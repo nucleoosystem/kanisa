@@ -5,7 +5,7 @@ import kanisa
 setup(
     name='kanisa',
     version=kanisa.__version__,
-    description="A Django app for managing Church websites."
+    description="A Django app for managing Church websites.",
     long_description=open('README.md').read(),
     author='Dominic Rodger',
     author_email='internet@dominicrodger.com',
