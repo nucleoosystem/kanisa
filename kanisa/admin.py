@@ -1,9 +1,8 @@
 from django.contrib import admin
+from kanisa.conf import KANISA_ADMIN_THUMBS_SIZE
 from kanisa.models.banners import Banner
 from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
-
-ADMIN_THUMBS_SIZE = '120x120'
 
 
 class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
@@ -13,7 +12,7 @@ class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
     def image_thumb(self, obj):
         if obj.image:
             thumb = default.backend.get_thumbnail(obj.image.file,
-                                                  ADMIN_THUMBS_SIZE)
+                                                  KANISA_ADMIN_THUMBS_SIZE)
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
         else:
             return "No Image"
