@@ -5,7 +5,7 @@ from kanisa.models.banners import Banner
 
 
 def index(request):
-    banners = Banner.objects.all()
+    banners = Banner.active_objects.all()
 
     return render_to_response('kanisa/index.html',
                               {'banners': banners},

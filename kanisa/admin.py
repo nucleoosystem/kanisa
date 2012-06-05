@@ -6,7 +6,7 @@ from sorl.thumbnail.admin import AdminImageMixin
 
 
 class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
-    list_display = ('image_thumb', 'headline', 'url', )
+    list_display = ('image_thumb', 'headline', 'url', 'publish_from', 'publish_until', 'active', )
     search_fields = ('headline', 'contents', 'url', )
 
     def image_thumb(self, obj):
