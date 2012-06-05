@@ -2,6 +2,7 @@ from datetime import date
 from django.db import models
 from sorl.thumbnail import ImageField
 
+
 class ActiveBannerManager(models.Manager):
     def get_query_set(self):
         qs = super(ActiveBannerManager, self).get_query_set()
@@ -20,7 +21,7 @@ class Banner(models.Model):
     url = models.URLField(verbose_name=u'URL',
                           blank=True,
                           null=True)
-    publish_from  = models.DateField(blank=True,
+    publish_from = models.DateField(blank=True,
                                      null=True)
     publish_until = models.DateField(blank=True,
                                      null=True)
