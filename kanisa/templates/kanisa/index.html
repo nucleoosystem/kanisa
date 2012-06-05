@@ -1,7 +1,5 @@
 {% extends 'kanisa/base.html' %}
 
-{% load thumbnail %}
-
 {% block content %}
 <div class="row">
   <div class="span4">
@@ -10,34 +8,8 @@
   </div>
 
   <div class="span8">
-    <div id="myCarousel" class="carousel slide">
-      <!-- Carousel items -->
-      <div class="carousel-inner">
-        {% for banner in banners %}
-        <div class="item">
-          {% thumbnail banner.image "770x400" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-          {% endthumbnail %}
-          <div class="carousel-caption">
-            <h4>{{ banner.headline }}</h4>
-            {% if banner.contents %}
-            <p>{{ banner.contents }}</p>
-            {% endif %}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-      <!-- Carousel nav -->
-      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div>
+    {% include 'kanisa/_banners.html' %}
   </div>
 </div>
-
-<script type="text/javascript">
-  $('.carousel').carousel({
-  interval: 2000
-  })
-</script>
 
 {% endblock %}
