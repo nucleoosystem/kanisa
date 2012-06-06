@@ -15,6 +15,18 @@ class BannerTest(TestCase):
     def tearDown(self):
         default_storage.location = self._old_default_storage_location
 
-    def testBasics(self):
-        banners = Banner.objects.all()
+    def testIsActive(self):
+        banner = Banner.objects.get(pk=1)
+        self.assertTrue(banner.active())
+
+    def testHasExpired(self):
+        banner = Banner.objects.get(pk=1)
+        self.assertFalse(banner.expired())        
+
+    def testFetchActive(self):
+        banners = Banner.active_objects.all()
         self.assertEqual(len(banners), 3)
+
+    def testUnicode(self):
+        banner = Banner.objects.get(pk=1)
+        self.assertEqual(unicode(banner), 'Green Flowers')
