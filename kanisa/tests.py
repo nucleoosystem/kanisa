@@ -27,7 +27,7 @@ class BannerTest(TestCase):
         # A banner with a long-passed publication date, and a
         # far-future expiration date
         banner = Banner.objects.get(pk=5)
-        self.assertFalse(banner.expired())
+        self.assertTrue(banner.active())
 
     def testHasExpired(self):
         # A banner with no expiry date or publication date
