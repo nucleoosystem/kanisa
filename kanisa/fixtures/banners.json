@@ -34,5 +34,29 @@
       "url": "",
       "contents": "Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force."
     }
+  },
+  {
+    "pk": 4,
+    "model": "kanisa.banner",
+    "fields": {
+      "publish_from": "2012-04-01",
+      "headline": "The Shard",
+      "publish_until": "2012-04-30",
+      "image": "kanisa/banners/theshard.jpg",
+      "url": "",
+      "contents": "Every time I learn something new, it pushes some old stuff out of my brain."
+    }
+  },
+  {
+    "pk": 5,
+    "model": "kanisa.banner",
+    "fields": {
+      "publish_from": "2001-01-01",
+      "headline": "A Lamp Post",
+      "publish_until": "2021-12-31",
+      "image": "kanisa/banners/lamppost.jpg",
+      "url": "",
+      "contents": "It will not go out of my mind that if we pass this post and lantern either we shall find strange adventures or else some great changes of our fortunes."
+    }
   }
 ]
