@@ -24,6 +24,7 @@ class Command(BaseCommand):
 
     def load_fixtures(self):
         call_command('loaddata', 'banners.json')
+        call_command('loaddata', 'diary.json')
 
     def copy_media(self):
         kanisa_directory = os.path.dirname(kanisa.models.__file__)

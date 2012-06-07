@@ -1,6 +1,6 @@
 from django.contrib import admin
 from kanisa.conf import KANISA_ADMIN_THUMBS_SIZE
-from kanisa.models.banners import Banner
+from kanisa.models import Banner, DiaryEvent, DiaryEventOccurrence
 from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
 
@@ -20,3 +20,16 @@ class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
     image_thumb.allow_tags = True
 
 admin.site.register(Banner, BannerAdmin)
+
+class DiaryEventAdmin(admin.ModelAdmin):
+    search_fields = ('title', 'details', )
+    list_display = ('title', 'day', 'start_time', )
+    list_filter = ('day', )
+
+admin.site.register(DiaryEvent, DiaryEventAdmin)
+
+class DiaryEventOccurrenceAdmin(admin.ModelAdmin):
+    search_fields = ('title', 'details', )
+    list_display = ('title', 'event', 'date', )
+
+admin.site.register(DiaryEventOccurrence, DiaryEventOccurrenceAdmin)

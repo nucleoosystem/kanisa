@@ -1,0 +1,24 @@
+[
+  {
+    "pk": 1,
+    "model": "kanisa.diaryevent",
+    "fields": {
+      "duration": 60,
+      "details": "Afternoon tea's always lovely.",
+      "start_time": "14:00:00",
+      "day": 1,
+      "title": "Afternoon Tea"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "kanisa.diaryevent",
+    "fields": {
+      "duration": 60,
+      "details": "",
+      "start_time": "08:00:00",
+      "day": 4,
+      "title": "Breakfast Club"
+    }
+  }
+]
