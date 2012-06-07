@@ -1,5 +1,6 @@
 from datetime import date
 from django.db import models
+from kanisa.models.utils import date_has_passed, today_in_range
 from sorl.thumbnail import ImageField
 
 
@@ -46,11 +47,7 @@ class Banner(models.Model):
 
         """
 
-        if not self.publish_until:
-            return False
-
-        today = date.today()
-        return self.publish_until < today
+        return date_has_passed(self.publish_until)
     expired.boolean = True
 
     def active(self):
@@ -65,20 +62,5 @@ class Banner(models.Model):
 
         """
 
-        if not self.publish_from and not self.publish_until:
-            # This banner has no start or expiry date, and so is
-            # always active.
-            return True
-
-        today = date.today()
-
-        if self.publish_from and self.publish_from > today:
-            # We've got a start date, and it's not happened yet
-            return False
-
-        if self.publish_until and self.publish_until < today:
-            # We've got a finish date which has passed
-            return False
-
-        return True
+        return today_in_range(self.publish_from, self.publish_until)
     active.boolean = True
