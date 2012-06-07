@@ -24,10 +24,17 @@ class Command(BaseCommand):
 
         src_files = os.listdir(kanisa_fixtures_media)
 
+        destination_directory = os.path.join(settings.MEDIA_ROOT,
+                                             "kanisa",
+                                             "banners")
+
+        if not os.path.exists(destination_directory):
+            os.makedirs(destination_directory)
+
         for file_name in src_files:
             full_file_name = os.path.join(kanisa_fixtures_media, file_name)
             if (os.path.isfile(full_file_name)):
+                destination_file = os.path.join(destination_directory,
+                                                file_name)
                 shutil.copy(full_file_name,
-                            os.path.join(settings.MEDIA_ROOT,
-                                         "kanisa/banners",
-                                         file_name))
+                            destination_file)
