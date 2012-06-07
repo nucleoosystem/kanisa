@@ -13,7 +13,7 @@ class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
         if obj.image:
             thumb = default.backend.get_thumbnail(obj.image.file,
                                                   KANISA_ADMIN_THUMBS_SIZE)
-            return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+            return u'<img width="%s" height="%s" src="%s" />' % (thumb.width, thumb.height, thumb.url)
         else:
             return "No Image"
     image_thumb.short_description = 'Image'
