@@ -39,6 +39,13 @@ class Banner(models.Model):
         return self.headline
 
     def expired(self):
+        """Returns whether or not this banner has expired.
+
+        A banner has expired if it has an expiration date, and that expiration
+        date has passed.
+
+        """
+
         if not self.publish_until:
             return False
 
@@ -47,6 +54,17 @@ class Banner(models.Model):
     expired.boolean = True
 
     def active(self):
+        """Returns whether or not this banner is currently active.
+
+        A banner is active if either it has no publication date, or the
+        publication date is in the past, and either it has no expiration date,
+        or the expiration date is in the future.
+
+        Banners are considered active if their publication date or expiration
+        date are the current day.
+
+        """
+
         if not self.publish_from and not self.publish_until:
             # This banner has no start or expiry date, and so is
             # always active.
