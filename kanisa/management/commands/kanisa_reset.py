@@ -3,12 +3,15 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import AppCommand, BaseCommand, CommandError
 import kanisa.models
-import os, os.path
+import os
+import os.path
 import shutil
+
 
 class Command(BaseCommand):
     option_list = AppCommand.option_list + (
-        make_option('--noinput', action='store_false', dest='interactive', default=True,
+        make_option('--noinput', action='store_false',
+            dest='interactive', default=True,
             help='Tells Django to NOT prompt the user for input of any kind.'),
     )
 
@@ -28,7 +31,9 @@ class Command(BaseCommand):
 
     def copy_media(self):
         kanisa_directory = os.path.dirname(kanisa.models.__file__)
-        kanisa_fixtures_media = os.path.join(kanisa_directory, '../', 'fixtures/media')
+        kanisa_fixtures_media = os.path.join(kanisa_directory,
+                                             '../',
+                                             'fixtures/media')
 
         src_files = os.listdir(kanisa_fixtures_media)
 

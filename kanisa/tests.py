@@ -55,7 +55,7 @@ class BannerTest(TestCase):
 
     def testDateHasPassed(self):
         self.assertFalse(date_has_passed(None))
-        self.assertTrue(date_has_passed(date(2012,1,1)))
+        self.assertTrue(date_has_passed(date(2012, 1, 1)))
         self.assertFalse(date_has_passed(date.today()))
 
     def testTodayInRange(self):

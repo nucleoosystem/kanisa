@@ -16,7 +16,8 @@ class DiaryEvent(models.Model):
     title = models.CharField(max_length=60)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
     start_time = models.TimeField()
-    duration = models.IntegerField(default=60, help_text=u'Duration in minutes')
+    duration = models.IntegerField(default=60,
+                                   help_text=u'Duration in minutes')
     details = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -26,6 +27,7 @@ class DiaryEvent(models.Model):
 
     def __unicode__(self):
         return self.title
+
 
 class DiaryEventOccurrence(models.Model):
     event = models.ForeignKey(DiaryEvent)
