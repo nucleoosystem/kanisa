@@ -1,17 +1,24 @@
+from optparse import make_option
 from django.conf import settings
 from django.core.management import call_command
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import AppCommand, BaseCommand, CommandError
 import kanisa.models
 import os, os.path
 import shutil
 
 class Command(BaseCommand):
-    help = 'Loads sample data for demonstrating Kanisa'
+    option_list = AppCommand.option_list + (
+        make_option('--noinput', action='store_false', dest='interactive', default=True,
+            help='Tells Django to NOT prompt the user for input of any kind.'),
+    )
+
+    help = 'Resets database and loads sample data for demonstrating Kanisa'
 
     def handle(self, *args, **options):
         if not getattr(settings, 'MEDIA_ROOT', None):
             raise CommandError("Please define MEDIA_ROOT.")
 
+        call_command('reset', 'kanisa', **options)
         self.load_fixtures()
         self.copy_media()
 
