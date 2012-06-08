@@ -1,0 +1,32 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+<div class="row-fluid">
+  <div class="span2">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">
+          Manage {{ KANISA_CHURCH_NAME }}
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon-picture"></i>
+            Banners
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon-calendar"></i>
+            Diary
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="span10">
+    <h1>Manage {{ KANISA_CHURCH_NAME }}</h1>
+  </div>
+</div>
+
+{% endblock %}
