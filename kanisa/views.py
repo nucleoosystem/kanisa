@@ -18,3 +18,12 @@ def manage(request):
     return render_to_response('kanisa/management/index.html',
                               {},
                               context_instance=RequestContext(request))
+
+
+@staff_member_required
+def manage_banners(request):
+    banners = Banner.active_objects.all()
+
+    return render_to_response('kanisa/management/banners/index.html',
+                              {'banners': banners},
+                              context_instance=RequestContext(request))

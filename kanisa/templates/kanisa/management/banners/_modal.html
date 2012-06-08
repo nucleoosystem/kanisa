@@ -1,0 +1,13 @@
+{% load thumbnail %}
+
+<div class="modal hide" id="banner-full-{{ banner.pk }}">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>{{ banner.headline }}</h3>
+  </div>
+  <div class="modal-body">
+    {% thumbnail banner.image "770x400" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+    {% endthumbnail %}
+  </div>
+</div>
