@@ -20,7 +20,6 @@ class ManagementViewTests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'admin/login.html')
 
-
     def test_management_index_disallows_non_staff(self):
         url = reverse('kanisa.views.manage')
         self.client.login(username='bob', password='secret')
