@@ -1,3 +1,5 @@
+{% load url from future %}
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -9,10 +11,13 @@
       <a class="brand" href="#">{{ KANISA_CHURCH_NAME }}</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        {% if user.is_authenticated %}
+        <p class="navbar-text pull-right">Welcome, {{ user }} (<a href="#">Logout</a>)</p>
+        {% endif %}
       </div><!--/.nav-collapse -->
     </div>
   </div>
