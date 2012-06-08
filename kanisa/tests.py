@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 from django.core.files.storage import default_storage
 from django.test import TestCase
-from kanisa.models import Banner
+from kanisa.models import Banner, DiaryEvent
 from kanisa.models.utils import date_has_passed, today_in_range
 import os
 
@@ -73,3 +73,11 @@ class BannerTest(TestCase):
                                         None))
         self.assertFalse(today_in_range(None,
                                         date.today() - timedelta(days=1)))
+
+
+class DiaryTest(TestCase):
+    fixtures = ['diary.json', ]
+
+    def testUnicode(self):
+        event = DiaryEvent.objects.get(pk=1)
+        self.assertEqual(unicode(event), 'Afternoon Tea')
