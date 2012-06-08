@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from django.db import models
 
 
@@ -10,6 +11,11 @@ DAYS_OF_WEEK = (
     (5, 'Saturday'),
     (6, 'Sunday'),
 )
+
+
+def daterange(start_date, end_date):
+    for n in range((end_date - start_date).days):
+        yield start_date + timedelta(n)
 
 
 class DiaryEvent(models.Model):
@@ -27,6 +33,18 @@ class DiaryEvent(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def schedule(self, start_date, end_date):
+        """Schedule an instance of this event, with no custom details
+        set up. The instance will be scheduled for all matching dates
+        on or after start_date, and before (and not including)
+        end_date.
+        """
+        for single_date in daterange(start_date, end_date):
+            if single_date.weekday() != self.day:
+                continue
+
+            instance = self.diaryeventoccurrence_set.create(date=single_date)
 
 
 class DiaryEventOccurrence(models.Model):
