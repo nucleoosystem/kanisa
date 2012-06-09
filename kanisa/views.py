@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 from kanisa.models.banners import Banner
+from kanisa.forms import BannerCreationForm
 
 
 def index(request):
@@ -29,6 +30,21 @@ def manage_banners(request):
 
     return render_to_response('kanisa/management/banners/index.html',
                               {'banners': banners},
+                              context_instance=RequestContext(request))
+
+
+@staff_member_required
+def create_banner(request):
+    if request.method == 'POST':
+        form = BannerCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
+    else:
+        form = BannerCreationForm()
+    
+    return render_to_response('kanisa/management/banners/create.html',
+                              {'form': form},
                               context_instance=RequestContext(request))
 
 

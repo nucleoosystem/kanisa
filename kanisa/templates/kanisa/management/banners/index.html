@@ -14,6 +14,7 @@
 
 {% block content %}
 {% include 'kanisa/management/banners/_lead.html' %}
+<p><a href="{% url 'kanisa.views.create_banner' %}" class="btn btn-large btn-primary">Create a new banner &raquo;</a></p>
 
 {% if banners %}
 <ul class="thumbnails">

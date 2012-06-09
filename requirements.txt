@@ -1,2 +1,3 @@
+django-crispy-forms==1.1.4
 PIL==1.1.7
 sorl-thumbnail==11.12

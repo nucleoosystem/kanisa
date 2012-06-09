@@ -1,0 +1,22 @@
+{% extends 'kanisa/management/banners/base.html' %}
+
+{% load url from future %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li class="active">
+  <span class="divider">/</span> Create
+</li>
+{% endblock %}
+
+
+{% block pagetitle %}Create a Banner {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% include 'kanisa/management/banners/_lead.html' %}
+
+{% crispy form %}
+
+{% endblock %}
