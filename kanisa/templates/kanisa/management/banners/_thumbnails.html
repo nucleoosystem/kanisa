@@ -1,0 +1,47 @@
+{% load thumbnail %}
+{% load url from future %}
+
+{% if banners %}
+<ul class="thumbnails">
+  {% for banner in banners %}
+  <li class="span3">
+    <div class="thumbnail">
+      {% thumbnail banner.image "260x180" crop="center" as im %}
+      <a data-toggle="modal" href="#banner-full-{{ banner.pk }}" ><img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" /></a>
+      {% endthumbnail %}
+      <div class="caption">
+        <h4>{{ banner.headline }}</h4>
+        {% if banner.active %}
+        {% if banner.publish_until %}
+        <p style="min-height: 2.5em">This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.</p>
+        {% else %}
+        <p style="min-height: 2.5em">This banner will remain active <strong>forever</strong>.</p>
+        {% endif %}
+        {% else %}
+        <p style="min-height: 2.5em">This banner is <strong>inactive</strong>.</p>
+        {% endif %}
+
+        <p>
+          <a class="btn btn-success" href="{% url 'kanisa.views.edit_banner' banner.pk %}">
+            <i class="icon-edit icon-white"></i>
+            Edit
+          </a>
+          {% if banner.active %}
+          <a class="btn btn-danger" href="{% url 'kanisa.views.retire_banner' banner.pk %}">
+            <i class="icon-trash icon-white"></i>
+            Retire
+          </a>
+          {% endif %}
+        </p>
+      </div>
+
+      {% include 'kanisa/management/banners/_modal.html' %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="alert alert-warning">
+There are no banners to display.
+</div>
+{% endif %}
