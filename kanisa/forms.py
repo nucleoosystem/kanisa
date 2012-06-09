@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
+from kanisa.models.diary import DiaryEvent
 
 
 class BaseForm(ModelForm):
@@ -22,3 +23,8 @@ class BaseForm(ModelForm):
 class BannerForm(BaseForm):
     class Meta:
         model = Banner
+
+
+class DiaryForm(BaseForm):
+    class Meta:
+        model = DiaryEvent

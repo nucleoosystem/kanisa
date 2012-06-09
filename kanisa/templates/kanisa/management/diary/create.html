@@ -1,0 +1,23 @@
+{% extends 'kanisa/management/diary/base.html' %}
+
+{% load url from future %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li class="active">
+  <span class="divider">/</span>
+  {% if diaryevent %}Edit Event: {{ diaryevent }}{% else %}Create{% endif %}
+</li>
+{% endblock %}
+
+
+{% block pagetitle %}{% if diaryevent %}Edit Event: {{ diaryevent }}{% else %}Create an Event {{ block.super }}{% endif %}{% endblock %}
+
+{% block content %}
+
+{% include 'kanisa/management/diary/_lead.html' %}
+
+{% crispy form %}
+
+{% endblock %}
