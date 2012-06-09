@@ -35,6 +35,15 @@
             {{ message }}
           </div>
           {% endfor %}
+
+          <ul class="breadcrumb">
+            {% block breadcrumbs %}
+            <li>
+              <a href="{% url 'kanisa.views.manage' %}">Kanisa</a>
+            </li>
+            {% endblock %}
+          </ul>
+
           {% block content %}
           {% endblock %}
         </div>

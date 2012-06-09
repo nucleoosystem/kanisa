@@ -1,0 +1,10 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>
+  <span class="divider">/</span> <a href="{% url 'kanisa.views.manage_banners' %}">Banners</a>
+</li>
+{% endblock %}
