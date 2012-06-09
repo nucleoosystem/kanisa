@@ -28,12 +28,14 @@ def manage_inactive_banners(request):
                               {'banners': banners},
                               context_instance=RequestContext(request))
 
+
 class BannerCreateView(KanisaCreateView):
     form_class = BannerForm
     template_name = 'kanisa/management/banners/create.html'
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_banners')
+
 
 @staff_member_required
 def edit_banner(request, banner_id):

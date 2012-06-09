@@ -14,7 +14,6 @@ class ManagementViewTests(KanisaViewTestCase):
         self.check_staff_only(reverse('kanisa.views.edit_banner',
                                       args=[1, ]))
 
-
     def test_root_view(self):
         url = reverse('kanisa.views.manage')
         self.client.login(username='fred', password='secret')

@@ -6,7 +6,8 @@ from django.views.generic.edit import CreateView
 
 class KanisaCreateView(CreateView):
     def form_valid(self, form):
-        message = u'%s "%s" created.' % (form.instance._meta.verbose_name.title(),
+        model_name = form.instance._meta.verbose_name.title()
+        message = u'%s "%s" created.' % (model_name,
                                          unicode(form.instance))
         messages.success(self.request, message, extra_tags='msg')
         return super(KanisaCreateView, self).form_valid(form)
