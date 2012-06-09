@@ -42,7 +42,7 @@ def create_banner(request):
             return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
     else:
         form = BannerCreationForm()
-    
+
     return render_to_response('kanisa/management/banners/create.html',
                               {'form': form},
                               context_instance=RequestContext(request))
