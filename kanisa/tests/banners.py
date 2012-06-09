@@ -49,6 +49,10 @@ class BannerTest(TestCase):
         banners = Banner.active_objects.all()
         self.assertEqual(len(banners), 4)
 
+    def testFetchInactive(self):
+        banners = Banner.inactive_objects.all()
+        self.assertEqual(len(banners), 1)
+
     def testUnicode(self):
         banner = Banner.objects.get(pk=1)
         self.assertEqual(unicode(banner), 'Green Flowers')
@@ -87,7 +91,7 @@ class BannerTest(TestCase):
         # Test changes were persisted
         banner = Banner.objects.get(pk=1)
         self.assertFalse(banner.active())
-        
+
         # Test the inactive banner manager picks it up
         self.assertTrue(banner in Banner.inactive_objects.all())
         self.assertRaises(Banner.DoesNotExist, Banner.active_objects.get, pk=1)
