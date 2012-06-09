@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 
 class KanisaCreateView(CreateView):
@@ -15,3 +15,16 @@ class KanisaCreateView(CreateView):
     @method_decorator(staff_member_required)
     def dispatch(self, *args, **kwargs):
         return super(KanisaCreateView, self).dispatch(*args, **kwargs)
+
+
+class KanisaUpdateView(UpdateView):
+    def form_valid(self, form):
+        model_name = form.instance._meta.verbose_name.title()
+        message = u'%s "%s" saved.' % (model_name,
+                                       unicode(form.instance))
+        messages.success(self.request, message, extra_tags='msg')
+        return super(KanisaUpdateView, self).form_valid(form)
+
+    @method_decorator(staff_member_required)
+    def dispatch(self, *args, **kwargs):
+        return super(KanisaUpdateView, self).dispatch(*args, **kwargs)

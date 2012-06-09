@@ -11,7 +11,7 @@ class ManagementViewTests(KanisaViewTestCase):
         self.check_staff_only(reverse('kanisa.views.retire_banner',
                                       args=[1, ]))
         self.check_staff_only(reverse('kanisa_create_banner'))
-        self.check_staff_only(reverse('kanisa.views.edit_banner',
+        self.check_staff_only(reverse('kanisa_update_banner',
                                       args=[1, ]))
 
     def test_root_view(self):
