@@ -52,6 +52,26 @@ def create_banner(request):
 
 
 @staff_member_required
+def edit_banner(request, banner_id):
+    banner = get_object_or_404(Banner, pk=banner_id)
+
+    if request.method == 'POST':
+        form = BannerForm(request.POST, request.FILES, instance=banner)
+        if form.is_valid():
+            form.save()
+            message = u'Banner "%s" saved.' % unicode(banner)
+            messages.success(request, message)
+
+            return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
+    else:
+        form = BannerForm(instance=banner)
+
+    return render_to_response('kanisa/management/banners/create.html',
+                              {'form': form, 'banner': banner,},
+                              context_instance=RequestContext(request))
+
+
+@staff_member_required
 def retire_banner(request, banner_id):
     banner = get_object_or_404(Banner, pk=banner_id)
     banner.set_retired()

@@ -6,12 +6,13 @@
 {% block breadcrumbs %}
 {{ block.super }}
 <li class="active">
-  <span class="divider">/</span> Create
+  <span class="divider">/</span>
+  {% if banner %}Edit Banner: {{ banner }}{% else %}Create{% endif %}
 </li>
 {% endblock %}
 
 
-{% block pagetitle %}Create a Banner {{ block.super }}{% endblock %}
+{% block pagetitle %}{% if banner %}Edit Banner: {{ banner }}{% else %}Create a Banner {{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
 

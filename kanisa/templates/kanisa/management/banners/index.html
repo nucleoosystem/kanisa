@@ -33,6 +33,10 @@
         {% endif %}
 
         <p>
+          <a class="btn btn-success" href="{% url 'kanisa.views.edit_banner' banner.pk %}">
+            <i class="icon-edit icon-white"></i>
+            Edit
+          </a>
           <a class="btn btn-danger" href="{% url 'kanisa.views.retire_banner' banner.pk %}">
             <i class="icon-trash icon-white"></i>
             Retire

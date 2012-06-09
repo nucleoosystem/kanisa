@@ -13,6 +13,6 @@ class BannerForm(ModelForm):
         self.helper = FormHelper()
 
         css = "btn-primary btn-large btn-success"
-        self.helper.add_input(Submit('submit', 'Create Banner',
+        self.helper.add_input(Submit('submit', 'Save Banner',
                                      css_class=css))
         super(BannerForm, self).__init__(*args, **kwargs)
