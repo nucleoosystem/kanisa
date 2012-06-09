@@ -5,7 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
+
 from kanisa.models.banners import Banner
+from kanisa.views.generic import KanisaCreateView
 from kanisa.forms import BannerForm
 
 
@@ -26,24 +28,12 @@ def manage_inactive_banners(request):
                               {'banners': banners},
                               context_instance=RequestContext(request))
 
+class BannerCreateView(KanisaCreateView):
+    form_class = BannerForm
+    template_name = 'kanisa/management/banners/create.html'
 
-@staff_member_required
-def create_banner(request):
-    if request.method == 'POST':
-        form = BannerForm(request.POST, request.FILES)
-        if form.is_valid():
-            banner = form.save()
-            message = u'Banner "%s" created.' % unicode(banner)
-            messages.success(request, message)
-
-            return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
-    else:
-        form = BannerForm()
-
-    return render_to_response('kanisa/management/banners/create.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
-
+    def get_success_url(self):
+        return reverse('kanisa.views.manage_banners')
 
 @staff_member_required
 def edit_banner(request, banner_id):
