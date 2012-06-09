@@ -1,5 +1,6 @@
 from kanisa.views.banners import (manage_banners, manage_inactive_banners,
                                   create_banner, edit_banner, retire_banner)
+from kanisa.views.diary import manage_diary
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext

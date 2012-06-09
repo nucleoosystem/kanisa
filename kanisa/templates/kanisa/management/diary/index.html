@@ -1,0 +1,36 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li class="active">
+  <span class="divider">/</span> Diary
+</li>
+{% endblock %}
+
+{% block pagetitle %}Manage Diary {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include 'kanisa/management/diary/_lead.html' %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Day</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in events %}
+    <tr>
+      <td>{{ event.title }}</td>
+      <td>{{ event.get_day_display }}</td>
+      <td>{{ event.start_time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
