@@ -5,7 +5,7 @@ from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
 
 
-class BannerCreationForm(ModelForm):
+class BannerForm(ModelForm):
     class Meta:
         model = Banner
 
@@ -15,4 +15,4 @@ class BannerCreationForm(ModelForm):
         css = "btn-primary btn-large btn-success"
         self.helper.add_input(Submit('submit', 'Create Banner',
                                      css_class=css))
-        super(BannerCreationForm, self).__init__(*args, **kwargs)
+        super(BannerForm, self).__init__(*args, **kwargs)
