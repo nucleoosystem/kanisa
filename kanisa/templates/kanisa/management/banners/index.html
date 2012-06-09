@@ -10,7 +10,7 @@
 </li>
 {% endblock %}
 
-{% block pagetitle %}Manage Banners for {{ KANISA_CHURCH_NAME }}{% endblock %}
+{% block pagetitle %}Manage Banners {{ block.super }}{% endblock %}
 
 {% block content %}
 {% include 'kanisa/management/banners/_lead.html' %}
