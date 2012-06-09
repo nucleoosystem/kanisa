@@ -15,4 +15,6 @@ class BannerForm(ModelForm):
         css = "btn-primary btn-large btn-success"
         self.helper.add_input(Submit('submit', 'Save Banner',
                                      css_class=css))
+        self.helper.form_class = 'form-horizontal'
+
         super(BannerForm, self).__init__(*args, **kwargs)
