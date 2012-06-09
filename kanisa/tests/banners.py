@@ -87,10 +87,14 @@ class BannerTest(TestCase):
         # Test changes were persisted
         banner = Banner.objects.get(pk=1)
         self.assertFalse(banner.active())
-        banner.publish_until = original_expiry
-        banner.save()
+        
+        # Test the inactive banner manager picks it up
+        self.assertTrue(banner in Banner.inactive_objects.all())
+        self.assertRaises(Banner.DoesNotExist, Banner.active_objects.get, pk=1)
 
         # Ensure test doesn't change state
+        banner.publish_until = original_expiry
+        banner.save()
         banner = Banner.objects.get(pk=1)
         self.assertEqual(banner.publish_until, original_expiry)
         self.assertTrue(banner.active())
