@@ -15,17 +15,32 @@ class ActiveBannerManager(models.Manager):
 class Banner(models.Model):
     headline = models.CharField(max_length=60,
                                 blank=True,
-                                null=True)
+                                null=True,
+                                help_text=u'Keep this short, summarise your'
+                                ' banner in a few words.')
     contents = models.TextField(blank=True,
-                                null=True)
-    image = ImageField(upload_to='kanisa/banners/')
+                                null=True,
+                                help_text=u'At most two sentences, give extra'
+                                ' details about what you\'re advertising.')
+    image = ImageField(upload_to='kanisa/banners/',
+                       help_text=u'Must be at least 800px by 600px.')
     url = models.URLField(verbose_name=u'URL',
                           blank=True,
-                          null=True)
+                          null=True,
+                          help_text=u'The web address your banner will link'
+                          'to.')
     publish_from = models.DateField(blank=True,
-                                     null=True)
+                                    null=True,
+                                    help_text=u'The date at which your banner'
+                                    ' will become visible on the website.'
+                                    ' If left blank the start date is'
+                                    ' unrestricted.')
     publish_until = models.DateField(blank=True,
-                                     null=True)
+                                     null=True,
+                                     help_text=u'The final date on which your'
+                                     ' banner will be visible. If left'
+                                     ' blank your banner will be visible'
+                                     ' indefinitely.')
 
     # Managers
     objects = models.Manager()
