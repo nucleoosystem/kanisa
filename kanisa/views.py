@@ -38,7 +38,10 @@ def create_banner(request):
     if request.method == 'POST':
         form = BannerForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            banner = form.save()
+            message = u'Banner "%s" created.' % unicode(banner)
+            messages.success(request, message)
+
             return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
     else:
         form = BannerForm()
