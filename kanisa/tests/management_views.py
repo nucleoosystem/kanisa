@@ -6,8 +6,8 @@ class ManagementViewTests(KanisaViewTestCase):
     fixtures = ['banners.json', ]
 
     def test_views_protected(self):
-        self.check_staff_only('kanisa.views.manage')
-        self.check_staff_only('kanisa.views.manage_banners')
+        self.check_staff_only(reverse('kanisa.views.manage'))
+        self.check_staff_only(reverse('kanisa.views.manage_banners'))
 
     def test_root_view(self):
         url = reverse('kanisa.views.manage')

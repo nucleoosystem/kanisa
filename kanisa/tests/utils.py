@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 
@@ -13,9 +12,8 @@ class KanisaViewTestCase(TestCase):
         fred.is_staff = True
         fred.save()
 
-    def check_staff_only(self, view_name):
+    def check_staff_only(self, url):
         # Not logged in
-        url = reverse(view_name)
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'admin/login.html')
