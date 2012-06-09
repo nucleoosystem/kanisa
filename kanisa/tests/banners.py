@@ -73,3 +73,24 @@ class BannerTest(TestCase):
                                         None))
         self.assertFalse(today_in_range(None,
                                         date.today() - timedelta(days=1)))
+
+    def testSetRetired(self):
+        # Confirm initial state
+        banner = Banner.objects.get(pk=1)
+        original_expiry = banner.publish_until
+        self.assertTrue(banner.active())
+
+        # Retire the banner
+        banner.set_retired()
+        self.assertFalse(banner.active())
+
+        # Test changes were persisted
+        banner = Banner.objects.get(pk=1)
+        self.assertFalse(banner.active())
+        banner.publish_until = original_expiry
+        banner.save()
+
+        # Ensure test doesn't change state
+        banner = Banner.objects.get(pk=1)
+        self.assertEqual(banner.publish_until, original_expiry)
+        self.assertTrue(banner.active())

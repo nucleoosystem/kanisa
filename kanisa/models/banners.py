@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from django.db import models
 from kanisa.models.utils import date_has_passed, today_in_range
 from sorl.thumbnail import ImageField
@@ -64,3 +64,11 @@ class Banner(models.Model):
 
         return today_in_range(self.publish_from, self.publish_until)
     active.boolean = True
+
+    def set_retired(self):
+        """Sets the expiration date of this banner to yesterday,
+        thereby removing it from the list of active banners.
+
+        """
+        self.publish_until = date.today() - timedelta(days=1)
+        self.save()
