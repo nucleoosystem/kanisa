@@ -34,6 +34,15 @@ def manage_banners(request):
 
 
 @staff_member_required
+def manage_inactive_banners(request):
+    banners = Banner.inactive_objects.all()
+
+    return render_to_response('kanisa/management/banners/inactive.html',
+                              {'banners': banners},
+                              context_instance=RequestContext(request))
+
+
+@staff_member_required
 def create_banner(request):
     if request.method == 'POST':
         form = BannerForm(request.POST, request.FILES)

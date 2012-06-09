@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from django.db import models
+from django.db.models import Q
 from kanisa.models.utils import date_has_passed, today_in_range
 from sorl.thumbnail import ImageField
 
@@ -10,6 +11,14 @@ class ActiveBannerManager(models.Manager):
         qs = qs.exclude(publish_from__gt=date.today())
         qs = qs.exclude(publish_until__lt=date.today())
         return qs
+
+
+class InactiveBannerManager(models.Manager):
+    def get_query_set(self):
+        qs = super(InactiveBannerManager, self).get_query_set()
+        not_yet_active = Q(publish_from__gt=date.today())
+        expired = Q(publish_until__lt=date.today())
+        return qs.filter(not_yet_active | expired)
 
 
 class Banner(models.Model):
@@ -45,6 +54,7 @@ class Banner(models.Model):
     # Managers
     objects = models.Manager()
     active_objects = ActiveBannerManager()
+    inactive_objects = InactiveBannerManager()
 
     class Meta:
         # Need this because I've split up models.py into multiple
