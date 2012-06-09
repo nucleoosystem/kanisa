@@ -1,6 +1,7 @@
 {% extends 'kanisa/management/base.html' %}
 
 {% load thumbnail %}
+{% load url from future %}
 
 {% block content %}
 <h1>Manage Banners for {{ KANISA_CHURCH_NAME }}</h1>
@@ -22,6 +23,13 @@
         {% else %}
         <p>This banner will remain active <strong>forever</strong>.</p>
         {% endif %}
+
+        <p>
+          <a class="btn btn-danger" href="{% url 'kanisa.views.retire_banner' banner.pk %}">
+            <i class="icon-trash icon-white"></i>
+            Retire
+          </a>
+        </p>
       </div>
 
       {% include 'kanisa/management/banners/_modal.html' %}

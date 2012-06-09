@@ -1,5 +1,8 @@
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 from kanisa.models.banners import Banner
@@ -27,3 +30,14 @@ def manage_banners(request):
     return render_to_response('kanisa/management/banners/index.html',
                               {'banners': banners},
                               context_instance=RequestContext(request))
+
+
+@staff_member_required
+def retire_banner(request, banner_id):
+    banner = get_object_or_404(Banner, pk=banner_id)
+    banner.set_retired()
+
+    message = u'Banner "%s" retired.' % unicode(banner)
+    messages.success(request, message)
+
+    return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))

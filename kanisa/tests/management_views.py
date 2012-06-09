@@ -8,6 +8,8 @@ class ManagementViewTests(KanisaViewTestCase):
     def test_views_protected(self):
         self.check_staff_only(reverse('kanisa.views.manage'))
         self.check_staff_only(reverse('kanisa.views.manage_banners'))
+        self.check_staff_only(reverse('kanisa.views.retire_banner',
+                                      args=[1, ]))
 
     def test_root_view(self):
         url = reverse('kanisa.views.manage')
@@ -26,3 +28,18 @@ class ManagementViewTests(KanisaViewTestCase):
         self.assertTrue('banners' in resp.context)
         self.assertEqual([banner.pk for banner in resp.context['banners']],
                          [1, 2, 3, 5, ])
+
+    def test_banner_retire_view(self):
+        url = reverse('kanisa.views.retire_banner', args=[1, ])
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+        self.assertTrue('banners' in resp.context)
+        self.assertEqual([banner.pk for banner in resp.context['banners']],
+                         [2, 3, 5, ])
+
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         [u'Banner "Green Flowers" retired.', ])
