@@ -10,9 +10,9 @@
 </li>
 {% endblock %}
 
-{% block content %}
-<h1>Manage Banners for {{ KANISA_CHURCH_NAME }}</h1>
+{% block pagetitle %}Manage Banners for {{ KANISA_CHURCH_NAME }}{% endblock %}
 
+{% block content %}
 {% include 'kanisa/management/banners/_lead.html' %}
 
 {% if banners %}
