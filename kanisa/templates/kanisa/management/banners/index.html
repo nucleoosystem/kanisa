@@ -27,9 +27,9 @@
       <div class="caption">
         <h4>{{ banner.headline }}</h4>
         {% if banner.publish_until %}
-        <p>This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.</p>
+        <p style="min-height: 2.5em">This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.</p>
         {% else %}
-        <p>This banner will remain active <strong>forever</strong>.</p>
+        <p style="min-height: 2.5em">This banner will remain active <strong>forever</strong>.</p>
         {% endif %}
 
         <p>
