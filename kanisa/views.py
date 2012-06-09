@@ -67,7 +67,7 @@ def edit_banner(request, banner_id):
         form = BannerForm(instance=banner)
 
     return render_to_response('kanisa/management/banners/create.html',
-                              {'form': form, 'banner': banner,},
+                              {'form': form, 'banner': banner, },
                               context_instance=RequestContext(request))
 
 
