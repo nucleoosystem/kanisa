@@ -30,6 +30,7 @@ class DiaryEvent(models.Model):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
+        ordering = ('day', 'start_time', )
 
     def __unicode__(self):
         return self.title
