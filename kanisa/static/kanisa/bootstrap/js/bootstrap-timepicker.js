@@ -358,9 +358,9 @@
     }
 
     $.fn.timepicker.defaults = {
-      minuteStep: 15
+      minuteStep: 5
     , disableFocus: false
-    , defaultTime: 'current'
+    , defaultTime: 'value'
     , showMeridian: true
     , template: 'dropdown'
     , templates: {} // set custom templates
