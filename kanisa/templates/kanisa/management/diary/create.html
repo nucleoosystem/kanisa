@@ -1,7 +1,6 @@
 {% extends 'kanisa/management/diary/base.html' %}
 
 {% load url from future %}
-{% load crispy_forms_tags %}
 
 {% block breadcrumbs %}
 {{ block.super }}
@@ -18,7 +17,6 @@
 
 {% include 'kanisa/management/diary/_lead.html' %}
 
-{{ form.media }}
-{% crispy form %}
+{% include "kanisa/management/_form.html" %}
 
 {% endblock %}
