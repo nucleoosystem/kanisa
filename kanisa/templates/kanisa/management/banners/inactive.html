@@ -1,14 +1,7 @@
-{% extends 'kanisa/management/banners/base.html' %}
+{% extends 'kanisa/management/base.html' %}
 
 {% load thumbnail %}
 {% load url from future %}
-
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">
-  <span class="divider">/</span> Inactive Banners
-</li>
-{% endblock %}
 
 {% block pagetitle %}Manage Inactive Banners {{ block.super }}{% endblock %}
 
