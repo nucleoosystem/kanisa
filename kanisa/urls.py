@@ -17,6 +17,7 @@ urlpatterns = patterns('',
         'kanisa.views.retire_banner'),
 
     url(r'^manage/diary/$', 'kanisa.views.manage_diary'),
+    url(r'^manage/diary/regular/$', 'kanisa.views.manage_regular_events'),
     url(r'^manage/diary/create/$',
         DiaryCreateView.as_view(), {}, 'kanisa_create_diary'),
     url(r'^manage/diary/edit/(?P<pk>\d+)$',

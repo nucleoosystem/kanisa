@@ -12,8 +12,15 @@ from kanisa.views.generic import KanisaCreateView, KanisaUpdateView
 
 @staff_member_required
 def manage_diary(request):
-    events = RegularEvent.objects.all()
     return render_to_response('kanisa/management/diary/index.html',
+                              {},
+                              context_instance=RequestContext(request))
+
+
+@staff_member_required
+def manage_regular_events(request):
+    events = RegularEvent.objects.all()
+    return render_to_response('kanisa/management/diary/regular_events.html',
                               {'events': events},
                               context_instance=RequestContext(request))
 

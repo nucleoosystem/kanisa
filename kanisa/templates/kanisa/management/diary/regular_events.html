@@ -15,4 +15,23 @@
 {% include 'kanisa/management/diary/_lead.html' %}
 <p><a href="{% url 'kanisa_create_diary' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Day</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in events %}
+    <tr>
+      <td><a href="{% url 'kanisa_update_diary' event.pk %}">{{ event.title }}</a></td>
+      <td>{{ event.get_day_display }}</td>
+      <td>{{ event.start_time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}
