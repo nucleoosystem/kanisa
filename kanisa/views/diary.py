@@ -1,3 +1,4 @@
+from datetime import time
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
@@ -23,6 +24,11 @@ class DiaryCreateView(KanisaCreateView):
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_diary')
+
+    def get_initial(self):
+        initial = super(DiaryCreateView, self).get_initial()
+        initial['start_time'] = time(9, 0, 0)
+        return initial
 
 
 class DiaryUpdateView(KanisaUpdateView):
