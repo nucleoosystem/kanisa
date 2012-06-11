@@ -755,3 +755,8 @@
 						'</div>';
 
 }( window.jQuery )
+
+$(function() {
+    // Handler for .ready() called.
+    $('.datepicker').datepicker();
+});

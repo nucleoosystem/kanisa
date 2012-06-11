@@ -33,6 +33,28 @@ class BootstrapTimeField(forms.TimeField):
         super(BootstrapTimeField, self).__init__(*args, **kwargs)
 
 
+class BootstrapDateWidget(forms.widgets.DateInput):
+    def __init__(self, *args, **kwargs):
+        extra_attrs = {'data-date-format': 'dd/mm/yyyy', 'class': 'datepicker'}
+
+        if 'attrs' not in kwargs:
+            kwargs['attrs'] = {}
+
+        kwargs['attrs'].update(extra_attrs)
+
+        super(BootstrapDateWidget, self).__init__(*args, **kwargs)
+
+    class Media:
+        css = {'all': ['kanisa/bootstrap/css/datepicker.css', ]}
+        js = ('kanisa/bootstrap/js/bootstrap-datepicker.js', )
+
+
+class BootstrapDateField(forms.DateField):
+    def __init__(self, *args, **kwargs):
+        kwargs['widget'] = BootstrapDateWidget
+        super(BootstrapDateField, self).__init__(*args, **kwargs)
+
+
 class BaseForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
@@ -48,6 +70,9 @@ class BaseForm(ModelForm):
 
 
 class BannerForm(BaseForm):
+    publish_from = BootstrapDateField(required=False)
+    publish_until = BootstrapDateField(required=False)
+
     class Meta:
         model = Banner
 
