@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
@@ -22,10 +21,6 @@ class KanisaCreateView(CreateView):
         messages.success(self.request, message, extra_tags='msg')
         return super(KanisaCreateView, self).form_valid(form)
 
-    @method_decorator(staff_member_required)
-    def dispatch(self, *args, **kwargs):
-        return super(KanisaCreateView, self).dispatch(*args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(KanisaCreateView,
                         self).get_context_data(**kwargs)
@@ -43,10 +38,6 @@ class KanisaUpdateView(UpdateView):
         messages.success(self.request, message, extra_tags='msg')
         return super(KanisaUpdateView, self).form_valid(form)
 
-    @method_decorator(staff_member_required)
-    def dispatch(self, *args, **kwargs):
-        return super(KanisaUpdateView, self).dispatch(*args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(KanisaUpdateView,
                         self).get_context_data(**kwargs)
@@ -57,10 +48,6 @@ class KanisaUpdateView(UpdateView):
 
 
 class KanisaListView(ListView):
-    @method_decorator(staff_member_required)
-    def dispatch(self, *args, **kwargs):
-        return super(KanisaListView, self).dispatch(*args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(KanisaListView,
                         self).get_context_data(**kwargs)
