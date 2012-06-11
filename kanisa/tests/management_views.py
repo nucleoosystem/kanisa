@@ -8,7 +8,7 @@ class ManagementViewTests(KanisaViewTestCase):
     def test_views_protected(self):
         self.check_staff_only(reverse('kanisa.views.manage'))
         self.check_staff_only(reverse('kanisa_manage_banners'))
-        self.check_staff_only(reverse('kanisa.views.retire_banner',
+        self.check_staff_only(reverse('kanisa_retire_banner',
                                       args=[1, ]))
         self.check_staff_only(reverse('kanisa_create_banner'))
         self.check_staff_only(reverse('kanisa_update_banner',
@@ -33,7 +33,7 @@ class ManagementViewTests(KanisaViewTestCase):
                          [1, 2, 3, 5, ])
 
     def test_banner_retire_view(self):
-        url = reverse('kanisa.views.retire_banner', args=[1, ])
+        url = reverse('kanisa_retire_banner', args=[1, ])
         self.client.login(username='fred', password='secret')
 
         resp = self.client.get(url, follow=True)
