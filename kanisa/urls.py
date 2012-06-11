@@ -3,7 +3,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from kanisa.views.banners import (BannerCreateView, BannerUpdateView,
                                   InactiveBannerManagementView,
-                                  BannerManagementView)
+                                  BannerManagementView,
+                                  RetireBannerView)
 from kanisa.views.diary import (DiaryCreateView, DiaryUpdateView,
                                 DiaryRegularEventsView)
 
@@ -25,7 +26,7 @@ urlpatterns = patterns('',
         staff_member_required(BannerUpdateView.as_view()),
         {}, 'kanisa_update_banner'),
     url(r'^manage/banners/retire/(?P<banner_id>\d+)$',
-        'kanisa.views.retire_banner',
+        staff_member_required(RetireBannerView.as_view()),
         {}, 'kanisa_retire_banner'),
 
     # Diary

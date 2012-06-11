@@ -1,10 +1,7 @@
 from django.contrib import messages
-from django.contrib.admin.views.decorators import staff_member_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
-
+from django.shortcuts import get_object_or_404
+from django.views.generic.base import RedirectView
 
 from kanisa.models.banners import Banner
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -54,12 +51,14 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
         return reverse('kanisa_manage_inactive_banners')
 
 
-@staff_member_required
-def retire_banner(request, banner_id):
-    banner = get_object_or_404(Banner, pk=banner_id)
-    banner.set_retired()
+class RetireBannerView(RedirectView):
+    permanent = False
 
-    message = u'Banner "%s" retired.' % unicode(banner)
-    messages.success(request, message)
+    def get_redirect_url(self, banner_id):
+        banner = get_object_or_404(Banner, pk=banner_id)
+        banner.set_retired()
 
-    return HttpResponseRedirect(reverse('kanisa_manage_banners'))
+        message = u'Banner "%s" retired.' % unicode(banner)
+        messages.success(self.request, message)
+
+        return reverse('kanisa_manage_banners')
