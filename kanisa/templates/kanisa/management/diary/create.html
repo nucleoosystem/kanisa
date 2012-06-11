@@ -1,16 +1,5 @@
 {% extends 'kanisa/management/diary/base.html' %}
 
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">
-  <span class="divider">/</span>
-  {% if regularevent %}Edit Event: {{ regularevent }}{% else %}Create{% endif %}
-</li>
-{% endblock %}
-
-
-{% block pagetitle %}{% if regularevent %}Edit Event: {{ regularevent }}{% else %}Create an Event {{ block.super }}{% endif %}{% endblock %}
-
 {% block content %}
 
 {% include 'kanisa/management/diary/_lead.html' %}

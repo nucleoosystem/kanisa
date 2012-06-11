@@ -17,6 +17,15 @@ class KanisaCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(KanisaCreateView, self).dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(KanisaCreateView,
+                        self).get_context_data(**kwargs)
+
+        if hasattr(self, 'kanisa_title'):
+            context['kanisa_title'] = self.kanisa_title
+
+        return context
+
 
 class KanisaUpdateView(UpdateView):
     def form_valid(self, form):
@@ -29,6 +38,17 @@ class KanisaUpdateView(UpdateView):
     @method_decorator(staff_member_required)
     def dispatch(self, *args, **kwargs):
         return super(KanisaUpdateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(KanisaUpdateView,
+                        self).get_context_data(**kwargs)
+
+        if hasattr(self, 'get_kanisa_title'):
+            context['kanisa_title'] = self.get_kanisa_title(self.object)
+        elif hasattr(self, 'kanisa_title'):
+            context['kanisa_title'] = self.kanisa_title
+
+        return context
 
 
 class KanisaListView(ListView):
