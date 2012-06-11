@@ -42,8 +42,8 @@ class DiaryUpdateView(KanisaUpdateView):
     template_name = 'kanisa/management/diary/create.html'
     model = RegularEvent
 
-    def get_kanisa_title(self, instance):
-        return 'Edit Event: %s' % unicode(instance)
+    def get_kanisa_title(self):
+        return 'Edit Event: %s' % unicode(self.object)
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_diary')

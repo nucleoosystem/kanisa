@@ -44,7 +44,7 @@ class KanisaUpdateView(UpdateView):
                         self).get_context_data(**kwargs)
 
         if hasattr(self, 'get_kanisa_title'):
-            context['kanisa_title'] = self.get_kanisa_title(self.object)
+            context['kanisa_title'] = self.get_kanisa_title()
         elif hasattr(self, 'kanisa_title'):
             context['kanisa_title'] = self.kanisa_title
 
