@@ -18,7 +18,7 @@ def daterange(start_date, end_date):
         yield start_date + timedelta(n)
 
 
-class DiaryEvent(models.Model):
+class RegularEvent(models.Model):
     title = models.CharField(max_length=60)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
     start_time = models.TimeField()
@@ -49,7 +49,7 @@ class DiaryEvent(models.Model):
 
 
 class DiaryEventOccurrence(models.Model):
-    event = models.ForeignKey(DiaryEvent)
+    event = models.ForeignKey(RegularEvent)
     date = models.DateField()
     title = models.CharField(max_length=60, blank=True, null=True)
     details = models.TextField(blank=True, null=True)

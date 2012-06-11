@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
-from kanisa.models.diary import DiaryEvent
+from kanisa.models.diary import RegularEvent
 
 TIMEPICKER_FORMAT = '%I:%M %p'
 
@@ -77,8 +77,8 @@ class BannerForm(BaseForm):
         model = Banner
 
 
-class DiaryForm(BaseForm):
+class RegularEventForm(BaseForm):
     start_time = BootstrapTimeField()
 
     class Meta:
-        model = DiaryEvent
+        model = RegularEvent

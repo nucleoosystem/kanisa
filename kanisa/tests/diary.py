@@ -1,17 +1,17 @@
 from datetime import date
 from django.test import TestCase
-from kanisa.models import DiaryEvent, DiaryEventOccurrence
+from kanisa.models import RegularEvent, DiaryEventOccurrence
 
 
 class DiaryTest(TestCase):
     fixtures = ['diary.json', ]
 
     def testUnicode(self):
-        event = DiaryEvent.objects.get(pk=1)
+        event = RegularEvent.objects.get(pk=1)
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
     def testSchedule(self):
-        event = DiaryEvent.objects.get(pk=1)
+        event = RegularEvent.objects.get(pk=1)
         self.assertEqual(event.day, 1)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
@@ -22,7 +22,7 @@ class DiaryTest(TestCase):
         self.assertEqual(instance.date, date(2012, 1, 3))
 
     def testInstanceUnicode(self):
-        event = DiaryEvent.objects.get(pk=2)
+        event = RegularEvent.objects.get(pk=2)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = DiaryEventOccurrence.objects.get(pk=1)

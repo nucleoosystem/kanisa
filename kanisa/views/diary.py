@@ -4,21 +4,21 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 
 
-from kanisa.forms import DiaryForm
-from kanisa.models import DiaryEvent
+from kanisa.forms import RegularEventForm
+from kanisa.models import RegularEvent
 from kanisa.views.generic import KanisaCreateView, KanisaUpdateView
 
 
 @staff_member_required
 def manage_diary(request):
-    events = DiaryEvent.objects.all()
+    events = RegularEvent.objects.all()
     return render_to_response('kanisa/management/diary/index.html',
                               {'events': events},
                               context_instance=RequestContext(request))
 
 
 class DiaryCreateView(KanisaCreateView):
-    form_class = DiaryForm
+    form_class = RegularEventForm
     template_name = 'kanisa/management/diary/create.html'
 
     def get_success_url(self):
@@ -26,9 +26,9 @@ class DiaryCreateView(KanisaCreateView):
 
 
 class DiaryUpdateView(KanisaUpdateView):
-    form_class = DiaryForm
+    form_class = RegularEventForm
     template_name = 'kanisa/management/diary/create.html'
-    model = DiaryEvent
+    model = RegularEvent
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_diary')

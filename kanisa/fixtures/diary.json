@@ -1,7 +1,7 @@
 [
   {
     "pk": 1,
-    "model": "kanisa.diaryevent",
+    "model": "kanisa.regularevent",
     "fields": {
       "duration": 60,
       "details": "Afternoon tea's always lovely.",
@@ -12,7 +12,7 @@
   },
   {
     "pk": 2,
-    "model": "kanisa.diaryevent",
+    "model": "kanisa.regularevent",
     "fields": {
       "duration": 60,
       "details": "",

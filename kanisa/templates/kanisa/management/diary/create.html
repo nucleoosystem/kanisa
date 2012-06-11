@@ -4,12 +4,12 @@
 {{ block.super }}
 <li class="active">
   <span class="divider">/</span>
-  {% if diaryevent %}Edit Event: {{ diaryevent }}{% else %}Create{% endif %}
+  {% if regularevent %}Edit Event: {{ regularevent }}{% else %}Create{% endif %}
 </li>
 {% endblock %}
 
 
-{% block pagetitle %}{% if diaryevent %}Edit Event: {{ diaryevent }}{% else %}Create an Event {{ block.super }}{% endif %}{% endblock %}
+{% block pagetitle %}{% if regularevent %}Edit Event: {{ regularevent }}{% else %}Create an Event {{ block.super }}{% endif %}{% endblock %}
 
 {% block content %}
 
