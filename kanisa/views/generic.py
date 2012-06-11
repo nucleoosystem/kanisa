@@ -35,3 +35,12 @@ class KanisaListView(ListView):
     @method_decorator(staff_member_required)
     def dispatch(self, *args, **kwargs):
         return super(KanisaListView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(KanisaListView,
+                        self).get_context_data(**kwargs)
+
+        if hasattr(self, 'kanisa_title'):
+            context['kanisa_title'] = self.kanisa_title
+
+        return context

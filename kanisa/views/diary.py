@@ -21,12 +21,7 @@ def manage_diary(request):
 class DiaryRegularEventsView(KanisaListView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DiaryRegularEventsView,
-                        self).get_context_data(**kwargs)
-        context['kanisa_title'] = 'Manage Regular Events'
-        return context
+    kanisa_title = 'Manage Regular Events'
 
 
 class DiaryCreateView(KanisaCreateView):
