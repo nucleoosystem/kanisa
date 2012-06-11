@@ -27,6 +27,7 @@ class DiaryRegularEventsView(KanisaListView):
 class DiaryCreateView(KanisaCreateView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/diary/create.html'
+    kanisa_title = 'Create a Regular Event'
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_diary')

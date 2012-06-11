@@ -5,6 +5,15 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
 
+def add_kanisa_title(cls, context):
+    if hasattr(cls, 'get_kanisa_title'):
+        context['kanisa_title'] = cls.get_kanisa_title()
+    elif hasattr(cls, 'kanisa_title'):
+        context['kanisa_title'] = cls.kanisa_title
+
+    return context
+
+
 class KanisaCreateView(CreateView):
     def form_valid(self, form):
         model_name = form.instance._meta.verbose_name.title()
@@ -21,8 +30,7 @@ class KanisaCreateView(CreateView):
         context = super(KanisaCreateView,
                         self).get_context_data(**kwargs)
 
-        if hasattr(self, 'kanisa_title'):
-            context['kanisa_title'] = self.kanisa_title
+        context = add_kanisa_title(self, context)
 
         return context
 
@@ -43,10 +51,7 @@ class KanisaUpdateView(UpdateView):
         context = super(KanisaUpdateView,
                         self).get_context_data(**kwargs)
 
-        if hasattr(self, 'get_kanisa_title'):
-            context['kanisa_title'] = self.get_kanisa_title()
-        elif hasattr(self, 'kanisa_title'):
-            context['kanisa_title'] = self.kanisa_title
+        context = add_kanisa_title(self, context)
 
         return context
 
@@ -60,7 +65,6 @@ class KanisaListView(ListView):
         context = super(KanisaListView,
                         self).get_context_data(**kwargs)
 
-        if hasattr(self, 'kanisa_title'):
-            context['kanisa_title'] = self.kanisa_title
+        context = add_kanisa_title(self, context)
 
         return context
