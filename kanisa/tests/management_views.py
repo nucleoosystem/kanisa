@@ -7,7 +7,7 @@ class ManagementViewTests(KanisaViewTestCase):
 
     def test_views_protected(self):
         self.check_staff_only(reverse('kanisa.views.manage'))
-        self.check_staff_only(reverse('kanisa.views.manage_banners'))
+        self.check_staff_only(reverse('kanisa_manage_banners'))
         self.check_staff_only(reverse('kanisa.views.retire_banner',
                                       args=[1, ]))
         self.check_staff_only(reverse('kanisa_create_banner'))
@@ -22,7 +22,7 @@ class ManagementViewTests(KanisaViewTestCase):
         self.assertTemplateUsed(resp, 'kanisa/management/index.html')
 
     def test_banner_management_view(self):
-        url = reverse('kanisa.views.manage_banners')
+        url = reverse('kanisa_manage_banners')
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)

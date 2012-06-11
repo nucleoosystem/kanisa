@@ -40,7 +40,7 @@ class BannerCreateView(KanisaCreateView, BannerBaseView):
     kanisa_title = 'Create Banner'
 
     def get_success_url(self):
-        return reverse('kanisa.views.manage_banners')
+        return reverse('kanisa_manage_banners')
 
 
 class BannerUpdateView(KanisaUpdateView, BannerBaseView):
@@ -52,7 +52,7 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
         return 'Edit Banner: %s' % unicode(self.object)
 
     def get_success_url(self):
-        return reverse('kanisa.views.manage_banners')
+        return reverse('kanisa_manage_banners')
 
 
 @staff_member_required
@@ -63,4 +63,4 @@ def retire_banner(request, banner_id):
     message = u'Banner "%s" retired.' % unicode(banner)
     messages.success(request, message)
 
-    return HttpResponseRedirect(reverse('kanisa.views.manage_banners'))
+    return HttpResponseRedirect(reverse('kanisa_manage_banners'))
