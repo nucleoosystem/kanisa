@@ -22,6 +22,10 @@ class DiaryBaseView:
     kanisa_lead = ('Diary events are regularly occurring events you want to '
                    'display on your church\'s calendar.')
 
+    def get_kanisa_root_crumb(self):
+        return {'text': 'Diary',
+                'url': reverse('kanisa_manage_diary')}
+
 
 class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
     model = RegularEvent
