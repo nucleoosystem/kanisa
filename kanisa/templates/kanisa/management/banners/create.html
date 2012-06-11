@@ -1,16 +1,5 @@
 {% extends 'kanisa/management/banners/base.html' %}
 
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">
-  <span class="divider">/</span>
-  {% if banner %}Edit Banner: {{ banner }}{% else %}Create{% endif %}
-</li>
-{% endblock %}
-
-
-{% block pagetitle %}{% if banner %}Edit Banner: {{ banner }}{% else %}Create a Banner {{ block.super }}{% endif %}{% endblock %}
-
 {% block content %}
 
 {% include 'kanisa/management/banners/_lead.html' %}

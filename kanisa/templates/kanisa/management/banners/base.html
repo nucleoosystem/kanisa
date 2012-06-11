@@ -7,4 +7,9 @@
 <li>
   <span class="divider">/</span> <a href="{% url 'kanisa.views.manage_banners' %}">Banners</a>
 </li>
+{% if kanisa_title %}
+<li>
+    <span class="divider">/</span> {{ kanisa_title }}</span>
+</li>
+{% endif %}
 {% endblock %}

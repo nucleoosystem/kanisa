@@ -32,6 +32,7 @@ def manage_inactive_banners(request):
 class BannerCreateView(KanisaCreateView):
     form_class = BannerForm
     template_name = 'kanisa/management/banners/create.html'
+    kanisa_title = 'Create Banner'
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_banners')
@@ -41,6 +42,9 @@ class BannerUpdateView(KanisaUpdateView):
     form_class = BannerForm
     template_name = 'kanisa/management/banners/create.html'
     model = Banner
+
+    def get_kanisa_title(self):
+        return 'Edit Banner: %s' % unicode(self.object)
 
     def get_success_url(self):
         return reverse('kanisa.views.manage_banners')
