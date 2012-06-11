@@ -35,7 +35,7 @@ class DiaryCreateView(KanisaCreateView, DiaryBaseView):
     kanisa_title = 'Create a Regular Event'
 
     def get_success_url(self):
-        return reverse('kanisa.views.manage_diary')
+        return reverse('kanisa_manage_diary')
 
     def get_initial(self):
         initial = super(DiaryCreateView, self).get_initial()

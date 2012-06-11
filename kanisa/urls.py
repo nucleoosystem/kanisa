@@ -26,7 +26,10 @@ urlpatterns = patterns('',
         'kanisa.views.retire_banner',
         {}, 'kanisa_retire_banner'),
 
-    url(r'^manage/diary/$', 'kanisa.views.manage_diary'),
+    # Diary
+    url(r'^manage/diary/$',
+        'kanisa.views.manage_diary',
+        {}, 'kanisa_manage_diary'),
     url(r'^manage/diary/regular/$',
         staff_member_required(DiaryRegularEventsView.as_view()),
         {}, 'kanisa_diary_regular_events'),

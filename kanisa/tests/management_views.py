@@ -13,6 +13,7 @@ class ManagementViewTests(KanisaViewTestCase):
         self.check_staff_only(reverse('kanisa_create_banner'))
         self.check_staff_only(reverse('kanisa_update_banner',
                                       args=[1, ]))
+        self.check_staff_only(reverse('kanisa_manage_diary'))
 
     def test_root_view(self):
         url = reverse('kanisa.views.manage')
