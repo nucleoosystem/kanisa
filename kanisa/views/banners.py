@@ -7,17 +7,9 @@ from django.template import RequestContext
 
 
 from kanisa.models.banners import Banner
-from kanisa.views.generic import KanisaCreateView, KanisaUpdateView
+from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
+                                  KanisaListView)
 from kanisa.forms import BannerForm
-
-
-@staff_member_required
-def manage_banners(request):
-    banners = Banner.active_objects.all()
-
-    return render_to_response('kanisa/management/banners/index.html',
-                              {'banners': banners},
-                              context_instance=RequestContext(request))
 
 
 @staff_member_required
@@ -32,6 +24,13 @@ def manage_inactive_banners(request):
 class BannerBaseView:
     kanisa_lead = ('Banners are a high-impact way of advertising content or '
                    'events for your site.')
+
+
+class BannerManagementView(KanisaListView, BannerBaseView):
+    model = Banner
+    queryset = Banner.active_objects.all()
+    template_name = 'kanisa/management/banners/index.html'
+    context_object_name = 'banners'
 
 
 class BannerCreateView(KanisaCreateView, BannerBaseView):

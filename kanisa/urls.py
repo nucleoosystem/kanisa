@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.admin.views.decorators import staff_member_required
 
-from kanisa.views.banners import BannerCreateView, BannerUpdateView
+from kanisa.views.banners import (BannerCreateView, BannerUpdateView,
+                                  BannerManagementView)
 from kanisa.views.diary import (DiaryCreateView, DiaryUpdateView,
                                 DiaryRegularEventsView)
 
@@ -11,7 +12,7 @@ urlpatterns = patterns('',
 
     # Banners
     url(r'^manage/banners/$',
-        'kanisa.views.manage_banners',
+        staff_member_required(BannerManagementView.as_view()),
         {}, 'kanisa_manage_banners'),
     url(r'^manage/banners/inactive/$',
         'kanisa.views.manage_inactive_banners',
