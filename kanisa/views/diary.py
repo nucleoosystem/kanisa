@@ -7,7 +7,8 @@ from django.template import RequestContext
 
 from kanisa.forms import RegularEventForm
 from kanisa.models import RegularEvent
-from kanisa.views.generic import KanisaCreateView, KanisaUpdateView
+from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
+                                  KanisaListView)
 
 
 @staff_member_required
@@ -17,12 +18,10 @@ def manage_diary(request):
                               context_instance=RequestContext(request))
 
 
-@staff_member_required
-def manage_regular_events(request):
-    events = RegularEvent.objects.all()
-    return render_to_response('kanisa/management/diary/regular_events.html',
-                              {'events': events},
-                              context_instance=RequestContext(request))
+class DiaryRegularEventsView(KanisaListView):
+    model = RegularEvent
+    template_name = 'kanisa/management/diary/regular_events.html'
+    context_object_name = 'events'
 
 
 class DiaryCreateView(KanisaCreateView):
