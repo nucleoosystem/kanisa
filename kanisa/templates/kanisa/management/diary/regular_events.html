@@ -2,15 +2,6 @@
 
 {% load url from future %}
 
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">
-  <span class="divider">/</span> Manage Regular Events
-</li>
-{% endblock %}
-
-{% block pagetitle %}Manage Diary {{ block.super }}{% endblock %}
-
 {% block content %}
 {% include 'kanisa/management/diary/_lead.html' %}
 <p><a href="{% url 'kanisa_create_diary' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>

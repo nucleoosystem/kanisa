@@ -71,7 +71,7 @@
             {% endblock %}
           </ul>
 
-          <h1>{% block pagetitle %} for {{ KANISA_CHURCH_NAME }}{% endblock %}</h1>
+          <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
 
           {% block content %}
           {% endblock %}
