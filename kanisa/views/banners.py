@@ -12,15 +12,6 @@ from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
 from kanisa.forms import BannerForm
 
 
-@staff_member_required
-def manage_inactive_banners(request):
-    banners = Banner.inactive_objects.all()
-
-    return render_to_response('kanisa/management/banners/inactive.html',
-                              {'banners': banners},
-                              context_instance=RequestContext(request))
-
-
 class BannerBaseView:
     kanisa_lead = ('Banners are a high-impact way of advertising content or '
                    'events for your site.')
@@ -30,6 +21,13 @@ class BannerManagementView(KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.active_objects.all()
     template_name = 'kanisa/management/banners/index.html'
+    context_object_name = 'banners'
+
+
+class InactiveBannerManagementView(KanisaListView, BannerBaseView):
+    model = Banner
+    queryset = Banner.inactive_objects.all()
+    template_name = 'kanisa/management/banners/inactive.html'
     context_object_name = 'banners'
 
 
