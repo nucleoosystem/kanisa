@@ -6,7 +6,8 @@ from kanisa.views.banners import (BannerCreateView, BannerUpdateView,
                                   BannerManagementView,
                                   RetireBannerView)
 from kanisa.views.diary import (DiaryCreateView, DiaryUpdateView,
-                                DiaryRegularEventsView)
+                                DiaryRegularEventsView,
+                                DiaryEventIndexView)
 
 urlpatterns = patterns('',
     url(r'^$', 'kanisa.views.index'),
@@ -31,7 +32,7 @@ urlpatterns = patterns('',
 
     # Diary
     url(r'^manage/diary/$',
-        'kanisa.views.manage_diary',
+        staff_member_required(DiaryEventIndexView.as_view()),
         {}, 'kanisa_manage_diary'),
     url(r'^manage/diary/regular/$',
         staff_member_required(DiaryRegularEventsView.as_view()),

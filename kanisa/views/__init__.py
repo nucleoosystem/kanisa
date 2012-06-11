@@ -1,4 +1,3 @@
-from kanisa.views.diary import manage_diary
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext

@@ -1,21 +1,11 @@
 from datetime import time
-from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
-from django.template import RequestContext
 
 
 from kanisa.forms import RegularEventForm
 from kanisa.models import RegularEvent
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView)
-
-
-@staff_member_required
-def manage_diary(request):
-    return render_to_response('kanisa/management/diary/index.html',
-                              {},
-                              context_instance=RequestContext(request))
+                                  KanisaListView, KanisaTemplateView)
 
 
 class DiaryBaseView:
@@ -25,6 +15,12 @@ class DiaryBaseView:
     def get_kanisa_root_crumb(self):
         return {'text': 'Diary',
                 'url': reverse('kanisa_manage_diary')}
+
+
+class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
+    template_name = 'kanisa/management/diary/index.html'
+    kanisa_title = 'Manage Diary'
+    kanisa_is_root_view = True
 
 
 class DiaryRegularEventsView(KanisaListView, DiaryBaseView):

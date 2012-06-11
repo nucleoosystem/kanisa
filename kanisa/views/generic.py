@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.utils.decorators import method_decorator
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
@@ -15,8 +16,20 @@ def add_kanisa_context(cls, context):
 
     if hasattr(cls, 'get_kanisa_root_crumb'):
         context['kanisa_root_crumb'] = cls.get_kanisa_root_crumb()
+        
+    context['kanisa_is_root_view'] = getattr(cls, 'kanisa_is_root_view', False)
 
     return context
+
+
+class KanisaTemplateView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super(KanisaTemplateView,
+                        self).get_context_data(**kwargs)
+
+        context = add_kanisa_context(self, context)
+
+        return context
 
 
 class KanisaCreateView(CreateView):
