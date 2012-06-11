@@ -2,15 +2,6 @@
 
 {% load url from future %}
 
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">
-  <span class="divider">/</span> Banners
-</li>
-{% endblock %}
-
-{% block pagetitle %}Manage Banners {{ block.super }}{% endblock %}
-
 {% block content %}
 <p><a href="{% url 'kanisa_create_banner' %}" class="btn btn-large btn-primary">Create a new banner &raquo;</a></p>
 
