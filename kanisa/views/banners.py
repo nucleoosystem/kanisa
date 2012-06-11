@@ -52,7 +52,9 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
         return 'Edit Banner: %s' % unicode(self.object)
 
     def get_success_url(self):
-        return reverse('kanisa_manage_banners')
+        if self.object.active():
+            return reverse('kanisa_manage_banners')
+        return reverse('kanisa_manage_inactive_banners')
 
 
 @staff_member_required
