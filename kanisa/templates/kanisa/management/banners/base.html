@@ -5,7 +5,8 @@
 {% block breadcrumbs %}
 {{ block.super }}
 <li>
-  <span class="divider">/</span> <a href="{% url 'kanisa_manage_banners' %}">Banners</a>
+  <span class="divider">/</span>
+  <a href="{{ kanisa_root_crumb.url }}">{{ kanisa_root_crumb.text }}</a>
 </li>
 {% if kanisa_title %}
 <li>

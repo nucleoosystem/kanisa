@@ -13,6 +13,9 @@ def add_kanisa_context(cls, context):
     if hasattr(cls, 'kanisa_lead'):
         context['kanisa_lead'] = cls.kanisa_lead
 
+    if hasattr(cls, 'get_kanisa_root_crumb'):
+        context['kanisa_root_crumb'] = cls.get_kanisa_root_crumb()
+
     return context
 
 
