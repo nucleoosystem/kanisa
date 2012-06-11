@@ -21,8 +21,6 @@ def manage_diary(request):
 class DiaryRegularEventsView(KanisaListView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
-    context_object_name = 'events'
-
 
 class DiaryCreateView(KanisaCreateView):
     form_class = RegularEventForm

@@ -24,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for event in events %}
+    {% for event in regularevent_list %}
     <tr>
       <td><a href="{% url 'kanisa_update_diary' event.pk %}">{{ event.title }}</a></td>
       <td>{{ event.get_day_display }}</td>
