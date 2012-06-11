@@ -16,7 +16,7 @@ def add_kanisa_context(cls, context):
 
     if hasattr(cls, 'get_kanisa_root_crumb'):
         context['kanisa_root_crumb'] = cls.get_kanisa_root_crumb()
-        
+
     context['kanisa_is_root_view'] = getattr(cls, 'kanisa_is_root_view', False)
 
     return context
