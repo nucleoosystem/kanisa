@@ -18,13 +18,18 @@ def manage_diary(request):
                               context_instance=RequestContext(request))
 
 
-class DiaryRegularEventsView(KanisaListView):
+class DiaryBaseView:
+    kanisa_lead = ('Diary events are regularly occurring events you want to '
+                   'display on your church\'s calendar.')
+
+
+class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Manage Regular Events'
 
 
-class DiaryCreateView(KanisaCreateView):
+class DiaryCreateView(KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/diary/create.html'
     kanisa_title = 'Create a Regular Event'
@@ -38,7 +43,7 @@ class DiaryCreateView(KanisaCreateView):
         return initial
 
 
-class DiaryUpdateView(KanisaUpdateView):
+class DiaryUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/diary/create.html'
     model = RegularEvent

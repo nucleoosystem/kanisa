@@ -29,7 +29,12 @@ def manage_inactive_banners(request):
                               context_instance=RequestContext(request))
 
 
-class BannerCreateView(KanisaCreateView):
+class BannerBaseView:
+    kanisa_lead = ('Banners are a high-impact way of advertising content or '
+                   'events for your site.')
+
+
+class BannerCreateView(KanisaCreateView, BannerBaseView):
     form_class = BannerForm
     template_name = 'kanisa/management/banners/create.html'
     kanisa_title = 'Create Banner'
@@ -38,7 +43,7 @@ class BannerCreateView(KanisaCreateView):
         return reverse('kanisa.views.manage_banners')
 
 
-class BannerUpdateView(KanisaUpdateView):
+class BannerUpdateView(KanisaUpdateView, BannerBaseView):
     form_class = BannerForm
     template_name = 'kanisa/management/banners/create.html'
     model = Banner

@@ -10,6 +10,9 @@ def add_kanisa_title(cls, context):
     elif hasattr(cls, 'kanisa_title'):
         context['kanisa_title'] = cls.kanisa_title
 
+    if hasattr(cls, 'kanisa_lead'):
+        context['kanisa_lead'] = cls.kanisa_lead
+
     return context
 
 
