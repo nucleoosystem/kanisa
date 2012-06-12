@@ -22,12 +22,12 @@
       <td><strong>{{ day }}</strong></td>
       <td>
       {% for e in entry %}
-      {{ e.start_time }}
+      {{ e.start_time }}<br />
       {% endfor %}
       </td>
       <td>
       {% for e in entry %}
-      {{ e }}
+      {{ e }}<br />
       {% empty %}
       <em>None</em>
       {% endfor %}
