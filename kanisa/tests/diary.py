@@ -1,6 +1,7 @@
 from datetime import date
 from django.test import TestCase
 from kanisa.models import RegularEvent, DiaryEventOccurrence
+from kanisa.utils import get_week_bounds
 
 
 class DiaryTest(TestCase):
@@ -32,3 +33,32 @@ class DiaryTest(TestCase):
 
         instance = DiaryEventOccurrence.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Special Breakfast')
+
+class DiaryUtilsTest(TestCase):
+    def testGetWeekBoundsToday(self):
+        monday, sunday = get_week_bounds()
+        self.assertEqual(monday.weekday(), 0)
+        self.assertEqual(sunday.weekday(), 6)
+        self.assertTrue(monday <= date.today())
+        self.assertTrue(sunday >= date.today())
+
+    def testGetWeekBoundsOnDate(self):
+        monday, sunday = get_week_bounds(date(2012, 6, 12))
+        self.assertEqual(monday.weekday(), 0)
+        self.assertEqual(sunday.weekday(), 6)
+        self.assertEqual(monday, date(2012, 6, 11))
+        self.assertEqual(sunday, date(2012, 6, 17))
+
+    def testGetWeekBoundsOnAMonday(self):
+        monday, sunday = get_week_bounds(date(2012, 6, 11))
+        self.assertEqual(monday.weekday(), 0)
+        self.assertEqual(sunday.weekday(), 6)
+        self.assertEqual(monday, date(2012, 6, 11))
+        self.assertEqual(sunday, date(2012, 6, 17))
+
+    def testGetWeekBoundsOnASunday(self):
+        monday, sunday = get_week_bounds(date(2012, 6, 17))
+        self.assertEqual(monday.weekday(), 0)
+        self.assertEqual(sunday.weekday(), 6)
+        self.assertEqual(monday, date(2012, 6, 11))
+        self.assertEqual(sunday, date(2012, 6, 17))
