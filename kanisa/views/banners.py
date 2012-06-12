@@ -55,7 +55,7 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
     def get_success_url(self):
         if self.object.active():
             return reverse('kanisa_manage_banners')
-        return reverse('kanisa_manage_inactive_banners')
+        return reverse('kanisa_manage_banners_inactive')
 
 
 class RetireBannerView(RedirectView):
