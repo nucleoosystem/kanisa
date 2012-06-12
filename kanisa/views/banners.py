@@ -22,7 +22,6 @@ class BannerManagementView(KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.active_objects.all()
     template_name = 'kanisa/management/banners/index.html'
-    context_object_name = 'banners'
     kanisa_title = 'Manage Banners'
     kanisa_is_root_view = True
 
@@ -31,7 +30,6 @@ class InactiveBannerManagementView(KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.inactive_objects.all()
     template_name = 'kanisa/management/banners/inactive.html'
-    context_object_name = 'banners'
     kanisa_title = 'Manage Inactive Banners'
 
 

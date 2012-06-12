@@ -1,9 +1,9 @@
 {% load thumbnail %}
 {% load url from future %}
 
-{% if banners %}
+{% if banner_list %}
 <ul class="thumbnails">
-  {% for banner in banners %}
+  {% for banner in banner_list %}
   <li class="span3">
     <div class="thumbnail">
       {% thumbnail banner.image "260x180" crop="center" as im %}
