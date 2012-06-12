@@ -29,8 +29,8 @@ class ManagementViewTests(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/banners/index.html')
 
-        self.assertTrue('banners' in resp.context)
-        self.assertEqual([banner.pk for banner in resp.context['banners']],
+        self.assertTrue('banner_list' in resp.context)
+        self.assertEqual([banner.pk for banner in resp.context['banner_list']],
                          [1, 2, 3, 5, ])
 
     def test_banner_retire_view(self):
@@ -40,8 +40,8 @@ class ManagementViewTests(KanisaViewTestCase):
         resp = self.client.get(url, follow=True)
         self.assertEqual(resp.status_code, 200)
 
-        self.assertTrue('banners' in resp.context)
-        self.assertEqual([banner.pk for banner in resp.context['banners']],
+        self.assertTrue('banner_list' in resp.context)
+        self.assertEqual([banner.pk for banner in resp.context['banner_list']],
                          [2, 3, 5, ])
 
         self.assertTrue('messages' in resp.context)
