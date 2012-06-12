@@ -34,6 +34,7 @@ class DiaryTest(TestCase):
         instance = DiaryEventOccurrence.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
+
 class DiaryUtilsTest(TestCase):
     def testGetWeekBoundsToday(self):
         monday, sunday = get_week_bounds()

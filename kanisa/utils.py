@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 
+
 def get_week_bounds(containing=None):
     if not containing:
         containing = date.today()
