@@ -5,4 +5,36 @@
 {% block content %}
 <p><a href="{% url 'kanisa_manage_diary_create' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>
 
+<hr />
+
+<h2>This Week</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th colspan="2">Regular Events</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for day, entry in calendar %}
+    <tr>
+      <td><strong>{{ day }}</strong></td>
+      <td>
+      {% for e in entry %}
+      {{ e.start_time }}
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry %}
+      {{ e }}
+      {% empty %}
+      <em>None</em>
+      {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock %}
