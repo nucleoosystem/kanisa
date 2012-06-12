@@ -58,6 +58,7 @@ class DiaryEventOccurrence(models.Model):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
+        ordering = ('date', )
 
     def __unicode__(self):
         if self.title:
