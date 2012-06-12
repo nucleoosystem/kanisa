@@ -61,13 +61,6 @@
           </div>
         </div>
         <div class="span10">
-          {% for message in messages %}
-          <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-            <button class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
-          </div>
-          {% endfor %}
-
           <ul class="breadcrumb">
             {% block breadcrumbs %}
             <li>
@@ -90,6 +83,13 @@
             {% endif %}
             {% endblock %}
           </ul>
+
+          {% for message in messages %}
+          <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+            <button class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+          </div>
+          {% endfor %}
 
           <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
 
