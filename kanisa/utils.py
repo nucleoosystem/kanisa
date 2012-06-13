@@ -13,6 +13,7 @@ def get_week_bounds(containing=None):
     sunday = monday + timedelta(days=6)
     return (monday, sunday)
 
+
 class WeekSchedule(object):
     def __init__(self, thedate=None):
         self.date = thedate
