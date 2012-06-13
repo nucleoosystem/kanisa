@@ -35,7 +35,7 @@ class DiaryTest(TestCase):
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
 
-class DiaryUtilsTest(TestCase):
+class DiaryGetWeekBoundsTest(TestCase):
     def testGetWeekBoundsToday(self):
         monday, sunday = get_week_bounds()
         self.assertEqual(monday.weekday(), 0)
