@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 
 from kanisa.forms import RegularEventForm
 from kanisa.models import RegularEvent, DiaryEventOccurrence
-from kanisa.utils import get_week_bounds
+from kanisa.utils import get_schedule
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView)
 
@@ -27,24 +27,7 @@ class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
         context = super(DiaryEventIndexView,
                         self).get_context_data(**kwargs)
 
-        # Get events for this week, along with all regular events
-        regular_events = RegularEvent.objects.all()
-        monday, sunday = get_week_bounds()
-        scheduled_events = DiaryEventOccurrence.objects.\
-                            exclude(date__lt=monday,
-                                    date__gt=sunday)
-
-        calendar_entries = []
-
-        from kanisa.models import diary
-
-        for i in range(0, 7):
-            calendar_entries.append((diary.DAYS_OF_WEEK[i][1], []))
-
-        for event in regular_events:
-            calendar_entries[event.day][1].append(event)
-
-        context['calendar'] = calendar_entries
+        context['calendar'] = get_schedule().calendar_entries
 
         return context
 
