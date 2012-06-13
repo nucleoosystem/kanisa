@@ -83,19 +83,23 @@ class DiaryScheduleRegularEventView(RedirectView):
             raise Http404
 
         formatted_date = formats.date_format(parsed_date,
-                                             "SHORT_DATETIME_FORMAT")
+                                             "DATE_FORMAT")
+        formatted_time = formats.date_format(parsed_date,
+                                             "TIME_FORMAT")
+        date_string = '%s at %s' % (formatted_date, formatted_time)
 
         event_exists = DiaryEventOccurrence.objects.filter(event=event,
                                                            date=parsed_date)
         if len(event_exists) != 0:
-            message = u'%s already scheduled for %s.' % (unicode(event),
-                                                         formatted_date)
+            message = u'%s already scheduled for %s' % (unicode(event),
+                                                         date_string)
             messages.info(self.request, message)
             return reverse('kanisa_manage_diary')
 
         event.schedule(parsed_date, parsed_date + timedelta(days=1))
 
-        message = u'%s scheduled for %s.' % (unicode(event), formatted_date)
+        message = u'%s scheduled for %s' % (unicode(event),
+                                            date_string)
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_diary')
