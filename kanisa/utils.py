@@ -14,6 +14,20 @@ def get_week_bounds(containing=None):
     return (monday, sunday)
 
 
+class DaySchedule(object):
+    def __init__(self, day, thedate, regular_events, scheduled_events):
+        self.date = thedate
+        self.day = day
+        self.dayname = diary.DAYS_OF_WEEK[day][1]
+        self.regular_events = []
+
+        for event in regular_events:
+            if event.day != day:
+                continue
+
+            self.regular_events.append({'event': event, 'scheduled': False})
+
+
 class WeekSchedule(object):
     def __init__(self, thedate=None):
         self.date = thedate
@@ -23,18 +37,19 @@ class WeekSchedule(object):
 
         self.monday, self.sunday = get_week_bounds(self.date)
 
-        self.regular_events = RegularEvent.objects.all()
-        self.scheduled_events = DiaryEventOccurrence.objects.\
+        regular_events = RegularEvent.objects.all()
+        scheduled_events = DiaryEventOccurrence.objects.\
                                     exclude(date__lt=self.monday,
                                             date__gt=self.sunday)
 
         self.calendar_entries = []
 
         for i in range(0, 7):
-            self.calendar_entries.append((diary.DAYS_OF_WEEK[i][1], []))
-
-        for event in self.regular_events:
-            self.calendar_entries[event.day][1].append(event)
+            this_date = self.monday + timedelta(days=i)
+            self.calendar_entries.append(DaySchedule(i,
+                                                     this_date,
+                                                     regular_events,
+                                                     scheduled_events))
 
 
 def get_schedule():

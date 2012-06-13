@@ -13,23 +13,31 @@
   <thead>
     <tr>
       <th>Day</th>
-      <th colspan="2">Regular Events</th>
+      <th colspan="3">Regular Events</th>
     </tr>
   </thead>
   <tbody>
-    {% for day, entry in calendar %}
+    {% for entry in calendar %}
     <tr>
-      <td><strong>{{ day }}</strong></td>
+      <td><strong>{{ entry.dayname }}</strong></td>
       <td>
-      {% for e in entry %}
-      {{ e.start_time }}<br />
+      {% for e in entry.regular_events %}
+      {{ e.event.start_time }}<br />
       {% endfor %}
       </td>
       <td>
-      {% for e in entry %}
-      {{ e }}<br />
+      {% for e in entry.regular_events %}
+      {{ e.event }}<br />
       {% empty %}
       <em>None</em>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.regular_events %}
+      {% if not e.scheduled %}
+        <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.event.pk entry.date|date:"Ymd" %}" class="btn btn-mini">Schedule</a>
+      {% endif %}
+      <br />
       {% endfor %}
       </td>
     </tr>
