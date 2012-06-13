@@ -19,13 +19,29 @@ class DaySchedule(object):
         self.date = thedate
         self.day = day
         self.dayname = diary.DAYS_OF_WEEK[day][1]
+        self.scheduled_events = []
+
+        for event in scheduled_events:
+            if event.date != self.date:
+                continue
+
+            self.scheduled_events.append(event)
+
         self.regular_events = []
 
         for event in regular_events:
             if event.day != day:
                 continue
 
-            self.regular_events.append({'event': event, 'scheduled': False})
+            scheduled = False
+
+            for scheduled_event in self.scheduled_events:
+                if event == scheduled_event.event:
+                    scheduled = True
+                    break
+
+            self.regular_events.append({'event': event,
+                                        'scheduled': scheduled})
 
 
 class WeekSchedule(object):
@@ -52,5 +68,5 @@ class WeekSchedule(object):
                                                      scheduled_events))
 
 
-def get_schedule():
-    return WeekSchedule()
+def get_schedule(thedate=None):
+    return WeekSchedule(thedate)

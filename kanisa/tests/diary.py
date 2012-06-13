@@ -90,3 +90,26 @@ class DiaryGetScheduleTest(TestCase):
                          RegularEvent.objects.get(pk=1))
         self.assertEqual(entries[4].regular_events[0]['event'],
                          RegularEvent.objects.get(pk=2))
+
+    def testScheduled(self):
+        event = RegularEvent.objects.get(pk=1)
+
+        self.assertEqual(event.day, 1)
+        self.assertEqual(unicode(event), 'Afternoon Tea')
+
+        event.schedule(date(2012, 1, 1),
+                       date(2012, 1, 8))
+        self.assertEqual(len(DiaryEventOccurrence.objects.all()),
+                         1)
+        instance = DiaryEventOccurrence.objects.get(pk=1)
+        self.assertEqual(instance.date, date(2012, 1, 3))
+
+        schedule = get_schedule(date(2012, 1, 4))
+        entries = schedule.calendar_entries
+
+        self.assertEqual([len(e.regular_events) for e in entries],
+                         [0, 1, 0, 0, 1, 0, 0])
+        self.assertEqual([len(e.scheduled_events) for e in entries],
+                         [0, 1, 0, 0, 0, 0, 0])
+        self.assertTrue(entries[1].regular_events[0]['scheduled'])
+        self.assertFalse(entries[4].regular_events[0]['scheduled'])
