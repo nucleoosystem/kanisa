@@ -47,3 +47,11 @@ class ManagementViewTests(KanisaViewTestCase):
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
                          [u'Banner "Green Flowers" retired.', ])
+
+    def test_banner_create_view_required_fields(self):
+        url = reverse('kanisa_manage_banners_create')
+        self.client.login(username='fred', password='secret')
+        resp = self.client.post(url, {})
+        self.assertEqual(resp.status_code, 200)
+        self.assertFormError(resp, 'form', 'headline', 'This field is required.')
+        self.assertFormError(resp, 'form', 'image', 'This field is required.')

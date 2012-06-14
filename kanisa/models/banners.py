@@ -23,8 +23,6 @@ class InactiveBannerManager(models.Manager):
 
 class Banner(models.Model):
     headline = models.CharField(max_length=60,
-                                blank=True,
-                                null=True,
                                 help_text=u'Keep this short, summarise your'
                                 ' banner in a few words.')
     contents = models.TextField(blank=True,
