@@ -62,13 +62,18 @@ class WeekSchedule(object):
 
         self.calendar_entries = []
 
+        self.events_to_schedule = False
+
         for i in range(0, 7):
             this_date = self.monday + timedelta(days=i)
-            self.calendar_entries.append(DaySchedule(i,
-                                                     this_date,
-                                                     regular_events,
-                                                     scheduled_events))
+            day_schedule = DaySchedule(i,
+                                       this_date,
+                                       regular_events,
+                                       scheduled_events)
+            self.calendar_entries.append(day_schedule)
 
+            if day_schedule.regular_events:
+                self.events_to_schedule = True
 
 def get_schedule(thedate=None):
     return WeekSchedule(thedate)

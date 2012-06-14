@@ -9,7 +9,7 @@ from django.views.generic.base import RedirectView
 
 from kanisa.forms import RegularEventForm, ScheduledEventForm
 from kanisa.models import RegularEvent, ScheduledEvent
-from kanisa.utils import get_schedule
+from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView)
 
@@ -32,7 +32,9 @@ class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
         context = super(DiaryEventIndexView,
                         self).get_context_data(**kwargs)
 
-        context['calendar'] = get_schedule().calendar_entries
+        schedule = get_schedule()
+        context['calendar'] = schedule.calendar_entries
+        context['events_to_schedule'] = schedule.events_to_schedule
 
         return context
 
@@ -101,7 +103,7 @@ class DiaryScheduleRegularEventView(RedirectView):
         date_string = '%s at %s' % (formatted_date, formatted_time)
 
         event_exists = ScheduledEvent.objects.filter(event=event,
-                                                           date=parsed_date)
+                                                     date=parsed_date)
         if len(event_exists) != 0:
             message = u'%s already scheduled for %s' % (unicode(event),
                                                          date_string)
@@ -113,6 +115,32 @@ class DiaryScheduleRegularEventView(RedirectView):
         message = u'%s scheduled for %s' % (unicode(event),
                                             date_string)
         messages.success(self.request, message)
+
+        return reverse('kanisa_manage_diary')
+
+
+class DiaryScheduleWeeksRegularEventView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        monday, sunday = get_week_bounds()
+        next_monday = sunday + timedelta(days=1)
+
+        done_something=False
+
+        for event in RegularEvent.objects.all():
+            exists = ScheduledEvent.objects.filter(event=event).\
+                                            exclude(date__lt=monday,
+                                                    date__gt=next_monday)
+            if not exists:
+                done_something = True
+                event.schedule(monday, next_monday)
+
+        if done_something:
+            messages.success(self.request, ('I\'ve scheduled this week\'s '
+                                            'events for you - enjoy!'))
+        else:
+            messages.info(self.request, 'No events to schedule.')
 
         return reverse('kanisa_manage_diary')
 

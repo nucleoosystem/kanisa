@@ -3,7 +3,9 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_diary_regular_create' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>
+{% if events_to_schedule %}
+<p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}" class="btn btn-large btn-primary">Schedule this week's regular events &raquo;</a></p>
+{% endif %}
 
 <hr />
 
@@ -30,7 +32,7 @@
       </td>
       <td>
       {% for e in entry.regular_events %}
-      {{ e }}<br />
+      <a href="{% url 'kanisa_manage_diary_regular_update' e.pk %}">{{ e }}</a><br />
       {% endfor %}
       </td>
       <td>

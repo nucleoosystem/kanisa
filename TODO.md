@@ -12,7 +12,6 @@
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
 * Allow creating one-off events (optionally linked to regular event type)
-* "Schedule all" option for particular week?
 
 # Sermons
 
