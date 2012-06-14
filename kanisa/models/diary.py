@@ -45,10 +45,10 @@ class RegularEvent(models.Model):
             if single_date.weekday() != self.day:
                 continue
 
-            instance = self.diaryeventoccurrence_set.create(date=single_date)
+            instance = self.scheduledevent_set.create(date=single_date)
 
 
-class DiaryEventOccurrence(models.Model):
+class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent)
     date = models.DateField()
     title = models.CharField(max_length=60, blank=True, null=True)

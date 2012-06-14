@@ -8,7 +8,7 @@ from django.utils import formats
 from django.views.generic.base import RedirectView
 
 from kanisa.forms import RegularEventForm, ScheduledEventForm
-from kanisa.models import RegularEvent, DiaryEventOccurrence
+from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView)
@@ -72,7 +72,7 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
 class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = ScheduledEventForm
     template_name = 'kanisa/management/create.html'
-    model = DiaryEventOccurrence
+    model = ScheduledEvent
 
     def get_kanisa_title(self):
         return 'Edit Scheduled Event: %s' % unicode(self.object)
@@ -100,7 +100,7 @@ class DiaryScheduleRegularEventView(RedirectView):
                                              "TIME_FORMAT")
         date_string = '%s at %s' % (formatted_date, formatted_time)
 
-        event_exists = DiaryEventOccurrence.objects.filter(event=event,
+        event_exists = ScheduledEvent.objects.filter(event=event,
                                                            date=parsed_date)
         if len(event_exists) != 0:
             message = u'%s already scheduled for %s' % (unicode(event),
@@ -121,7 +121,7 @@ class DiaryCancelScheduledEventView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, pk):
-        event = get_object_or_404(DiaryEventOccurrence, pk=pk)
+        event = get_object_or_404(ScheduledEvent, pk=pk)
 
         parsed_date = datetime.combine(event.date, event.event.start_time)
 

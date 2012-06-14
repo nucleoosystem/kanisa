@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 
 from kanisa.models import diary
-from kanisa.models import RegularEvent, DiaryEventOccurrence
+from kanisa.models import RegularEvent, ScheduledEvent
 
 
 def get_week_bounds(containing=None):
@@ -56,7 +56,7 @@ class WeekSchedule(object):
         self.monday, self.sunday = get_week_bounds(self.date)
 
         regular_events = RegularEvent.objects.all()
-        scheduled_events = DiaryEventOccurrence.objects.\
+        scheduled_events = ScheduledEvent.objects.\
                                     exclude(date__lt=self.monday,
                                             date__gt=self.sunday)
 

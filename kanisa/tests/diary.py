@@ -1,7 +1,7 @@
 from datetime import date
 from django.test import TestCase
 from kanisa.models import diary
-from kanisa.models import RegularEvent, DiaryEventOccurrence
+from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_week_bounds, get_schedule
 
 
@@ -17,7 +17,7 @@ class DiaryTest(TestCase):
         self.assertEqual(event.day, 1)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
-        instances = event.diaryeventoccurrence_set.all()
+        instances = event.scheduledevent_set.all()
         self.assertEqual(len(instances), 1)
 
         instance = instances[0]
@@ -27,12 +27,12 @@ class DiaryTest(TestCase):
         event = RegularEvent.objects.get(pk=2)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
-        instance = DiaryEventOccurrence.objects.get(pk=1)
+        instance = ScheduledEvent.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Breakfast Club')
         instance.title = 'Special Breakfast'
         instance.save()
 
-        instance = DiaryEventOccurrence.objects.get(pk=1)
+        instance = ScheduledEvent.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
 
@@ -97,9 +97,9 @@ class DiaryGetScheduleTest(TestCase):
 
         event.schedule(date(2012, 1, 1),
                        date(2012, 1, 8))
-        self.assertEqual(len(DiaryEventOccurrence.objects.all()),
+        self.assertEqual(len(ScheduledEvent.objects.all()),
                          1)
-        instance = DiaryEventOccurrence.objects.get(pk=1)
+        instance = ScheduledEvent.objects.get(pk=1)
         self.assertEqual(instance.date, date(2012, 1, 3))
 
         schedule = get_schedule(date(2012, 1, 4))
