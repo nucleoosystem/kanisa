@@ -53,5 +53,7 @@ class ManagementViewTests(KanisaViewTestCase):
         self.client.login(username='fred', password='secret')
         resp = self.client.post(url, {})
         self.assertEqual(resp.status_code, 200)
-        self.assertFormError(resp, 'form', 'headline', 'This field is required.')
-        self.assertFormError(resp, 'form', 'image', 'This field is required.')
+        self.assertFormError(resp, 'form', 'headline',
+                             'This field is required.')
+        self.assertFormError(resp, 'form', 'image',
+                             'This field is required.')
