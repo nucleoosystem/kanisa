@@ -75,5 +75,6 @@ class WeekSchedule(object):
             if day_schedule.regular_events:
                 self.events_to_schedule = True
 
+
 def get_schedule(thedate=None):
     return WeekSchedule(thedate)

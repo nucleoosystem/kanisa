@@ -126,7 +126,7 @@ class DiaryScheduleWeeksRegularEventView(RedirectView):
         monday, sunday = get_week_bounds()
         next_monday = sunday + timedelta(days=1)
 
-        done_something=False
+        done_something = False
 
         for event in RegularEvent.objects.all():
             exists = ScheduledEvent.objects.filter(event=event).\
