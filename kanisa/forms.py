@@ -55,7 +55,7 @@ class BootstrapDateField(forms.DateField):
         super(BootstrapDateField, self).__init__(*args, **kwargs)
 
 
-class BaseForm(ModelForm):
+class KanisaBaseForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
 
@@ -66,10 +66,10 @@ class BaseForm(ModelForm):
                                      css_class=css))
         self.helper.form_class = 'form-horizontal'
 
-        super(BaseForm, self).__init__(*args, **kwargs)
+        super(KanisaBaseForm, self).__init__(*args, **kwargs)
 
 
-class BannerForm(BaseForm):
+class BannerForm(KanisaBaseForm):
     publish_from = BootstrapDateField(required=False)
     publish_until = BootstrapDateField(required=False)
 
@@ -77,7 +77,7 @@ class BannerForm(BaseForm):
         model = Banner
 
 
-class RegularEventForm(BaseForm):
+class RegularEventForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
 
     class Meta:
