@@ -45,12 +45,18 @@ class RegularEvent(models.Model):
             if single_date.weekday() != self.day:
                 continue
 
-            instance = self.scheduledevent_set.create(date=single_date)
+            instance = self.scheduledevent_set.\
+                create(date=single_date,
+                       start_time=self.start_time,
+                       duration=self.duration)
 
 
 class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent)
     date = models.DateField()
+    start_time = models.TimeField()
+    duration = models.IntegerField(default=60,
+                                   help_text=u'Duration in minutes')
     title = models.CharField(max_length=60, blank=True, null=True,
                              help_text=('If left blank, this defaults to '
                                         'event type.'))

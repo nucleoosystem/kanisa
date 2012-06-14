@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, time
 from django.test import TestCase
 from kanisa.models import diary
 from kanisa.models import RegularEvent, ScheduledEvent
@@ -22,6 +22,8 @@ class DiaryTest(TestCase):
 
         instance = instances[0]
         self.assertEqual(instance.date, date(2012, 1, 3))
+        self.assertEqual(instance.start_time, time(14, 0, 0))
+        self.assertEqual(instance.duration, 60)
 
     def testInstanceUnicode(self):
         event = RegularEvent.objects.get(pk=2)
