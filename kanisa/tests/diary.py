@@ -84,11 +84,9 @@ class DiaryGetScheduleTest(TestCase):
 
         self.assertEqual([len(e.regular_events) for e in entries],
                          [0, 1, 0, 0, 1, 0, 0])
-        self.assertFalse(entries[1].regular_events[0]['scheduled'])
-        self.assertFalse(entries[4].regular_events[0]['scheduled'])
-        self.assertEqual(entries[1].regular_events[0]['event'],
+        self.assertEqual(entries[1].regular_events[0],
                          RegularEvent.objects.get(pk=1))
-        self.assertEqual(entries[4].regular_events[0]['event'],
+        self.assertEqual(entries[4].regular_events[0],
                          RegularEvent.objects.get(pk=2))
 
     def testScheduled(self):
@@ -108,8 +106,6 @@ class DiaryGetScheduleTest(TestCase):
         entries = schedule.calendar_entries
 
         self.assertEqual([len(e.regular_events) for e in entries],
-                         [0, 1, 0, 0, 1, 0, 0])
+                         [0, 0, 0, 0, 1, 0, 0])
         self.assertEqual([len(e.scheduled_events) for e in entries],
                          [0, 1, 0, 0, 0, 0, 0])
-        self.assertTrue(entries[1].regular_events[0]['scheduled'])
-        self.assertFalse(entries[4].regular_events[0]['scheduled'])

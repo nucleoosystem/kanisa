@@ -13,7 +13,8 @@
   <thead>
     <tr>
       <th>Day</th>
-      <th colspan="3">Regular Events</th>
+      <th colspan="3">Available Events</th>
+      <th colspan="3">Scheduled Events</th>
     </tr>
   </thead>
   <tbody>
@@ -22,21 +23,35 @@
       <td><strong>{{ entry.dayname }}</strong></td>
       <td>
       {% for e in entry.regular_events %}
-      {{ e.event.start_time }}<br />
-      {% endfor %}
-      </td>
-      <td>
-      {% for e in entry.regular_events %}
-      {{ e.event }}<br />
+      {{ e.start_time }}<br />
       {% empty %}
       <em>None</em>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.regular_events %}
-      {% if not e.scheduled %}
-        <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.event.pk entry.date|date:"Ymd" %}" class="btn btn-mini">Schedule</a>
-      {% endif %}
+      {{ e }}<br />
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.regular_events %}
+        <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini">Schedule</a>
+      <br />
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+      {{ e.event.start_time }}<br />
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+      {{ e.event }}<br />
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+        <a href="{% url 'kanisa_manage_diary_cancel_regular_event' e.pk %}" class="btn btn-mini btn-danger">Cancel</a>
       <br />
       {% endfor %}
       </td>

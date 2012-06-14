@@ -103,3 +103,26 @@ class DiaryScheduleRegularEventView(RedirectView):
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_diary')
+
+
+class DiaryCancelScheduledEventView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, pk):
+        event = get_object_or_404(DiaryEventOccurrence, pk=pk)
+
+        parsed_date = datetime.combine(event.date, event.event.start_time)
+
+        formatted_date = formats.date_format(parsed_date,
+                                             "DATE_FORMAT")
+        formatted_time = formats.date_format(parsed_date,
+                                             "TIME_FORMAT")
+        date_string = '%s at %s' % (formatted_date, formatted_time)
+
+        event.delete()
+
+        message = u'%s cancelled on %s' % (unicode(event),
+                                           date_string)
+        messages.success(self.request, message)
+
+        return reverse('kanisa_manage_diary')

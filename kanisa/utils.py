@@ -40,8 +40,10 @@ class DaySchedule(object):
                     scheduled = True
                     break
 
-            self.regular_events.append({'event': event,
-                                        'scheduled': scheduled})
+            if scheduled:
+                continue
+
+            self.regular_events.append(event)
 
 
 class WeekSchedule(object):

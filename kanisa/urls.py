@@ -8,7 +8,8 @@ from kanisa.views.banners import (BannerCreateView, BannerUpdateView,
 from kanisa.views.diary import (DiaryCreateView, DiaryUpdateView,
                                 DiaryRegularEventsView,
                                 DiaryEventIndexView,
-                                DiaryScheduleRegularEventView)
+                                DiaryScheduleRegularEventView,
+                                DiaryCancelScheduledEventView)
 
 urlpatterns = patterns('',
     url(r'^$', 'kanisa.views.index'),
@@ -47,4 +48,7 @@ urlpatterns = patterns('',
     url(r'^manage/diary/schedule/(?P<pk>\d+)/(?P<thedate>\d{8})/$',
         staff_member_required(DiaryScheduleRegularEventView.as_view()),
         {}, 'kanisa_manage_diary_schedule_regular_event'),
+    url(r'^manage/diary/cancel/(?P<pk>\d+)/$',
+        staff_member_required(DiaryCancelScheduledEventView.as_view()),
+        {}, 'kanisa_manage_diary_cancel_regular_event'),
 )
