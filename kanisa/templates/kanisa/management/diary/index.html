@@ -46,7 +46,7 @@
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-      <a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e.event }}</a><br />
+      <a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a><br />
       {% endfor %}
       </td>
       <td>
