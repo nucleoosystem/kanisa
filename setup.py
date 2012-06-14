@@ -16,5 +16,6 @@ setup(
     install_requires=[
         "django",
         "sorl-thumbnail==11.12",
+        "django-crispy-forms==1.1.4",
     ],
 )
