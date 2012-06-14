@@ -51,7 +51,9 @@ class RegularEvent(models.Model):
 class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent)
     date = models.DateField()
-    title = models.CharField(max_length=60, blank=True, null=True)
+    title = models.CharField(max_length=60, blank=True, null=True,
+                             help_text=('If left blank, this defaults to '
+                                        'event type.'))
     details = models.TextField(blank=True, null=True)
 
     class Meta:
