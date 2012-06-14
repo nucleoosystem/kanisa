@@ -3,7 +3,7 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_diary_create' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>
+<p><a href="{% url 'kanisa_manage_diary_regular_create' %}" class="btn btn-large btn-primary">Create a new regular event &raquo;</a></p>
 
 <table class="table table-striped">
   <thead>
@@ -16,7 +16,7 @@
   <tbody>
     {% for event in regularevent_list %}
     <tr>
-      <td><a href="{% url 'kanisa_manage_diary_update' event.pk %}">{{ event.title }}</a></td>
+      <td><a href="{% url 'kanisa_manage_diary_regular_update' event.pk %}">{{ event.title }}</a></td>
       <td>{{ event.get_day_display }}</td>
       <td>{{ event.start_time }}</td>
     </tr>
