@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import RedirectView
 
-from kanisa.forms import RegularEventForm
+from kanisa.forms import RegularEventForm, ScheduledEventForm
 from kanisa.models import RegularEvent, DiaryEventOccurrence
 from kanisa.utils import get_schedule
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -66,7 +66,19 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
         return 'Edit Event: %s' % unicode(self.object)
 
     def get_success_url(self):
-        return reverse('kanisa.views.manage_diary')
+        return reverse('kanisa_manage_diary')
+
+
+class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
+    form_class = ScheduledEventForm
+    template_name = 'kanisa/management/create.html'
+    model = DiaryEventOccurrence
+
+    def get_kanisa_title(self):
+        return 'Edit Scheduled Event: %s' % unicode(self.object)
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_diary')
 
 
 class DiaryScheduleRegularEventView(RedirectView):

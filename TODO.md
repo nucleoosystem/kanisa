@@ -9,7 +9,6 @@
 # Diary
 
 * Confirm before event cancellation?
-* Allow editing instances of scheduled regular events
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
 * Allow creating one-off events (optionally linked to regular event type)

@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
-from kanisa.models.diary import RegularEvent
+from kanisa.models.diary import RegularEvent, DiaryEventOccurrence
 
 TIMEPICKER_FORMAT = '%I:%M %p'
 
@@ -82,3 +82,9 @@ class RegularEventForm(KanisaBaseForm):
 
     class Meta:
         model = RegularEvent
+
+
+class ScheduledEventForm(KanisaBaseForm):
+        class Meta:
+            model = DiaryEventOccurrence
+            exclude = ('event', 'date', )
