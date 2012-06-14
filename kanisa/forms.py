@@ -85,6 +85,6 @@ class RegularEventForm(KanisaBaseForm):
 
 
 class ScheduledEventForm(KanisaBaseForm):
-        class Meta:
-            model = ScheduledEvent
-            exclude = ('event', 'date', )
+    class Meta:
+        model = ScheduledEvent
+        exclude = ('event', 'date', )
