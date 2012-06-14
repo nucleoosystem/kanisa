@@ -43,7 +43,7 @@ class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
     kanisa_title = 'Manage Regular Events'
 
 
-class DiaryCreateView(KanisaCreateView, DiaryBaseView):
+class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/create.html'
     kanisa_title = 'Create a Regular Event'
@@ -52,12 +52,12 @@ class DiaryCreateView(KanisaCreateView, DiaryBaseView):
         return reverse('kanisa_manage_diary')
 
     def get_initial(self):
-        initial = super(DiaryCreateView, self).get_initial()
+        initial = super(DiaryRegularEventCreateView, self).get_initial()
         initial['start_time'] = time(9, 0, 0)
         return initial
 
 
-class DiaryUpdateView(KanisaUpdateView, DiaryBaseView):
+class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/create.html'
     model = RegularEvent
