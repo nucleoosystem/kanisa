@@ -180,7 +180,7 @@ class DiaryCancelScheduledEventView(RedirectView):
     def get_redirect_url(self, pk):
         event = get_object_or_404(ScheduledEvent, pk=pk)
 
-        parsed_date = datetime.combine(event.date, event.event.start_time)
+        parsed_date = datetime.combine(event.date, event.start_time)
 
         formatted_date = formats.date_format(parsed_date,
                                              "DATE_FORMAT")
