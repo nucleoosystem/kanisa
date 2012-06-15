@@ -23,7 +23,7 @@ class RegularEvent(models.Model):
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
     start_time = models.TimeField()
     duration = models.IntegerField(default=60,
-                                   help_text=u'Duration in minutes')
+                                   help_text=u'Duration in minutes.')
     details = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -56,7 +56,7 @@ class ScheduledEvent(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     duration = models.IntegerField(default=60,
-                                   help_text=u'Duration in minutes')
+                                   help_text=u'Duration in minutes.')
     title = models.CharField(max_length=60, blank=True, null=True,
                              help_text=('If left blank, this defaults to '
                                         'event type.'))
