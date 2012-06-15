@@ -67,7 +67,7 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
     kanisa_form_warning = ('Changes made here will not affect events already '
                            'in the diary (whether they\'re future events or '
                            'not).')
-    
+
     def get_kanisa_title(self):
         return 'Edit Event: %s' % unicode(self.object)
 
@@ -90,14 +90,14 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
         initial = super(DiaryScheduledEventCreateView, self).get_initial()
         initial['start_time'] = time(9, 0, 0)
         initial['date'] = date.today()
-        
+
         if 'date' in self.request.GET:
             thedate = self.request.GET['date']
             try:
                 initial['date'] = datetime.strptime(thedate, '%Y%m%d').date()
             except ValueError:
                 pass
-        
+
         return initial
 
 
