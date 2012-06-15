@@ -1,4 +1,4 @@
-from datetime import datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -7,7 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import RedirectView
 
-from kanisa.forms import RegularEventForm, ScheduledEventForm
+from kanisa.forms import (RegularEventForm, ScheduledEventForm,
+                          ScheduledEventCreationForm)
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -69,6 +70,22 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
 
     def get_success_url(self):
         return reverse('kanisa_manage_diary')
+
+
+class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
+    form_class = ScheduledEventCreationForm
+    template_name = 'kanisa/management/create.html'
+    model = ScheduledEvent
+    kanisa_title = 'Create Scheduled Event'
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_diary')
+
+    def get_initial(self):
+        initial = super(DiaryScheduledEventCreateView, self).get_initial()
+        initial['start_time'] = time(9, 0, 0)
+        initial['date'] = date.today()
+        return initial
 
 
 class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):

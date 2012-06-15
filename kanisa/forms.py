@@ -90,3 +90,11 @@ class ScheduledEventForm(KanisaBaseForm):
     class Meta:
         model = ScheduledEvent
         exclude = ('event', 'date', )
+
+
+class ScheduledEventCreationForm(KanisaBaseForm):
+    start_time = BootstrapTimeField()
+    date = BootstrapDateField()
+
+    class Meta:
+        model = ScheduledEvent
