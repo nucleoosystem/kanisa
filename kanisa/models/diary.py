@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -59,14 +60,16 @@ class RegularEvent(models.Model):
 
 
 class ScheduledEvent(models.Model):
-    event = models.ForeignKey(RegularEvent)
+    event = models.ForeignKey(RegularEvent, blank=True, null=True,
+                              help_text=('If left blank, you must give the '
+                                         'event a name.'))
     date = models.DateField()
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
     title = models.CharField(max_length=60, blank=True, null=True,
                              help_text=('If left blank, this defaults to '
-                                        'event type.'))
+                                        'event type (if there is one).'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '
@@ -82,4 +85,17 @@ class ScheduledEvent(models.Model):
         if self.title:
             return self.title
 
-        return self.event.title
+        if self.event:
+            return self.event.title
+
+        # Hopefully this only occurs during event editing
+        return u'None'
+
+    def clean(self):
+        if self.pk and not self.event and not self.title:
+            raise ValidationError('This scheduled event does not have a '
+                                  'parent event type, so it needs a title.')
+            
+        if not self.event and not self.title:
+            raise ValidationError('You must either select an event, or give '
+                                  'your new event a title.')
