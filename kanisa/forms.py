@@ -84,7 +84,7 @@ class RegularEventForm(KanisaBaseForm):
         model = RegularEvent
 
 
-class ScheduledEventForm(KanisaBaseForm):
+class ScheduledEventEditForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
 
     class Meta:

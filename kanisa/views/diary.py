@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import RedirectView
 
-from kanisa.forms import (RegularEventForm, ScheduledEventForm,
+from kanisa.forms import (RegularEventForm, ScheduledEventEditForm,
                           ScheduledEventCreationForm)
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule, get_week_bounds
@@ -91,7 +91,7 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
 
 
 class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
-    form_class = ScheduledEventForm
+    form_class = ScheduledEventEditForm
     template_name = 'kanisa/management/create.html'
     model = ScheduledEvent
     kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
