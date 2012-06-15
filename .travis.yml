@@ -8,7 +8,7 @@ env:
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -r requirements.txt --use-mirrors
-  - pip install pep8 --use-mirrors
+  - pip install pep8 --use-mirrors --ignore=E121,E122,E127,E128
 script:
   - pep8 kanisa
   - ./kanisa/example_project/manage.py test kanisa
