@@ -22,8 +22,8 @@
         {% endif %}
 
         <p>
-          <a class="btn btn-success" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
-            <i class="icon-edit icon-white"></i>
+          <a class="btn" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
+            <i class="icon-edit"></i>
             Edit
           </a>
           {% if banner.active %}
