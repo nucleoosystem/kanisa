@@ -37,7 +37,7 @@
       </td>
       <td>
       {% for e in entry.regular_events %}
-        <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini">Schedule</a>
+        <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success">Schedule</a>
       <br />
       {% endfor %}
       </td>
