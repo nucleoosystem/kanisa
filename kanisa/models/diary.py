@@ -95,7 +95,7 @@ class ScheduledEvent(models.Model):
         if self.pk and not self.event and not self.title:
             raise ValidationError('This scheduled event does not have a '
                                   'parent event type, so it needs a title.')
-            
+
         if not self.event and not self.title:
             raise ValidationError('You must either select an event, or give '
                                   'your new event a title.')
