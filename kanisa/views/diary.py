@@ -77,6 +77,8 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
     template_name = 'kanisa/management/create.html'
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
+    kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
+                   'diary - with an associated date and time.')
 
     def get_success_url(self):
         return reverse('kanisa_manage_diary')
@@ -92,6 +94,8 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = ScheduledEventForm
     template_name = 'kanisa/management/create.html'
     model = ScheduledEvent
+    kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
+                   'diary - with an associated date and time.')
 
     def get_kanisa_title(self):
         return 'Edit Scheduled Event: %s' % unicode(self.object)
