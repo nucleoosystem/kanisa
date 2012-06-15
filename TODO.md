@@ -11,6 +11,8 @@
 * Confirm before event cancellation?
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
+* Show error on title field when editing a ScheduledEvent with no title
+  and no parent event type.
 
 # Sermons
 
