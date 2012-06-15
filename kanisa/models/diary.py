@@ -19,12 +19,19 @@ def daterange(start_date, end_date):
 
 
 class RegularEvent(models.Model):
-    title = models.CharField(max_length=60)
-    day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
-    start_time = models.TimeField()
+    title = models.CharField(max_length=60,
+                             help_text='The name of the event.')
+    day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,
+                                           help_text=('What day of the week '
+                                                      'does this event '
+                                                      'happen on?'))
+    start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
-    details = models.TextField(blank=True, null=True)
+    details = models.TextField(blank=True, null=True,
+                               help_text=('e.g. Who is this event for? What '
+                                          'does it involve? How much does it '
+                                          'cost? Where is it held?'))
 
     class Meta:
         # Need this because I've split up models.py into multiple
@@ -54,13 +61,16 @@ class RegularEvent(models.Model):
 class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent)
     date = models.DateField()
-    start_time = models.TimeField()
+    start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
     title = models.CharField(max_length=60, blank=True, null=True,
                              help_text=('If left blank, this defaults to '
                                         'event type.'))
-    details = models.TextField(blank=True, null=True)
+    details = models.TextField(blank=True, null=True,
+                               help_text=('e.g. Who is this event for? What '
+                                          'does it involve? How much does it '
+                                          'cost? Where is it held?'))
 
     class Meta:
         # Need this because I've split up models.py into multiple
