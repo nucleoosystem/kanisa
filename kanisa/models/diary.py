@@ -60,6 +60,9 @@ class RegularEvent(models.Model):
 
 
 class ScheduledEvent(models.Model):
+    title = models.CharField(max_length=60, blank=True, null=True,
+                             help_text=('If left blank, this defaults to '
+                                        'event type (if there is one).'))
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
                               help_text=('If left blank, you must give the '
                                          'event a name.'))
@@ -67,9 +70,6 @@ class ScheduledEvent(models.Model):
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
-    title = models.CharField(max_length=60, blank=True, null=True,
-                             help_text=('If left blank, this defaults to '
-                                        'event type (if there is one).'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '
