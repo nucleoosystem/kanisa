@@ -19,6 +19,9 @@ def add_kanisa_context(cls, context):
 
     context['kanisa_is_root_view'] = getattr(cls, 'kanisa_is_root_view', False)
 
+    if hasattr(cls, 'kanisa_form_warning'):
+        context['kanisa_form_warning'] = cls.kanisa_form_warning
+    
     return context
 
 

@@ -64,7 +64,10 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     template_name = 'kanisa/management/create.html'
     model = RegularEvent
-
+    kanisa_form_warning = ('Changes made here will not affect events already '
+                           'in the diary (whether they\'re future events or '
+                           'not).')
+    
     def get_kanisa_title(self):
         return 'Edit Event: %s' % unicode(self.object)
 
