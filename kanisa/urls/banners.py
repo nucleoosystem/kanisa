@@ -1,0 +1,30 @@
+from django.conf.urls import patterns, url
+from django.contrib.admin.views.decorators import staff_member_required as smr
+from kanisa.views.banners import (BannerCreateView,
+                                  BannerUpdateView,
+                                  InactiveBannerManagementView,
+                                  BannerManagementView,
+                                  RetireBannerView)
+
+urlpatterns = patterns('',
+                       url(r'^$',
+                           smr(BannerManagementView.as_view()),
+                           {},
+                           'kanisa_manage_banners'),
+                       url(r'^inactive/$',
+                           smr(InactiveBannerManagementView.as_view()),
+                           {},
+                           'kanisa_manage_banners_inactive'),
+                       url(r'^create/$',
+                           smr(BannerCreateView.as_view()),
+                           {},
+                           'kanisa_manage_banners_create'),
+                       url(r'^edit/(?P<pk>\d+)$',
+                           smr(BannerUpdateView.as_view()),
+                           {},
+                           'kanisa_manage_banners_update'),
+                       url(r'^retire/(?P<banner_id>\d+)$',
+                           smr(RetireBannerView.as_view()),
+                           {},
+                           'kanisa_manage_banners_retire'),
+                       )
