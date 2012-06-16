@@ -138,7 +138,7 @@ class DiaryScheduleRegularEventView(RedirectView):
                                                      date=parsed_date)
         if len(event_exists) != 0:
             message = u'%s already scheduled for %s' % (unicode(event),
-                                                         date_string)
+                                                        date_string)
             messages.info(self.request, message)
             return reverse('kanisa_manage_diary')
 
@@ -162,8 +162,8 @@ class DiaryScheduleWeeksRegularEventView(RedirectView):
 
         for event in RegularEvent.objects.all():
             exists = ScheduledEvent.objects.filter(event=event).\
-                                            exclude(date__lt=monday,
-                                                    date__gt=next_monday)
+                exclude(date__lt=monday,
+                        date__gt=next_monday)
             if not exists:
                 done_something = True
                 event.schedule(monday, next_monday)

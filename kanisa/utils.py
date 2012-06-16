@@ -57,8 +57,8 @@ class WeekSchedule(object):
 
         regular_events = RegularEvent.objects.all()
         scheduled_events = ScheduledEvent.objects.\
-                                    exclude(date__lt=self.monday,
-                                            date__gt=self.sunday)
+            exclude(date__lt=self.monday,
+                    date__gt=self.sunday)
 
         self.calendar_entries = []
 

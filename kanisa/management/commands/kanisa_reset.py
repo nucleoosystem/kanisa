@@ -11,8 +11,9 @@ import shutil
 class Command(BaseCommand):
     option_list = AppCommand.option_list + (
         make_option('--noinput', action='store_false',
-            dest='interactive', default=True,
-            help='Tells Django to NOT prompt the user for input of any kind.'),
+                    dest='interactive', default=True,
+                    help=('Tells Django to NOT prompt the user for input of '
+                          'any kind.')),
     )
 
     help = 'Resets database and loads sample data for demonstrating Kanisa'
