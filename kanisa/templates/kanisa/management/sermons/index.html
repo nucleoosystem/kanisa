@@ -5,6 +5,9 @@
 {% block content %}
 <p><a href="{% url 'kanisa_manage_sermons_series_create' %}" class="btn btn-large btn-primary">Create a new series &raquo;</a></p>
 
+<hr />
+
+{% if sermonseries_list %}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -21,6 +24,10 @@
     {% endfor %}
   </tbody>
 </table>
-
+{% else %}
+<div class="alert alert-warning">
+There are no series to display.
+</div>
+{% endif %}
 
 {% endblock %}
