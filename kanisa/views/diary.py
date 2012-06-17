@@ -102,7 +102,9 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
                    'diary - with an associated date and time.')
 
     def get_success_url(self):
-        return reverse('kanisa_manage_diary')
+        path = reverse('kanisa_manage_diary')
+        query_string = 'date=%s' % self.object.date.strftime('%Y%m%d')
+        return '%s?%s' % (path, query_string)
 
     def get_initial(self):
         initial = super(DiaryScheduledEventCreateView, self).get_initial()
@@ -130,7 +132,9 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
         return 'Edit Scheduled Event: %s' % unicode(self.object)
 
     def get_success_url(self):
-        return reverse('kanisa_manage_diary')
+        path = reverse('kanisa_manage_diary')
+        query_string = 'date=%s' % self.object.date.strftime('%Y%m%d')
+        return '%s?%s' % (path, query_string)
 
 
 class DiaryScheduleRegularEventView(RedirectView):
