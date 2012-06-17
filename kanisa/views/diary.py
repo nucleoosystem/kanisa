@@ -35,6 +35,15 @@ class DiaryBaseView:
 
         return thedate
 
+    def get_relative_root_url(self, input_date=None):
+        path = reverse('kanisa_manage_diary')
+        yyyymmdd = self.request.GET.get('date', input_date)
+
+        if not yyyymmdd:
+            return path
+
+        return path + '?date=%s' % yyyymmdd
+
 
 class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
     template_name = 'kanisa/management/diary/index.html'
@@ -103,9 +112,7 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
                    'diary - with an associated date and time.')
 
     def get_success_url(self):
-        path = reverse('kanisa_manage_diary')
-        query_string = 'date=%s' % self.object.date.strftime('%Y%m%d')
-        return '%s?%s' % (path, query_string)
+        return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
     def get_initial(self):
         initial = super(DiaryScheduledEventCreateView, self).get_initial()
@@ -133,12 +140,10 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
         return 'Edit Scheduled Event: %s' % unicode(self.object)
 
     def get_success_url(self):
-        path = reverse('kanisa_manage_diary')
-        query_string = 'date=%s' % self.object.date.strftime('%Y%m%d')
-        return '%s?%s' % (path, query_string)
+        return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduleRegularEventView(RedirectView):
+class DiaryScheduleRegularEventView(RedirectView, DiaryBaseView):
     permanent = False
 
     def get_redirect_url(self, pk, thedate):
@@ -163,7 +168,7 @@ class DiaryScheduleRegularEventView(RedirectView):
             message = u'%s already scheduled for %s' % (unicode(event),
                                                         date_string)
             messages.info(self.request, message)
-            return reverse('kanisa_manage_diary') + '?date=%s' % thedate
+            return self.get_relative_root_url(thedate)
 
         event.schedule(parsed_date, parsed_date + timedelta(days=1))
 
@@ -171,7 +176,7 @@ class DiaryScheduleRegularEventView(RedirectView):
                                             date_string)
         messages.success(self.request, message)
 
-        return reverse('kanisa_manage_diary') + '?date=%s' % thedate
+        return self.get_relative_root_url(thedate)
 
 
 class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
@@ -197,11 +202,10 @@ class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
         else:
             messages.info(self.request, 'No events to schedule.')
 
-        yyyymmdd = thedate.strftime('%Y%m%d')
-        return reverse('kanisa_manage_diary') + '?date=%s' % yyyymmdd
+        return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(RedirectView):
+class DiaryCancelScheduledEventView(RedirectView, DiaryBaseView):
     permanent = False
 
     def get_redirect_url(self, pk):
@@ -221,6 +225,4 @@ class DiaryCancelScheduledEventView(RedirectView):
                                            date_string)
         messages.success(self.request, message)
 
-        thedate = event.date.strftime('%Y%m%d')
-
-        return reverse('kanisa_manage_diary') + '?date=%s' % thedate
+        return self.get_relative_root_url(event.date.strftime('%Y%m%d'))
