@@ -7,6 +7,7 @@
 
 <hr />
 
+{% if document_list %}
 <table class="table table-striped kanisa_diary">
   <thead>
     <tr>
@@ -37,5 +38,10 @@
     {% endfor %}
 </tbody>
 </table>
+{% else %}
+<div class="alert alert-warning">
+There are no documents to display.
+</div>
+{% endif %}
 
 {% endblock %}
