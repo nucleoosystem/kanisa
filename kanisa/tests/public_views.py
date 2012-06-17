@@ -5,7 +5,7 @@ from kanisa.tests.utils import KanisaViewTestCase
 class PublicViewTest(KanisaViewTestCase):
     fixtures = ['banners.json', ]
 
-    def test_banner_management_view(self):
+    def test_kanisa_root_view(self):
         url = reverse('kanisa.views.index')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
