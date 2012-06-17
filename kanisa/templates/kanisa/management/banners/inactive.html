@@ -6,6 +6,8 @@
 {% block content %}
 <p><a href="{% url 'kanisa_manage_banners_create' %}" class="btn btn-large btn-primary">Create a new banner &raquo;</a></p>
 
+<hr />
+
 <div class="alert alert-info">These banners are either retired, or are just not yet active.</div>
 
 {% include 'kanisa/management/banners/_thumbnails.html' %}
