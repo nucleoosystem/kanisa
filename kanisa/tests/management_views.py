@@ -2,8 +2,7 @@ from django.core.urlresolvers import reverse
 from kanisa.tests.utils import KanisaViewTestCase
 
 
-class ManagementViewTests(KanisaViewTestCase):
-    fixtures = ['banners.json', ]
+class ManagementViewTest(KanisaViewTestCase):
 
     def test_views_protected(self):
         self.check_staff_only(reverse('kanisa.views.manage'))

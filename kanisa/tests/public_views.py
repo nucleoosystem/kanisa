@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from kanisa.tests.utils import KanisaViewTestCase
 
 
-class PublicViewTests(KanisaViewTestCase):
+class PublicViewTest(KanisaViewTestCase):
     fixtures = ['banners.json', ]
 
     def test_banner_management_view(self):
