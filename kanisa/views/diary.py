@@ -185,8 +185,7 @@ class DiaryScheduleWeeksRegularEventView(RedirectView):
 
         for event in RegularEvent.objects.all():
             exists = ScheduledEvent.objects.filter(event=event).\
-                exclude(date__lt=monday,
-                        date__gt=next_monday)
+                exclude(date__lt=monday).exclude(date__gt=next_monday)
             if not exists:
                 done_something = True
                 event.schedule(monday, next_monday)
