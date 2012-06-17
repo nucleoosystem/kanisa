@@ -1,5 +1,6 @@
+from datetime import date
 from django.core.urlresolvers import reverse
-from kanisa.models import ScheduledEvent
+from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.tests.utils import KanisaViewTestCase
 
 
@@ -67,6 +68,40 @@ class DiaryManagementViewTest(KanisaViewTestCase):
     def test_diary_schedule_regular_event_baddate_404s(self):
         url = reverse('kanisa_manage_diary_schedule_regular_event',
                       args=[1, 20121301, ])
+        self.client.login(username='fred', password='secret')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+
+    def test_diary_cancel_scheduled_event(self):
+        # Check preconditions
+        self.assertEqual(len(ScheduledEvent.objects.all()), 0)
+
+        # Schedule an event
+        event = RegularEvent.objects.get(pk=1)
+        event.schedule(date(2012, 01, 03), date(2012, 01, 04))
+        self.assertEqual(len(ScheduledEvent.objects.all()), 1)
+
+        pk = ScheduledEvent.objects.all()[0].pk
+
+        url = reverse('kanisa_manage_diary_cancel_regular_event',
+                      args=[pk, ])
+        self.client.login(username='fred', password='secret')
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         ['Afternoon Tea cancelled on 3 Jan 2012 at 2 p.m.',
+                          ])
+
+        self.assertEqual(len(ScheduledEvent.objects.all()), 0)
+
+    def test_diary_cancel_scheduled_event_nonexistent_404s(self):
+        # Check preconditions
+        self.assertEqual(len(ScheduledEvent.objects.all()), 0)
+
+        url = reverse('kanisa_manage_diary_cancel_regular_event',
+                      args=[40, ])
+
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 404)
