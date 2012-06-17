@@ -18,6 +18,12 @@
         </div>
       </div>
 
+      {% if sermonseries.active %}
+      <p>This series is currently <strong>ongoing</strong>.</p>
+      {% else %}
+      <p>This series is <strong>complete</strong>.</p>
+      {% endif %}
+
       <p>
         <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
           <i class="icon-edit"></i>
