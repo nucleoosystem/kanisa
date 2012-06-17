@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
-from kanisa.models.banners import Banner
+from kanisa.models import Banner
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView)
 from kanisa.forms import BannerForm

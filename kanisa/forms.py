@@ -3,10 +3,10 @@ from django.forms import ModelForm
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from kanisa.models.banners import Banner
-from kanisa.models.diary import RegularEvent, ScheduledEvent
-from kanisa.models.documents import Document
-from kanisa.models.sermons import SermonSeries
+from kanisa.models import (Banner,
+                           RegularEvent, ScheduledEvent,
+                           Document,
+                           SermonSeries)
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
