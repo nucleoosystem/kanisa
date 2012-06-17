@@ -8,8 +8,12 @@ class DiaryManagementViewTest(KanisaViewTestCase):
     fixtures = ['diary.json', ]
 
     def test_views_protected(self):
-        self.check_staff_only(reverse('kanisa_manage_diary'))
-        self.check_staff_only(reverse('kanisa_manage_diary_regularevents'))
+        prefix = 'kanisa_manage_diary'
+        self.check_staff_only(reverse(prefix))
+        self.check_staff_only(reverse('%s_regularevents'
+                                      % prefix))
+        self.check_staff_only(reverse('%s_schedule_weeks_regular_event'
+                                      % prefix))
 
     def test_diary_root_view(self):
         url = reverse('kanisa_manage_diary')
@@ -105,3 +109,27 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 404)
+
+    def test_diary_schedule_weeks_events(self):
+        # Check preconditions
+        self.assertEqual(len(ScheduledEvent.objects.all()), 0)
+        url = reverse('kanisa_manage_diary_schedule_weeks_regular_event')
+
+        # Scheduling events should schedule them
+        self.client.login(username='fred', password='secret')
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         [('I\'ve scheduled this week\'s events for you - '
+                           'enjoy!'), ])
+
+        self.assertEqual(len(ScheduledEvent.objects.all()), 2)
+
+        # Trying again should error out
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         [('No events to schedule.'), ])
+        self.assertEqual(len(ScheduledEvent.objects.all()), 2)
