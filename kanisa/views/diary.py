@@ -158,7 +158,7 @@ class DiaryScheduleRegularEventView(RedirectView):
             message = u'%s already scheduled for %s' % (unicode(event),
                                                         date_string)
             messages.info(self.request, message)
-            return reverse('kanisa_manage_diary')
+            return reverse('kanisa_manage_diary') + '?date=%s' % thedate
 
         event.schedule(parsed_date, parsed_date + timedelta(days=1))
 
@@ -166,7 +166,7 @@ class DiaryScheduleRegularEventView(RedirectView):
                                             date_string)
         messages.success(self.request, message)
 
-        return reverse('kanisa_manage_diary')
+        return reverse('kanisa_manage_diary') + '?date=%s' % thedate
 
 
 class DiaryScheduleWeeksRegularEventView(RedirectView):
@@ -215,4 +215,6 @@ class DiaryCancelScheduledEventView(RedirectView):
                                            date_string)
         messages.success(self.request, message)
 
-        return reverse('kanisa_manage_diary')
+        thedate = event.date.strftime('%Y%m%d')
+
+        return reverse('kanisa_manage_diary') + '?date=%s' % thedate
