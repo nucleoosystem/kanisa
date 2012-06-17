@@ -43,7 +43,7 @@ class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
 class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
-    kanisa_title = 'Manage Regular Events'
+    kanisa_title = 'Regular Events'
 
 
 class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
