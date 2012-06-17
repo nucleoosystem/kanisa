@@ -4,7 +4,7 @@
 
 {% block content %}
 {% if events_to_schedule %}
-<p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}" class="btn btn-large btn-primary">Schedule this week's regular events &raquo;</a></p>
+<p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}?date={{ monday|date:"Ymd" }}" class="btn btn-large btn-primary">Schedule this week's regular events &raquo;</a></p>
 {% endif %}
 
 <hr />

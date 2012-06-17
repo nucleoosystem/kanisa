@@ -174,11 +174,12 @@ class DiaryScheduleRegularEventView(RedirectView):
         return reverse('kanisa_manage_diary') + '?date=%s' % thedate
 
 
-class DiaryScheduleWeeksRegularEventView(RedirectView):
+class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
     permanent = False
 
     def get_redirect_url(self):
-        monday, sunday = get_week_bounds()
+        thedate = self.date_from_yyymmdd()
+        monday, sunday = get_week_bounds(thedate)
         next_monday = sunday + timedelta(days=1)
 
         done_something = False
@@ -194,9 +195,11 @@ class DiaryScheduleWeeksRegularEventView(RedirectView):
             messages.success(self.request, ('I\'ve scheduled this week\'s '
                                             'events for you - enjoy!'))
         else:
-            messages.info(self.request, 'No events to schedule.')
+            messages.info(self.request, 'No events to schedule (%s - %s).'
+                          % (monday, sunday))
 
-        return reverse('kanisa_manage_diary')
+        yyyymmdd = thedate.strftime('%Y%m%d')
+        return reverse('kanisa_manage_diary') + '?date=%s' % yyyymmdd
 
 
 class DiaryCancelScheduledEventView(RedirectView):
