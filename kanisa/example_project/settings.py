@@ -45,3 +45,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'kanisa.context_processors.kanisa_settings',
 )
+
+DATE_FORMAT = 'j M Y'
+TIME_FORMAT = 'P'
+SHORT_DATE_FORMAT = 'm/d/Y'
