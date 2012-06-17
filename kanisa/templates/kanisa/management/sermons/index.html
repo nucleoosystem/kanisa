@@ -1,0 +1,26 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+<p><a href="{% url 'kanisa_manage_sermons_series_create' %}" class="btn btn-large btn-primary">Create a new series &raquo;</a></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Series</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for series in sermonseries_list %}
+    <tr>
+      <td><a href="{% url 'kanisa_manage_sermons_series_update' series.pk %}">{{ series.title }}</a></td>
+      <td>{{ series.active|yesno|title }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

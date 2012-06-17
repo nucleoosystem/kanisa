@@ -5,6 +5,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
 from kanisa.models.diary import RegularEvent, ScheduledEvent
+from kanisa.models.sermons import SermonSeries
+
 
 TIMEPICKER_FORMAT = '%I:%M %p'
 
@@ -113,3 +115,8 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 
     class Meta:
         model = ScheduledEvent
+
+
+class SermonSeriesForm(KanisaBaseForm):
+    class Meta:
+        model = SermonSeries
