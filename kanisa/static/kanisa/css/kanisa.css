@@ -19,3 +19,7 @@ body {
 .kanisa_diary td {
     vertical-align: middle;
 }
+
+.kanisa_diary td div.notlast {
+    padding-bottom: 3px;
+}
