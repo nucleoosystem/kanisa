@@ -49,3 +49,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 DATE_FORMAT = 'j M Y'
 TIME_FORMAT = 'P'
 SHORT_DATE_FORMAT = 'm/d/Y'
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher', )
