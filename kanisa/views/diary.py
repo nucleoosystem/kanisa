@@ -29,11 +29,29 @@ class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
     kanisa_title = 'Manage Diary'
     kanisa_is_root_view = True
 
+    def __date_from_yyymmdd(self, yyyymmdd):
+        if not yyyymmdd:
+            return date.today()
+
+        try:
+            thedate = datetime.strptime(yyyymmdd, '%Y%m%d').date()
+        except ValueError:
+            return date.today()
+
+        return thedate
+
     def get_context_data(self, **kwargs):
+        thedate = self.__date_from_yyymmdd(self.request.GET.get('date', None))
+
         context = super(DiaryEventIndexView,
                         self).get_context_data(**kwargs)
 
-        schedule = get_schedule()
+        schedule = get_schedule(thedate)
+        context['previousdate'] = (schedule.monday -
+                                   timedelta(days=7)).strftime("%Y%m%d")
+        context['nextdate'] = (schedule.monday +
+                               timedelta(days=7)).strftime("%Y%m%d")
+        context['monday'] = schedule.monday
         context['calendar'] = schedule.calendar_entries
         context['events_to_schedule'] = schedule.events_to_schedule
 

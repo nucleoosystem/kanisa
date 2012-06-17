@@ -15,3 +15,7 @@ body {
 .thumbnail-caption a:hover {
     text-decoration: inherit;
 }
+
+.kanisa_diary td {
+    vertical-align: middle;
+}

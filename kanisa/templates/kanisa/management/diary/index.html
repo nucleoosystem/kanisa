@@ -9,9 +9,9 @@
 
 <hr />
 
-<h2>This Week</h2>
+<h2>Week Beginning {{ monday|date:"jS F Y" }}</h2>
 
-<table class="table table-striped">
+<table class="table table-striped kanisa_diary">
   <thead>
     <tr>
       <th>Day</th>
@@ -22,7 +22,10 @@
   <tbody>
     {% for entry in calendar %}
     <tr>
-      <td><strong>{{ entry.dayname }}</strong></td>
+      <td>
+        <strong>{{ entry.dayname }}</strong><br />
+        {{ entry.date|date:"jS F" }}
+      </td>
       <td>
       {% for e in entry.regular_events %}
       {{ e.start_time }}<br />
@@ -62,6 +65,15 @@
     {% endfor %}
   </tbody>
 </table>
+
+<ul class="pager">
+  <li class="previous">
+    <a href="?date={{ previousdate }}">&larr; Older</a>
+  </li>
+  <li class="next">
+    <a href="?date={{ nextdate }}">Newer &rarr;</a>
+  </li>
+</ul>
 
 <p class="pull-right"><a href="{% url 'kanisa_manage_diary_scheduled_create' %}" class="btn btn-primary">Schedule a new event &raquo;</a></p>
 
