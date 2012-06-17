@@ -6,7 +6,7 @@
   {% for sermonseries in sermonseries_list %}
   <li class="span3">
     <div class="thumbnail">
-      <div style="position: relative; margin-bottom: 4px;">
+      <div class="thumbnail-caption">
         {% thumbnail sermonseries.image "260x180" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
         {% endthumbnail %}
