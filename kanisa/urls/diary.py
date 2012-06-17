@@ -46,5 +46,5 @@ urlpatterns = patterns('',
                        url(r'^cancel/(?P<pk>\d+)/$',
                            smr(DiaryCancelScheduledEventView.as_view()),
                            {},
-                           'kanisa_manage_diary_cancel_regular_event'),
+                           'kanisa_manage_diary_cancel_scheduled_event'),
                        )

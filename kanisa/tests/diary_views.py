@@ -87,7 +87,7 @@ class DiaryManagementViewTest(KanisaViewTestCase):
 
         pk = ScheduledEvent.objects.all()[0].pk
 
-        url = reverse('kanisa_manage_diary_cancel_regular_event',
+        url = reverse('kanisa_manage_diary_cancel_scheduled_event',
                       args=[pk, ])
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url, follow=True)
@@ -103,7 +103,7 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         # Check preconditions
         self.assertEqual(len(ScheduledEvent.objects.all()), 0)
 
-        url = reverse('kanisa_manage_diary_cancel_regular_event',
+        url = reverse('kanisa_manage_diary_cancel_scheduled_event',
                       args=[40, ])
 
         self.client.login(username='fred', password='secret')
