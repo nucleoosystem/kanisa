@@ -26,6 +26,17 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertTrue(resp.context['events_to_schedule'])
         self.assertEqual(len(resp.context['calendar']), 7)
 
+    def test_diary_root_view_bad_date(self):
+        url = reverse('kanisa_manage_diary') + '?date=abc'
+        self.client.login(username='fred', password='secret')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'kanisa/management/diary/index.html')
+        self.assertTrue('calendar' in resp.context)
+        self.assertTrue('events_to_schedule' in resp.context)
+        self.assertTrue(resp.context['events_to_schedule'])
+        self.assertEqual(len(resp.context['calendar']), 7)
+
     def test_diary_regular_events_view(self):
         url = reverse('kanisa_manage_diary_regularevents')
         self.client.login(username='fred', password='secret')
