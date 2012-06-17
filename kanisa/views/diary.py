@@ -23,13 +23,8 @@ class DiaryBaseView:
         return {'text': 'Diary',
                 'url': reverse('kanisa_manage_diary')}
 
-
-class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
-    template_name = 'kanisa/management/diary/index.html'
-    kanisa_title = 'Manage Diary'
-    kanisa_is_root_view = True
-
-    def __date_from_yyymmdd(self, yyyymmdd):
+    def date_from_yyymmdd(self):
+        yyyymmdd = self.request.GET.get('date', None)
         if not yyyymmdd:
             return date.today()
 
@@ -40,8 +35,14 @@ class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
 
         return thedate
 
+
+class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
+    template_name = 'kanisa/management/diary/index.html'
+    kanisa_title = 'Manage Diary'
+    kanisa_is_root_view = True
+
     def get_context_data(self, **kwargs):
-        thedate = self.__date_from_yyymmdd(self.request.GET.get('date', None))
+        thedate = self.date_from_yyymmdd()
 
         context = super(DiaryEventIndexView,
                         self).get_context_data(**kwargs)
