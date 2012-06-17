@@ -23,6 +23,12 @@
           <i class="icon-edit"></i>
           Edit
         </a>
+        {% if sermonseries.active %}
+        <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">
+          <i class="icon-ok"></i>
+          Mark Complete
+        </a>
+        {% endif %}
       </p>
     </div>
   </li>

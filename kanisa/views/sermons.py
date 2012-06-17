@@ -1,4 +1,7 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
+from django.views.generic.base import RedirectView
 from kanisa.forms import SermonSeriesForm
 from kanisa.models import SermonSeries
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -41,4 +44,18 @@ class SermonSeriesUpdateView(KanisaUpdateView, SermonBaseView):
         return 'Edit Sermon Series: %s' % unicode(self.object)
 
     def get_success_url(self):
+        return reverse('kanisa_manage_sermons')
+
+
+class SermonSeriesCompleteView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, sermon_id):
+        series = get_object_or_404(SermonSeries, pk=sermon_id)
+        series.active = False
+        series.save()
+
+        message = u'Series "%s" marked as complete.' % unicode(series)
+        messages.success(self.request, message)
+
         return reverse('kanisa_manage_sermons')
