@@ -195,8 +195,7 @@ class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
             messages.success(self.request, ('I\'ve scheduled this week\'s '
                                             'events for you - enjoy!'))
         else:
-            messages.info(self.request, 'No events to schedule (%s - %s).'
-                          % (monday, sunday))
+            messages.info(self.request, 'No events to schedule.')
 
         yyyymmdd = thedate.strftime('%Y%m%d')
         return reverse('kanisa_manage_diary') + '?date=%s' % yyyymmdd
