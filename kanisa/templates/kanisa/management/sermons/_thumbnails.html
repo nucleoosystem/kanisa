@@ -1,0 +1,33 @@
+{% load thumbnail %}
+{% load url from future %}
+
+{% if sermonseries_list %}
+<ul class="thumbnails">
+  {% for sermonseries in sermonseries_list %}
+  <li class="span3">
+    <div class="thumbnail">
+      <div style="position: relative; margin-bottom: 4px;">
+        {% thumbnail sermonseries.image "260x180" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+        {% endthumbnail %}
+
+        <div class="carousel-caption">
+          <h4>{{ sermonseries.title }}</h4>
+        </div>
+      </div>
+
+      <p>
+        <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
+          <i class="icon-edit"></i>
+          Edit
+        </a>
+      </p>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="alert alert-warning">
+There are no sermon series to display.
+</div>
+{% endif %}

@@ -7,27 +7,6 @@
 
 <hr />
 
-{% if sermonseries_list %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Series</th>
-      <th>Active</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for series in sermonseries_list %}
-    <tr>
-      <td><a href="{% url 'kanisa_manage_sermons_series_update' series.pk %}">{{ series.title }}</a></td>
-      <td>{{ series.active|yesno|title }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<div class="alert alert-warning">
-There are no series to display.
-</div>
-{% endif %}
+{% include 'kanisa/management/sermons/_thumbnails.html' %}
 
 {% endblock %}
