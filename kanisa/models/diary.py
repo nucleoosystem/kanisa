@@ -14,11 +14,6 @@ DAYS_OF_WEEK = (
 )
 
 
-def daterange(start_date, end_date):
-    for n in range((end_date - start_date).days):
-        yield start_date + timedelta(n)
-
-
 class RegularEvent(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
@@ -49,6 +44,11 @@ class RegularEvent(models.Model):
         on or after start_date, and before (and not including)
         end_date.
         """
+
+        def daterange(start_date, end_date):
+            for n in range((end_date - start_date).days):
+                yield start_date + timedelta(n)
+
         for single_date in daterange(start_date, end_date):
             if single_date.weekday() != self.day:
                 continue
