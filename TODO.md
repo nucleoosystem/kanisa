@@ -28,7 +28,6 @@
 # Members' Area
 
 * Service Planning
-* Documents
 * Rotas
 
 # Misc

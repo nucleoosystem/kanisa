@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from kanisa.models.banners import Banner
 from kanisa.models.diary import RegularEvent, ScheduledEvent
+from kanisa.models.documents import Document
 from kanisa.models.sermons import SermonSeries
 
 
@@ -120,3 +121,8 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 class SermonSeriesForm(KanisaBaseForm):
     class Meta:
         model = SermonSeries
+
+
+class DocumentForm(KanisaBaseForm):
+    class Meta:
+        model = Document
