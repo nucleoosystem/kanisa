@@ -1,7 +1,3 @@
-from django import forms
-from django.core import exceptions
-from django.forms import util
-from django.db import models
 from kanisa.models.bible.bible_constants import (BOOKS_OF_THE_BIBLE,
                                                  MULTI_CHAPTER_BOOKS,
                                                  SINGLE_CHAPTER_BOOKS,
@@ -290,65 +286,3 @@ class BiblePassage(object):
 
 def normalise_passage(input):
     return unicode(to_passage(input))
-
-
-class BiblePassageFormField(forms.CharField):
-    def __init__(self, *args, **kwargs):
-        super(BiblePassageFormField, self).__init__(*args, **kwargs)
-
-    def clean(self, value):
-        """
-        Validates that the input is a valid BiblePassage. Returns a
-        Unicode object.
-        """
-        value = super(BiblePassageFormField, self).clean(value)
-        if value == u'':
-            return value
-
-        try:
-            return unicode(to_passage(value))
-        except InvalidPassage, e:
-            raise util.ValidationError(u('\'%s\' is not a valid Bible '
-                                         'reference. %s') % (value, e))
-
-
-class BiblePassageField(models.CharField):
-    def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 25
-        super(BiblePassageField, self).__init__(*args, **kwargs)
-
-    def formfield(self, **kwargs):
-        defaults = {'form_class': BiblePassageFormField}
-        defaults.update(kwargs)
-
-        return super(BiblePassageField, self).formfield(**defaults)
-
-    def db_type(self, connection):
-        return 'char(25)'
-
-    def get_internal_type(self):
-        return "CharField"
-
-    def to_python(self, value):
-        if isinstance(value, BiblePassage):
-            return value
-
-        # Parse a string into a BiblePassage object
-        try:
-            if not value or len(value) == 0:
-                return None
-
-            return to_passage(value)
-        except InvalidPassage:
-            raise exceptions.ValidationError
-
-    def get_db_prep_value(self, value, connection, prepared=False):
-        if isinstance(value, BiblePassage):
-            return unicode(value)
-
-        passage = self.to_python(value)
-
-        if passage:
-            return unicode(passage)
-
-        return u''

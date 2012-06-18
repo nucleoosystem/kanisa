@@ -1,0 +1,45 @@
+from django.core import exceptions
+from django.db import models
+from kanisa.models.bible import bible
+
+
+class BiblePassageField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        kwargs['max_length'] = 25
+        super(BiblePassageField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': BiblePassageFormField}
+        defaults.update(kwargs)
+
+        return super(BiblePassageField, self).formfield(**defaults)
+
+    def db_type(self, connection):
+        return 'char(25)'
+
+    def get_internal_type(self):
+        return "CharField"
+
+    def to_python(self, value):
+        if isinstance(value, bible.BiblePassage):
+            return value
+
+        # Parse a string into a BiblePassage object
+        try:
+            if not value or len(value) == 0:
+                return None
+
+            return bible.to_passage(value)
+        except bible.InvalidPassage:
+            raise exceptions.ValidationError
+
+    def get_db_prep_value(self, value, connection, prepared=False):
+        if isinstance(value, bible.BiblePassage):
+            return unicode(value)
+
+        passage = self.to_python(value)
+
+        if passage:
+            return unicode(passage)
+
+        return u''
