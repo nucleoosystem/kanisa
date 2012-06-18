@@ -57,24 +57,24 @@ class BiblePassageBadInput(TestCase):
 
 class BiblePassageToString(TestCase):
     def testToString(self):
-        self.assertEqual(bible.to_passage('1 thessalonians').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 thessalonians')),
                          '1 Thessalonians')
-        self.assertEqual(bible.to_passage('1 thessalonians  3').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 thessalonians  3')),
                          '1 Thessalonians 3')
         self.assertEqual(unicode(bible.to_passage('1 thessalonians 3 v 8')),
                          '1 Thessalonians 3:8')
         bit_too_long = unicode(bible.to_passage('1 thessalonians 3 v 8 - 4:1'))
         self.assertEqual(bit_too_long,
                          '1 Thessalonians 3:8-4:1')
-        self.assertEqual(bible.to_passage('1 th 3 v 8 - 3:9').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 th 3 v 8 - 3:9')),
                          '1 Thessalonians 3:8-9')
-        self.assertEqual(bible.to_passage('1 cor').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 cor')),
                          '1 Corinthians')
-        self.assertEqual(bible.to_passage('1 cor 2').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 cor 2')),
                          '1 Corinthians 2')
-        self.assertEqual(bible.to_passage('1 cor 2:3-7').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 cor 2:3-7')),
                          '1 Corinthians 2:3-7')
-        self.assertEqual(bible.to_passage('1 cor 2-3').__unicode__(),
+        self.assertEqual(unicode(bible.to_passage('1 cor 2-3')),
                          '1 Corinthians 2-3')
 
 
@@ -209,16 +209,16 @@ class ToPassageGoodInput(TestCase):
 
     def testLessLikelyInputs(self):
         passage = bible.to_passage('1 John ch 2 v 3-5')
-        self.assertEqual(passage.__unicode__(), '1 John 2:3-5')
+        self.assertEqual(unicode(passage), '1 John 2:3-5')
 
         passage = bible.to_passage('1 John chapter 2 v 3-5')
-        self.assertEqual(passage.__unicode__(), '1 John 2:3-5')
+        self.assertEqual(unicode(passage), '1 John 2:3-5')
 
         passage = bible.to_passage('1 John chapter 2 verse 3 - v5')
-        self.assertEqual(passage.__unicode__(), '1 John 2:3-5')
+        self.assertEqual(unicode(passage), '1 John 2:3-5')
 
         passage = bible.to_passage('1 John ch 2 v 3 - ch 4:5')
-        self.assertEqual(passage.__unicode__(), '1 John 2:3-4:5')
+        self.assertEqual(unicode(passage), '1 John 2:3-4:5')
 
     def testSingleChapterBooks(self):
         passage = bible.to_passage('Jude 1:2-3')
@@ -227,7 +227,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_chapter, 1)
         self.assertEqual(passage.start_verse, 2)
         self.assertEqual(passage.end_verse, 3)
-        self.assertEqual(passage.__unicode__(), 'Jude 2-3')
+        self.assertEqual(unicode(passage), 'Jude 2-3')
 
         passage = bible.to_passage('Obadiah 1:2-1:3')
         self.assertEqual(passage.book, 'Obadiah')
@@ -235,7 +235,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_chapter, 1)
         self.assertEqual(passage.start_verse, 2)
         self.assertEqual(passage.end_verse, 3)
-        self.assertEqual(passage.__unicode__(), 'Obadiah 2-3')
+        self.assertEqual(unicode(passage), 'Obadiah 2-3')
 
         passage = bible.to_passage('Philemon 2-3')
         self.assertEqual(passage.book, 'Philemon')
@@ -243,7 +243,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_chapter, 1)
         self.assertEqual(passage.start_verse, 2)
         self.assertEqual(passage.end_verse, 3)
-        self.assertEqual(passage.__unicode__(), 'Philemon 2-3')
+        self.assertEqual(unicode(passage), 'Philemon 2-3')
 
         passage = bible.to_passage('2 Jo 1')
         self.assertEqual(passage.book, '2 John')
@@ -251,7 +251,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_chapter, None)
         self.assertEqual(passage.start_verse, 1)
         self.assertEqual(passage.end_verse, None)
-        self.assertEqual(passage.__unicode__(), '2 John 1')
+        self.assertEqual(unicode(passage), '2 John 1')
 
         self.assertRaises(bible.ChapterBoundsError, bible.to_passage,
                           '2 John 1-14')
