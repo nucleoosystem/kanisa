@@ -291,11 +291,11 @@ class BiblePassage(object):
                                    self.end_verse)
 
     def __len__(self):
-        return len(self.__unicode__())
+        return len(unicode(self))
 
 
 def Normalise(input):
-    return to_passage(input).__unicode__()
+    return unicode(to_passage(input))
 
 
 class BiblePassageFormField(forms.CharField):
@@ -312,7 +312,7 @@ class BiblePassageFormField(forms.CharField):
             return value
 
         try:
-            return to_passage(value).__unicode__()
+            return unicode(to_passage(value))
         except InvalidPassage, e:
             raise util.ValidationError(u('\'%s\' is not a valid Bible '
                                          'reference. %s') % (value, e))
@@ -350,11 +350,11 @@ class BiblePassageField(models.CharField):
 
     def get_db_prep_value(self, value, connection, prepared=False):
         if isinstance(value, BiblePassage):
-            return value.__unicode__()
+            return unicode(value)
 
         passage = self.to_python(value)
 
         if passage:
-            return passage.__unicode__()
+            return unicode(passage)
 
         return u''
