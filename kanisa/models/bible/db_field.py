@@ -1,6 +1,7 @@
 from django.core import exceptions
 from django.db import models
 from kanisa.models.bible import bible
+from kanisa.models.bible.form_field import BiblePassageFormField
 
 
 class BiblePassageField(models.CharField):
