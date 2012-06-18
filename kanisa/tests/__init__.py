@@ -6,6 +6,6 @@ from kanisa.tests.banner_views import BannerManagementViewTest
 from kanisa.tests.diary_views import DiaryManagementViewTest
 from kanisa.tests.public_views import PublicViewTest
 from kanisa.tests.bible_passages import (BiblePassageBadInput,
-                                         BiblePassageToString,
+                                         BiblePassage,
                                          ToPassageBadInput,
                                          ToPassageGoodInput)

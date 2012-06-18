@@ -55,7 +55,7 @@ class BiblePassageBadInput(TestCase):
                           'Revelation 22:20-22')
 
 
-class BiblePassageToString(TestCase):
+class BiblePassage(TestCase):
     def testToString(self):
         self.assertEqual(unicode(bible.to_passage('1 thessalonians')),
                          '1 Thessalonians')
@@ -76,6 +76,12 @@ class BiblePassageToString(TestCase):
                          '1 Corinthians 2:3-7')
         self.assertEqual(unicode(bible.to_passage('1 cor 2-3')),
                          '1 Corinthians 2-3')
+
+    def testLength(self):
+        self.assertEqual(len(bible.to_passage('1 cor 2 v 3 - 7')),
+                         len('1 Corinthians 2:3-7'))
+        self.assertEqual(len(bible.to_passage('1 cor 2-3')),
+                         len('1 Corinthians 2-3'))
 
 
 class ToPassageBadInput(TestCase):
