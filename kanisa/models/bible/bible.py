@@ -123,11 +123,7 @@ def to_passage(inputstring):
         if not isinstance(inputstring, unicode):
             raise InvalidPassage
 
-    try:
-        # Have we got a string?
-        input = inputstring.strip().lower()
-    except AttributeError:
-        raise InvalidPassage
+    input = inputstring.strip().lower()
 
     try:
         i = [b.lower() for b in BOOKS_OF_THE_BIBLE].index(input)
@@ -167,10 +163,8 @@ class BiblePassage(object):
         if not isinstance(book, str):
             raise InvalidPassage('Book \'%s\' is not textual.' % book)
 
-        try:
-            book = book.strip()
-        except AttributeError:
-            raise InvalidPassage('Book \'%s\' is not textual.' % book)
+        book = book.strip()
+
         try:
             book_index = BOOKS_OF_THE_BIBLE.index(book)
         except ValueError:
