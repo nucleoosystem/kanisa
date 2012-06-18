@@ -21,5 +21,3 @@ class BiblePassageFormField(forms.CharField):
         except bible.InvalidPassage, e:
             raise util.ValidationError(u('\'%s\' is not a valid Bible '
                                          'reference. %s') % (value, e))
-
-
