@@ -99,6 +99,10 @@ class ToPassageBadInput(TestCase):
         self.assertRaises(bible.InvalidPassage, bible.to_passage,
                           '1 Thessalonians 2:2-2:1')
 
+    def testGoodBookStupidRange(self):
+        self.assertRaises(bible.InvalidPassage, bible.to_passage,
+                          '1 Thessalonians Fish')
+
 
 class ToPassageGoodInput(TestCase):
     def testBooksOnly(self):
