@@ -201,14 +201,20 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage2.end_verse, 4)
 
     def testBookPseudonyms(self):
-        self.assertEqual(bible.Normalise('Psalms 23:1-6'), 'Psalm 23:1-6')
-        self.assertEqual(bible.Normalise('1 Jn 4:1-5'), '1 John 4:1-5')
-        self.assertEqual(bible.Normalise('Song of Songs 4:2'),
+        self.assertEqual(bible.normalise_passage('Psalms 23:1-6'),
+                         'Psalm 23:1-6')
+        self.assertEqual(bible.normalise_passage('1 Jn 4:1-5'),
+                         '1 John 4:1-5')
+        self.assertEqual(bible.normalise_passage('Song of Songs 4:2'),
                          'Song of Solomon 4:2')
-        self.assertEqual(bible.Normalise('Sos 4:2'), 'Song of Solomon 4:2')
-        self.assertEqual(bible.Normalise('Eph 4:2'), 'Ephesians 4:2')
-        self.assertEqual(bible.Normalise('1 Jo 3:2'), '1 John 3:2')
-        self.assertEqual(bible.Normalise('1 Jo 1:1-5:5'), '1 John 1:1-5:5')
+        self.assertEqual(bible.normalise_passage('Sos 4:2'),
+                         'Song of Solomon 4:2')
+        self.assertEqual(bible.normalise_passage('Eph 4:2'),
+                         'Ephesians 4:2')
+        self.assertEqual(bible.normalise_passage('1 Jo 3:2'),
+                         '1 John 3:2')
+        self.assertEqual(bible.normalise_passage('1 Jo 1:1-5:5'),
+                         '1 John 1:1-5:5')
 
     def testAmbiguousNames(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 'J 3:16')

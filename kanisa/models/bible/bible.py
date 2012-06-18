@@ -288,7 +288,7 @@ class BiblePassage(object):
         return len(unicode(self))
 
 
-def Normalise(input):
+def normalise_passage(input):
     return unicode(to_passage(input))
 
 
