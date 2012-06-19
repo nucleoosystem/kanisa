@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 from django.core import exceptions
 from django.db import models
-from kanisa.models.bible import bible
-from kanisa.models.bible.form_field import BiblePassageFormField
+from .bible import to_passage, InvalidPassage, BiblePassage
+from .form_field import BiblePassageFormField
 
 
 class BiblePassageField(models.CharField):
@@ -22,7 +23,7 @@ class BiblePassageField(models.CharField):
         return "CharField"
 
     def to_python(self, value):
-        if isinstance(value, bible.BiblePassage):
+        if isinstance(value, BiblePassage):
             return value
 
         # Parse a string into a BiblePassage object
@@ -30,12 +31,12 @@ class BiblePassageField(models.CharField):
             if not value or len(value) == 0:
                 return None
 
-            return bible.to_passage(value)
-        except bible.InvalidPassage:
+            return to_passage(value)
+        except InvalidPassage:
             raise exceptions.ValidationError
 
     def get_db_prep_value(self, value, connection, prepared=False):
-        if isinstance(value, bible.BiblePassage):
+        if isinstance(value, BiblePassage):
             return unicode(value)
 
         passage = self.to_python(value)

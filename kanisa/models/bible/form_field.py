@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from django import forms
 from django.forms import util
-from kanisa.models.bible import bible
+from .bible import to_passage, InvalidPassage
 
 
 class BiblePassageFormField(forms.CharField):
@@ -17,7 +18,7 @@ class BiblePassageFormField(forms.CharField):
             return value
 
         try:
-            return unicode(bible.to_passage(value))
-        except bible.InvalidPassage, e:
+            return unicode(to_passage(value))
+        except InvalidPassage, e:
             raise util.ValidationError(u('\'%s\' is not a valid Bible '
                                          'reference. %s') % (value, e))
