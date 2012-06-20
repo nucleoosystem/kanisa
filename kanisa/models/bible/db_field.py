@@ -35,7 +35,12 @@ class BiblePassageField(models.CharField):
 
             return to_passage(value)
         except InvalidPassage:
-            raise exceptions.ValidationError
+            # Shouldn't get here - since we've saved the BiblePassage
+            # in a model.
+            return None
 
     def get_prep_value(self, value):
+        if not value:
+            return None
+
         return unicode(value)

@@ -322,3 +322,10 @@ class BiblePassageModelField(TestCase):
         self.assertEqual(len(objects), 1)
         self.assertEqual(unicode(objects[0].object.passage),
                          'Psalms')
+
+    def testNone(self):
+        m = SermonSeries()
+        m.save()
+
+        m1 = SermonSeries.objects.get(pk=m.pk)
+        self.assertEqual(m1.passage, None)
