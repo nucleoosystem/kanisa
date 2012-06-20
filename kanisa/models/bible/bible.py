@@ -102,6 +102,12 @@ def get_verses(book_index, chapter):
     return VERSES_IN_THE_CHAPTERS[book_index][chapter - 1]
 
 
+def normalise_book(book_str):
+    if book_str == 'Psalm':
+        return 'Psalms'
+    return book_str
+
+
 def to_passage(inputstring):
     """
     Takes passages of the form:
@@ -220,10 +226,10 @@ class BiblePassage(object):
         if start_chapter > legal_chapters or end_chapter > legal_chapters:
             if legal_chapters == 1:
                 raise BookBoundsError('There is only 1 chapter in %s.'
-                                      % (book))
+                                      % (normalise_book(book)))
             else:
                 raise BookBoundsError('There are only %i chapters in %s.'
-                                      % (legal_chapters, book))
+                                      % (legal_chapters, normalise_book(book)))
 
         if start_chapter and start_verse:
             if start_verse > get_verses(book_index, start_chapter):
@@ -247,7 +253,7 @@ class BiblePassage(object):
 
     def __unicode__(self):
         if not self.start_chapter:
-            return self.book
+            return normalise_book(self.book)
 
         if self.start_chapter == 1 and self.book in SINGLE_CHAPTER_BOOKS:
             if not self.end_verse:
