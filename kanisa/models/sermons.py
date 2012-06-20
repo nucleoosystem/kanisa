@@ -1,6 +1,8 @@
 from django.db import models
 from sorl.thumbnail import ImageField
 
+from kanisa.models.bible.db_field import BiblePassageField
+
 
 class SermonSeries(models.Model):
     title = models.CharField(max_length=60,
@@ -12,6 +14,7 @@ class SermonSeries(models.Model):
                                           'cover?'))
     active = models.BooleanField(default=True,
                                  help_text='Is this series currently ongoing?')
+    passage = BiblePassageField(blank=True, null=True)
 
     def __unicode__(self):
         return self.title
