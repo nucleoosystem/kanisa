@@ -329,3 +329,11 @@ class BiblePassageModelField(TestCase):
 
         m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertEqual(m1.passage, None)
+
+    def testBadPassageSavedAsString(self):
+        m = SermonSeries()
+        m.passage = 'Not a Bible Passage'
+        m.save()
+
+        m1 = SermonSeries.objects.get(pk=m.pk)
+        self.assertEqual(m1.passage, None)
