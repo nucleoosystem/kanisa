@@ -6,6 +6,8 @@ from .form_field import BiblePassageFormField
 
 
 class BiblePassageField(models.CharField):
+    __metaclass__ = models.SubfieldBase
+
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 25
         super(BiblePassageField, self).__init__(*args, **kwargs)

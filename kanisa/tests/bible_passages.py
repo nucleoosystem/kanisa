@@ -290,12 +290,13 @@ class BiblePassageModelField(TestCase):
     def testModelField(self):
         p = bible.to_passage('2 John 1')
         m = SermonSeries(passage=p)
+        m.save()
         self.assertEqual(m.passage, p)
         self.assertEqual(m._meta.get_field("passage").verbose_name,
-                         "Some field")
+                         "passage")
         self.assertTrue(isinstance(p, bible.BiblePassage))
         self.assertTrue(isinstance(m.passage, bible.BiblePassage))
 
-        m1 = MyModel.objects.get(pk=m.pk)
+        m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), '2 John 1')
