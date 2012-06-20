@@ -37,7 +37,7 @@ class BiblePassageField(models.CharField):
         except InvalidPassage:
             raise exceptions.ValidationError
 
-    def get_db_prep_value(self, value, connection, prepared=False):
+    def get_prep_value(self, value):
         if isinstance(value, BiblePassage):
             return unicode(value)
 
