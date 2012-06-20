@@ -9,4 +9,5 @@ from .public_views import PublicViewTest
 from .bible_passages import (BiblePassageBadInput,
                              BiblePassage,
                              ToPassageBadInput,
-                             ToPassageGoodInput)
+                             ToPassageGoodInput,
+                             BiblePassageModelField)

@@ -1,4 +1,7 @@
 from kanisa.models.bible import bible
+from kanisa.models.bible.db_field import BiblePassageField
+from kanisa.models.sermons import SermonSeries
+from django.db import models
 from django.test import TestCase
 
 
@@ -281,3 +284,18 @@ class ToPassageGoodInput(TestCase):
                           '2 John 2:1-2')
         self.assertRaises(bible.BookBoundsError, bible.to_passage,
                           '2 John 2:1-2:2')
+
+
+class BiblePassageModelField(TestCase):
+    def testModelField(self):
+        p = bible.to_passage('2 John 1')
+        m = SermonSeries(passage=p)
+        self.assertEqual(m.passage, p)
+        self.assertEqual(m._meta.get_field("passage").verbose_name,
+                         "Some field")
+        self.assertTrue(isinstance(p, bible.BiblePassage))
+        self.assertTrue(isinstance(m.passage, bible.BiblePassage))
+
+        m1 = MyModel.objects.get(pk=m.pk)
+        self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
+        self.assertEqual(unicode(m1.passage), '2 John 1')
