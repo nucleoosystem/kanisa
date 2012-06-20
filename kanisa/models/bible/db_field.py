@@ -25,11 +25,10 @@ class BiblePassageField(models.CharField):
         if isinstance(value, BiblePassage):
             return value
 
-        # Parse a string into a BiblePassage object
-        try:
-            if not value or len(value) == 0:
-                return None
+        if not value:
+            return None
 
+        try:
             return to_passage(value)
         except InvalidPassage:
             # Shouldn't get here - since we've saved the BiblePassage
