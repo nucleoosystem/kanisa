@@ -1,6 +1,7 @@
 from kanisa.models.bible import bible
 from kanisa.models.bible.db_field import BiblePassageField
 from kanisa.models.sermons import SermonSeries
+from django.core import serializers
 from django.db import models
 from django.test import TestCase
 
@@ -301,7 +302,7 @@ class BiblePassageModelField(TestCase):
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), '2 John 1')
 
-    def testAssignString(self):
+    def testAssignStringToModel(self):
         p = 'Psalm'
         m = SermonSeries(passage=p)
         m.save()
@@ -309,3 +310,15 @@ class BiblePassageModelField(TestCase):
         m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), 'Psalms')
+
+    def testSerialization(self):
+        p = 'Psalm'
+        m = SermonSeries(passage=p)
+        m.save()
+
+        cereal = serializers.serialize('json',
+                                       SermonSeries.objects.all())
+        objects = list(serializers.deserialize("json", cereal))
+        self.assertEqual(len(objects), 1)
+        self.assertEqual(unicode(objects[0].object.passage),
+                         'Psalms')
