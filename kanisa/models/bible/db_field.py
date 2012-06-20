@@ -38,12 +38,4 @@ class BiblePassageField(models.CharField):
             raise exceptions.ValidationError
 
     def get_prep_value(self, value):
-        if isinstance(value, BiblePassage):
-            return unicode(value)
-
-        passage = self.to_python(value)
-
-        if passage:
-            return unicode(passage)
-
-        return u''
+        return unicode(value)

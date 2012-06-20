@@ -287,7 +287,7 @@ class ToPassageGoodInput(TestCase):
 
 
 class BiblePassageModelField(TestCase):
-    def testModelField(self):
+    def testAssignPassage(self):
         p = bible.to_passage('2 John 1')
         m = SermonSeries(passage=p)
         m.save()
@@ -300,3 +300,12 @@ class BiblePassageModelField(TestCase):
         m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), '2 John 1')
+
+    def testAssignString(self):
+        p = 'Psalm'
+        m = SermonSeries(passage=p)
+        m.save()
+
+        m1 = SermonSeries.objects.get(pk=m.pk)
+        self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
+        self.assertEqual(unicode(m1.passage), 'Psalms')
