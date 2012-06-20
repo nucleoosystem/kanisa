@@ -21,9 +21,6 @@ class BiblePassageField(models.CharField):
     def db_type(self, connection):
         return 'char(25)'
 
-    def get_internal_type(self):
-        return "CharField"
-
     def to_python(self, value):
         if isinstance(value, BiblePassage):
             return value
