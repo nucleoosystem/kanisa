@@ -40,7 +40,7 @@ class KanisaCreateView(CreateView):
         model_name = form.instance._meta.verbose_name.title()
         message = u'%s "%s" created.' % (model_name,
                                          unicode(form.instance))
-        messages.success(self.request, message, extra_tags='msg')
+        messages.success(self.request, message)
         return super(KanisaCreateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -57,7 +57,7 @@ class KanisaUpdateView(UpdateView):
         model_name = form.instance._meta.verbose_name.title()
         message = u'%s "%s" saved.' % (model_name,
                                        unicode(form.instance))
-        messages.success(self.request, message, extra_tags='msg')
+        messages.success(self.request, message)
         return super(KanisaUpdateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
