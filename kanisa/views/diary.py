@@ -223,7 +223,7 @@ class DiaryCancelScheduledEventView(KanisaDeleteView, DiaryBaseView):
 
     def get_success_url(self):
         message = u'%s cancelled on %s' % (unicode(self.object),
-                                           date_string)
+                                           self.get_date_string())
         messages.success(self.request, message)
 
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
