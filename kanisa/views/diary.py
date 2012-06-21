@@ -80,7 +80,7 @@ class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
     kanisa_title = 'Create a Regular Event'
 
     def get_success_url(self):
-        return reverse('kanisa_manage_diary')
+        return reverse('kanisa_manage_diary_regularevents')
 
     def get_initial(self):
         initial = super(DiaryRegularEventCreateView, self).get_initial()
@@ -99,7 +99,7 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
         return 'Edit Event: %s' % unicode(self.object)
 
     def get_success_url(self):
-        return reverse('kanisa_manage_diary')
+        return reverse('kanisa_manage_diary_regularevents')
 
 
 class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
