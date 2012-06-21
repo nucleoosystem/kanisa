@@ -111,7 +111,7 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         url = reverse('kanisa_manage_diary_cancel_scheduled_event',
                       args=[pk, ])
         self.client.login(username='fred', password='secret')
-        resp = self.client.get(url, follow=True)
+        resp = self.client.post(url, follow=True)
         self.assertEqual(resp.status_code, 200)
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
