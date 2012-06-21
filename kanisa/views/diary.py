@@ -12,7 +12,8 @@ from kanisa.forms import (RegularEventForm, ScheduledEventEditForm,
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaTemplateView)
+                                  KanisaListView, KanisaTemplateView,
+                                  KanisaDeleteView)
 
 
 class DiaryBaseView:
@@ -201,24 +202,28 @@ class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
         return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(RedirectView, DiaryBaseView):
-    permanent = False
+class DiaryCancelScheduledEventView(KanisaDeleteView, DiaryBaseView):
+    model = ScheduledEvent
 
-    def get_redirect_url(self, pk):
-        event = get_object_or_404(ScheduledEvent, pk=pk)
-
-        parsed_date = datetime.combine(event.date, event.start_time)
-
+    def get_date_string(self):
+        parsed_date = datetime.combine(self.object.date,
+                                       self.object.start_time)
         formatted_date = formats.date_format(parsed_date,
                                              "DATE_FORMAT")
         formatted_time = formats.date_format(parsed_date,
                                              "TIME_FORMAT")
-        date_string = '%s at %s' % (formatted_date, formatted_time)
+        return '%s at %s' % (formatted_date, formatted_time)
 
-        event.delete()
+    def get_deletion_confirmation_message(self):
+        return 'Are you sure you want to cancel %s on %s?'\
+            % (unicode(self.object), self.get_date_string())
 
-        message = u'%s cancelled on %s' % (unicode(event),
+    def get_kanisa_title(self):
+        return 'Cancel Scheduled Event'
+
+    def get_success_url(self):
+        message = u'%s cancelled on %s' % (unicode(self.object),
                                            date_string)
         messages.success(self.request, message)
 
-        return self.get_relative_root_url(event.date.strftime('%Y%m%d'))
+        return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))

@@ -86,10 +86,15 @@ class KanisaListView(ListView):
 class KanisaDeleteView(DeleteView):
     template_name = 'kanisa/management/delete.html'
 
+    def get_deletion_confirmation_message(self):
+        return 'Are you sure you want to delete %s?' % unicode(self.object)
+
     def get_context_data(self, **kwargs):
         context = super(KanisaDeleteView,
                         self).get_context_data(**kwargs)
 
         context = add_kanisa_context(self, context)
+        msg = self.get_deletion_confirmation_message()
+        context['kanisa_delete_confirm'] = msg
 
         return context

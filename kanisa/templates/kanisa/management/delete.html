@@ -1,7 +1,7 @@
 {% extends 'kanisa/management/base.html' %}
 
 {% block lead %}
-    <p class="lead">Are you sure you want to delete <em>{{ object }}</em>?</p>
+    <p class="lead">{{ kanisa_delete_confirm }}</p>
 {% endblock %}
 
 {% block content %}

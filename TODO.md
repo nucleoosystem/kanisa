@@ -8,7 +8,6 @@
 
 # Diary
 
-* Confirm before event cancellation?
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
 
