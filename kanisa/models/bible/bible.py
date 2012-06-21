@@ -263,9 +263,13 @@ class BiblePassage(object):
             return '%s %s-%s' % (self.book, self.start_verse, self.end_verse)
 
         if not self.start_verse and self.end_chapter:
-            return '%s %s-%s' % (self.book,
-                                 self.start_chapter,
-                                 self.end_chapter)
+            if self.start_chapter == self.end_chapter:
+                return '%s %s' % (self.book,
+                                  self.start_chapter)
+            else:
+                return '%s %s-%s' % (self.book,
+                                     self.start_chapter,
+                                     self.end_chapter)
 
         if not self.start_verse:
             return '%s %s' % (self.book, self.start_chapter)

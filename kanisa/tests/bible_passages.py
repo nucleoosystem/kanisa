@@ -240,6 +240,13 @@ class ToPassageGoodInput(TestCase):
         passage = bible.to_passage('1 John ch 2 v 3 - ch 4:5')
         self.assertEqual(unicode(passage), '1 John 2:3-4:5')
 
+    def testSameStartAndEndChapter(self):
+        passage = bible.to_passage('1 John 1-1')
+        self.assertEqual(unicode(passage), '1 John 1')
+
+        passage = bible.to_passage('1 John 1:3-1:4')
+        self.assertEqual(unicode(passage), '1 John 1:3-4')
+
     def testSingleChapterBooks(self):
         passage = bible.to_passage('Jude 1:2-3')
         self.assertEqual(passage.book, 'Jude')
