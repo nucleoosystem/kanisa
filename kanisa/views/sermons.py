@@ -28,7 +28,6 @@ class SermonIndexView(KanisaListView, SermonBaseView):
 
 class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSeriesForm
-    template_name = 'kanisa/management/create.html'
     kanisa_title = 'Create a Sermon Series'
 
     def get_success_url(self):
@@ -37,7 +36,6 @@ class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
 
 class SermonSeriesUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonSeriesForm
-    template_name = 'kanisa/management/create.html'
     model = SermonSeries
 
     def get_kanisa_title(self):

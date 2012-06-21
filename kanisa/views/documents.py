@@ -26,7 +26,6 @@ class DocumentIndexView(KanisaListView, DocumentBaseView):
 
 class DocumentCreateView(KanisaCreateView, DocumentBaseView):
     form_class = DocumentForm
-    template_name = 'kanisa/management/create.html'
     kanisa_title = 'Upload a Document'
 
     def get_success_url(self):
@@ -35,7 +34,6 @@ class DocumentCreateView(KanisaCreateView, DocumentBaseView):
 
 class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
     form_class = DocumentForm
-    template_name = 'kanisa/management/create.html'
     model = Document
 
     def get_kanisa_title(self):
@@ -47,7 +45,6 @@ class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
 
 class DocumentDeleteView(KanisaDeleteView, DocumentBaseView):
     model = Document
-    template_name = 'kanisa/management/delete.html'
 
     def get_kanisa_title(self):
         return 'Delete Document'

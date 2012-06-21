@@ -36,6 +36,8 @@ class KanisaTemplateView(TemplateView):
 
 
 class KanisaCreateView(CreateView):
+    template_name = 'kanisa/management/create.html'
+
     def form_valid(self, form):
         model_name = form.instance._meta.verbose_name.title()
         message = u'%s "%s" created.' % (model_name,
@@ -53,6 +55,8 @@ class KanisaCreateView(CreateView):
 
 
 class KanisaUpdateView(UpdateView):
+    template_name = 'kanisa/management/create.html'
+
     def form_valid(self, form):
         model_name = form.instance._meta.verbose_name.title()
         message = u'%s "%s" saved.' % (model_name,
@@ -80,6 +84,8 @@ class KanisaListView(ListView):
 
 
 class KanisaDeleteView(DeleteView):
+    template_name = 'kanisa/management/delete.html'
+
     def get_context_data(self, **kwargs):
         context = super(KanisaDeleteView,
                         self).get_context_data(**kwargs)

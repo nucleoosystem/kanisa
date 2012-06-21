@@ -76,7 +76,6 @@ class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
 
 class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
-    template_name = 'kanisa/management/create.html'
     kanisa_title = 'Create a Regular Event'
 
     def get_success_url(self):
@@ -90,7 +89,6 @@ class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
 
 class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
-    template_name = 'kanisa/management/create.html'
     model = RegularEvent
     kanisa_form_warning = ('Changes made here will not affect events already '
                            'in the diary (whether they\'re future events or '
@@ -105,7 +103,6 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
 
 class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
     form_class = ScheduledEventCreationForm
-    template_name = 'kanisa/management/create.html'
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
     kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
@@ -131,7 +128,6 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
 
 class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = ScheduledEventEditForm
-    template_name = 'kanisa/management/create.html'
     model = ScheduledEvent
     kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
                    'diary - with an associated date and time.')
