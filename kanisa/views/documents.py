@@ -1,8 +1,9 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from kanisa.forms import DocumentForm
 from kanisa.models import Document
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView)
+                                  KanisaListView, KanisaDeleteView)
 
 
 class DocumentBaseView:
@@ -41,4 +42,17 @@ class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
         return 'Edit Document: %s' % unicode(self.object)
 
     def get_success_url(self):
+        return reverse('kanisa_manage_documents')
+
+
+class DocumentDeleteView(KanisaDeleteView, DocumentBaseView):
+    model = Document
+    template_name = 'kanisa/management/delete.html'
+
+    def get_kanisa_title(self):
+        return 'Delete Document'
+
+    def get_success_url(self):
+        message = '%s deleted.' % self.object
+        messages.success(self.request, message)
         return reverse('kanisa_manage_documents')

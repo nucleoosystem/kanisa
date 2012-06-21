@@ -14,6 +14,7 @@
       <th>Title</th>
       <th>Uploaded</th>
       <th>Modified</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,9 @@
         <abbr title="{{ document.modified|date:"r"}}">
           {{ document.modified|timesince }} ago
         </abbr>
+      </td>
+      <td>
+      <a class="btn btn-danger btn-mini" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
       </td>
     </tr>
     {% endfor %}

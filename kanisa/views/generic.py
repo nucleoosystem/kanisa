@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 
@@ -72,6 +72,16 @@ class KanisaUpdateView(UpdateView):
 class KanisaListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(KanisaListView,
+                        self).get_context_data(**kwargs)
+
+        context = add_kanisa_context(self, context)
+
+        return context
+
+
+class KanisaDeleteView(DeleteView):
+    def get_context_data(self, **kwargs):
+        context = super(KanisaDeleteView,
                         self).get_context_data(**kwargs)
 
         context = add_kanisa_context(self, context)

@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 from django.contrib.admin.views.decorators import staff_member_required as smr
 from kanisa.views.documents import (DocumentIndexView,
                                     DocumentCreateView,
-                                    DocumentUpdateView)
+                                    DocumentUpdateView,
+                                    DocumentDeleteView)
 
 urlpatterns = patterns('',
                        url(r'^$',
@@ -17,4 +18,8 @@ urlpatterns = patterns('',
                            smr(DocumentUpdateView.as_view()),
                            {},
                            'kanisa_manage_documents_update'),
+                       url(r'^delete/(?P<pk>\d+)$',
+                           smr(DocumentDeleteView.as_view()),
+                           {},
+                           'kanisa_manage_documents_delete'),
                        )
