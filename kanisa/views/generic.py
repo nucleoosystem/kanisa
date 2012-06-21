@@ -96,5 +96,6 @@ class KanisaDeleteView(DeleteView):
         context = add_kanisa_context(self, context)
         msg = self.get_deletion_confirmation_message()
         context['kanisa_delete_confirm'] = msg
+        context['kanisa_cancel_url'] = self.get_cancel_url()
 
         return context

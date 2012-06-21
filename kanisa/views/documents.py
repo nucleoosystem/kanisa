@@ -49,6 +49,9 @@ class DocumentDeleteView(KanisaDeleteView, DocumentBaseView):
     def get_kanisa_title(self):
         return 'Delete Document'
 
+    def get_cancel_url(self):
+        return reverse('kanisa_manage_documents')
+
     def get_success_url(self):
         message = '%s deleted.' % self.object
         messages.success(self.request, message)
