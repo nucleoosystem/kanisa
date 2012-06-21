@@ -10,11 +10,15 @@
 
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
+* Add a "do not auto-schedule" flag for RegularEvents, for RegularEvents that
+  are less than regular.
 
 # Sermons
 
 * Group sermons into series
 * Management structure - separate blocks of sermons for each series
+* Allow multiple podcasts (select which sermons go where at the sermon series
+  layer - allow series to go to multiple podcasts)
 
 # Pages
 
