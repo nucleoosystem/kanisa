@@ -55,6 +55,7 @@ class RegularEvent(models.Model):
 
             instance = self.scheduledevent_set.\
                 create(date=single_date,
+                       title=self.title,
                        start_time=self.start_time,
                        duration=self.duration)
 
