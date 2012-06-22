@@ -23,3 +23,7 @@ body {
 .kanisa_diary td div.notlast {
     padding-bottom: 3px;
 }
+
+.thumbnail .caption p.details {
+    min-height: 2.5em;
+}
