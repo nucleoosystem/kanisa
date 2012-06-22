@@ -33,6 +33,13 @@
 * Incorporate Twitter feed/Facebook feed into site?
 * Follow us on Twitter/Like us on Facebook buttons?
 
+# User Management
+
+* Allow users to upload photos?
+* Allow admin staff to quickly give permissions (not too granular - based on
+  content types rather than individual create/edit/delete for each).
+* Allow quick membership approval process
+
 # Members' Area
 
 * Service Planning
