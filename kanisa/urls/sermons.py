@@ -1,15 +1,22 @@
 from django.conf.urls import patterns, url
 from django.contrib.admin.views.decorators import staff_member_required as smr
 from kanisa.views.sermons import (SermonIndexView,
+                                  SermonSeriesDetailView,
                                   SermonSeriesCreateView,
                                   SermonSeriesUpdateView,
-                                  SermonSeriesCompleteView)
+                                  SermonSeriesCompleteView,
+                                  SermonCreateView,
+                                  SermonUpdateView)
 
 urlpatterns = patterns('',
                        url(r'^$',
                            smr(SermonIndexView.as_view()),
                            {},
                            'kanisa_manage_sermons'),
+                       url(r'^series/(?P<pk>\d+)$$',
+                           smr(SermonSeriesDetailView.as_view()),
+                           {},
+                           'kanisa_manage_sermons_series_detail'),
                        url(r'^series/create/$',
                            smr(SermonSeriesCreateView.as_view()),
                            {},
@@ -22,4 +29,12 @@ urlpatterns = patterns('',
                            smr(SermonSeriesCompleteView.as_view()),
                            {},
                            'kanisa_manage_sermons_series_complete'),
+                       url(r'^sermon/create/$',
+                           smr(SermonCreateView.as_view()),
+                           {},
+                           'kanisa_manage_sermons_individual_create'),
+                       url(r'^sermon/edit/(?P<pk>\d+)$',
+                           smr(SermonUpdateView.as_view()),
+                           {},
+                           'kanisa_manage_sermons_individual_update'),
                        )

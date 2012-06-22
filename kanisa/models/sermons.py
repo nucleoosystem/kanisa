@@ -33,3 +33,26 @@ class SermonSeries(models.Model):
         app_label = 'kanisa'
         ordering = ('-active', )
         verbose_name_plural = 'Sermon series'
+
+
+class Sermon(models.Model):
+    title = models.CharField(max_length=60,
+                             help_text='The title of the sermon.')
+    date = models.DateField(help_text='The date the sermon was preached.')
+    series = models.ForeignKey(SermonSeries,
+                               blank=True, null=True,
+                               help_text=('What series the sermon is from, if '
+                                          'any.'))
+    passage = BiblePassageField(blank=True, null=True)
+    details = models.TextField(blank=True, null=True,
+                               help_text=('e.g. What themes does the sermon '
+                                          'cover?'))
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        # Need this because I've split up models.py into multiple
+        # files.
+        app_label = 'kanisa'
+        ordering = ('-date', )

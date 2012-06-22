@@ -12,7 +12,7 @@
         {% endthumbnail %}
 
         <div class="carousel-caption">
-          <h4><a href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
+          <h4><a href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}" title="View details">
               {{ sermonseries.title }}
               <span class="subtitle">
                 ({{ sermonseries.num_sermons }} sermon{{ sermonseries.num_sermons|pluralize }})

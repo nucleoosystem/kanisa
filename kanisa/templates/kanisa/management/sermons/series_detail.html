@@ -1,0 +1,59 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+{% load thumbnail %}
+
+{% block content %}
+<p><a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-large btn-primary">Upload a Sermon &raquo;</a></p>
+<hr />
+<div class="row">
+  <div class="span7">
+  {% if object.details %}
+  <blockquote>
+  <p>{{ object.details }}</p>
+  </blockquote>
+  {% endif %}
+  {% with object.sermon_set.all as sermons %}
+  {% if sermons %}
+    <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Passage</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sermon in sermons %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_manage_sermons_individual_update' sermon.pk %}">
+          {{ sermon.title }}
+        </a>
+      </td>
+      <td>
+          {{ sermon.date|date:"jS F Y"}}
+      </td>
+      <td>
+        {{ sermon.passage }}
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-warning">
+    There are no sermons in this series.
+    </div>
+  {% endif %}
+  {% endwith %}
+  </div>
+  <div class="span3">
+    <div class="thumbnail">
+    {% thumbnail object.image "260x180" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+    {% endthumbnail %}
+    </div>
+  </div>
+</div>
+{% endblock %}

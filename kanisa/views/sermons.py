@@ -2,10 +2,10 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from kanisa.forms import SermonSeriesForm
-from kanisa.models import SermonSeries
+from kanisa.forms import SermonSeriesForm, SermonForm
+from kanisa.models import SermonSeries, Sermon
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView)
+                                  KanisaListView, KanisaDetailView)
 
 
 class SermonBaseView:
@@ -24,6 +24,17 @@ class SermonIndexView(KanisaListView, SermonBaseView):
     template_name = 'kanisa/management/sermons/index.html'
     kanisa_title = 'Manage Sermons'
     kanisa_is_root_view = True
+
+
+class SermonSeriesDetailView(KanisaDetailView, SermonBaseView):
+    model = SermonSeries
+    template_name = 'kanisa/management/sermons/series_detail.html'
+
+    def get_kanisa_title(self):
+        return unicode(self.object)
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_sermons')
 
 
 class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
@@ -57,3 +68,30 @@ class SermonSeriesCompleteView(RedirectView):
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_sermons')
+
+
+class SermonCreateView(KanisaCreateView, SermonBaseView):
+    form_class = SermonForm
+    kanisa_title = 'Upload a Sermon'
+
+    def get_success_url(self):
+        if self.object.series:
+            return reverse('kanisa_manage_sermons_series_detail',
+                           args=[self.object.series.pk, ])
+        return reverse('kanisa_manage_sermons')
+
+
+class SermonUpdateView(KanisaUpdateView, SermonBaseView):
+    form_class = SermonForm
+    model = Sermon
+
+    def get_kanisa_title(self):
+        return 'Edit Sermon: %s' % unicode(self.object)
+
+    def get_success_url(self):
+        if self.object.series:
+            return reverse('kanisa_manage_sermons_series_detail',
+                           args=[self.object.series.pk, ])
+        return reverse('kanisa_manage_sermons')
+
+
