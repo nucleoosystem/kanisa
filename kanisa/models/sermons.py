@@ -32,3 +32,4 @@ class SermonSeries(models.Model):
         # files.
         app_label = 'kanisa'
         ordering = ('-active', )
+        verbose_name_plural = 'Sermon series'
