@@ -21,3 +21,17 @@ class SermonTest(TestCase):
         self.assertEqual(unicode(series[0]), 'The Psalms')
         self.assertEqual(unicode(series[1]), 'All Sorts of Things')
         self.assertEqual(unicode(series[2]), 'The Beatitudes')
+
+    def testNumSermons(self):
+        series1 = SermonSeries.objects.get(pk=1)
+        series2 = SermonSeries.objects.get(pk=2)
+        series3 = SermonSeries.objects.get(pk=3)
+
+        with self.assertNumQueries(0):
+            self.assertEqual(series1.num_sermons(), 3)
+
+        with self.assertNumQueries(0):
+            self.assertEqual(series2.num_sermons(), 0)
+
+        with self.assertNumQueries(0):
+            self.assertEqual(series2.num_sermons(), 0)

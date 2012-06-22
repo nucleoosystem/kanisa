@@ -1,7 +1,14 @@
 from django.db import models
+from django.db.models import Count
 from sorl.thumbnail import ImageField
 
 from kanisa.models.bible.db_field import BiblePassageField
+
+
+class SermonSeriesManager(models.Manager):
+    def get_query_set(self):
+        qs = super(SermonSeriesManager, self).get_query_set()
+        return qs.annotate(the_num_sermons=Count('sermon'))
 
 
 class SermonSeries(models.Model):
@@ -16,16 +23,13 @@ class SermonSeries(models.Model):
                                  help_text='Is this series currently ongoing?')
     passage = BiblePassageField(blank=True, null=True)
 
+    objects = SermonSeriesManager()
+
     def __unicode__(self):
         return self.title
 
     def num_sermons(self):
-        # This will need implementing once I've got a sermon model - will
-        # need to make sure this doesn't result in a query.
-        if not hasattr(self, 'fake_num_sermons'):
-            import random
-            self.fake_num_sermons = random.randint(0, 10)
-        return self.fake_num_sermons
+        return self.the_num_sermons
 
     class Meta:
         # Need this because I've split up models.py into multiple

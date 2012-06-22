@@ -29,5 +29,35 @@
       "image": "kanisa/sermons/theshard.jpg",
       "title": "All Sorts of Things"
     }
+  },
+  {
+    "pk": 1,
+    "model": "kanisa.sermon",
+    "fields": {
+      "title": "Something about Psalm 1",
+      "date": "2012-04-29",
+      "series": 1,
+      "passage": "Psalm 1"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "kanisa.sermon",
+    "fields": {
+      "title": "Something about Psalm 2",
+      "date": "2012-05-6",
+      "series": 1,
+      "passage": "Psalm 2"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "kanisa.sermon",
+    "fields": {
+      "title": "Something about Psalm 3-4",
+      "date": "2012-05-13",
+      "series": 1,
+      "passage": "Psalm 3-4"
+    }
   }
 ]
