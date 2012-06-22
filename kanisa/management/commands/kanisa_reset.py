@@ -26,13 +26,11 @@ class Command(BaseCommand):
         self.load_fixtures()
 
     def load_fixtures(self):
-        call_command('loaddata', 'banners.json')
-        self.copy_media('banners')
-
-        call_command('loaddata', 'diary.json')
-
-        call_command('loaddata', 'sermons.json')
-        self.copy_media('sermons')
+        for subapp in ['banners', 'diary', 'sermons', ]:
+            print "Loading data for %s." % subapp
+            call_command('loaddata', '%s.json' % subapp)
+            self.copy_media(subapp)
+            print ""
 
     def copy_media(self, destination):
         kanisa_directory = os.path.dirname(kanisa.models.__file__)
