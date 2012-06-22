@@ -1,0 +1,33 @@
+[
+  {
+    "pk": 1,
+    "model": "kanisa.sermonseries",
+    "fields": {
+      "active": true,
+      "image": "kanisa/sermons/greenflowers.jpg",
+      "passage": "Psalms",
+      "details": "Help, help, I'm being repressed! You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person!",
+      "title": "The Psalms"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "kanisa.sermonseries",
+    "fields": {
+      "active": false,
+      "image": "kanisa/sermons/church.jpg",
+      "passage": "John 21",
+      "details": "",
+      "title": "The Beatitudes"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "kanisa.sermonseries",
+    "fields": {
+      "active": true,
+      "image": "kanisa/sermons/theshard.jpg",
+      "title": "All Sorts of Things"
+    }
+  }
+]

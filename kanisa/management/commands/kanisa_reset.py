@@ -24,13 +24,17 @@ class Command(BaseCommand):
 
         call_command('reset', 'kanisa', **options)
         self.load_fixtures()
-        self.copy_media()
 
     def load_fixtures(self):
         call_command('loaddata', 'banners.json')
+        self.copy_media('banners')
+
         call_command('loaddata', 'diary.json')
 
-    def copy_media(self):
+        call_command('loaddata', 'sermons.json')
+        self.copy_media('sermons')
+
+    def copy_media(self, destination):
         kanisa_directory = os.path.dirname(kanisa.models.__file__)
         kanisa_fixtures_media = os.path.join(kanisa_directory,
                                              '../',
@@ -40,7 +44,7 @@ class Command(BaseCommand):
 
         destination_directory = os.path.join(settings.MEDIA_ROOT,
                                              "kanisa",
-                                             "banners")
+                                             destination)
 
         if not os.path.exists(destination_directory):
             os.makedirs(destination_directory)
