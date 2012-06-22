@@ -74,6 +74,15 @@ class SermonCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonForm
     kanisa_title = 'Upload a Sermon'
 
+    def get_initial(self):
+        initial = super(SermonCreateView, self).get_initial()
+        initial = initial.copy()
+
+        if 'series' in self.request.GET:
+            initial['series'] = self.request.GET['series']
+
+        return initial
+
     def get_success_url(self):
         if self.object.series:
             return reverse('kanisa_manage_sermons_series_detail',

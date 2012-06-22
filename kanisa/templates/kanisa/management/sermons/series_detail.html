@@ -4,7 +4,7 @@
 {% load thumbnail %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-large btn-primary">Upload a Sermon &raquo;</a></p>
+<p><a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-large btn-primary">Add a sermon to this series &raquo;</a></p>
 <hr />
 <div class="row">
   <div class="span7">
