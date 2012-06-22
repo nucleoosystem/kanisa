@@ -1,0 +1,10 @@
+{% load url from future %}
+
+<form class="well form-search" method="post" action="{% url 'kanisa_search_documents' %}">
+  {% csrf_token %}
+  <input type="text" class="input-medium search-query" name="query">
+  <button type="submit" class="btn">
+    <i class="icon-search"></i>
+    Search Documents
+  </button>
+</form>

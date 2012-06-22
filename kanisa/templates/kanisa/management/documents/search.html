@@ -1,0 +1,58 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+<p><a href="{% url 'kanisa_manage_documents_create' %}" class="btn btn-large btn-primary">Upload a Document &raquo;</a></p>
+
+<hr />
+
+{% include 'kanisa/management/documents/_document_search.html' %}
+
+{% if results %}
+
+<div class="alert alert-info">
+Displaying {{ results|length }} document{{ results|length|pluralize }} for the search term <em>{{ search_term }}</em>.
+</div>
+
+<table class="table table-striped kanisa_diary">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Uploaded</th>
+      <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for document in results %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_manage_documents_update' document.pk %}">
+          {{ document.object.title }}
+        </a>
+      </td>
+      <td>
+        <abbr title="{{ document.object.created|date:"r"}}">
+          {{ document.object.created|timesince }} ago
+        </abbr>
+      </td>
+      <td>
+        <abbr title="{{ document.modified|date:"r"}}">
+          {{ document.object.modified|timesince }} ago
+        </abbr>
+      </td>
+      <td>
+      <a class="btn btn-danger btn-mini" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% else %}
+<div class="alert alert-warning">
+There are no documents to display for the search term <em>{{ search_term }}</em>.
+</div>
+{% endif %}
+
+{% endblock %}

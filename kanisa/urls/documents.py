@@ -3,13 +3,18 @@ from django.contrib.admin.views.decorators import staff_member_required as smr
 from kanisa.views.documents import (DocumentIndexView,
                                     DocumentCreateView,
                                     DocumentUpdateView,
-                                    DocumentDeleteView)
+                                    DocumentDeleteView,
+                                    DocumentSearchView)
 
 urlpatterns = patterns('',
                        url(r'^$',
                            smr(DocumentIndexView.as_view()),
                            {},
                            'kanisa_manage_documents'),
+                       url(r'^search/$',
+                           smr(DocumentSearchView.as_view()),
+                           {},
+                           'kanisa_search_documents'),
                        url(r'^create/$',
                            smr(DocumentCreateView.as_view()),
                            {},

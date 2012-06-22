@@ -8,6 +8,8 @@
 <hr />
 
 {% if document_list %}
+
+{% include 'kanisa/management/documents/_document_search.html' %}
 {% include 'kanisa/management/documents/_document_table.html' %}
 {% else %}
 <div class="alert alert-warning">

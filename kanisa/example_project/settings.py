@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'crispy_forms',
+    'haystack',
     'kanisa',
 )
 
@@ -57,3 +58,7 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptPasswordHasher',
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher', )
+
+HAYSTACK_SITECONF = 'kanisadev.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, "whoosh_index")

@@ -1,9 +1,14 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from haystack.query import SearchQuerySet
 from kanisa.forms import DocumentForm
 from kanisa.models import Document
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaDeleteView)
+                                  KanisaListView, KanisaDeleteView,
+                                  KanisaTemplateView)
 
 
 class DocumentBaseView:
@@ -22,6 +27,34 @@ class DocumentIndexView(KanisaListView, DocumentBaseView):
     template_name = 'kanisa/management/documents/index.html'
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
+
+    def get_context_data(self, **kwargs):
+        context = super(DocumentIndexView,
+                        self).get_context_data(**kwargs)
+        return context
+
+
+class DocumentSearchView(KanisaTemplateView, DocumentBaseView):
+    kanisa_title = 'Search Documents'
+    template_name = 'kanisa/management/documents/search.html'
+
+    def post(self, request, *args, **kwargs):
+        query = request.POST.get('query', None)
+
+        if not query:
+            messages.warning(self.request, 'No search query entered.')
+            return HttpResponseRedirect(reverse('kanisa_manage_documents'))
+
+        matching = SearchQuerySet().models(Document).\
+            filter(content=request.POST['query'])
+
+        context = self.get_context_data(**kwargs)
+        context['results'] = matching
+        context['search_term'] = query
+
+        return render_to_response(self.template_name,
+                                  context,
+                                  context_instance=RequestContext(request))
 
 
 class DocumentCreateView(KanisaCreateView, DocumentBaseView):

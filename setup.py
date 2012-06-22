@@ -17,5 +17,7 @@ setup(
         "django",
         "sorl-thumbnail==11.12",
         "django-crispy-forms==1.1.4",
+        "django-haystack==1.2.7",
+        "Whoosh==2.4.1",
     ],
 )
