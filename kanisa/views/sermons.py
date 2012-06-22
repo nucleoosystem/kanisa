@@ -93,5 +93,3 @@ class SermonUpdateView(KanisaUpdateView, SermonBaseView):
             return reverse('kanisa_manage_sermons_series_detail',
                            args=[self.object.series.pk, ])
         return reverse('kanisa_manage_sermons')
-
-

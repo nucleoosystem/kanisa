@@ -35,7 +35,7 @@ class KanisaTemplateView(TemplateView):
 
         return context
 
-        
+
 class KanisaDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(KanisaDetailView,
