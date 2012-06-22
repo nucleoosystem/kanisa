@@ -6,8 +6,16 @@
     <h3>{{ banner.headline }}</h3>
   </div>
   <div class="modal-body">
-    {% thumbnail banner.image "770x400" crop="center" as im %}
-    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-    {% endthumbnail %}
+    <div style="height: 400px; width: 770px; position: relative">
+        {% thumbnail banner.image "770x400" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+        {% endthumbnail %}
+        <div class="carousel-caption">
+          <h4>{{ banner.headline }}</h4>
+          {% if banner.contents %}
+          <p>{{ banner.contents }}</p>
+          {% endif %}
+        </div>
+    </div>
   </div>
 </div>
