@@ -18,7 +18,11 @@
         <p class="details">This banner will remain active <strong>forever</strong>.</p>
         {% endif %}
         {% else %}
-        <p class="details">This banner is <strong>inactive</strong>.</p>
+            {% if banner.expired %}
+            <p class="details">This banner is <strong>retired</strong>.</p>
+            {% else %}
+            <p class="details">This banner is <strong>not yet active</strong> (it will become active on <strong>{{ banner.publish_from }}</strong>).</p>
+            {% endif %}
         {% endif %}
 
         <p>
@@ -27,7 +31,7 @@
             Edit
           </a>
           {% if banner.active %}
-          <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}">
+          <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}" title="Retiring a banner just stops it showing up to your site's users, it does not delete it permanently">
             <i class="icon-trash icon-white"></i>
             Retire
           </a>
