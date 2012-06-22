@@ -1,0 +1,36 @@
+{% load url from future %}
+
+<table class="table table-striped kanisa_diary">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Uploaded</th>
+      <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for document in document_list %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_manage_documents_update' document.pk %}">
+          {{ document.title }}
+        </a>
+      </td>
+      <td>
+        <abbr title="{{ document.created|date:"r"}}">
+          {{ document.created|timesince }} ago
+        </abbr>
+      </td>
+      <td>
+        <abbr title="{{ document.modified|date:"r"}}">
+          {{ document.modified|timesince }} ago
+        </abbr>
+      </td>
+      <td>
+      <a class="btn btn-danger btn-mini" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
