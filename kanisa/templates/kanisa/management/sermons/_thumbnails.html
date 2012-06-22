@@ -25,9 +25,9 @@
       <div class="caption">
 
       <p>
-        <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
-          <i class="icon-edit"></i>
-          Edit
+        <a class="btn" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
+          <i class="icon-eye-open"></i>
+          View
         </a>
         {% if sermonseries.active %}
         <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">

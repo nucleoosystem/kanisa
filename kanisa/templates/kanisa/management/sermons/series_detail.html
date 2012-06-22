@@ -13,6 +13,23 @@
   <p>{{ object.details }}</p>
   </blockquote>
   {% endif %}
+
+  <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
+    <i class="icon-edit"></i>
+    Edit this series
+  </a>
+
+  {% if object.active %}
+  <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">
+    <i class="icon-ok"></i>
+    Mark this series as complete
+  </a>
+  {% endif %}
+
+  <hr />
+
+  <h2>Sermons in this Series</h2>
+
   {% with object.sermon_set.all as sermons %}
   {% if sermons %}
     <table class="table table-striped">
