@@ -18,20 +18,12 @@
                 ({{ sermonseries.num_sermons }} sermon{{ sermonseries.num_sermons|pluralize }})
               </span>
           </a></h4>
+          {% if sermonseries.passage %}<p>A series on {{ sermonseries.passage }}.</p>{% endif %}
         </div>
       </div>
 
       <div class="caption">
-      <p class="details">This series
-      {% if sermonseries.passage %}
-      on <strong>{{ sermonseries.passage }}</strong>
-      {% endif %}
-      is
-      {% if sermonseries.active %}
-      currently <strong>ongoing</strong>{% else %}
-      <strong>complete</strong>
-      {% endif %}.</p>
-      
+
       <p>
         <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
           <i class="icon-edit"></i>
