@@ -25,7 +25,6 @@ body {
 }
 
 .thumbnail .caption p.details {
-    margin-top: 0.5em;
     min-height: 3em;
     line-height: 1.5em;
 }
