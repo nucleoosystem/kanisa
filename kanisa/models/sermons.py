@@ -18,6 +18,14 @@ class SermonSeries(models.Model):
 
     def __unicode__(self):
         return self.title
+        
+    def num_sermons(self):
+        # This will need implementing once I've got a sermon model - will
+        # need to make sure this doesn't result in a query.
+        if not hasattr(self, 'fake_num_sermons'):
+            import random
+            self.fake_num_sermons = random.randint(0, 10)
+        return self.fake_num_sermons
 
     class Meta:
         # Need this because I've split up models.py into multiple
