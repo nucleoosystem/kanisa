@@ -59,5 +59,14 @@
       "series": 1,
       "passage": "Psalm 3-4"
     }
+  },
+  {
+    "pk": 4,
+    "model": "kanisa.sermon",
+    "fields": {
+      "title": "Not in a Series",
+      "date": "2012-05-06",
+      "passage": "Genesis"
+    }
   }
 ]
