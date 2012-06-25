@@ -39,6 +39,20 @@ class SermonSeries(models.Model):
         verbose_name_plural = 'Sermon series'
 
 
+class SermonSpeaker(models.Model):
+    forename = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return '%s %s' % (self.forename, self.surname)
+
+    class Meta:
+        # Need this because I've split up models.py into multiple
+        # files.
+        app_label = 'kanisa'
+        ordering = ('surname', 'forename', )
+
+
 class Sermon(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
@@ -47,6 +61,7 @@ class Sermon(models.Model):
                                blank=True, null=True,
                                help_text=('What series the sermon is from, if '
                                           'any.'))
+    speaker = models.ForeignKey(SermonSpeaker)
     passage = BiblePassageField(blank=True, null=True)
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '

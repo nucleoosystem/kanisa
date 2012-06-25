@@ -6,6 +6,7 @@
         <th>Title</th>
         <th>Date</th>
         <th>Passage</th>
+        <th>Speaker</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,9 @@
             </td>
             <td>
                 {{ sermon.passage }}
+            </td>
+            <td>
+                {{ sermon.speaker }}
             </td>
         </tr>
     {% endfor %}

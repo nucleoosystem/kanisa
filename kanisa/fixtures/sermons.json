@@ -32,11 +32,28 @@
   },
   {
     "pk": 1,
+    "model": "kanisa.sermonspeaker",
+    "fields": {
+      "forename": "Bugs",
+      "surname": "Bunny"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "kanisa.sermonspeaker",
+    "fields": {
+      "forename": "Road",
+      "surname": "Runner"
+    }
+  },
+  {
+    "pk": 1,
     "model": "kanisa.sermon",
     "fields": {
       "title": "Something about Psalm 1",
       "date": "2012-04-29",
       "series": 1,
+      "speaker": 1,
       "passage": "Psalm 1"
     }
   },
@@ -47,6 +64,7 @@
       "title": "Something about Psalm 2",
       "date": "2012-05-6",
       "series": 1,
+      "speaker": 2,
       "passage": "Psalm 2"
     }
   },
@@ -57,6 +75,7 @@
       "title": "Something about Psalm 3-4",
       "date": "2012-05-13",
       "series": 1,
+      "speaker": 2,
       "passage": "Psalm 3-4"
     }
   },
@@ -66,6 +85,7 @@
     "fields": {
       "title": "Not in a Series",
       "date": "2012-05-06",
+      "speaker": 1,
       "passage": "Genesis"
     }
   }
