@@ -1,0 +1,28 @@
+{% load url from future %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Passage</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sermon in sermons %}
+        <tr>
+            <td>
+                <a href="{% url 'kanisa_manage_sermons_individual_update' sermon.pk %}">
+                {{ sermon.title }}
+                </a>
+            </td>
+            <td>
+                {{ sermon.date|date:"jS F Y"}}
+            </td>
+            <td>
+                {{ sermon.passage }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
