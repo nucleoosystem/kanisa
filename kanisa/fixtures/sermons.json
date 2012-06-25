@@ -35,7 +35,8 @@
     "model": "kanisa.sermonspeaker",
     "fields": {
       "forename": "Bugs",
-      "surname": "Bunny"
+      "surname": "Bunny",
+      "image": "kanisa/sermons/greenflowers.jpg"
     }
   },
   {
@@ -43,7 +44,8 @@
     "model": "kanisa.sermonspeaker",
     "fields": {
       "forename": "Road",
-      "surname": "Runner"
+      "surname": "Runner",
+      "image": "kanisa/sermons/church.jpg"
     }
   },
   {

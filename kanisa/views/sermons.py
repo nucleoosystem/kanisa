@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from kanisa.forms import SermonSeriesForm, SermonForm
-from kanisa.models import SermonSeries, Sermon
+from kanisa.forms import SermonSeriesForm, SermonForm, SermonSpeakerForm
+from kanisa.models import SermonSeries, Sermon, SermonSpeaker
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaDetailView)
 
@@ -109,3 +109,31 @@ class SermonUpdateView(KanisaUpdateView, SermonBaseView):
             return reverse('kanisa_manage_sermons_series_detail',
                            args=[self.object.series.pk, ])
         return reverse('kanisa_manage_sermons')
+
+
+class SermonSpeakerIndexView(KanisaListView, SermonBaseView):
+    model = SermonSpeaker
+    queryset = SermonSpeaker.objects.all()
+
+    template_name = 'kanisa/management/sermons/speakers.html'
+    kanisa_title = 'Manage Sermon Speakers'
+
+
+        
+class SermonSpeakerCreateView(KanisaCreateView, SermonBaseView):
+    form_class = SermonSpeakerForm
+    kanisa_title = 'Add a Speaker'
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_sermons_speaker')
+
+
+class SermonSpeakerUpdateView(KanisaUpdateView, SermonBaseView):
+    form_class = SermonSpeakerForm
+    model = SermonSpeaker
+
+    def get_kanisa_title(self):
+        return 'Edit Speaker: %s' % unicode(self.object)
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_sermons_speaker')

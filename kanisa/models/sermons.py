@@ -14,7 +14,7 @@ class SermonSeriesManager(models.Manager):
 class SermonSeries(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the series.')
-    image = ImageField(upload_to='kanisa/sermons/',
+    image = ImageField(upload_to='kanisa/sermons/series/',
                        help_text=u'Must be at least 400px by 300px.')
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the series '
@@ -42,6 +42,8 @@ class SermonSeries(models.Model):
 class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
+    image = ImageField(upload_to='kanisa/sermons/speakers/',
+                       help_text=u'Must be at least 400px by 300px.')
 
     def __unicode__(self):
         return '%s %s' % (self.forename, self.surname)
