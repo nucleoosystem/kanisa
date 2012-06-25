@@ -119,7 +119,6 @@ class SermonSpeakerIndexView(KanisaListView, SermonBaseView):
     kanisa_title = 'Manage Sermon Speakers'
 
 
-        
 class SermonSpeakerCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSpeakerForm
     kanisa_title = 'Add a Speaker'
