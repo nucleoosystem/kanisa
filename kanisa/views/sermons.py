@@ -25,6 +25,13 @@ class SermonIndexView(KanisaListView, SermonBaseView):
     kanisa_title = 'Manage Sermons'
     kanisa_is_root_view = True
 
+    def get_context_data(self, **kwargs):
+        context = super(SermonIndexView,
+                        self).get_context_data(**kwargs)
+        context['standalone'] = Sermon.objects.filter(series__isnull=True)
+
+        return context
+
 
 class SermonSeriesDetailView(KanisaDetailView, SermonBaseView):
     model = SermonSeries

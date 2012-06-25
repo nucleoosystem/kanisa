@@ -3,10 +3,21 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_sermons_series_create' %}" class="btn btn-large btn-primary">Create a new series &raquo;</a></p>
+<p>
+    <a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-large btn-primary">Add a new sermon &raquo;</a>
+    <a href="{% url 'kanisa_manage_sermons_series_create' %}" class="btn btn-large">Create a new series &raquo;</a>
+</p>
 
 <hr />
 
 {% include 'kanisa/management/sermons/_thumbnails.html' %}
+
+{% if standalone %}
+<hr />
+<h2>Standalone Sermons</h2>
+<p class="alert alert-info">Sermons in this section are not part of a series.</p>
+{% include 'kanisa/management/sermons/_sermon_table.html' with sermons=standalone%}
+
+{% endif %}
 
 {% endblock %}
