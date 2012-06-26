@@ -73,6 +73,11 @@ class Sermon(models.Model):
                                           'any.'))
     speaker = models.ForeignKey(SermonSpeaker)
     passage = BiblePassageField(blank=True, null=True)
+    mp3 = models.FileField(blank=True,
+                           null=True,
+                           upload_to='kanisa/sermons/mp3s/%Y/',
+                           max_length=200,
+                           verbose_name='MP3')
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '
                                           'cover?'))

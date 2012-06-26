@@ -1,8 +1,12 @@
 from django import forms
 from django.forms import ModelForm
+from django.forms.util import ErrorList
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from mutagen.mp3 import MP3
+from mutagen.easyid3 import EasyID3
+
 from kanisa.models import (Banner,
                            RegularEvent, ScheduledEvent,
                            Document,
@@ -133,6 +137,32 @@ class SermonForm(KanisaBaseForm):
 
     class Meta:
         model = Sermon
+
+    def clean(self):
+        super(SermonForm, self).clean()
+        cleaned_data = self.cleaned_data
+
+        if u'mp3' in self.files:
+            if hasattr(self.files['mp3'], 'temporary_file_path'):
+                audio = MP3(self.files['mp3'].temporary_file_path())
+            else:
+                # You probably need to set FILE_UPLOAD_HANDLERS to
+                # django.core.files.uploadhandler.TemporaryFileUploadHandler
+                audio = None
+
+            if not audio or not audio.info or audio.info.sketchy:
+                errors = ErrorList([u'Please upload a valid MP3.'])
+                self._errors["mp3"] = errors
+                del cleaned_data["mp3"]
+            else:
+                # Other valid keys include 'albumartist', 'date', 'album',
+                # 'organization', 'artist'
+                audio = EasyID3(self.files['mp3'].temporary_file_path())
+                audio['title'] = cleaned_data['title']
+                audio['genre'] = 'Speech'
+                audio.save()
+
+        return cleaned_data
 
 
 class DocumentForm(KanisaBaseForm):
