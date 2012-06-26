@@ -18,7 +18,12 @@
             {% endthumbnail %}
 
             <div class="carousel-caption">
-            <h4>{{ speaker }}</h4>
+            <h4>
+              {{ speaker }}
+              <span class="subtitle">
+                ({{ speaker.num_sermons }} sermon{{ speaker.num_sermons|pluralize }})
+              </span>
+            </h4>
             </div>
             </a>
             </div>

@@ -113,6 +113,7 @@ class SermonUpdateView(KanisaUpdateView, SermonBaseView):
 
 class SermonSpeakerIndexView(KanisaListView, SermonBaseView):
     model = SermonSpeaker
+    queryset = SermonSpeaker.objects.all().order_by('-num_sermons')
 
     template_name = 'kanisa/management/sermons/speakers.html'
     kanisa_title = 'Manage Sermon Speakers'

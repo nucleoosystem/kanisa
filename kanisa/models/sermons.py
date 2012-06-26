@@ -39,11 +39,19 @@ class SermonSeries(models.Model):
         verbose_name_plural = 'Sermon series'
 
 
+class SpeakerManager(models.Manager):
+    def get_query_set(self):
+        qs = super(SpeakerManager, self).get_query_set()
+        return qs.annotate(num_sermons=Count('sermon'))
+
+
 class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
                        help_text=u'Must be at least 400px by 300px.')
+
+    objects = SpeakerManager()
 
     def __unicode__(self):
         return '%s %s' % (self.forename, self.surname)
