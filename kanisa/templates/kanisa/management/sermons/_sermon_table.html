@@ -24,7 +24,9 @@
                 {{ sermon.passage }}
             </td>
             <td>
+                <a href="{% url 'kanisa_manage_sermons_speaker_update' sermon.speaker.pk %}" title="Update this speaker's details">
                 {{ sermon.speaker }}
+                </a>
             </td>
         </tr>
     {% endfor %}
