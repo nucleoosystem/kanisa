@@ -36,3 +36,7 @@ h4 .subtitle {
 label.requiredField {
     font-weight: bold;
 }
+
+.biblepassageresponse {
+    margin-left: 1em;
+}
