@@ -20,8 +20,6 @@
 
 # Sermons
 
-* Group sermons into series
-* Management structure - separate blocks of sermons for each series
 * Allow multiple podcasts (select which sermons go where at the sermon series
   layer - allow series to go to multiple podcasts)
 
