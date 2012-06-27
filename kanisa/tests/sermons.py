@@ -1,6 +1,6 @@
 from django.core.files.storage import default_storage
 from django.test import TestCase
-from kanisa.models import SermonSeries
+from kanisa.models import SermonSeries, Sermon
 import os
 
 
@@ -36,3 +36,9 @@ class SermonTest(TestCase):
         with self.assertNumQueries(0):
             self.assertEqual([s.num_sermons() for s in series],
                              [3, 0, 0])
+
+    def testGetSermonSpeakerIsFree(self):
+        sermon = Sermon.objects.get(pk=1)
+
+        with self.assertNumQueries(0):
+            self.assertEqual(unicode(sermon.speaker), 'Bugs Bunny')

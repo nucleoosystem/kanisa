@@ -66,6 +66,12 @@ class SermonSpeaker(models.Model):
         ordering = ('surname', 'forename', )
 
 
+class SermonManager(models.Manager):
+    def get_query_set(self):
+        qs = super(SermonManager, self).get_query_set()
+        return qs.select_related(depth=1)
+
+
 class Sermon(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
@@ -84,6 +90,8 @@ class Sermon(models.Model):
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '
                                           'cover?'))
+
+    objects = SermonManager()
 
     def __unicode__(self):
         return self.title
