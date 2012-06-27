@@ -4,7 +4,9 @@
 
 {% block content %}
 {% if events_to_schedule %}
-<p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}?date={{ monday|date:"Ymd" }}" class="btn btn-large btn-primary">Schedule this week's regular events &raquo;</a></p>
+<p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}?date={{ monday|date:"Ymd" }}" class="btn btn-large btn-primary" id="schedule-weeks-events">
+    Schedule this week's regular events &raquo;
+</a></p>
 {% endif %}
 
 <hr />
@@ -28,7 +30,7 @@
       </td>
       <td>
       {% for e in entry.regular_events %}
-      <div{% if not forloop.last %} class="notlast"{% endif %}>
+      <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
         {{ e.start_time }}
       </div>
       {% empty %}
@@ -37,29 +39,31 @@
       </td>
       <td>
       {% for e in entry.regular_events %}
-      <div{% if not forloop.last %} class="notlast"{% endif %}>
+      <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
         <a href="{% url 'kanisa_manage_diary_regular_update' e.pk %}">{{ e }}</a>
       </div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.regular_events %}
-        <div{% if not forloop.last %} class="notlast"{% endif %}><a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success">Schedule</a></div>
+        <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
+            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success">Schedule</a>
+        </div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-      <div{% if not forloop.last %} class="notlast"{% endif %}>{{ e.start_time }}</div>
+      <div class="{% if not forloop.last %} notlast{% endif %}">{{ e.start_time }}</div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-      <div{% if not forloop.last %} class="notlast"{% endif %}><a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a></div>
+      <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a></div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-        <div{% if not forloop.last %} class="notlast"{% endif %}><a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger">Cancel</a></div>
+        <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger">Cancel</a></div>
       {% endfor %}
       </td>
       <td>

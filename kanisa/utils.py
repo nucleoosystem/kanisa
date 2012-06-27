@@ -72,7 +72,7 @@ class WeekSchedule(object):
                                        scheduled_events)
             self.calendar_entries.append(day_schedule)
 
-            if day_schedule.regular_events:
+            if [s for s in day_schedule.regular_events if s.autoschedule]:
                 self.events_to_schedule = True
 
 

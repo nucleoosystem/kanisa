@@ -15,10 +15,7 @@
   already ScheduledEvents is actually true).
 * Make it possible to create a RegularEvent from a ScheduledEvent (for when
   you've created an event once, and then realise it'll happen regularly).
-* On mouseover of the "schedule this week's events, fade out regular events
-  that would not be auto-scheduled (i.e. those with auto-schedule turned
-  off).
-
+  
 # Sermons
 
 * Allow multiple podcasts (select which sermons go where at the sermon series
