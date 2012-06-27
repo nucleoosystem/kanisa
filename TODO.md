@@ -15,6 +15,7 @@
   already ScheduledEvents is actually true).
 * Make it possible to create a RegularEvent from a ScheduledEvent (for when
   you've created an event once, and then realise it'll happen regularly).
+* Allow creating RegularEvents on timetables other than day x of week.
   
 # Sermons
 
