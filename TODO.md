@@ -21,8 +21,6 @@
 
 * Allow multiple podcasts (select which sermons go where at the sermon series
   layer - allow series to go to multiple podcasts).
-* Asynchronous validation of BiblePassageField, to avoid uploading sermon MP3s
-  and then being told there's an error in your formatting.
 * Lots of reasonable Bible passages get rejected (e.g. Matt 3)
 * Remove hard-coded URL in kanisa/js/biblefield.js
 
