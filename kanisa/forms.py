@@ -155,11 +155,18 @@ class SermonForm(KanisaBaseForm):
                 self._errors["mp3"] = errors
                 del cleaned_data["mp3"]
             else:
-                # Other valid keys include 'albumartist', 'date', 'album',
-                # 'organization', 'artist'
+                # Other valid keys include 'albumartist', 'album',
+                # 'organization'
                 audio = EasyID3(self.files['mp3'].temporary_file_path())
                 audio['title'] = cleaned_data['title']
+                audio['artist'] = unicode(cleaned_data['speaker'])
                 audio['genre'] = 'Speech'
+
+                # Not sure if this date format is right - the MP3
+                # players I've got to test with don't show anything
+                # more than the year.
+                audio['date'] = cleaned_data['date'].strftime('%Y%m%d')
+
                 audio.save()
 
         return cleaned_data
