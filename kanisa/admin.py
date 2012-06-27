@@ -8,7 +8,20 @@ from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
 
 
-class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
+class KanisaBaseAdmin(admin.ModelAdmin):
+    def image_thumb(self, obj):
+        if obj.image:
+            thumb = default.backend.get_thumbnail(obj.image.file,
+                                                  KANISA_ADMIN_THUMBS_SIZE)
+            return u'<img width="%s" height="%s" src="%s" />' % (thumb.width,
+                                                                 thumb.height,
+                                                                 thumb.url)
+        return "No Image"
+    image_thumb.short_description = 'Image'
+    image_thumb.allow_tags = True
+
+
+class BannerAdmin(KanisaBaseAdmin, AdminImageMixin):
     list_display = ('image_thumb',
                     'headline',
                     'url',
@@ -19,18 +32,6 @@ class BannerAdmin(admin.ModelAdmin, AdminImageMixin):
     search_fields = ('headline',
                      'contents',
                      'url', )
-
-    def image_thumb(self, obj):
-        if obj.image:
-            thumb = default.backend.get_thumbnail(obj.image.file,
-                                                  KANISA_ADMIN_THUMBS_SIZE)
-            return u'<img width="%s" height="%s" src="%s" />' % (thumb.width,
-                                                                 thumb.height,
-                                                                 thumb.url)
-        else:
-            return "No Image"
-    image_thumb.short_description = 'Image'
-    image_thumb.allow_tags = True
 
 admin.site.register(Banner, BannerAdmin)
 
@@ -57,16 +58,16 @@ class DocumentAdmin(admin.ModelAdmin):
 admin.site.register(Document, DocumentAdmin)
 
 
-class SermonSeriesAdmin(admin.ModelAdmin):
+class SermonSeriesAdmin(KanisaBaseAdmin):
     search_fields = ('title', 'details', )
-    list_display = ('title', 'passage', )
+    list_display = ('title', 'image_thumb', 'passage', )
 
 admin.site.register(SermonSeries, SermonSeriesAdmin)
 
 
-class SermonSpeakerAdmin(admin.ModelAdmin):
+class SermonSpeakerAdmin(KanisaBaseAdmin):
     search_fields = ('forename', 'surname', )
-    list_display = ('forename', 'surname', )
+    list_display = ('name', 'image_thumb', )
 
 admin.site.register(SermonSpeaker, SermonSpeakerAdmin)
 

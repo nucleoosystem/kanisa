@@ -56,6 +56,9 @@ class SermonSpeaker(models.Model):
     def __unicode__(self):
         return '%s %s' % (self.forename, self.surname)
 
+    def name(self):
+        return unicode(self)
+
     class Meta:
         # Need this because I've split up models.py into multiple
         # files.
