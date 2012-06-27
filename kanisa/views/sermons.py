@@ -40,9 +40,6 @@ class SermonSeriesDetailView(KanisaDetailView, SermonBaseView):
     def get_kanisa_title(self):
         return unicode(self.object)
 
-    def get_success_url(self):
-        return reverse('kanisa_manage_sermons')
-
 
 class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSeriesForm
