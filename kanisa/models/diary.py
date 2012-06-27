@@ -28,6 +28,11 @@ class RegularEvent(models.Model):
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '
                                           'cost? Where is it held?'))
+    autoschedule = models.BooleanField(default=True,
+                                       verbose_name='auto-schedule',
+                                       help_text=('Uncheck this to not '
+                                                  'auto-schedule this event '
+                                                  'when bulk-scheduling.'))
 
     class Meta:
         # Need this because I've split up models.py into multiple

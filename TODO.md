@@ -10,8 +10,6 @@
 
 * Allow multiple schedules for regular events, with different names (e.g.
   Football/Football Training)
-* Add a "do not auto-schedule" flag for RegularEvents, for RegularEvents that
-  are less than regular.
 * Make it impossible for a ScheduledEvent not to have a title (so that the
   warning on the RegularEvent page about changes not being propagated to
   already ScheduledEvents is actually true).
