@@ -45,7 +45,7 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertTemplateUsed(resp,
                                 'kanisa/management/diary/regular_events.html')
         self.assertTrue('regularevent_list' in resp.context)
-        self.assertEqual(len(resp.context['regularevent_list']), 2)
+        self.assertEqual(len(resp.context['regularevent_list']), 4)
 
     def test_diary_schedule_regular_event(self):
         # Check preconditions
@@ -149,7 +149,7 @@ class DiaryManagementViewTest(KanisaViewTestCase):
                          [('I\'ve scheduled this week\'s events for you - '
                            'enjoy!'), ])
 
-        self.assertEqual(len(ScheduledEvent.objects.all()), 2)
+        self.assertEqual(len(ScheduledEvent.objects.all()), 3)
 
         # Trying again should error out
         resp = self.client.get(url, follow=True)
@@ -157,4 +157,4 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
                          [('No events to schedule.'), ])
-        self.assertEqual(len(ScheduledEvent.objects.all()), 2)
+        self.assertEqual(len(ScheduledEvent.objects.all()), 3)

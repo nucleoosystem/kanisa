@@ -20,5 +20,28 @@
       "day": 4,
       "title": "Breakfast Club"
     }
+  },
+  {
+    "pk": 3,
+    "model": "kanisa.regularevent",
+    "fields": {
+      "duration": 120,
+      "details": "",
+      "start_time": "19:00:00",
+      "day": 2,
+      "title": "Youth Club"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "kanisa.regularevent",
+    "fields": {
+      "duration": 90,
+      "details": "",
+      "start_time": "19:30:00",
+      "day": 3,
+      "title": "Church Meeting",
+      "autoschedule": false
+    }
   }
 ]
