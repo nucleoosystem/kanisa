@@ -1,6 +1,6 @@
 django-crispy-forms==1.1.4
+django-haystack==1.2.7
+mutagen==1.20
 PIL==1.1.7
 sorl-thumbnail==11.12
-django-haystack==1.2.7
 Whoosh==2.4.1
-mutagen==1.20
