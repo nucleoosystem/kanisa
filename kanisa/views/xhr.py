@@ -3,11 +3,12 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
+
 @csrf_exempt
 def check_bible_passage(request):
     if not 'passage' in request.POST:
         return HttpResponseBadRequest("Passage not found.")
-        
+
     try:
         passage = to_passage(request.POST['passage'])
         return HttpResponse(unicode(passage))

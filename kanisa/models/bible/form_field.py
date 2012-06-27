@@ -4,6 +4,7 @@ from django.forms import util
 from django.forms.widgets import TextInput
 from .bible import to_passage, InvalidPassage
 
+
 class BiblePassageWidget(TextInput):
     class Media:
         js = ('kanisa/js/biblefield.js', )
