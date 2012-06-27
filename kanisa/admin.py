@@ -2,6 +2,7 @@ from django.contrib import admin
 from kanisa.conf import KANISA_ADMIN_THUMBS_SIZE
 from kanisa.models import (Banner,
                            RegularEvent, ScheduledEvent,
+                           Document,
                            SermonSeries, SermonSpeaker, Sermon)
 from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
@@ -47,6 +48,13 @@ class ScheduledEventAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'date', )
 
 admin.site.register(ScheduledEvent, ScheduledEventAdmin)
+
+
+class DocumentAdmin(admin.ModelAdmin):
+    search_fields = ('title', 'details', )
+    list_display = ('title', 'modified', )
+
+admin.site.register(Document, DocumentAdmin)
 
 
 class SermonSeriesAdmin(admin.ModelAdmin):
