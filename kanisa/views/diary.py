@@ -92,9 +92,6 @@ class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
                            'in the diary (whether they\'re future events or '
                            'not).')
 
-    def get_kanisa_title(self):
-        return 'Edit Event: %s' % unicode(self.object)
-
 
 class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):
     form_class = ScheduledEventCreationForm
@@ -126,9 +123,6 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
     model = ScheduledEvent
     kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
                    'diary - with an associated date and time.')
-
-    def get_kanisa_title(self):
-        return 'Edit Scheduled Event: %s' % unicode(self.object)
 
     def get_success_url(self):
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
