@@ -43,6 +43,10 @@
 * Service Planning
 * Rotas
 
+# Documents
+
+* Add searchable description.
+
 # Misc
 
 * Improve test coverage
