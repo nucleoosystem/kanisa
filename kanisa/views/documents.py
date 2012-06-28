@@ -61,15 +61,9 @@ class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
     model = Document
     success_url = reverse_lazy('kanisa_manage_documents')
 
-    def get_kanisa_title(self):
-        return 'Edit Document: %s' % unicode(self.object)
-
 
 class DocumentDeleteView(KanisaDeleteView, DocumentBaseView):
     model = Document
-
-    def get_kanisa_title(self):
-        return 'Delete Document'
 
     def get_cancel_url(self):
         return reverse('kanisa_manage_documents')

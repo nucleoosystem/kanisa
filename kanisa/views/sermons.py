@@ -35,9 +35,6 @@ class SermonSeriesDetailView(KanisaDetailView, SermonBaseView):
     model = SermonSeries
     template_name = 'kanisa/management/sermons/series_detail.html'
 
-    def get_kanisa_title(self):
-        return unicode(self.object)
-
 
 class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSeriesForm
@@ -49,9 +46,6 @@ class SermonSeriesUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonSeriesForm
     model = SermonSeries
     success_url = reverse_lazy('kanisa_manage_sermons')
-
-    def get_kanisa_title(self):
-        return 'Edit Sermon Series: %s' % unicode(self.object)
 
 
 class SermonSeriesCompleteView(RedirectView):
@@ -92,9 +86,6 @@ class SermonUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonForm
     model = Sermon
 
-    def get_kanisa_title(self):
-        return 'Edit Sermon: %s' % unicode(self.object)
-
     def get_success_url(self):
         if self.object.series:
             return reverse('kanisa_manage_sermons_series_detail',
@@ -120,6 +111,3 @@ class SermonSpeakerUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonSpeakerForm
     model = SermonSpeaker
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
-
-    def get_kanisa_title(self):
-        return 'Edit Speaker: %s' % unicode(self.object)

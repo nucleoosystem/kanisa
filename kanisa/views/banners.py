@@ -41,9 +41,6 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
     form_class = BannerForm
     model = Banner
 
-    def get_kanisa_title(self):
-        return 'Edit Banner: %s' % unicode(self.object)
-
     def get_success_url(self):
         if self.object.active():
             return reverse('kanisa_manage_banners')

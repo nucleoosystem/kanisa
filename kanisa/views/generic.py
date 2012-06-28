@@ -11,6 +11,8 @@ def add_kanisa_context(cls, context):
         context['kanisa_title'] = cls.get_kanisa_title()
     elif hasattr(cls, 'kanisa_title'):
         context['kanisa_title'] = cls.kanisa_title
+    elif hasattr(cls, 'get_kanisa_default_title'):
+        context['kanisa_title'] = cls.get_kanisa_default_title()
 
     if hasattr(cls, 'kanisa_lead'):
         context['kanisa_lead'] = cls.kanisa_lead
@@ -44,6 +46,9 @@ class KanisaDetailView(DetailView):
         context = add_kanisa_context(self, context)
 
         return context
+
+    def get_kanisa_default_title(self):
+        return unicode(self.object)
 
 
 class KanisaCreateView(CreateView):
@@ -83,6 +88,9 @@ class KanisaUpdateView(UpdateView):
 
         return context
 
+    def get_kanisa_default_title(self):
+        return 'Edit %s: %s' % (self.model._meta.verbose_name.title(),
+                                unicode(self.object))
 
 class KanisaListView(ListView):
     def get_context_data(self, **kwargs):
@@ -99,6 +107,9 @@ class KanisaDeleteView(DeleteView):
 
     def get_deletion_confirmation_message(self):
         return 'Are you sure you want to delete %s?' % unicode(self.object)
+
+    def get_kanisa_default_title(self):
+        return 'Delete %s' % self.model._meta.verbose_name.title()
 
     def get_context_data(self, **kwargs):
         context = super(KanisaDeleteView,
