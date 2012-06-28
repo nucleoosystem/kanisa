@@ -12,10 +12,8 @@ from kanisa.forms import BannerForm
 class BannerBaseView:
     kanisa_lead = ('Banners are a high-impact way of advertising content or '
                    'events for your site.')
-
-    def get_kanisa_root_crumb(self):
-        return {'text': 'Banners',
-                'url': reverse('kanisa_manage_banners')}
+    kanisa_root_crumb = {'text': 'Banners',
+                         'url': reverse_lazy('kanisa_manage_banners')}
 
 
 class BannerManagementView(KanisaListView, BannerBaseView):

@@ -12,9 +12,8 @@ class SermonBaseView:
     kanisa_lead = ('Having sermons on your site allows people who can\'t make '
                    'services to keep up with what you\'re learning.')
 
-    def get_kanisa_root_crumb(self):
-        return {'text': 'Sermons',
-                'url': reverse('kanisa_manage_sermons')}
+    kanisa_root_crumb = {'text': 'Sermons',
+                         'url': reverse_lazy('kanisa_manage_sermons')}
 
 
 class SermonIndexView(KanisaListView, SermonBaseView):

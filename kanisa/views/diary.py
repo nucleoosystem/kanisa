@@ -20,9 +20,8 @@ class DiaryBaseView:
     kanisa_lead = ('Diary events are regularly occurring events you want to '
                    'display on your church\'s calendar.')
 
-    def get_kanisa_root_crumb(self):
-        return {'text': 'Diary',
-                'url': reverse('kanisa_manage_diary')}
+    kanisa_root_crumb = {'text': 'Diary',
+                         'url': reverse_lazy('kanisa_manage_diary')}
 
     def date_from_yyymmdd(self):
         yyyymmdd = self.request.GET.get('date', None)

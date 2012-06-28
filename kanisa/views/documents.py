@@ -15,9 +15,8 @@ class DocumentBaseView:
     kanisa_lead = ('Storing documents on your site allows people to have '
                    'easy access to the files they need.')
 
-    def get_kanisa_root_crumb(self):
-        return {'text': 'Documents',
-                'url': reverse('kanisa_manage_documents')}
+    kanisa_root_crumb = {'text': 'Documents',
+                         'url': reverse_lazy('kanisa_manage_documents')}
 
 
 class DocumentIndexView(KanisaListView, DocumentBaseView):
