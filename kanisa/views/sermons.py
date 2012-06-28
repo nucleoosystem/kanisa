@@ -11,7 +11,6 @@ from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
 class SermonBaseView:
     kanisa_lead = ('Having sermons on your site allows people who can\'t make '
                    'services to keep up with what you\'re learning.')
-
     kanisa_root_crumb = {'text': 'Sermons',
                          'url': reverse_lazy('kanisa_manage_sermons')}
 

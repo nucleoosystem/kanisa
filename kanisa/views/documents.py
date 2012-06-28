@@ -14,7 +14,6 @@ from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
 class DocumentBaseView:
     kanisa_lead = ('Storing documents on your site allows people to have '
                    'easy access to the files they need.')
-
     kanisa_root_crumb = {'text': 'Documents',
                          'url': reverse_lazy('kanisa_manage_documents')}
 
@@ -66,7 +65,7 @@ class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
     form_class = DocumentForm
     model = Document
     success_url = reverse_lazy('kanisa_manage_documents')
-    
+
     def get_kanisa_title(self):
         return 'Edit Document: %s' % unicode(self.object)
 

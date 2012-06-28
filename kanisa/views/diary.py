@@ -19,7 +19,6 @@ from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
 class DiaryBaseView:
     kanisa_lead = ('Diary events are regularly occurring events you want to '
                    'display on your church\'s calendar.')
-
     kanisa_root_crumb = {'text': 'Diary',
                          'url': reverse_lazy('kanisa_manage_diary')}
 
