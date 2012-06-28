@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -60,20 +60,16 @@ class DocumentSearchView(KanisaTemplateView, DocumentBaseView):
 class DocumentCreateView(KanisaCreateView, DocumentBaseView):
     form_class = DocumentForm
     kanisa_title = 'Upload a Document'
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_documents')
+    success_url = reverse_lazy('kanisa_manage_documents')
 
 
 class DocumentUpdateView(KanisaUpdateView, DocumentBaseView):
     form_class = DocumentForm
     model = Document
-
+    success_url = reverse_lazy('kanisa_manage_documents')
+    
     def get_kanisa_title(self):
         return 'Edit Document: %s' % unicode(self.object)
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_documents')
 
 
 class DocumentDeleteView(KanisaDeleteView, DocumentBaseView):

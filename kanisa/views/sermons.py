@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 from kanisa.forms import SermonSeriesForm, SermonForm, SermonSpeakerForm
@@ -44,20 +44,16 @@ class SermonSeriesDetailView(KanisaDetailView, SermonBaseView):
 class SermonSeriesCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSeriesForm
     kanisa_title = 'Create a Sermon Series'
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_sermons')
+    success_url = reverse_lazy('kanisa_manage_sermons')
 
 
 class SermonSeriesUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonSeriesForm
     model = SermonSeries
+    success_url = reverse_lazy('kanisa_manage_sermons')
 
     def get_kanisa_title(self):
         return 'Edit Sermon Series: %s' % unicode(self.object)
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_sermons')
 
 
 class SermonSeriesCompleteView(RedirectView):
@@ -119,17 +115,13 @@ class SermonSpeakerIndexView(KanisaListView, SermonBaseView):
 class SermonSpeakerCreateView(KanisaCreateView, SermonBaseView):
     form_class = SermonSpeakerForm
     kanisa_title = 'Add a Speaker'
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_sermons_speaker')
+    success_url = reverse_lazy('kanisa_manage_sermons_speaker')
 
 
 class SermonSpeakerUpdateView(KanisaUpdateView, SermonBaseView):
     form_class = SermonSpeakerForm
     model = SermonSpeaker
+    success_url = reverse_lazy('kanisa_manage_sermons_speaker')
 
     def get_kanisa_title(self):
         return 'Edit Speaker: %s' % unicode(self.object)
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_sermons_speaker')

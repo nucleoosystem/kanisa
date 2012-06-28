@@ -1,7 +1,7 @@
 from datetime import date, datetime, time, timedelta
 
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import formats
@@ -78,9 +78,7 @@ class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
 class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
     kanisa_title = 'Create a Regular Event'
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_diary_regularevents')
+    success_url = reverse_lazy('kanisa_manage_diary_regularevents')
 
     def get_initial(self):
         initial = super(DiaryRegularEventCreateView, self).get_initial()
@@ -91,15 +89,13 @@ class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
 class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     model = RegularEvent
+    success_url = reverse_lazy('kanisa_manage_diary_regularevents')
     kanisa_form_warning = ('Changes made here will not affect events already '
                            'in the diary (whether they\'re future events or '
                            'not).')
 
     def get_kanisa_title(self):
         return 'Edit Event: %s' % unicode(self.object)
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_diary_regularevents')
 
 
 class DiaryScheduledEventCreateView(KanisaCreateView, DiaryBaseView):

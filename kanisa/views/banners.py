@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
@@ -36,9 +36,7 @@ class InactiveBannerManagementView(KanisaListView, BannerBaseView):
 class BannerCreateView(KanisaCreateView, BannerBaseView):
     form_class = BannerForm
     kanisa_title = 'Create Banner'
-
-    def get_success_url(self):
-        return reverse('kanisa_manage_banners')
+    success_url = reverse_lazy('kanisa_manage_banners')
 
 
 class BannerUpdateView(KanisaUpdateView, BannerBaseView):
