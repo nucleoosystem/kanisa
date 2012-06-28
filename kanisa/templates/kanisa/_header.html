@@ -13,7 +13,18 @@
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
           {% if user.is_staff %}
-          <li><a href="{% url 'kanisa.views.manage' %}">Manage Site</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Manage
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'kanisa_manage_banners' %}">Banners</a></li>
+              <li><a href="{% url 'kanisa_manage_diary' %}">Diary</a></li>
+              <li><a href="{% url 'kanisa_manage_sermons' %}">Sermons</a></li>
+              <li><a href="{% url 'kanisa_manage_documents' %}">Documents</a></li>
+            </ul>
+          </li>
           <li><a href="{% url 'admin:index' %}">Admin</a></li>
           {% endif %}
         </ul>
