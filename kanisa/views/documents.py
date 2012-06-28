@@ -26,11 +26,6 @@ class DocumentIndexView(KanisaListView, DocumentBaseView):
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
 
-    def get_context_data(self, **kwargs):
-        context = super(DocumentIndexView,
-                        self).get_context_data(**kwargs)
-        return context
-
 
 class DocumentSearchView(KanisaTemplateView, DocumentBaseView):
     kanisa_title = 'Search Documents'
