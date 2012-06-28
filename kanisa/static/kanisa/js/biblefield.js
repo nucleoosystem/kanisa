@@ -14,7 +14,14 @@ $(function() {
             return;
         }
 
-        $.post("/manage/xhr/passage/", { passage: input },
+        var url = el.attr("data-validate-url");
+
+        if (url === undefined) {
+            status_element.html('<i class="icon-exclamation-sign"></i> Could not locate Bible passage checker.');
+            return;
+        }
+
+        $.post(url, { passage: input },
                function(data) {
                    status_element.html('<i class="icon-ok"></i> ' + data);
                }).error(function(data) {
