@@ -1,2 +1,3 @@
 {{ object.title }}
 {{ object.file }}
+{{ object.details }}
