@@ -40,3 +40,11 @@ label.requiredField {
 .biblepassageresponse {
     margin-left: 1em;
 }
+
+.search-result {
+    margin-bottom: 1em;
+}
+
+.search-result blockquote {
+    font-size: 1em;
+}
