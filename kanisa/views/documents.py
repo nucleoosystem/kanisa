@@ -31,6 +31,9 @@ class DocumentSearchView(KanisaTemplateView, DocumentBaseView):
     kanisa_title = 'Search Documents'
     template_name = 'kanisa/management/documents/search.html'
 
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect(reverse('kanisa_manage_documents'))
+
     def post(self, request, *args, **kwargs):
         query = request.POST.get('query', None)
 
