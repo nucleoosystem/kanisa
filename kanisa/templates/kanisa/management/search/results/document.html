@@ -1,0 +1,5 @@
+{% load url from future %}
+<tr>
+    <td>{{ result.object }}</td>
+    <td><a href="{% url 'kanisa_manage_documents_update' result.pk %}"><i class="icon-eye-open"></i></a></td>
+</tr>
