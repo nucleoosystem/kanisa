@@ -11,10 +11,6 @@ class DocumentIndex(indexes.SearchIndex):
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
 
-    def index_queryset(self):
-        """Used when the entire index for model is updated."""
-        return Document.objects.all()
-
 site.register(Document, DocumentIndex)
 
 
@@ -23,10 +19,6 @@ class SermonSeriesIndex(indexes.SearchIndex):
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
-
-    def index_queryset(self):
-        """Used when the entire index for model is updated."""
-        return SermonSeries.objects.all()
 
     def prepare_image(self, obj):
         im = get_thumbnail(obj.image, '100x100', crop='center')
@@ -41,10 +33,6 @@ class BannerIndex(indexes.SearchIndex):
     title = indexes.CharField(model_attr='headline')
     details = indexes.CharField(model_attr='contents', null=True)
     url = indexes.CharField(model_attr='url')
-
-    def index_queryset(self):
-        """Used when the entire index for model is updated."""
-        return Banner.objects.all()
 
     def prepare_image(self, obj):
         im = get_thumbnail(obj.image, '100x100', crop='center')
