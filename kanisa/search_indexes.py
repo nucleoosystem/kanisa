@@ -1,4 +1,3 @@
-import datetime
 from haystack import indexes
 from haystack import site
 from kanisa.models import Sermon, SermonSeries, Document, Banner
