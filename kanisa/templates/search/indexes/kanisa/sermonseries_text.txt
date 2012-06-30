@@ -1,3 +1,4 @@
+{% autoescape off %}
 {{ object.title }}
 {% if object.details %}
 {{ object.details }}
@@ -6,3 +7,4 @@
 {% if object.passage %}
 {{ object.passage }}
 {% endif %}
+{% endautoescape %}
