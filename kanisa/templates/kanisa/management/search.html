@@ -17,7 +17,7 @@
 
 {% for result in results %}
     <div class="search-result">
-    <h3>{{ result.object }} ({{ result.verbose_name }})</h3>
+    <h3>{{ result.title }} ({{ result.verbose_name }})</h3>
     {% include result.model_name|search_template %}
     </div>
 {% endfor %}
