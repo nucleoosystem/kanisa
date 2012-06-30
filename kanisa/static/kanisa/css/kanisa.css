@@ -45,6 +45,6 @@ label.requiredField {
     margin-bottom: 1em;
 }
 
-.search-result blockquote {
+.search-result blockquote p {
     font-size: 1em;
 }
