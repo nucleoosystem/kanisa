@@ -27,7 +27,7 @@ class SermonSeriesIndex(indexes.SearchIndex):
     def index_queryset(self):
         """Used when the entire index for model is updated."""
         return SermonSeries.objects.all()
-        
+
     def prepare_image(self, obj):
         im = get_thumbnail(obj.image, '100x100', crop='center')
         return im.name
