@@ -1,0 +1,11 @@
+{% load url from future %}
+<blockquote class="withthumbnail">
+{% if result.image %}
+<img src="{{ MEDIA_URL }}{{ result.image }}" />
+{% endif %}
+{{ result.details.strip|linebreaks }}
+{% if result.url %}
+<p><strong>URL</strong>: <a href="{{ result.url }}">{{ result.url }}</a></p>
+{% endif %}
+</blockquote>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_banners_update' result.pk %}"><i class="icon-edit"></i> Edit</a>
