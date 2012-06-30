@@ -1,5 +1,5 @@
 {% autoescape off %}
 {{ object.title }}
-Filename: {{ object.file }}
+{{ object.file }}
 {{ object.details }}
 {% endautoescape %}
