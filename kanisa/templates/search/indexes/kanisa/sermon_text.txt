@@ -1,0 +1,12 @@
+{% autoescape off %}
+{{ object.title }}
+{% if object.details %}
+{{ object.details }}
+{% endif %}
+
+{% if object.passage %}
+{{ object.passage }}
+{% endif %}
+
+{{ object.speaker }}
+{% endautoescape %}

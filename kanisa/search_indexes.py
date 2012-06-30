@@ -1,7 +1,7 @@
 import datetime
 from haystack import indexes
 from haystack import site
-from kanisa.models import SermonSeries, Document, Banner
+from kanisa.models import Sermon, SermonSeries, Document, Banner
 from sorl.thumbnail import get_thumbnail
 
 
@@ -25,6 +25,17 @@ class SermonSeriesIndex(indexes.SearchIndex):
         return im.name
 
 site.register(SermonSeries, SermonSeriesIndex)
+
+
+class SermonIndex(indexes.SearchIndex):
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
+    details = indexes.CharField(model_attr='details', null=True)
+    speaker = indexes.CharField(model_attr='speaker')
+    series = indexes.CharField(model_attr='series', null=True)
+    date = indexes.DateField(model_attr='date')
+
+site.register(Sermon, SermonIndex)
 
 
 class BannerIndex(indexes.SearchIndex):
