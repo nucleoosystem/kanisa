@@ -2,6 +2,7 @@ import datetime
 from haystack import indexes
 from haystack import site
 from kanisa.models import SermonSeries, Document
+from sorl.thumbnail import get_thumbnail
 
 
 class DocumentIndex(indexes.SearchIndex):
@@ -17,9 +18,14 @@ site.register(Document, DocumentIndex)
 
 class SermonSeriesIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    image = indexes.CharField(model_attr='image')
 
     def index_queryset(self):
         """Used when the entire index for model is updated."""
         return SermonSeries.objects.all()
+        
+    def prepare_image(self, obj):
+        im = get_thumbnail(obj.image, '100x100', crop='center')
+        return im.name
 
 site.register(SermonSeries, SermonSeriesIndex)
