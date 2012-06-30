@@ -48,3 +48,12 @@ label.requiredField {
 .search-result blockquote p {
     font-size: 1em;
 }
+
+.search-result blockquote.withthumbnail {
+    min-height: 100px;
+}
+
+.search-result blockquote.withthumbnail img {
+    float: left;
+    margin-right: 10px;
+}
