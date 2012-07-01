@@ -5,6 +5,7 @@ from kanisa.models import Document
 from kanisa.views.generic import KanisaTemplateView
 import tweepy
 
+
 class SocialBaseView:
     kanisa_lead = ('Having a presence on social networks allows your Church '
                    'to communicate with people it might not otherwise reach.')
@@ -55,7 +56,7 @@ class SocialIndexView(KanisaTemplateView, SocialBaseView):
                         self).get_context_data(**kwargs)
 
         twitter = cache.get('twitter_handle')
-        
+
         if not twitter:
             twitter = get_tweepy_handle(self.request)
             cache.set('twitter_handle', twitter, 120)
