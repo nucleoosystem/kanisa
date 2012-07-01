@@ -10,13 +10,13 @@
 {% if twitter_username %}
 <div class="row">
 
-    <div class="span4">
+    <div class="span5">
         <p>You are logged in to Twitter as <strong><a href="http://twitter.com/{{ twitter_username }}">@{{ twitter_username }}</a></strong>.</p>
 
         <p>You currently have <strong><a href="http://twitter.com/{{ twitter_username }}/followers">{{ followers }} follower{{ followers|pluralize }}</a></strong>, and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.</p>
     </div>
 
-    <div class="span4">
+    <div class="span5">
         <blockquote>
         <h4>Most Recent Status</h4>
         <p>{{ current_status.text|urlize }}</p>
