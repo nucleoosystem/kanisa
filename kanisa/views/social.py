@@ -26,8 +26,10 @@ class SocialIndexView(KanisaTemplateView, SocialBaseView):
         twitter = cache.get('twitter_handle')
 
         if not twitter:
-            twitter = get_tweepy_handle(self.request).me()
-            cache.set('twitter_handle', twitter, 120)
+            api = get_tweepy_handle(self.request)
+            if api:
+                twitter = api.me()
+                cache.set('twitter_handle', twitter, 120)
 
         if twitter:
             context['twitter_username'] = twitter.screen_name
