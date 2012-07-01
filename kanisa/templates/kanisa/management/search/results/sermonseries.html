@@ -3,6 +3,9 @@
 {% if result.image %}
 <img src="{{ MEDIA_URL }}{{ result.image }}" />
 {% endif %}
+{% if result.passage %}
+<p><strong>Passage:</strong> {{ result.passage }}</p>
+{% endif %}
 {{ result.details.strip|linebreaks }}
 </blockquote>
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_detail' result.pk %}"><i class="icon-eye-open"></i> View</a>

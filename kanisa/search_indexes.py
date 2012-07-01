@@ -18,6 +18,7 @@ class SermonSeriesIndex(indexes.SearchIndex):
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
+    passage = indexes.CharField(model_attr='passage', null=True)
 
     def prepare_image(self, obj):
         im = get_thumbnail(obj.image, '100x100', crop='center')
@@ -33,6 +34,7 @@ class SermonIndex(indexes.SearchIndex):
     speaker = indexes.CharField(model_attr='speaker')
     series = indexes.CharField(model_attr='series', null=True)
     date = indexes.DateField(model_attr='date')
+    passage = indexes.CharField(model_attr='passage', null=True)
 
 site.register(Sermon, SermonIndex)
 

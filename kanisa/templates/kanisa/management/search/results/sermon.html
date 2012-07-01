@@ -5,6 +5,9 @@
 <strong>Series:</strong> {{ result.series }}<br />
 {% endif %}
 <strong>Speaker:</strong> {{ result.speaker }}<br />
+{% if result.passage %}
+<strong>Passage:</strong> {{ result.passage }}<br />
+{% endif %}
 A sermon preached on <strong>{{ result.date|date:"jS F Y" }}</strong>.</p>
 
 {{ result.details.strip|linebreaks }}
