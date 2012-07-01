@@ -19,6 +19,7 @@ setup(
         "django-haystack==1.2.7",
         "mutagen==1.20",
         "sorl-thumbnail==11.12",
+        "tweepy==1.9",
         "Whoosh==2.4.1",
     ],
 )

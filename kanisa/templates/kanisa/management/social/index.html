@@ -1,0 +1,19 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+<hr />
+
+<h2>Twitter <img src="{{ STATIC_URL }}kanisa/img/twitter-bird-light-bgs.png" /></h2>
+
+{% if twitter_username %}
+<p>You are logged in to Twitter as <strong>@{{ twitter_username }}</strong>.</p>
+
+<p>You currently have <strong>{{ followers }} follower{{ followers|pluralize }}</strong>, and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.</p>
+
+{% else %}
+<p>You are not logged in to Twitter, or Twitter is unreachable.</p>
+{% endif %}
+
+{% endblock %}
