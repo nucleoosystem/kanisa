@@ -8,9 +8,21 @@
 <h2>Twitter <img src="{{ STATIC_URL }}kanisa/img/twitter-bird-light-bgs.png" /></h2>
 
 {% if twitter_username %}
-<p>You are logged in to Twitter as <strong>@{{ twitter_username }}</strong>.</p>
+<div class="row">
 
-<p>You currently have <strong>{{ followers }} follower{{ followers|pluralize }}</strong>, and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.</p>
+    <div class="span4">
+        <p>You are logged in to Twitter as <strong><a href="http://twitter.com/{{ twitter_username }}">@{{ twitter_username }}</a></strong>.</p>
+
+        <p>You currently have <strong><a href="http://twitter.com/{{ twitter_username }}/followers">{{ followers }} follower{{ followers|pluralize }}</a></strong>, and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.</p>
+    </div>
+
+    <div class="span4">
+        <blockquote>
+        <p>{{ current_status.text|urlize }}</p>
+        <small class="pull-right">{{ current_status.created_at|timesince }} ago</small>
+        </blockquote>
+    </div>
+</div>
 
 {% else %}
 <p>You are not logged in to Twitter, or Twitter is unreachable.</p>
