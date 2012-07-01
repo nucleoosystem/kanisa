@@ -22,6 +22,11 @@ def get_tweepy_handle(request):
 
     for attr in required_attrs:
         if not hasattr(settings, attr):
+            required_bits = ', '.join(required_attrs)
+            msg = ('Cannot connect to Twitter. '
+                   'Please ensure you have all '
+                   'the following settings: %s.') % required_bits
+            messages.info(request, msg)
             return None
 
     auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
