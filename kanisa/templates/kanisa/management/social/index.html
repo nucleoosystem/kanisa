@@ -19,7 +19,11 @@
     <div class="span4">
         <blockquote>
         <p>{{ current_status.text|urlize }}</p>
-        <small class="pull-right">{{ current_status.created_at|timesince }} ago</small>
+        <small class="pull-right">
+          <a href="http://twitter.com/{{ twitter_username }}/status/{{ current_status.id }}">
+            {{ current_status.created_at|timesince }} ago
+          </a>
+        </small>
         </blockquote>
     </div>
 </div>
