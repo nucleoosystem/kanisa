@@ -21,9 +21,9 @@
           <strong><a href="http://twitter.com/{{ twitter_username }}/followers">{{ followers }} follower{{ followers|pluralize }}</a></strong>,
           and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.
         </p>
-    </div>
 
-    <div class="span5">
+        <hr />
+
         <blockquote>
         <h4>Most Recent Status</h4>
         <p>{{ current_status.text|urlize }}</p>
@@ -33,8 +33,24 @@
           </a>
         </small>
         </blockquote>
+
+    </div>
+
+    <div class="span5">
+        <form method="post" action="{% url 'kanisa_manage_social_twitter_post' %}">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Update your Status</legend>
+            <div class="control-group">
+            <textarea name="twitter-status" class="input-xlarge" maxlength="140" rows="2" style="width:100%"></textarea>
+            <p><button type="submit" class="btn btn-primary">Update Status</button></p>
+            </div>
+          </fieldset>
+        </form>
     </div>
 </div>
+
+<hr />
 
 {% else %}
 <p>You are not logged in to Twitter, or Twitter is unreachable.</p>
