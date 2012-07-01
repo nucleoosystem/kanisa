@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.urlresolvers import reverse_lazy
@@ -14,19 +15,14 @@ class SocialBaseView:
 
 
 def get_tweepy_handle(request):
-    from django.conf import settings
+    required_attrs = ['TWITTER_CONSUMER_KEY',
+                      'TWITTER_CONSUMER_SECRET',
+                      'TWITTER_ACCESS_TOKEN',
+                      'TWITTER_ACCESS_TOKEN_SECRET', ]
 
-    if not hasattr(settings, 'TWITTER_CONSUMER_KEY'):
-        return None
-
-    if not hasattr(settings, 'TWITTER_CONSUMER_SECRET'):
-        return None
-
-    if not hasattr(settings, 'TWITTER_ACCESS_TOKEN'):
-        return None
-
-    if not hasattr(settings, 'TWITTER_ACCESS_TOKEN_SECRET'):
-        return None
+    for attr in required_attrs:
+        if not hasattr(settings, attr):
+            return None
 
     auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
                                settings.TWITTER_CONSUMER_SECRET)
