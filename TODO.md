@@ -17,6 +17,7 @@
   you've created an event once, and then realise it'll happen regularly).
 * Allow creating RegularEvents on timetables other than day x of week.
 * Ensure searches for scheduled events incorportate date in the result title.
+* Make it possible to clone a scheduled event.
   
 # Sermons
 
@@ -49,3 +50,5 @@
 
 * Improve test coverage
 * Documentation (developer friendly/end user friendly)
+* Give every model an updated field, to make rebuilding search indexes cheaper
+* Add a way to kick-off a search index rebuild from the interface
