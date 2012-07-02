@@ -47,17 +47,17 @@ class SocialTwitterPostView(RedirectView):
         twitter = get_tweepy_handle(self.request)
 
         if not twitter:
-            messages.error("No active Twitter connection available.")
+            messages.error(self.request, "No active Twitter connection available.")
             return reverse('kanisa_manage_social')
 
         if 'twitter-status' not in self.request.POST:
-            messages.error("You must enter a Twitter status.")
+            messages.error(self.request, "You must enter a Twitter status.")
             return reverse('kanisa_manage_social')
 
         twitter_status = self.request.POST['twitter-status']
 
         if not twitter_status:
-            messages.error("You must enter a Twitter status.")
+            messages.error(self.request, "You must enter a Twitter status.")
             return reverse('kanisa_manage_social')
 
         twitter.update_status(twitter_status)
