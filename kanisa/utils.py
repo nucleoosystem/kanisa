@@ -80,6 +80,7 @@ class WeekSchedule(object):
 def get_schedule(thedate=None):
     return WeekSchedule(thedate)
 
+
 class TwitterException(Exception):
     def __init__(self, value):
         self.value = value
