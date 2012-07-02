@@ -16,7 +16,6 @@
 * Make it possible to create a RegularEvent from a ScheduledEvent (for when
   you've created an event once, and then realise it'll happen regularly).
 * Allow creating RegularEvents on timetables other than day x of week.
-* Ensure searches for scheduled events incorporate date in the result title.
 * Make it possible to clone a scheduled event.
   
 # Sermons

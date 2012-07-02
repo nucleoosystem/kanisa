@@ -1,6 +1,6 @@
 {% load url from future %}
 <blockquote>
-<p>{{ result.title }} is on <strong>{{ result.date|date:"jS F Y" }}</strong> at <strong>{{ result.start_time }}</strong>.</p>
+<p>{{ result.titleonly }} is on <strong>{{ result.date|date:"jS F Y" }}</strong> at <strong>{{ result.start_time }}</strong>.</p>
 {{ result.details.strip|linebreaks }}
 </blockquote>
 <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' result.pk %}"><i class="icon-edit"></i> Edit</a>
