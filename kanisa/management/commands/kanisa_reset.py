@@ -24,6 +24,9 @@ class Command(BaseCommand):
 
         call_command('reset', 'kanisa', **options)
         self.load_fixtures()
+        print ""
+        print "Resetting search indexes..."
+        call_command('rebuild_index', **options)
 
     def load_fixtures(self):
         for subapp in ['banners', 'diary', 'sermons', ]:
