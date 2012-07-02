@@ -43,26 +43,22 @@ class SocialTwitterPostView(RedirectView):
     permanent = False
 
     def get_redirect_url(self):
+        twitter_status = self.request.POST.get('twitter-status', None)
+
+        if not twitter_status:
+            messages.error(self.request, "You must enter a Twitter status.")
+            return reverse('kanisa_manage_social')
+
         try:
             twitter = get_tweepy_handle(self.request)
-
-            if 'twitter-status' not in self.request.POST:
-                messages.error(self.request, "You must enter a Twitter status.")
-                return reverse('kanisa_manage_social')
-
-            twitter_status = self.request.POST['twitter-status']
-
-            if not twitter_status:
-                messages.error(self.request, "You must enter a Twitter status.")
-                return reverse('kanisa_manage_social')
-
-            twitter.update_status(twitter_status)
-
-            message = 'Tweet posted.'
-            messages.success(self.request, message)
-
-            cache.delete('twitter_handle')
         except TwitterException, e:
             messages.error(self.request, "Error posting tweet: %s" % e.value)
+            return reverse('kanisa_manage_social')
 
+        twitter.update_status(twitter_status)
+
+        message = 'Tweet posted.'
+        messages.success(self.request, message)
+
+        cache.delete('twitter_handle')
         return reverse('kanisa_manage_social')
