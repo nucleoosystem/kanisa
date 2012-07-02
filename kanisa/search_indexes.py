@@ -12,6 +12,10 @@ class KanisaBaseSearchIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
     modified = indexes.DateTimeField(model_attr='modified')
 
+    def get_updated_field(self):
+        return 'modified'
+
+
 class DocumentIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
