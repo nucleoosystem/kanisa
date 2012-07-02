@@ -1,0 +1,8 @@
+{% autoescape off %}
+{{ object.title }}
+{% if object.details %}
+{{ object.details }}
+{% endif %}
+
+{{ object.event }}
+{% endautoescape %}

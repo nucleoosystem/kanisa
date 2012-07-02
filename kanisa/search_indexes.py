@@ -1,6 +1,9 @@
 from haystack import indexes
 from haystack import site
-from kanisa.models import Sermon, SermonSeries, Document, Banner, RegularEvent
+from kanisa.models import (Sermon, SermonSeries,
+                           Document,
+                           Banner,
+                           RegularEvent, ScheduledEvent)
 from sorl.thumbnail import get_thumbnail
 
 
@@ -67,3 +70,17 @@ class RegularEventIndex(indexes.SearchIndex):
         return obj.start_time.strftime("%H:%M")
 
 site.register(RegularEvent, RegularEventIndex)
+
+
+class ScheduledEventIndex(indexes.SearchIndex):
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
+    details = indexes.CharField(model_attr='details', null=True)
+    date = indexes.DateField(model_attr='date')
+    start_time = indexes.CharField(model_attr='start_time')
+    event = indexes.CharField(model_attr='event', null=True)
+
+    def prepare_start_time(self, obj):
+        return obj.start_time.strftime("%H:%M")
+
+site.register(ScheduledEvent, ScheduledEventIndex)
