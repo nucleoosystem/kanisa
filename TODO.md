@@ -49,5 +49,4 @@
 
 * Improve test coverage
 * Documentation (developer friendly/end user friendly)
-* Give every model an updated field, to make rebuilding search indexes cheaper
 * Add a way to kick-off a search index rebuild from the interface

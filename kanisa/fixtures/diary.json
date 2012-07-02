@@ -7,7 +7,8 @@
       "details": "Afternoon tea's always lovely.",
       "start_time": "14:00:00",
       "day": 1,
-      "title": "Afternoon Tea"
+      "title": "Afternoon Tea",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -18,7 +19,8 @@
       "details": "",
       "start_time": "08:00:00",
       "day": 4,
-      "title": "Breakfast Club"
+      "title": "Breakfast Club",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -29,7 +31,8 @@
       "details": "",
       "start_time": "19:00:00",
       "day": 2,
-      "title": "Youth Club"
+      "title": "Youth Club",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -41,7 +44,8 @@
       "start_time": "19:30:00",
       "day": 3,
       "title": "Church Meeting",
-      "autoschedule": false
+      "autoschedule": false,
+      "modified": "2012-01-01 07:00+03:00"
     }
   }
 ]

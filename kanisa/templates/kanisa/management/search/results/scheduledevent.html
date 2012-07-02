@@ -3,4 +3,7 @@
 <p>{{ result.titleonly }} is on <strong>{{ result.date|date:"jS F Y" }}</strong> at <strong>{{ result.start_time }}</strong>.</p>
 {{ result.details.strip|linebreaks }}
 </blockquote>
+<p class="footnote">
+    <strong>Last Modified:</strong> {{ result.modified }}
+</p>
 <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' result.pk %}"><i class="icon-edit"></i> Edit</a>

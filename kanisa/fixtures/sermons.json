@@ -7,7 +7,8 @@
       "image": "kanisa/sermons/greenflowers.jpg",
       "passage": "Psalms",
       "details": "Help, help, I'm being repressed! You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person!",
-      "title": "The Psalms"
+      "title": "The Psalms",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -18,7 +19,8 @@
       "image": "kanisa/sermons/church.jpg",
       "passage": "John 21",
       "details": "",
-      "title": "The Beatitudes"
+      "title": "The Beatitudes",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -27,7 +29,8 @@
     "fields": {
       "active": true,
       "image": "kanisa/sermons/theshard.jpg",
-      "title": "All Sorts of Things"
+      "title": "All Sorts of Things",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -36,7 +39,8 @@
     "fields": {
       "forename": "Bugs",
       "surname": "Bunny",
-      "image": "kanisa/sermons/greenflowers.jpg"
+      "image": "kanisa/sermons/greenflowers.jpg",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -45,7 +49,8 @@
     "fields": {
       "forename": "Road",
       "surname": "Runner",
-      "image": "kanisa/sermons/church.jpg"
+      "image": "kanisa/sermons/church.jpg",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -56,7 +61,8 @@
       "date": "2012-04-29",
       "series": 1,
       "speaker": 1,
-      "passage": "Psalm 1"
+      "passage": "Psalm 1",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -67,7 +73,8 @@
       "date": "2012-05-6",
       "series": 1,
       "speaker": 2,
-      "passage": "Psalm 2"
+      "passage": "Psalm 2",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -78,7 +85,8 @@
       "date": "2012-05-13",
       "series": 1,
       "speaker": 2,
-      "passage": "Psalm 3-4"
+      "passage": "Psalm 3-4",
+      "modified": "2012-01-01 07:00+03:00"
     }
   },
   {
@@ -88,7 +96,8 @@
       "title": "Not in a Series",
       "date": "2012-05-06",
       "speaker": 1,
-      "passage": "Genesis"
+      "passage": "Genesis",
+      "modified": "2012-01-01 07:00+03:00"
     }
   }
 ]

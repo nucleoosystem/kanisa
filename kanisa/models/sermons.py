@@ -22,6 +22,7 @@ class SermonSeries(models.Model):
     active = models.BooleanField(default=True,
                                  help_text='Is this series currently ongoing?')
     passage = BiblePassageField(blank=True, null=True)
+    modified = models.DateTimeField(auto_now=True)
 
     objects = SermonSeriesManager()
 
@@ -50,6 +51,7 @@ class SermonSpeaker(models.Model):
     surname = models.CharField(max_length=100)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
                        help_text=u'Must be at least 400px by 300px.')
+    modified = models.DateTimeField(auto_now=True)
 
     objects = SpeakerManager()
 
@@ -90,6 +92,7 @@ class Sermon(models.Model):
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '
                                           'cover?'))
+    modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()
 

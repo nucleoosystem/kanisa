@@ -10,7 +10,7 @@ from sorl.thumbnail import get_thumbnail
 
 class DocumentIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
-    pub_date = indexes.DateTimeField(model_attr='modified')
+    modified = indexes.DateTimeField(model_attr='modified')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
 
@@ -19,6 +19,7 @@ site.register(Document, DocumentIndex)
 
 class SermonSeriesIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    modified = indexes.DateTimeField(model_attr='modified')
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
@@ -33,6 +34,7 @@ site.register(SermonSeries, SermonSeriesIndex)
 
 class SermonIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    modified = indexes.DateTimeField(model_attr='modified')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
     speaker = indexes.CharField(model_attr='speaker')
@@ -45,6 +47,7 @@ site.register(Sermon, SermonIndex)
 
 class BannerIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    modified = indexes.DateTimeField(model_attr='modified')
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='headline')
     details = indexes.CharField(model_attr='contents', null=True)
@@ -59,6 +62,7 @@ site.register(Banner, BannerIndex)
 
 class RegularEventIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    modified = indexes.DateTimeField(model_attr='modified')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
     start_time = indexes.CharField(model_attr='start_time')
@@ -75,6 +79,7 @@ site.register(RegularEvent, RegularEventIndex)
 
 class ScheduledEventIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
+    modified = indexes.DateTimeField(model_attr='modified')
     title = indexes.CharField(model_attr='title')
     titleonly = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)

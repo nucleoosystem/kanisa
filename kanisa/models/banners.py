@@ -48,6 +48,7 @@ class Banner(models.Model):
                                      ' banner will be visible. If left'
                                      ' blank your banner will be visible'
                                      ' indefinitely.')
+    modified = models.DateTimeField(auto_now=True)
 
     # Managers
     objects = models.Manager()
