@@ -8,18 +8,18 @@ from kanisa.models import (Sermon, SermonSeries,
 from sorl.thumbnail import get_thumbnail
 
 
-class DocumentIndex(indexes.SearchIndex):
+class KanisaBaseSearchIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
     modified = indexes.DateTimeField(model_attr='modified')
+
+class DocumentIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
 
 site.register(Document, DocumentIndex)
 
 
-class SermonSeriesIndex(indexes.SearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
+class SermonSeriesIndex(KanisaBaseSearchIndex):
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
@@ -32,9 +32,7 @@ class SermonSeriesIndex(indexes.SearchIndex):
 site.register(SermonSeries, SermonSeriesIndex)
 
 
-class SermonIndex(indexes.SearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
+class SermonIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
     speaker = indexes.CharField(model_attr='speaker')
@@ -45,9 +43,7 @@ class SermonIndex(indexes.SearchIndex):
 site.register(Sermon, SermonIndex)
 
 
-class BannerIndex(indexes.SearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
+class BannerIndex(KanisaBaseSearchIndex):
     image = indexes.CharField(model_attr='image')
     title = indexes.CharField(model_attr='headline')
     details = indexes.CharField(model_attr='contents', null=True)
@@ -60,9 +56,7 @@ class BannerIndex(indexes.SearchIndex):
 site.register(Banner, BannerIndex)
 
 
-class RegularEventIndex(indexes.SearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
+class RegularEventIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
     start_time = indexes.CharField(model_attr='start_time')
@@ -77,9 +71,7 @@ class RegularEventIndex(indexes.SearchIndex):
 site.register(RegularEvent, RegularEventIndex)
 
 
-class ScheduledEventIndex(indexes.SearchIndex):
-    text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
+class ScheduledEventIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='title')
     titleonly = indexes.CharField(model_attr='title')
     details = indexes.CharField(model_attr='details', null=True)
