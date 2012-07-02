@@ -16,6 +16,7 @@
 * Make it possible to create a RegularEvent from a ScheduledEvent (for when
   you've created an event once, and then realise it'll happen regularly).
 * Allow creating RegularEvents on timetables other than day x of week.
+* Ensure searches for scheduled events incorportate date in the result title.
   
 # Sermons
 
@@ -30,6 +31,7 @@
 * Allow delayed posting to Twitter (and Facebook?)
 * Incorporate Twitter feed/Facebook feed into site?
 * Follow us on Twitter/Like us on Facebook buttons?
+* Allow posting to Facebook
 
 # User Management
 
