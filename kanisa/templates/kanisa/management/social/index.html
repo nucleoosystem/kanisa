@@ -53,7 +53,7 @@
 <hr />
 
 {% else %}
-<p>You are not logged in to Twitter, or Twitter is unreachable.</p>
+<div class="alert alert-info">{{ twitter_status }}</div>
 {% endif %}
 
 {% endblock %}

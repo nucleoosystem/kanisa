@@ -1,6 +1,5 @@
 from datetime import date, timedelta
 from django.conf import settings
-from django.contrib import messages
 import tweepy
 
 from kanisa.models import diary
@@ -81,6 +80,13 @@ class WeekSchedule(object):
 def get_schedule(thedate=None):
     return WeekSchedule(thedate)
 
+class TwitterException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
 
 def get_tweepy_handle(request):
     required_attrs = ['TWITTER_CONSUMER_KEY',
@@ -94,8 +100,7 @@ def get_tweepy_handle(request):
             msg = ('Cannot connect to Twitter. '
                    'Please ensure you have all '
                    'the following settings: %s.') % required_bits
-            messages.info(request, msg)
-            return None
+            raise TwitterException(msg)
 
     auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
                                settings.TWITTER_CONSUMER_SECRET)
@@ -108,8 +113,7 @@ def get_tweepy_handle(request):
 
         if user:
             return api
-        messages.warning(request, 'Your Twitter credentials are invalid.')
+        raise TwitterException('Your Twitter authentication credentials are '
+                               'invalid.')
     except tweepy.TweepError:
-        messages.warning(request, 'Twitter appears to be unreachable.')
-
-    return None
+        raise TwitterException('Twitter appears to be unreachable.')
