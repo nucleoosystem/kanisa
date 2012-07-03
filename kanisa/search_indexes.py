@@ -22,6 +22,7 @@ site.register(Sermon, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, KanisaBaseSearchIndex)
 
+
 class BannerIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='headline')
 
