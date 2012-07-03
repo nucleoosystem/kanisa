@@ -23,7 +23,7 @@ site.register(Document, DocumentIndex)
 
 
 class SermonSeriesIndex(KanisaBaseSearchIndex):
-    image = indexes.CharField(model_attr='image')
+    title = indexes.CharField(model_attr='title')
 site.register(SermonSeries, SermonSeriesIndex)
 
 
