@@ -1,0 +1,2 @@
+{% load url from future %}
+<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_speaker_update' object.pk %}"><i class="icon-edit"></i> Edit</a>

@@ -1,6 +1,6 @@
 from haystack import indexes
 from haystack import site
-from kanisa.models import (Sermon, SermonSeries,
+from kanisa.models import (Sermon, SermonSeries, SermonSpeaker,
                            Document,
                            Banner,
                            RegularEvent, ScheduledEvent)
@@ -26,3 +26,13 @@ class BannerIndex(KanisaBaseSearchIndex):
     title = indexes.CharField(model_attr='headline')
 
 site.register(Banner, BannerIndex)
+
+
+class SermonSpeakerIndex(KanisaBaseSearchIndex):
+    title = indexes.CharField()
+    
+    def prepare_title(self, obj):
+        return '%s %s' % (obj.forename, obj.surname)
+
+
+site.register(SermonSpeaker, SermonSpeakerIndex)

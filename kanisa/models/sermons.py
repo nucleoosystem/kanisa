@@ -49,7 +49,7 @@ class SpeakerManager(models.Manager):
         return qs.annotate(num_sermons=Count('sermon'))
 
 
-class SermonSpeaker(models.Model):
+class SermonSpeaker(SearchableModel):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
