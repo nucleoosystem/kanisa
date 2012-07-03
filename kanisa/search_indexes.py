@@ -1,11 +1,9 @@
-from django.utils.dateformat import DateFormat
 from haystack import indexes
 from haystack import site
 from kanisa.models import (Sermon, SermonSeries,
                            Document,
                            Banner,
                            RegularEvent, ScheduledEvent)
-from sorl.thumbnail import get_thumbnail
 
 
 class KanisaBaseSearchIndex(indexes.SearchIndex):
