@@ -8,7 +8,7 @@
 {% endthumbnail %}
 {% endif %}
 
-{{ object.details.strip|linebreaks }}
+{{ object.contents.strip|linebreaks }}
 {% if object.url %}
 <p><strong>URL</strong>: <a href="{{ object.url }}">{{ object.url }}</a></p>
 {% endif %}
