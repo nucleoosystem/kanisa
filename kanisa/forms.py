@@ -104,10 +104,11 @@ class RegularEventForm(KanisaBaseForm):
 
 class ScheduledEventEditForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
+    date = BootstrapDateField()
 
     class Meta:
         model = ScheduledEvent
-        exclude = ('event', 'date', )
+        exclude = ('event', )
 
     def clean(self):
         cleaned_data = self.cleaned_data
