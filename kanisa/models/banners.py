@@ -1,8 +1,12 @@
+from __future__ import absolute_import
+
 from datetime import date, timedelta
 from django.db import models
 from django.db.models import Q
 from kanisa.models.utils import date_has_passed, today_in_range
 from sorl.thumbnail import ImageField
+
+from .base import SearchableModel
 
 
 class ActiveBannerManager(models.Manager):
@@ -21,7 +25,7 @@ class InactiveBannerManager(models.Manager):
         return qs.filter(not_yet_active | expired)
 
 
-class Banner(models.Model):
+class Banner(SearchableModel):
     headline = models.CharField(max_length=60,
                                 help_text=u'Keep this short, summarise your'
                                 ' banner in a few words.')

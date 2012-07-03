@@ -1,8 +1,11 @@
+from __future__ import absolute_import
+
 from django.db import models
 from django.db.models import Count
 from sorl.thumbnail import ImageField
 
 from kanisa.models.bible.db_field import BiblePassageField
+from .base import SearchableModel
 
 
 class SermonSeriesManager(models.Manager):
@@ -11,7 +14,7 @@ class SermonSeriesManager(models.Manager):
         return qs.annotate(the_num_sermons=Count('sermon'))
 
 
-class SermonSeries(models.Model):
+class SermonSeries(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the series.')
     image = ImageField(upload_to='kanisa/sermons/series/',
@@ -46,7 +49,7 @@ class SpeakerManager(models.Manager):
         return qs.annotate(num_sermons=Count('sermon'))
 
 
-class SermonSpeaker(models.Model):
+class SermonSpeaker(SearchableModel):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
@@ -74,7 +77,7 @@ class SermonManager(models.Manager):
         return qs.select_related(depth=1)
 
 
-class Sermon(models.Model):
+class Sermon(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
     date = models.DateField(help_text='The date the sermon was preached.')

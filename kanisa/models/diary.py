@@ -1,6 +1,10 @@
+from __future__ import absolute_import
+
 from datetime import date, timedelta
 from django.core.exceptions import ValidationError
 from django.db import models
+
+from .base import SearchableModel
 
 
 DAYS_OF_WEEK = (
@@ -14,7 +18,7 @@ DAYS_OF_WEEK = (
 )
 
 
-class RegularEvent(models.Model):
+class RegularEvent(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,
@@ -66,7 +70,7 @@ class RegularEvent(models.Model):
                        duration=self.duration)
 
 
-class ScheduledEvent(models.Model):
+class ScheduledEvent(SearchableModel):
     title = models.CharField(max_length=60, blank=True, null=True,
                              help_text=('If left blank, this defaults to '
                                         'event type (if there is one).'))
