@@ -8,7 +8,6 @@ from kanisa.models import (Sermon, SermonSeries,
 
 class KanisaBaseSearchIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
-    modified = indexes.DateTimeField(model_attr='modified')
     rendered = indexes.CharField(use_template=True)
     title = indexes.CharField(model_attr='title')
 
