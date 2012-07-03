@@ -8,6 +8,7 @@ from kanisa.views.diary import (DiaryRegularEventCreateView,
                                 DiaryCancelScheduledEventView,
                                 DiaryScheduledEventCreateView,
                                 DiaryScheduledEventUpdateView,
+                                DiaryScheduledEventCloneView,
                                 DiaryScheduleWeeksRegularEventView)
 
 urlpatterns = patterns('',
@@ -47,4 +48,8 @@ urlpatterns = patterns('',
                            smr(DiaryCancelScheduledEventView.as_view()),
                            {},
                            'kanisa_manage_diary_cancel_scheduled_event'),
+                       url(r'^clone/$',
+                           smr(DiaryScheduledEventCloneView.as_view()),
+                           {},
+                           'kanisa_manage_diary_clone_scheduled_event'),
                        )

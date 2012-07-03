@@ -128,6 +128,36 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryBaseView):
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
+class DiaryScheduledEventCloneView(KanisaCreateView, DiaryBaseView):
+    form_class = ScheduledEventCreationForm
+    model = ScheduledEvent
+    kanisa_title = 'Create Scheduled Event'
+    kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
+                   'diary - with an associated date and time.')
+
+    def get_initial(self):
+        try:
+            pk = int(self.request.GET['event'])
+        except ValueError:
+            raise Http404
+        except KeyError:
+            raise Http404
+
+        original = get_object_or_404(ScheduledEvent, pk=pk)
+        initial = super(DiaryScheduledEventCloneView, self).get_initial()
+        
+        initial['title'] = original.title
+        initial['event'] = original.event
+        initial['start_time'] = original.start_time
+        initial['duration'] = original.duration
+        initial['details'] = original.details
+        
+        return initial
+
+    def get_success_url(self):
+        return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
+
+
 class DiaryScheduleRegularEventView(RedirectView, DiaryBaseView):
     permanent = False
 
