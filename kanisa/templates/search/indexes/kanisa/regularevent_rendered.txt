@@ -1,0 +1,9 @@
+{% load url from future %}
+<blockquote>
+<p>{{ object.title }} is on <strong>{{ object.day }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
+{{ object.details.strip|linebreaks }}
+</blockquote>
+<p class="footnote">
+    <strong>Last Modified:</strong> {{ object.modified }}
+</p>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}"><i class="icon-edit"></i> Edit</a>

@@ -49,5 +49,4 @@
 * Improve test coverage
 * Documentation (developer friendly/end user friendly)
 * Add a way to kick-off a search index rebuild from the interface
-* Pre-render search results
 * On object update, reindex that object in Haystack

@@ -1,0 +1,19 @@
+{% load thumbnail %}
+
+{% load url from future %}
+<blockquote class="withthumbnail">
+{% if object.image %}
+{% thumbnail object.image "100x100" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+{% endthumbnail %}
+{% endif %}
+
+{{ object.details.strip|linebreaks }}
+{% if object.url %}
+<p><strong>URL</strong>: <a href="{{ object.url }}">{{ object.url }}</a></p>
+{% endif %}
+</blockquote>
+<p class="footnote">
+    <strong>Last Modified:</strong> {{ object.modified }}
+</p>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_banners_update' object.pk %}"><i class="icon-edit"></i> Edit</a>

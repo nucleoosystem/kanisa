@@ -11,6 +11,7 @@ from sorl.thumbnail import get_thumbnail
 class KanisaBaseSearchIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
     modified = indexes.DateTimeField(model_attr='modified')
+    rendered = indexes.CharField(use_template=True)
 
     def get_updated_field(self):
         return 'modified'

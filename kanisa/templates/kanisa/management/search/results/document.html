@@ -1,6 +1,0 @@
-{% load url from future %}
-<blockquote>{{ result.details.strip|linebreaks }}</blockquote>
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ result.modified }}
-</p>
-<a class="btn btn-mini" href="{% url 'kanisa_manage_documents_update' result.pk %}"><i class="icon-edit"></i> Edit</a>

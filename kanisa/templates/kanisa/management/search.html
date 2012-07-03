@@ -1,7 +1,5 @@
 {% extends 'kanisa/management/base.html' %}
 
-{% load kanisa_search_templates %}
-
 {% block pagetitle %}Search Results{% endblock %}
 
 {% block content %}
@@ -18,7 +16,7 @@
 {% for result in results %}
     <div class="search-result">
     <h3>{{ result.title }} <small>({{ result.verbose_name }})</small></h3>
-    {% include result.model_name|search_template %}
+    {{ result.rendered|safe }}
     <hr />
     </div>
 {% endfor %}

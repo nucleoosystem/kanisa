@@ -1,0 +1,18 @@
+{% load url from future %}
+<blockquote>
+<p>
+{% if object.series %}
+<strong>Series:</strong> {{ object.series }}<br />
+{% endif %}
+<strong>Speaker:</strong> {{ object.speaker }}<br />
+{% if object.passage %}
+<strong>Passage:</strong> {{ object.passage }}<br />
+{% endif %}
+A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
+
+{{ object.details.strip|linebreaks }}
+</blockquote>
+<p class="footnote">
+    <strong>Last Modified:</strong> {{ object.modified }}
+</p>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
