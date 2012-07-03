@@ -97,7 +97,9 @@ class DiaryScheduledEventBaseView(DiaryBaseView):
     kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
                    'diary - with an associated date and time.')
 
-class DiaryScheduledEventCreateView(KanisaCreateView, DiaryScheduledEventBaseView):
+
+class DiaryScheduledEventCreateView(KanisaCreateView,
+                                    DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
@@ -120,7 +122,8 @@ class DiaryScheduledEventCreateView(KanisaCreateView, DiaryScheduledEventBaseVie
         return initial
 
 
-class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryScheduledEventBaseView):
+class DiaryScheduledEventUpdateView(KanisaUpdateView,
+                                    DiaryScheduledEventBaseView):
     form_class = ScheduledEventEditForm
     model = ScheduledEvent
 
@@ -128,7 +131,8 @@ class DiaryScheduledEventUpdateView(KanisaUpdateView, DiaryScheduledEventBaseVie
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduledEventCloneView(KanisaCreateView, DiaryScheduledEventBaseView):
+class DiaryScheduledEventCloneView(KanisaCreateView,
+                                   DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
@@ -143,13 +147,13 @@ class DiaryScheduledEventCloneView(KanisaCreateView, DiaryScheduledEventBaseView
 
         original = get_object_or_404(ScheduledEvent, pk=pk)
         initial = super(DiaryScheduledEventCloneView, self).get_initial()
-        
+
         initial['title'] = original.title
         initial['event'] = original.event
         initial['start_time'] = original.start_time
         initial['duration'] = original.duration
         initial['details'] = original.details
-        
+
         return initial
 
     def get_success_url(self):
@@ -218,7 +222,8 @@ class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
         return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(KanisaDeleteView, DiaryScheduledEventBaseView):
+class DiaryCancelScheduledEventView(KanisaDeleteView,
+                                    DiaryScheduledEventBaseView):
     model = ScheduledEvent
 
     def get_date_string(self):
