@@ -30,9 +30,8 @@ site.register(Banner, BannerIndex)
 
 class SermonSpeakerIndex(KanisaBaseSearchIndex):
     title = indexes.CharField()
-    
+
     def prepare_title(self, obj):
         return '%s %s' % (obj.forename, obj.surname)
-
 
 site.register(SermonSpeaker, SermonSpeakerIndex)
