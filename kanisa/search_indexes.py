@@ -1,3 +1,4 @@
+from django.utils.dateformat import DateFormat
 from haystack import indexes
 from haystack import site
 from kanisa.models import (Sermon, SermonSeries, SermonSpeaker,
@@ -19,7 +20,16 @@ site.register(Document, KanisaBaseSearchIndex)
 site.register(SermonSeries, KanisaBaseSearchIndex)
 site.register(Sermon, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
-site.register(ScheduledEvent, KanisaBaseSearchIndex)
+
+
+class ScheduledEventIndex(KanisaBaseSearchIndex):
+    subtitle = indexes.CharField(model_attr='title')
+
+    def prepare_subtitle(self, obj):
+        thedate = DateFormat(obj.date).format('l, jS F Y')
+        return '%s' % thedate
+
+site.register(ScheduledEvent, ScheduledEventIndex)
 
 
 class BannerIndex(KanisaBaseSearchIndex):
