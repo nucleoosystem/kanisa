@@ -1,5 +1,9 @@
 {% load url from future %}
-<blockquote>{{ object.details.strip|linebreaks }}</blockquote>
+{% load static %}
+<blockquote>
+{{ object.details.strip|linebreaks }}
+<strong>File:</strong> <a href="{% get_media_prefix %}{{ object.file.name }}">{{ object.file_name }}</a>
+</blockquote>
 <p class="footnote">
     <strong>Last Modified:</strong> {{ object.modified }}
 </p>

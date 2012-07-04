@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from django.db import models
+import os
 
 from .base import SearchableModel
 
@@ -18,6 +19,9 @@ class Document(SearchableModel):
 
     def __unicode__(self):
         return self.title
+
+    def file_name(self):
+        return os.path.basename(self.file.name)
 
     class Meta:
         # Need this because I've split up models.py into multiple
