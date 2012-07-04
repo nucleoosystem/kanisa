@@ -1,6 +1,6 @@
 {% load url from future %}
 <blockquote>
-<p>{{ object.title }} is on <strong>{{ object.day }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
+<p>{{ object.title }} is on <strong>{{ object.get_day_display }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
 {{ object.details.strip|linebreaks }}
 </blockquote>
 <p class="footnote">
