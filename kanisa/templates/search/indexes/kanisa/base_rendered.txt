@@ -1,0 +1,9 @@
+{% block contents %}
+{% endblock %}
+
+<p class="footnote">
+    <strong>Last Modified:</strong> {{ object.modified }}
+</p>
+
+{% block buttons %}
+{% endblock %}

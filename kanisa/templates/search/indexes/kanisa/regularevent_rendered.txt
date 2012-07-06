@@ -1,9 +1,14 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
 {% load url from future %}
+
+{% block contents %}
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.get_day_display }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
 {{ object.details.strip|linebreaks }}
 </blockquote>
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ object.modified }}
-</p>
+{% endblock %}
+
+{% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}

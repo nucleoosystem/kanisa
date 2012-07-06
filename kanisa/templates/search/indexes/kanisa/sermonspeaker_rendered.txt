@@ -1,2 +1,7 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
 {% load url from future %}
+
+{% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_speaker_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}

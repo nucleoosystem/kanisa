@@ -1,6 +1,9 @@
-{% load thumbnail %}
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
+{% load thumbnail %}
 {% load url from future %}
+
+{% block contents %}
 <blockquote class="withthumbnail">
 {% if object.image %}
 {% thumbnail object.image "100x100" crop="center" as im %}
@@ -13,8 +16,9 @@
 {% endif %}
 {{ object.details.strip|linebreaks }}
 </blockquote>
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ object.modified }}
-</p>
+{% endblock %}
+
+{% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_detail' object.pk %}"><i class="icon-eye-open"></i> View</a>
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}

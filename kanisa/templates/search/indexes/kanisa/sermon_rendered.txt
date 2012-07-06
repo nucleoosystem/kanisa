@@ -1,4 +1,8 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
 {% load url from future %}
+
+{% block contents %}
 <blockquote>
 <p>
 {% if object.series %}
@@ -12,7 +16,8 @@ A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
 
 {{ object.details.strip|linebreaks }}
 </blockquote>
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ object.modified }}
-</p>
+{% endblock %}
+
+{% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}

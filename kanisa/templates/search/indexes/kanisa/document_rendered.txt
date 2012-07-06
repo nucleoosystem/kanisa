@@ -1,10 +1,15 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
 {% load url from future %}
 {% load static %}
+
+{% block contents %}
 <blockquote>
 {{ object.details.strip|linebreaks }}
 <strong>File:</strong> <a href="{% get_media_prefix %}{{ object.file.name }}">{{ object.file_name }}</a>
 </blockquote>
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ object.modified }}
-</p>
+{% endblock %}
+
+{% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_documents_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}
