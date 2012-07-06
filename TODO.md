@@ -44,6 +44,11 @@
 * Service Planning
 * Rotas
 
+# Search
+
+* Paginate search results
+* Limit number of words in details bit
+
 # Misc
 
 * Improve test coverage
