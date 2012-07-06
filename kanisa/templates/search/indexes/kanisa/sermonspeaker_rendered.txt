@@ -1,8 +1,20 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
 {% load url from future %}
+{% load thumbnail %}
 
 {% block title %}{{ object.forename }} {{ object.surname }}{% endblock %}
+
+{% block contents %}
+<blockquote class="withthumbnail">
+{% if object.image %}
+{% thumbnail object.image "100x100" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+{% endthumbnail %}
+{% endif %}
+</blockquote>
+
+{% endblock %}
 
 {% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_speaker_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
