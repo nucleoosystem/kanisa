@@ -1,4 +1,7 @@
 {% autoescape off %}
+{% load kanisa_search %}
+
+{{ object|verbose_name }}
 {{ object.forename }}
 {{ object.surname }}
 
