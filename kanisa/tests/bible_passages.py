@@ -293,6 +293,90 @@ class ToPassageGoodInput(TestCase):
         self.assertRaises(bible.BookBoundsError, bible.to_passage,
                           '2 John 2:1-2:2')
 
+    def testCommonNames(self):
+        COMMON_ABBREVIATIONS = [['gen', ],
+                                ['ex', ],
+                                ['lev', ],
+                                ['num', ],
+                                ['deut', ],
+                                ['jos', 'josh', ],
+                                # Not sure how people abbreviate Judges
+                                [],
+                                # Not sure how people abbreviate Ruth
+                                [],
+                                ['1 sam', ],
+                                ['2 sam', ],
+                                ['1 ki', '1 kgs', ],
+                                ['2 ki', '2 kgs', ],
+                                ['1 chr', ],
+                                ['2 chr', ],
+                                # Not sure how people abbreviate Ezra
+                                [],
+                                ['neh', ],
+                                # Not sure how people abbreviate Esther
+                                [],
+                                # Not sure how people abbreviate Job
+                                [],
+                                ['ps', ],
+                                ['Pr', ],
+                                ['Ecc', ],
+                                ['SoS', 'SS'],
+                                ['Is', ],
+                                ['Jer', ],
+                                ['Lam', ],
+                                ['Eze', ],
+                                ['Dan', ],
+                                ['Hos', ],
+                                # Not sure how people abbreviate Joel
+                                [],
+                                # Not sure how people abbreviate Amos
+                                [],
+                                ['Oba', ],
+                                ['Jon', ],
+                                ['Mic', ],
+                                ['Nah', ],
+                                ['Hab', ],
+                                ['Zep', 'Zeph', ],
+                                ['Hag', ],
+                                ['Zec', 'Zech', ],
+                                ['Mal', ],
+                                ['Mt', 'Matt', ],
+                                ['Mk', 'Mar', ],
+                                ['Lk', ],
+                                ['Joh', 'Jn', ],
+                                ['Acts', ],
+                                ['Rom', ],
+                                ['1 Cor', '1 co', ],
+                                ['2 Cor', '2 co'],
+                                ['Gal', ],
+                                ['Eph', ],
+                                # This clashes with Philemon, but people tend
+                                # to mean Philippians
+                                ['Phil', ],
+                                ['Col', ],
+                                ['1 Th', '1 thes', '1 thess'],
+                                ['2 Th', '2 thes', '2 thess'],
+                                ['1 tim', ],
+                                ['2 tim', ],
+                                ['Tit', ],
+                                # Not sure how people abbreviate Philemon
+                                [],
+                                ['Heb', ],
+                                ['Jam', 'Jas', ],
+                                ['1 Pet', ],
+                                ['2 Pet', ],
+                                ['1 Jn', '1 Jo', ],
+                                ['2 Jn', '2 Jo', ],
+                                ['3 Jn', '3 Jo', ],
+                                ['Jude', ],
+                                ['Rev', ]]
+
+        for i in range(0, len(COMMON_ABBREVIATIONS)):
+            for abbr in COMMON_ABBREVIATIONS[i]:
+                reference = bible.normalise_book(bible.BOOKS_OF_THE_BIBLE[i])
+                self.assertEqual(unicode(bible.to_passage(abbr)),
+                                 reference)
+
 
 class BiblePassageModelField(TestCase):
     def testAssignPassage(self):

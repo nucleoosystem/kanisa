@@ -21,7 +21,6 @@
 
 * Allow multiple podcasts (select which sermons go where at the sermon series
   layer - allow series to go to multiple podcasts).
-* Lots of reasonable Bible passages get rejected (e.g. Matt 3)
 
 # Pages
 
