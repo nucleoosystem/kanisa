@@ -2,6 +2,8 @@
 {% load thumbnail %}
 {% load url from future %}
 
+{% block title %}{{ object.headline }}{% endblock %}
+
 {% block contents %}
 <blockquote class="withthumbnail">
 {% if object.image %}

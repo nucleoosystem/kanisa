@@ -2,6 +2,8 @@
 
 {% load url from future %}
 
+{% block subtitle %}{{ object.date|date:"l, jS F Y" }} - {% endblock %}
+
 {% block contents %}
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.date|date:"jS F Y" }}</strong> at <strong>{{ object.start_time }}</strong>.</p>

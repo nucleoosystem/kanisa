@@ -2,6 +2,8 @@
 
 {% load url from future %}
 
+{% block title %}{{ object.forename }} {{ object.surname }}{% endblock %}
+
 {% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_speaker_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
 {% endblock %}

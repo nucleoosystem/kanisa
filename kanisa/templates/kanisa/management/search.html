@@ -15,7 +15,6 @@
 
 {% for result in results %}
     <div class="search-result">
-    <h3>{{ result.title }} <small>({% if result.subtitle %}{{ result.subtitle }} - {% endif %}{{ result.verbose_name }})</small></h3>
     {{ result.rendered|safe }}
     <hr />
     </div>

@@ -1,3 +1,7 @@
+{% load kanisa_search %}
+
+<h3>{% block title %}{{ object.title }}{% endblock %} <small>({% block subtitle %}{% endblock %}{{ object|verbose_name }})</small></h3>
+
 {% block contents %}
 {% endblock %}
 
