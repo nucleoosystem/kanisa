@@ -14,10 +14,10 @@ class KanisaBaseSearchIndex(indexes.SearchIndex):
         return 'modified'
 
 
-site.register(Document, KanisaBaseSearchIndex)
 site.register(SermonSeries, KanisaBaseSearchIndex)
 site.register(Sermon, KanisaBaseSearchIndex)
+site.register(SermonSpeaker, KanisaBaseSearchIndex)
+site.register(Document, KanisaBaseSearchIndex)
+site.register(Banner, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, KanisaBaseSearchIndex)
-site.register(Banner, KanisaBaseSearchIndex)
-site.register(SermonSpeaker, KanisaBaseSearchIndex)
