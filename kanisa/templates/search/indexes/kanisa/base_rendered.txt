@@ -8,6 +8,7 @@
 
     <p class="footnote">
         <strong>Last Modified:</strong> {{ object.modified }}
+        {% block extradetails %}{% endblock %}
     </p>
 
     {% block buttons %}

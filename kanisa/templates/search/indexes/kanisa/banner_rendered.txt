@@ -13,10 +13,31 @@
 {% endif %}
 
 {{ object.contents.strip|linebreaks }}
+
+<br />
+
 {% if object.url %}
 <p><strong>URL</strong>: <a href="{{ object.url }}">{{ object.url }}</a></p>
 {% endif %}
+
 </blockquote>
+{% endblock %}
+
+{% block extradetails %}
+<strong>Status:</strong>
+{% if object.active %}
+    {% if object.publish_until %}
+        This banner will remain active for {{ object.publish_until|timeuntil }}.
+    {% else %}
+        This banner will remain active forever.
+    {% endif %}
+{% else %}
+    {% if object.expired %}
+        This banner is retired.
+    {% else %}
+        This banner is not yet active (it will become active on {{ object.publish_from }}).
+    {% endif %}
+{% endif %}
 {% endblock %}
 
 {% block buttons %}
