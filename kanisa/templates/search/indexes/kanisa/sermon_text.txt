@@ -1,8 +1,7 @@
+{% extends 'search/indexes/kanisa/base_text.txt' %}
+
+{% block details %}
 {% autoescape off %}
-{% load kanisa_search %}
-
-{{ object|verbose_name }}
-
 {{ object.title }}
 {% if object.details %}
 {{ object.details }}
@@ -14,3 +13,4 @@
 
 {{ object.speaker }}
 {% endautoescape %}
+{% endblock %}

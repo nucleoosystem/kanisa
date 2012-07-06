@@ -1,9 +1,10 @@
-{% autoescape off %}
-{% load kanisa_search %}
+{% extends 'search/indexes/kanisa/base_text.txt' %}
 
-{{ object|verbose_name }}
+{% block details %}
+{% autoescape off %}
 
 {{ object.title }}
 {{ object.file }}
 {{ object.details }}
 {% endautoescape %}
+{% endblock %}

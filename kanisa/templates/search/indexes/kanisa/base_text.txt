@@ -1,0 +1,10 @@
+{% autoescape off %}
+{% load kanisa_search %}
+
+{{ object|verbose_name }}
+
+{% endautoescape %}
+
+{% block details %}
+
+{% endblock %}

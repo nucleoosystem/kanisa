@@ -1,7 +1,7 @@
-{% autoescape off %}
-{% load kanisa_search %}
+{% extends 'search/indexes/kanisa/base_text.txt' %}
 
-{{ object|verbose_name }}
+{% block details %}
+{% autoescape off %}
 
 {{ object.title }}
 {% if object.details %}
@@ -10,3 +10,4 @@
 
 {{ object.event }}
 {% endautoescape %}
+{% endblock %}
