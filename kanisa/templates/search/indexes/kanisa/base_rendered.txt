@@ -1,13 +1,17 @@
 {% load kanisa_search %}
 
-<h3>{% block title %}{{ object.title }}{% endblock %} <small>({% block subtitle %}{% endblock %}{{ object|verbose_name }})</small></h3>
+<div class="search-result">
+    <h3>{% block title %}{{ object.title }}{% endblock %} <small>({% block subtitle %}{% endblock %}{{ object|verbose_name }})</small></h3>
 
-{% block contents %}
-{% endblock %}
+    {% block contents %}
+    {% endblock %}
 
-<p class="footnote">
-    <strong>Last Modified:</strong> {{ object.modified }}
-</p>
+    <p class="footnote">
+        <strong>Last Modified:</strong> {{ object.modified }}
+    </p>
 
-{% block buttons %}
-{% endblock %}
+    {% block buttons %}
+    {% endblock %}
+
+<hr />
+</div>

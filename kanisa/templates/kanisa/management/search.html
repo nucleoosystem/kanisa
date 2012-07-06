@@ -14,10 +14,7 @@
 {% endif %}
 
 {% for result in results %}
-    <div class="search-result">
     {{ result.rendered|safe }}
-    <hr />
-    </div>
 {% endfor %}
 
 {% endblock %}
