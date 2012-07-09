@@ -92,6 +92,7 @@ class BannerForm(KanisaBaseForm):
                                                   'visible indefinitely.'))
 
     class Meta:
+        exclude = ('visits', )
         model = Banner
 
 

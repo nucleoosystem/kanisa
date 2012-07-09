@@ -1,6 +1,5 @@
 # Banners
 
-* Track click-throughs?
 * Fix issue where image doesn't load for some time (might be limited
   to the dev server).
 * Ordering/prioritisation?

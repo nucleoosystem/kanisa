@@ -57,6 +57,9 @@ class Banner(SearchableModel):
                                      ' banner will be visible. If left'
                                      ' blank your banner will be visible'
                                      ' indefinitely.')
+    visits = models.IntegerField(default=0,
+                                 help_text='The number of click-throughs this'
+                                 ' banner has had.')
     modified = models.DateTimeField(auto_now=True)
 
     # Managers

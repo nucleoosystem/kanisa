@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import F
 from django.http import Http404
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -69,5 +70,8 @@ class VisitBannerView(RedirectView):
 
         if not banner.url:
             raise Http404
+
+        banner.visits = F('visits') + 1
+        banner.save()
 
         return banner.url

@@ -17,21 +17,24 @@
           </a></h4>
         </div>
       </div>
-      
+
       <div class="caption">
+        <p class="details">
         {% if banner.active %}
         {% if banner.publish_until %}
-        <p class="details">This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.</p>
+        This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.
         {% else %}
-        <p class="details">This banner will remain active <strong>forever</strong>.</p>
+        This banner will remain active <strong>forever</strong>.
         {% endif %}
         {% else %}
             {% if banner.expired %}
-            <p class="details">This banner is <strong>retired</strong>.</p>
+            This banner is <strong>retired</strong>.
             {% else %}
-            <p class="details">This banner is <strong>not yet active</strong> (it will become active on <strong>{{ banner.publish_from }}</strong>).</p>
+            This banner is <strong>not yet active</strong> (it will become active on <strong>{{ banner.publish_from }}</strong>).
             {% endif %}
         {% endif %}
+
+        This banner has been visited <strong>{{ banner.visits }} time{{ banner.visits|pluralize }}</strong>.</p>
 
         <p>
           <a class="btn" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
