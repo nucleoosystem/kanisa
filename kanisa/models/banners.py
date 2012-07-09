@@ -3,10 +3,10 @@ from __future__ import absolute_import
 from datetime import date, timedelta
 from django.db import models
 from django.db.models import Q
-from kanisa.models.utils import date_has_passed, today_in_range
 from sorl.thumbnail import ImageField
 
 from .base import SearchableModel
+from .utils import date_has_passed, today_in_range
 
 
 class ActiveBannerManager(models.Manager):
