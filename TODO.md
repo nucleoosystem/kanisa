@@ -53,6 +53,8 @@
 
 * Improve test coverage
 * Documentation (developer friendly/end user friendly)
+* Make it possible to attach documents to events (e.g. agendas,
+  minutes).
 
 # Frontend
 
