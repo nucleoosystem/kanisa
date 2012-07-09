@@ -38,8 +38,8 @@ class Banner(SearchableModel):
     link_text = models.CharField(max_length=60,
                                  blank=True,
                                  null=True,
-                                 help_text=u'The text that users will click '
-                                 'on to visit the URL for this banner.')
+                                 help_text=u'The text that users will click'
+                                 ' on to visit the URL for this banner.')
     url = models.URLField(verbose_name=u'URL',
                           blank=True,
                           null=True,
