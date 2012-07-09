@@ -49,9 +49,13 @@
 
 * Paginate search results
 * Limit number of words in details bit
-* Exclude past events?
+* Boost future events in search results over past events
 
 # Misc
 
 * Improve test coverage
 * Documentation (developer friendly/end user friendly)
+
+# Frontend
+
+* Actually implement the frontend of the site
