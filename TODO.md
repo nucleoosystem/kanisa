@@ -1,15 +1,15 @@
 # Banners
 
-* Allow customising link text
+* Allow customising link text.
 * Track click-throughs?
 * Fix issue where image doesn't load for some time (might be limited
-  to the dev server)
+  to the dev server).
 * Ordering/prioritisation?
 
 # Diary
 
 * Allow multiple schedules for regular events, with different names
-  (e.g.  Football/Football Training)
+  (e.g.  Football/Football Training).
 * Make it impossible for a ScheduledEvent not to have a title (so that
   the warning on the RegularEvent page about changes not being
   propagated to already ScheduledEvents is actually true).
@@ -27,10 +27,10 @@
 
 # Social Media
 
-* Allow delayed posting to Twitter (and Facebook?)
+* Allow delayed posting to Twitter (and Facebook?).
 * Incorporate Twitter feed/Facebook feed into site?
 * Follow us on Twitter/Like us on Facebook buttons?
-* Allow posting to Facebook
+* Allow posting to Facebook.
 
 # User Management
 
@@ -38,7 +38,7 @@
 * Allow admin staff to quickly give permissions (not too granular -
   based on content types rather than individual create/edit/delete for
   each).
-* Allow quick membership approval process
+* Allow quick membership approval process.
 
 # Members' Area
 
