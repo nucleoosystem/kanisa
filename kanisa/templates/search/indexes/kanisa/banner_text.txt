@@ -5,6 +5,7 @@
 
 {{ object.headline }}
 {{ object.contents }}
+{{ object.link_text }}
 {{ object.url }}
 
 {% endautoescape %}

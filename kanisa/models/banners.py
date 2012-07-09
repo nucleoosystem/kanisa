@@ -35,6 +35,11 @@ class Banner(SearchableModel):
                                 ' details about what you\'re advertising.')
     image = ImageField(upload_to='kanisa/banners/',
                        help_text=u'Must be at least 800px by 600px.')
+    link_text = models.CharField(max_length=60,
+                                 blank=True,
+                                 null=True,
+                                 help_text=u'The text that users will click '
+                                 'on to visit the URL for this banner.')
     url = models.URLField(verbose_name=u'URL',
                           blank=True,
                           null=True,

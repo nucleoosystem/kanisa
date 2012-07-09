@@ -1,3 +1,4 @@
+
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 {% load thumbnail %}
 {% load url from future %}
@@ -17,6 +18,9 @@
 <br />
 
 {% if object.url %}
+{% if object.link_text %}
+<p><strong>Link Text</strong>: {{ object.link_text }}</p>
+{% endif %}
 <p><strong>URL</strong>: <a href="{{ object.url }}">{{ object.url }}</a></p>
 {% endif %}
 

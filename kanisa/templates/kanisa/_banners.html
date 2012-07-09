@@ -15,6 +15,11 @@
         {% if banner.contents %}
         <p>{{ banner.contents }}</p>
         {% endif %}
+        {% if banner.url %}
+        <a href="{{ banner.url }}" title="{{ banner.link_text|default:"Find out more" }}">
+          {{ banner.link_text|default:"Find out more" }} &raquo;
+        </a>
+        {% endif %}
       </div>
     </div>
     {% endfor %}
