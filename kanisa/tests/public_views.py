@@ -25,8 +25,7 @@ class PublicViewTest(KanisaViewTestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 302)
         items = resp.items()
-        self.assertEqual(len(items), 3)
-        self.assertEqual(items[2],
+        self.assertEqual(items[-1],
                          ('Location', 'http://www.google.com'))
 
         banner = Banner.objects.get(pk=2)
