@@ -1,6 +1,7 @@
 {% if banners %}
 
 {% load thumbnail %}
+{% load url from future %}
 
 <div id="banners_carousel" class="carousel slide" style="height: 400px">
   <!-- Carousel items -->
@@ -16,7 +17,7 @@
         <p>{{ banner.contents }}</p>
         {% endif %}
         {% if banner.url %}
-        <a href="{{ banner.url }}" title="{{ banner.link_text|default:"Find out more" }}">
+        <a href="{% url 'kanisa_public_banners_visit' banner.pk %}" title="{{ banner.link_text|default:"Find out more" }}">
           {{ banner.link_text|default:"Find out more" }} &raquo;
         </a>
         {% endif %}

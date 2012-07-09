@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import Http404
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
@@ -58,3 +59,15 @@ class RetireBannerView(RedirectView):
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_banners')
+
+
+class VisitBannerView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, banner_id):
+        banner = get_object_or_404(Banner, pk=banner_id)
+
+        if not banner.url:
+            raise Http404
+
+        return banner.url
