@@ -50,7 +50,6 @@
 * Paginate search results
 * Limit number of words in details bit
 * Exclude past events?
-* Add clone button to search results for scheduled events?
 
 # Misc
 

@@ -13,5 +13,6 @@
 
 {% block buttons %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ object.pk }}">Clone</a>
 <a class="btn btn-mini btn-danger" href="{% url 'kanisa_manage_diary_cancel_scheduled_event' object.pk %}"><i class="icon-white icon-trash"></i> Cancel</a>
 {% endblock %}
