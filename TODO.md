@@ -52,6 +52,8 @@
 * Documentation (developer friendly/end user friendly)
 * Make it possible to attach documents to events (e.g. agendas,
   minutes).
+* Allow redirecting arbitrary URLs as a fallback - to help map old
+  URLs.
 
 # Frontend
 
