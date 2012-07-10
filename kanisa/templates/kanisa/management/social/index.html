@@ -7,53 +7,6 @@
 
 <h2>Twitter</h2>
 
-{% if twitter_username %}
-<div class="row">
-
-    <div class="span5">
-        <p>
-          You are logged in to Twitter as
-          <strong><a href="http://twitter.com/{{ twitter_username }}">@{{ twitter_username }}</a></strong>.
-        </p>
-
-        <p>
-          You currently have
-          <strong><a href="http://twitter.com/{{ twitter_username }}/followers">{{ followers }} follower{{ followers|pluralize }}</a></strong>,
-          and have posted <strong>{{ statuses }} status update{{ statuses|pluralize }}</strong>.
-        </p>
-
-        <hr />
-
-        <blockquote>
-        <h4>Most Recent Status</h4>
-        <p>{{ current_status.text|urlize }}</p>
-        <small class="pull-right">
-          <a href="http://twitter.com/{{ twitter_username }}/status/{{ current_status.id }}">
-            {{ current_status.created_at|timesince }} ago
-          </a>
-        </small>
-        </blockquote>
-
-    </div>
-
-    <div class="span5">
-        <form method="post" action="{% url 'kanisa_manage_social_twitter_post' %}">
-          {% csrf_token %}
-          <fieldset>
-            <legend>Update your Status</legend>
-            <div class="control-group">
-            <textarea name="twitter-status" class="input-xlarge" maxlength="140" rows="2" style="width:100%"></textarea>
-            <p><button type="submit" class="btn btn-primary">Update Status</button></p>
-            </div>
-          </fieldset>
-        </form>
-    </div>
-</div>
-
-<hr />
-
-{% else %}
-<div class="alert alert-info">{{ twitter_status }}</div>
-{% endif %}
+{% include 'kanisa/management/social/_twitter_basics.html' %}
 
 {% endblock %}
