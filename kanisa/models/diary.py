@@ -71,12 +71,11 @@ class RegularEvent(SearchableModel):
 
 
 class ScheduledEvent(SearchableModel):
-    title = models.CharField(max_length=60, blank=True, null=True,
-                             help_text=('If left blank, this defaults to '
-                                        'event type (if there is one).'))
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
-                              help_text=('If left blank, you must give the '
-                                         'event a name.'))
+                              help_text=('You can leave this blank, but if '
+                                         'you do you must give the event a '
+                                         'title.'))
+    title = models.CharField(max_length=60)
     date = models.DateField()
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
@@ -102,12 +101,3 @@ class ScheduledEvent(SearchableModel):
 
         # Hopefully this only occurs during event editing
         return u'None'
-
-    def clean(self):
-        if self.pk and not self.event and not self.title:
-            raise ValidationError('This scheduled event does not have a '
-                                  'parent event type, so it needs a title.')
-
-        if not self.event and not self.title:
-            raise ValidationError('You must either select an event, or give '
-                                  'your new event a title.')

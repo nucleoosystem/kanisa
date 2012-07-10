@@ -8,9 +8,6 @@
 
 * Allow multiple schedules for regular events, with different names
   (e.g.  Football/Football Training).
-* Make it impossible for a ScheduledEvent not to have a title (so that
-  the warning on the RegularEvent page about changes not being
-  propagated to already ScheduledEvents is actually true).
 * Make it possible to create a RegularEvent from a ScheduledEvent (for
   when you've created an event once, and then realise it'll happen
   regularly).

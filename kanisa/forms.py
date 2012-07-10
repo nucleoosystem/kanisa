@@ -111,21 +111,6 @@ class ScheduledEventEditForm(KanisaBaseForm):
         model = ScheduledEvent
         exclude = ('event', )
 
-    def clean(self):
-        cleaned_data = self.cleaned_data
-
-        if not self.instance.pk:
-            return cleaned_data
-
-        title = cleaned_data['title']
-
-        if not title and not self.instance.event:
-            msg = 'Your event must have a title.'
-            self._errors["title"] = self.error_class([msg])
-            del cleaned_data["title"]
-
-        return cleaned_data
-
 
 class ScheduledEventCreationForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
@@ -133,6 +118,9 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 
     class Meta:
         model = ScheduledEvent
+
+    class Media:
+        js = ('kanisa/js/scheduled_event.js', )
 
 
 class SermonSeriesForm(KanisaBaseForm):
