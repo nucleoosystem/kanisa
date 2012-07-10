@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.base import RedirectView
-from kanisa.models import Document
 from kanisa.utils import get_tweepy_handle, TwitterException
 from kanisa.views.generic import KanisaTemplateView
 
