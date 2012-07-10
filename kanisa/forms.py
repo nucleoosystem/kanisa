@@ -115,6 +115,9 @@ class ScheduledEventEditForm(KanisaBaseForm):
 class ScheduledEventCreationForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
+    event = forms.ModelChoiceField(queryset=RegularEvent.objects.
+                                   order_by('title').all(),
+                                   required=False)
 
     class Meta:
         model = ScheduledEvent
