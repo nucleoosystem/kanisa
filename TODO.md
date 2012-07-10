@@ -7,7 +7,7 @@
 # Diary
 
 * Allow multiple schedules for regular events, with different names
-  (e.g.  Football/Football Training).
+  (e.g. Football/Football Training).
 * Make it possible to create a RegularEvent from a ScheduledEvent (for
   when you've created an event once, and then realise it'll happen
   regularly).
