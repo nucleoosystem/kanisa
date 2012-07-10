@@ -15,6 +15,8 @@
   when you've created an event once, and then realise it'll happen
   regularly).
 * Allow creating RegularEvents on timetables other than day x of week.
+* Sort scheduled events in dropdowns alphabetically, elsewhere sort
+  them by day.
 
 # Sermons
 
