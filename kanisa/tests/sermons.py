@@ -30,7 +30,7 @@ class SermonTest(TestCase):
         with self.assertNumQueries(0):
             self.assertEqual(series1.num_sermons(), 3)
             self.assertEqual(series2.num_sermons(), 0)
-            self.assertEqual(series2.num_sermons(), 0)
+            self.assertEqual(series3.num_sermons(), 0)
 
         series = list(SermonSeries.objects.all())
         with self.assertNumQueries(0):
