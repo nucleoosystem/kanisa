@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 from .bible_constants import (BOOKS_OF_THE_BIBLE,
-                              MULTI_CHAPTER_BOOKS,
                               SINGLE_CHAPTER_BOOKS,
                               CHAPTERS_IN_THE_BOOKS,
                               VERSES_IN_THE_CHAPTERS,

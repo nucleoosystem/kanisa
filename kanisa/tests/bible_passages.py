@@ -1,8 +1,7 @@
 from kanisa.models.bible import bible
-from kanisa.models.bible.db_field import BiblePassageField
+from kanisa.models.bible.bible_constants import MULTI_CHAPTER_BOOKS
 from kanisa.models.sermons import SermonSeries
 from django.core import serializers
-from django.db import models
 from django.test import TestCase
 
 
@@ -137,7 +136,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_verse, 5)
 
     def testBooksWithChapter1(self):
-        for b in bible.MULTI_CHAPTER_BOOKS:
+        for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1')
             self.assertEqual(passage.book, b)
             self.assertEqual(passage.book, b)
@@ -147,7 +146,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage.end_verse, None)
 
     def testBooksWithChapter1To2(self):
-        for b in bible.MULTI_CHAPTER_BOOKS:
+        for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1 - 2')
             self.assertEqual(passage.book, b)
             self.assertEqual(passage.book, b)
@@ -189,7 +188,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage2.end_verse, 2)
 
     def testBooksWithFullRange(self):
-        for b in bible.MULTI_CHAPTER_BOOKS:
+        for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1:3-2:4')
             self.assertEqual(passage.book, b)
             self.assertEqual(passage.start_chapter, 1)
