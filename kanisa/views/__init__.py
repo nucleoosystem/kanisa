@@ -1,6 +1,4 @@
-from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
