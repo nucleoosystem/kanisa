@@ -7,7 +7,7 @@ env:
 install:
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install -r requirements.txt --use-mirrors
-  - pip install pep8 --use-mirrors
+  - pip install flake8 --use-mirrors
 script:
-  - pep8 kanisa
+  - flake8 kanisa
   - ./kanisa/example_project/manage.py test kanisa
