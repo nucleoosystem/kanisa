@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 
-from datetime import date, timedelta
-from django.core.exceptions import ValidationError
+from datetime import timedelta
 from django.db import models
 
 from .base import SearchableModel
@@ -63,7 +62,7 @@ class RegularEvent(SearchableModel):
             if single_date.weekday() != self.day:
                 continue
 
-            instance = self.scheduledevent_set.\
+            self.scheduledevent_set.\
                 create(date=single_date,
                        title=self.title,
                        start_time=self.start_time,
