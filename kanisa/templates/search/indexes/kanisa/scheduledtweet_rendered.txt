@@ -1,0 +1,19 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
+{% load url from future %}
+{% load static %}
+
+{% block title %}
+{{ object.tweet|truncatechars:80 }}
+{% endblock %}
+
+{% block contents %}
+<blockquote>
+{{ object.tweet }}
+<strong>Scheduled for :</strong> {{ object.date|date:"jS F Y" }} at {{ object.time|date:"H:i" }}
+</blockquote>
+{% endblock %}
+
+{% block buttons %}
+<a class="btn btn-mini" href="{% url 'kanisa_manage_social_twitter_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endblock %}

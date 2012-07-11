@@ -3,7 +3,8 @@ from haystack import site
 from kanisa.models import (Sermon, SermonSeries, SermonSpeaker,
                            Document,
                            Banner,
-                           RegularEvent, ScheduledEvent)
+                           RegularEvent, ScheduledEvent,
+                           ScheduledTweet)
 
 
 class KanisaBaseSearchIndex(indexes.SearchIndex):
@@ -21,3 +22,4 @@ site.register(Document, KanisaBaseSearchIndex)
 site.register(Banner, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, KanisaBaseSearchIndex)
+site.register(ScheduledTweet, KanisaBaseSearchIndex)

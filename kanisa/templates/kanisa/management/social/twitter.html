@@ -1,0 +1,40 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+{% include 'kanisa/management/social/_twitter_basics.html' %}
+
+<h2>Scheduled Tweets</h2>
+
+<p><a class="btn btn-primary btn-large" href="{% url 'kanisa_manage_social_twitter_create' %}">Schedule a Tweet</a></p>
+
+{% if object_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tweet</th>
+      <th>Scheduled For</th>
+      <th></td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tweet in object_list %}
+    <tr>
+      <td>{{ tweet.tweet }}</td>
+      <td>{{ tweet.date|date:"jS F Y" }} at {{ tweet.time|date:"H:i" }}</td>
+      <td>
+        <a class="btn btn-mini" href="{% url 'kanisa_manage_social_twitter_update' tweet.pk %}"><i class="icon-edit"></i> Edit</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+There are no scheduled tweets to display.
+</div>
+{% endif %}
+
+{% endblock %}

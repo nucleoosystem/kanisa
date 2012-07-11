@@ -11,7 +11,8 @@ from mutagen.easyid3 import EasyID3
 from kanisa.models import (Banner,
                            RegularEvent, ScheduledEvent,
                            Document,
-                           SermonSeries, Sermon, SermonSpeaker)
+                           SermonSeries, Sermon, SermonSpeaker,
+                           ScheduledTweet)
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
@@ -186,3 +187,12 @@ class SermonForm(KanisaBaseForm):
 class DocumentForm(KanisaBaseForm):
     class Meta:
         model = Document
+
+
+class ScheduledTweetForm(KanisaBaseForm):
+    date = BootstrapDateField()
+    time = BootstrapTimeField()
+
+    class Meta:
+        model = ScheduledTweet
+        exclude = ('posted', )
