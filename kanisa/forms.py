@@ -205,7 +205,8 @@ class ScheduledTweetForm(KanisaBaseForm):
 
         thedt = datetime.combine(thedate, thetime)
         if thedt < datetime.now():
-            raise forms.ValidationError("You cannot scheduled tweets in the past.")
+            raise forms.ValidationError('You cannot scheduled tweets in the '
+                                        'past.')
 
         return cleaned_data
 
