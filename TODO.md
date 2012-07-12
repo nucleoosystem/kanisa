@@ -50,6 +50,7 @@
 * Paginate search results
 * Limit number of words in details bit
 * Boost future events in search results over past events
+* Make sure objects are removed from search indexes on deletion
 
 # Misc
 
