@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-from datetime import datetime
 from django.db import models
 
 from .base import SearchableModel
@@ -8,10 +7,8 @@ from .base import SearchableModel
 
 class FutureScheduledTweetsManager(models.Manager):
     def get_query_set(self):
-        now = datetime.now()
         qs = super(FutureScheduledTweetsManager, self).get_query_set()
-        qs = qs.exclude(date__lt=now.date())
-        qs = qs.exclude(date=now.date(), time__lt=now.time())
+        qs = qs.exclude(posted=True)
         return qs
 
 
