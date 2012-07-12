@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from datetime import date, datetime
+from datetime import datetime
 from django.db import models
 
 from .base import SearchableModel
