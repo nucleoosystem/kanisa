@@ -4,6 +4,7 @@ from kanisa.views.social import (SocialIndexView,
                                  SocialTwitterIndexView,
                                  SocialTwitterPostView,
                                  ScheduledTweetCreateView,
+                                 ScheduledTweetDeleteView,
                                  ScheduledTweetUpdateView)
 
 
@@ -22,6 +23,10 @@ urlpatterns = patterns('',
                            'kanisa_manage_social_twitter_create'),
                        url(r'^twitter/edit/(?P<pk>\d+)$',
                            smr(ScheduledTweetUpdateView.as_view()),
+                           {},
+                           'kanisa_manage_social_twitter_update'),
+                       url(r'^twitter/delete/(?P<pk>\d+)$',
+                           smr(ScheduledTweetDeleteView.as_view()),
                            {},
                            'kanisa_manage_social_twitter_update'),
                        url(r'^twitter/post/$',

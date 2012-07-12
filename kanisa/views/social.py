@@ -9,6 +9,7 @@ from kanisa.utils import get_tweepy_handle, TwitterException
 from kanisa.views.generic import (KanisaTemplateView,
                                   KanisaCreateView,
                                   KanisaUpdateView,
+                                  KanisaDeleteView,
                                   KanisaListView)
 
 
@@ -78,6 +79,17 @@ class ScheduledTweetUpdateView(KanisaUpdateView, SocialBaseView):
     form_class = ScheduledTweetForm
     model = ScheduledTweet
     success_url = reverse_lazy('kanisa_manage_social_twitter')
+
+
+class ScheduledTweetDeleteView(KanisaDeleteView, SocialBaseView):
+    model = ScheduledTweet
+
+    def get_cancel_url(self):
+        return reverse('kanisa_manage_social_twitter')
+
+    def get_success_url(self):
+        messages.success(self.request, 'Tweet deleted')
+        return reverse('kanisa_manage_social_twitter')
 
 
 class SocialTwitterPostView(RedirectView):
