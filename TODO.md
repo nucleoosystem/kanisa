@@ -26,7 +26,6 @@
 * Incorporate Twitter feed/Facebook feed into site?
 * Follow us on Twitter/Like us on Facebook buttons?
 * Allow posting to Facebook.
-* Prevent creating scheduled tweets in the past
 * Disallow editing tweets which have been posted
 * Hide old scheduled tweets by default (they're accessible as part of
   your Twitter stream)
