@@ -15,5 +15,7 @@
 {% endblock %}
 
 {% block buttons %}
+{% if not object.posted %}
 <a class="btn btn-mini" href="{% url 'kanisa_manage_social_twitter_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+{% endif %}
 {% endblock %}
