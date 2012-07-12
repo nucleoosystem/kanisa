@@ -60,6 +60,7 @@
   minutes).
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
+* Cache queries for the management sidebar
 
 # Frontend
 
