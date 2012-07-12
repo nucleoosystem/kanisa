@@ -26,6 +26,7 @@
       <td>{{ tweet.date|date:"jS F Y" }} at {{ tweet.time|date:"H:i" }}</td>
       <td>
         <a class="btn btn-mini" href="{% url 'kanisa_manage_social_twitter_update' tweet.pk %}"><i class="icon-edit"></i> Edit</a>
+        <a class="btn btn-mini btn-danger" href="{% url 'kanisa_manage_social_twitter_delete' tweet.pk %}"><i class="icon-trash icon-white"></i> Delete</a>
       </td>
     </tr>
     {% endfor %}
