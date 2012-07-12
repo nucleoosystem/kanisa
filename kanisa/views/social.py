@@ -53,7 +53,7 @@ class SocialIndexView(KanisaTemplateView, SocialBaseView):
 
 class SocialTwitterIndexView(KanisaListView, SocialBaseView):
     kanisa_title = 'Manage Twitter'
-    model = ScheduledTweet
+    queryset = ScheduledTweet.future_objects.all
     template_name = 'kanisa/management/social/twitter.html'
 
     def get_context_data(self, **kwargs):
