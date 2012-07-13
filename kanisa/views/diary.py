@@ -76,7 +76,8 @@ class DiaryRegularEventsView(StaffMemberRequiredMixin,
     kanisa_title = 'Regular Events'
 
 
-class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
+class DiaryRegularEventCreateView(StaffMemberRequiredMixin,
+                                  KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
     kanisa_title = 'Create a Regular Event'
     success_url = reverse_lazy('kanisa_manage_diary_regularevents')
@@ -87,7 +88,8 @@ class DiaryRegularEventCreateView(KanisaCreateView, DiaryBaseView):
         return initial
 
 
-class DiaryRegularEventUpdateView(KanisaUpdateView, DiaryBaseView):
+class DiaryRegularEventUpdateView(StaffMemberRequiredMixin,
+                                  KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     model = RegularEvent
     success_url = reverse_lazy('kanisa_manage_diary_regularevents')
@@ -101,7 +103,8 @@ class DiaryScheduledEventBaseView(DiaryBaseView):
                    'diary - with an associated date and time.')
 
 
-class DiaryScheduledEventCreateView(KanisaCreateView,
+class DiaryScheduledEventCreateView(StaffMemberRequiredMixin,
+                                    KanisaCreateView,
                                     DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
@@ -125,7 +128,8 @@ class DiaryScheduledEventCreateView(KanisaCreateView,
         return initial
 
 
-class DiaryScheduledEventUpdateView(KanisaUpdateView,
+class DiaryScheduledEventUpdateView(StaffMemberRequiredMixin,
+                                    KanisaUpdateView,
                                     DiaryScheduledEventBaseView):
     form_class = ScheduledEventEditForm
     model = ScheduledEvent
