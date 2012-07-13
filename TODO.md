@@ -50,9 +50,17 @@
 * Boost future events in search results over past events
 * Make sure objects are removed from search indexes on deletion
 
+# Tests
+
+* Add tests for the sermon views (there's currently no coverage here at all)
+* Add tests for document management views (there's currently auth tests only)
+* Add tests for the social management views (there's currently no coverage
+  here at all)
+* Add tests for XHR views (there's currently no coverage here at all)
+* Check coverage of diary/banner CRUD views.
+
 # Misc
 
-* Improve test coverage
 * Documentation (developer friendly/end user friendly)
 * Make it possible to attach documents to events (e.g. agendas,
   minutes).
