@@ -12,8 +12,8 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.check_staff_only_302(reverse(prefix))
         self.check_staff_only_302(reverse('%s_regularevents'
                                   % prefix))
-        self.check_staff_only(reverse('%s_schedule_weeks_regular_event'
-                                      % prefix))
+        self.check_staff_only_302(reverse('%s_schedule_weeks_regular_event'
+                                          % prefix))
 
     def test_diary_root_view(self):
         url = reverse('kanisa_manage_diary')

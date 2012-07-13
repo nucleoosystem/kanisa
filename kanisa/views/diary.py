@@ -168,7 +168,8 @@ class DiaryScheduledEventCloneView(StaffMemberRequiredMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduleRegularEventView(RedirectView, DiaryBaseView):
+class DiaryScheduleRegularEventView(StaffMemberRequiredMixin,
+                                    RedirectView, DiaryBaseView):
     permanent = False
 
     def get_redirect_url(self, pk, thedate):
@@ -204,7 +205,8 @@ class DiaryScheduleRegularEventView(RedirectView, DiaryBaseView):
         return self.get_relative_root_url(thedate)
 
 
-class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
+class DiaryScheduleWeeksRegularEventView(StaffMemberRequiredMixin,
+                                         RedirectView, DiaryBaseView):
     permanent = False
 
     def get_redirect_url(self):
