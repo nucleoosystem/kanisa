@@ -1,4 +1,8 @@
+from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.utils.http import urlquote
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -25,6 +29,27 @@ def add_kanisa_context(cls, context):
         context['kanisa_form_warning'] = cls.kanisa_form_warning
 
     return context
+
+
+class StaffMemberRequiredMixin(object):
+    login_url = settings.LOGIN_URL
+    raise_exception = False
+    redirect_field_name = REDIRECT_FIELD_NAME
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super(StaffMemberRequiredMixin, self).dispatch(
+                request,
+                *args,
+                **kwargs)
+
+        if request.user.is_authenticated():
+            # Logged in, but no permission
+            return HttpResponseForbidden()
+
+        path = urlquote(request.get_full_path())
+        tup = self.login_url, self.redirect_field_name, path
+        return HttpResponseRedirect("%s?%s=%s" % tup)
 
 
 class KanisaTemplateView(TemplateView):

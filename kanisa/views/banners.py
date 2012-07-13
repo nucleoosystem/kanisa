@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
 from kanisa.models import Banner
-from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
+from kanisa.views.generic import (StaffMemberRequiredMixin,
+                                  KanisaCreateView, KanisaUpdateView,
                                   KanisaListView)
 from kanisa.forms import BannerForm
 
@@ -18,7 +19,8 @@ class BannerBaseView:
                          'url': reverse_lazy('kanisa_manage_banners')}
 
 
-class BannerManagementView(KanisaListView, BannerBaseView):
+class BannerManagementView(StaffMemberRequiredMixin,
+                           KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.active_objects.all()
     template_name = 'kanisa/management/banners/index.html'
@@ -26,20 +28,23 @@ class BannerManagementView(KanisaListView, BannerBaseView):
     kanisa_is_root_view = True
 
 
-class InactiveBannerManagementView(KanisaListView, BannerBaseView):
+class InactiveBannerManagementView(StaffMemberRequiredMixin,
+                                   KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.inactive_objects.all()
     template_name = 'kanisa/management/banners/inactive.html'
     kanisa_title = 'Manage Inactive Banners'
 
 
-class BannerCreateView(KanisaCreateView, BannerBaseView):
+class BannerCreateView(StaffMemberRequiredMixin,
+                       KanisaCreateView, BannerBaseView):
     form_class = BannerForm
     kanisa_title = 'Create Banner'
     success_url = reverse_lazy('kanisa_manage_banners')
 
 
-class BannerUpdateView(KanisaUpdateView, BannerBaseView):
+class BannerUpdateView(StaffMemberRequiredMixin,
+                       KanisaUpdateView, BannerBaseView):
     form_class = BannerForm
     model = Banner
 
@@ -49,7 +54,8 @@ class BannerUpdateView(KanisaUpdateView, BannerBaseView):
         return reverse('kanisa_manage_banners_inactive')
 
 
-class RetireBannerView(RedirectView):
+class RetireBannerView(StaffMemberRequiredMixin,
+                       RedirectView):
     permanent = False
 
     def get_redirect_url(self, banner_id):
