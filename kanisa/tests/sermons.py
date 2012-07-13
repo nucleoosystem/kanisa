@@ -1,6 +1,6 @@
 from django.core.files.storage import default_storage
 from django.test import TestCase
-from kanisa.models import SermonSeries, Sermon
+from kanisa.models import SermonSeries, Sermon, SermonSpeaker
 import os
 
 
@@ -22,6 +22,9 @@ class SermonTest(TestCase):
         self.assertEqual(unicode(series[1]), 'All Sorts of Things')
         self.assertEqual(unicode(series[2]), 'The Beatitudes')
 
+        sermon = Sermon.objects.get(pk=1)
+        self.assertEqual(unicode(sermon), 'Something about Psalm 1')
+
     def testNumSermons(self):
         series1 = SermonSeries.objects.get(pk=1)
         series2 = SermonSeries.objects.get(pk=2)
@@ -42,3 +45,7 @@ class SermonTest(TestCase):
 
         with self.assertNumQueries(0):
             self.assertEqual(unicode(sermon.speaker), 'Bugs Bunny')
+
+    def testGetSermonSpeakerName(self):
+        speaker = SermonSpeaker.objects.get(pk=1)
+        self.assertEqual(speaker.name(), 'Bugs Bunny')
