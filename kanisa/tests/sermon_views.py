@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from kanisa.models import SermonSeries
 from kanisa.tests.utils import KanisaViewTestCase
 
 
@@ -80,5 +81,26 @@ class SermonManagementViewTest(KanisaViewTestCase):
         resp = self.client.get(reverse('kanisa_manage_sermons_speaker_create'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
+
+        self.client.logout()
+
+    def test_mark_series_complete(self):
+        self.client.login(username='fred', password='secret')
+
+        self.assertTrue(SermonSeries.objects.get(pk=1).active)
+
+        resp = self.client.get(reverse('kanisa_manage_sermons_series_complete',
+                                       args=[1, ]),
+                               follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+        # Check the relevant message is set
+        messages = resp.context['messages']
+        self.assertTrue(messages)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual('Series "The Psalms" marked as complete.',
+                         list(messages)[0].message)
+
+        self.assertFalse(SermonSeries.objects.get(pk=1).active)
 
         self.client.logout()
