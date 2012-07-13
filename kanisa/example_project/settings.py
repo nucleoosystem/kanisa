@@ -14,7 +14,6 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 SECRET_KEY = "incrediblysecretkeyyoushouldchange"
 ADMINS = ()
 MANAGERS = ADMINS
-LOGIN_URL = "/admin/"
 
 DATABASES = {
     'default': {
