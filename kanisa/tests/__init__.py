@@ -14,4 +14,5 @@ from .bible_passages import (BiblePassageBadInput,
                              ToPassageGoodInput,
                              BiblePassageModelField)
 from .sermons import SermonTest
+from .sermon_views import SermonManagementViewTest
 from .document_views import DocumentManagementViewTest
