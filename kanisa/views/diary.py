@@ -13,7 +13,8 @@ from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
-                                  KanisaDeleteView)
+                                  KanisaDeleteView,
+                                  StaffMemberRequiredMixin)
 
 
 class DiaryBaseView:
@@ -44,7 +45,8 @@ class DiaryBaseView:
         return path + '?date=%s' % yyyymmdd
 
 
-class DiaryEventIndexView(KanisaTemplateView, DiaryBaseView):
+class DiaryEventIndexView(StaffMemberRequiredMixin,
+                          KanisaTemplateView, DiaryBaseView):
     template_name = 'kanisa/management/diary/index.html'
     kanisa_title = 'Manage Diary'
     kanisa_is_root_view = True

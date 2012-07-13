@@ -13,7 +13,7 @@ from kanisa.views.diary import (DiaryRegularEventCreateView,
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           smr(DiaryEventIndexView.as_view()),
+                           DiaryEventIndexView.as_view(),
                            {},
                            'kanisa_manage_diary'),
                        url(r'^regular/$',
