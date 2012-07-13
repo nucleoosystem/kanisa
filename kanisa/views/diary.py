@@ -138,7 +138,8 @@ class DiaryScheduledEventUpdateView(StaffMemberRequiredMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduledEventCloneView(KanisaCreateView,
+class DiaryScheduledEventCloneView(StaffMemberRequiredMixin,
+                                   KanisaCreateView,
                                    DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
@@ -229,7 +230,8 @@ class DiaryScheduleWeeksRegularEventView(RedirectView, DiaryBaseView):
         return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(KanisaDeleteView,
+class DiaryCancelScheduledEventView(StaffMemberRequiredMixin,
+                                    KanisaDeleteView,
                                     DiaryScheduledEventBaseView):
     model = ScheduledEvent
 
