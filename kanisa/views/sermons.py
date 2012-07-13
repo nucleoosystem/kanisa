@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 from kanisa.forms import SermonSeriesForm, SermonForm, SermonSpeakerForm
@@ -77,10 +78,16 @@ class SermonCreateView(StaffMemberRequiredMixin,
         initial = super(SermonCreateView, self).get_initial()
         initial = initial.copy()
 
-        if 'series' in self.request.GET:
-            initial['series'] = self.request.GET['series']
+        if 'series' not in self.request.GET:
+            return initial
 
-        return initial
+        try:
+            series = get_object_or_404(SermonSeries,
+                                       pk=self.request.GET['series'])
+            initial['series'] = series.pk
+            return initial
+        except ValueError:
+            raise Http404
 
     def get_success_url(self):
         if self.object.series:

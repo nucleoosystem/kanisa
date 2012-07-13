@@ -52,7 +52,7 @@ class SermonManagementViewTest(KanisaViewTestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
-        self.assertEqual(resp.context['form'].initial['series'], '2')
+        self.assertEqual(resp.context['form'].initial['series'], 2)
 
         # Check without a pre-populated series
         resp = self.client.get(base_url)
@@ -60,12 +60,17 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
         self.assertTrue('series' not in resp.context['form'].initial)
 
-        # Check with an invalid pre-populated series
+        # Check with an invalid pre-populated series (series is not an
+        # integer)
         url = '%s?series=foobar' % base_url
         resp = self.client.get(url)
-        self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, 'kanisa/management/create.html')
-        self.assertEqual(resp.context['form'].initial['series'], 'foobar')
+        self.assertEqual(resp.status_code, 404)
+
+        # Check with an invalid pre-populated series (series does not
+        # exist)
+        url = '%s?series=42' % base_url
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
 
         self.client.logout()
 
