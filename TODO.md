@@ -67,6 +67,8 @@
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
 * Cache queries for the management sidebar
+* Modify StaffMemberRequiredMixin to be permission based, rather than
+  just a yes/no based on whether you're a staff member
 
 # Frontend
 
