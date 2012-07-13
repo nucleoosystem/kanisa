@@ -43,7 +43,7 @@ class SermonManagementViewTest(KanisaViewTestCase):
 
         self.client.logout()
 
-    def test_create_series_view(self):
+    def test_create_sermon_view(self):
         self.client.login(username='fred', password='secret')
         base_url = reverse('kanisa_manage_sermons_individual_create')
 
