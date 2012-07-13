@@ -16,3 +16,4 @@ from .bible_passages import (BiblePassageBadInput,
 from .sermons import SermonTest
 from .sermon_views import SermonManagementViewTest
 from .document_views import DocumentManagementViewTest
+from .xhr_views import XHRViewTest
