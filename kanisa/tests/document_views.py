@@ -9,5 +9,7 @@ class DocumentManagementViewTest(KanisaViewTestCase):
         self.check_staff_only_302(reverse('kanisa_manage_documents_search'))
 
         # These would 404 if you were logged in
-        self.check_staff_only_302(reverse('kanisa_manage_documents_update', args=[1, ]))
-        self.check_staff_only_302(reverse('kanisa_manage_documents_delete', args=[1, ]))
+        self.check_staff_only_302(reverse('kanisa_manage_documents_update',
+                                  args=[1, ]))
+        self.check_staff_only_302(reverse('kanisa_manage_documents_delete',
+                                  args=[1, ]))
