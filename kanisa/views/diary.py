@@ -69,7 +69,8 @@ class DiaryEventIndexView(StaffMemberRequiredMixin,
         return context
 
 
-class DiaryRegularEventsView(KanisaListView, DiaryBaseView):
+class DiaryRegularEventsView(StaffMemberRequiredMixin,
+                             KanisaListView, DiaryBaseView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
