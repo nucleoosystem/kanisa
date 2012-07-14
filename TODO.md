@@ -58,7 +58,6 @@
   tests only)
 * Add tests for the social management views (there's currently no
   coverage here at all)
-* Add tests for XHR views (there's currently no coverage here at all)
 * Check coverage of diary/banner CRUD views.
 
 # Misc
