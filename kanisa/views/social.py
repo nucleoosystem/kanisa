@@ -26,9 +26,11 @@ class SocialBaseView:
         context = {}
 
         try:
-            api = get_tweepy_handle(self.request)
-            twitter = api.me()
-            cache.set('twitter_handle', twitter, 120)
+            if not twitter:
+                api = get_tweepy_handle(self.request)
+                twitter = api.me()
+                cache.set('twitter_handle', twitter, 120)
+
             context['twitter_username'] = twitter.screen_name
             context['followers'] = twitter.followers_count
             context['statuses'] = twitter.statuses_count
