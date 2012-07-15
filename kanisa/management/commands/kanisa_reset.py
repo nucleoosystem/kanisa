@@ -1,5 +1,6 @@
 from optparse import make_option
 from django.conf import settings
+from django.contrib.contenttypes.management import update_all_contenttypes
 from django.core.management import call_command
 from django.core.management.base import AppCommand, BaseCommand, CommandError
 import kanisa.models
@@ -23,10 +24,21 @@ class Command(BaseCommand):
             raise CommandError("Please define MEDIA_ROOT.")
 
         call_command('reset', 'kanisa', **options)
+        self.reset_permissions()
         self.load_fixtures()
         print ""
         print "Resetting search indexes..."
         call_command('rebuild_index', **options)
+
+    def reset_permissions(self):
+        # Add any missing content types
+        update_all_contenttypes()
+
+        # Add any missing permissions
+        from django.contrib.auth.management import create_permissions
+        from django.db.models import get_apps
+        for app in get_apps():
+            create_permissions(app, None, 2)
 
     def load_fixtures(self):
         for subapp in ['banners', 'diary', 'sermons', ]:
