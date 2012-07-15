@@ -6,7 +6,7 @@ from django.template import RequestContext
 from haystack.query import SearchQuerySet
 from kanisa.forms import DocumentForm
 from kanisa.models import Document
-from kanisa.views.generic import (StaffMemberRequiredMixin,
+from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaDeleteView,
                                   KanisaTemplateView)
@@ -19,7 +19,7 @@ class DocumentBaseView:
                          'url': reverse_lazy('kanisa_manage_documents')}
 
 
-class DocumentIndexView(StaffMemberRequiredMixin,
+class DocumentIndexView(KanisaAuthorizationMixin,
                         KanisaListView, DocumentBaseView):
     model = Document
     queryset = Document.objects.all()
@@ -29,7 +29,7 @@ class DocumentIndexView(StaffMemberRequiredMixin,
     kanisa_is_root_view = True
 
 
-class DocumentSearchView(StaffMemberRequiredMixin,
+class DocumentSearchView(KanisaAuthorizationMixin,
                          KanisaTemplateView, DocumentBaseView):
     kanisa_title = 'Search Documents'
     template_name = 'kanisa/management/documents/search.html'
@@ -56,21 +56,21 @@ class DocumentSearchView(StaffMemberRequiredMixin,
                                   context_instance=RequestContext(request))
 
 
-class DocumentCreateView(StaffMemberRequiredMixin,
+class DocumentCreateView(KanisaAuthorizationMixin,
                          KanisaCreateView, DocumentBaseView):
     form_class = DocumentForm
     kanisa_title = 'Upload a Document'
     success_url = reverse_lazy('kanisa_manage_documents')
 
 
-class DocumentUpdateView(StaffMemberRequiredMixin,
+class DocumentUpdateView(KanisaAuthorizationMixin,
                          KanisaUpdateView, DocumentBaseView):
     form_class = DocumentForm
     model = Document
     success_url = reverse_lazy('kanisa_manage_documents')
 
 
-class DocumentDeleteView(StaffMemberRequiredMixin,
+class DocumentDeleteView(KanisaAuthorizationMixin,
                          KanisaDeleteView, DocumentBaseView):
     model = Document
 

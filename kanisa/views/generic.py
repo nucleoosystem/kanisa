@@ -31,7 +31,7 @@ def add_kanisa_context(cls, context):
     return context
 
 
-class StaffMemberRequiredMixin(object):
+class KanisaAuthorizationMixin(object):
     login_url = settings.LOGIN_URL
     raise_exception = False
     redirect_field_name = REDIRECT_FIELD_NAME
@@ -53,7 +53,7 @@ class StaffMemberRequiredMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
         if self.authorization_check(request.user):
-            return super(StaffMemberRequiredMixin, self).dispatch(
+            return super(KanisaAuthorizationMixin, self).dispatch(
                 request,
                 *args,
                 **kwargs)

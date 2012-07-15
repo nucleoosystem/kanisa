@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 from kanisa.forms import SermonSeriesForm, SermonForm, SermonSpeakerForm
 from kanisa.models import SermonSeries, Sermon, SermonSpeaker
-from kanisa.views.generic import (StaffMemberRequiredMixin,
+from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaDetailView)
 
@@ -17,7 +17,7 @@ class SermonBaseView:
                          'url': reverse_lazy('kanisa_manage_sermons')}
 
 
-class SermonIndexView(StaffMemberRequiredMixin,
+class SermonIndexView(KanisaAuthorizationMixin,
                       KanisaListView, SermonBaseView):
     model = SermonSeries
     queryset = SermonSeries.objects.all()
@@ -34,27 +34,27 @@ class SermonIndexView(StaffMemberRequiredMixin,
         return context
 
 
-class SermonSeriesDetailView(StaffMemberRequiredMixin,
+class SermonSeriesDetailView(KanisaAuthorizationMixin,
                              KanisaDetailView, SermonBaseView):
     model = SermonSeries
     template_name = 'kanisa/management/sermons/series_detail.html'
 
 
-class SermonSeriesCreateView(StaffMemberRequiredMixin,
+class SermonSeriesCreateView(KanisaAuthorizationMixin,
                              KanisaCreateView, SermonBaseView):
     form_class = SermonSeriesForm
     kanisa_title = 'Create a Sermon Series'
     success_url = reverse_lazy('kanisa_manage_sermons')
 
 
-class SermonSeriesUpdateView(StaffMemberRequiredMixin,
+class SermonSeriesUpdateView(KanisaAuthorizationMixin,
                              KanisaUpdateView, SermonBaseView):
     form_class = SermonSeriesForm
     model = SermonSeries
     success_url = reverse_lazy('kanisa_manage_sermons')
 
 
-class SermonSeriesCompleteView(StaffMemberRequiredMixin,
+class SermonSeriesCompleteView(KanisaAuthorizationMixin,
                                RedirectView):
     permanent = False
 
@@ -69,7 +69,7 @@ class SermonSeriesCompleteView(StaffMemberRequiredMixin,
         return reverse('kanisa_manage_sermons')
 
 
-class SermonCreateView(StaffMemberRequiredMixin,
+class SermonCreateView(KanisaAuthorizationMixin,
                        KanisaCreateView, SermonBaseView):
     form_class = SermonForm
     kanisa_title = 'Upload a Sermon'
@@ -96,7 +96,7 @@ class SermonCreateView(StaffMemberRequiredMixin,
         return reverse('kanisa_manage_sermons')
 
 
-class SermonUpdateView(StaffMemberRequiredMixin,
+class SermonUpdateView(KanisaAuthorizationMixin,
                        KanisaUpdateView, SermonBaseView):
     form_class = SermonForm
     model = Sermon
@@ -108,7 +108,7 @@ class SermonUpdateView(StaffMemberRequiredMixin,
         return reverse('kanisa_manage_sermons')
 
 
-class SermonSpeakerIndexView(StaffMemberRequiredMixin,
+class SermonSpeakerIndexView(KanisaAuthorizationMixin,
                              KanisaListView, SermonBaseView):
     model = SermonSpeaker
     queryset = SermonSpeaker.objects.all().order_by('-num_sermons')
@@ -117,14 +117,14 @@ class SermonSpeakerIndexView(StaffMemberRequiredMixin,
     kanisa_title = 'Manage Speakers'
 
 
-class SermonSpeakerCreateView(StaffMemberRequiredMixin,
+class SermonSpeakerCreateView(KanisaAuthorizationMixin,
                               KanisaCreateView, SermonBaseView):
     form_class = SermonSpeakerForm
     kanisa_title = 'Add a Speaker'
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
 
 
-class SermonSpeakerUpdateView(StaffMemberRequiredMixin,
+class SermonSpeakerUpdateView(KanisaAuthorizationMixin,
                               KanisaUpdateView, SermonBaseView):
     form_class = SermonSpeakerForm
     model = SermonSpeaker

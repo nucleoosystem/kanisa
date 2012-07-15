@@ -14,7 +14,7 @@ from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
                                   KanisaDeleteView,
-                                  StaffMemberRequiredMixin)
+                                  KanisaAuthorizationMixin)
 
 
 class DiaryBaseView:
@@ -45,7 +45,7 @@ class DiaryBaseView:
         return path + '?date=%s' % yyyymmdd
 
 
-class DiaryEventIndexView(StaffMemberRequiredMixin,
+class DiaryEventIndexView(KanisaAuthorizationMixin,
                           KanisaTemplateView, DiaryBaseView):
     template_name = 'kanisa/management/diary/index.html'
     kanisa_title = 'Manage Diary'
@@ -69,14 +69,14 @@ class DiaryEventIndexView(StaffMemberRequiredMixin,
         return context
 
 
-class DiaryRegularEventsView(StaffMemberRequiredMixin,
+class DiaryRegularEventsView(KanisaAuthorizationMixin,
                              KanisaListView, DiaryBaseView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
 
 
-class DiaryRegularEventCreateView(StaffMemberRequiredMixin,
+class DiaryRegularEventCreateView(KanisaAuthorizationMixin,
                                   KanisaCreateView, DiaryBaseView):
     form_class = RegularEventForm
     kanisa_title = 'Create a Regular Event'
@@ -88,7 +88,7 @@ class DiaryRegularEventCreateView(StaffMemberRequiredMixin,
         return initial
 
 
-class DiaryRegularEventUpdateView(StaffMemberRequiredMixin,
+class DiaryRegularEventUpdateView(KanisaAuthorizationMixin,
                                   KanisaUpdateView, DiaryBaseView):
     form_class = RegularEventForm
     model = RegularEvent
@@ -103,7 +103,7 @@ class DiaryScheduledEventBaseView(DiaryBaseView):
                    'diary - with an associated date and time.')
 
 
-class DiaryScheduledEventCreateView(StaffMemberRequiredMixin,
+class DiaryScheduledEventCreateView(KanisaAuthorizationMixin,
                                     KanisaCreateView,
                                     DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
@@ -128,7 +128,7 @@ class DiaryScheduledEventCreateView(StaffMemberRequiredMixin,
         return initial
 
 
-class DiaryScheduledEventUpdateView(StaffMemberRequiredMixin,
+class DiaryScheduledEventUpdateView(KanisaAuthorizationMixin,
                                     KanisaUpdateView,
                                     DiaryScheduledEventBaseView):
     form_class = ScheduledEventEditForm
@@ -138,7 +138,7 @@ class DiaryScheduledEventUpdateView(StaffMemberRequiredMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduledEventCloneView(StaffMemberRequiredMixin,
+class DiaryScheduledEventCloneView(KanisaAuthorizationMixin,
                                    KanisaCreateView,
                                    DiaryScheduledEventBaseView):
     form_class = ScheduledEventCreationForm
@@ -168,7 +168,7 @@ class DiaryScheduledEventCloneView(StaffMemberRequiredMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduleRegularEventView(StaffMemberRequiredMixin,
+class DiaryScheduleRegularEventView(KanisaAuthorizationMixin,
                                     RedirectView, DiaryBaseView):
     permanent = False
 
@@ -205,7 +205,7 @@ class DiaryScheduleRegularEventView(StaffMemberRequiredMixin,
         return self.get_relative_root_url(thedate)
 
 
-class DiaryScheduleWeeksRegularEventView(StaffMemberRequiredMixin,
+class DiaryScheduleWeeksRegularEventView(KanisaAuthorizationMixin,
                                          RedirectView, DiaryBaseView):
     permanent = False
 
@@ -232,7 +232,7 @@ class DiaryScheduleWeeksRegularEventView(StaffMemberRequiredMixin,
         return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(StaffMemberRequiredMixin,
+class DiaryCancelScheduledEventView(KanisaAuthorizationMixin,
                                     KanisaDeleteView,
                                     DiaryScheduledEventBaseView):
     model = ScheduledEvent

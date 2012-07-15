@@ -6,7 +6,7 @@ from django.views.generic.base import RedirectView
 from kanisa.forms import ScheduledTweetForm
 from kanisa.models import ScheduledTweet
 from kanisa.utils import get_tweepy_handle, TwitterException
-from kanisa.views.generic import (StaffMemberRequiredMixin,
+from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
                                   KanisaCreateView,
                                   KanisaUpdateView,
@@ -14,7 +14,7 @@ from kanisa.views.generic import (StaffMemberRequiredMixin,
                                   KanisaListView)
 
 
-class SocialBaseView(StaffMemberRequiredMixin):
+class SocialBaseView(KanisaAuthorizationMixin):
     kanisa_lead = ('Having a presence on social networks allows your Church '
                    'to communicate with people it might not otherwise reach.')
     kanisa_root_crumb = {'text': 'Social',

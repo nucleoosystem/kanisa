@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
 from kanisa.models import Banner
-from kanisa.views.generic import (StaffMemberRequiredMixin,
+from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
                                   KanisaListView)
 from kanisa.forms import BannerForm
@@ -19,7 +19,7 @@ class BannerBaseView:
                          'url': reverse_lazy('kanisa_manage_banners')}
 
 
-class BannerManagementView(StaffMemberRequiredMixin,
+class BannerManagementView(KanisaAuthorizationMixin,
                            KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.active_objects.all()
@@ -28,7 +28,7 @@ class BannerManagementView(StaffMemberRequiredMixin,
     kanisa_is_root_view = True
 
 
-class InactiveBannerManagementView(StaffMemberRequiredMixin,
+class InactiveBannerManagementView(KanisaAuthorizationMixin,
                                    KanisaListView, BannerBaseView):
     model = Banner
     queryset = Banner.inactive_objects.all()
@@ -36,14 +36,14 @@ class InactiveBannerManagementView(StaffMemberRequiredMixin,
     kanisa_title = 'Manage Inactive Banners'
 
 
-class BannerCreateView(StaffMemberRequiredMixin,
+class BannerCreateView(KanisaAuthorizationMixin,
                        KanisaCreateView, BannerBaseView):
     form_class = BannerForm
     kanisa_title = 'Create Banner'
     success_url = reverse_lazy('kanisa_manage_banners')
 
 
-class BannerUpdateView(StaffMemberRequiredMixin,
+class BannerUpdateView(KanisaAuthorizationMixin,
                        KanisaUpdateView, BannerBaseView):
     form_class = BannerForm
     model = Banner
@@ -54,7 +54,7 @@ class BannerUpdateView(StaffMemberRequiredMixin,
         return reverse('kanisa_manage_banners_inactive')
 
 
-class RetireBannerView(StaffMemberRequiredMixin,
+class RetireBannerView(KanisaAuthorizationMixin,
                        RedirectView):
     permanent = False
 
