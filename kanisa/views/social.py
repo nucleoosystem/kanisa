@@ -19,6 +19,7 @@ class SocialBaseView(StaffMemberRequiredMixin):
                    'to communicate with people it might not otherwise reach.')
     kanisa_root_crumb = {'text': 'Social',
                          'url': reverse_lazy('kanisa_manage_social')}
+    permission = 'kanisa.manage_social'
 
     def get_twitter_context(self):
         twitter = cache.get('twitter_handle')

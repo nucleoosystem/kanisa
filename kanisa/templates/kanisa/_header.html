@@ -23,7 +23,9 @@
               <li><a href="{% url 'kanisa_manage_diary' %}">Diary</a></li>
               <li><a href="{% url 'kanisa_manage_sermons' %}">Sermons</a></li>
               <li><a href="{% url 'kanisa_manage_documents' %}">Documents</a></li>
+              {% if perms.kanisa.manage_social %}
               <li><a href="{% url 'kanisa_manage_social' %}">Social</a></li>
+              {% endif %}
             </ul>
           </li>
           <li><a href="{% url 'admin:index' %}">Admin</a></li>

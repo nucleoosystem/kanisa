@@ -31,6 +31,10 @@ class ScheduledTweet(SearchableModel):
         # files.
         app_label = 'kanisa'
         ordering = ('date', 'time', )
+        permissions = (
+            ('manage_social',
+             'Can manage your social networks'),
+            )
 
     def __unicode__(self):
         return self.tweet

@@ -71,6 +71,7 @@
                   Manage Documents
                 </a>
               </li>
+              {% if perms.kanisa.manage_social %}
               <li class="nav-header">
                 <i class="icon-fire"></i>
                 Social
@@ -85,6 +86,7 @@
                   Scheduled Tweets <span class="badge">{% kanisa_future_scheduled_tweets %}</span>
                 </a>
               </li>
+              {% endif %}
             </ul>
           </div>
         </div>
