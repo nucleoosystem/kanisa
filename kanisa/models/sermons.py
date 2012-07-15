@@ -69,6 +69,7 @@ class SermonSpeaker(SearchableModel):
         # files.
         app_label = 'kanisa'
         ordering = ('surname', 'forename', )
+        verbose_name = 'Speaker'
 
 
 class SermonManager(models.Manager):

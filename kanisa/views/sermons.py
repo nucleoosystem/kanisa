@@ -114,7 +114,7 @@ class SermonSpeakerIndexView(StaffMemberRequiredMixin,
     queryset = SermonSpeaker.objects.all().order_by('-num_sermons')
 
     template_name = 'kanisa/management/sermons/speakers.html'
-    kanisa_title = 'Manage Sermon Speakers'
+    kanisa_title = 'Manage Speakers'
 
 
 class SermonSpeakerCreateView(StaffMemberRequiredMixin,
