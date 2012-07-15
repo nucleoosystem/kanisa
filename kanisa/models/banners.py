@@ -71,6 +71,10 @@ class Banner(SearchableModel):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
+        permissions = (
+            ('manage_banners',
+             'Can manage your banners'),
+            )
 
     def __unicode__(self):
         return self.headline

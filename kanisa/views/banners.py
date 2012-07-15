@@ -17,6 +17,7 @@ class BannerBaseView(KanisaAuthorizationMixin):
                    'events for your site.')
     kanisa_root_crumb = {'text': 'Banners',
                          'url': reverse_lazy('kanisa_manage_banners')}
+    permission = 'kanisa.manage_banners'
 
 
 class BannerManagementView(BannerBaseView,

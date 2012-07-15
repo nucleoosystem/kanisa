@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.test import TestCase
 
 
@@ -10,6 +10,8 @@ class KanisaViewTestCase(TestCase):
 
         fred = User.objects.create_user('fred', '', 'secret')
         fred.is_staff = True
+        p = Permission.objects.get(codename='manage_banners')
+        fred.user_permissions.add(p)
         fred.save()
 
     def check_staff_only(self, url):
