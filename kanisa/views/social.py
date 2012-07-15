@@ -14,7 +14,7 @@ from kanisa.views.generic import (StaffMemberRequiredMixin,
                                   KanisaListView)
 
 
-class SocialBaseView:
+class SocialBaseView(StaffMemberRequiredMixin):
     kanisa_lead = ('Having a presence on social networks allows your Church '
                    'to communicate with people it might not otherwise reach.')
     kanisa_root_crumb = {'text': 'Social',
@@ -41,8 +41,7 @@ class SocialBaseView:
         return context
 
 
-class SocialIndexView(StaffMemberRequiredMixin,
-                      KanisaTemplateView, SocialBaseView):
+class SocialIndexView(SocialBaseView, KanisaTemplateView):
     template_name = 'kanisa/management/social/index.html'
     kanisa_title = 'Manage Social Networks'
     kanisa_is_root_view = True
@@ -55,8 +54,7 @@ class SocialIndexView(StaffMemberRequiredMixin,
         return context
 
 
-class SocialTwitterIndexView(StaffMemberRequiredMixin,
-                             KanisaListView, SocialBaseView):
+class SocialTwitterIndexView(SocialBaseView, KanisaListView):
     kanisa_title = 'Manage Twitter'
     queryset = ScheduledTweet.future_objects.all
     template_name = 'kanisa/management/social/twitter.html'
@@ -69,8 +67,7 @@ class SocialTwitterIndexView(StaffMemberRequiredMixin,
         return context
 
 
-class ScheduledTweetCreateView(StaffMemberRequiredMixin,
-                               KanisaCreateView, SocialBaseView):
+class ScheduledTweetCreateView(SocialBaseView, KanisaCreateView):
     form_class = ScheduledTweetForm
     kanisa_title = 'Schedule Tweet'
     success_url = reverse_lazy('kanisa_manage_social_twitter')
@@ -81,15 +78,13 @@ class ScheduledTweetCreateView(StaffMemberRequiredMixin,
         return initial
 
 
-class ScheduledTweetUpdateView(StaffMemberRequiredMixin,
-                               KanisaUpdateView, SocialBaseView):
+class ScheduledTweetUpdateView(SocialBaseView, KanisaUpdateView):
     form_class = ScheduledTweetForm
     model = ScheduledTweet
     success_url = reverse_lazy('kanisa_manage_social_twitter')
 
 
-class ScheduledTweetDeleteView(StaffMemberRequiredMixin,
-                               KanisaDeleteView, SocialBaseView):
+class ScheduledTweetDeleteView(SocialBaseView, KanisaDeleteView):
     model = ScheduledTweet
 
     def get_cancel_url(self):
@@ -100,8 +95,7 @@ class ScheduledTweetDeleteView(StaffMemberRequiredMixin,
         return reverse('kanisa_manage_social_twitter')
 
 
-class SocialTwitterPostView(StaffMemberRequiredMixin,
-                            RedirectView):
+class SocialTwitterPostView(SocialBaseView, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
