@@ -14,7 +14,7 @@
 {% if object.passage %}
 <p><strong>Passage:</strong> {{ object.passage }}</p>
 {% endif %}
-{{ object.details.strip|linebreaks }}
+{{ object.details.strip|truncatewords:75|linebreaks }}
 </blockquote>
 {% endblock %}
 

@@ -8,9 +8,6 @@
 
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
-* Make it possible to create a RegularEvent from a ScheduledEvent (for
-  when you've created an event once, and then realise it'll happen
-  regularly).
 * Allow creating RegularEvents on timetables other than day x of week.
 
 # Sermons
@@ -46,7 +43,6 @@
 # Search
 
 * Paginate search results
-* Limit number of words in details bit
 * Boost future events in search results over past events
 * Make sure objects are removed from search indexes on deletion
 

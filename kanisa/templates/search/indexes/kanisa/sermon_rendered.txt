@@ -22,7 +22,7 @@
 {% endif %}
 A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
 
-{{ object.details.strip|linebreaks }}
+{{ object.details.strip|truncatewords:75|linebreaks }}
 </blockquote>
 {% endblock %}
 

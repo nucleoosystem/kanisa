@@ -13,7 +13,7 @@
 {% endthumbnail %}
 {% endif %}
 
-{{ object.contents.strip|linebreaks }}
+{{ object.contents.strip|truncatewords:75|linebreaks }}
 
 <br />
 

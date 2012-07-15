@@ -5,7 +5,7 @@
 
 {% block contents %}
 <blockquote>
-{{ object.details.strip|linebreaks }}
+{{ object.details.strip||truncatewords:75|linebreaks }}
 <strong>File:</strong> <a href="{% get_media_prefix %}{{ object.file.name }}">{{ object.file_name }}</a>
 </blockquote>
 {% endblock %}
