@@ -12,15 +12,15 @@ from kanisa.views.generic import (KanisaAuthorizationMixin,
 from kanisa.forms import BannerForm
 
 
-class BannerBaseView:
+class BannerBaseView(KanisaAuthorizationMixin):
     kanisa_lead = ('Banners are a high-impact way of advertising content or '
                    'events for your site.')
     kanisa_root_crumb = {'text': 'Banners',
                          'url': reverse_lazy('kanisa_manage_banners')}
 
 
-class BannerManagementView(KanisaAuthorizationMixin,
-                           KanisaListView, BannerBaseView):
+class BannerManagementView(BannerBaseView,
+                           KanisaListView):
     model = Banner
     queryset = Banner.active_objects.all()
     template_name = 'kanisa/management/banners/index.html'
@@ -28,23 +28,23 @@ class BannerManagementView(KanisaAuthorizationMixin,
     kanisa_is_root_view = True
 
 
-class InactiveBannerManagementView(KanisaAuthorizationMixin,
-                                   KanisaListView, BannerBaseView):
+class InactiveBannerManagementView(BannerBaseView,
+                                   KanisaListView):
     model = Banner
     queryset = Banner.inactive_objects.all()
     template_name = 'kanisa/management/banners/inactive.html'
     kanisa_title = 'Manage Inactive Banners'
 
 
-class BannerCreateView(KanisaAuthorizationMixin,
-                       KanisaCreateView, BannerBaseView):
+class BannerCreateView(BannerBaseView,
+                       KanisaCreateView):
     form_class = BannerForm
     kanisa_title = 'Create Banner'
     success_url = reverse_lazy('kanisa_manage_banners')
 
 
-class BannerUpdateView(KanisaAuthorizationMixin,
-                       KanisaUpdateView, BannerBaseView):
+class BannerUpdateView(BannerBaseView,
+                       KanisaUpdateView):
     form_class = BannerForm
     model = Banner
 
@@ -54,7 +54,7 @@ class BannerUpdateView(KanisaAuthorizationMixin,
         return reverse('kanisa_manage_banners_inactive')
 
 
-class RetireBannerView(KanisaAuthorizationMixin,
+class RetireBannerView(BannerBaseView,
                        RedirectView):
     permanent = False
 
