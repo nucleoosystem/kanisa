@@ -36,13 +36,13 @@ class StaffMemberRequiredMixin(object):
     raise_exception = False
     redirect_field_name = REDIRECT_FIELD_NAME
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_staff:
-            return super(StaffMemberRequiredMixin, self).dispatch(
-                request,
-                *args,
-                **kwargs)
+    def authorization_check(self, user):
+        if hasattr(self, 'permission'):
+            return user.has_perm(self.permission)
 
+        return user.is_staff
+
+    def handle_failure(self, request):
         if request.user.is_authenticated():
             # Logged in, but no permission
             return HttpResponseForbidden()
@@ -50,6 +50,15 @@ class StaffMemberRequiredMixin(object):
         path = urlquote(request.get_full_path())
         tup = self.login_url, self.redirect_field_name, path
         return HttpResponseRedirect("%s?%s=%s" % tup)
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.authorization_check(request.user):
+            return super(StaffMemberRequiredMixin, self).dispatch(
+                request,
+                *args,
+                **kwargs)
+
+        return self.handle_failure(request)
 
 
 class KanisaTemplateView(TemplateView):
