@@ -14,6 +14,8 @@ class KanisaViewTestCase(TestCase):
         fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_diary')
         fred.user_permissions.add(p)
+        p = Permission.objects.get(codename='manage_sermons')
+        fred.user_permissions.add(p)
         fred.save()
 
     def view_is_restricted(self, url):

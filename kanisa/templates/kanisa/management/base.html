@@ -52,6 +52,7 @@
                 </a>
               </li>
               {% endif %}
+              {% if perms.kanisa.manage_sermons %}
               <li class="nav-header">
                 <i class="icon-headphones"></i>
                 Sermons
@@ -66,6 +67,7 @@
                   Manage Speakers
                 </a>
               </li>
+              {% endif %}
               {% if perm.kanisa.manage_documents %}
               <li class="nav-header">
                 <i class="icon-file"></i>

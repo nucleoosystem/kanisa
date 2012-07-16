@@ -41,6 +41,10 @@ class SermonSeries(SearchableModel):
         app_label = 'kanisa'
         ordering = ('-active', )
         verbose_name_plural = 'Sermon series'
+        permissions = (
+            ('manage_sermons',
+             'Can manage your sermons'),
+            )
 
 
 class SpeakerManager(models.Manager):
