@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Permission
 from django.test import TestCase
+from django.test.utils import override_settings
 
 
 class KanisaViewTestCase(TestCase):
@@ -18,6 +19,7 @@ class KanisaViewTestCase(TestCase):
         fred.user_permissions.add(p)
         fred.save()
 
+    @override_settings(LOGIN_URL='/accounts/login/')
     def view_is_restricted(self, url):
         # Not logged in
         resp = self.client.get(url)
