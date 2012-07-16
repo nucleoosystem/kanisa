@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.admin.views.decorators import staff_member_required as smr
-from kanisa.views import KanisaSearchView
+from kanisa.views import (KanisaManagementIndexView,
+                          KanisaSearchView)
 from kanisa.views.banners import VisitBannerView
 
 
@@ -10,9 +10,12 @@ urlpatterns = patterns('',
                            VisitBannerView.as_view(),
                            {},
                            'kanisa_public_banners_visit'),
-                       url(r'^manage/$', 'kanisa.views.manage'),
+                       url(r'^manage/$',
+                           KanisaManagementIndexView.as_view(),
+                           {},
+                           'kanisa_manage_index'),
                        url(r'^manage/search/$',
-                           smr(KanisaSearchView.as_view()),
+                           KanisaSearchView.as_view(),
                            {},
                            'kanisa_manage_search'),
                        url(r'^manage/banners/',

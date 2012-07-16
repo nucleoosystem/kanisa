@@ -15,7 +15,7 @@
                 Manage {{ KANISA_CHURCH_NAME }}
               </li>
               <li>
-                <a href="{% url 'kanisa.views.manage' %}">
+                <a href="{% url 'kanisa_manage_index' %}">
                   <i class="icon-home"></i>
                   Home
                 </a>
@@ -96,7 +96,7 @@
           <ul class="breadcrumb">
             {% block breadcrumbs %}
             <li>
-              <a href="{% url 'kanisa.views.manage' %}">Kanisa</a>
+              <a href="{% url 'kanisa_manage_index' %}">Kanisa</a>
             </li>
             {% if kanisa_root_crumb %}
             <li>

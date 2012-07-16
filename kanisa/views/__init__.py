@@ -1,10 +1,10 @@
-from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
 
 from kanisa.models.banners import Banner
-from kanisa.views.generic import KanisaTemplateView
+from kanisa.views.generic import (KanisaAuthorizationMixin,
+                                  KanisaTemplateView)
 
 
 def index(request):
@@ -15,14 +15,13 @@ def index(request):
                               context_instance=RequestContext(request))
 
 
-@staff_member_required
-def manage(request):
-    return render_to_response('kanisa/management/index.html',
-                              {},
-                              context_instance=RequestContext(request))
+class KanisaManagementIndexView(KanisaAuthorizationMixin,
+                                KanisaTemplateView):
+    template_name = 'kanisa/management/index.html'
 
 
-class KanisaSearchView(KanisaTemplateView):
+class KanisaSearchView(KanisaAuthorizationMixin,
+                       KanisaTemplateView):
     kanisa_title = 'Search'
     template_name = 'kanisa/management/search.html'
 
