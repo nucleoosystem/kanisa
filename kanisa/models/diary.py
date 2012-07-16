@@ -43,6 +43,10 @@ class RegularEvent(SearchableModel):
         # files.
         app_label = 'kanisa'
         ordering = ('day', 'start_time', )
+        permissions = (
+            ('manage_diary',
+             'Can manage your diary'),
+            )
 
     def __unicode__(self):
         return self.title

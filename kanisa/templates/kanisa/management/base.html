@@ -36,6 +36,7 @@
                 </a>
               </li>
               {% endif %}
+              {% if perms.kanisa.manage_diary %}
               <li class="nav-header">
                 <i class="icon-calendar"></i>
                 Diary
@@ -50,6 +51,7 @@
                   View Regular Events
                 </a>
               </li>
+              {% endif %}
               <li class="nav-header">
                 <i class="icon-headphones"></i>
                 Sermons

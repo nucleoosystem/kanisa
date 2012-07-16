@@ -22,7 +22,9 @@
               {% if perms.kanisa.manage_banners %}
               <li><a href="{% url 'kanisa_manage_banners' %}">Banners</a></li>
               {% endif %}
+              {% if perms.kanisa.manage_diary %}
               <li><a href="{% url 'kanisa_manage_diary' %}">Diary</a></li>
+              {% endif %}
               <li><a href="{% url 'kanisa_manage_sermons' %}">Sermons</a></li>
               <li><a href="{% url 'kanisa_manage_documents' %}">Documents</a></li>
               {% if perms.kanisa.manage_social %}
