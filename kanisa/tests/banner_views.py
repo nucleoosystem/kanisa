@@ -6,12 +6,12 @@ class BannerManagementViewTest(KanisaViewTestCase):
     fixtures = ['banners.json', ]
 
     def test_views_protected(self):
-        self.check_staff_only_302(reverse('kanisa_manage_banners'))
-        self.check_staff_only_302(reverse('kanisa_manage_banners_retire',
-                                          args=[1, ]))
-        self.check_staff_only_302(reverse('kanisa_manage_banners_create'))
-        self.check_staff_only_302(reverse('kanisa_manage_banners_update',
-                                          args=[1, ]))
+        self.view_is_restricted(reverse('kanisa_manage_banners'))
+        self.view_is_restricted(reverse('kanisa_manage_banners_retire',
+                                        args=[1, ]))
+        self.view_is_restricted(reverse('kanisa_manage_banners_create'))
+        self.view_is_restricted(reverse('kanisa_manage_banners_update',
+                                        args=[1, ]))
 
     def test_banner_management_view(self):
         url = reverse('kanisa_manage_banners')

@@ -14,7 +14,7 @@ class KanisaViewTestCase(TestCase):
         fred.user_permissions.add(p)
         fred.save()
 
-    def check_staff_only_302(self, url):
+    def view_is_restricted(self, url):
         # Not logged in
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 302)

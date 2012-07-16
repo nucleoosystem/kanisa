@@ -9,11 +9,11 @@ class DiaryManagementViewTest(KanisaViewTestCase):
 
     def test_views_protected(self):
         prefix = 'kanisa_manage_diary'
-        self.check_staff_only_302(reverse(prefix))
-        self.check_staff_only_302(reverse('%s_regularevents'
-                                  % prefix))
-        self.check_staff_only_302(reverse('%s_schedule_weeks_regular_event'
-                                          % prefix))
+        self.view_is_restricted(reverse(prefix))
+        self.view_is_restricted(reverse('%s_regularevents'
+                                        % prefix))
+        self.view_is_restricted(reverse('%s_schedule_weeks_regular_event'
+                                        % prefix))
 
     def test_diary_root_view(self):
         url = reverse('kanisa_manage_diary')
