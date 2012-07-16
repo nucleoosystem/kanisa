@@ -65,8 +65,10 @@
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
 * Cache queries for the management sidebar
-* Modify KanisaAuthorizationMixin to be permission based, rather than
-  just a yes/no based on whether you're a staff member
+* Ensure all view classes have a permission attribute, so that
+  KanisaAuthorizationMixin never checks whether you're a staff member
+  (I'd like to restrict use of "staff" to just mean those who can
+  access the default Django admin).
 
 # Frontend
 
