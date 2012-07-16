@@ -28,3 +28,7 @@ class Document(SearchableModel):
         # files.
         app_label = 'kanisa'
         ordering = ('-modified', )
+        permissions = (
+            ('manage_documents',
+             'Can manage your documents'),
+            )

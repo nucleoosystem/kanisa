@@ -26,7 +26,9 @@
               <li><a href="{% url 'kanisa_manage_diary' %}">Diary</a></li>
               {% endif %}
               <li><a href="{% url 'kanisa_manage_sermons' %}">Sermons</a></li>
+              {% if perms.kanisa.manage_document %}
               <li><a href="{% url 'kanisa_manage_documents' %}">Documents</a></li>
+              {% endif %}
               {% if perms.kanisa.manage_social %}
               <li><a href="{% url 'kanisa_manage_social' %}">Social</a></li>
               {% endif %}

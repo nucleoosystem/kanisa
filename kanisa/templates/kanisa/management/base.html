@@ -66,6 +66,7 @@
                   Manage Speakers
                 </a>
               </li>
+              {% if perm.kanisa.manage_documents %}
               <li class="nav-header">
                 <i class="icon-file"></i>
                 Documents
@@ -75,6 +76,7 @@
                   Manage Documents
                 </a>
               </li>
+              {% endif %}
               {% if perms.kanisa.manage_social %}
               <li class="nav-header">
                 <i class="icon-fire"></i>

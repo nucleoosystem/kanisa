@@ -17,6 +17,7 @@ class DocumentBaseView(KanisaAuthorizationMixin):
                    'easy access to the files they need.')
     kanisa_root_crumb = {'text': 'Documents',
                          'url': reverse_lazy('kanisa_manage_documents')}
+    permission = 'kanisa.manage_documents'
 
 
 class DocumentIndexView(DocumentBaseView,
