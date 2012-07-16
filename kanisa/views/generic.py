@@ -32,7 +32,6 @@ def add_kanisa_context(cls, context):
 
 
 class KanisaAuthorizationMixin(object):
-    login_url = settings.LOGIN_URL
     raise_exception = False
     redirect_field_name = REDIRECT_FIELD_NAME
 
@@ -48,7 +47,8 @@ class KanisaAuthorizationMixin(object):
             return HttpResponseForbidden()
 
         path = urlquote(request.get_full_path())
-        tup = self.login_url, self.redirect_field_name, path
+        login_url = settings.LOGIN_URL
+        tup = login_url, self.redirect_field_name, path
         return HttpResponseRedirect("%s?%s=%s" % tup)
 
     def dispatch(self, request, *args, **kwargs):
