@@ -17,7 +17,7 @@ from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaAuthorizationMixin)
 
 
-class DiaryBaseView:
+class DiaryBaseView(KanisaAuthorizationMixin):
     kanisa_lead = ('Diary events are regularly occurring events you want to '
                    'display on your church\'s calendar.')
     kanisa_root_crumb = {'text': 'Diary',
@@ -45,8 +45,8 @@ class DiaryBaseView:
         return path + '?date=%s' % yyyymmdd
 
 
-class DiaryEventIndexView(KanisaAuthorizationMixin,
-                          KanisaTemplateView, DiaryBaseView):
+class DiaryEventIndexView(DiaryBaseView,
+                          KanisaTemplateView):
     template_name = 'kanisa/management/diary/index.html'
     kanisa_title = 'Manage Diary'
     kanisa_is_root_view = True
@@ -69,15 +69,15 @@ class DiaryEventIndexView(KanisaAuthorizationMixin,
         return context
 
 
-class DiaryRegularEventsView(KanisaAuthorizationMixin,
-                             KanisaListView, DiaryBaseView):
+class DiaryRegularEventsView(DiaryBaseView,
+                             KanisaListView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
 
 
-class DiaryRegularEventCreateView(KanisaAuthorizationMixin,
-                                  KanisaCreateView, DiaryBaseView):
+class DiaryRegularEventCreateView(DiaryBaseView,
+                                  KanisaCreateView):
     form_class = RegularEventForm
     kanisa_title = 'Create a Regular Event'
     success_url = reverse_lazy('kanisa_manage_diary_regularevents')
@@ -88,8 +88,8 @@ class DiaryRegularEventCreateView(KanisaAuthorizationMixin,
         return initial
 
 
-class DiaryRegularEventUpdateView(KanisaAuthorizationMixin,
-                                  KanisaUpdateView, DiaryBaseView):
+class DiaryRegularEventUpdateView(DiaryBaseView,
+                                  KanisaUpdateView):
     form_class = RegularEventForm
     model = RegularEvent
     success_url = reverse_lazy('kanisa_manage_diary_regularevents')
@@ -103,9 +103,8 @@ class DiaryScheduledEventBaseView(DiaryBaseView):
                    'diary - with an associated date and time.')
 
 
-class DiaryScheduledEventCreateView(KanisaAuthorizationMixin,
-                                    KanisaCreateView,
-                                    DiaryScheduledEventBaseView):
+class DiaryScheduledEventCreateView(DiaryScheduledEventBaseView,
+                                    KanisaCreateView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
@@ -128,9 +127,8 @@ class DiaryScheduledEventCreateView(KanisaAuthorizationMixin,
         return initial
 
 
-class DiaryScheduledEventUpdateView(KanisaAuthorizationMixin,
-                                    KanisaUpdateView,
-                                    DiaryScheduledEventBaseView):
+class DiaryScheduledEventUpdateView(DiaryScheduledEventBaseView,
+                                    KanisaUpdateView):
     form_class = ScheduledEventEditForm
     model = ScheduledEvent
 
@@ -138,9 +136,8 @@ class DiaryScheduledEventUpdateView(KanisaAuthorizationMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduledEventCloneView(KanisaAuthorizationMixin,
-                                   KanisaCreateView,
-                                   DiaryScheduledEventBaseView):
+class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
+                                   KanisaCreateView):
     form_class = ScheduledEventCreationForm
     model = ScheduledEvent
     kanisa_title = 'Create Scheduled Event'
@@ -168,8 +165,8 @@ class DiaryScheduledEventCloneView(KanisaAuthorizationMixin,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
 
-class DiaryScheduleRegularEventView(KanisaAuthorizationMixin,
-                                    RedirectView, DiaryBaseView):
+class DiaryScheduleRegularEventView(DiaryBaseView,
+                                    RedirectView):
     permanent = False
 
     def get_redirect_url(self, pk, thedate):
@@ -205,8 +202,8 @@ class DiaryScheduleRegularEventView(KanisaAuthorizationMixin,
         return self.get_relative_root_url(thedate)
 
 
-class DiaryScheduleWeeksRegularEventView(KanisaAuthorizationMixin,
-                                         RedirectView, DiaryBaseView):
+class DiaryScheduleWeeksRegularEventView(DiaryBaseView,
+                                         RedirectView):
     permanent = False
 
     def get_redirect_url(self):
@@ -232,9 +229,8 @@ class DiaryScheduleWeeksRegularEventView(KanisaAuthorizationMixin,
         return self.get_relative_root_url()
 
 
-class DiaryCancelScheduledEventView(KanisaAuthorizationMixin,
-                                    KanisaDeleteView,
-                                    DiaryScheduledEventBaseView):
+class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
+                                    KanisaDeleteView):
     model = ScheduledEvent
 
     def get_date_string(self):
