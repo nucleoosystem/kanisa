@@ -57,31 +57,23 @@ class DiaryManagementViewTest(KanisaViewTestCase):
 
         # Schedule the event
         resp = self.client.get(url, follow=True)
-        self.assertEqual(resp.status_code, 200)
+        expected_location = reverse('kanisa_manage_diary') + '?date=20120103'
+        self.assertRedirects(resp, expected_location)
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
                          ['Afternoon Tea scheduled for 3 Jan 2012 at 2 p.m.',
                           ])
-        expected_location = reverse('kanisa_manage_diary')
-        self.assertEqual(resp.redirect_chain,
-                         [('http://testserver%s?date=20120103'
-                           % expected_location, 302), ])
 
         self.assertEqual(len(ScheduledEvent.objects.all()), 1)
 
         # shouldn't be able to schedule it again
         resp = self.client.get(url, follow=True)
-        self.assertEqual(resp.status_code, 200)
+        self.assertRedirects(resp, expected_location)
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
                          [('Afternoon Tea already scheduled for 3 Jan 2012 at '
                            '2 p.m.'),
                           ])
-
-        expected_location = reverse('kanisa_manage_diary')
-        self.assertEqual(resp.redirect_chain,
-                         [('http://testserver%s?date=20120103'
-                           % expected_location, 302), ])
 
     def test_diary_schedule_nonexistent_regular_event_404s(self):
         url = reverse('kanisa_manage_diary_schedule_regular_event',
