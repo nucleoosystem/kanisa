@@ -12,15 +12,15 @@ from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView)
 
 
-class DocumentBaseView:
+class DocumentBaseView(KanisaAuthorizationMixin):
     kanisa_lead = ('Storing documents on your site allows people to have '
                    'easy access to the files they need.')
     kanisa_root_crumb = {'text': 'Documents',
                          'url': reverse_lazy('kanisa_manage_documents')}
 
 
-class DocumentIndexView(KanisaAuthorizationMixin,
-                        KanisaListView, DocumentBaseView):
+class DocumentIndexView(DocumentBaseView,
+                        KanisaListView):
     model = Document
     queryset = Document.objects.all()
 
@@ -29,8 +29,8 @@ class DocumentIndexView(KanisaAuthorizationMixin,
     kanisa_is_root_view = True
 
 
-class DocumentSearchView(KanisaAuthorizationMixin,
-                         KanisaTemplateView, DocumentBaseView):
+class DocumentSearchView(DocumentBaseView,
+                         KanisaTemplateView):
     kanisa_title = 'Search Documents'
     template_name = 'kanisa/management/documents/search.html'
 
@@ -56,22 +56,22 @@ class DocumentSearchView(KanisaAuthorizationMixin,
                                   context_instance=RequestContext(request))
 
 
-class DocumentCreateView(KanisaAuthorizationMixin,
-                         KanisaCreateView, DocumentBaseView):
+class DocumentCreateView(DocumentBaseView,
+                         KanisaCreateView):
     form_class = DocumentForm
     kanisa_title = 'Upload a Document'
     success_url = reverse_lazy('kanisa_manage_documents')
 
 
-class DocumentUpdateView(KanisaAuthorizationMixin,
-                         KanisaUpdateView, DocumentBaseView):
+class DocumentUpdateView(DocumentBaseView,
+                         KanisaUpdateView):
     form_class = DocumentForm
     model = Document
     success_url = reverse_lazy('kanisa_manage_documents')
 
 
-class DocumentDeleteView(KanisaAuthorizationMixin,
-                         KanisaDeleteView, DocumentBaseView):
+class DocumentDeleteView(DocumentBaseView,
+                         KanisaDeleteView):
     model = Document
 
     def get_cancel_url(self):
