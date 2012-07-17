@@ -15,24 +15,24 @@
           {% if user.is_staff %}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Manage
+              Members
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               {% if perms.kanisa.manage_banners %}
-              <li><a href="{% url 'kanisa_manage_banners' %}">Banners</a></li>
+              <li><a href="{% url 'kanisa_manage_banners' %}">Manage Banners</a></li>
               {% endif %}
               {% if perms.kanisa.manage_diary %}
-              <li><a href="{% url 'kanisa_manage_diary' %}">Diary</a></li>
+              <li><a href="{% url 'kanisa_manage_diary' %}">Manage Diary</a></li>
               {% endif %}
               {% if perms.kanisa.manage_sermons %}
-              <li><a href="{% url 'kanisa_manage_sermons' %}">Sermons</a></li>
+              <li><a href="{% url 'kanisa_manage_sermons' %}">Manage Sermons</a></li>
               {% endif %}
               {% if perms.kanisa.manage_document %}
-              <li><a href="{% url 'kanisa_manage_documents' %}">Documents</a></li>
+              <li><a href="{% url 'kanisa_manage_documents' %}">Manage Documents</a></li>
               {% endif %}
               {% if perms.kanisa.manage_social %}
-              <li><a href="{% url 'kanisa_manage_social' %}">Social</a></li>
+              <li><a href="{% url 'kanisa_manage_social' %}">Manage Social Networks</a></li>
               {% endif %}
             </ul>
           </li>
