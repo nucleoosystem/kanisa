@@ -63,3 +63,4 @@ HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, "whoosh_index")
 
 USE_TZ = True
+LOGIN_URL = '/login/'
