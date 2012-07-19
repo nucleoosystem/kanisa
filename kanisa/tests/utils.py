@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Permission
+from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -19,17 +20,13 @@ class KanisaViewTestCase(TestCase):
         fred.user_permissions.add(p)
         fred.save()
 
-    @override_settings(LOGIN_URL='/loginview/')
+    @override_settings(LOGIN_URL=reverse_lazy('kanisa_public_login'))
     def view_is_restricted(self, url):
         # Not logged in
         resp = self.client.get(url)
 
-        # The loginview URL does not exist. I should probably make
-        # sure it does, but for now I'll just say this should 404, and
-        # set the URL to something that probably won't exist. This
-        # could do with tidying up.
-        self.assertRedirects(resp, '/loginview/?next=%s' % url,
-                             302, 404)
+        self.assertRedirects(resp, '/login/?next=%s' % url,
+                             302, 200)
 
         # Logged in as non-staff member
         self.client.login(username='bob', password='secret')
