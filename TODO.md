@@ -73,3 +73,5 @@
 # Frontend
 
 * Actually implement the frontend of the site
+* Add favicons, and other assorted Apple bits (see Bootstrap templates
+  for examples).
