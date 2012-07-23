@@ -1,14 +1,21 @@
 {% extends 'kanisa/management/base.html' %}
 
 {% load url from future %}
+{% load kanisa_tags %}
 
 {% block content %}
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered userpermtable">
   <thead>
     <tr>
       <th>Username</th>
       <th>Full name</th>
       <th>Active</th>
+      <th><i class="icon icon-picture" title="Manage Banners"></i></th>
+      <th><i class="icon icon-calendar" title="Manage Diary"></i></th>
+      <th><i class="icon icon-headphones" title="Manage Sermons"></i></th>
+      <th><i class="icon icon-file" title="Manage Documents"></i></th>
+      <th><i class="icon icon-fire" title="Manage Networks"></i></th>
+      <th><i class="icon icon-user" title="Manage Users"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +29,12 @@
     <i class="icon icon-ok"></i>
     {% endif %}
   </td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
 </tr>
 {% endfor %}
 </tbody>
