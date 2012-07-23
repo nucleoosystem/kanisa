@@ -9,8 +9,8 @@
 
 {% block contents %}
 <blockquote>
-{{ object.tweet }}
-<strong>Scheduled for :</strong> {{ object.date|date:"jS F Y" }} at {{ object.time|date:"H:i" }}
+<p>{{ object.tweet }}</p>
+<small><strong>Scheduled for:</strong> {{ object.date|date:"jS F Y" }} at {{ object.time|date:"H:i" }}</small>
 </blockquote>
 {% endblock %}
 
