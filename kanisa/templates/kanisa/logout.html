@@ -1,0 +1,13 @@
+{% extends 'kanisa/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<p class="lead">Thank you, you have now been logged out.</p>
+
+<p>Want to <a href="{% url 'kanisa_public_login' %}" title="Login again">login again</a>?</p>
+
+{% endblock %}

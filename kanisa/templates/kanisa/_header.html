@@ -41,7 +41,7 @@
         </ul>
         {% if user.is_authenticated %}
         <p class="navbar-text pull-right">Welcome, {{ user }}
-          (<a href="{% url 'admin:logout' %}">Logout</a>)
+          (<a href="{% url 'kanisa_public_logout' %}">Logout</a>)
         </p>
         <form class="navbar-search pull-right" style="margin-right: 20px;" action="{% url 'kanisa_manage_search' %}">
           <input type="text" class="search-query" placeholder="Search" name="query">
