@@ -95,6 +95,17 @@
                 </a>
               </li>
               {% endif %}
+              {% if perms.kanisa.manage_users %}
+              <li class="nav-header">
+                <i class="icon-user"></i>
+                Users
+              </li>
+              <li>
+                <a href="{% url 'kanisa_manage_users' %}">
+                  Manage Users
+                </a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </div>

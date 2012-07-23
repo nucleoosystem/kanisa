@@ -23,6 +23,8 @@ urlpatterns = patterns('',
                            include('kanisa.urls.sermons')),
                        url(r'^social/',
                            include('kanisa.urls.social')),
+                       url(r'^users/',
+                           include('kanisa.urls.users')),
                        url(r'^xhr/',
                            include('kanisa.urls.xhr')),
                        )
