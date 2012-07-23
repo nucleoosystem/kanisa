@@ -17,7 +17,7 @@ def kanisa_future_scheduled_tweets():
 
 @register.simple_tag(takes_context=True)
 def kanisa_user_has_perm(context, perm):
-    user = context['user']
+    user = context['theuser']
     if user.has_perm(perm):
         return '<i class="icon icon-ok"></i>'
     return ''

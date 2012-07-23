@@ -58,6 +58,7 @@ label.requiredField {
     margin-right: 10px;
 }
 
+.help_text,
 .search-result .footnote {
     font-size: 90%;
     color: #777;
