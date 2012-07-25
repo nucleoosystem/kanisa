@@ -1,0 +1,41 @@
+{% load kanisa_tags %}
+{% load url from future %}
+
+<table class="table table-striped table-bordered userpermtable">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Full name</th>
+      <th>Active</th>
+      <th><i class="icon icon-picture" title="Manage Banners"></i></th>
+      <th><i class="icon icon-calendar" title="Manage Diary"></i></th>
+      <th><i class="icon icon-headphones" title="Manage Sermons"></i></th>
+      <th><i class="icon icon-file" title="Manage Documents"></i></th>
+      <th><i class="icon icon-fire" title="Manage Networks"></i></th>
+      <th><i class="icon icon-user" title="Manage Users"></i></th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for theuser in user_list %}
+<tr>
+  <td>
+    <a href="{% url 'admin:auth_user_change' theuser.pk %}">{{ theuser.username }}</a>
+    {% if user.pk = theuser.pk %}<span class="help_text">(this is you)</span>{% endif %}
+  </td>
+  <td>{{ theuser.get_full_name }}</td>
+  <td>
+    {% if theuser.is_active %}
+    <i class="icon icon-ok"></i>
+    {% endif %}
+  </td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
+  <td>{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
