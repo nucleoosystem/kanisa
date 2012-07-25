@@ -6,6 +6,9 @@ from django.test.utils import override_settings
 
 class KanisaViewTestCase(TestCase):
     def setUp(self):
+        if hasattr(self, 'setup_called'):
+            return
+
         bob = User.objects.create_user('bob', '', 'secret')
         bob.is_staff = False
         bob.save()
@@ -19,6 +22,10 @@ class KanisaViewTestCase(TestCase):
         p = Permission.objects.get(codename='manage_sermons')
         fred.user_permissions.add(p)
         fred.save()
+
+        # Only need to do all this once - we create users and then
+        # never clear them up.
+        self.setup_called = True
 
     @override_settings(LOGIN_URL=reverse_lazy('kanisa_public_login'))
     def view_is_restricted(self, url):
