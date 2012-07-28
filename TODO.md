@@ -34,10 +34,12 @@
   based on content types rather than individual create/edit/delete for
   each).
 * Allow quick membership approval process.
+* Fix O(n)-ness of user management views (queries for each user to get
+  their permissions).
 
 # Members' Area
 
-* Service Planning
+* Service Planning (including notification centre).
 * Rotas
 
 # Search
