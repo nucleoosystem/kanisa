@@ -26,7 +26,7 @@
   <td>{{ theuser.get_full_name }}</td>
   <td>
     {% if theuser.is_active %}
-    <i class="icon icon-ok"></i>
+    <input type="checkbox" checked="checked" disabled="disabled" />
     {% endif %}
   </td>
   <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
