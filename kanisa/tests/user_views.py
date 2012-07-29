@@ -58,16 +58,25 @@ class UserManagementViewTest(KanisaViewTestCase):
         with self.assertNumQueries(2):
             output = check_perm_template(fred, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
-                                 '<input type="checkbox" checked="checked" />')
+                                 ('<input '
+                                  'type="checkbox" '
+                                  'checked="checked" '
+                                  'id="kanisa_manage_users_2" />'))
             output = check_perm_template(fred, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
-                                 '<input type="checkbox" />')
+                                 ('<input '
+                                  'type="checkbox" '
+                                  'id="kanisa_manage_social_2" />'))
 
         # Bob doesn't have access to either
         with self.assertNumQueries(2):
             output = check_perm_template(bob, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
-                                 '<input type="checkbox" />')
+                                 ('<input '
+                                  'type="checkbox" '
+                                  'id="kanisa_manage_users_1" />'))
             output = check_perm_template(bob, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
-                                 '<input type="checkbox" />')
+                                 ('<input '
+                                  'type="checkbox" '
+                                  'id="kanisa_manage_social_1" />'))
