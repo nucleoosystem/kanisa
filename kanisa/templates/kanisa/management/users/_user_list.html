@@ -6,7 +6,6 @@
     <tr>
       <th>Username</th>
       <th>Full name</th>
-      <th>Active</th>
       <th><i class="icon icon-picture" title="Manage Banners"></i></th>
       <th><i class="icon icon-calendar" title="Manage Diary"></i></th>
       <th><i class="icon icon-headphones" title="Manage Sermons"></i></th>
@@ -24,11 +23,6 @@
     {% if user.pk = theuser.pk %}<span class="help_text">(this is you)</span>{% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
-  <td>
-    {% if theuser.is_active %}
-    <input type="checkbox" checked="checked" disabled="disabled" />
-    {% endif %}
-  </td>
   <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
   <td>{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
   <td>{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
