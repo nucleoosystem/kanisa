@@ -18,12 +18,19 @@ def kanisa_future_scheduled_tweets():
 @register.simple_tag(takes_context=True)
 def kanisa_user_has_perm(context, perm):
     user = context['theuser']
-    input = '<i class="icon icon-ok"></i>'
+    input = '<input %s/>'
+
+    attributes = {}
+    attributes['type'] = 'checkbox'
+    attributes['id'] = '%s_%s' % (perm.replace('.', '_'), user.pk)
 
     if user.is_superuser:
-        return input
+        attributes['disabled'] = 'disabled'
+        attributes['checked'] = 'checked'
 
     if user.has_perm(perm):
-        return input
+        attributes['checked'] = 'checked'
 
-    return ''
+    html_attr = ['%s="%s"' % (k, v) for k, v in attributes.items()]
+
+    return input % ' '.join(html_attr)
