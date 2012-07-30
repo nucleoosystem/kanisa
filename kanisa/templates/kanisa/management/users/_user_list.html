@@ -20,7 +20,12 @@
 <tr>
   <td>
     <a href="{% url 'admin:auth_user_change' theuser.pk %}">{{ theuser.username }}</a>
-    {% if user.pk = theuser.pk %}<span class="help_text">(this is you)</span>{% endif %}
+
+    {% if user.pk = theuser.pk %}
+    <span class="help_text">
+      (this is you)
+    </span>
+    {% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
   <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
