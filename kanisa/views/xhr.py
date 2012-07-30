@@ -1,13 +1,10 @@
 from django.contrib.auth.models import User, Permission
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden)
-from django.views.decorators.csrf import csrf_exempt
 
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
 
-# TODO - don't think I need the csrf_exempt any more
-@csrf_exempt
 def check_bible_passage(request):
     if not 'passage' in request.POST:
         return HttpResponseBadRequest("Passage not found.")
@@ -23,12 +20,12 @@ def check_bible_passage(request):
 
 
 def assign_permission(request):
-    if not 'permission' in request.POST:
-        return HttpResponseBadRequest("Permission ID not found.")
-
     if not request.user.has_perm('kanisa.manage_users'):
         return HttpResponseForbidden(("You do not have permission to manage "
                                       "users."))
+
+    if not 'permission' in request.POST:
+        return HttpResponseBadRequest("Permission ID not found.")
 
     if not 'user' in request.POST:
         return HttpResponseBadRequest("User ID not found.")
@@ -43,7 +40,7 @@ def assign_permission(request):
     try:
         user = User.objects.get(pk=user_pk)
     except User.DoesNotExist:
-        return HttpResponseBadRequest("No user found with ID %d.", user_pk)
+        return HttpResponseBadRequest("No user found with ID %s." % user_pk)
 
     try:
         app, perm = input_perm.split('.')
