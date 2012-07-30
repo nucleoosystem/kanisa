@@ -1,9 +1,12 @@
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.contrib.auth.models import User, Permission
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseForbidden)
 from django.views.decorators.csrf import csrf_exempt
 
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
 
+# TODO - don't think I need the csrf_exempt any more
 @csrf_exempt
 def check_bible_passage(request):
     if not 'passage' in request.POST:
@@ -17,3 +20,50 @@ def check_bible_passage(request):
             return HttpResponseBadRequest(e.message)
         msg = '"%s" is not a valid Bible passage.' % request.POST['passage']
         return HttpResponseBadRequest(msg)
+
+
+def assign_permission(request):
+    if not 'permission' in request.POST:
+        return HttpResponseBadRequest("Permission ID not found.")
+
+    if not request.user.has_perm('kanisa.manage_users'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "users."))
+
+    if not 'user' in request.POST:
+        return HttpResponseBadRequest("User ID not found.")
+
+    if not 'assigned' in request.POST:
+        return HttpResponseBadRequest("Assigned status not found.")
+
+    input_perm = request.POST['permission']
+    user_pk = request.POST['user']
+    assigned = request.POST['assigned'] == 'true'
+
+    try:
+        user = User.objects.get(pk=user_pk)
+    except User.DoesNotExist:
+        return HttpResponseBadRequest("No user found with ID %d.", user_pk)
+
+    try:
+        app, perm = input_perm.split('.')
+    except ValueError:
+        msg = "Malformed permission: '%s'." % input_perm
+        return HttpResponseBadRequest(msg)
+
+    try:
+        p = Permission.objects.get(codename=perm)
+    except Permission.DoesNotExist:
+        msg = "Permission '%s' not found." % input_perm
+        return HttpResponseBadRequest(msg)
+
+    if assigned:
+        user.user_permissions.add(p)
+        msg = 'Permission added.'
+    else:
+        user.user_permissions.remove(p)
+        msg = 'Permission removed.'
+
+    user.save()
+
+    return HttpResponse(msg)

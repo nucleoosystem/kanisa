@@ -6,6 +6,7 @@ from kanisa.tests.utils import KanisaViewTestCase
 
 
 class UserManagementViewTest(KanisaViewTestCase):
+
     def setUp(self):
         if hasattr(self, 'setup_called'):
             return
@@ -61,12 +62,18 @@ class UserManagementViewTest(KanisaViewTestCase):
                                  ('<input '
                                   'type="checkbox" '
                                   'checked="checked" '
-                                  'id="kanisa_manage_users_2" />'))
+                                  'class="kanisa_user_perm" '
+                                  'data-permission-id="kanisa.manage_users" '
+                                  'data-user-id="2" '
+                                  ' />'))
             output = check_perm_template(fred, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
                                  ('<input '
                                   'type="checkbox" '
-                                  'id="kanisa_manage_social_2" />'))
+                                  'class="kanisa_user_perm" '
+                                  'data-permission-id="kanisa.manage_social" '
+                                  'data-user-id="2" '
+                                  '/>'))
 
         # Bob doesn't have access to either
         with self.assertNumQueries(2):
@@ -74,9 +81,15 @@ class UserManagementViewTest(KanisaViewTestCase):
             self.assertHTMLEqual(output,
                                  ('<input '
                                   'type="checkbox" '
-                                  'id="kanisa_manage_users_1" />'))
+                                  'class="kanisa_user_perm" '
+                                  'data-permission-id="kanisa.manage_users" '
+                                  'data-user-id="1" '
+                                  '/>'))
             output = check_perm_template(bob, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
                                  ('<input '
                                   'type="checkbox" '
-                                  'id="kanisa_manage_social_1" />'))
+                                  'class="kanisa_user_perm" '
+                                  'data-permission-id="kanisa.manage_social" '
+                                  'data-user-id="1" '
+                                  '/>'))

@@ -22,7 +22,9 @@ def kanisa_user_has_perm(context, perm):
 
     attributes = {}
     attributes['type'] = 'checkbox'
-    attributes['id'] = '%s_%s' % (perm.replace('.', '_'), user.pk)
+    attributes['data-permission-id'] = perm
+    attributes['data-user-id'] = user.pk
+    attributes['class'] = 'kanisa_user_perm'
 
     if user.is_superuser:
         attributes['disabled'] = 'disabled'
