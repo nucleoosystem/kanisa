@@ -21,6 +21,9 @@ class KanisaViewTestCase(TestCase):
         fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_sermons')
         fred.user_permissions.add(p)
+        p = Permission.objects.get(codename='manage_users')
+        fred.user_permissions.add(p)
+
         fred.save()
 
         # Only need to do all this once - we create users and then
