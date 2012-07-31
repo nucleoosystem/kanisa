@@ -52,13 +52,13 @@ $(function() {
         perm_id = checkbox.attr("data-permission-id");
         user_id = checkbox.attr("data-user-id");
         alert_box = $("#kanisa_alerts");
-        url = '/manage/xhr/permissions/';
 
         assigned = checkbox.attr("checked") == "checked";
 
-        $.post(url, { 'permission': perm_id,
-                      'user': user_id,
-                      'assigned': assigned },
+        $.post(permission_change_url,
+               { 'permission': perm_id,
+                 'user': user_id,
+                 'assigned': assigned },
                function(data) {
                    html = "<div class=\"alert alert-info\"><button class=\"close\" data-dismiss=\"alert\">&times;</button>" + data + "</div>";
                    alert_box.after(html);
