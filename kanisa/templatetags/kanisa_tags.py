@@ -16,6 +16,12 @@ def kanisa_future_scheduled_tweets():
     return ScheduledTweet.future_objects.count()
 
 
+def __get_help_text(perm_text):
+    app, perm_code = perm_text.split('.')
+    perm = Permission.objects.get(codename=perm_code)
+    return perm.name
+
+
 @register.simple_tag(takes_context=True)
 def kanisa_user_has_perm(context, perm):
     user = context['theuser']
@@ -27,9 +33,7 @@ def kanisa_user_has_perm(context, perm):
     attributes['data-user-id'] = user.pk
     attributes['class'] = 'kanisa_user_perm'
 
-    app, perm_code = perm.split('.')
-    p = Permission.objects.get(codename=perm_code)
-    attributes['title'] = p.name
+    attributes['title'] = __get_help_text(perm)
 
     if user.is_superuser:
         attributes['disabled'] = 'disabled'
