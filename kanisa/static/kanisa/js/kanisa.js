@@ -66,28 +66,36 @@ $(function() {
 
     $(".kanisa_user_perm").change(function() {
         checkbox = $(this);
-        checkbox.attr("disabled", "disabled");
 
         perm_id = checkbox.attr("data-permission-id");
         user_id = checkbox.attr("data-user-id");
         assigned = checkbox.attr("checked") == "checked";
+        spinner_id = "spinner-" + perm_id.replace(".", "_");
+
+        checkbox.hide();
+
+        checkbox.after("<i class=\"spinner\" id=\"" + spinner_id + "\"></i>");
+        spinner = $("#" + spinner_id);
 
         $.post(permission_change_url,
                { 'permission': perm_id,
                  'user': user_id,
                  'assigned': assigned },
                function(data) {
-                   alert_success(data);
-                   checkbox.removeAttr("disabled");
+                   spinner.remove();
+                   checkbox.show();
                }).error(function(data) {
                    alert_failure(data.responseText);
-                   checkbox.removeAttr("disabled");
+
                    if (assigned) {
                        checkbox.removeAttr("checked");
                    }
                    else {
                        checkbox.attr("checked", "checked");
                    }
+
+                   spinner.remove();
+                   checkbox.show();
                });
     });
 });

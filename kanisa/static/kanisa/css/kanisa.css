@@ -63,3 +63,11 @@ label.requiredField {
     font-size: 90%;
     color: #777;
 }
+
+i.spinner {
+    background-image: url(../img/ajax.gif);
+    background-repeat: no-repeat;
+    height: 16px;
+    width: 16px;
+    display: block;
+}
