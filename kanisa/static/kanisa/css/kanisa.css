@@ -69,5 +69,15 @@ i.spinner {
     background-repeat: no-repeat;
     height: 16px;
     width: 16px;
-    display: block;
+    display: inline-block;
+    position: absolute;
+    left: 16px;
+    top: 10px;
+}
+
+th.iconcell,
+td.iconcell {
+    width: 32px;
+    text-align: center;
+    position: relative;
 }

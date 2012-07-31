@@ -10,12 +10,12 @@
     <tr>
       <th>Username</th>
       <th>Full name</th>
-      <th><i class="icon icon-picture" title="Manage Banners"></i></th>
-      <th><i class="icon icon-calendar" title="Manage Diary"></i></th>
-      <th><i class="icon icon-headphones" title="Manage Sermons"></i></th>
-      <th><i class="icon icon-file" title="Manage Documents"></i></th>
-      <th><i class="icon icon-fire" title="Manage Networks"></i></th>
-      <th><i class="icon icon-user" title="Manage Users"></i></th>
+      <th class="iconcell"><i class="icon icon-picture" title="Manage Banners"></i></th>
+      <th class="iconcell"><i class="icon icon-calendar" title="Manage Diary"></i></th>
+      <th class="iconcell"><i class="icon icon-headphones" title="Manage Sermons"></i></th>
+      <th class="iconcell"><i class="icon icon-file" title="Manage Documents"></i></th>
+      <th class="iconcell"><i class="icon icon-fire" title="Manage Networks"></i></th>
+      <th class="iconcell"><i class="icon icon-user" title="Manage Users"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -32,12 +32,12 @@
     {% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
-  <td>{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
 </tr>
 {% endfor %}
 </tbody>
