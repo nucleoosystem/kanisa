@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Permission
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.template import Context, Template
 from django.template.loader import render_to_string
@@ -39,11 +40,14 @@ class UserManagementViewTest(KanisaViewTestCase):
     def test_template_complexity(self):
         tmpl = 'kanisa/management/users/_user_list.html'
         users = list(User.objects.all())
-        with self.assertNumQueries(16):
+        with self.assertNumQueries(4):
             render_to_string(tmpl,
                              {'user_list': users})
 
     def test_template_tags(self):
+        # To make sure this test is independent of other cached keys.
+        cache.clear()
+
         def check_perm_template(user, perm):
             template = ("{%% load kanisa_tags %%}"
                         "{%% kanisa_user_has_perm '%s' %%}" % perm)
@@ -56,7 +60,7 @@ class UserManagementViewTest(KanisaViewTestCase):
 
         # Fred has access to manage users, not to manage social
         # networks.
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(3):
             output = check_perm_template(fred, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
                                  ('<input '
@@ -78,7 +82,7 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   '/>'))
 
         # Bob doesn't have access to either
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(2):
             output = check_perm_template(bob, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
                                  ('<input '

@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.auth.models import Permission
+from django.core.cache import cache
 from kanisa.models import Banner, ScheduledTweet
 
 
@@ -16,10 +17,20 @@ def kanisa_future_scheduled_tweets():
     return ScheduledTweet.future_objects.count()
 
 
+def __cache_all_perms():
+    all_perms = Permission.objects.filter(content_type__app_label='kanisa')
+    for perm in all_perms:
+        cache.set('kanisa_perms_name:%s' % perm.codename, perm.name)
+
+
 def __get_help_text(perm_text):
     app, perm_code = perm_text.split('.')
-    perm = Permission.objects.get(codename=perm_code)
-    return perm.name
+    cache_key = 'kanisa_perms_name:%s' % perm_code
+
+    if not cache.get(cache_key):
+        __cache_all_perms()
+
+    return cache.get(cache_key)
 
 
 @register.simple_tag(takes_context=True)

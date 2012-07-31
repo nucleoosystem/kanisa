@@ -32,7 +32,7 @@
 * Allow users to upload photos?
 * Allow quick membership approval process.
 * Fix O(n)-ness of user management views (queries for each user to get
-  their permissions, and to get the help text for each permission).
+  their permissions).
 
 # Members' Area
 
