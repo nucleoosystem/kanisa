@@ -39,7 +39,7 @@ class UserManagementViewTest(KanisaViewTestCase):
     def test_template_complexity(self):
         tmpl = 'kanisa/management/users/_user_list.html'
         users = list(User.objects.all())
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(16):
             render_to_string(tmpl,
                              {'user_list': users})
 
@@ -56,7 +56,7 @@ class UserManagementViewTest(KanisaViewTestCase):
 
         # Fred has access to manage users, not to manage social
         # networks.
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(4):
             output = check_perm_template(fred, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
                                  ('<input '
@@ -65,7 +65,8 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   'class="kanisa_user_perm" '
                                   'data-permission-id="kanisa.manage_users" '
                                   'data-user-id="2" '
-                                  ' />'))
+                                  'title="Can manage your users" '
+                                  '/>'))
             output = check_perm_template(fred, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
                                  ('<input '
@@ -73,10 +74,11 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   'class="kanisa_user_perm" '
                                   'data-permission-id="kanisa.manage_social" '
                                   'data-user-id="2" '
+                                  'title="Can manage your social networks" '
                                   '/>'))
 
         # Bob doesn't have access to either
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(4):
             output = check_perm_template(bob, 'kanisa.manage_users')
             self.assertHTMLEqual(output,
                                  ('<input '
@@ -84,6 +86,7 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   'class="kanisa_user_perm" '
                                   'data-permission-id="kanisa.manage_users" '
                                   'data-user-id="1" '
+                                  'title="Can manage your users" '
                                   '/>'))
             output = check_perm_template(bob, 'kanisa.manage_social')
             self.assertHTMLEqual(output,
@@ -92,4 +95,5 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   'class="kanisa_user_perm" '
                                   'data-permission-id="kanisa.manage_social" '
                                   'data-user-id="1" '
+                                  'title="Can manage your social networks" '
                                   '/>'))

@@ -1,4 +1,5 @@
 from django import template
+from django.contrib.auth.models import Permission
 from kanisa.models import Banner, ScheduledTweet
 
 
@@ -25,6 +26,10 @@ def kanisa_user_has_perm(context, perm):
     attributes['data-permission-id'] = perm
     attributes['data-user-id'] = user.pk
     attributes['class'] = 'kanisa_user_perm'
+
+    app, perm_code = perm.split('.')
+    p = Permission.objects.get(codename=perm_code)
+    attributes['title'] = p.name
 
     if user.is_superuser:
         attributes['disabled'] = 'disabled'
