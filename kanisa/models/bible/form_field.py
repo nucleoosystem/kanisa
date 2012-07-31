@@ -33,5 +33,4 @@ class BiblePassageFormField(forms.CharField):
         try:
             return unicode(to_passage(value))
         except InvalidPassage, e:
-            raise util.ValidationError(('\'%s\' is not a valid Bible '
-                                        'reference. %s') % (value, e))
+            raise util.ValidationError(e)

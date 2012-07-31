@@ -123,7 +123,7 @@ def to_passage(inputstring):
 
     if not isinstance(inputstring, str):
         if not isinstance(inputstring, unicode):
-            raise InvalidPassage
+            raise InvalidPassage("to_passage requires a string")
 
     input = inputstring.strip().lower()
 
@@ -151,7 +151,7 @@ def to_passage(inputstring):
                                 ec,
                                 ev)
 
-    raise InvalidPassage
+    raise InvalidPassage('"%s" is not a valid Bible passage.' % inputstring)
 
 
 class BiblePassage(object):

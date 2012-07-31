@@ -13,10 +13,7 @@ def check_bible_passage(request):
         passage = to_passage(request.POST['passage'])
         return HttpResponse(unicode(passage))
     except InvalidPassage, e:
-        if e.message:
-            return HttpResponseBadRequest(e.message)
-        msg = '"%s" is not a valid Bible passage.' % request.POST['passage']
-        return HttpResponseBadRequest(msg)
+        return HttpResponseBadRequest(unicode(e))
 
 
 def assign_permission(request):
