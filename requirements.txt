@@ -1,7 +1,9 @@
+Django==1.4
+PIL==1.1.7
 django-crispy-forms==1.1.4
 django-haystack==1.2.7
 mutagen==1.20
-PIL==1.1.7
 sorl-thumbnail==11.12
 tweepy==1.9
 Whoosh==2.4.1
+wsgiref==0.1.2
