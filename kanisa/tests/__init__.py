@@ -15,7 +15,7 @@ from .bible_passages import (BiblePassageBadInput,
                              BiblePassageModelField)
 from .sermons import SermonTest
 from .sermon_views import SermonManagementViewTest
-from .social_views import SocialViewTestCase
+from .social_views import SocialViewTest
 from .document_views import DocumentManagementViewTest
 from .user_views import UserManagementViewTest
 from .xhr_views import XHRBiblePassageViewTest, UserPermissionViewTest

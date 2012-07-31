@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from kanisa.tests.utils import KanisaViewTestCase
 
 
-class SocialViewTestCase(KanisaViewTestCase):
+class SocialViewTest(KanisaViewTestCase):
     def test_views_protected(self):
         prefix = 'kanisa_manage_social'
         self.view_is_restricted(reverse(prefix))
