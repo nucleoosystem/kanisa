@@ -66,6 +66,7 @@ $(function() {
 
     $(".kanisa_user_perm").change(function() {
         checkbox = $(this);
+        checkbox.attr("disabled", "disabled");
 
         perm_id = checkbox.attr("data-permission-id");
         user_id = checkbox.attr("data-user-id");
@@ -77,8 +78,16 @@ $(function() {
                  'assigned': assigned },
                function(data) {
                    alert_success(data);
+                   checkbox.removeAttr("disabled");
                }).error(function(data) {
                    alert_failure(data.responseText);
+                   checkbox.removeAttr("disabled");
+                   if (assigned) {
+                       checkbox.removeAttr("checked");
+                   }
+                   else {
+                       checkbox.attr("checked", "checked");
+                   }
                });
     });
 });
