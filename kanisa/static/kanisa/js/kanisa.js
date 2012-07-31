@@ -40,6 +40,23 @@ jQuery(document).ajaxSend(function(event, xhr, settings) {
 
 // Kanisa-specific functionality
 
+function _alert_impl(msg, alert_class) {
+    alert_box = $("#kanisa_alerts");
+    $(".js-alert").remove();
+    html = "<div class=\"js-alert alert " + alert_class + "\" style=\"display: none\">";
+    html += "<button class=\"close\" data-dismiss=\"alert\">&times;</button>" + msg + "</div>";
+    alert_box.after(html);
+    $(".js-alert").slideDown('fast');
+}
+
+function alert_success(msg) {
+    _alert_impl(msg, "alert-success");
+}
+
+function alert_failure(msg) {
+    _alert_impl(msg, "alert-error");
+}
+
 $(function() {
     $("#schedule-weeks-events").mouseover(function() {
         $(".noautoschedule").fadeTo('fast', 0.3);
@@ -49,10 +66,9 @@ $(function() {
 
     $(".kanisa_user_perm").change(function() {
         checkbox = $(this);
+
         perm_id = checkbox.attr("data-permission-id");
         user_id = checkbox.attr("data-user-id");
-        alert_box = $("#kanisa_alerts");
-
         assigned = checkbox.attr("checked") == "checked";
 
         $.post(permission_change_url,
@@ -60,11 +76,9 @@ $(function() {
                  'user': user_id,
                  'assigned': assigned },
                function(data) {
-                   html = "<div class=\"alert alert-info\"><button class=\"close\" data-dismiss=\"alert\">&times;</button>" + data + "</div>";
-                   alert_box.after(html);
+                   alert_success(data);
                }).error(function(data) {
-                   html = "<div class=\"alert alert-error\"><button class=\"close\" data-dismiss=\"alert\">&times;</button>" + data.responseText + "</div>";
-                   alert_box.after(html);
+                   alert_failure(data.responseText);
                });
     });
 });
