@@ -34,6 +34,9 @@
               {% if perms.kanisa.manage_social %}
               <li><a href="{% url 'kanisa_manage_social' %}">Manage Social Networks</a></li>
               {% endif %}
+              {% if perms.kanisa.manage_users %}
+              <li><a href="{% url 'kanisa_manage_users' %}">Manage Users</a></li>
+              {% endif %}
             </ul>
           </li>
           <li><a href="{% url 'admin:index' %}">Admin</a></li>
