@@ -56,10 +56,11 @@ def assign_permission(request):
 
     if assigned:
         user.user_permissions.add(p)
-        msg = 'Permission added.'
+        msg = '%s %s.' % (user, p.name.lower())
     else:
+        what = p.name.lower().replace("can ", "can no longer ")
         user.user_permissions.remove(p)
-        msg = 'Permission removed.'
+        msg = '%s %s.' % (user, what)
 
     user.save()
 

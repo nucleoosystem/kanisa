@@ -80,14 +80,16 @@ class UserPermissionViewTest(KanisaViewTestCase):
                                  'user': 2,
                                  'assigned': 'true'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content, 'Permission added.')
+        self.assertEqual(resp.content,
+                         'fred can manage your users.')
 
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.manage_users',
                                  'user': 2,
                                  'assigned': 'foobar'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content, 'Permission removed.')
+        self.assertEqual(resp.content,
+                         'fred can no longer manage your users.')
 
         self.client.logout()
 
