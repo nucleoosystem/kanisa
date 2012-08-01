@@ -1,5 +1,6 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
+{% load markup %}
 {% load thumbnail %}
 {% load url from future %}
 
@@ -14,7 +15,7 @@
 {% if object.passage %}
 <p><strong>Passage:</strong> {{ object.passage }}</p>
 {% endif %}
-{{ object.details.strip|truncatewords:75|linebreaks }}
+{{ object.details.strip|markdown|truncatewords_html:75 }}
 </blockquote>
 {% endblock %}
 

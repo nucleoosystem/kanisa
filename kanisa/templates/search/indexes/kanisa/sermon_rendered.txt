@@ -1,7 +1,8 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
-{% load url from future %}
+{% load markup %}
 {% load thumbnail %}
+{% load url from future %}
 
 {% block contents %}
 {% if object.series and object.series.image %}
@@ -22,7 +23,7 @@
 {% endif %}
 A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
 
-{{ object.details.strip|truncatewords:75|linebreaks }}
+{{ object.details.strip|markdown|truncatewords_html:75 }}
 </blockquote>
 {% endblock %}
 

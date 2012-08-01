@@ -1,11 +1,12 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
+{% load markup %}
 {% load url from future %}
 
 {% block contents %}
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.get_day_display }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
-{{ object.details.strip|truncatewords:75|linebreaks }}
+{{ object.details.strip|markdown|truncatewords_html:75 }}
 </blockquote>
 {% endblock %}
 

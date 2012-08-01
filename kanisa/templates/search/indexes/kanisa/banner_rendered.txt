@@ -1,5 +1,5 @@
-
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
+{% load markup %}
 {% load thumbnail %}
 {% load url from future %}
 
@@ -13,7 +13,7 @@
 {% endthumbnail %}
 {% endif %}
 
-{{ object.contents.strip|truncatewords:75|linebreaks }}
+{{ object.contents.strip|markdown|truncatewords_html:75 }}
 
 <br />
 
