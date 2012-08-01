@@ -100,7 +100,7 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
 
 
 class DiaryScheduledEventBaseView(DiaryBaseView):
-    kanisa_lead = ('Scheduled events are particularly entries in a week\'s '
+    kanisa_lead = ('Scheduled events are particular entries in a week\'s '
                    'diary - with an associated date and time.')
 
 
