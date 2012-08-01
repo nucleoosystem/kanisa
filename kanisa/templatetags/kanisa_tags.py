@@ -1,20 +1,9 @@
 from django import template
 from django.contrib.auth.models import Permission
 from django.core.cache import cache
-from kanisa.models import Banner, ScheduledTweet
 
 
 register = template.Library()
-
-
-@register.simple_tag()
-def kanisa_active_banners():
-    return Banner.active_objects.count()
-
-
-@register.simple_tag()
-def kanisa_future_scheduled_tweets():
-    return ScheduledTweet.future_objects.count()
 
 
 def __cache_all_perms():
