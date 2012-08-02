@@ -20,7 +20,6 @@
 * Add page hierarchy management views
 * Drag-and-drop page moving
 * Quick page hierarchy creation tool
-* Add section to user management for permission controls
 
 # Social Media
 

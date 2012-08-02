@@ -21,6 +21,10 @@ class Page(MPTTModel):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
+        permissions = (
+            ('manage_pages',
+             'Can manage your pages'),
+            )
 
     def __unicode__(self):
         return self.title
