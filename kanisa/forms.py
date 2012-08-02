@@ -195,6 +195,7 @@ class SermonForm(KanisaBaseForm):
 class DocumentForm(KanisaBaseForm):
     class Meta:
         model = Document
+        widgets = {'details': EpicWidget(), }
 
 
 class ScheduledTweetForm(KanisaBaseForm):
