@@ -9,17 +9,21 @@
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
 * Allow creating RegularEvents on timetables other than day x of week.
+* Add slugs for regular events
 
 # Sermons
 
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
+* Add slugs for sermon series, sermons and speakers
 
 # Pages
 
-* Add page hierarchy management views
+* Add page deletion view (what if you try and delete a page that is
+  not a root node?)
 * Drag-and-drop page moving
 * Quick page hierarchy creation tool
+* Automatically create slugs (though make them editable if required)
 
 # Social Media
 
@@ -59,6 +63,7 @@
   tests only)
 * Check coverage of diary/banner CRUD views.
 * Add tests for search views
+* Add tests for pages
 
 # Misc
 
