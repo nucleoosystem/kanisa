@@ -11,7 +11,7 @@
     {% for page in page_list %}
     <tr>
       <td>
-        <a href="{% url 'kanisa_manage_pages_update' page.pk %}">
+        <a href="{% url 'kanisa_manage_pages_update' page.pk %}" style="margin-left: {{ page.get_level }}em">
           {{ page.title }}
         </a>
       </td>
