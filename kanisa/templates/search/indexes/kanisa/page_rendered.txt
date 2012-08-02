@@ -1,9 +1,14 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
 {% load markup %}
+{% load url from future %}
 
 {% block contents %}
 <blockquote>
 <p>{{ object.contents|markdown|striptags|truncatewords:75 }}</p>
 </blockquote>
+{% endblock %}
+
+{% block buttons %}
+<a class="btn btn-mini" href="{% url 'kanisa_manage_pages_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
 {% endblock %}
