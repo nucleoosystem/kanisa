@@ -3,6 +3,7 @@
 {% block details %}
 {% autoescape off %}
 
+{{ object.title }}
 {{ object.contents }}
 
 {% endautoescape %}
