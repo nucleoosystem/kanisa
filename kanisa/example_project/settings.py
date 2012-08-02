@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'crispy_forms',
     'haystack',
+    'mptt',
     'kanisa',
 )
 
