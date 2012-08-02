@@ -1,11 +1,9 @@
-from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from kanisa.forms import PageForm
 from kanisa.models import Page
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaDeleteView,
-                                  KanisaTemplateView)
+                                  KanisaListView)
 
 
 class PageBaseView(KanisaAuthorizationMixin):
