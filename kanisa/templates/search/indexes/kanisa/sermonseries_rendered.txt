@@ -15,7 +15,7 @@
 {% if object.passage %}
 <p><strong>Passage:</strong> {{ object.passage }}</p>
 {% endif %}
-{{ object.details.strip|markdown|truncatewords_html:75 }}
+{{ object.details|markdown|striptags|truncatewords:75 }}
 </blockquote>
 {% endblock %}
 

@@ -6,7 +6,7 @@
 
 {% block contents %}
 <blockquote>
-{{ object.details.strip||markdown|truncatewords_html:75 }}
+<p>{{ object.details|markdown|striptags|truncatewords:75 }}</p>
 <strong>File:</strong> <a href="{% get_media_prefix %}{{ object.file.name }}">{{ object.file_name }}</a>
 </blockquote>
 {% endblock %}
