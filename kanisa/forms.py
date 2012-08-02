@@ -136,6 +136,7 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 class SermonSeriesForm(KanisaBaseForm):
     class Meta:
         model = SermonSeries
+        widgets = {'details': EpicWidget(), }
 
 
 class SermonSpeakerForm(KanisaBaseForm):
@@ -148,6 +149,7 @@ class SermonForm(KanisaBaseForm):
 
     class Meta:
         model = Sermon
+        widgets = {'details': EpicWidget(), }
 
     def clean(self):
         super(SermonForm, self).clean()
