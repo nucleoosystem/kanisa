@@ -106,6 +106,17 @@
                 </a>
               </li>
               {% endif %}
+              {% if perms.kanisa.manage_pages %}
+              <li class="nav-header">
+                <i class="icon-font"></i>
+                Pages
+              </li>
+              <li>
+                <a href="{% url 'kanisa_manage_pages' %}">
+                  Manage Pages
+                </a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </div>

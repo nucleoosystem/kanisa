@@ -1,0 +1,26 @@
+{% load url from future %}
+
+<table class="table table-striped kanisa_diary">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for page in page_list %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_manage_pages_update' page.pk %}">
+          {{ page.title }}
+        </a>
+      </td>
+      <td>
+        <abbr title="{{ page.modified|date:"r"}}">
+          {{ page.modified|timesince }} ago
+        </abbr>
+      </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>

@@ -1,0 +1,19 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+<p><a href="{% url 'kanisa_manage_pages_create' %}" class="btn btn-large btn-primary">Create a Page &raquo;</a></p>
+
+<hr />
+
+{% if page_list %}
+
+{% include 'kanisa/management/pages/_page_table.html' %}
+{% else %}
+<div class="alert alert-warning">
+There are no pages to display.
+</div>
+{% endif %}
+
+{% endblock %}

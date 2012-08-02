@@ -37,6 +37,9 @@
               {% if perms.kanisa.manage_users %}
               <li><a href="{% url 'kanisa_manage_users' %}">Manage Users</a></li>
               {% endif %}
+              {% if perms.kanisa.manage_pages %}
+              <li><a href="{% url 'kanisa_manage_pages' %}">Manage Pages</a></li>
+              {% endif %}
             </ul>
           </li>
           <li><a href="{% url 'admin:index' %}">Admin</a></li>

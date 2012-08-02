@@ -15,7 +15,8 @@ from kanisa.models import (Banner,
                            RegularEvent, ScheduledEvent,
                            Document,
                            SermonSeries, Sermon, SermonSpeaker,
-                           ScheduledTweet)
+                           ScheduledTweet,
+                           Page)
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
@@ -196,6 +197,12 @@ class DocumentForm(KanisaBaseForm):
     class Meta:
         model = Document
         widgets = {'details': EpicWidget(), }
+
+
+class PageForm(KanisaBaseForm):
+    class Meta:
+        model = Page
+        widgets = {'contents': EpicWidget(), }
 
 
 class ScheduledTweetForm(KanisaBaseForm):
