@@ -4,6 +4,7 @@
 {% autoescape off %}
 
 {{ object.title }}
+{{ object.slug }}
 {{ object.contents }}
 
 {% endautoescape %}
