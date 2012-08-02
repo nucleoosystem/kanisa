@@ -20,19 +20,14 @@
                   Home
                 </a>
               </li>
-              {% if perms.kanisa.manage_banners %}
+              {% if perms.kanisa.manage_pages %}
               <li class="nav-header">
-                <i class="icon-picture"></i>
-                Banners
+                <i class="icon-font"></i>
+                Pages
               </li>
               <li>
-                <a href="{% url 'kanisa_manage_banners' %}">
-                  Manage Banners
-                </a>
-              </li>
-              <li>
-                <a href="{% url 'kanisa_manage_banners_inactive' %}">
-                  View Inactive Banners
+                <a href="{% url 'kanisa_manage_pages' %}">
+                  Manage Pages
                 </a>
               </li>
               {% endif %}
@@ -65,6 +60,22 @@
               <li>
                 <a href="{% url 'kanisa_manage_sermons_speaker' %}">
                   Manage Speakers
+                </a>
+              </li>
+              {% endif %}
+              {% if perms.kanisa.manage_banners %}
+              <li class="nav-header">
+                <i class="icon-picture"></i>
+                Banners
+              </li>
+              <li>
+                <a href="{% url 'kanisa_manage_banners' %}">
+                  Manage Banners
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'kanisa_manage_banners_inactive' %}">
+                  View Inactive Banners
                 </a>
               </li>
               {% endif %}
@@ -103,17 +114,6 @@
               <li>
                 <a href="{% url 'kanisa_manage_users' %}">
                   Manage Users
-                </a>
-              </li>
-              {% endif %}
-              {% if perms.kanisa.manage_pages %}
-              <li class="nav-header">
-                <i class="icon-font"></i>
-                Pages
-              </li>
-              <li>
-                <a href="{% url 'kanisa_manage_pages' %}">
-                  Manage Pages
                 </a>
               </li>
               {% endif %}
