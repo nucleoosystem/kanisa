@@ -2,11 +2,11 @@
 
 <textarea style="display:none" name="{{ name }}" id="{{ id }}">{{ value }}</textarea>
 
-<div id="{{ id }}-ee" class="epiceditor"></div>
+<div id="{{ id }}-epiceditor" class="epiceditor"></div>
 
 <script type="text/javascript">
 var opts = {% templatetag openbrace %}
-  container: '{{ id }}-ee',
+  container: '{{ id }}-epiceditor',
   basePath: '{% static "kanisa/epiceditor" %}',
   clientSideStorage: false,
   theme: {% templatetag openbrace %}
@@ -17,9 +17,9 @@ var opts = {% templatetag openbrace %}
 {% templatetag closebrace %}
 
 var editor = new EpicEditor(opts).load();
-editor.importFile('{{ id }}-ee', $("#{{ id }}").val());
+editor.importFile('{{ id }}-epiceditor', $("#{{ id }}").val());
 
-form = $("#{{ id }}-ee").parents("form");
+form = $("#{{ id }}-epiceditor").parents("form");
 form.submit(function() {% templatetag openbrace %}
   content = editor.exportFile();
   $("#{{ id }}").val(content);
