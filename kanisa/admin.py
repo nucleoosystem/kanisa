@@ -3,7 +3,9 @@ from kanisa.conf import KANISA_ADMIN_THUMBS_SIZE
 from kanisa.models import (Banner,
                            RegularEvent, ScheduledEvent,
                            Document,
-                           SermonSeries, SermonSpeaker, Sermon)
+                           SermonSeries, SermonSpeaker, Sermon,
+                           Page)
+from mptt.admin import MPTTModelAdmin
 from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
 
@@ -77,3 +79,9 @@ class SermonAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'passage', 'series', 'speaker', )
 
 admin.site.register(Sermon, SermonAdmin)
+
+
+class PageAdmin(MPTTModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
+admin.site.register(Page, PageAdmin)
