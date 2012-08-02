@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<textarea style="display:none" name="{{ name }}" id="{{ id }}">{{ value }}</textarea>
+
+<div id="{{ id }}-ee" class="epiceditor"></div>
+
+<script type="text/javascript">
+var opts = {% templatetag openbrace %}
+  container: '{{ id }}-ee',
+  basePath: '{% static "kanisa/epiceditor" %}',
+  clientSideStorage: false,
+  theme: {% templatetag openbrace %}
+    base:'/themes/base/epiceditor.css',
+    preview:'/themes/preview/github.css',
+    editor:'/themes/editor/epic-kanisa.css'
+  {% templatetag closebrace %}
+{% templatetag closebrace %}
+
+var editor = new EpicEditor(opts).load();
+editor.importFile('{{ id }}-ee', $("#{{ id }}").val());
+
+form = $("#{{ id }}-ee").parents("form");
+form.submit(function() {% templatetag openbrace %}
+  content = editor.exportFile();
+  $("#{{ id }}").val(content);
+{% templatetag closebrace %});
+</script>

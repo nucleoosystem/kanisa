@@ -81,3 +81,7 @@ td.iconcell {
     text-align: center;
     position: relative;
 }
+
+.epiceditor {
+  border: 1px solid #ccc;
+}
