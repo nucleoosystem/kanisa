@@ -63,7 +63,8 @@
   tests only)
 * Check coverage of diary/banner CRUD views.
 * Add tests for search views
-* Add tests for pages
+* Add tests for page management views (there's currently auth tests
+  only)
 
 # Misc
 
