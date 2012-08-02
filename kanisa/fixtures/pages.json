@@ -1,0 +1,62 @@
+[
+  {
+    "pk": 1, 
+    "model": "kanisa.page", 
+    "fields": {
+      "rght": 8, 
+      "parent": null, 
+      "title": "About Us", 
+      "level": 0, 
+      "modified": "2012-08-02T19:07:46.432Z", 
+      "lft": 1, 
+      "tree_id": 1, 
+      "slug": "about", 
+      "contents": "Found them? In Mercia?! The coconut's tropical! The swallow may fly south with the sun."
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "kanisa.page", 
+    "fields": {
+      "rght": 3, 
+      "parent": 1, 
+      "title": "What we Believe", 
+      "level": 1, 
+      "modified": "2012-08-02T19:09:19.197Z", 
+      "lft": 2, 
+      "tree_id": 1, 
+      "slug": "doctrine", 
+      "contents": "A sample statement of faith would go here."
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "kanisa.page", 
+    "fields": {
+      "rght": 5, 
+      "parent": 1, 
+      "title": "Location", 
+      "level": 1, 
+      "modified": "2012-08-02T19:08:17.367Z", 
+      "lft": 4, 
+      "tree_id": 1, 
+      "slug": "location", 
+      "contents": "Something about where the building is."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "kanisa.page", 
+    "fields": {
+      "rght": 7, 
+      "parent": 1, 
+      "title": "Staff", 
+      "level": 1, 
+      "modified": "2012-08-02T19:08:02.190Z", 
+      "lft": 6, 
+      "tree_id": 1, 
+      "slug": "staff", 
+      "contents": "Something about staff members."
+    }
+  }
+]
