@@ -3,8 +3,6 @@ from __future__ import absolute_import
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
-from .base import SearchableModel
-
 
 class Page(MPTTModel):
     title = models.CharField(max_length=60)
