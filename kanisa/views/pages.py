@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
+from django.http import Http404
 from kanisa.forms import PageForm
 from kanisa.models import Page
 from kanisa.views.generic import (KanisaAuthorizationMixin,
@@ -29,6 +30,20 @@ class PageCreateView(PageBaseView,
     form_class = PageForm
     kanisa_title = 'Create a Page'
     success_url = reverse_lazy('kanisa_manage_pages')
+
+    def get_initial(self):
+        initial = super(PageCreateView, self).get_initial()
+
+        if 'parent' in self.request.GET:
+            parent = self.request.GET['parent']
+            try:
+                initial['parent'] = Page.objects.get(pk=int(parent))
+            except ValueError:
+                raise Http404
+            except Page.DoesNotExist:
+                raise Http404
+
+        return initial
 
 
 class PageUpdateView(PageBaseView,

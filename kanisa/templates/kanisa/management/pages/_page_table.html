@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th style="width: 16px"></th>
       <th>Modified</th>
     </tr>
   </thead>
@@ -13,6 +14,11 @@
       <td>
         <a href="{% url 'kanisa_manage_pages_update' page.pk %}" style="margin-left: {{ page.get_level }}em">
           {{ page.title }}
+        </a>
+      </td>
+      <td>
+        <a href="{% url 'kanisa_manage_pages_create' %}?parent={{ page.pk }}" title="Create a page with &ldquo;{{ page.title }}&rdquo; as its parent">
+          <i class="icon-plus-sign"></i>
         </a>
       </td>
       <td>
