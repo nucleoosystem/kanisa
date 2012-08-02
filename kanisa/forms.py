@@ -105,6 +105,7 @@ class RegularEventForm(KanisaBaseForm):
 
     class Meta:
         model = RegularEvent
+        widgets = {'details': EpicWidget(), }
 
 
 class ScheduledEventEditForm(KanisaBaseForm):
