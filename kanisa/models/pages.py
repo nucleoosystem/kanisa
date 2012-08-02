@@ -12,6 +12,7 @@ class Page(MPTTModel):
                             null=True,
                             blank=True,
                             related_name='children')
+    modified = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
         order_insertion_by = ['slug']
@@ -23,3 +24,8 @@ class Page(MPTTModel):
 
     def __unicode__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super(Page, self).save(*args, **kwargs)
+        from haystack import site as haystack_site
+        haystack_site.get_index(self.__class__).update_object(self)

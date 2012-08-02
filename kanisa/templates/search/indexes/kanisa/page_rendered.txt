@@ -1,0 +1,9 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
+{% load markup %}
+
+{% block contents %}
+<blockquote>
+<p>{{ object.contents|markdown|striptags|truncatewords:75 }}</p>
+</blockquote>
+{% endblock %}
