@@ -127,6 +127,7 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 
     class Meta:
         model = ScheduledEvent
+        widgets = {'details': EpicWidget(), }
 
     class Media:
         js = ('kanisa/js/scheduled_event.js', )
