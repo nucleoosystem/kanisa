@@ -10,7 +10,7 @@ from haystack.query import SearchQuerySet
 
 from kanisa.forms import KanisaLoginForm
 from kanisa.models.banners import Banner
-from kanisa.views.generic import (KanisaAuthorizationMixin,
+from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
                                   KanisaTemplateView)
 
 
@@ -22,12 +22,9 @@ def index(request):
                               context_instance=RequestContext(request))
 
 
-class KanisaManagementIndexView(KanisaAuthorizationMixin,
+class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
                                 KanisaTemplateView):
     template_name = 'kanisa/management/index.html'
-
-    def authorization_check(self, user):
-        return user.is_staff
 
 
 class KanisaLoginView(FormView):
@@ -53,13 +50,10 @@ class KanisaLoginView(FormView):
         return HttpResponseRedirect(redirect_to)
 
 
-class KanisaSearchView(KanisaAuthorizationMixin,
+class KanisaSearchView(KanisaAnyAuthorizationMixin,
                        KanisaTemplateView):
     kanisa_title = 'Search'
     template_name = 'kanisa/management/search.html'
-
-    def authorization_check(self, user):
-        return user.is_staff
 
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', None)

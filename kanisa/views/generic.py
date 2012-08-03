@@ -57,6 +57,11 @@ class KanisaAuthorizationMixin(object):
         return self.handle_failure(request)
 
 
+class KanisaAnyAuthorizationMixin(KanisaAuthorizationMixin):
+    def authorization_check(self, user):
+        return user.is_staff
+
+
 class KanisaTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(KanisaTemplateView,
