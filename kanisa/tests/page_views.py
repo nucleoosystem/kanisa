@@ -23,9 +23,23 @@ class PageManagementViewTest(KanisaViewTestCase):
     def test_create_page_view(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.get(reverse('kanisa_manage_pages_create'))
+        url = reverse('kanisa_manage_pages_create')
+
+        resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
+
+        # Should 404 with an invalid ID
+        resp = self.client.get(url + '?parent=foo')
+        self.assertEqual(resp.status_code, 404)
+
+        # Should 404 with a valid ID, which is non-existent
+        resp = self.client.get(url + '?parent=99')
+        self.assertEqual(resp.status_code, 404)
+
+        resp = self.client.get(url + '?parent=1')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context['form'].initial['parent'].pk, 1)
 
         self.client.logout()
 
