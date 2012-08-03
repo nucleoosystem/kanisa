@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from kanisa.forms import SermonSeriesForm, SermonForm, SermonSpeakerForm
+from kanisa.forms.sermons import (SermonSeriesForm,
+                                  SermonForm,
+                                  SermonSpeakerForm)
 from kanisa.models import SermonSeries, Sermon, SermonSpeaker
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
