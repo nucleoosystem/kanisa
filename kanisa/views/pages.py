@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
-from kanisa.forms import PageForm
+from kanisa.forms.pages import PageForm
 from kanisa.models import Page
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
