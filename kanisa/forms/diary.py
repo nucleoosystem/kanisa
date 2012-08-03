@@ -1,8 +1,8 @@
 from django import forms
 from kanisa.forms import (KanisaBaseForm,
                           BootstrapTimeField,
-                          BootstrapDateField,
-                          EpicWidget)
+                          BootstrapDateField)
+from kanisa.widgets import EpicWidget
 from kanisa.models import RegularEvent, ScheduledEvent
 
 

@@ -1,5 +1,6 @@
 from django import forms
-from kanisa.forms import KanisaBaseForm, EpicWidget
+from kanisa.forms import KanisaBaseForm
+from kanisa.widgets import EpicWidget
 from kanisa.models import Page
 
 
