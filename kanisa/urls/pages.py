@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 from kanisa.views.pages import (PageIndexView,
                                 PageCreateView,
-                                PageUpdateView)
+                                PageUpdateView,
+                                PageDeleteView)
 
 urlpatterns = patterns('',
                        url(r'^$',
@@ -16,4 +17,8 @@ urlpatterns = patterns('',
                            PageUpdateView.as_view(),
                            {},
                            'kanisa_manage_pages_update'),
+                       url(r'^delete/(?P<pk>\d+)$',
+                           PageDeleteView.as_view(),
+                           {},
+                           'kanisa_manage_pages_delete'),
                        )

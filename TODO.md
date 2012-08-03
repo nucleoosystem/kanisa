@@ -19,8 +19,6 @@
 
 # Pages
 
-* Add page deletion view (what if you try and delete a page that is
-  not a root node?)
 * Drag-and-drop page moving
 * Quick page hierarchy creation tool
 * Automatically create slugs (though make them editable if required)

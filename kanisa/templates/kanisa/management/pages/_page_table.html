@@ -6,6 +6,7 @@
       <th>Title</th>
       <th style="width: 16px"></th>
       <th>Modified</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,11 @@
         <abbr title="{{ page.modified|date:"r"}}">
           {{ page.modified|timesince }} ago
         </abbr>
+      </td>
+      <td>
+        {% if page.is_leaf_node %}
+        <a class="btn btn-danger btn-mini" href="{% url 'kanisa_manage_pages_delete' page.pk %}">Delete</a>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
