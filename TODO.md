@@ -58,8 +58,9 @@
   tests only)
 * Check coverage of diary/banner CRUD views.
 * Add tests for search views
-* Add tests for page management views (there's currently auth tests
-  only)
+* Add tests for page management views (there's currently tests for
+  page deletion, and that the page creation view basically returns a
+  success status)
 
 # Misc
 
