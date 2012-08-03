@@ -59,7 +59,9 @@ class KanisaAuthorizationMixin(object):
 
 class KanisaAnyAuthorizationMixin(KanisaAuthorizationMixin):
     def authorization_check(self, user):
-        return user.is_staff
+        perms = user.get_all_permissions()
+        kanisa_management = [p for p in perms if p.startswith('kanisa.manage')]
+        return len(kanisa_management) > 0
 
 
 class KanisaTemplateView(TemplateView):

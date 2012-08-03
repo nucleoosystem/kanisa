@@ -14,7 +14,6 @@ class KanisaViewTestCase(TestCase):
         bob.save()
 
         fred = User.objects.create_user('fred', '', 'secret')
-        fred.is_staff = True
         p = Permission.objects.get(codename='manage_banners')
         fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_diary')

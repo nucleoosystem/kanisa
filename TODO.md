@@ -68,7 +68,6 @@
   minutes).
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
-* Remove user.is_staff from KanisaAnyAuthorizationMixin.
 
 # Frontend
 
