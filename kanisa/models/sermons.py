@@ -55,9 +55,14 @@ class SpeakerManager(models.Manager):
         return qs.annotate(num_sermons=Count('sermon'))
 
 
+def sermon_speaker_slug(speaker):
+    return '%s %s' % (speaker.forename, speaker.surname)
+
+
 class SermonSpeaker(SearchableModel):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from=sermon_speaker_slug, unique=True)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
                        help_text=u'Must be at least 400px by 300px.')
     modified = models.DateTimeField(auto_now=True)

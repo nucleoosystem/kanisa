@@ -42,6 +42,7 @@
     "fields": {
       "forename": "Bugs",
       "surname": "Bunny",
+      "slug": "bugs-bunny",
       "image": "kanisa/sermons/greenflowers.jpg",
       "modified": "2012-01-01 07:00+03:00"
     }
@@ -52,6 +53,7 @@
     "fields": {
       "forename": "Road",
       "surname": "Runner",
+      "slug": "road-runner",
       "image": "kanisa/sermons/church.jpg",
       "modified": "2012-01-01 07:00+03:00"
     }
