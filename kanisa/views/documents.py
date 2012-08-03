@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
-from kanisa.forms import DocumentForm
+from kanisa.forms.documents import DocumentForm
 from kanisa.models import Document
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,

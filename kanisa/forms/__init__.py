@@ -5,10 +5,8 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from datetime import datetime
-from kanisa.widgets import EpicWidget
 
-from kanisa.models import (Document,
-                           ScheduledTweet)
+from kanisa.models import ScheduledTweet
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
@@ -72,12 +70,6 @@ class KanisaBaseForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
 
         super(KanisaBaseForm, self).__init__(*args, **kwargs)
-
-
-class DocumentForm(KanisaBaseForm):
-    class Meta:
-        model = Document
-        widgets = {'details': EpicWidget(), }
 
 
 class ScheduledTweetForm(KanisaBaseForm):
