@@ -4,9 +4,6 @@ from django.forms import ModelForm
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from datetime import datetime
-
-from kanisa.models import ScheduledTweet
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
@@ -70,31 +67,6 @@ class KanisaBaseForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
 
         super(KanisaBaseForm, self).__init__(*args, **kwargs)
-
-
-class ScheduledTweetForm(KanisaBaseForm):
-    date = BootstrapDateField()
-    time = BootstrapTimeField()
-
-    def clean(self):
-        cleaned_data = super(ScheduledTweetForm, self).clean()
-
-        if self.instance.pk:
-            return cleaned_data
-
-        thedate = cleaned_data.get("date")
-        thetime = cleaned_data.get("time")
-
-        thedt = datetime.combine(thedate, thetime)
-        if thedt < datetime.now():
-            raise forms.ValidationError('You cannot scheduled tweets in the '
-                                        'past.')
-
-        return cleaned_data
-
-    class Meta:
-        model = ScheduledTweet
-        exclude = ('posted', )
 
 
 class KanisaLoginForm(AuthenticationForm):
