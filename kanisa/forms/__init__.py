@@ -7,10 +7,8 @@ from crispy_forms.layout import Submit
 from datetime import datetime
 from kanisa.widgets import EpicWidget
 
-from kanisa.models import (Banner,
-                           Document,
-                           ScheduledTweet,
-                           Page)
+from kanisa.models import (Document,
+                           ScheduledTweet)
 
 
 TIMEPICKER_FORMAT = '%I:%M %p'
@@ -74,25 +72,6 @@ class KanisaBaseForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
 
         super(KanisaBaseForm, self).__init__(*args, **kwargs)
-
-
-class BannerForm(KanisaBaseForm):
-    publish_from = BootstrapDateField(required=False,
-                                      help_text=('The date at which your '
-                                                 'banner will become visible '
-                                                 'on the website. If left '
-                                                 'blank the start date is '
-                                                 'unrestricted.'))
-    publish_until = BootstrapDateField(required=False,
-                                       help_text=('The final date on which '
-                                                  'your banner will be '
-                                                  'visible. If left blank '
-                                                  'your banner will be '
-                                                  'visible indefinitely.'))
-
-    class Meta:
-        exclude = ('visits', )
-        model = Banner
 
 
 class DocumentForm(KanisaBaseForm):

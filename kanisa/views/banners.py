@@ -9,7 +9,7 @@ from kanisa.models import Banner
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
                                   KanisaListView)
-from kanisa.forms import BannerForm
+from kanisa.forms.banners import BannerForm
 
 
 class BannerBaseView(KanisaAuthorizationMixin):
