@@ -8,7 +8,7 @@ from django.template import RequestContext
 from django.views.generic.edit import FormView
 from haystack.query import SearchQuerySet
 
-from kanisa.forms import KanisaLoginForm
+from kanisa.forms.auth import KanisaLoginForm
 from kanisa.models.banners import Banner
 from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
                                   KanisaTemplateView)
