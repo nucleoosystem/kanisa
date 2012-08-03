@@ -1,4 +1,3 @@
-from django import forms
 from django.forms.util import ErrorList
 
 from kanisa import conf
