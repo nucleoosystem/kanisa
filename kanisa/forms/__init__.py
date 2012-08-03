@@ -12,7 +12,8 @@ TIMEPICKER_FORMAT = '%I:%M %p'
 class BootstrapTimeWidget(forms.widgets.TimeInput):
     def __init__(self, *args, **kwargs):
         kwargs['format'] = TIMEPICKER_FORMAT
-        extra_attrs = {'data-provide': 'timepicker', 'class': 'timepicker'}
+        extra_attrs = {'data-provide': 'timepicker',
+                       'class': 'timepicker'}
 
         if 'attrs' not in kwargs:
             kwargs['attrs'] = {}
@@ -35,7 +36,8 @@ class BootstrapTimeField(forms.TimeField):
 
 class BootstrapDateWidget(forms.widgets.DateInput):
     def __init__(self, *args, **kwargs):
-        extra_attrs = {'data-date-format': 'dd/mm/yyyy', 'class': 'datepicker'}
+        extra_attrs = {'data-date-format': 'dd/mm/yyyy',
+                       'class': 'datepicker'}
 
         if 'attrs' not in kwargs:
             kwargs['attrs'] = {}
