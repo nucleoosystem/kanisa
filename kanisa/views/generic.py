@@ -35,10 +35,7 @@ class KanisaAuthorizationMixin(object):
     redirect_field_name = REDIRECT_FIELD_NAME
 
     def authorization_check(self, user):
-        if hasattr(self, 'permission'):
-            return user.has_perm(self.permission)
-
-        return user.is_staff
+        return user.has_perm(self.permission)
 
     def handle_failure(self, request):
         if request.user.is_authenticated():

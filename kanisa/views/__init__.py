@@ -26,6 +26,9 @@ class KanisaManagementIndexView(KanisaAuthorizationMixin,
                                 KanisaTemplateView):
     template_name = 'kanisa/management/index.html'
 
+    def authorization_check(self, user):
+        return user.is_staff
+
 
 class KanisaLoginView(FormView):
     template_name = 'kanisa/login.html'
@@ -54,6 +57,9 @@ class KanisaSearchView(KanisaAuthorizationMixin,
                        KanisaTemplateView):
     kanisa_title = 'Search'
     template_name = 'kanisa/management/search.html'
+
+    def authorization_check(self, user):
+        return user.is_staff
 
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', None)

@@ -68,10 +68,8 @@
   minutes).
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
-* Ensure all view classes have a permission attribute, so that
-  KanisaAuthorizationMixin never checks whether you're a staff member
-  (I'd like to restrict use of "staff" to just mean those who can
-  access the default Django admin).
+* Remove user.is_staff from KanisaSearchView and
+  KanisaManagementIndexView.
 
 # Frontend
 
