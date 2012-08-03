@@ -32,7 +32,6 @@ def add_kanisa_context(cls, context):
 
 
 class KanisaAuthorizationMixin(object):
-    raise_exception = False
     redirect_field_name = REDIRECT_FIELD_NAME
 
     def authorization_check(self, user):
