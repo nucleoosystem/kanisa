@@ -49,3 +49,9 @@ class SermonTest(TestCase):
     def testGetSermonSpeakerName(self):
         speaker = SermonSpeaker.objects.get(pk=1)
         self.assertEqual(speaker.name(), 'Bugs Bunny')
+
+    def testAutoSlugForSermonSpeaker(self):
+        speaker = SermonSpeaker.objects.create(forename="Mickey",
+                                               surname="Mouse")
+        speaker.save()
+        self.assertEqual(speaker.slug, 'mickey-mouse')
