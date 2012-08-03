@@ -21,7 +21,6 @@
 
 * Drag-and-drop page moving
 * Quick page hierarchy creation tool
-* Automatically create slugs (though make them editable if required)
 
 # Social Media
 

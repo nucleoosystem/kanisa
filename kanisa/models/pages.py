@@ -1,13 +1,11 @@
+from autoslug import AutoSlugField
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Page(MPTTModel):
     title = models.CharField(max_length=60)
-    slug = models.SlugField(max_length=60,
-                            help_text=('This is part of the web-address, '
-                                       'should be all lowercase, and use '
-                                       'hyphens instead of spaces.'))
+    slug = AutoSlugField(populate_from='title', unique=True)
     contents = models.TextField(null=True, blank=True)
     parent = TreeForeignKey('self',
                             null=True,

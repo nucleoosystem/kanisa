@@ -1,5 +1,6 @@
 Django==1.4
 PIL==1.1.7
+django-autoslug==1.5.0
 django-crispy-forms==1.1.4
 django-haystack==1.2.7
 django-mptt==0.5.2
