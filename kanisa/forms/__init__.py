@@ -12,7 +12,6 @@ from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 
 from kanisa.models import (Banner,
-                           RegularEvent, ScheduledEvent,
                            Document,
                            SermonSeries, Sermon, SermonSpeaker,
                            ScheduledTweet,
@@ -99,39 +98,6 @@ class BannerForm(KanisaBaseForm):
     class Meta:
         exclude = ('visits', )
         model = Banner
-
-
-class RegularEventForm(KanisaBaseForm):
-    start_time = BootstrapTimeField()
-
-    class Meta:
-        model = RegularEvent
-        widgets = {'details': EpicWidget(), }
-
-
-class ScheduledEventEditForm(KanisaBaseForm):
-    start_time = BootstrapTimeField()
-    date = BootstrapDateField()
-
-    class Meta:
-        model = ScheduledEvent
-        exclude = ('event', )
-        widgets = {'details': EpicWidget(), }
-
-
-class ScheduledEventCreationForm(KanisaBaseForm):
-    start_time = BootstrapTimeField()
-    date = BootstrapDateField()
-    event = forms.ModelChoiceField(queryset=RegularEvent.objects.
-                                   order_by('title').all(),
-                                   required=False)
-
-    class Meta:
-        model = ScheduledEvent
-        widgets = {'details': EpicWidget(), }
-
-    class Media:
-        js = ('kanisa/js/scheduled_event.js', )
 
 
 class SermonSeriesForm(KanisaBaseForm):

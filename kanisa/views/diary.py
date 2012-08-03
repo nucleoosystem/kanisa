@@ -7,8 +7,9 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import RedirectView
 
-from kanisa.forms import (RegularEventForm, ScheduledEventEditForm,
-                          ScheduledEventCreationForm)
+from kanisa.forms.diary import (RegularEventForm,
+                                ScheduledEventEditForm,
+                                ScheduledEventCreationForm)
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
