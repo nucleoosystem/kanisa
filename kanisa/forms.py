@@ -204,6 +204,21 @@ class PageForm(KanisaBaseForm):
         model = Page
         widgets = {'contents': EpicWidget(), }
 
+    def clean_parent(self):
+        parent = self.cleaned_data['parent']
+
+        if not self.instance.pk:
+            return parent
+
+        if self.instance == parent:
+            raise forms.ValidationError('A page cannot be its own parent.')
+
+        if self.instance.is_ancestor_of(parent):
+            raise forms.ValidationError('Invalid parent - cyclical '
+                                        'hierarchy detected.')
+
+        return parent
+
 
 class ScheduledTweetForm(KanisaBaseForm):
     date = BootstrapDateField()
