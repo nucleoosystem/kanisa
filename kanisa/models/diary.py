@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from autoslug import AutoSlugField
 from datetime import timedelta
 from django.db import models
 
@@ -20,6 +21,7 @@ DAYS_OF_WEEK = (
 class RegularEvent(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
+    slug = AutoSlugField(populate_from='title', unique=True)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,
                                            help_text=('What day of the week '
                                                       'does this event '

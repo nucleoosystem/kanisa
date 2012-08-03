@@ -8,6 +8,7 @@
       "passage": "Psalms",
       "details": "Help, help, I'm being repressed! You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person!",
       "title": "The Psalms",
+      "slug": "the-psalms",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -20,6 +21,7 @@
       "passage": "John 21",
       "details": "",
       "title": "The Beatitudes",
+      "slug": "the-beautitudes",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -30,6 +32,7 @@
       "active": true,
       "image": "kanisa/sermons/theshard.jpg",
       "title": "All Sorts of Things",
+      "slug": "all-sorts-of-things",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -70,6 +73,7 @@
     "model": "kanisa.sermon",
     "fields": {
       "title": "Something about Psalm 2",
+      "slug": "something-about-psalm-2",
       "date": "2012-05-6",
       "series": 1,
       "speaker": 2,
@@ -82,6 +86,7 @@
     "model": "kanisa.sermon",
     "fields": {
       "title": "Something about Psalm 3-4",
+      "slug": "something-about-psalm-3-4",
       "date": "2012-05-13",
       "series": 1,
       "speaker": 2,
@@ -94,6 +99,7 @@
     "model": "kanisa.sermon",
     "fields": {
       "title": "Not in a Series",
+      "slug": "not-in-a-series",
       "date": "2012-05-06",
       "speaker": 1,
       "passage": "Genesis",

@@ -8,6 +8,7 @@
       "start_time": "14:00:00",
       "day": 1,
       "title": "Afternoon Tea",
+      "slug": "afternoon-tea",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -20,6 +21,7 @@
       "start_time": "08:00:00",
       "day": 4,
       "title": "Breakfast Club",
+      "slug": "breakfast-club",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -32,6 +34,7 @@
       "start_time": "19:00:00",
       "day": 2,
       "title": "Youth Club",
+      "slug": "youth-club",
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -44,6 +47,7 @@
       "start_time": "19:30:00",
       "day": 3,
       "title": "Church Meeting",
+      "slug": "church-meeting",
       "autoschedule": false,
       "modified": "2012-01-01 07:00+03:00"
     }

@@ -9,13 +9,12 @@
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
 * Allow creating RegularEvents on timetables other than day x of week.
-* Add slugs for regular events
 
 # Sermons
 
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
-* Add slugs for sermon series, sermons and speakers
+* Add slugs for speakers
 
 # Pages
 

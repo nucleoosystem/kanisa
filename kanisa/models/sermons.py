@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+from autoslug import AutoSlugField
 from django.db import models
 from django.db.models import Count
 from sorl.thumbnail import ImageField
@@ -17,6 +18,7 @@ class SermonSeriesManager(models.Manager):
 class SermonSeries(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the series.')
+    slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(upload_to='kanisa/sermons/series/',
                        help_text=u'Must be at least 400px by 300px.')
     details = models.TextField(blank=True, null=True,
@@ -85,6 +87,7 @@ class SermonManager(models.Manager):
 class Sermon(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
+    slug = AutoSlugField(populate_from='title', unique=True)
     date = models.DateField(help_text='The date the sermon was preached.')
     series = models.ForeignKey(SermonSeries,
                                blank=True, null=True,
