@@ -1,8 +1,8 @@
 function update_page_list() {
     $.get(pages_list_url,
           function(data) {
-              $("#page_details_container").html(data);
-          });
+              $("#page_details_container").html(data.page_table);
+          }, "json");
 }
 
 function quick_page_create(event) {
