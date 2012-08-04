@@ -70,6 +70,9 @@ i.spinner {
     height: 16px;
     width: 16px;
     display: inline-block;
+}
+
+td i.spinner {
     position: absolute;
     left: 16px;
     top: 10px;
@@ -84,4 +87,9 @@ td.iconcell {
 
 .epiceditor {
   border: 1px solid #ccc;
+}
+
+.inline-status {
+    display: inline-block;
+    vertical-align: middle;
 }
