@@ -5,17 +5,14 @@ function update_page_list() {
           });
 }
 
-function do_nothing() {
-    return false;
-}
-
 function quick_page_create() {
     var form = $(this);
-    form.unbind('submit', quick_page_create);
-    form.bind('submit', do_nothing);
 
-    var button = form.find("button");
-    button.attr("disabled", "disabled");
+    if (form.data('submitting') == true) {
+        return false;
+    }
+
+    form.data('submitting', true);
 
     var title_element = form.find("#id_title");
     var title = title_element.val();
@@ -30,14 +27,10 @@ function quick_page_create() {
                status_block.html("<i class=\"icon-ok\"></i> " + data);
                title_element.val("");
                update_page_list();
-               button.removeAttr("disabled");
-               form.bind('submit', quick_page_create);
-               form.unbind('submit', do_nothing);
+               form.data('submitting', false);
            }).error(function(data) {
                status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
-               button.removeAttr("disabled");
-               form.bind('submit', quick_page_create);
-               form.unbind('submit', do_nothing);
+               form.data('submitting', false);
            });
 
     return false;
