@@ -162,6 +162,8 @@ class XHRUserPermissionViewTest(KanisaViewTestCase):
 
 
 class XHRCreatePageViewTest(KanisaViewTestCase):
+    fixtures = ['pages.json', ]
+
     url = reverse_lazy('kanisa_xhr_management_create_page')
 
     def test_gets_disallowed(self):
@@ -199,12 +201,43 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
         self.assertEqual(resp.content, 'Parent not found.')
         self.client.logout()
 
-    def test_success(self):
+    def test_empty_title(self):
+        self.client.login(username='fred', password='secret')
+
+        # Empty title
+        resp = self.client.post(self.url,
+                                {'title': '', 'parent': ''},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Title must not be empty.')
+        self.client.logout()
+
+    def test_nonexistent_parent(self):
         self.client.login(username='fred', password='secret')
 
         resp = self.client.post(self.url,
-                                {'title': 'Test page', 'parent': None},
+                                {'title': 'Test page', 'parent': '99'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Page with ID \'99\' not found.')
+        self.client.logout()
+
+    def test_empty_parent(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url,
+                                {'title': 'Test page', 'parent': ''},
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content, 'This doesn\'t do anything yet.')
+        self.assertEqual(resp.content, 'Page created.')
+        self.client.logout()
+
+    def test_good_parent(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url,
+                                {'title': 'Test page', 'parent': '1'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content, 'Page created.')
         self.client.logout()

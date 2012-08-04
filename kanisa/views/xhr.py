@@ -3,6 +3,7 @@ from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden)
 from django.views.decorators.http import require_POST
 
+from kanisa.models import Page
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
 
@@ -88,4 +89,23 @@ def create_page(request):
     if not 'parent' in request.POST:
         return HttpResponseBadRequest("Parent not found.")
 
-    return HttpResponse("This doesn't do anything yet.")
+    title = request.POST['title']
+
+    if not title:
+        return HttpResponseBadRequest("Title must not be empty.")
+
+    parent = request.POST['parent']
+
+    if not parent:
+        parent = None
+    else:
+        try:
+            parent = Page.objects.get(pk=parent)
+        except Page.DoesNotExist:
+            return HttpResponseBadRequest("Page with ID '%s' not found."
+                                          % parent)
+
+    p = Page.objects.create(title=request.POST['title'],
+                            parent=parent)
+
+    return HttpResponse("Page created.")
