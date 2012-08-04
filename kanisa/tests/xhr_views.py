@@ -181,11 +181,28 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage pages.'))
 
+    def test_must_provide_required_inputs(self):
+        self.client.login(username='fred', password='secret')
+
+        # No title
+        resp = self.client.post(self.url,
+                                {'parent': '3', },
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Title not found.')
+
+        # No parent
+        resp = self.client.post(self.url,
+                                {'title': 'Test page', },
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Parent not found.')
+
     def test_success(self):
         self.client.login(username='fred', password='secret')
 
         resp = self.client.post(self.url,
-                                {},
+                                {'title': 'Test page', 'parent': None},
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'This doesn\'t do anything yet.')

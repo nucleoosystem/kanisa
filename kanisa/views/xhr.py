@@ -82,4 +82,10 @@ def create_page(request):
         return HttpResponseForbidden(("You do not have permission to manage "
                                       "pages."))
 
+    if not 'title' in request.POST:
+        return HttpResponseBadRequest("Title not found.")
+
+    if not 'parent' in request.POST:
+        return HttpResponseBadRequest("Parent not found.")
+
     return HttpResponse("This doesn't do anything yet.")
