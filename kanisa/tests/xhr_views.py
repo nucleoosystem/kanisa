@@ -197,6 +197,7 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Parent not found.')
+        self.client.logout()
 
     def test_success(self):
         self.client.login(username='fred', password='secret')
@@ -206,3 +207,4 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'This doesn\'t do anything yet.')
+        self.client.logout()
