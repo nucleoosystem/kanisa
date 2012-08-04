@@ -8,6 +8,8 @@ function update_page_list() {
 $(function() {
     $("#page_quick_create").submit(function() {
         var form = $(this);
+        var button = form.find("button");
+        button.attr("disabled", "disabled");
         var title_element = form.find("#id_title");
         var title = title_element.val();
         var status_block = form.find("div");
@@ -20,8 +22,10 @@ $(function() {
                    status_block.html("<i class=\"icon-ok\"></i> " + data);
                    title_element.val("");
                    update_page_list();
+                   button.removeAttr("disabled");
                }).error(function(data) {
                    status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
+                   button.removeAttr("disabled");
                });
 
         return false;
