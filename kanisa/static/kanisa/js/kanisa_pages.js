@@ -49,7 +49,7 @@ function quick_page_delete(event) {
     if (confirm("Are you sure you want to delete the page \"" + page + "\"?")) {
         $.post($(this).attr("href"),
                function(data) {
-                 update_page_list();
+                   update_page_list();
                });
     }
 }
