@@ -8,6 +8,5 @@ urlpatterns = patterns('',
                        url(r'^permissions/$',
                            'kanisa.views.xhr.assign_permission',
                            {},
-                           'kanisa_management_assign_permission'),
-
+                           'kanisa_xhr_management_assign_permission'),
                        )

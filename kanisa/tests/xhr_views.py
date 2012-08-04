@@ -45,7 +45,7 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
 
 
 class UserPermissionViewTest(KanisaViewTestCase):
-    url = reverse_lazy('kanisa_management_assign_permission')
+    url = reverse_lazy('kanisa_xhr_management_assign_permission')
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
