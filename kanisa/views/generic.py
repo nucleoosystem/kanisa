@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import (HttpResponse,
+                         HttpResponseForbidden,
+                         HttpResponseRedirect)
 from django.utils.http import urlquote
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
@@ -158,3 +160,11 @@ class KanisaDeleteView(DeleteView):
         context['kanisa_cancel_url'] = self.get_cancel_url()
 
         return context
+
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            self.object = self.get_object()
+            self.object.delete()
+            return HttpResponse("")
+
+        return super(KanisaDeleteView, self).delete(request, *args, **kwargs)
