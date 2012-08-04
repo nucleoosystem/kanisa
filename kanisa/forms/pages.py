@@ -15,6 +15,9 @@ class PageForm(KanisaBaseForm):
         if not self.instance.pk:
             return parent
 
+        if not parent:
+            return parent
+
         if self.instance == parent:
             raise forms.ValidationError('A page cannot be its own parent.')
 

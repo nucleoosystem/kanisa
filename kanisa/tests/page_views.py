@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from kanisa.models import Page
 from kanisa.tests.utils import KanisaViewTestCase
 
 
@@ -69,5 +70,48 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
                          [u'Staff deleted.', ])
+
+        self.client.logout()
+
+    def test_update_page_view(self):
+        self.client.login(username='fred', password='secret')
+
+        p = Page.objects.get(pk=1)
+        url = reverse('kanisa_manage_pages_update', args=[1, ])
+
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.client.post(url, {'title': p.title,
+                                      'contents': p.contents},
+                                follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         [u'Page "%s" saved.' % p.title, ])
+
+        # Pages cannot be their own parents
+        resp = self.client.post(url, {'title': p.title,
+                                      'contents': p.contents,
+                                      'parent': p.pk})
+        self.assertEqual(resp.status_code, 200)
+        self.assertFormError(resp, 'form', 'parent',
+                             'A page cannot be its own parent.')
+
+        # Pages cannot have their descendants as their parent
+        child = Page.objects.get(pk=4)
+        self.assertEqual(child.parent, p)
+        resp = self.client.post(url, {'title': p.title,
+                                      'contents': p.contents,
+                                      'parent': child.pk})
+        self.assertEqual(resp.status_code, 200)
+        self.assertFormError(resp, 'form', 'parent',
+                             'Invalid parent - cyclical hierarchy detected.')
+
+        url = reverse('kanisa_manage_pages_update', args=[4, ])
+        resp = self.client.post(url, {'title': child.title,
+                                      'contents': child.contents,
+                                      'parent': 2})
+        self.assertEqual(resp.status_code, 302)
 
         self.client.logout()
