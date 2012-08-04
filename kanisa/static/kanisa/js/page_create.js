@@ -30,9 +30,9 @@ function quick_page_create(event) {
                status_block.html("<i class=\"icon-ok\"></i> " + data);
                title_element.val("");
                update_page_list();
-               form.data('submitting', false);
            }).error(function(data) {
                status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
+           }).complete(function() {
                form.data('submitting', false);
            });
 }
