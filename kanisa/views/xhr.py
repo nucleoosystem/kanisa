@@ -1,11 +1,16 @@
 from django.contrib.auth.models import User, Permission
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden)
+from django.views.decorators.http import require_POST
 
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
 
+@require_POST
 def check_bible_passage(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
     if not 'passage' in request.POST:
         return HttpResponseBadRequest("Passage not found.")
 
@@ -16,7 +21,11 @@ def check_bible_passage(request):
         return HttpResponseBadRequest(unicode(e))
 
 
+@require_POST
 def assign_permission(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
     if not request.user.has_perm('kanisa.manage_users'):
         return HttpResponseForbidden(("You do not have permission to manage "
                                       "users."))

@@ -7,27 +7,39 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.status_code, 405)
+        self.assertEqual(resp.content,
+                         '')
+
+    def test_xhr_only(self):
+        resp = self.client.post(self.url, {'passage': 'Foobar'})
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content,
+                         'This page is not directly accessible.')
 
     def test_must_provide_passage(self):
-        resp = self.client.post(self.url, {'foo': 'bar'})
+        resp = self.client.post(self.url, {'foo': 'bar'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Passage not found.')
 
     def test_invalid_passage(self):
-        resp = self.client.post(self.url, {'passage': 'Foobar'})
+        resp = self.client.post(self.url, {'passage': 'Foobar'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          '"Foobar" is not a valid Bible passage.')
 
     def test_valid_book_invalid_range(self):
-        resp = self.client.post(self.url, {'passage': 'Ps 151'})
+        resp = self.client.post(self.url, {'passage': 'Ps 151'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'There are only 150 chapters in Psalms.')
 
     def test_valid_passage(self):
-        resp = self.client.post(self.url, {'passage': 'Matt 3v1-7'})
+        resp = self.client.post(self.url, {'passage': 'Matt 3v1-7'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Matthew 3:1-7')
 
@@ -35,16 +47,22 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
 class UserPermissionViewTest(KanisaViewTestCase):
     url = reverse_lazy('kanisa_management_assign_permission')
 
-    def test_must_be_authenticated(self):
-        resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 403)
-
     def test_gets_disallowed(self):
-        self.client.login(username='fred', password='secret')
         resp = self.client.get(self.url)
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Permission ID not found.')
-        self.client.logout()
+        self.assertEqual(resp.status_code, 405)
+        self.assertEqual(resp.content, '')
+
+    def test_must_be_xhr(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, 'This page is not directly accessible.')
+
+    def test_must_be_authenticated(self):
+        resp = self.client.post(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        'manage users.'))
 
     def test_must_provide_required_inputs(self):
         self.client.login(username='fred', password='secret')
@@ -52,21 +70,24 @@ class UserPermissionViewTest(KanisaViewTestCase):
         # No permission
         resp = self.client.post(self.url,
                                 {'user': '3',
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Permission ID not found.')
 
         # No user
         resp = self.client.post(self.url,
                                 {'permission': 'foo',
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'User ID not found.')
 
         # No 'assigned'
         resp = self.client.post(self.url,
                                 {'permission': 'foo',
-                                 'user': '3'})
+                                 'user': '3'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Assigned status not found.')
 
@@ -78,7 +99,8 @@ class UserPermissionViewTest(KanisaViewTestCase):
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.manage_users',
                                  'user': 2,
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can manage your users.')
@@ -86,7 +108,8 @@ class UserPermissionViewTest(KanisaViewTestCase):
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.manage_users',
                                  'user': 2,
-                                 'assigned': 'foobar'})
+                                 'assigned': 'foobar'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can no longer manage your users.')
@@ -99,7 +122,8 @@ class UserPermissionViewTest(KanisaViewTestCase):
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.manage_users',
                                  'user': 99,
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'No user found with ID 99.')
 
@@ -111,14 +135,16 @@ class UserPermissionViewTest(KanisaViewTestCase):
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa',
                                  'user': 2,
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Malformed permission: \'kanisa\'.')
 
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.foo.bar',
                                  'user': 2,
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Malformed permission: \'kanisa.foo.bar\'.')
@@ -126,7 +152,8 @@ class UserPermissionViewTest(KanisaViewTestCase):
         resp = self.client.post(self.url,
                                 {'permission': 'kanisa.raspberries',
                                  'user': 2,
-                                 'assigned': 'true'})
+                                 'assigned': 'true'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Permission \'kanisa.raspberries\' not found.')
