@@ -3,6 +3,13 @@
 {% load url from future %}
 
 {% block content %}
+
+<script type="text/javascript">
+var page_create_url = "{% url 'kanisa_xhr_management_create_page' %}";
+var pages_list_url = "{% url 'kanisa_xhr_management_list_pages' %}";
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_pages.js"></script>
+
 {% include 'kanisa/management/pages/_quick_creation.html' %}
 <hr />
 

@@ -4,12 +4,6 @@
   <span class="help_text">(Want to use the <a href="{% url 'kanisa_manage_pages_create' %}">full page creation form</a>?)</span>
 </h3>
 
-<script type="text/javascript">
-var page_create_url = "{% url 'kanisa_xhr_management_create_page' %}";
-var pages_list_url = "{% url 'kanisa_xhr_management_list_pages' %}";
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/page_create.js"></script>
-
 <form class="form-inline" method="post" action="{% url 'kanisa_manage_pages_create' %}" id="page_quick_create">
   {% csrf_token %}
   <input type="text" name="title" id="id_title" placeholder="Title" />
