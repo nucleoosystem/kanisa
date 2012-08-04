@@ -44,7 +44,7 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
         self.assertEqual(resp.content, 'Matthew 3:1-7')
 
 
-class UserPermissionViewTest(KanisaViewTestCase):
+class XHRUserPermissionViewTest(KanisaViewTestCase):
     url = reverse_lazy('kanisa_xhr_management_assign_permission')
 
     def test_gets_disallowed(self):
