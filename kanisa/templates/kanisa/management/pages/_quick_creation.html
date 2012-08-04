@@ -1,6 +1,8 @@
 {% load url from future %}
 
-<h3>Quick Create</h3>
+<h3>Quick Create
+  <span class="help_text">(Want to use the <a href="{% url 'kanisa_manage_pages_create' %}">full page creation form</a>?)</span>
+</h3>
 
 <script type="text/javascript">
 var page_create_url = "{% url 'kanisa_xhr_management_create_page' %}";

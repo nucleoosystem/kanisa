@@ -93,3 +93,8 @@ td.iconcell {
     display: inline-block;
     vertical-align: middle;
 }
+
+h3 span.help_text {
+    font-size: 12px;
+    font-weight: normal;
+}

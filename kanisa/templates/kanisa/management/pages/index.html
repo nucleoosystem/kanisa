@@ -3,8 +3,7 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_pages_create' %}" class="btn btn-large btn-primary">Create a Page &raquo;</a></p>
-
+{% include 'kanisa/management/pages/_quick_creation.html' %}
 <hr />
 
 <div id="page_details_container">
@@ -16,9 +15,5 @@ There are no pages to display.
 </div>
 {% endif %}
 </div>
-
-
-<hr />
-{% include 'kanisa/management/pages/_quick_creation.html' %}
 
 {% endblock %}
