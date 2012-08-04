@@ -5,7 +5,9 @@ function update_page_list() {
           });
 }
 
-function quick_page_create() {
+function quick_page_create(event) {
+    event.preventDefault();
+
     var form = $(this);
 
     if (form.data('submitting') == true) {
@@ -32,8 +34,6 @@ function quick_page_create() {
                status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
                form.data('submitting', false);
            });
-
-    return false;
 }
 
 $(function() {
