@@ -2,23 +2,24 @@
 
 from __future__ import absolute_import
 from .banners import BannerTest
-from .diary import (DiaryTest, DiaryGetWeekBoundsTest,
-                    DiaryGetScheduleTest)
-from .management_views import ManagementViewTest
 from .banner_views import BannerManagementViewTest
-from .diary_views import DiaryManagementViewTest
-from .public_views import PublicViewTest
 from .bible_passages import (BiblePassageBadInput,
                              BiblePassage,
                              ToPassageBadInput,
                              ToPassageGoodInput,
                              BiblePassageModelField)
+from .diary import (DiaryTest,
+                    DiaryGetWeekBoundsTest,
+                    DiaryGetScheduleTest)
+from .diary_views import DiaryManagementViewTest
+from .document_views import DocumentManagementViewTest
+from .management_views import ManagementViewTest
+from .page_views import PageManagementViewTest
+from .public_views import PublicViewTest
 from .sermons import SermonTest
 from .sermon_views import SermonManagementViewTest
 from .social_views import SocialViewTest
-from .document_views import DocumentManagementViewTest
 from .user_views import UserManagementViewTest
-from .page_views import PageManagementViewTest
 from .xhr_views import (XHRBiblePassageViewTest,
                         XHRUserPermissionViewTest,
                         XHRCreatePageViewTest,
