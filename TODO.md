@@ -22,6 +22,8 @@
   non-null parents.
 * Make sure the quick page creation tool stays in view after redrawing
   the list of pages.
+* Make sure the quick page creation tool is disabled whilst a request
+  is in progress (somehow need to unbind the submit handler temporarily).
 * Move page hierarchy checking from the ModelForm to the model itself.
 
 # Social Media
