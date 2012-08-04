@@ -15,4 +15,14 @@ There are no pages to display.
 </div>
 {% endif %}
 
+
+<hr />
+<h3>Quick Create</h3>
+
+<form class="form-inline" method="post" action="{% url 'kanisa_manage_pages_create' %}">
+  {% csrf_token %}
+  <input type="text" name="title" id="id_title" placeholder="Title" />
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
 {% endblock %}
