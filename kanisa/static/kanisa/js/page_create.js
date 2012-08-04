@@ -1,3 +1,10 @@
+function update_page_list() {
+    $.get(pages_list_url,
+          function(data) {
+              $("#page_details_container").html(data);
+          });
+}
+
 $(function() {
     $("#page_quick_create").submit(function() {
         var form = $(this);
@@ -12,10 +19,18 @@ $(function() {
                function(data) {
                    status_block.html("<i class=\"icon-ok\"></i> " + data);
                    title_element.val("");
+                   update_page_list();
                }).error(function(data) {
                    status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
                });
 
         return false;
     });
+
+    /*
+    $("#page_quick_create").submit(function() {
+        update_page_list();
+        return false;
+    });
+    */
 });

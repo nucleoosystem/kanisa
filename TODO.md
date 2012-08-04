@@ -20,9 +20,8 @@
 * Drag-and-drop page moving
 * Allow the quick page creation tool to support creating pages with
   non-null parents.
-* Redraw the page table when the quick page creation tool successfully
-  creates a page (make sure to support the case where there were
-  initially no pages).
+* Make sure the quick page creation tool stays in view after redrawing
+  the list of pages.
 * Move page hierarchy checking from the ModelForm to the model itself.
 
 # Social Media

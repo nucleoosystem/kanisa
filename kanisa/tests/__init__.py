@@ -21,4 +21,5 @@ from .user_views import UserManagementViewTest
 from .page_views import PageManagementViewTest
 from .xhr_views import (XHRBiblePassageViewTest,
                         XHRUserPermissionViewTest,
-                        XHRCreatePageViewTest)
+                        XHRCreatePageViewTest,
+                        XHRListPagesViewTest)

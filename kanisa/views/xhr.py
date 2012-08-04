@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User, Permission
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden)
-from django.views.decorators.http import require_POST
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.views.decorators.http import require_POST, require_GET
 
 from kanisa.models import Page
 from kanisa.models.bible.bible import to_passage, InvalidPassage
@@ -109,3 +111,18 @@ def create_page(request):
                             parent=parent)
 
     return HttpResponse("Page created.")
+
+
+@require_GET
+def list_pages(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
+    if not request.user.has_perm('kanisa.manage_pages'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "pages."))
+
+    pages = Page.objects.all()
+    return render_to_response('kanisa/management/pages/_page_table.html',
+                              {'page_list': pages},
+                              context_instance=RequestContext(request))
