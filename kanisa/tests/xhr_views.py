@@ -159,3 +159,33 @@ class UserPermissionViewTest(KanisaViewTestCase):
                          'Permission \'kanisa.raspberries\' not found.')
 
         self.client.logout()
+
+
+class XHRCreatePageViewTest(KanisaViewTestCase):
+    url = reverse_lazy('kanisa_xhr_management_create_page')
+
+    def test_gets_disallowed(self):
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 405)
+        self.assertEqual(resp.content, '')
+
+    def test_must_be_xhr(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, 'This page is not directly accessible.')
+
+    def test_must_be_authenticated(self):
+        resp = self.client.post(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        'manage pages.'))
+
+    def test_success(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url,
+                                {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content, 'This doesn\'t do anything yet.')

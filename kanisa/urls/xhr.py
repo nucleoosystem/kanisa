@@ -9,4 +9,8 @@ urlpatterns = patterns('',
                            'kanisa.views.xhr.assign_permission',
                            {},
                            'kanisa_xhr_management_assign_permission'),
+                       url(r'^createpage/$',
+                           'kanisa.views.xhr.create_page',
+                           {},
+                           'kanisa_xhr_management_create_page'),
                        )

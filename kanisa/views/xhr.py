@@ -71,3 +71,15 @@ def assign_permission(request):
     user.save()
 
     return HttpResponse(msg)
+
+
+@require_POST
+def create_page(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
+    if not request.user.has_perm('kanisa.manage_pages'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "pages."))
+
+    return HttpResponse("This doesn't do anything yet.")

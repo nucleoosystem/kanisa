@@ -19,4 +19,6 @@ from .social_views import SocialViewTest
 from .document_views import DocumentManagementViewTest
 from .user_views import UserManagementViewTest
 from .page_views import PageManagementViewTest
-from .xhr_views import XHRBiblePassageViewTest, UserPermissionViewTest
+from .xhr_views import (XHRBiblePassageViewTest,
+                        UserPermissionViewTest,
+                        XHRCreatePageViewTest)
