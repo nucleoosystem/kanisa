@@ -128,5 +128,11 @@ def list_pages(request):
                                   {'page_list': pages},
                                   context_instance=RequestContext(request))
 
-    response = {'page_table': page_table}
+    tmpl = 'kanisa/management/pages/_parent_select_options.html'
+    options = render_to_string(tmpl,
+                               {'page_list': pages},
+                               context_instance=RequestContext(request))
+
+    response = {'page_table': page_table,
+                'options': options}
     return HttpResponse(json.dumps(response))

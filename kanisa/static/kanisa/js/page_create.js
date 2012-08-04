@@ -2,6 +2,10 @@ function update_page_list() {
     $.get(pages_list_url,
           function(data) {
               $("#page_details_container").html(data.page_table);
+              var parent = $("#id_parent");
+              var previous_val = parent.val();
+              parent.html(data.options)
+              parent.val(previous_val);
           }, "json");
 }
 
