@@ -19,6 +19,10 @@
 
 * Drag-and-drop page moving.
 * Redraw select box after creating pages with the quick creation tool.
+* Set pages as drafts when they're quick-created. Children of draft
+  pages should automatically be set as drafts, no matter how they're
+  created. It should not be possible to put a published page back to
+  draft status unless it's a leaf node.
 
 # Social Media
 
