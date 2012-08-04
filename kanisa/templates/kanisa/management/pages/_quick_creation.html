@@ -13,6 +13,9 @@ var pages_list_url = "{% url 'kanisa_xhr_management_list_pages' %}";
 <form class="form-inline" method="post" action="{% url 'kanisa_manage_pages_create' %}" id="page_quick_create">
   {% csrf_token %}
   <input type="text" name="title" id="id_title" placeholder="Title" />
+  <select name="parent" id="id_parent">
+    {% include 'kanisa/management/pages/_parent_select_options.html' %}
+  </select>
   <button type="submit" class="btn btn-success">Submit</button>
   <div class="inline-status"></div>
 </form>

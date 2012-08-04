@@ -1,0 +1,4 @@
+<option value="">--------</option>
+{% for page in page_list %}
+<option value="{{ page.pk }}">{{ page.title }}</option>
+{% endfor %}

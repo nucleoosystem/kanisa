@@ -17,6 +17,7 @@ function quick_page_create(event) {
     form.data('submitting', true);
 
     var title_element = form.find("#id_title");
+    var parent_element = form.find("#id_parent");
     var title = title_element.val();
     var status_block = form.find("div");
 
@@ -24,7 +25,7 @@ function quick_page_create(event) {
 
     $.post(page_create_url,
            { 'title': title,
-             'parent': '' },
+             'parent': parent_element.val() },
            function(data) {
                status_block.html("<i class=\"icon-ok\"></i> " + data);
                title_element.val("");
