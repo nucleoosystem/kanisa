@@ -78,6 +78,14 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.assertEqual([m.message for m in resp.context['messages']],
                          [u'Staff deleted.', ])
 
+        resp = self.client.post(reverse('kanisa_manage_pages_delete',
+                                        args=[3, ]),
+                                {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content, '"Location" deleted')
+
         self.client.logout()
 
     def test_update_page_view(self):

@@ -165,6 +165,6 @@ class KanisaDeleteView(DeleteView):
         if request.is_ajax():
             self.object = self.get_object()
             self.object.delete()
-            return HttpResponse("")
+            return HttpResponse('"%s" deleted' % self.object)
 
         return super(KanisaDeleteView, self).delete(request, *args, **kwargs)
