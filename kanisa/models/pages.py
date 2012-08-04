@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from django.core.exceptions import ValidationError
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -32,3 +33,13 @@ class Page(MPTTModel):
         super(Page, self).save(*args, **kwargs)
         from haystack import site as haystack_site
         haystack_site.get_index(self.__class__).update_object(self)
+
+    def clean_fields(self, exclude=None):
+        if self.pk and self.parent:
+            if self.pk == self.parent.pk:
+                raise ValidationError({'parent': ['A page cannot be its own '
+                                                  'parent.', ]})
+
+            if self.is_ancestor_of(self.parent):
+                raise ValidationError({'parent': ['Invalid parent - cyclical '
+                                                  'hierarchy detected.', ]})
