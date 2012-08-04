@@ -42,6 +42,13 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context['form'].initial['parent'].pk, 1)
 
+        resp = self.client.post(url, {'title': "Test page"},
+                                follow=True)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('messages' in resp.context)
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         [u'Page "Test page" created.', ])
+
         self.client.logout()
 
     def test_delete_page_view(self):
