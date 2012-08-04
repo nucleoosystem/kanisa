@@ -5,8 +5,7 @@ function update_page_list() {
           });
 }
 
-$(function() {
-    $("#page_quick_create").submit(function() {
+function quick_page_create() {
         var form = $(this);
         var button = form.find("button");
         button.attr("disabled", "disabled");
@@ -29,5 +28,8 @@ $(function() {
                });
 
         return false;
-    });
+    }
+
+$(function() {
+    $("#page_quick_create").submit(quick_page_create);
 });
