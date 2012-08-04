@@ -14,13 +14,7 @@ var pages_list_url = "{% url 'kanisa_xhr_management_list_pages' %}";
 <hr />
 
 <div id="page_details_container">
-{% if page_list %}
 {% include 'kanisa/management/pages/_page_table.html' %}
-{% else %}
-<div class="alert alert-warning">
-There are no pages to display.
-</div>
-{% endif %}
 </div>
 
 {% endblock %}

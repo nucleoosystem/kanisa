@@ -1,5 +1,6 @@
 {% load url from future %}
 
+{% if page_list %}
 <table class="table table-striped kanisa_diary">
   <thead>
     <tr>
@@ -40,3 +41,8 @@
     {% endfor %}
 </tbody>
 </table>
+{% else %}
+<div class="alert alert-warning">
+There are no pages to display.
+</div>
+{% endif %}
