@@ -2,7 +2,8 @@
 
 from __future__ import absolute_import
 from .banners import BannerTest
-from .banner_views import BannerManagementViewTest
+from .banner_views import (BannerManagementViewTest,
+                           BannerPublicViewTest)
 from .bible_passages import (BiblePassageBadInput,
                              BiblePassage,
                              ToPassageBadInput,
