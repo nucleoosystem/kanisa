@@ -19,6 +19,7 @@
 
 * Drag-and-drop page moving
 * Quick page hierarchy creation tool
+* Move page hierarchy checking from the ModelForm to the model itself.
 
 # Social Media
 
