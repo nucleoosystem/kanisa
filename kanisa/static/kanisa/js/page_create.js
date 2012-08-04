@@ -26,11 +26,4 @@ $(function() {
 
         return false;
     });
-
-    /*
-    $("#page_quick_create").submit(function() {
-        update_page_list();
-        return false;
-    });
-    */
 });
