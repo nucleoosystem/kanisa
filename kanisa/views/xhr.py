@@ -107,8 +107,8 @@ def create_page(request):
             return HttpResponseBadRequest("Page with ID '%s' not found."
                                           % parent)
 
-    p = Page.objects.create(title=request.POST['title'],
-                            parent=parent)
+    Page.objects.create(title=request.POST['title'],
+                        parent=parent)
 
     return HttpResponse("Page created.")
 
