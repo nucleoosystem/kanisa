@@ -21,7 +21,8 @@
 * Set pages as drafts when they're quick-created. Children of draft
   pages should automatically be set as drafts, no matter how they're
   created. It should not be possible to put a published page back to
-  draft status unless it's a leaf node.
+  draft status unless it's a leaf node. It should not be possible to
+  mark a page as published if any of its ancestor nodes are drafts.
 
 # Social Media
 
