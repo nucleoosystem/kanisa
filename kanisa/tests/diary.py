@@ -2,7 +2,7 @@ from datetime import date, time
 from django.test import TestCase
 from kanisa.models import diary
 from kanisa.models import RegularEvent, ScheduledEvent
-from kanisa.utils import get_week_bounds, get_schedule
+from kanisa.utils.diary import get_week_bounds, get_schedule
 
 
 class DiaryTest(TestCase):

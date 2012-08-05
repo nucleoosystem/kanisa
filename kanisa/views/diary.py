@@ -11,7 +11,7 @@ from kanisa.forms.diary import (RegularEventForm,
                                 ScheduledEventEditForm,
                                 ScheduledEventCreationForm)
 from kanisa.models import RegularEvent, ScheduledEvent
-from kanisa.utils import get_schedule, get_week_bounds
+from kanisa.utils.diary import get_schedule, get_week_bounds
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
                                   KanisaDeleteView,
