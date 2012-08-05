@@ -66,6 +66,8 @@
   minutes).
 * Allow redirecting arbitrary URLs as a fallback - to help map old
   URLs.
+* Stop making EpicEditor look like it support rich text (try making
+  text bold, or pasting in rich text).
 
 # Frontend
 
