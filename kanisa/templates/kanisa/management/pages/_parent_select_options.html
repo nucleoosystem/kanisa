@@ -1,6 +1,7 @@
 {% load kanisa_tags %}
 
-<option value="">--------</option>
+<option value="">---------</option>
+
 {% for page in page_list %}
-<option value="{{ page.pk }}">{% for i in page.level|get_range %}--{% endfor %} {{ page.title }}</option>
+<option value="{{ page.pk }}">{% for i in page.level|get_range %}---{% endfor %} {{ page.title }}</option>
 {% endfor %}
