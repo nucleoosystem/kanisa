@@ -9,16 +9,15 @@ class PageTest(TestCase):
     def test_make_non_leaf_node_a_draft(self):
         p = Page.objects.get(pk=1)
         p.draft = True
-        try:
+
+        with self.assertRaises(ValidationError) as cm:
             p.full_clean()
-            # Shouldn't get here
-            self.assertFalse(True)
-        except ValidationError, e:
-            errors = e.message_dict
-            self.assertTrue('draft' in errors)
-            self.assertEqual(errors['draft'],
-                             ['Cannot mark this page as draft, as it has '
-                              'published descendants.', ])
+
+        errors = cm.exception.message_dict
+        self.assertTrue('draft' in errors)
+        self.assertEqual(errors['draft'],
+                         ['Cannot mark this page as draft, as it has '
+                          'published descendants.', ])
 
     def test_make_leaf_node_a_draft(self):
         p = Page.objects.get(pk=4)
@@ -36,30 +35,26 @@ class PageTest(TestCase):
         new_page.save()
         new_page.draft = False
 
-        try:
+        with self.assertRaises(ValidationError) as cm:
             new_page.full_clean()
-            # Shouldn't get here
-            self.assertFalse(True)
-        except ValidationError, e:
-            errors = e.message_dict
-            self.assertTrue('draft' in errors)
-            self.assertEqual(errors['draft'],
-                             ['Cannot mark this page as published, as it '
-                              'has non-published ancestors.', ])
+
+        errors = cm.exception.message_dict
+        self.assertTrue('draft' in errors)
+        self.assertEqual(errors['draft'],
+                         ['Cannot mark this page as published, as it '
+                          'has non-published ancestors.', ])
 
     def test_page_cannot_be_its_own_parent(self):
         p = Page.objects.get(pk=4)
         p.parent = p
 
-        try:
+        with self.assertRaises(ValidationError) as cm:
             p.full_clean()
-            # Shouldn't get here
-            self.assertFalse(True)
-        except ValidationError, e:
-            errors = e.message_dict
-            self.assertTrue('parent' in errors)
-            self.assertEqual(errors['parent'],
-                             ['A page cannot be its own parent.', ])
+
+        errors = cm.exception.message_dict
+        self.assertTrue('parent' in errors)
+        self.assertEqual(errors['parent'],
+                         ['A page cannot be its own parent.', ])
 
     def test_page_cannot_have_descendant_as_parent(self):
         p = Page.objects.get(pk=1)
@@ -69,13 +64,11 @@ class PageTest(TestCase):
 
         p.parent = Page.objects.get(pk=4)
 
-        try:
+        with self.assertRaises(ValidationError) as cm:
             p.full_clean()
-            # Shouldn't get here
-            self.assertFalse(True)
-        except ValidationError, e:
-            errors = e.message_dict
-            self.assertTrue('parent' in errors)
-            self.assertEqual(errors['parent'],
-                             ['Invalid parent - cyclical hierarchy '
-                              'detected.', ])
+
+        errors = cm.exception.message_dict
+        self.assertTrue('parent' in errors)
+        self.assertEqual(errors['parent'],
+                         ['Invalid parent - cyclical hierarchy '
+                          'detected.', ])
