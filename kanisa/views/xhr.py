@@ -109,7 +109,8 @@ def create_page(request):
                                           % parent)
 
     Page.objects.create(title=request.POST['title'],
-                        parent=parent)
+                        parent=parent,
+                        draft=True)
 
     return HttpResponse("Page created.")
 

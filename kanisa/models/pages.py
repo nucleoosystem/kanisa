@@ -8,6 +8,7 @@ class Page(MPTTModel):
     title = models.CharField(max_length=60)
     slug = AutoSlugField(populate_from='title', unique=True)
     contents = models.TextField(null=True, blank=True)
+    draft = models.BooleanField(default=False)
     parent = TreeForeignKey('self',
                             null=True,
                             blank=True,
@@ -44,5 +45,26 @@ class Page(MPTTModel):
                 raise ValidationError({'parent': ['Invalid parent - cyclical '
                                                   'hierarchy detected.', ]})
 
+    def check_draft_status(self):
+        if not self.draft:
+            ancestors = self.get_ancestors()
+            for a in ancestors:
+                if a.draft:
+                    raise ValidationError({'draft': ['Cannot mark this page '
+                                                     'as published, as it has '
+                                                     'non-published '
+                                                     'ancestors.', ]})
+
+        if self.draft and not self.is_leaf_node():
+            descendants = self.get_descendants()
+
+            for d in descendants:
+                if not d.draft:
+                    raise ValidationError({'draft': ['Cannot mark this page '
+                                                     'as draft, as it has '
+                                                     'published '
+                                                     'descendants.', ]})
+
     def clean_fields(self, exclude=None):
         self.check_parent_status()
+        self.check_draft_status()

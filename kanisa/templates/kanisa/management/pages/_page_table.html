@@ -6,6 +6,7 @@
     <tr>
       <th>Title</th>
       <th style="width: 16px"></th>
+      <th>Draft</th>
       <th>Modified</th>
       <th></th>
     </tr>
@@ -24,6 +25,11 @@
         <a href="{% url 'kanisa_manage_pages_create' %}?parent={{ page.pk }}" title="Create a page with &ldquo;{{ page.title }}&rdquo; as its parent">
           <i class="icon-plus-sign"></i>
         </a>
+      </td>
+      <td class="iconcell">
+        {% if page.draft %}
+        <i class="icon icon-ok" title="This page is a draft"></i>
+        {% endif %}
       </td>
       <td>
         <abbr title="{{ page.modified|date:"r"}}">
