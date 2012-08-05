@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.base import RedirectView
 from kanisa.forms.social import ScheduledTweetForm
 from kanisa.models import ScheduledTweet
-from kanisa.utils import get_tweepy_handle, TwitterException
+from kanisa.utils.social import get_tweepy_handle, TwitterException
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
                                   KanisaCreateView,
