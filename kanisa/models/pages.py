@@ -7,6 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class Page(MPTTModel):
     title = models.CharField(max_length=60)
     slug = AutoSlugField(populate_from='title', unique=True)
+    summary = models.TextField(null=True, blank=True)
     contents = models.TextField(null=True, blank=True)
     draft = models.BooleanField(default=False)
     parent = TreeForeignKey('self',
