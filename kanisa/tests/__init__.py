@@ -25,4 +25,5 @@ from .user_views import UserManagementViewTest
 from .xhr_views import (XHRBiblePassageViewTest,
                         XHRUserPermissionViewTest,
                         XHRCreatePageViewTest,
-                        XHRListPagesViewTest)
+                        XHRListPagesViewTest,
+                        XHRMarkSermonSeriesComplete)

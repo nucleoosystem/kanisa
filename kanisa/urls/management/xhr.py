@@ -13,4 +13,8 @@ urlpatterns = patterns('',
                            'kanisa.views.xhr.list_pages',
                            {},
                            'kanisa_manage_xhr_list_pages'),
+                       url(r'^sermons/markcomplete/$',
+                           'kanisa.views.xhr.mark_sermon_series_complete',
+                           {},
+                           'kanisa_manage_xhr_sermon_series_complete'),
                        )

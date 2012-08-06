@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST, require_GET
 import json
 
-from kanisa.models import Page
+from kanisa.models import Page, SermonSeries
 from kanisa.models.bible.bible import to_passage, InvalidPassage
 
 
@@ -137,3 +137,31 @@ def list_pages(request):
     response = {'page_table': page_table,
                 'options': options}
     return HttpResponse(json.dumps(response))
+
+
+@require_POST
+def mark_sermon_series_complete(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
+    if not request.user.has_perm('kanisa.manage_sermons'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "sermons."))
+
+    if not 'series' in request.POST:
+        return HttpResponseBadRequest("Series ID not found.")
+
+    try:
+        series_pk = int(request.POST['series'])
+    except ValueError:
+        return HttpResponseBadRequest("No sermon series found with ID '%s'."
+                                      % request.POST['series'])
+
+    try:
+        series = SermonSeries.objects.get(pk=series_pk)
+        series.active = False
+        series.save()
+        return HttpResponse("Series marked complete.")
+    except SermonSeries.DoesNotExist:
+        return HttpResponseBadRequest("No sermon series found with ID %s."
+                                      % series_pk)

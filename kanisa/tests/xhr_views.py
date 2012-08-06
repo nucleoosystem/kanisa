@@ -272,3 +272,62 @@ class XHRListPagesViewTest(KanisaViewTestCase):
                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.client.logout()
+
+
+class XHRMarkSermonSeriesComplete(KanisaViewTestCase):
+    fixtures = ['sermons.json', ]
+
+    url = reverse_lazy('kanisa_manage_xhr_sermon_series_complete')
+
+    def test_gets_disallowed(self):
+        resp = self.client.get(self.url)
+        self.assertEqual(resp.status_code, 405)
+        self.assertEqual(resp.content, '')
+
+    def test_must_be_xhr(self):
+        resp = self.client.post(self.url, {})
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, 'This page is not directly accessible.')
+
+    def test_must_be_authenticated(self):
+        resp = self.client.post(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        'manage sermons.'))
+
+    def test_fails_without_required_parameters(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Series ID not found.')
+        self.client.logout()
+
+    def test_fails_with_non_numeric_series(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url, {'series': 'nonnumeric'},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content,
+                         "No sermon series found with ID 'nonnumeric'.")
+        self.client.logout()
+
+    def test_fails_with_non_existent_series(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url, {'series': 99},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'No sermon series found with ID 99.')
+        self.client.logout()
+
+    def test_success(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.client.post(self.url, {'series': 1},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 200)
+        self.client.logout()
