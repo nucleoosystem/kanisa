@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Permission
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -35,8 +35,8 @@ class KanisaViewTestCase(TestCase):
     def view_is_restricted(self, url):
         # Not logged in
         resp = self.client.get(url)
-
-        self.assertRedirects(resp, '/login/?next=%s' % url,
+        login_url = reverse('kanisa_public_login')
+        self.assertRedirects(resp, '%s?next=%s' % (login_url, url),
                              302, 200)
 
         # Logged in as non-staff member
