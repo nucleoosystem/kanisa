@@ -19,4 +19,6 @@ urlpatterns = patterns('',
                            'kanisa_public_banners_visit'),
                        url(r'^manage/',
                            include('kanisa.urls.management')),
+                       url(r'^xhr/',
+                           include('kanisa.urls.xhr')),
                        )

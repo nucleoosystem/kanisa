@@ -28,5 +28,5 @@ urlpatterns = patterns('',
                        url(r'^users/',
                            include('kanisa.urls.management.users')),
                        url(r'^xhr/',
-                           include('kanisa.urls.xhr')),
+                           include('kanisa.urls.management.xhr')),
                        )
