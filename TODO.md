@@ -35,6 +35,8 @@
 * Allow quick membership approval process.
 * Fix O(n)-ness of user management views (queries for each user to get
   their permissions).
+* Add views for password changing.
+* Add views for registration.
 
 # Members' Area
 
