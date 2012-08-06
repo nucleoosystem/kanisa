@@ -49,7 +49,7 @@ def assign_permission(request):
 
     try:
         user = User.objects.get(pk=user_pk)
-    except User.DoesNotExist:
+    except (User.DoesNotExist, ValueError):
         return HttpResponseBadRequest("No user found with ID %s." % user_pk)
 
     try:
@@ -104,7 +104,7 @@ def create_page(request):
     else:
         try:
             parent = Page.objects.get(pk=parent)
-        except Page.DoesNotExist:
+        except (Page.DoesNotExist, ValueError):
             return HttpResponseBadRequest("Page with ID '%s' not found."
                                           % parent)
 
@@ -153,15 +153,10 @@ def mark_sermon_series_complete(request):
 
     try:
         series_pk = int(request.POST['series'])
-    except ValueError:
-        return HttpResponseBadRequest("No sermon series found with ID '%s'."
-                                      % request.POST['series'])
-
-    try:
         series = SermonSeries.objects.get(pk=series_pk)
         series.active = False
         series.save()
         return HttpResponse("Series marked complete.")
-    except SermonSeries.DoesNotExist:
-        return HttpResponseBadRequest("No sermon series found with ID %s."
-                                      % series_pk)
+    except (SermonSeries.DoesNotExist, ValueError):
+        return HttpResponseBadRequest("No sermon series found with ID '%s'."
+                                      % request.POST['series'])

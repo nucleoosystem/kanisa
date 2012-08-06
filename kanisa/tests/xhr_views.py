@@ -321,7 +321,7 @@ class XHRMarkSermonSeriesComplete(KanisaViewTestCase):
         resp = self.client.post(self.url, {'series': 99},
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'No sermon series found with ID 99.')
+        self.assertEqual(resp.content, "No sermon series found with ID '99'.")
         self.client.logout()
 
     def test_success(self):
