@@ -45,7 +45,7 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
 
 
 class XHRUserPermissionViewTest(KanisaViewTestCase):
-    url = reverse_lazy('kanisa_xhr_management_assign_permission')
+    url = reverse_lazy('kanisa_manage_xhr_assign_permission')
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
@@ -164,7 +164,7 @@ class XHRUserPermissionViewTest(KanisaViewTestCase):
 class XHRCreatePageViewTest(KanisaViewTestCase):
     fixtures = ['pages.json', ]
 
-    url = reverse_lazy('kanisa_xhr_management_create_page')
+    url = reverse_lazy('kanisa_manage_xhr_create_page')
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
@@ -246,7 +246,7 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
 class XHRListPagesViewTest(KanisaViewTestCase):
     fixtures = ['pages.json', ]
 
-    url = reverse_lazy('kanisa_xhr_management_list_pages')
+    url = reverse_lazy('kanisa_manage_xhr_list_pages')
 
     def test_posts_disallowed(self):
         resp = self.client.post(self.url, {})
