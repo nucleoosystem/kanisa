@@ -30,10 +30,12 @@
           View
         </a>
         {% if sermonseries.active %}
-        <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">
+        <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
+
           <i class="icon-ok"></i>
           Mark Complete
         </a>
+        <span class="inline-status"></span>
         {% endif %}
       </p>
       </div>
