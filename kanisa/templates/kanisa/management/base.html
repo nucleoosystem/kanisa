@@ -2,7 +2,11 @@
 {% load kanisa_tags %}
 <!DOCTYPE html>
 <html lang="en">
+  <head>
   {% include "kanisa/_head.html" %}
+  {% block extrajs %}
+  {% endblock %}
+  </head>
   <body>
     {% include "kanisa/_header.html" %}
 

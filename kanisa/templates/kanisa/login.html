@@ -2,10 +2,11 @@
 
 {% load crispy_forms_tags %}
 
-{% block content %}
-
+{% block extrajs %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/login.js"></script>
+{% endblock %}
 
+{% block content %}
 <div class="row">
   <div class="span6 offset3">
     <h1>Welcome to Kanisa</h1>
