@@ -171,15 +171,17 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
                                     RedirectView):
     permanent = False
 
-    def get_redirect_url(self, pk, thedate):
-        event = get_object_or_404(RegularEvent, pk=pk)
-
+    def parse_date_to_datetime(self, thedate):
         try:
             event_date = datetime.strptime(thedate, '%Y%m%d').date()
             event_time = event.start_time
-            parsed_date = datetime.combine(event_date, event_time)
+            return datetime.combine(event_date, event_time)
         except ValueError:
             raise Http404
+
+    def get_redirect_url(self, pk, thedate):
+        event = get_object_or_404(RegularEvent, pk=pk)
+        parsed_date = self.parse_date_to_datetime(thedate)
 
         event_exists = ScheduledEvent.objects.filter(event=event,
                                                      date=parsed_date)
