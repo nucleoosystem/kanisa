@@ -1,6 +1,15 @@
 from datetime import date, timedelta
+from django.utils import formats
 from kanisa.models import diary
 from kanisa.models import RegularEvent, ScheduledEvent
+
+
+def datetime_to_string(dt):
+    formatted_date = formats.date_format(dt,
+                                         "DATE_FORMAT")
+    formatted_time = formats.date_format(dt,
+                                         "TIME_FORMAT")
+    return '%s at %s' % (formatted_date, formatted_time)
 
 
 def get_week_bounds(containing=None):

@@ -4,14 +4,14 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.utils import formats
 from django.views.generic.base import RedirectView
 
 from kanisa.forms.diary import (RegularEventForm,
                                 ScheduledEventEditForm,
                                 ScheduledEventCreationForm)
 from kanisa.models import RegularEvent, ScheduledEvent
-from kanisa.utils.diary import get_schedule, get_week_bounds
+from kanisa.utils.diary import (get_schedule, get_week_bounds,
+                                datetime_to_string)
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
                                   KanisaDeleteView,
@@ -181,11 +181,7 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
         except ValueError:
             raise Http404
 
-        formatted_date = formats.date_format(parsed_date,
-                                             "DATE_FORMAT")
-        formatted_time = formats.date_format(parsed_date,
-                                             "TIME_FORMAT")
-        date_string = '%s at %s' % (formatted_date, formatted_time)
+        date_string = datetime_to_string(parsed_date)
 
         event_exists = ScheduledEvent.objects.filter(event=event,
                                                      date=parsed_date)
@@ -238,11 +234,7 @@ class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
     def get_date_string(self):
         parsed_date = datetime.combine(self.object.date,
                                        self.object.start_time)
-        formatted_date = formats.date_format(parsed_date,
-                                             "DATE_FORMAT")
-        formatted_time = formats.date_format(parsed_date,
-                                             "TIME_FORMAT")
-        return '%s at %s' % (formatted_date, formatted_time)
+        return datetime_to_string(parsed_date)
 
     def get_deletion_confirmation_message(self):
         return 'Are you sure you want to cancel %s on %s?'\
