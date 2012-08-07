@@ -1,0 +1,67 @@
+{% load url from future %}
+
+<table class="table table-striped kanisa_diary">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th colspan="3">Available Events</th>
+      <th colspan="5">Scheduled Events</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in calendar %}
+    <tr>
+      <td>
+        <strong>{{ entry.dayname }}</strong><br />
+        {{ entry.date|date:"jS F" }}
+      </td>
+      <td>
+      {% for e in entry.regular_events %}
+      <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
+        {{ e.start_time }}
+      </div>
+      {% empty %}
+      <em>None</em>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.regular_events %}
+      <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
+        <a href="{% url 'kanisa_manage_diary_regular_update' e.pk %}">{{ e }}</a>
+      </div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.regular_events %}
+        <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
+            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success">Schedule</a>
+        </div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+      <div class="{% if not forloop.last %} notlast{% endif %}">{{ e.start_time }}</div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+      <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a></div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+        <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-mini">Clone</a></div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+        <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger">Cancel</a></div>
+      {% endfor %}
+      </td>
+      <td>
+        <a href="{% url 'kanisa_manage_diary_scheduled_create' %}?date={{ entry.date|date:"Ymd" }}" title="Create an event on {{ entry.date|date:"jS F Y"}}"><i class="icon-plus-sign"></i></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
