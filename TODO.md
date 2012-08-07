@@ -60,6 +60,7 @@
 * Check coverage of diary/banner CRUD views.
 * Add tests for search views.
 * Make sure search results for test runs are kept separately.
+* Tests for diary XHR views.
 
 # Misc
 

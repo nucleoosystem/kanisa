@@ -1,13 +1,16 @@
+from datetime import datetime
 from django.contrib.auth.models import User, Permission
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponseForbidden)
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST, require_GET
 import json
 
-from kanisa.models import Page, SermonSeries
+from kanisa.models import Page, SermonSeries, RegularEvent
 from kanisa.models.bible.bible import to_passage, InvalidPassage
+from kanisa.utils.diary import get_schedule
 
 
 @require_POST
@@ -160,3 +163,54 @@ def mark_sermon_series_complete(request):
     except (SermonSeries.DoesNotExist, ValueError):
         return HttpResponseBadRequest("No sermon series found with ID '%s'."
                                       % request.POST['series'])
+
+
+@require_POST
+def schedule_regular_event(request):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
+    if not request.user.has_perm('kanisa.manage_diary'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "the diary."))
+
+    if not 'event' in request.POST:
+        return HttpResponseBadRequest("Event ID not found.")
+
+    if not 'date' in request.POST:
+        return HttpResponseBadRequest("Event date not found.")
+
+    try:
+        event_date = datetime.strptime(request.POST['date'], '%Y%m%d')
+    except ValueError:
+        given = request.POST['date']
+        return HttpResponseBadRequest("'%s' is not a valid date." % given)
+
+    try:
+        event_pk = int(request.POST['event'])
+        event = RegularEvent.objects.get(pk=event_pk)
+        event.schedule_once(event_date)
+        return HttpResponse("Event scheduled.")
+    except (RegularEvent.DoesNotExist, ValueError):
+        return HttpResponseBadRequest("No event series found with ID '%s'."
+                                      % request.POST['event'])
+    except event.AlreadyScheduled:
+        return HttpResponseBadRequest("That event is already scheduled.")
+
+
+@require_GET
+def get_events(request, date):
+    if not request.is_ajax():
+        return HttpResponseForbidden(("This page is not directly accessible."))
+
+    if not request.user.has_perm('kanisa.manage_diary'):
+        return HttpResponseForbidden(("You do not have permission to manage "
+                                      "the diary."))
+
+    thedate = datetime.strptime(date, '%Y%m%d').date()
+    schedule = get_schedule(thedate)
+
+    tmpl = 'kanisa/management/diary/_diary_page.html'
+    return render_to_response(tmpl,
+                              {'calendar': schedule.calendar_entries},
+                              context_instance=RequestContext(request))

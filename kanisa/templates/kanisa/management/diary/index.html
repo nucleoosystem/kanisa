@@ -2,6 +2,14 @@
 
 {% load url from future %}
 
+{% block extrajs %}
+<script type="text/javascript">
+var schedule_event_url = "{% url 'kanisa_manage_xhr_diary_schedule_regular' %}";
+var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|date:"Ymd" %}";
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_diary.js"></script>
+{% endblock %}
+
 {% block content %}
 {% if events_to_schedule %}
 <p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}?date={{ monday|date:"Ymd" }}" class="btn btn-large btn-primary" id="schedule-weeks-events">
@@ -12,8 +20,9 @@
 <hr />
 
 <h2>Week Beginning {{ monday|date:"jS F Y" }}</h2>
-
+<div id="diary_page">
 {% include "kanisa/management/diary/_diary_page.html" with calendar=calendar only %}
+</div>
 
 <ul class="pager">
   <li class="previous">

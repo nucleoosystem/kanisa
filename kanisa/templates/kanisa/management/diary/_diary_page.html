@@ -34,7 +34,7 @@
       <td>
       {% for e in entry.regular_events %}
         <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
-            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success">Schedule</a>
+            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-mini btn-success regular_schedule" data-event-id="{{ e.pk }}" data-event-date="{{ entry.date|date:"Ymd" }}">Schedule</a><span class="inline-status"></span>
         </div>
       {% endfor %}
       </td>
