@@ -181,20 +181,20 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
         except ValueError:
             raise Http404
 
-        date_string = datetime_to_string(parsed_date)
-
         event_exists = ScheduledEvent.objects.filter(event=event,
                                                      date=parsed_date)
         if len(event_exists) != 0:
-            message = u'%s already scheduled for %s' % (unicode(event),
-                                                        date_string)
+            message = u'%s already scheduled for %s'
+            % (unicode(event),
+               datetime_to_string(parsed_date))
+
             messages.info(self.request, message)
             return self.get_relative_root_url(thedate)
 
         event.schedule(parsed_date, parsed_date + timedelta(days=1))
 
         message = u'%s scheduled for %s' % (unicode(event),
-                                            date_string)
+                                            datetime_to_string(parsed_date))
         messages.success(self.request, message)
 
         return self.get_relative_root_url(thedate)
