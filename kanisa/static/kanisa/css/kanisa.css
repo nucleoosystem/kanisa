@@ -72,7 +72,7 @@ i.spinner {
     display: inline-block;
 }
 
-td i.spinner {
+td.iconcell i.spinner {
     position: absolute;
     left: 16px;
     top: 10px;
