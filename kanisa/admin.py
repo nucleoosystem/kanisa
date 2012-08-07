@@ -82,6 +82,6 @@ admin.site.register(Sermon, SermonAdmin)
 
 
 class PageAdmin(MPTTModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
+    pass
 
 admin.site.register(Page, PageAdmin)
