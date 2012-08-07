@@ -171,7 +171,7 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
                                     RedirectView):
     permanent = False
 
-    def parse_date_to_datetime(self, thedate):
+    def parse_date_to_datetime(self, thedate, event):
         try:
             event_date = datetime.strptime(thedate, '%Y%m%d').date()
             event_time = event.start_time
@@ -181,23 +181,19 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
 
     def get_redirect_url(self, pk, thedate):
         event = get_object_or_404(RegularEvent, pk=pk)
-        parsed_date = self.parse_date_to_datetime(thedate)
+        parsed_date = self.parse_date_to_datetime(thedate, event)
 
-        event_exists = ScheduledEvent.objects.filter(event=event,
-                                                     date=parsed_date)
-        if len(event_exists) != 0:
-            message = u'%s already scheduled for %s'
-            % (unicode(event),
-               datetime_to_string(parsed_date))
+        try:
+            event.schedule_once(parsed_date)
+            message = '%s scheduled for %s' % (unicode(event),
+                                               datetime_to_string(parsed_date))
+            messages.success(self.request, message)
+        except event.AlreadyScheduled:
+            date_string = datetime_to_string(parsed_date)
+            message = '%s already scheduled for %s' % (unicode(event),
+                                                       date_string)
 
             messages.info(self.request, message)
-            return self.get_relative_root_url(thedate)
-
-        event.schedule(parsed_date, parsed_date + timedelta(days=1))
-
-        message = u'%s scheduled for %s' % (unicode(event),
-                                            datetime_to_string(parsed_date))
-        messages.success(self.request, message)
 
         return self.get_relative_root_url(thedate)
 

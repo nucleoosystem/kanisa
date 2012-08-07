@@ -74,6 +74,17 @@ class RegularEvent(SearchableModel):
                        start_time=self.start_time,
                        duration=self.duration)
 
+    class AlreadyScheduled(Exception):
+        pass
+
+    def schedule_once(self, date):
+        event_exists = ScheduledEvent.objects.filter(event=self,
+                                                     date=date)
+        if len(event_exists) != 0:
+            raise RegularEvent.AlreadyScheduled()
+
+        self.schedule(date, date + timedelta(days=1))
+
 
 class ScheduledEvent(SearchableModel):
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
