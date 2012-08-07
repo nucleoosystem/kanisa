@@ -174,8 +174,7 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
     def parse_date_to_datetime(self, thedate, event):
         try:
             event_date = datetime.strptime(thedate, '%Y%m%d').date()
-            event_time = event.start_time
-            return datetime.combine(event_date, event_time)
+            return datetime.combine(event_date, event.start_time)
         except ValueError:
             raise Http404
 
