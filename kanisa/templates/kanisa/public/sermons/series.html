@@ -1,0 +1,14 @@
+{% extends 'kanisa/base.html' %}
+
+{% load markup %}
+
+{% block content %}
+<div class="row">
+  <h1>{{ object.title }}</h1>
+
+  <div class="lead">
+  {{ object.details|markdown }}
+  </div>
+</div>
+
+{% endblock %}

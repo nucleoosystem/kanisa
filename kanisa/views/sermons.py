@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
+from django.views.generic.detail import DetailView
 from kanisa.forms.sermons import (SermonSeriesForm,
                                   SermonForm,
                                   SermonSpeakerForm)
@@ -132,3 +133,8 @@ class SermonSpeakerUpdateView(SermonBaseView,
     form_class = SermonSpeakerForm
     model = SermonSpeaker
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+
+
+class SermonSeriesView(DetailView):
+    model = SermonSeries
+    template_name = 'kanisa/public/sermons/series.html'

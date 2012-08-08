@@ -9,6 +9,8 @@ urlpatterns = patterns('',
                            include('kanisa.urls.public.banners')),
                        url(r'^manage/',
                            include('kanisa.urls.management')),
+                       url(r'^sermons/',
+                           include('kanisa.urls.public.sermons')),
                        url(r'^xhr/',
                            include('kanisa.urls.xhr')),
                        )

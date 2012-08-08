@@ -18,6 +18,10 @@
     <i class="icon-edit"></i>
     Edit this series
   </a>
+  <a class="btn" href="{% url 'kanisa_public_sermon_series' sermonseries.slug %}">
+    <i class="icon-eye-open"></i>
+    View on site
+  </a>
 
   {% if object.active %}
   <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">
