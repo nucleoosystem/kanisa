@@ -35,21 +35,23 @@ class XHRBaseView(View):
                 return HttpResponseForbidden("You do not have permission "
                                              "to view this page.")
 
-    def check_required_arguments(self, provided):
+    def check_required_arguments(self):
         for arg in self.required_arguments:
-            if arg not in provided:
+            if arg not in self.arguments:
                 raise MissingArgument(arg)
 
 
 class XHRBasePostView(XHRBaseView):
     def post(self, request, *args, **kwargs):
+        self.arguments = request.POST
+
         response = self.check_permissions(request)
 
         if response:
             return response
 
         try:
-            self.check_required_arguments(request.POST)
+            self.check_required_arguments()
         except MissingArgument, e:
             message = "Required argument '%s' not found." % e.message
             return HttpResponseBadRequest(message)
@@ -75,16 +77,16 @@ class AssignPermissionView(XHRBasePostView):
     permission = 'kanisa.manage_users'
     required_arguments = ['permission', 'user', 'assigned', ]
 
-    def get_user(self, request):
-        user_pk = request.POST['user']
+    def get_user(self):
+        user_pk = self.arguments['user']
 
         try:
             return User.objects.get(pk=user_pk)
         except (User.DoesNotExist, ValueError):
             raise BadArgument("No user found with ID %s." % user_pk)
 
-    def get_permission(self, request):
-        input_perm = request.POST['permission']
+    def get_permission(self):
+        input_perm = self.arguments['permission']
         try:
             app, perm = input_perm.split('.')
         except ValueError:
@@ -96,9 +98,9 @@ class AssignPermissionView(XHRBasePostView):
             raise BadArgument("Permission '%s' not found." % input_perm)
 
     def handle_post(self, request, *args, **kwargs):
-        assigned = request.POST['assigned'] == 'true'
-        user = self.get_user(request)
-        permission = self.get_permission(request)
+        assigned = self.arguments['assigned'] == 'true'
+        user = self.get_user()
+        permission = self.get_permission()
 
         if assigned:
             user.user_permissions.add(permission)
@@ -117,16 +119,16 @@ class CreatePageView(XHRBasePostView):
     permission = 'kanisa.manage_pages'
     required_arguments = ['title', 'parent', ]
 
-    def get_title(self, request):
-        title = request.POST['title']
+    def get_title(self):
+        title = self.arguments['title']
 
         if not title:
             raise BadArgument("Title must not be empty.")
 
         return title
 
-    def get_parent(self, request):
-        parent = request.POST['parent']
+    def get_parent(self):
+        parent = self.arguments['parent']
 
         if not parent:
             return None
@@ -138,8 +140,8 @@ class CreatePageView(XHRBasePostView):
                               % parent)
 
     def handle_post(self, request, *args, **kwargs):
-        title = self.get_title(request)
-        parent = self.get_parent(request)
+        title = self.get_title()
+        parent = self.get_parent()
 
         Page.objects.create(title=title,
                             parent=parent,
@@ -176,16 +178,16 @@ class MarkSermonSeriesCompleteView(XHRBasePostView):
     required_arguments = ['series', ]
     permission = 'kanisa.manage_sermons'
 
-    def get_series(self, request):
+    def get_series(self):
         try:
-            series_pk = int(request.POST['series'])
+            series_pk = int(self.arguments['series'])
             return SermonSeries.objects.get(pk=series_pk)
         except (SermonSeries.DoesNotExist, ValueError):
             raise BadArgument("No sermon series found with ID '%s'."
-                              % request.POST['series'])
+                              % self.arguments['series'])
 
     def handle_post(self, request, *args, **kwargs):
-        series = self.get_series(request)
+        series = self.get_series()
         series.active = False
         series.save()
         return HttpResponse("Series marked complete.")
@@ -195,25 +197,25 @@ class ScheduleRegularEventView(XHRBasePostView):
     required_arguments = ['event', 'date', ]
     permission = 'kanisa.manage_diary'
 
-    def get_date(self, request):
+    def get_date(self):
         try:
-            event_date = datetime.strptime(request.POST['date'], '%Y%m%d')
+            event_date = datetime.strptime(self.arguments['date'], '%Y%m%d')
             return event_date
         except ValueError:
-            given = request.POST['date']
+            given = self.arguments['date']
             raise BadArgument("'%s' is not a valid date." % given)
 
-    def get_event(self, request):
+    def get_event(self):
         try:
-            event_pk = int(request.POST['event'])
+            event_pk = int(self.arguments['event'])
             return RegularEvent.objects.get(pk=event_pk)
         except (RegularEvent.DoesNotExist, ValueError):
             raise BadArgument("No event found with ID '%s'."
-                              % request.POST['event'])
+                              % self.arguments['event'])
 
     def handle_post(self, request, *args, **kwargs):
-        event_date = self.get_date(request)
-        event = self.get_event(request)
+        event_date = self.get_date()
+        event = self.get_event()
 
         try:
             event.schedule_once(event_date)
