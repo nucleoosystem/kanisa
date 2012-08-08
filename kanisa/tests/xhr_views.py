@@ -45,8 +45,6 @@ class XHRBaseTestCase(KanisaViewTestCase):
 
         resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        '%s.' % self.permission_text))
 
 
 class XHRBiblePassageViewTest(XHRBaseTestCase):
@@ -56,7 +54,8 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
     def test_must_provide_passage(self):
         resp = self.fetch({'foo': 'bar'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Passage not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'passage' not found.")
 
     def test_invalid_passage(self):
         resp = self.fetch({'passage': 'Foobar'})
@@ -281,11 +280,13 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
 
         resp = self.fetch({'date': 'foobar'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, "Event ID not found.")
+        self.assertEqual(resp.content,
+                         "Required argument 'event' not found.")
 
         resp = self.fetch({'event': 'foobar'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, "Event date not found.")
+        self.assertEqual(resp.content,
+                         "Required argument 'date' not found.")
 
         self.client.logout()
 

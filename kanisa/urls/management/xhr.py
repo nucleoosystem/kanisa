@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from kanisa.views.xhr import ScheduleRegularEventView
 
 urlpatterns = patterns('',
                        url(r'^permissions/$',
@@ -18,7 +19,7 @@ urlpatterns = patterns('',
                            {},
                            'kanisa_manage_xhr_sermon_series_complete'),
                        url(r'^diary/schedule/update/$',
-                           'kanisa.views.xhr.schedule_regular_event',
+                           ScheduleRegularEventView.as_view(),
                            {},
                            'kanisa_manage_xhr_diary_schedule_regular'),
                        url(r'^diary/schedule/fetch/(?P<date>\d+)/$',

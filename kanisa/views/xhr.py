@@ -14,20 +14,41 @@ from kanisa.models.bible.bible import to_passage, InvalidPassage
 from kanisa.utils.diary import get_schedule
 
 
+class MissingArgument(Exception):
+    pass
+
+
 class XHRBasePostView(View):
+    required_arguments = []
+
+    def check_required_arguments(self, request):
+        for arg in self.required_arguments:
+            if arg not in request.POST:
+                raise MissingArgument(arg)
+
     def post(self, request, *args, **kwargs):
         if not request.is_ajax():
             return HttpResponseForbidden("This page is not directly "
                                          "accessible.")
 
+        if hasattr(self, 'permission'):
+            if not request.user.has_perm(self.permission):
+                return HttpResponseForbidden("You do not have permission "
+                                             "to view this page.")
+
+        try:
+            self.check_required_arguments(request)
+        except MissingArgument, e:
+            message = "Required argument '%s' not found." % e.message
+            return HttpResponseBadRequest(message)
+
         return self.handle_post(request, *args, **kwargs)
 
 
 class CheckBiblePassageView(XHRBasePostView):
-    def handle_post(self, request, *args, **kwargs):
-        if not 'passage' in request.POST:
-            return HttpResponseBadRequest("Passage not found.")
+    required_arguments = ['passage', ]
 
+    def handle_post(self, request, *args, **kwargs):
         try:
             passage = to_passage(request.POST['passage'])
             return HttpResponse(unicode(passage))
@@ -172,37 +193,26 @@ def mark_sermon_series_complete(request):
                                       % request.POST['series'])
 
 
-@require_POST
-def schedule_regular_event(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class ScheduleRegularEventView(XHRBasePostView):
+    required_arguments = ['event', 'date', ]
+    permission = 'kanisa.manage_diary'
 
-    if not request.user.has_perm('kanisa.manage_diary'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "the diary."))
-
-    if not 'event' in request.POST:
-        return HttpResponseBadRequest("Event ID not found.")
-
-    if not 'date' in request.POST:
-        return HttpResponseBadRequest("Event date not found.")
-
-    try:
-        event_date = datetime.strptime(request.POST['date'], '%Y%m%d')
-    except ValueError:
-        given = request.POST['date']
-        return HttpResponseBadRequest("'%s' is not a valid date." % given)
-
-    try:
-        event_pk = int(request.POST['event'])
-        event = RegularEvent.objects.get(pk=event_pk)
-        event.schedule_once(event_date)
-        return HttpResponse("Event scheduled.")
-    except (RegularEvent.DoesNotExist, ValueError):
-        return HttpResponseBadRequest("No event found with ID '%s'."
-                                      % request.POST['event'])
-    except event.AlreadyScheduled:
-        return HttpResponseBadRequest("That event is already scheduled.")
+    def handle_post(self, request, *args, **kwargs):
+        try:
+            event_date = datetime.strptime(request.POST['date'], '%Y%m%d')
+        except ValueError:
+            given = request.POST['date']
+            return HttpResponseBadRequest("'%s' is not a valid date." % given)
+        try:
+            event_pk = int(request.POST['event'])
+            event = RegularEvent.objects.get(pk=event_pk)
+            event.schedule_once(event_date)
+            return HttpResponse("Event scheduled.")
+        except (RegularEvent.DoesNotExist, ValueError):
+            return HttpResponseBadRequest("No event found with ID '%s'."
+                                          % request.POST['event'])
+        except event.AlreadyScheduled:
+            return HttpResponseBadRequest("That event is already scheduled.")
 
 
 @require_GET
