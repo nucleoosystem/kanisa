@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from kanisa.models import SermonSeries
-from kanisa.views.xhr import XHRBasePostView, BadArgument
+from kanisa.views.xhr.base import XHRBasePostView, BadArgument
 
 
 class MarkSermonSeriesCompleteView(XHRBasePostView):

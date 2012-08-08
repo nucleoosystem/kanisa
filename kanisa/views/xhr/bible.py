@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from kanisa.models.bible.bible import to_passage, InvalidPassage
-from kanisa.views.xhr import XHRBasePostView
+from kanisa.views.xhr.base import XHRBasePostView
 
 
 class CheckBiblePassageView(XHRBasePostView):

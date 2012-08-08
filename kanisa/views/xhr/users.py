@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Permission
 from django.http import HttpResponse
-from kanisa.views.xhr import XHRBasePostView, BadArgument
+from kanisa.views.xhr.base import XHRBasePostView, BadArgument
 
 
 class AssignPermissionView(XHRBasePostView):

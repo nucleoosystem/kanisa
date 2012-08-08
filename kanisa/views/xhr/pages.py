@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 
 from kanisa.models import Page
-from kanisa.views.xhr import XHRBasePostView, XHRBaseGetView, BadArgument
+from kanisa.views.xhr.base import XHRBasePostView, XHRBaseGetView, BadArgument
 
 
 class CreatePageView(XHRBasePostView):

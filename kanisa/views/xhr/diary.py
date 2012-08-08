@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from kanisa.models import RegularEvent
 from kanisa.utils.diary import get_schedule
-from kanisa.views.xhr import XHRBasePostView, XHRBaseGetView, BadArgument
+from kanisa.views.xhr.base import XHRBasePostView, XHRBaseGetView, BadArgument
 
 
 class ScheduleRegularEventView(XHRBasePostView):
