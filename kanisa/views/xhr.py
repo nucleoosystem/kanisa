@@ -207,7 +207,12 @@ def get_events(request, date):
         return HttpResponseForbidden(("You do not have permission to manage "
                                       "the diary."))
 
-    thedate = datetime.strptime(date, '%Y%m%d').date()
+    try:
+        thedate = datetime.strptime(date, '%Y%m%d').date()
+    except ValueError:
+        return HttpResponseBadRequest("Invalid date '%s' provided."
+                                      % date)
+
     schedule = get_schedule(thedate)
 
     tmpl = 'kanisa/management/diary/_diary_page.html'

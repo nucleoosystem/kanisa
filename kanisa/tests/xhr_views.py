@@ -1,15 +1,18 @@
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from kanisa.tests.utils import KanisaViewTestCase
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
-    def fetch(self, params={}):
+    def fetch_url(self, url, params={}):
         if self.method == 'get':
-            return self.client.get(self.url, params,
+            return self.client.get(url, params,
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         if self.method == 'post':
-            return self.client.post(self.url, params,
+            return self.client.post(url, params,
                                     HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+    def fetch(self, params={}):
+        return self.fetch_url(self.url, params)
 
     def test_xhr_only(self):
         if self.method == 'get':
@@ -277,3 +280,19 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
                        args=['20120101', ])
     method = 'get'
     permission_text = 'manage the diary'
+
+    def test_success(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch()
+        self.assertEqual(resp.status_code, 200)
+        self.client.logout()
+
+    def test_baddate(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch_url(reverse('kanisa_manage_xhr_diary_get_schedule',
+                                      args=[2012, ]))
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, "Invalid date '2012' provided.")
+        self.client.logout()
