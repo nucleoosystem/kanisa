@@ -14,16 +14,17 @@ from kanisa.models.bible.bible import to_passage, InvalidPassage
 from kanisa.utils.diary import get_schedule
 
 
-class XHRBaseView(View):
-    pass
-
-
-class CheckBiblePassageView(XHRBaseView):
+class XHRBasePostView(View):
     def post(self, request, *args, **kwargs):
         if not request.is_ajax():
             return HttpResponseForbidden("This page is not directly "
                                          "accessible.")
 
+        return self.handle_post(request, *args, **kwargs)
+
+
+class CheckBiblePassageView(XHRBasePostView):
+    def handle_post(self, request, *args, **kwargs):
         if not 'passage' in request.POST:
             return HttpResponseBadRequest("Passage not found.")
 
