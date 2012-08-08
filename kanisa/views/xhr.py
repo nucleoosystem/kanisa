@@ -57,7 +57,7 @@ class XHRBasePostView(XHRBaseView):
             return HttpResponseBadRequest(message)
 
         try:
-            return self.handle_post(request, *args, **kwargs)
+            return self.render_to_response(request, *args, **kwargs)
         except BadArgument, e:
             return HttpResponseBadRequest(e.message)
 
@@ -65,7 +65,7 @@ class XHRBasePostView(XHRBaseView):
 class CheckBiblePassageView(XHRBasePostView):
     required_arguments = ['passage', ]
 
-    def handle_post(self, request, *args, **kwargs):
+    def render_to_response(self, request, *args, **kwargs):
         try:
             passage = to_passage(request.POST['passage'])
             return HttpResponse(unicode(passage))
@@ -97,7 +97,7 @@ class AssignPermissionView(XHRBasePostView):
         except Permission.DoesNotExist:
             raise BadArgument("Permission '%s' not found." % input_perm)
 
-    def handle_post(self, request, *args, **kwargs):
+    def render_to_response(self, request, *args, **kwargs):
         assigned = self.arguments['assigned'] == 'true'
         user = self.get_user()
         permission = self.get_permission()
@@ -139,7 +139,7 @@ class CreatePageView(XHRBasePostView):
             raise BadArgument("Page with ID '%s' not found."
                               % parent)
 
-    def handle_post(self, request, *args, **kwargs):
+    def render_to_response(self, request, *args, **kwargs):
         title = self.get_title()
         parent = self.get_parent()
 
@@ -186,7 +186,7 @@ class MarkSermonSeriesCompleteView(XHRBasePostView):
             raise BadArgument("No sermon series found with ID '%s'."
                               % self.arguments['series'])
 
-    def handle_post(self, request, *args, **kwargs):
+    def render_to_response(self, request, *args, **kwargs):
         series = self.get_series()
         series.active = False
         series.save()
@@ -213,7 +213,7 @@ class ScheduleRegularEventView(XHRBasePostView):
             raise BadArgument("No event found with ID '%s'."
                               % self.arguments['event'])
 
-    def handle_post(self, request, *args, **kwargs):
+    def render_to_response(self, request, *args, **kwargs):
         event_date = self.get_date()
         event = self.get_event()
 
