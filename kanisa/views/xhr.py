@@ -5,7 +5,6 @@ from django.http import (HttpResponse, HttpResponseBadRequest,
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.views.decorators.http import require_GET
 from django.views.generic import View
 import json
 
@@ -61,6 +60,13 @@ class XHRBaseView(View):
 class XHRBasePostView(XHRBaseView):
     def post(self, request, *args, **kwargs):
         self.arguments = request.POST
+
+        return self.handle(request, *args, **kwargs)
+
+
+class XHRBaseGetView(XHRBaseView):
+    def get(self, request, *args, **kwargs):
+        self.arguments = request.GET
 
         return self.handle(request, *args, **kwargs)
 
@@ -153,28 +159,24 @@ class CreatePageView(XHRBasePostView):
         return HttpResponse("Page created.")
 
 
-@require_GET
-def list_pages(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class ListPagesView(XHRBaseGetView):
+    permission = 'kanisa.manage_pages'
 
-    if not request.user.has_perm('kanisa.manage_pages'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "pages."))
+    def render_to_response(self, request, *args, **kwargs):
+        pages = Page.objects.all()
+        tmpl = 'kanisa/management/pages/_page_table.html'
+        page_table = render_to_string(tmpl,
+                                      {'page_list': pages},
+                                      context_instance=RequestContext(request))
 
-    pages = Page.objects.all()
-    page_table = render_to_string('kanisa/management/pages/_page_table.html',
-                                  {'page_list': pages},
-                                  context_instance=RequestContext(request))
+        tmpl = 'kanisa/management/pages/_parent_select_options.html'
+        options = render_to_string(tmpl,
+                                   {'page_list': pages},
+                                   context_instance=RequestContext(request))
 
-    tmpl = 'kanisa/management/pages/_parent_select_options.html'
-    options = render_to_string(tmpl,
-                               {'page_list': pages},
-                               context_instance=RequestContext(request))
-
-    response = {'page_table': page_table,
-                'options': options}
-    return HttpResponse(json.dumps(response))
+        response = {'page_table': page_table,
+                    'options': options}
+        return HttpResponse(json.dumps(response))
 
 
 class MarkSermonSeriesCompleteView(XHRBasePostView):
@@ -227,24 +229,22 @@ class ScheduleRegularEventView(XHRBasePostView):
             return HttpResponseBadRequest("That event is already scheduled.")
 
 
-@require_GET
-def get_events(request, date):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class DiaryGetSchedule(XHRBaseGetView):
+    permission = 'kanisa.manage_diary'
 
-    if not request.user.has_perm('kanisa.manage_diary'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "the diary."))
+    def get_date(self, request, *args, **kwargs):
+        date = kwargs['date']
+        try:
+            thedate = datetime.strptime(date, '%Y%m%d').date()
+        except ValueError:
+            raise BadArgument("Invalid date '%s' provided."
+                              % date)
 
-    try:
-        thedate = datetime.strptime(date, '%Y%m%d').date()
-    except ValueError:
-        return HttpResponseBadRequest("Invalid date '%s' provided."
-                                      % date)
+    def render_to_response(self, request, *args, **kwargs):
+        thedate = self.get_date(request, *args, **kwargs)
+        schedule = get_schedule(thedate)
 
-    schedule = get_schedule(thedate)
-
-    tmpl = 'kanisa/management/diary/_diary_page.html'
-    return render_to_response(tmpl,
-                              {'calendar': schedule.calendar_entries},
-                              context_instance=RequestContext(request))
+        tmpl = 'kanisa/management/diary/_diary_page.html'
+        return render_to_response(tmpl,
+                                  {'calendar': schedule.calendar_entries},
+                                  context_instance=RequestContext(request))

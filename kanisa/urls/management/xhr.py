@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, url
 from kanisa.views.xhr import (AssignPermissionView,
                               ScheduleRegularEventView,
+                              DiaryGetSchedule,
                               CreatePageView,
+                              ListPagesView,
                               MarkSermonSeriesCompleteView)
 
 urlpatterns = patterns('',
@@ -14,7 +16,7 @@ urlpatterns = patterns('',
                            {},
                            'kanisa_manage_xhr_create_page'),
                        url(r'^pages/list/$',
-                           'kanisa.views.xhr.list_pages',
+                           ListPagesView.as_view(),
                            {},
                            'kanisa_manage_xhr_list_pages'),
                        url(r'^sermons/markcomplete/$',
@@ -26,7 +28,7 @@ urlpatterns = patterns('',
                            {},
                            'kanisa_manage_xhr_diary_schedule_regular'),
                        url(r'^diary/schedule/fetch/(?P<date>\d+)/$',
-                           'kanisa.views.xhr.get_events',
+                           DiaryGetSchedule.as_view(),
                            {},
                            'kanisa_manage_xhr_diary_get_schedule'),
                        )
