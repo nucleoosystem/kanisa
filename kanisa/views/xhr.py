@@ -29,7 +29,7 @@ class XHRBaseView(View):
             return HttpResponseForbidden("This page is not directly "
                                          "accessible.")
 
-        if hasattr(self, 'permission'):
+        if self.permission:
             if not request.user.has_perm(self.permission):
                 return HttpResponseForbidden("You do not have permission "
                                              "to view this page.")
@@ -73,6 +73,7 @@ class XHRBaseGetView(XHRBaseView):
 
 class CheckBiblePassageView(XHRBasePostView):
     required_arguments = ['passage', ]
+    permission = None
 
     def render_to_response(self, request, *args, **kwargs):
         try:
