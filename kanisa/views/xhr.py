@@ -52,7 +52,7 @@ class XHRBaseView(View):
             return HttpResponseBadRequest(message)
 
         try:
-            return self.render_to_response(request, *args, **kwargs)
+            return self.render(request, *args, **kwargs)
         except BadArgument, e:
             return HttpResponseBadRequest(e.message)
 
@@ -75,7 +75,7 @@ class CheckBiblePassageView(XHRBasePostView):
     required_arguments = ['passage', ]
     permission = None
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         try:
             passage = to_passage(request.POST['passage'])
             return HttpResponse(unicode(passage))
@@ -107,7 +107,7 @@ class AssignPermissionView(XHRBasePostView):
         except Permission.DoesNotExist:
             raise BadArgument("Permission '%s' not found." % input_perm)
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         assigned = self.arguments['assigned'] == 'true'
         user = self.get_user()
         permission = self.get_permission()
@@ -149,7 +149,7 @@ class CreatePageView(XHRBasePostView):
             raise BadArgument("Page with ID '%s' not found."
                               % parent)
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         title = self.get_title()
         parent = self.get_parent()
 
@@ -163,7 +163,7 @@ class CreatePageView(XHRBasePostView):
 class ListPagesView(XHRBaseGetView):
     permission = 'kanisa.manage_pages'
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         pages = Page.objects.all()
         tmpl = 'kanisa/management/pages/_page_table.html'
         page_table = render_to_string(tmpl,
@@ -192,7 +192,7 @@ class MarkSermonSeriesCompleteView(XHRBasePostView):
             raise BadArgument("No sermon series found with ID '%s'."
                               % self.arguments['series'])
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         series = self.get_series()
         series.active = False
         series.save()
@@ -219,7 +219,7 @@ class ScheduleRegularEventView(XHRBasePostView):
             raise BadArgument("No event found with ID '%s'."
                               % self.arguments['event'])
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         event_date = self.get_date()
         event = self.get_event()
 
@@ -241,7 +241,7 @@ class DiaryGetSchedule(XHRBaseGetView):
             raise BadArgument("Invalid date '%s' provided."
                               % date)
 
-    def render_to_response(self, request, *args, **kwargs):
+    def render(self, request, *args, **kwargs):
         thedate = self.get_date(request, *args, **kwargs)
         schedule = get_schedule(thedate)
 
