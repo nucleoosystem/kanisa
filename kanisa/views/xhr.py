@@ -22,15 +22,10 @@ class BadArgument(Exception):
     pass
 
 
-class XHRBasePostView(View):
+class XHRBaseView(View):
     required_arguments = []
 
-    def check_required_arguments(self, request):
-        for arg in self.required_arguments:
-            if arg not in request.POST:
-                raise MissingArgument(arg)
-
-    def post(self, request, *args, **kwargs):
+    def check_permissions(self, request):
         if not request.is_ajax():
             return HttpResponseForbidden("This page is not directly "
                                          "accessible.")
@@ -40,8 +35,21 @@ class XHRBasePostView(View):
                 return HttpResponseForbidden("You do not have permission "
                                              "to view this page.")
 
+    def check_required_arguments(self, provided):
+        for arg in self.required_arguments:
+            if arg not in provided:
+                raise MissingArgument(arg)
+
+
+class XHRBasePostView(XHRBaseView):
+    def post(self, request, *args, **kwargs):
+        response = self.check_permissions(request)
+
+        if response:
+            return response
+
         try:
-            self.check_required_arguments(request)
+            self.check_required_arguments(request.POST)
         except MissingArgument, e:
             message = "Required argument '%s' not found." % e.message
             return HttpResponseBadRequest(message)
