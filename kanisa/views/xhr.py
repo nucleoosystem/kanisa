@@ -192,7 +192,7 @@ def schedule_regular_event(request):
         event.schedule_once(event_date)
         return HttpResponse("Event scheduled.")
     except (RegularEvent.DoesNotExist, ValueError):
-        return HttpResponseBadRequest("No event series found with ID '%s'."
+        return HttpResponseBadRequest("No event found with ID '%s'."
                                       % request.POST['event'])
     except event.AlreadyScheduled:
         return HttpResponseBadRequest("That event is already scheduled.")
