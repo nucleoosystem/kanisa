@@ -3,6 +3,14 @@ from kanisa.tests.utils import KanisaViewTestCase
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
+    def fetch(self, params={}):
+        if self.method == 'get':
+            return self.client.get(self.url, params,
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        if self.method == 'post':
+            return self.client.post(self.url, params,
+                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
     def test_xhr_only(self):
         if self.method == 'get':
             resp = self.client.get(self.url)
@@ -33,28 +41,24 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
     method = 'post'
 
     def test_must_provide_passage(self):
-        resp = self.client.post(self.url, {'foo': 'bar'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'foo': 'bar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Passage not found.')
 
     def test_invalid_passage(self):
-        resp = self.client.post(self.url, {'passage': 'Foobar'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'passage': 'Foobar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          '"Foobar" is not a valid Bible passage.')
 
     def test_valid_book_invalid_range(self):
-        resp = self.client.post(self.url, {'passage': 'Ps 151'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'passage': 'Ps 151'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'There are only 150 chapters in Psalms.')
 
     def test_valid_passage(self):
-        resp = self.client.post(self.url, {'passage': 'Matt 3v1-7'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'passage': 'Matt 3v1-7'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Matthew 3:1-7')
 
@@ -64,8 +68,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     method = 'post'
 
     def test_must_be_authenticated(self):
-        resp = self.client.post(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage users.'))
@@ -74,26 +77,20 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.client.login(username='fred', password='secret')
 
         # No permission
-        resp = self.client.post(self.url,
-                                {'user': '3',
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'user': '3',
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Permission ID not found.')
 
         # No user
-        resp = self.client.post(self.url,
-                                {'permission': 'foo',
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'foo',
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'User ID not found.')
 
         # No 'assigned'
-        resp = self.client.post(self.url,
-                                {'permission': 'foo',
-                                 'user': '3'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'foo',
+                           'user': '3'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Assigned status not found.')
 
@@ -102,20 +99,16 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     def test_input_parsing(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa.manage_users',
-                                 'user': 2,
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa.manage_users',
+                           'user': 2,
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can manage your users.')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa.manage_users',
-                                 'user': 2,
-                                 'assigned': 'foobar'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa.manage_users',
+                           'user': 2,
+                           'assigned': 'foobar'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can no longer manage your users.')
@@ -125,11 +118,9 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     def test_bad_user(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa.manage_users',
-                                 'user': 99,
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa.manage_users',
+                           'user': 99,
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'No user found with ID 99.')
 
@@ -138,28 +129,22 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     def test_bad_permission(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa',
-                                 'user': 2,
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa',
+                           'user': 2,
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Malformed permission: \'kanisa\'.')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa.foo.bar',
-                                 'user': 2,
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa.foo.bar',
+                           'user': 2,
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Malformed permission: \'kanisa.foo.bar\'.')
 
-        resp = self.client.post(self.url,
-                                {'permission': 'kanisa.raspberries',
-                                 'user': 2,
-                                 'assigned': 'true'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'permission': 'kanisa.raspberries',
+                           'user': 2,
+                           'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Permission \'kanisa.raspberries\' not found.')
@@ -174,8 +159,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     method = 'post'
 
     def test_must_be_authenticated(self):
-        resp = self.client.post(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage pages.'))
@@ -184,16 +168,12 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
         self.client.login(username='fred', password='secret')
 
         # No title
-        resp = self.client.post(self.url,
-                                {'parent': '3', },
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'parent': '3', })
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Title not found.')
 
         # No parent
-        resp = self.client.post(self.url,
-                                {'title': 'Test page', },
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'title': 'Test page', })
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Parent not found.')
         self.client.logout()
@@ -202,9 +182,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
         self.client.login(username='fred', password='secret')
 
         # Empty title
-        resp = self.client.post(self.url,
-                                {'title': '', 'parent': ''},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'title': '', 'parent': ''})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Title must not be empty.')
         self.client.logout()
@@ -212,9 +190,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     def test_nonexistent_parent(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'title': 'Test page', 'parent': '99'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'title': 'Test page', 'parent': '99'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Page with ID \'99\' not found.')
         self.client.logout()
@@ -222,9 +198,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     def test_empty_parent(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'title': 'Test page', 'parent': ''},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'title': 'Test page', 'parent': ''})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Page created.')
         self.client.logout()
@@ -232,9 +206,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     def test_good_parent(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url,
-                                {'title': 'Test page', 'parent': '1'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'title': 'Test page', 'parent': '1'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Page created.')
         self.client.logout()
@@ -247,8 +219,7 @@ class XHRListPagesViewTest(XHRBaseTestCase):
     method = 'get'
 
     def test_must_be_authenticated(self):
-        resp = self.client.get(self.url, {},
-                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage pages.'))
@@ -256,8 +227,7 @@ class XHRListPagesViewTest(XHRBaseTestCase):
     def test_success(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.get(self.url,
-                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 200)
         self.client.logout()
 
@@ -269,8 +239,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     method = 'post'
 
     def test_must_be_authenticated(self):
-        resp = self.client.post(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage sermons.'))
@@ -278,8 +247,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     def test_fails_without_required_parameters(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Series ID not found.')
         self.client.logout()
@@ -287,8 +255,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     def test_fails_with_non_numeric_series(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url, {'series': 'nonnumeric'},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'series': 'nonnumeric'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "No sermon series found with ID 'nonnumeric'.")
@@ -297,8 +264,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     def test_fails_with_non_existent_series(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url, {'series': 99},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'series': 99})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "No sermon series found with ID '99'.")
         self.client.logout()
@@ -306,8 +272,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     def test_success(self):
         self.client.login(username='fred', password='secret')
 
-        resp = self.client.post(self.url, {'series': 1},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch({'series': 1})
         self.assertEqual(resp.status_code, 200)
         self.client.logout()
 
@@ -317,8 +282,7 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
     method = 'post'
 
     def test_must_be_authenticated(self):
-        resp = self.client.post(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage the diary.'))
@@ -330,8 +294,7 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
     method = 'get'
 
     def test_must_be_authenticated(self):
-        resp = self.client.get(self.url, {},
-                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        resp = self.fetch()
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content, ('You do not have permission to '
                                         'manage the diary.'))
