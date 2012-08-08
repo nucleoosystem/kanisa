@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr import (ScheduleRegularEventView,
+from kanisa.views.xhr import (AssignPermissionView,
+                              ScheduleRegularEventView,
                               CreatePageView,
                               MarkSermonSeriesCompleteView)
 
 urlpatterns = patterns('',
                        url(r'^permissions/$',
-                           'kanisa.views.xhr.assign_permission',
+                           AssignPermissionView.as_view(),
                            {},
                            'kanisa_manage_xhr_assign_permission'),
                        url(r'^pages/create/$',

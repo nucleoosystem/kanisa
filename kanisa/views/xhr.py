@@ -63,56 +63,46 @@ class CheckBiblePassageView(XHRBasePostView):
             return HttpResponseBadRequest(unicode(e))
 
 
-@require_POST
-def assign_permission(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class AssignPermissionView(XHRBasePostView):
+    permission = 'kanisa.manage_users'
+    required_arguments = ['permission', 'user', 'assigned', ]
 
-    if not request.user.has_perm('kanisa.manage_users'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "users."))
+    def get_user(self, request):
+        user_pk = request.POST['user']
 
-    if not 'permission' in request.POST:
-        return HttpResponseBadRequest("Permission ID not found.")
+        try:
+            return User.objects.get(pk=user_pk)
+        except (User.DoesNotExist, ValueError):
+            raise BadArgument("No user found with ID %s." % user_pk)
 
-    if not 'user' in request.POST:
-        return HttpResponseBadRequest("User ID not found.")
+    def get_permission(self, request):
+        input_perm = request.POST['permission']
+        try:
+            app, perm = input_perm.split('.')
+        except ValueError:
+            raise BadArgument("Malformed permission: '%s'." % input_perm)
 
-    if not 'assigned' in request.POST:
-        return HttpResponseBadRequest("Assigned status not found.")
+        try:
+            return Permission.objects.get(codename=perm)
+        except Permission.DoesNotExist:
+            raise BadArgument("Permission '%s' not found." % input_perm)
 
-    input_perm = request.POST['permission']
-    user_pk = request.POST['user']
-    assigned = request.POST['assigned'] == 'true'
+    def handle_post(self, request, *args, **kwargs):
+        assigned = request.POST['assigned'] == 'true'
+        user = self.get_user(request)
+        permission = self.get_permission(request)
 
-    try:
-        user = User.objects.get(pk=user_pk)
-    except (User.DoesNotExist, ValueError):
-        return HttpResponseBadRequest("No user found with ID %s." % user_pk)
+        if assigned:
+            user.user_permissions.add(permission)
+            msg = '%s %s.' % (user, permission.name.lower())
+        else:
+            what = permission.name.lower().replace("can ", "can no longer ")
+            user.user_permissions.remove(permission)
+            msg = '%s %s.' % (user, what)
 
-    try:
-        app, perm = input_perm.split('.')
-    except ValueError:
-        msg = "Malformed permission: '%s'." % input_perm
-        return HttpResponseBadRequest(msg)
+        user.save()
 
-    try:
-        p = Permission.objects.get(codename=perm)
-    except Permission.DoesNotExist:
-        msg = "Permission '%s' not found." % input_perm
-        return HttpResponseBadRequest(msg)
-
-    if assigned:
-        user.user_permissions.add(p)
-        msg = '%s %s.' % (user, p.name.lower())
-    else:
-        what = p.name.lower().replace("can ", "can no longer ")
-        user.user_permissions.remove(p)
-        msg = '%s %s.' % (user, what)
-
-    user.save()
-
-    return HttpResponse(msg)
+        return HttpResponse(msg)
 
 
 class CreatePageView(XHRBasePostView):

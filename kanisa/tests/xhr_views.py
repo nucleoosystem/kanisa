@@ -87,19 +87,22 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         resp = self.fetch({'user': '3',
                            'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Permission ID not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'permission' not found.")
 
         # No user
         resp = self.fetch({'permission': 'foo',
                            'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'User ID not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'user' not found.")
 
         # No 'assigned'
         resp = self.fetch({'permission': 'foo',
                            'user': '3'})
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Assigned status not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'assigned' not found.")
 
         self.client.logout()
 
