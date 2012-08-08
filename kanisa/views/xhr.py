@@ -115,42 +115,39 @@ def assign_permission(request):
     return HttpResponse(msg)
 
 
-@require_POST
-def create_page(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class CreatePageView(XHRBasePostView):
+    permission = 'kanisa.manage_pages'
+    required_arguments = ['title', 'parent', ]
 
-    if not request.user.has_perm('kanisa.manage_pages'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "pages."))
+    def get_title(self, request):
+        title = request.POST['title']
 
-    if not 'title' in request.POST:
-        return HttpResponseBadRequest("Title not found.")
+        if not title:
+            raise BadArgument("Title must not be empty.")
 
-    if not 'parent' in request.POST:
-        return HttpResponseBadRequest("Parent not found.")
+        return title
 
-    title = request.POST['title']
+    def get_parent(self, request):
+        parent = request.POST['parent']
 
-    if not title:
-        return HttpResponseBadRequest("Title must not be empty.")
+        if not parent:
+            return None
 
-    parent = request.POST['parent']
-
-    if not parent:
-        parent = None
-    else:
         try:
-            parent = Page.objects.get(pk=parent)
+            return Page.objects.get(pk=parent)
         except (Page.DoesNotExist, ValueError):
-            return HttpResponseBadRequest("Page with ID '%s' not found."
-                                          % parent)
+            raise BadArgument("Page with ID '%s' not found."
+                              % parent)
 
-    Page.objects.create(title=request.POST['title'],
-                        parent=parent,
-                        draft=True)
+    def handle_post(self, request, *args, **kwargs):
+        title = self.get_title(request)
+        parent = self.get_parent(request)
 
-    return HttpResponse("Page created.")
+        Page.objects.create(title=title,
+                            parent=parent,
+                            draft=True)
+
+        return HttpResponse("Page created.")
 
 
 @require_GET

@@ -172,12 +172,14 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
         # No title
         resp = self.fetch({'parent': '3', })
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Title not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'title' not found.")
 
         # No parent
         resp = self.fetch({'title': 'Test page', })
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Parent not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'parent' not found.")
         self.client.logout()
 
     def test_empty_title(self):
