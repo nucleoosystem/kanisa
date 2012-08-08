@@ -18,6 +18,10 @@ class MissingArgument(Exception):
     pass
 
 
+class BadArgument(Exception):
+    pass
+
+
 class XHRBasePostView(View):
     required_arguments = []
 
@@ -42,7 +46,10 @@ class XHRBasePostView(View):
             message = "Required argument '%s' not found." % e.message
             return HttpResponseBadRequest(message)
 
-        return self.handle_post(request, *args, **kwargs)
+        try:
+            return self.handle_post(request, *args, **kwargs)
+        except BadArgument, e:
+            return HttpResponseBadRequest(e.message)
 
 
 class CheckBiblePassageView(XHRBasePostView):
@@ -197,20 +204,29 @@ class ScheduleRegularEventView(XHRBasePostView):
     required_arguments = ['event', 'date', ]
     permission = 'kanisa.manage_diary'
 
-    def handle_post(self, request, *args, **kwargs):
+    def get_date(self, request):
         try:
             event_date = datetime.strptime(request.POST['date'], '%Y%m%d')
+            return event_date
         except ValueError:
             given = request.POST['date']
-            return HttpResponseBadRequest("'%s' is not a valid date." % given)
+            raise BadArgument("'%s' is not a valid date." % given)
+
+    def get_event(self, request):
         try:
             event_pk = int(request.POST['event'])
-            event = RegularEvent.objects.get(pk=event_pk)
+            return RegularEvent.objects.get(pk=event_pk)
+        except (RegularEvent.DoesNotExist, ValueError):
+            raise BadArgument("No event found with ID '%s'."
+                              % request.POST['event'])
+
+    def handle_post(self, request, *args, **kwargs):
+        event_date = self.get_date(request)
+        event = self.get_event(request)
+
+        try:
             event.schedule_once(event_date)
             return HttpResponse("Event scheduled.")
-        except (RegularEvent.DoesNotExist, ValueError):
-            return HttpResponseBadRequest("No event found with ID '%s'."
-                                          % request.POST['event'])
         except event.AlreadyScheduled:
             return HttpResponseBadRequest("That event is already scheduled.")
 
