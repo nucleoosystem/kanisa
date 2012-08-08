@@ -26,4 +26,6 @@ from .xhr_views import (XHRBiblePassageViewTest,
                         XHRUserPermissionViewTest,
                         XHRCreatePageViewTest,
                         XHRListPagesViewTest,
-                        XHRMarkSermonSeriesComplete)
+                        XHRMarkSermonSeriesComplete,
+                        XHRScheduleRegularEventViewTest,
+                        XHRFetchScheduleViewTest)

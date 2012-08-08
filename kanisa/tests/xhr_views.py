@@ -310,3 +310,28 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(resp.status_code, 200)
         self.client.logout()
+
+
+class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_manage_xhr_diary_schedule_regular')
+    method = 'post'
+
+    def test_must_be_authenticated(self):
+        resp = self.client.post(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        'manage the diary.'))
+
+
+class XHRFetchScheduleViewTest(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_manage_xhr_diary_get_schedule',
+                       args=['20120101', ])
+    method = 'get'
+
+    def test_must_be_authenticated(self):
+        resp = self.client.get(self.url, {},
+                                HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        'manage the diary.'))
