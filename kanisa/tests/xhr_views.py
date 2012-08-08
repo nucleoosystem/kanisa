@@ -241,7 +241,8 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
 
         resp = self.fetch()
         self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Series ID not found.')
+        self.assertEqual(resp.content,
+                         "Required argument 'series' not found.")
         self.client.logout()
 
     def test_fails_with_non_numeric_series(self):

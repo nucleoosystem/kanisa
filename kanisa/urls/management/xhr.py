@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr import ScheduleRegularEventView
+from kanisa.views.xhr import (ScheduleRegularEventView,
+                              MarkSermonSeriesCompleteView)
 
 urlpatterns = patterns('',
                        url(r'^permissions/$',
@@ -15,7 +16,7 @@ urlpatterns = patterns('',
                            {},
                            'kanisa_manage_xhr_list_pages'),
                        url(r'^sermons/markcomplete/$',
-                           'kanisa.views.xhr.mark_sermon_series_complete',
+                           MarkSermonSeriesCompleteView.as_view(),
                            {},
                            'kanisa_manage_xhr_sermon_series_complete'),
                        url(r'^diary/schedule/update/$',

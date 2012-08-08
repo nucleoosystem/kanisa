@@ -177,27 +177,23 @@ def list_pages(request):
     return HttpResponse(json.dumps(response))
 
 
-@require_POST
-def mark_sermon_series_complete(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class MarkSermonSeriesCompleteView(XHRBasePostView):
+    required_arguments = ['series', ]
+    permission = 'kanisa.manage_sermons'
 
-    if not request.user.has_perm('kanisa.manage_sermons'):
-        return HttpResponseForbidden(("You do not have permission to manage "
-                                      "sermons."))
+    def get_series(self, request):
+        try:
+            series_pk = int(request.POST['series'])
+            return SermonSeries.objects.get(pk=series_pk)
+        except (SermonSeries.DoesNotExist, ValueError):
+            raise BadArgument("No sermon series found with ID '%s'."
+                              % request.POST['series'])
 
-    if not 'series' in request.POST:
-        return HttpResponseBadRequest("Series ID not found.")
-
-    try:
-        series_pk = int(request.POST['series'])
-        series = SermonSeries.objects.get(pk=series_pk)
+    def handle_post(self, request, *args, **kwargs):
+        series = self.get_series(request)
         series.active = False
         series.save()
         return HttpResponse("Series marked complete.")
-    except (SermonSeries.DoesNotExist, ValueError):
-        return HttpResponseBadRequest("No sermon series found with ID '%s'."
-                                      % request.POST['series'])
 
 
 class ScheduleRegularEventView(XHRBasePostView):
