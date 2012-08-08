@@ -236,7 +236,7 @@ class DiaryGetSchedule(XHRBaseGetView):
     def get_date(self, request, *args, **kwargs):
         date = kwargs['date']
         try:
-            thedate = datetime.strptime(date, '%Y%m%d').date()
+            return datetime.strptime(date, '%Y%m%d').date()
         except ValueError:
             raise BadArgument("Invalid date '%s' provided."
                               % date)
