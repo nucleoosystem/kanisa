@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr import CheckBiblePassageView
+from kanisa.views.xhr.bible import CheckBiblePassageView
 
 urlpatterns = patterns('',
                        url(r'^passage/$',

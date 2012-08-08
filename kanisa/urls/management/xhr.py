@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr import (AssignPermissionView,
-                              ScheduleRegularEventView,
-                              DiaryGetSchedule,
-                              CreatePageView,
-                              ListPagesView,
-                              MarkSermonSeriesCompleteView)
+from kanisa.views.xhr.pages import (CreatePageView,
+                                    ListPagesView)
+from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
+from kanisa.views.xhr.diary import (ScheduleRegularEventView,
+                                    DiaryGetSchedule)
+from kanisa.views.xhr.users import AssignPermissionView
+
 
 urlpatterns = patterns('',
                        url(r'^permissions/$',
