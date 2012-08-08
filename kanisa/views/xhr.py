@@ -5,7 +5,7 @@ from django.http import (HttpResponse, HttpResponseBadRequest,
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.http import require_GET
 from django.views.generic import View
 import json
 
