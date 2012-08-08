@@ -11,6 +11,7 @@ function quick_series_complete(event) {
            function(data) {
                el.remove();
                status_block.html('<i class="icon-ok"></i> ' + data);
+               status_block.delay(3000).fadeOut(1000);
            }).error(function(data) {
                alert_failure(data.responseText);
                el.show();
