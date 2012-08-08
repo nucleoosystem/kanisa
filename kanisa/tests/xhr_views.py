@@ -3,23 +3,28 @@ from kanisa.tests.utils import KanisaViewTestCase
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
-    pass
+    def test_xhr_only(self):
+        if self.method == 'get':
+            resp = self.client.get(self.url)
+        elif self.method == 'post':
+            resp = self.client.post(self.url)
+        else:
+            raise Exception("Invalid XHR method '%s'." % self.method)
+
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content,
+                         'This page is not directly accessible.')
 
 
 class XHRBiblePassageViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_xhr_biblepassage_check')
+    method = 'post'
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content,
                          '')
-
-    def test_xhr_only(self):
-        resp = self.client.post(self.url, {'passage': 'Foobar'})
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content,
-                         'This page is not directly accessible.')
 
     def test_must_provide_passage(self):
         resp = self.client.post(self.url, {'foo': 'bar'},
@@ -50,16 +55,12 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
 
 class XHRUserPermissionViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_assign_permission')
+    method = 'post'
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content, '')
-
-    def test_must_be_xhr(self):
-        resp = self.client.post(self.url, {})
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, 'This page is not directly accessible.')
 
     def test_must_be_authenticated(self):
         resp = self.client.post(self.url, {},
@@ -169,16 +170,12 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     fixtures = ['pages.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_create_page')
+    method = 'post'
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content, '')
-
-    def test_must_be_xhr(self):
-        resp = self.client.post(self.url, {})
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, 'This page is not directly accessible.')
 
     def test_must_be_authenticated(self):
         resp = self.client.post(self.url, {},
@@ -251,16 +248,12 @@ class XHRListPagesViewTest(XHRBaseTestCase):
     fixtures = ['pages.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_list_pages')
+    method = 'get'
 
     def test_posts_disallowed(self):
         resp = self.client.post(self.url, {})
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content, '')
-
-    def test_must_be_xhr(self):
-        resp = self.client.get(self.url, {})
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, 'This page is not directly accessible.')
 
     def test_must_be_authenticated(self):
         resp = self.client.get(self.url, {},
@@ -282,16 +275,12 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     fixtures = ['sermons.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_sermon_series_complete')
+    method = 'post'
 
     def test_gets_disallowed(self):
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content, '')
-
-    def test_must_be_xhr(self):
-        resp = self.client.post(self.url, {})
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, 'This page is not directly accessible.')
 
     def test_must_be_authenticated(self):
         resp = self.client.post(self.url, {},
