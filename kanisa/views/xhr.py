@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST, require_GET
+from django.views.generic import View
 import json
 
 from kanisa.models import Page, SermonSeries, RegularEvent
@@ -13,19 +14,24 @@ from kanisa.models.bible.bible import to_passage, InvalidPassage
 from kanisa.utils.diary import get_schedule
 
 
-@require_POST
-def check_bible_passage(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden(("This page is not directly accessible."))
+class XHRBaseView(View):
+    pass
 
-    if not 'passage' in request.POST:
-        return HttpResponseBadRequest("Passage not found.")
 
-    try:
-        passage = to_passage(request.POST['passage'])
-        return HttpResponse(unicode(passage))
-    except InvalidPassage, e:
-        return HttpResponseBadRequest(unicode(e))
+class CheckBiblePassageView(XHRBaseView):
+    def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseForbidden("This page is not directly "
+                                         "accessible.")
+
+        if not 'passage' in request.POST:
+            return HttpResponseBadRequest("Passage not found.")
+
+        try:
+            passage = to_passage(request.POST['passage'])
+            return HttpResponse(unicode(passage))
+        except InvalidPassage, e:
+            return HttpResponseBadRequest(unicode(e))
 
 
 @require_POST

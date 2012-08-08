@@ -1,8 +1,9 @@
 from django.conf.urls import patterns, url
+from kanisa.views.xhr import CheckBiblePassageView
 
 urlpatterns = patterns('',
                        url(r'^passage/$',
-                           'kanisa.views.xhr.check_bible_passage',
+                           CheckBiblePassageView.as_view(),
                            {},
                            'kanisa_xhr_biblepassage_check'),
                        )
