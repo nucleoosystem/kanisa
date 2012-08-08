@@ -2,7 +2,11 @@ from django.core.urlresolvers import reverse_lazy
 from kanisa.tests.utils import KanisaViewTestCase
 
 
-class XHRBiblePassageViewTest(KanisaViewTestCase):
+class XHRBaseTestCase(KanisaViewTestCase):
+    pass
+
+
+class XHRBiblePassageViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_xhr_biblepassage_check')
 
     def test_gets_disallowed(self):
@@ -44,7 +48,7 @@ class XHRBiblePassageViewTest(KanisaViewTestCase):
         self.assertEqual(resp.content, 'Matthew 3:1-7')
 
 
-class XHRUserPermissionViewTest(KanisaViewTestCase):
+class XHRUserPermissionViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_assign_permission')
 
     def test_gets_disallowed(self):
@@ -161,7 +165,7 @@ class XHRUserPermissionViewTest(KanisaViewTestCase):
         self.client.logout()
 
 
-class XHRCreatePageViewTest(KanisaViewTestCase):
+class XHRCreatePageViewTest(XHRBaseTestCase):
     fixtures = ['pages.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_create_page')
@@ -243,7 +247,7 @@ class XHRCreatePageViewTest(KanisaViewTestCase):
         self.client.logout()
 
 
-class XHRListPagesViewTest(KanisaViewTestCase):
+class XHRListPagesViewTest(XHRBaseTestCase):
     fixtures = ['pages.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_list_pages')
@@ -274,7 +278,7 @@ class XHRListPagesViewTest(KanisaViewTestCase):
         self.client.logout()
 
 
-class XHRMarkSermonSeriesComplete(KanisaViewTestCase):
+class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     fixtures = ['sermons.json', ]
 
     url = reverse_lazy('kanisa_manage_xhr_sermon_series_complete')
