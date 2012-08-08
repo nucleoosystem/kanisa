@@ -35,6 +35,15 @@ class XHRBaseTestCase(KanisaViewTestCase):
         self.assertEqual(resp.content,
                          '')
 
+    def test_must_be_authenticated(self):
+        if not hasattr(self, 'permission_text'):
+            return
+
+        resp = self.fetch()
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content, ('You do not have permission to '
+                                        '%s.' % self.permission_text))
+
 
 class XHRBiblePassageViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_xhr_biblepassage_check')
@@ -66,12 +75,7 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
 class XHRUserPermissionViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_assign_permission')
     method = 'post'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage users.'))
+    permission_text = 'manage users'
 
     def test_must_provide_required_inputs(self):
         self.client.login(username='fred', password='secret')
@@ -157,12 +161,7 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
 
     url = reverse_lazy('kanisa_manage_xhr_create_page')
     method = 'post'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage pages.'))
+    permission_text = 'manage pages'
 
     def test_must_provide_required_inputs(self):
         self.client.login(username='fred', password='secret')
@@ -217,12 +216,7 @@ class XHRListPagesViewTest(XHRBaseTestCase):
 
     url = reverse_lazy('kanisa_manage_xhr_list_pages')
     method = 'get'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage pages.'))
+    permission_text = 'manage pages'
 
     def test_success(self):
         self.client.login(username='fred', password='secret')
@@ -237,12 +231,7 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
 
     url = reverse_lazy('kanisa_manage_xhr_sermon_series_complete')
     method = 'post'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage sermons.'))
+    permission_text = 'manage sermons'
 
     def test_fails_without_required_parameters(self):
         self.client.login(username='fred', password='secret')
@@ -280,21 +269,11 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
 class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_diary_schedule_regular')
     method = 'post'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage the diary.'))
+    permission_text = 'manage the diary'
 
 
 class XHRFetchScheduleViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_diary_get_schedule',
                        args=['20120101', ])
     method = 'get'
-
-    def test_must_be_authenticated(self):
-        resp = self.fetch()
-        self.assertEqual(resp.status_code, 403)
-        self.assertEqual(resp.content, ('You do not have permission to '
-                                        'manage the diary.'))
+    permission_text = 'manage the diary'
