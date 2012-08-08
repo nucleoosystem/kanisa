@@ -40,11 +40,7 @@ class XHRBaseView(View):
             if arg not in self.arguments:
                 raise MissingArgument(arg)
 
-
-class XHRBasePostView(XHRBaseView):
-    def post(self, request, *args, **kwargs):
-        self.arguments = request.POST
-
+    def handle(self, request, *args, **kwargs):
         response = self.check_permissions(request)
 
         if response:
@@ -60,6 +56,13 @@ class XHRBasePostView(XHRBaseView):
             return self.render_to_response(request, *args, **kwargs)
         except BadArgument, e:
             return HttpResponseBadRequest(e.message)
+
+
+class XHRBasePostView(XHRBaseView):
+    def post(self, request, *args, **kwargs):
+        self.arguments = request.POST
+
+        return self.handle(request, *args, **kwargs)
 
 
 class CheckBiblePassageView(XHRBasePostView):
