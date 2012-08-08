@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse, reverse_lazy
+from kanisa.models import ScheduledEvent
 from kanisa.tests.utils import KanisaViewTestCase
 
 
@@ -270,9 +271,70 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
 
 
 class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
+    fixtures = ['diary.json', ]
     url = reverse_lazy('kanisa_manage_xhr_diary_schedule_regular')
     method = 'post'
     permission_text = 'manage the diary'
+
+    def test_required_attributes_are_required(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch({'date': 'foobar'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, "Event ID not found.")
+
+        resp = self.fetch({'event': 'foobar'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, "Event date not found.")
+
+        self.client.logout()
+
+    def test_bad_date_format(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch({'event': 'foobar',
+                           'date': '20121301'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, "'20121301' is not a valid date.")
+
+        self.client.logout()
+
+    def test_bad_event_id(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch({'event': '99',
+                           'date': '20121201'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, "No event found with ID '99'.")
+
+        self.client.logout()
+
+    def test_success(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch({'event': '1',
+                           'date': '20120103'})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content, "Event scheduled.")
+
+        events = ScheduledEvent.objects.filter(event__pk=1,
+                                               date='2012-01-03')
+        self.assertEqual(len(events), 1)
+
+        self.client.logout()
+
+    def test_double_schedule(self):
+        self.client.login(username='fred', password='secret')
+
+        resp = self.fetch({'event': '1',
+                           'date': '20120110'})
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.fetch({'event': '1',
+                           'date': '20120110'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'That event is already scheduled.')
+        self.client.logout()
 
 
 class XHRFetchScheduleViewTest(XHRBaseTestCase):
