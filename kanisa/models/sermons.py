@@ -21,6 +21,11 @@ class SermonSeries(SearchableModel):
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(upload_to='kanisa/sermons/series/',
                        help_text=u'Must be at least 400px by 300px.')
+    intro = models.TextField(blank=True, null=True,
+                             help_text=('Sum up this series in a few '
+                                        'sentences. This may be displayed '
+                                        'without the details section '
+                                        'below.'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the series '
                                           'cover?'))

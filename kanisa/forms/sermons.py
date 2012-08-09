@@ -14,7 +14,8 @@ from kanisa.models import (SermonSeries,
 class SermonSeriesForm(KanisaBaseForm):
     class Meta:
         model = SermonSeries
-        widgets = {'details': EpicWidget(), }
+        widgets = {'intro': EpicWidget(),
+                   'details': EpicWidget(), }
 
 
 class SermonSpeakerForm(KanisaBaseForm):
