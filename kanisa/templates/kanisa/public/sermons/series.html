@@ -27,31 +27,7 @@
   </div>
   <div class="span5">
     {% with object.sermons as sermons %}
-    {% if sermons %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Sermon</th>
-          <th>Passage</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for sermon in sermons %}
-        <tr>
-          <td>
-            {{ sermon.title }}
-            <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
-          </td>
-          <td>
-            {{ sermon.passage }}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p class="alert alert-info">There are no sermons in this series yet.</p>
-    {% endif %}
+    {% include "kanisa/public/sermons/_series_table.html" %}
     {% endwith %}
   </div>
 </div>
