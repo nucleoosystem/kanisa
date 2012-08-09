@@ -3,7 +3,7 @@ from kanisa.views.public.sermons import SermonSeriesDetailView
 
 
 urlpatterns = patterns('',
-                       url(r'^(?P<slug>[a-z-]+)$',
+                       url(r'^(?P<slug>[a-z0-9-]+)/$',
                            SermonSeriesDetailView.as_view(),
                            {},
                            'kanisa_public_sermon_series_detail'),
