@@ -21,29 +21,33 @@
 </h1>
 
 {% if active_series %}
-<h2>Current Series</h2>
-<ul class="thumbnails">
-  {% for series in active_series %}
-  <li class="span3">
-    <div class="thumbnail">
-      <div class="thumbnail-no-caption">
-        {% thumbnail series.image "260x180" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-        {% endthumbnail %}
-        <div class="carousel-caption">
-          <h4><a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">
-              {{ series.title }}
-              <span class="subtitle">
-                ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }})
-              </span>
-          </a></h4>
-          {% if series.passage %}<p>A series on {{ series.passage }}.</p>{% endif %}
-        </div>
-      </div>
+
+{% for series in active_series %}
+<div class="row">
+  <div class="span3">
+    <div class="thumbnail" style="width:260px; margin: 0 1em 1em 0">
+      {% thumbnail series.image "260x180" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+      {% endthumbnail %}
     </div>
-  </li>
-  {% endfor %}
-</ul>
+  </div>
+  <div class="span9">
+    <h2>
+      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
+      <span class="subtitle">
+        ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }})
+      </span>
+    </h2>
+    {% if series.passage %}<p>A series on {{ series.passage }}.</p>{% endif %}
+    {% if series.intro %}
+    <div class="lead">
+    {{ series.intro|markdown }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+
 {% endif %}
 
 {% endblock %}
