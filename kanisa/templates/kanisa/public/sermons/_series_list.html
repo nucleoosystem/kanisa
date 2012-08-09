@@ -28,6 +28,14 @@
     {% include "kanisa/public/sermons/_series_table_of_sermons.html" %}
     {% endwith %}
     {% endif %}
+    {% with series.date_range as date_range %}
+    {% if date_range %}
+    <p>
+      This series began on {{ date_range|first|date:"jS F Y" }}.
+    </p>
+    {% endif %}
+    {% endwith %}
   </div>
 </div>
+<hr />
 {% endfor %}
