@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from autoslug import AutoSlugField
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
 from sorl.thumbnail import ImageField
@@ -143,6 +144,18 @@ class Sermon(SearchableModel):
 
     def __unicode__(self):
         return self.title
+
+    def url(self):
+        # I'm not sure this belongs here, but I don't really like
+        # having to switch on whether or not a sermon is part of a
+        # series when I need the URL for a sermon. I'll revisit this
+        # later.
+        if not self.series:
+            return reverse('kanisa_public_standalone_sermon_detail',
+                           args=[self.slug, ])
+
+        return reverse('kanisa_public_sermon_detail',
+                       args=[self.series.slug, self.slug, ])
 
     class Meta:
         # Need this because I've split up models.py into multiple

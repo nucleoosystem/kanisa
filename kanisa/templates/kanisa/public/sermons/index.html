@@ -39,11 +39,13 @@
     {% for sermon in latest_sermons %}
     <tr>
       <td>
-        <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a>
+        <a href="{{ sermon.url }}">{{ sermon.title }}</a>
         <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
       </td>
       <td>
+        {% if sermon.series %}
         {{ sermon.series }}
+        {% endif %}
       </td>
     </tr>
     {% endfor %}

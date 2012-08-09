@@ -17,4 +17,8 @@ urlpatterns = patterns('',
                            SermonDetailView.as_view(),
                            {},
                            'kanisa_public_sermon_detail'),
+                       url(r'^standalone/(?P<slug>[a-z0-9-]+)/$',
+                           SermonDetailView.as_view(),
+                           {},
+                           'kanisa_public_standalone_sermon_detail'),
                        )

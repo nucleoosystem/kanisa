@@ -14,10 +14,12 @@
     <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a>
     <span class="divider">/</span>
   </li>
+  {% if object.series %}
   <li>
     <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series.title }}</a>
     <span class="divider">/</span>
   </li>
+  {% endif %}
   <li class="active">
     {{ object.title }}
   </li>
@@ -44,10 +46,12 @@
     </p>
     {% endif %}
 
+    {% if object.series %}
     <p>
       <i class="icon icon-list"></i>
       This sermon is part of the series <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series }}</a>.
     </p>
+    {% endif %}
 
     <p>
       <i class="icon icon-headphones"></i>
