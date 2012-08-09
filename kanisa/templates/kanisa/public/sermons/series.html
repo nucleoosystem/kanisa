@@ -46,6 +46,18 @@
     {% with object.sermons as sermons %}
     {% include "kanisa/public/sermons/_series_table_of_sermons.html" %}
     {% endwith %}
+
+    {% if perms.kanisa.manage_sermons %}
+    <a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-success">
+      <i class="icon-white icon-plus"></i>
+      Add a sermon to this series
+    </a>
+    <a href="{% url 'kanisa_manage_sermons_series_update' object.pk %}" class="btn">
+      <i class="icon-edit"></i>
+      Edit this series
+    </a>
+    {% endif %}
+
   </div>
 </div>
 {% endblock %}

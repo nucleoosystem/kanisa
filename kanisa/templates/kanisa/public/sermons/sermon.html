@@ -80,6 +80,14 @@
 
     {% endif %}
     {% endwith %}
+
+    {% if perms.kanisa.manage_sermons %}
+    <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn">
+      <i class="icon-edit"></i>
+      Edit this sermon
+    </a>
+    {% endif %}
+
   </div>
 </div>
 

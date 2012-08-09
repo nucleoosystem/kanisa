@@ -18,8 +18,6 @@
   series (including in the list of latest sermons on the sermons index
   page, which is currently limited to sermons which are part of a
   series).
-* Add links for editing sermon series or sermons from the public
-  views.
 * Add support for podcasts.
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
