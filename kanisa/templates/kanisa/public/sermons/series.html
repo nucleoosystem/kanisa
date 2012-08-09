@@ -11,7 +11,8 @@
 {% endif %}
 </h1>
 
-<div class="lead">
+<div class="row">
+<div class="span7 lead">
   <div class="thumbnail" style="width:260px; float: left; margin: 0 1em 1em 0">
     {% thumbnail sermonseries.image "260x180" crop="center" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
@@ -19,5 +20,33 @@
   </div>
 
   {{ object.details|markdown }}
+</div>
+<div class="span5">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Passage</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for sermon in object.sermon_set.all %}
+        <tr>
+            <td>
+              {{ sermon.title }}
+            </td>
+            <td>
+                {{ sermon.date|date:"jS F Y"}}
+            </td>
+            <td>
+                {{ sermon.passage }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
 </div>
 {% endblock %}
