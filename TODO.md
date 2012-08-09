@@ -48,6 +48,9 @@
 * Paginate search results
 * Boost future events in search results over past events
 * Make sure objects are removed from search indexes on deletion
+* Fix up use of icon-eye-open in search result templates (these should
+  be for viewing items on the site, not for viewing items in the
+  management interface).
 
 # Tests
 
