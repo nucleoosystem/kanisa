@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from kanisa.views.banners import VisitBannerView
+from kanisa.views.public.banners import VisitBannerView
 
 
 urlpatterns = patterns('',
