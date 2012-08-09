@@ -21,6 +21,9 @@
   transcripts, but will give an idea of where series are going.
 * When adding a sermon to a series, auto-select the series' passage,
   if any.
+* Add a sermon archive feature, which shows a short list of all past
+  sermon series, and also has a list of all past sermons, most recent
+  first.
 
 # Pages
 
