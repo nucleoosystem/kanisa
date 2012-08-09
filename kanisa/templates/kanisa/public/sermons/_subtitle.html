@@ -1,0 +1,2 @@
+({% if object.passage %}A series on <em>{{ object.passage }}</em>{% if date_range %}:{% endif %}
+{% endif %}{% if date_range %}{{ date_range|first|date:"jS F Y" }} &ndash; {% if date_range|last %}{{ date_range|last|date:"jS F Y" }}{% endif %}){% endif %}

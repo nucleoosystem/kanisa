@@ -6,9 +6,13 @@
 {% block content %}
 <h1>
   {{ object.title }}
-  {% if object.passage %}
-  <span class="subtitle">A series on {{ object.passage }}</span>
+  {% with object.date_range as date_range %}
+  {% if object.date_range or object.passage %}
+  <span class="subtitle">
+    {% include "kanisa/public/sermons/_subtitle.html" %}
+  </span>
   {% endif %}
+  {% endwith %}
 </h1>
 
 <div class="row">
