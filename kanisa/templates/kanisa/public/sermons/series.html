@@ -28,6 +28,8 @@
     {% endif %}
   </div>
   <div class="span5">
+    {% with object.sermons as sermons %}
+    {% if sermons %}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -36,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for sermon in object.sermons %}
+        {% for sermon in sermons %}
         <tr>
           <td>
             {{ sermon.title }}
@@ -49,7 +51,10 @@
         {% endfor %}
       </tbody>
     </table>
-
+    {% else %}
+    <p class="alert alert-info">There are no sermons in this series yet.</p>
+    {% endif %}
+    {% endwith %}
   </div>
 </div>
 {% endblock %}
