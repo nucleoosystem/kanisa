@@ -83,6 +83,8 @@
   URLs.
 * Stop making EpicEditor look like it support rich text (try making
   text bold, or pasting in rich text).
+* Make sure each page has a descriptive title (i.e. the <title> tag
+  contains something other than just the name of the Church).
 
 # Frontend
 
