@@ -12,9 +12,13 @@
 
 # Sermons
 
+* Add transcript facility.
+* Add support for public views of sermons without series.
+* Add links for editing sermon series or sermons.
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
-* Add transcript facility.
+* Add support for future sermons - which won't have audio or
+  transcripts, but will give an idea of where series are going.
 
 # Pages
 
@@ -52,6 +56,7 @@
 * Fix up use of icon-eye-open in search result templates (these should
   be for viewing items on the site, not for viewing items in the
   management interface).
+* Add a public search facility.
 
 # Tests
 
