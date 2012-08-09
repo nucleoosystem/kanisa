@@ -4,18 +4,20 @@
 {% load thumbnail %}
 
 {% block content %}
-<div class="row">
-  <h1>{{ object.title }}</h1>
+<h1>
+  {{ object.title }}
+{% if object.passage %}
+  <span class="subtitle">A series on {{ object.passage }}</span>
+{% endif %}
+</h1>
 
-  <div class="lead">
-    <div class="thumbnail" style="width:260px; float: left; margin: 0 1em 1em 0">
-      {% thumbnail sermonseries.image "260x180" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-      {% endthumbnail %}
-    </div>
+<div class="lead">
+  <div class="thumbnail" style="width:260px; float: left; margin: 0 1em 1em 0">
+    {% thumbnail sermonseries.image "260x180" crop="center" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+    {% endthumbnail %}
+  </div>
 
   {{ object.details|markdown }}
-  </div>
 </div>
-
 {% endblock %}

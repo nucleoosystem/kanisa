@@ -29,6 +29,12 @@ body {
     line-height: 1.5em;
 }
 
+h1 .subtitle {
+    font-weight: normal;
+    font-size: 70%;
+    color: #555;
+}
+
 h4 .subtitle {
     font-weight: normal;
 }
