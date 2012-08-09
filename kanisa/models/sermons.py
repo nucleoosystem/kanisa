@@ -42,6 +42,9 @@ class SermonSeries(SearchableModel):
     def num_sermons(self):
         return self.the_num_sermons
 
+    def sermons(self):
+        return self.sermon_set.order_by('date').all()
+
     class Meta:
         # Need this because I've split up models.py into multiple
         # files.
