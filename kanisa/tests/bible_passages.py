@@ -380,7 +380,7 @@ class ToPassageGoodInput(TestCase):
 class BiblePassageModelField(TestCase):
     def testAssignPassage(self):
         p = bible.to_passage('2 John 1')
-        m = SermonSeries(passage=p, title='test_title')
+        m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
         self.assertEqual(m.passage, p)
         self.assertEqual(m._meta.get_field("passage").verbose_name,
@@ -394,7 +394,7 @@ class BiblePassageModelField(TestCase):
 
     def testAssignStringToModel(self):
         p = 'Psalm'
-        m = SermonSeries(passage=p, title='test_title')
+        m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
 
         m1 = SermonSeries.objects.get(pk=m.pk)
@@ -403,7 +403,7 @@ class BiblePassageModelField(TestCase):
 
     def testSerialization(self):
         p = 'Psalm'
-        m = SermonSeries(passage=p, title='test_title')
+        m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
 
         cereal = serializers.serialize('json',
@@ -414,14 +414,14 @@ class BiblePassageModelField(TestCase):
                          'Psalms')
 
     def testNone(self):
-        m = SermonSeries(title='test_title')
+        m = SermonSeries(title='test_title', slug='test-title')
         m.save()
 
         m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertEqual(m1.passage, None)
 
     def testBadPassageSavedAsString(self):
-        m = SermonSeries(title='test_title')
+        m = SermonSeries(title='test_title', slug='test-title')
         m.passage = 'Not a Bible Passage'
         m.save()
 

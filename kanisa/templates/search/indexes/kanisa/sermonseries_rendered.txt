@@ -20,7 +20,17 @@
 {% endblock %}
 
 {% block buttons %}
-<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_detail' object.pk %}"><i class="icon-eye-open"></i> View</a>
-<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
-<a  class="btn btn-mini btn-primary" href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}">Add a sermon to this series &raquo;</a></p>
+<a class="btn btn-mini" href="{% url 'kanisa_public_sermon_series_detail' object.slug %}">
+   <i class="icon-eye-open"></i>
+   View on site
+</a>
+<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_update' object.pk %}">
+   <i class="icon-edit"></i>
+   Edit
+</a>
+<a  class="btn btn-mini btn-success" href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}">
+   <i class="icon-white icon-plus"></i>
+   Add a sermon to this series
+</a>
+</p>
 {% endblock %}

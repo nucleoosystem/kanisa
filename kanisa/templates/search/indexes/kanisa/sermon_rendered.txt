@@ -15,7 +15,8 @@
 {% endif %}
 <p>
 {% if object.series %}
-<strong>Series:</strong> {{ object.series }}<br />
+<strong>Series:</strong>
+<a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series }}</a><br />
 {% endif %}
 <strong>Speaker:</strong> {{ object.speaker }}<br />
 {% if object.passage %}
@@ -23,10 +24,20 @@
 {% endif %}
 A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
 
+{% if object.details %}
 {{ object.details|markdown|striptags|truncatewords:75 }}
+{% endif %}
 </blockquote>
 {% endblock %}
 
 {% block buttons %}
-<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+<a class="btn btn-mini" href="{{ object.url }}">
+   <i class="icon-eye-open"></i>
+   View on site
+</a>
+
+<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}">
+   <i class="icon-edit"></i>
+   Edit
+</a>
 {% endblock %}
