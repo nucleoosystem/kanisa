@@ -1,0 +1,66 @@
+{% extends 'kanisa/base.html' %}
+
+{% load markup %}
+{% load thumbnail %}
+{% load url from future %}
+
+{% block content %}
+<h1 style="margin-bottom: 0.7em;">
+  {{ object.title }}
+  <span class="subtitle">({{ object.date|date:"jS F Y" }}
+  &ndash; {{ object.speaker }})</span>
+</h1>
+
+<div class="row">
+  <div class="span7">
+    {% if object.details %}
+    {{ object.markdown }}
+    {% endif %}
+
+    {% if object.passage %}
+    <p>
+      <i class="icon icon-book"></i>
+      This sermon is on <em>{{ object.passage }}</em>.
+    </p>
+    {% endif %}
+
+    <p>
+      <i class="icon icon-list"></i>
+      This sermon is part of the series <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series }}</a>.
+    </p>
+
+    <p>
+      <i class="icon icon-headphones"></i>
+      {% if not object.mp3 %}
+      This sermon doesn't have audio available.
+      {% endif %}
+    </p>
+
+  </div>
+  <div class="span5">
+    {% with object.series as series %}
+    {% if series %}
+    <h2>
+      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}">{{ series.title }}</a>
+      {% include "kanisa/public/sermons/_subtitle.html" with object=series %}
+    </h2>
+    <div class="thumbnail" style="width:130; float: left; margin: 0 1em 1em 0">
+      {% thumbnail series.image "130x90" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+      {% endthumbnail %}
+    </div>
+
+    {% if series.intro %}
+    {{ series.intro|markdown }}
+    {% endif %}
+
+    {% with series.sermons as sermons %}
+    {% include "kanisa/public/sermons/_series_table.html" with current=object%}
+    {% endwith %}
+
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+{% endblock %}

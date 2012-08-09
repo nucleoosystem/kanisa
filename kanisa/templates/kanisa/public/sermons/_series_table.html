@@ -1,3 +1,5 @@
+{% load url from future %}
+
 {% if sermons %}
 <table class="table table-striped">
   <thead>
@@ -10,7 +12,11 @@
     {% for sermon in sermons %}
     <tr>
       <td>
+        {% if sermon.pk != current.pk %}
+        <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a>
+        {% else %}
         {{ sermon.title }}
+        {% endif %}
         <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
       </td>
       <td>
