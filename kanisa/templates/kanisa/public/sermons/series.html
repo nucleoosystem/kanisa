@@ -2,6 +2,23 @@
 
 {% load markup %}
 {% load thumbnail %}
+{% load url from future %}
+
+{% block precontent %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa.views.index' %}">Home</a>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    {{ object.title }}
+  </li>
+</ul>
+{% endblock %}
 
 {% block content %}
 <h1 style="margin-bottom: 0.7em;">
