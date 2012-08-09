@@ -55,6 +55,13 @@
 <p class="alert alert-info">There are no sermons available yet.</p>
 {% endif %}
 
+{% if perms.kanisa.manage_sermons %}
+<a class="btn btn-primary" href="{% url 'kanisa_manage_sermons' %}">
+  <i class="icon-white icon-headphones"></i>
+  Manage Sermons
+</a>
+{% endif %}
+
 </div>
 </div>
 
