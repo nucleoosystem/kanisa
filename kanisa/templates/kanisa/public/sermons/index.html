@@ -43,6 +43,10 @@
     <div class="lead">
     {{ series.intro|markdown }}
     </div>
+    {% else %}
+    {% with series.sermons as sermons %}
+    {% include "kanisa/public/sermons/_series_table.html" %}
+    {% endwith %}
     {% endif %}
   </div>
 </div>
