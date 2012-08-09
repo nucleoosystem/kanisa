@@ -1,3 +1,4 @@
+from datetime import date
 from django.core.files.storage import default_storage
 from django.test import TestCase
 from kanisa.models import SermonSeries, Sermon, SermonSpeaker
@@ -55,3 +56,16 @@ class SermonTest(TestCase):
                                                surname="Mouse")
         speaker.save()
         self.assertEqual(speaker.slug, 'mickey-mouse')
+
+    def testFetchSermonsForSeries(self):
+        series1 = SermonSeries.objects.get(pk=1)
+        with self.assertNumQueries(1):
+            sermons = list(series1.sermons())
+
+        self.assertEqual(len(sermons), 3)
+
+        # Sermons should be returned in date order, oldest first.
+        self.assertEqual([s.date for s in sermons],
+                         [date(2012, 4, 29),
+                          date(2012, 5, 6),
+                          date(2012, 5, 13)])
