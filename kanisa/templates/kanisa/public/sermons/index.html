@@ -23,15 +23,15 @@
 {% if active_series %}
 
 {% for series in active_series %}
-<div class="row">
-  <div class="span3">
-    <div class="thumbnail" style="width:260px; margin: 0 1em 1em 0">
-      {% thumbnail series.image "260x180" crop="center" as im %}
+<div class="row" style="margin-bottom: 1em;">
+  <div class="span2">
+    <div class="thumbnail">
+      {% thumbnail series.image "160x135" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
       {% endthumbnail %}
     </div>
   </div>
-  <div class="span9">
+  <div class="span10">
     <h2>
       <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
       <span class="subtitle">
