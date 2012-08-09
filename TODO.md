@@ -9,12 +9,16 @@
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
 * Allow creating RegularEvents on timetables other than day x of week.
+* Add support for linking scheduled events to sermons.
 
 # Sermons
 
 * Add transcript facility.
-* Add support for public views of sermons without series.
-* Add links for editing sermon series or sermons.
+* Add support for public views of sermons which are not a part of a
+  series.
+* Add links for editing sermon series or sermons from the public
+  views.
+* Add support for podcasts.
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
 * Add support for future sermons - which won't have audio or
