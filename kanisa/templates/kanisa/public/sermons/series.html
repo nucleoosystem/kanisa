@@ -19,7 +19,9 @@
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
         {% endthumbnail %}
       </div>
+      {% if object.intro %}
       {{ object.intro|markdown }}
+      {% endif %}
     </div>
     {% if object.details %}
     {{ object.details|markdown }}
