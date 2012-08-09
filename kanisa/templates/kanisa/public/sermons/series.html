@@ -29,8 +29,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Date</th>
+          <th>Sermon</th>
           <th>Passage</th>
         </tr>
       </thead>
@@ -39,9 +38,7 @@
         <tr>
           <td>
             {{ sermon.title }}
-          </td>
-          <td>
-            {{ sermon.date|date:"jS F Y"}}
+            <span class="extra_details">({{ sermon.date|date:"jS F Y"}})</span>
           </td>
           <td>
             {{ sermon.passage }}
