@@ -12,6 +12,9 @@ class SermonIndexView(TemplateView):
 
         series = SermonSeries.objects.filter(active=True)
         context['active_series'] = series
+        latest_sermons = Sermon.objects.all()
+        latest_sermons = latest_sermons.filter(series__isnull=False)
+        context['latest_sermons'] = latest_sermons
 
         return context
 

@@ -15,7 +15,9 @@
 
 * Add transcript facility.
 * Add support for public views of sermons which are not a part of a
-  series.
+  series (including in the list of latest sermons on the sermons index
+  page, which is currently limited to sermons which are part of a
+  series).
 * Add links for editing sermon series or sermons from the public
   views.
 * Add support for podcasts.

@@ -18,8 +18,42 @@
   Sermons
 </h1>
 
+<div class="row">
+<div class="span7">
 {% if active_series %}
 {% include "kanisa/public/sermons/_series_list.html" %}
 {% endif %}
+</div>
+<div class="span5">
+<h2>Latest Sermons</h2>
+
+{% if latest_sermons %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sermon</th>
+      <th>Series</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sermon in latest_sermons %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a>
+        <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
+      </td>
+      <td>
+        {{ sermon.series }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-info">There are no sermons in this series yet.</p>
+{% endif %}
+
+</div>
+</div>
 
 {% endblock %}
