@@ -25,6 +25,8 @@
   series layer - allow series to go to multiple podcasts).
 * Add support for future sermons - which won't have audio or
   transcripts, but will give an idea of where series are going.
+* When adding a sermon to a series, auto-select the series' passage,
+  if any.
 
 # Pages
 
