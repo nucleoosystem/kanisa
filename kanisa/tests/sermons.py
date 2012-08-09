@@ -1,5 +1,6 @@
 from datetime import date
 from django.core.files.storage import default_storage
+from django.template.loader import render_to_string
 from django.test import TestCase
 from kanisa.models import SermonSeries, Sermon, SermonSpeaker
 import os
@@ -95,3 +96,37 @@ class SermonTest(TestCase):
         with self.assertNumQueries(1):
             self.assertEqual(series2.date_range(),
                              None)
+
+    def test_subtitle_template(self):
+        def render(series):
+            tmpl = 'kanisa/public/sermons/_subtitle.html'
+            return render_to_string(tmpl,
+                                    {'object': series}).strip()
+
+        series1 = SermonSeries.objects.get(pk=1)
+        self.assertEqual(render(series1),
+                         ('<span class="subtitle">\n(A series on '
+                          '<em>Psalms</em>: 29th April 2012 &ndash; '
+                          ')\n</span>'))
+
+        series1.active = False
+        self.assertEqual(render(series1),
+                         ('<span class="subtitle">\n(A series on '
+                          '<em>Psalms</em>: 29th April 2012 &ndash; '
+                          '13th May 2012)\n</span>'))
+
+        series1.passage = None
+        self.assertEqual(render(series1),
+                         ('<span class="subtitle">\n(29th April 2012 '
+                          '&ndash; 13th May 2012)\n</span>'))
+
+        series1.active = True
+        self.assertEqual(render(series1),
+                         ('<span class="subtitle">\n(29th April 2012 '
+                          '&ndash; )\n</span>'))
+
+        # Series 2 has no sermons
+        series2 = SermonSeries.objects.get(pk=2)
+        self.assertEqual(render(series2),
+                         ('<span class="subtitle">\n(A series on '
+                          '<em>John 21</em>)\n</span>'))
