@@ -1,0 +1,33 @@
+{% load markup %}
+{% load thumbnail %}
+{% load url from future %}
+
+{% for series in active_series %}
+<div class="row" style="margin-bottom: 1em;">
+  <div class="span2">
+    <div class="thumbnail">
+      {% thumbnail series.image "160x135" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+      {% endthumbnail %}
+    </div>
+  </div>
+  <div class="span10">
+    <h2>
+      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
+      <span class="subtitle">
+        ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
+      </span>
+    </h2>
+
+    {% if series.intro %}
+    <div class="lead">
+    {{ series.intro|markdown }}
+    </div>
+    {% else %}
+    {% with series.sermons as sermons %}
+    {% include "kanisa/public/sermons/_series_table.html" %}
+    {% endwith %}
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
