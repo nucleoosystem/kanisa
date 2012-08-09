@@ -6,5 +6,5 @@ urlpatterns = patterns('',
                        url(r'^(?P<slug>[a-z-]+)$',
                            SermonSeriesDetailView.as_view(),
                            {},
-                           'kanisa_public_sermon_series'),
+                           'kanisa_public_sermon_series_detail'),
                        )
