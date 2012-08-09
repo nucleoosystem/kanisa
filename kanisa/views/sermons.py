@@ -135,6 +135,6 @@ class SermonSpeakerUpdateView(SermonBaseView,
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
 
 
-class SermonSeriesView(DetailView):
+class SermonSeriesDetailView(DetailView):
     model = SermonSeries
     template_name = 'kanisa/public/sermons/series.html'
