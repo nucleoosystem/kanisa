@@ -1,0 +1,38 @@
+{% extends 'kanisa/base.html' %}
+
+{% load markup %}
+{% load thumbnail %}
+{% load url from future %}
+
+{% block content %}
+<h1 style="margin-bottom: 0.7em;">
+  Sermons
+</h1>
+
+{% if active_series %}
+<h2>Current Series</h2>
+<ul class="thumbnails">
+  {% for series in active_series %}
+  <li class="span3">
+    <div class="thumbnail">
+      <div class="thumbnail-no-caption">
+        {% thumbnail series.image "260x180" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+        {% endthumbnail %}
+        <div class="carousel-caption">
+          <h4><a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">
+              {{ series.title }}
+              <span class="subtitle">
+                ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }})
+              </span>
+          </a></h4>
+          {% if series.passage %}<p>A series on {{ series.passage }}.</p>{% endif %}
+        </div>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

@@ -1,9 +1,14 @@
 from django.conf.urls import patterns, url
-from kanisa.views.public.sermons import (SermonSeriesDetailView,
+from kanisa.views.public.sermons import (SermonIndexView,
+                                         SermonSeriesDetailView,
                                          SermonDetailView)
 
 
 urlpatterns = patterns('',
+                       url(r'^$',
+                           SermonIndexView.as_view(),
+                           {},
+                           'kanisa_public_sermon_index'),
                        url(r'^(?P<slug>[a-z0-9-]+)/$',
                            SermonSeriesDetailView.as_view(),
                            {},

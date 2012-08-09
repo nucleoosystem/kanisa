@@ -109,3 +109,11 @@ h3 span.help_text {
     font-size: 12px;
     font-weight: normal;
 }
+
+.thumbnail-no-caption {
+    position: relative
+}
+
+.thumbnail-no-caption a {
+    color: inherit;
+}
