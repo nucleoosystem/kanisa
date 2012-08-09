@@ -14,6 +14,7 @@
 
 * Allow multiple podcasts (select which sermons go where at the sermon
   series layer - allow series to go to multiple podcasts).
+* Add transcript facility.
 
 # Pages
 
