@@ -69,3 +69,29 @@ class SermonTest(TestCase):
                          [date(2012, 4, 29),
                           date(2012, 5, 6),
                           date(2012, 5, 13)])
+
+    def test_date_range(self):
+        # Series 1 has three sermons
+        series1 = SermonSeries.objects.get(pk=1)
+        self.assertTrue(series1.active)
+
+        # Active series have None as the end-point of the date range.
+        with self.assertNumQueries(1):
+            self.assertEqual(series1.date_range(),
+                             (date(2012, 4, 29),
+                              None))
+
+        series1.active = False
+
+        with self.assertNumQueries(1):
+            self.assertEqual(series1.date_range(),
+                             (date(2012, 4, 29),
+                              date(2012, 5, 13)))
+
+        # Series 2 has no sermons
+        series2 = SermonSeries.objects.get(pk=2)
+        self.assertEqual(series2.sermons().count(), 0)
+
+        with self.assertNumQueries(1):
+            self.assertEqual(series2.date_range(),
+                             None)
