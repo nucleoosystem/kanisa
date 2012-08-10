@@ -4,7 +4,12 @@
 {% load thumbnail %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_sermons_speaker_create' %}" class="btn btn-large btn-primary">Add a speaker &raquo;</a></p>
+<p>
+  <a href="{% url 'kanisa_manage_sermons_speaker_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Add a speaker
+  </a>
+</p>
 <hr />
 
 <ul class="thumbnails">

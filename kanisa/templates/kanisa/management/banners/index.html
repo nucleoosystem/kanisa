@@ -3,7 +3,12 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_banners_create' %}" class="btn btn-large btn-primary">Create a new banner &raquo;</a></p>
+<p>
+  <a href="{% url 'kanisa_manage_banners_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Create a new banner
+  </a>
+</p>
 
 <hr />
 

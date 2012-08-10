@@ -3,7 +3,12 @@
 {% load url from future %}
 
 {% block content %}
-<p><a href="{% url 'kanisa_manage_documents_create' %}" class="btn btn-large btn-primary">Upload a Document &raquo;</a></p>
+<p>
+  <a href="{% url 'kanisa_manage_documents_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Upload a Document
+  </a>
+</p>
 
 <hr />
 
