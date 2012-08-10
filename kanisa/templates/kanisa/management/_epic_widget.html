@@ -16,12 +16,12 @@ var opts = {% templatetag openbrace %}
   {% templatetag closebrace %}
 {% templatetag closebrace %}
 
-var editor = new EpicEditor(opts).load();
-editor.importFile('{{ id }}-epiceditor', $("#{{ id }}").val());
+var editor_{{ id }} = new EpicEditor(opts).load();
+editor_{{ id }}.importFile('{{ id }}-epiceditor', $("#{{ id }}").val());
 
 form = $("#{{ id }}-epiceditor").parents("form");
 form.submit(function() {% templatetag openbrace %}
-  content = editor.exportFile();
+  content = editor_{{ id }}.exportFile();
   $("#{{ id }}").val(content);
 {% templatetag closebrace %});
 </script>
