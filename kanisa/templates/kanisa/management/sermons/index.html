@@ -1,13 +1,6 @@
-{% extends 'kanisa/management/base.html' %}
+{% extends 'kanisa/management/sermons/base.html' %}
 
 {% load url from future %}
-
-{% block extrajs %}
-<script type="text/javascript">
-var series_complete_url = "{% url 'kanisa_manage_xhr_sermon_series_complete' %}";
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_sermons.js"></script>
-{% endblock %}
 
 {% block content %}
 <p>

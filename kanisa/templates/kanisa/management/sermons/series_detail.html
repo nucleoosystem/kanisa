@@ -1,4 +1,4 @@
-{% extends 'kanisa/management/base.html' %}
+{% extends 'kanisa/management/sermons/base.html' %}
 
 {% load url from future %}
 {% load thumbnail %}
@@ -24,10 +24,11 @@
   </a>
 
   {% if object.active %}
-  <a class="btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}">
+  <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
     <i class="icon-ok"></i>
-    Mark this series as complete
+    Mark Complete
   </a>
+  <span class="inline-status"></span>
   {% endif %}
 
   <hr />
