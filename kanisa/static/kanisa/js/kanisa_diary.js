@@ -2,7 +2,7 @@ function update_event_list() {
     $.get(update_diary_url,
           function(data) {
               $("#diary_page").html(data);
-              bind_schedule_handlers();
+              bind_diary_handlers();
           });
 }
 
@@ -26,10 +26,10 @@ function quick_event_schedule(event) {
            });
 }
 
-function bind_schedule_handlers() {
+function bind_diary_handlers() {
     $("a.regular_schedule").click(quick_event_schedule);
 }
 
 $(function() {
-    bind_schedule_handlers();
+    bind_diary_handlers();
 });
