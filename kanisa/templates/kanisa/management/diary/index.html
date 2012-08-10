@@ -33,6 +33,11 @@ var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|dat
   </li>
 </ul>
 
-<p class="pull-right"><a href="{% url 'kanisa_manage_diary_scheduled_create' %}" class="btn btn-primary">Schedule a new event &raquo;</a></p>
+<p class="pull-right">
+  <a href="{% url 'kanisa_manage_diary_scheduled_create' %}" class="btn btn-success">
+    <i class="icon-white icon-plus"></i>
+    Schedule a new event
+  </a>
+</p>
 
 {% endblock %}
