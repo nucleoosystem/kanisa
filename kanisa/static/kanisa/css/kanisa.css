@@ -29,6 +29,10 @@ body {
     line-height: 1.5em;
 }
 
+h1.primary {
+    margin-bottom: 0.7em;
+}
+
 h1 .subtitle,
 h2 .subtitle {
     font-weight: normal;
