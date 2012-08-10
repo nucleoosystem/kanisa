@@ -20,8 +20,6 @@ class XHRBaseTestCase(KanisaViewTestCase):
             resp = self.client.get(self.url)
         elif self.method == 'post':
             resp = self.client.post(self.url)
-        else:
-            raise Exception("Invalid XHR method '%s'." % self.method)
 
         self.assertEqual(resp.status_code, 403)
         self.assertEqual(resp.content,
@@ -32,8 +30,6 @@ class XHRBaseTestCase(KanisaViewTestCase):
             resp = self.client.post(self.url)
         elif self.method == 'post':
             resp = self.client.get(self.url)
-        else:
-            raise Exception("Invalid XHR method '%s'." % self.method)
 
         self.assertEqual(resp.status_code, 405)
         self.assertEqual(resp.content,

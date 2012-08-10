@@ -9,9 +9,6 @@ from kanisa.tests.utils import KanisaViewTestCase
 class UserManagementViewTest(KanisaViewTestCase):
 
     def setUp(self):
-        if hasattr(self, 'setup_called'):
-            return
-
         super(UserManagementViewTest, self).setUp()
 
         p = Permission.objects.get(codename='manage_users')
