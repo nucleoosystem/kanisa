@@ -54,6 +54,8 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
         self.assertEqual(resp.context['form'].initial['series'], 2)
+        self.assertEqual(unicode(resp.context['form'].initial['passage']),
+                         'John 21')
 
         # Check without a pre-populated series
         resp = self.client.get(base_url)

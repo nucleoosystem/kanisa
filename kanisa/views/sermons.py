@@ -88,6 +88,10 @@ class SermonCreateView(SermonBaseView,
             series = get_object_or_404(SermonSeries,
                                        pk=self.request.GET['series'])
             initial['series'] = series.pk
+
+            if series.passage:
+                initial['passage'] = series.passage
+
             return initial
         except ValueError:
             raise Http404
