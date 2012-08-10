@@ -55,7 +55,9 @@
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-        <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger">Cancel</a></div>
+        <div class="{% if not forloop.last %} notlast{% endif %}">
+          <a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger scheduled_event_cancel" data-event-title="{{ e.title }}">Cancel</a>
+        </div>
       {% endfor %}
       </td>
       <td>

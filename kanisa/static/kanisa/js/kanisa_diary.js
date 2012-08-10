@@ -26,8 +26,20 @@ function quick_event_schedule(event) {
            });
 }
 
+function quick_event_delete(event) {
+    event.preventDefault();
+    title= $(this).attr("data-event-title");
+    if (confirm("Are you sure you want to cancel the event \"" + title + "\"?")) {
+        $.post($(this).attr("href"),
+               function(data) {
+                   update_event_list();
+               });
+    }
+}
+
 function bind_diary_handlers() {
     $("a.regular_schedule").click(quick_event_schedule);
+    $("a.scheduled_event_cancel").click(quick_event_delete);
 }
 
 $(function() {
