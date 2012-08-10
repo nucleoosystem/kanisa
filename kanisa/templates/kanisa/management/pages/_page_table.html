@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th style="width: 16px"></th>
+      <th class="iconcell"></th>
       <th>Draft</th>
       <th>Modified</th>
       <th></th>
@@ -21,7 +21,7 @@
           {{ page.title }}
         </a>
       </td>
-      <td>
+      <td class="iconcell">
         <a href="{% url 'kanisa_manage_pages_create' %}?parent={{ page.pk }}" title="Create a page with &ldquo;{{ page.title }}&rdquo; as its parent">
           <i class="icon-plus-sign"></i>
         </a>
