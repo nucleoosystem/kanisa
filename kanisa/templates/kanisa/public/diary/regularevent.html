@@ -1,0 +1,29 @@
+{% extends 'kanisa/public/sermons/base.html' %}
+
+{% load markup %}
+{% load url from future %}
+
+{% block precontent %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa.views.index' %}">Home</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    {{ object.title }}
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1 class="primary">
+  {{ object.title }}
+</h1>
+
+<p class="lead">{{ object.title }} is on {{ object.get_day_display }}s at {{ object.start_time }}</p>
+
+{% if object.details %}
+{{ object.markdown }}
+{% endif %}
+
+{% endblock %}

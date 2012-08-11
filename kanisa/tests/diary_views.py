@@ -147,3 +147,14 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual([m.message for m in resp.context['messages']],
                          [('No events to schedule.'), ])
         self.assertEqual(len(ScheduledEvent.objects.all()), 3)
+
+
+class DiaryPublicViewTest(KanisaViewTestCase):
+    fixtures = ['diary.json', ]
+
+    def test_view_regular_event(self):
+        event = RegularEvent.objects.get(pk=1)
+        url = reverse('kanisa_public_diary_regularevent_detail',
+                      args=[event.slug, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)

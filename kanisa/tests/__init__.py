@@ -12,7 +12,8 @@ from .bible_passages import (BiblePassageBadInput,
 from .diary import (DiaryTest,
                     DiaryGetWeekBoundsTest,
                     DiaryGetScheduleTest)
-from .diary_views import DiaryManagementViewTest
+from .diary_views import (DiaryManagementViewTest,
+                          DiaryPublicViewTest)
 from .document_views import DocumentManagementViewTest
 from .management_views import ManagementViewTest
 from .page_views import PageManagementViewTest

@@ -16,6 +16,7 @@
       <th>Event</th>
       <th>Day</th>
       <th>Time</th>
+      <th class="iconcell"></th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
       <td><a href="{% url 'kanisa_manage_diary_regular_update' event.pk %}">{{ event.title }}</a></td>
       <td>{{ event.get_day_display }}</td>
       <td>{{ event.start_time }}</td>
+      <td class="iconcell"><a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site"><i class="icon-eye-open"></i></a></td>
     </tr>
     {% endfor %}
   </tbody>
