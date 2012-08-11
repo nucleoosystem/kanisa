@@ -25,6 +25,9 @@
     <div class="well" style="padding:8px 0">
       {% include "kanisa/public/diary/_diary_nav.html" %}
     </div>
+    {% if perms.kanisa.manage_diary %}
+    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">Edit this regular event</a>
+    {% endif %}
   </div>
   <div class="span9">
 
