@@ -1,6 +1,5 @@
 {% extends 'kanisa/public/sermons/base.html' %}
 
-{% load markup %}
 {% load url from future %}
 
 {% block precontent %}
@@ -9,12 +8,8 @@
     <a href="{% url 'kanisa.views.index' %}">Home</a>
     <span class="divider">/</span>
   </li>
-  <li>
-    <a href="{% url 'kanisa_public_diary_index' %}">Diary</a>
-    <span class="divider">/</span>
-  </li>
   <li class="active">
-    {{ object.title }}
+    Diary
   </li>
 </ul>
 {% endblock %}
@@ -23,21 +18,10 @@
 <div class="row">
   <div class="span3">
     <div class="well" style="padding:8px 0">
-      {% include "kanisa/public/diary/_diary_nav.html" %}
+    {% include "kanisa/public/diary/_diary_nav.html" %}
     </div>
   </div>
   <div class="span9">
-
-<h1 class="primary">
-  {{ object.title }}
-</h1>
-
-<p class="lead">{{ object.title }} is on {{ object.get_day_display }}s at {{ object.start_time }}</p>
-
-{% if object.details %}
-{{ object.markdown }}
-{% endif %}
   </div>
 </div>
-
 {% endblock %}
