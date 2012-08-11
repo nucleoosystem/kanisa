@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from kanisa.models import SermonSeries
+from kanisa.models import Sermon, SermonSeries
 from kanisa.tests.utils import KanisaViewTestCase
 
 
@@ -106,3 +106,32 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.assertFalse(SermonSeries.objects.get(pk=1).active)
 
         self.client.logout()
+
+
+class SermonPublicViewTest(KanisaViewTestCase):
+    fixtures = ['sermons.json', ]
+
+    def test_view_sermon_index(self):
+        resp = self.client.get(reverse('kanisa_public_sermon_index'))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_view_sermon_series(self):
+        series = SermonSeries.objects.get(pk=1)
+        resp = self.client.get(reverse('kanisa_public_sermon_series_detail',
+                                       args=[series.slug, ]))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_view_sermon_which_is_part_of_a_series(self):
+        sermon = Sermon.objects.get(pk=1)
+        resp = self.client.get(reverse('kanisa_public_sermon_detail',
+                                       args=[sermon.series.slug,
+                                             sermon.slug, ]))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_view_sermon_which_is_not_part_of_a_series(self):
+        sermon = Sermon.objects.get(pk=4)
+        self.assertEqual(sermon.series, None)
+        url = reverse('kanisa_public_standalone_sermon_detail',
+                      args=[sermon.slug, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)

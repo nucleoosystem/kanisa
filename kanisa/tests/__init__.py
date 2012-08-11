@@ -19,7 +19,8 @@ from .page_views import PageManagementViewTest
 from .pages import PageTest
 from .public_views import PublicViewTest
 from .sermons import SermonTest
-from .sermon_views import SermonManagementViewTest
+from .sermon_views import (SermonManagementViewTest,
+                           SermonPublicViewTest)
 from .social_views import SocialViewTest
 from .user_views import UserManagementViewTest
 from .xhr_views import (XHRBiblePassageViewTest,
