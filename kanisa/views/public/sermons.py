@@ -31,7 +31,7 @@ class SermonDetailView(DetailView):
     def get_object(self, queryset=None):
         object = super(SermonDetailView, self).get_object(queryset)
 
-        if self.kwargs['series'] == 'standalone':
+        if 'series' not in self.kwargs:
             if object.series is not None:
                 raise Http404
 
