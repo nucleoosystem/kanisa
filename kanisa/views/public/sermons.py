@@ -1,6 +1,7 @@
-from kanisa.models import Sermon, SermonSeries
+from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
+from kanisa.models import Sermon, SermonSeries
 
 
 class SermonIndexView(TemplateView):
@@ -26,3 +27,12 @@ class SermonSeriesDetailView(DetailView):
 class SermonDetailView(DetailView):
     model = Sermon
     template_name = 'kanisa/public/sermons/sermon.html'
+
+    def get_object(self, queryset=None):
+        object = super(SermonDetailView, self).get_object(queryset)
+
+        if self.kwargs['series'] == 'standalone':
+            if object.series is not None:
+                raise Http404
+
+        return object

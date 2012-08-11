@@ -135,3 +135,12 @@ class SermonPublicViewTest(KanisaViewTestCase):
                       args=[sermon.slug, ])
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
+
+    def test_standalone_view_404s_for_sermons_in_a_series(self):
+        sermon = Sermon.objects.get(pk=1)
+        self.assertNotEqual(sermon.series, None)
+
+        url = reverse('kanisa_public_standalone_sermon_detail',
+                      args=[sermon.slug, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
