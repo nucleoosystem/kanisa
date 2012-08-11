@@ -144,3 +144,10 @@ class SermonPublicViewTest(KanisaViewTestCase):
                       args=[sermon.slug, ])
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 404)
+
+    def test_must_provide_correct_series_to_view_sermon(self):
+        sermon = Sermon.objects.get(pk=1)
+        resp = self.client.get(reverse('kanisa_public_sermon_detail',
+                                       args=['foobar',
+                                             sermon.slug, ]))
+        self.assertEqual(resp.status_code, 404)

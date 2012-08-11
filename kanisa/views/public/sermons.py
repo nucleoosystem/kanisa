@@ -34,5 +34,9 @@ class SermonDetailView(DetailView):
         if 'series' not in self.kwargs:
             if object.series is not None:
                 raise Http404
+            return object
+
+        if object.series.slug != self.kwargs['series']:
+            raise Http404
 
         return object
