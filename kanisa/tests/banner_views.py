@@ -7,6 +7,7 @@ import factory
 
 
 class BannerFactory(factory.Factory):
+    FACTORY_FOR = Banner
     headline = factory.Sequence(lambda n: 'Banner Title #' + n)
     contents = 'Banner contents'
     image = 'non_existent_image.jpg'
