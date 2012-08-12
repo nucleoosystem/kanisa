@@ -102,7 +102,7 @@ class DiaryGetScheduleTest(TestCase):
 
     def testScheduled(self):
         event1 = RegularEventFactory.create(day=1)
-        event2 = RegularEventFactory.create(day=2)
+        RegularEventFactory.create(day=2)
 
         event1.schedule(date(2012, 1, 1),
                         date(2012, 1, 8))
