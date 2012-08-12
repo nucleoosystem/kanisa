@@ -1,60 +1,63 @@
 from datetime import date, timedelta
-from django.core.files.storage import default_storage
 from django.test import TestCase
 from kanisa.models import Banner
 from kanisa.models.utils import date_has_passed, today_in_range
-import os
+import factory
+
+
+class BannerFactory(factory.Factory):
+    headline = factory.Sequence(lambda n: 'Banner Title #' + n)
+    contents = 'Banner contents'
+    image = 'non_existent_image.jpg'
 
 
 class BannerTest(TestCase):
-    fixtures = ['banners.json', ]
-
-    def setUp(self):
-        media_dir = os.path.join(os.path.dirname(__file__), 'fixtures/media')
-        self._old_default_storage_location = default_storage.location
-        default_storage.location = media_dir
-
-    def tearDown(self):
-        default_storage.location = self._old_default_storage_location
-
     def testIsActive(self):
         # A banner with no expiry date or publication date
-        banner = Banner.objects.get(pk=1)
+        banner = BannerFactory.build()
         self.assertTrue(banner.active())
 
         # A banner which has expired
-        banner = Banner.objects.get(pk=4)
+        banner = BannerFactory.build(publish_until=date(2012, 1, 1))
         self.assertFalse(banner.active())
 
         # A banner with a long-passed publication date, and a
         # far-future expiration date
-        banner = Banner.objects.get(pk=5)
+        banner = BannerFactory.build(publish_from=date(2012, 1, 1),
+                                     publish_until=date(2020, 1, 1))
         self.assertTrue(banner.active())
 
     def testHasExpired(self):
         # A banner with no expiry date or publication date
-        banner = Banner.objects.get(pk=1)
+        banner = BannerFactory.build()
         self.assertFalse(banner.expired())
 
         # A banner which has expired
-        banner = Banner.objects.get(pk=4)
+        banner = BannerFactory.build(publish_until=date(2012, 1, 1))
         self.assertTrue(banner.expired())
 
         # A banner with a long-passed publication date, and a
         # far-future expiration date
-        banner = Banner.objects.get(pk=5)
+        banner = BannerFactory.build(publish_from=date(2012, 1, 1),
+                                     publish_until=date(2020, 1, 1))
         self.assertFalse(banner.expired())
 
     def testFetchActive(self):
+        BannerFactory.create()
+        BannerFactory.create(publish_until=date(2012, 1, 1))
+        BannerFactory.create(publish_from=date(2020, 1, 1))
         banners = Banner.active_objects.all()
-        self.assertEqual(len(banners), 4)
-
-    def testFetchInactive(self):
-        banners = Banner.inactive_objects.all()
         self.assertEqual(len(banners), 1)
 
+    def testFetchInactive(self):
+        BannerFactory.create()
+        BannerFactory.create(publish_until=date(2012, 1, 1))
+        BannerFactory.create(publish_from=date(2020, 1, 1))
+        banners = Banner.inactive_objects.all()
+        self.assertEqual(len(banners), 2)
+
     def testUnicode(self):
-        banner = Banner.objects.get(pk=1)
+        banner = BannerFactory.build(headline='Green Flowers')
         self.assertEqual(unicode(banner), 'Green Flowers')
 
     def testDateHasPassed(self):
@@ -80,8 +83,7 @@ class BannerTest(TestCase):
 
     def testSetRetired(self):
         # Confirm initial state
-        banner = Banner.objects.get(pk=1)
-        original_expiry = banner.publish_until
+        banner = BannerFactory.create()
         self.assertTrue(banner.active())
 
         # Retire the banner
@@ -89,16 +91,13 @@ class BannerTest(TestCase):
         self.assertFalse(banner.active())
 
         # Test changes were persisted
-        banner = Banner.objects.get(pk=1)
+        banner = Banner.objects.get(pk=banner.pk)
         self.assertFalse(banner.active())
 
         # Test the inactive banner manager picks it up
         self.assertTrue(banner in Banner.inactive_objects.all())
-        self.assertRaises(Banner.DoesNotExist, Banner.active_objects.get, pk=1)
+        self.assertRaises(Banner.DoesNotExist,
+                          Banner.active_objects.get, pk=banner.pk)
 
         # Ensure test doesn't change state
-        banner.publish_until = original_expiry
-        banner.save()
-        banner = Banner.objects.get(pk=1)
-        self.assertEqual(banner.publish_until, original_expiry)
-        self.assertTrue(banner.active())
+        banner.delete()
