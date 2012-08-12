@@ -3,18 +3,24 @@ from django.test import TestCase
 from kanisa.models import diary
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils.diary import get_week_bounds, get_schedule
+import factory
+
+
+class RegularEventFactory(factory.Factory):
+    FACTORY_FOR = RegularEvent
+    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    start_time = time(14, 0)
+    duration = 60
+    day = 1
 
 
 class DiaryTest(TestCase):
-    fixtures = ['diary.json', ]
-
     def testUnicode(self):
-        event = RegularEvent.objects.get(pk=1)
+        event = RegularEventFactory.build(title='Afternoon Tea')
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
     def testSchedule(self):
-        event = RegularEvent.objects.get(pk=1)
-        self.assertEqual(event.day, 1)
+        event = RegularEventFactory.build(day=1)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instances = event.scheduledevent_set.all()
@@ -26,7 +32,8 @@ class DiaryTest(TestCase):
         self.assertEqual(instance.duration, 60)
 
     def testInstanceUnicode(self):
-        event = RegularEvent.objects.get(pk=2)
+        event = RegularEventFactory.build(title='Breakfast Club',
+                                          day=4)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = ScheduledEvent.objects.get(pk=1)
@@ -69,9 +76,11 @@ class DiaryGetWeekBoundsTest(TestCase):
 
 
 class DiaryGetScheduleTest(TestCase):
-    fixtures = ['diary.json', ]
-
     def testBasics(self):
+        event1 = RegularEventFactory.create(day=1)
+        event2 = RegularEventFactory.create(day=4)
+        RegularEventFactory.create(day=2)
+        RegularEventFactory.create(day=3)
         schedule = get_schedule()
         self.assertTrue(hasattr(schedule, 'calendar_entries'))
         self.assertEqual(len(schedule.calendar_entries), 7)
@@ -87,18 +96,16 @@ class DiaryGetScheduleTest(TestCase):
         self.assertEqual([len(e.regular_events) for e in entries],
                          [0, 1, 1, 1, 1, 0, 0])
         self.assertEqual(entries[1].regular_events[0],
-                         RegularEvent.objects.get(pk=1))
+                         event1)
         self.assertEqual(entries[4].regular_events[0],
-                         RegularEvent.objects.get(pk=2))
+                         event2)
 
     def testScheduled(self):
-        event = RegularEvent.objects.get(pk=1)
+        event1 = RegularEventFactory.create(day=1)
+        event2 = RegularEventFactory.create(day=2)
 
-        self.assertEqual(event.day, 1)
-        self.assertEqual(unicode(event), 'Afternoon Tea')
-
-        event.schedule(date(2012, 1, 1),
-                       date(2012, 1, 8))
+        event1.schedule(date(2012, 1, 1),
+                        date(2012, 1, 8))
         self.assertEqual(len(ScheduledEvent.objects.all()),
                          1)
         instance = ScheduledEvent.objects.get(pk=1)
@@ -107,7 +114,12 @@ class DiaryGetScheduleTest(TestCase):
         schedule = get_schedule(date(2012, 1, 4))
         entries = schedule.calendar_entries
 
+        # Regular events is a weekday aligned list of regular events
+        # which are not yet scheduled.
         self.assertEqual([len(e.regular_events) for e in entries],
-                         [0, 0, 1, 1, 1, 0, 0])
+                         [0, 0, 1, 0, 0, 0, 0])
+
+        # Scheduled events is a weekday aligned list of scheduled
+        # events which are scheduled.
         self.assertEqual([len(e.scheduled_events) for e in entries],
                          [0, 1, 0, 0, 0, 0, 0])
