@@ -1,12 +1,18 @@
+from datetime import date
 from django.core.urlresolvers import reverse
 from kanisa.models import Banner
 from kanisa.tests.utils import KanisaViewTestCase
 from django.test import TestCase
+import factory
+
+
+class BannerFactory(factory.Factory):
+    headline = factory.Sequence(lambda n: 'Banner Title #' + n)
+    contents = 'Banner contents'
+    image = 'non_existent_image.jpg'
 
 
 class BannerManagementViewTest(KanisaViewTestCase):
-    fixtures = ['banners.json', ]
-
     def test_views_protected(self):
         self.view_is_restricted(reverse('kanisa_manage_banners'))
         self.view_is_restricted(reverse('kanisa_manage_banners_retire',
@@ -16,6 +22,10 @@ class BannerManagementViewTest(KanisaViewTestCase):
                                         args=[1, ]))
 
     def test_banner_management_view(self):
+        BannerFactory.create()
+        BannerFactory.create(publish_until=date(2012, 1, 1))
+        BannerFactory.create(publish_from=date(2020, 1, 1))
+
         url = reverse('kanisa_manage_banners')
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
@@ -24,9 +34,11 @@ class BannerManagementViewTest(KanisaViewTestCase):
 
         self.assertTrue('banner_list' in resp.context)
         self.assertEqual([banner.pk for banner in resp.context['banner_list']],
-                         [1, 2, 3, 5, ])
+                         [1, ])
 
     def test_banner_retire_view(self):
+        BannerFactory.create(headline="Green Flowers")
+
         url = reverse('kanisa_manage_banners_retire', args=[1, ])
         self.client.login(username='fred', password='secret')
 
@@ -35,7 +47,7 @@ class BannerManagementViewTest(KanisaViewTestCase):
 
         self.assertTrue('banner_list' in resp.context)
         self.assertEqual([banner.pk for banner in resp.context['banner_list']],
-                         [2, 3, 5, ])
+                         [])
 
         self.assertTrue('messages' in resp.context)
         self.assertEqual([m.message for m in resp.context['messages']],
@@ -53,12 +65,8 @@ class BannerManagementViewTest(KanisaViewTestCase):
 
 
 class BannerPublicViewTest(TestCase):
-    fixtures = ['banners.json', ]
-
     def test_banner_visit_counting(self):
-        banner = Banner.objects.get(pk=2)
-        self.assertEqual(banner.url, "http://www.google.com")
-        self.assertEqual(banner.visits, 0)
+        banner = BannerFactory.create(url="http://www.google.com")
 
         url = reverse('kanisa_public_banners_visit', args=[banner.pk, ])
         resp = self.client.get(url)
@@ -67,11 +75,11 @@ class BannerPublicViewTest(TestCase):
         self.assertEqual(items[-1],
                          ('Location', 'http://www.google.com'))
 
-        banner = Banner.objects.get(pk=2)
+        banner = Banner.objects.get(pk=banner.pk)
         self.assertEqual(banner.visits, 1)
 
     def test_banner_visit_counting_404s_without_url(self):
-        banner = Banner.objects.get(pk=1)
+        banner = BannerFactory.create(url="")
         self.assertEqual(banner.url, '')
         url = reverse('kanisa_public_banners_visit', args=[banner.pk, ])
         resp = self.client.get(url)
