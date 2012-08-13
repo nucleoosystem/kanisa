@@ -1,12 +1,19 @@
-from datetime import date
+from datetime import date, time
 from django.core.urlresolvers import reverse
 from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.tests.utils import KanisaViewTestCase
+import factory
+
+
+class RegularEventFactory(factory.Factory):
+    FACTORY_FOR = RegularEvent
+    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    start_time = time(14, 0)
+    duration = 60
+    day = 1
 
 
 class DiaryManagementViewTest(KanisaViewTestCase):
-    fixtures = ['diary.json', ]
-
     def test_views_protected(self):
         prefix = 'kanisa_manage_diary'
         self.view_is_restricted(reverse(prefix))
@@ -16,6 +23,8 @@ class DiaryManagementViewTest(KanisaViewTestCase):
                                         % prefix))
 
     def test_diary_root_view(self):
+        RegularEventFactory.create()
+
         url = reverse('kanisa_manage_diary')
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
@@ -27,6 +36,8 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(resp.context['calendar']), 7)
 
     def test_diary_root_view_bad_date(self):
+        RegularEventFactory.create()
+
         url = reverse('kanisa_manage_diary') + '?date=abc'
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
@@ -38,6 +49,9 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(resp.context['calendar']), 7)
 
     def test_diary_regular_events_view(self):
+        RegularEventFactory.create()
+        RegularEventFactory.create()
+
         url = reverse('kanisa_manage_diary_regularevents')
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
@@ -45,14 +59,15 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertTemplateUsed(resp,
                                 'kanisa/management/diary/regular_events.html')
         self.assertTrue('regularevent_list' in resp.context)
-        self.assertEqual(len(resp.context['regularevent_list']), 4)
+        self.assertEqual(len(resp.context['regularevent_list']), 2)
 
     def test_diary_schedule_regular_event(self):
+        pk = RegularEventFactory.create(title='Afternoon Tea').pk
         # Check preconditions
         self.assertEqual(len(ScheduledEvent.objects.all()), 0)
 
         url = reverse('kanisa_manage_diary_schedule_regular_event',
-                      args=[1, 20120103, ])
+                      args=[pk, 20120103, ])
         self.client.login(username='fred', password='secret')
 
         # Schedule the event
@@ -83,8 +98,9 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 404)
 
     def test_diary_schedule_regular_event_baddate_404s(self):
+        pk = RegularEventFactory.create(title='Afternoon Tea').pk
         url = reverse('kanisa_manage_diary_schedule_regular_event',
-                      args=[1, 20121301, ])
+                      args=[pk, 20121301, ])
         self.client.login(username='fred', password='secret')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 404)
@@ -94,7 +110,8 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(ScheduledEvent.objects.all()), 0)
 
         # Schedule an event
-        event = RegularEvent.objects.get(pk=1)
+        pk = RegularEventFactory.create(title='Afternoon Tea').pk
+        event = RegularEvent.objects.get(pk=pk)
         event.schedule(date(2012, 01, 03), date(2012, 01, 04))
         self.assertEqual(len(ScheduledEvent.objects.all()), 1)
 
@@ -125,6 +142,10 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 404)
 
     def test_diary_schedule_weeks_events(self):
+        RegularEventFactory.create(day=1)
+        RegularEventFactory.create(day=2)
+        RegularEventFactory.create(day=3)
+
         # Check preconditions
         self.assertEqual(len(ScheduledEvent.objects.all()), 0)
         url = reverse('kanisa_manage_diary_schedule_weeks_regular_event')
