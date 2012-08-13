@@ -25,8 +25,6 @@ class SermonFactory(factory.Factory):
 
 
 class SermonManagementViewTest(KanisaViewTestCase):
-    fixtures = ['sermons.json', ]
-
     def test_views_protected(self):
         prefix = 'kanisa_manage_sermons'
         self.view_is_restricted(reverse(prefix))
@@ -47,13 +45,17 @@ class SermonManagementViewTest(KanisaViewTestCase):
                                         args=[1, ]))
 
     def test_index_view(self):
+        SermonSeriesFactory.create()
+        SermonSeriesFactory.create()
+        SermonFactory.create(series=None)
+
         self.client.login(username='fred', password='secret')
         resp = self.client.get(reverse('kanisa_manage_sermons'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/sermons/index.html')
 
         self.assertEqual(len(resp.context['standalone']), 1)
-        self.assertEqual(len(resp.context['object_list']), 3)
+        self.assertEqual(len(resp.context['object_list']), 2)
         self.client.logout()
 
     def test_create_series_view(self):
@@ -66,15 +68,16 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.client.logout()
 
     def test_create_sermon_view(self):
+        pk = SermonSeriesFactory.create(passage='John 21').pk
         self.client.login(username='fred', password='secret')
         base_url = reverse('kanisa_manage_sermons_individual_create')
 
         # Check with a pre-populated series
-        url = '%s?series=2' % base_url
+        url = '%s?series=%s' % (base_url, pk)
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/create.html')
-        self.assertEqual(resp.context['form'].initial['series'], 2)
+        self.assertEqual(resp.context['form'].initial['series'], pk)
         self.assertEqual(unicode(resp.context['form'].initial['passage']),
                          'John 21')
 
@@ -108,12 +111,15 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.client.logout()
 
     def test_mark_series_complete(self):
+        pk = SermonSeriesFactory.create(title="The Psalms",
+                                        active=True).pk
+
         self.client.login(username='fred', password='secret')
 
         self.assertTrue(SermonSeries.objects.get(pk=1).active)
 
         resp = self.client.get(reverse('kanisa_manage_sermons_series_complete',
-                                       args=[1, ]),
+                                       args=[pk, ]),
                                follow=True)
         self.assertEqual(resp.status_code, 200)
 
@@ -124,7 +130,7 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.assertEqual('Series "The Psalms" marked as complete.',
                          list(messages)[0].message)
 
-        self.assertFalse(SermonSeries.objects.get(pk=1).active)
+        self.assertFalse(SermonSeries.objects.get(pk=pk).active)
 
         self.client.logout()
 
