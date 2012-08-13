@@ -1,55 +1,69 @@
 from datetime import date
-from django.core.files.storage import default_storage
 from django.template.loader import render_to_string
 from django.test import TestCase
 from kanisa.models import SermonSeries, Sermon, SermonSpeaker
-import os
+import factory
+
+
+class SermonSpeakerFactory(factory.Factory):
+    FACTORY_FOR = SermonSpeaker
+    forename = factory.Sequence(lambda n: 'John #%s' % n)
+    surname = factory.Sequence(lambda n: 'Doe #%s' % n)
+
+
+class SermonSeriesFactory(factory.Factory):
+    FACTORY_FOR = SermonSeries
+    title = factory.Sequence(lambda n: 'Series #%s' % n)
+
+
+class SermonFactory(factory.Factory):
+    FACTORY_FOR = Sermon
+    speaker = factory.SubFactory(SermonSpeakerFactory)
+    series = factory.SubFactory(SermonSeriesFactory)
+    title = factory.Sequence(lambda n: 'Sermon #%s' % n)
+    date = date(2012, 1, 1)
 
 
 class SermonTest(TestCase):
-    fixtures = ['sermons.json', ]
-
-    def setUp(self):
-        media_dir = os.path.join(os.path.dirname(__file__), 'fixtures/media')
-        self._old_default_storage_location = default_storage.location
-        default_storage.location = media_dir
-
-    def tearDown(self):
-        default_storage.location = self._old_default_storage_location
-
     def testUnicode(self):
-        series = SermonSeries.objects.all()
-        self.assertEqual(len(series), 3)
-        self.assertEqual(unicode(series[0]), 'The Psalms')
-        self.assertEqual(unicode(series[1]), 'All Sorts of Things')
-        self.assertEqual(unicode(series[2]), 'The Beatitudes')
+        series = SermonSeriesFactory.build(title='Series Title')
+        self.assertEqual(unicode(series), 'Series Title')
 
-        sermon = Sermon.objects.get(pk=1)
-        self.assertEqual(unicode(sermon), 'Something about Psalm 1')
+        sermon = SermonFactory.build(title='Sermon Title')
+        self.assertEqual(unicode(sermon), 'Sermon Title')
 
     def testNumSermons(self):
-        series1 = SermonSeries.objects.get(pk=1)
-        series2 = SermonSeries.objects.get(pk=2)
-        series3 = SermonSeries.objects.get(pk=3)
+        series1 = SermonSeriesFactory.create()
+        series2 = SermonSeriesFactory.create()
+
+        SermonFactory.create(series=series1)
+        SermonFactory.create(series=series1)
+        SermonFactory.create(series=series1)
+
+        series1 = SermonSeries.objects.get(pk=series1.pk)
+        series2 = SermonSeries.objects.get(pk=series2.pk)
 
         with self.assertNumQueries(0):
             self.assertEqual(series1.num_sermons(), 3)
             self.assertEqual(series2.num_sermons(), 0)
-            self.assertEqual(series3.num_sermons(), 0)
 
         series = list(SermonSeries.objects.all())
         with self.assertNumQueries(0):
             self.assertEqual([s.num_sermons() for s in series],
-                             [3, 0, 0])
+                             [3, 0])
 
     def testGetSermonSpeakerIsFree(self):
-        sermon = Sermon.objects.get(pk=1)
+        speaker = SermonSpeakerFactory(forename='Bugs',
+                                       surname='Bunny')
+        sermon = SermonFactory.create(speaker=speaker)
+        sermon = Sermon.objects.get(pk=sermon.pk)
 
         with self.assertNumQueries(0):
             self.assertEqual(unicode(sermon.speaker), 'Bugs Bunny')
 
     def testGetSermonSpeakerName(self):
-        speaker = SermonSpeaker.objects.get(pk=1)
+        speaker = SermonSpeakerFactory.build(forename='Bugs',
+                                             surname='Bunny')
         self.assertEqual(speaker.name(), 'Bugs Bunny')
 
     def testAutoSlugForSermonSpeaker(self):
@@ -59,6 +73,14 @@ class SermonTest(TestCase):
         self.assertEqual(speaker.slug, 'mickey-mouse')
 
     def testFetchSermonsForSeries(self):
+        series1 = SermonSeriesFactory.create()
+        SermonFactory.create(series=series1,
+                             date=date(2012, 4, 29))
+        SermonFactory.create(series=series1,
+                             date=date(2012, 5, 13))
+        SermonFactory.create(series=series1,
+                             date=date(2012, 5, 6))
+
         series1 = SermonSeries.objects.get(pk=1)
         with self.assertNumQueries(1):
             sermons = list(series1.sermons())
@@ -72,9 +94,11 @@ class SermonTest(TestCase):
                           date(2012, 5, 13)])
 
     def test_date_range(self):
-        # Series 1 has three sermons
-        series1 = SermonSeries.objects.get(pk=1)
-        self.assertTrue(series1.active)
+        series1 = SermonSeriesFactory.create(passage='Psalms')
+        SermonFactory.create(series=series1,
+                             date=date(2012, 4, 29))
+        SermonFactory.create(series=series1,
+                             date=date(2012, 5, 13))
 
         # Active series have None as the end-point of the date range.
         with self.assertNumQueries(1):
@@ -90,7 +114,7 @@ class SermonTest(TestCase):
                               date(2012, 5, 13)))
 
         # Series 2 has no sermons
-        series2 = SermonSeries.objects.get(pk=2)
+        series2 = SermonSeriesFactory.create(passage='John 21')
         self.assertEqual(series2.sermons().count(), 0)
 
         with self.assertNumQueries(1):
@@ -103,7 +127,12 @@ class SermonTest(TestCase):
             return render_to_string(tmpl,
                                     {'object': series}).strip()
 
-        series1 = SermonSeries.objects.get(pk=1)
+        series1 = SermonSeriesFactory.create(passage='Psalms')
+        SermonFactory.create(series=series1,
+                             date=date(2012, 4, 29))
+        SermonFactory.create(series=series1,
+                             date=date(2012, 5, 13))
+
         self.assertEqual(render(series1),
                          ('<span class="subtitle">\n(A series on '
                           '<em>Psalms</em>: 29th April 2012 &ndash; '
@@ -126,7 +155,7 @@ class SermonTest(TestCase):
                           '&ndash; )\n</span>'))
 
         # Series 2 has no sermons
-        series2 = SermonSeries.objects.get(pk=2)
+        series2 = SermonSeriesFactory.create(passage='John 21')
         self.assertEqual(render(series2),
                          ('<span class="subtitle">\n(A series on '
                           '<em>John 21</em>)\n</span>'))
