@@ -171,15 +171,13 @@ class DiaryManagementViewTest(KanisaViewTestCase):
 
 
 class DiaryPublicViewTest(KanisaViewTestCase):
-    fixtures = ['diary.json', ]
-
     def test_view_index(self):
         url = reverse('kanisa_public_diary_index')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
 
     def test_view_regular_event(self):
-        event = RegularEvent.objects.get(pk=1)
+        event = RegularEventFactory.create()
         url = reverse('kanisa_public_diary_regularevent_detail',
                       args=[event.slug, ])
         resp = self.client.get(url)
