@@ -1,6 +1,27 @@
+from datetime import date
 from django.core.urlresolvers import reverse
-from kanisa.models import Sermon, SermonSeries
+from kanisa.models import Sermon, SermonSeries, SermonSpeaker
 from kanisa.tests.utils import KanisaViewTestCase
+import factory
+
+
+class SermonSpeakerFactory(factory.Factory):
+    FACTORY_FOR = SermonSpeaker
+    forename = factory.Sequence(lambda n: 'John #%s' % n)
+    surname = factory.Sequence(lambda n: 'Doe #%s' % n)
+
+
+class SermonSeriesFactory(factory.Factory):
+    FACTORY_FOR = SermonSeries
+    title = factory.Sequence(lambda n: 'Series #%s' % n)
+
+
+class SermonFactory(factory.Factory):
+    FACTORY_FOR = Sermon
+    series = factory.SubFactory(SermonSeriesFactory)
+    speaker = factory.SubFactory(SermonSpeakerFactory)
+    title = factory.Sequence(lambda n: 'Sermon #%s' % n)
+    date = date(2012, 1, 1)
 
 
 class SermonManagementViewTest(KanisaViewTestCase):
@@ -109,35 +130,35 @@ class SermonManagementViewTest(KanisaViewTestCase):
 
 
 class SermonPublicViewTest(KanisaViewTestCase):
-    fixtures = ['sermons.json', ]
-
     def test_view_sermon_index(self):
         resp = self.client.get(reverse('kanisa_public_sermon_index'))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_sermon_series(self):
-        series = SermonSeries.objects.get(pk=1)
+        series = SermonSeriesFactory.create()
         resp = self.client.get(reverse('kanisa_public_sermon_series_detail',
                                        args=[series.slug, ]))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_sermon_which_is_part_of_a_series(self):
-        sermon = Sermon.objects.get(pk=1)
+        series = SermonSeriesFactory.create()
+        sermon = SermonFactory.create(series=series)
+
         resp = self.client.get(reverse('kanisa_public_sermon_detail',
                                        args=[sermon.series.slug,
                                              sermon.slug, ]))
         self.assertEqual(resp.status_code, 200)
 
     def test_view_sermon_which_is_not_part_of_a_series(self):
-        sermon = Sermon.objects.get(pk=4)
-        self.assertEqual(sermon.series, None)
+        sermon = SermonFactory.create(series=None)
         url = reverse('kanisa_public_standalone_sermon_detail',
                       args=[sermon.slug, ])
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
 
     def test_standalone_view_404s_for_sermons_in_a_series(self):
-        sermon = Sermon.objects.get(pk=1)
+        series = SermonSeriesFactory.create()
+        sermon = SermonFactory.create(series=series)
         self.assertNotEqual(sermon.series, None)
 
         url = reverse('kanisa_public_standalone_sermon_detail',
@@ -146,7 +167,9 @@ class SermonPublicViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 404)
 
     def test_must_provide_correct_series_to_view_sermon(self):
-        sermon = Sermon.objects.get(pk=1)
+        series = SermonSeriesFactory.create()
+        sermon = SermonFactory.create(series=series)
+
         resp = self.client.get(reverse('kanisa_public_sermon_detail',
                                        args=['foobar',
                                              sermon.slug, ]))
