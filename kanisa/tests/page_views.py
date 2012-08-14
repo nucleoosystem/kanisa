@@ -1,11 +1,15 @@
 from django.core.urlresolvers import reverse
 from kanisa.models import Page
 from kanisa.tests.utils import KanisaViewTestCase
+import factory
+
+
+class PageFactory(factory.Factory):
+    FACTORY_FOR = Page
+    title = 'Page Title'
 
 
 class PageManagementViewTest(KanisaViewTestCase):
-    fixtures = ['pages.json', ]
-
     def test_views_protected(self):
         self.view_is_restricted(reverse('kanisa_manage_pages'))
         self.view_is_restricted(reverse('kanisa_manage_pages_create'))
@@ -38,7 +42,8 @@ class PageManagementViewTest(KanisaViewTestCase):
         resp = self.client.get(url + '?parent=99')
         self.assertEqual(resp.status_code, 404)
 
-        resp = self.client.get(url + '?parent=1')
+        pk = PageFactory.create().pk
+        resp = self.client.get(url + '?parent=%s' % pk)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context['form'].initial['parent'].pk, 1)
 
@@ -52,24 +57,32 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.client.logout()
 
     def test_delete_page_view(self):
+        parent_page = PageFactory.create(title="About Us")
+        child_page = PageFactory.create(parent=parent_page,
+                                        title="Staff")
+        child_page2 = PageFactory.create(parent=parent_page,
+                                         title="Location")
+
         self.client.login(username='fred', password='secret')
 
-        # Can't delete pages which aren't root nodes
+        # Can't delete pages which aren't root nodes - getting the
+        # confirmation page should 404.
         resp = self.client.get(reverse('kanisa_manage_pages_delete',
-                                       args=[1, ]))
+                                       args=[parent_page.pk, ]))
         self.assertEqual(resp.status_code, 404)
 
+        # So should running the actual delete.
         resp = self.client.post(reverse('kanisa_manage_pages_delete',
                                         args=[1, ]),
                                 {})
         self.assertEqual(resp.status_code, 404)
 
         resp = self.client.get(reverse('kanisa_manage_pages_delete',
-                                       args=[2, ]))
+                                       args=[child_page.pk, ]))
         self.assertEqual(resp.status_code, 200)
 
         resp = self.client.post(reverse('kanisa_manage_pages_delete',
-                                        args=[2, ]),
+                                        args=[child_page.pk, ]),
                                 {},
                                 follow=True)
 
@@ -79,7 +92,7 @@ class PageManagementViewTest(KanisaViewTestCase):
                          [u'Staff deleted.', ])
 
         resp = self.client.post(reverse('kanisa_manage_pages_delete',
-                                        args=[3, ]),
+                                        args=[child_page2.pk, ]),
                                 {},
                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
@@ -89,9 +102,12 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.client.logout()
 
     def test_update_page_view(self):
+        parent_page = PageFactory.create(title="About Us")
+        child_page = PageFactory.create(title="Child page",
+                                        parent=parent_page)
         self.client.login(username='fred', password='secret')
 
-        p = Page.objects.get(pk=1)
+        p = Page.objects.get(pk=parent_page.pk)
         url = reverse('kanisa_manage_pages_update', args=[1, ])
 
         resp = self.client.get(url)
@@ -114,19 +130,17 @@ class PageManagementViewTest(KanisaViewTestCase):
                              'A page cannot be its own parent.')
 
         # Pages cannot have their descendants as their parent
-        child = Page.objects.get(pk=4)
-        self.assertEqual(child.parent, p)
         resp = self.client.post(url, {'title': p.title,
                                       'contents': p.contents,
-                                      'parent': child.pk})
+                                      'parent': child_page.pk})
         self.assertEqual(resp.status_code, 200)
         self.assertFormError(resp, 'form', 'parent',
                              'Invalid parent - cyclical hierarchy detected.')
 
-        url = reverse('kanisa_manage_pages_update', args=[4, ])
-        resp = self.client.post(url, {'title': child.title,
-                                      'contents': child.contents,
-                                      'parent': 2})
+        url = reverse('kanisa_manage_pages_update', args=[child_page.pk, ])
+        resp = self.client.post(url, {'title': child_page.title,
+                                      'contents': child_page.contents,
+                                      'parent': parent_page.pk})
         self.assertEqual(resp.status_code, 302)
 
         self.client.logout()
