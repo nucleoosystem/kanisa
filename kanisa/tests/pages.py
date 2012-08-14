@@ -32,9 +32,7 @@ class PageTest(TestCase):
 
     def test_publish_child_of_draft_node(self):
         parent = PageFactory.create(draft=True)
-        child = PageFactory.create(parent=parent, draft=True)
-
-        child.draft = False
+        child = PageFactory.build(parent=parent, draft=False)
 
         with self.assertRaises(ValidationError) as cm:
             child.full_clean()

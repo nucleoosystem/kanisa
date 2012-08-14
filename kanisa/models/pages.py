@@ -48,13 +48,11 @@ class Page(MPTTModel):
 
     def check_draft_status(self):
         if not self.draft:
-            ancestors = self.get_ancestors()
-            for a in ancestors:
-                if a.draft:
-                    raise ValidationError({'draft': ['Cannot mark this page '
-                                                     'as published, as it has '
-                                                     'non-published '
-                                                     'ancestors.', ]})
+            if self.parent and self.parent.draft:
+                raise ValidationError({'draft': ['Cannot mark this page '
+                                                 'as published, as it has '
+                                                 'non-published '
+                                                 'ancestors.', ]})
 
         if self.draft and not self.is_leaf_node():
             descendants = self.get_descendants()
