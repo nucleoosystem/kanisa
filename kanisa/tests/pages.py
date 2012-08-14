@@ -1,13 +1,19 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from kanisa.models import Page
+import factory
+
+
+class PageFactory(factory.Factory):
+    FACTORY_FOR = Page
+    title = 'Page Title'
 
 
 class PageTest(TestCase):
-    fixtures = ['pages.json', ]
-
     def test_make_non_leaf_node_a_draft(self):
-        p = Page.objects.get(pk=1)
+        parent = PageFactory.create()
+        child = PageFactory.create(parent=parent)
+        p = Page.objects.get(pk=parent.pk)
         p.draft = True
 
         with self.assertRaises(ValidationError) as cm:
@@ -20,23 +26,18 @@ class PageTest(TestCase):
                           'published descendants.', ])
 
     def test_make_leaf_node_a_draft(self):
-        p = Page.objects.get(pk=4)
-        self.assertTrue(p.is_leaf_node())
-        p.draft = True
-        p.full_clean()
+        leaf = PageFactory.create()
+        leaf.draft = True
+        leaf.full_clean()
 
     def test_publish_child_of_draft_node(self):
-        p = Page.objects.get(pk=4)
-        p.draft = True
-        p.save()
+        parent = PageFactory.create(draft=True)
+        child = PageFactory.create(parent=parent, draft=True)
 
-        new_page = Page.objects.create(title='Child of draft node',
-                                       parent=p)
-        new_page.save()
-        new_page.draft = False
+        child.draft = False
 
         with self.assertRaises(ValidationError) as cm:
-            new_page.full_clean()
+            child.full_clean()
 
         errors = cm.exception.message_dict
         self.assertTrue('draft' in errors)
@@ -45,7 +46,7 @@ class PageTest(TestCase):
                           'has non-published ancestors.', ])
 
     def test_page_cannot_be_its_own_parent(self):
-        p = Page.objects.get(pk=4)
+        p = PageFactory.create()
         p.parent = p
 
         with self.assertRaises(ValidationError) as cm:
@@ -57,15 +58,13 @@ class PageTest(TestCase):
                          ['A page cannot be its own parent.', ])
 
     def test_page_cannot_have_descendant_as_parent(self):
-        p = Page.objects.get(pk=1)
-        descendants = p.get_descendants()
-        self.assertEqual([d.pk for d in descendants],
-                         [4, 3, 2, ])
+        parent = PageFactory.create()
+        child = PageFactory.create(parent=parent)
 
-        p.parent = Page.objects.get(pk=4)
+        parent.parent = child
 
         with self.assertRaises(ValidationError) as cm:
-            p.full_clean()
+            parent.full_clean()
 
         errors = cm.exception.message_dict
         self.assertTrue('parent' in errors)
