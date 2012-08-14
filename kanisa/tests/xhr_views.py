@@ -1,6 +1,8 @@
+from datetime import time
 from django.core.urlresolvers import reverse, reverse_lazy
-from kanisa.models import ScheduledEvent
+from kanisa.models import ScheduledEvent, Page, SermonSeries, RegularEvent
 from kanisa.tests.utils import KanisaViewTestCase
+import factory
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
@@ -158,9 +160,12 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.client.logout()
 
 
-class XHRCreatePageViewTest(XHRBaseTestCase):
-    fixtures = ['pages.json', ]
+class PageFactory(factory.Factory):
+    FACTORY_FOR = Page
+    title = 'Page Title'
 
+
+class XHRCreatePageViewTest(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_create_page')
     method = 'post'
     permission_text = 'manage pages'
@@ -207,22 +212,26 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
         self.client.logout()
 
     def test_good_parent(self):
+        pk = PageFactory.create().pk
         self.client.login(username='fred', password='secret')
 
-        resp = self.fetch({'title': 'Test page', 'parent': '1'})
+        resp = self.fetch({'title': 'Test page', 'parent': '%s' % pk})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Page created.')
         self.client.logout()
 
 
 class XHRListPagesViewTest(XHRBaseTestCase):
-    fixtures = ['pages.json', ]
-
     url = reverse_lazy('kanisa_manage_xhr_list_pages')
     method = 'get'
     permission_text = 'manage pages'
 
     def test_success(self):
+        # Make some sample data
+        parent = PageFactory.create()
+        PageFactory.create(parent=parent)
+        PageFactory.create()
+
         self.client.login(username='fred', password='secret')
 
         resp = self.fetch()
@@ -230,9 +239,12 @@ class XHRListPagesViewTest(XHRBaseTestCase):
         self.client.logout()
 
 
-class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
-    fixtures = ['sermons.json', ]
+class SermonSeriesFactory(factory.Factory):
+    FACTORY_FOR = SermonSeries
+    title = factory.Sequence(lambda n: 'Series #%s' % n)
 
+
+class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     url = reverse_lazy('kanisa_manage_xhr_sermon_series_complete')
     method = 'post'
     permission_text = 'manage sermons'
@@ -264,15 +276,24 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
         self.client.logout()
 
     def test_success(self):
+        pk = SermonSeriesFactory.create().pk
+
         self.client.login(username='fred', password='secret')
 
-        resp = self.fetch({'series': 1})
+        resp = self.fetch({'series': pk})
         self.assertEqual(resp.status_code, 200)
         self.client.logout()
 
 
+class RegularEventFactory(factory.Factory):
+    FACTORY_FOR = RegularEvent
+    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    start_time = time(14, 0)
+    duration = 60
+    day = 1
+
+
 class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
-    fixtures = ['diary.json', ]
     url = reverse_lazy('kanisa_manage_xhr_diary_schedule_regular')
     method = 'post'
     permission_text = 'manage the diary'
@@ -313,9 +334,10 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
         self.client.logout()
 
     def test_success(self):
+        pk = RegularEventFactory.create().pk
         self.client.login(username='fred', password='secret')
 
-        resp = self.fetch({'event': '1',
+        resp = self.fetch({'event': '%s' % pk,
                            'date': '20120103'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, "Event scheduled.")
@@ -327,6 +349,7 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
         self.client.logout()
 
     def test_double_schedule(self):
+        pk = RegularEventFactory.create().pk
         self.client.login(username='fred', password='secret')
 
         resp = self.fetch({'event': '1',
