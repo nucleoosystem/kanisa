@@ -44,6 +44,21 @@ class DiaryTest(TestCase):
         instance = ScheduledEvent.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
+    def testGetNextWithEventScheduled(self):
+        event = RegularEventFactory.create(title='Breakfast Club')
+
+        # I should probably mock out datetime.now() here, so I don't
+        # have to use such a far-future date.
+        event.schedule(date(2020, 1, 1), date(2020, 1, 31))
+        next = event.get_next()
+        self.assertEqual(next.title, 'Breakfast Club')
+        self.assertEqual(next.date, date(2020, 1, 7))
+
+    def testGetNextWithoutEventScheduled(self):
+        event = RegularEventFactory.create(title='Breakfast Club')
+        next = event.get_next()
+        self.assertEqual(next, None)
+
 
 class DiaryGetWeekBoundsTest(TestCase):
     def testGetWeekBoundsToday(self):

@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from autoslug import AutoSlugField
-from datetime import timedelta
+from datetime import datetime, timedelta
 from django.db import models
 
 from .base import SearchableModel
@@ -84,6 +84,15 @@ class RegularEvent(SearchableModel):
             raise RegularEvent.AlreadyScheduled()
 
         self.schedule(date, date + timedelta(days=1))
+
+    def get_next(self):
+        events = ScheduledEvent.objects.filter(event=self,
+                                               date__gte=datetime.now())[:1]
+
+        if not events:
+            return None
+
+        return events[0]
 
 
 class ScheduledEvent(SearchableModel):
