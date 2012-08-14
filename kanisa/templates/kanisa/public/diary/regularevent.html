@@ -38,7 +38,7 @@
 <p class="lead">{{ object.title }} is on {{ object.get_day_display }}s at {{ object.start_time }}</p>
 
 {% if object.details %}
-{{ object.markdown }}
+{{ object.details|markdown }}
 {% endif %}
   </div>
 </div>
