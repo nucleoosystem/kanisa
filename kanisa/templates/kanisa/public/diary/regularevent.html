@@ -26,19 +26,54 @@
       {% include "kanisa/public/diary/_diary_nav.html" %}
     </div>
     {% if perms.kanisa.manage_diary %}
-    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">Edit this regular event</a>
+    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
+      <i class="icon-edit"></i>
+      Edit this regular event
+    </a>
     {% endif %}
   </div>
   <div class="span9">
+    <div class="row">
+      {% with object.get_next as next_event %}
+      <div class="span{% if next_event %}5{% else %}9{% endif %}">
+        <h1 class="primary">
+          {{ object.title }}
+        </h1>
 
-    <h1 class="primary">
-      {{ object.title }}
-    </h1>
+        <p class="lead">
+          {{ object.title }} is on
+          {{ object.get_day_display }}s at {{ object.start_time }}
+        </p>
+      </div>
+      {% if next_event %}
+      <div class="span4">
+        <div class="well">
+          <h3>Coming Up</h3>
+          <p>
+            The next <em>{{ next_event.title }}</em> is on
+            <strong>{{ next_event.date|date:"l, jS F Y" }}</strong>
+            at
+            <strong>{{ next_event.start_time }}</strong>
+          </p>
 
-    <p class="lead">
-      {{ object.title }} is on
-      {{ object.get_day_display }}s at {{ object.start_time }}
-    </p>
+          {% if object.details != next_event.details %}
+          {% if next_event.details %}
+          {{ next_event.details|markdown }}
+          {% endif %}
+          {% endif %}
+
+          {% if perms.kanisa.manage_diary %}
+          <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' next_event.pk %}">
+            <i class="icon-edit"></i>
+            Edit this scheduled event
+          </a>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+      {% endwith %}
+    </div>
 
     {% if object.details %}
     {{ object.details|markdown }}
