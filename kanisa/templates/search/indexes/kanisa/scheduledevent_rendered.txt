@@ -8,7 +8,9 @@
 {% block contents %}
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.date|date:"jS F Y" }}</strong> at <strong>{{ object.start_time }}</strong>.</p>
+{% if object.details %}
 {{ object.details|markdown|striptags|truncatewords:75 }}
+{% endif %}
 </blockquote>
 {% endblock %}
 
