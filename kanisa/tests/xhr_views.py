@@ -1,7 +1,10 @@
-from datetime import time
 from django.core.urlresolvers import reverse, reverse_lazy
+from datetime import time
+from django.test.client import RequestFactory
 from kanisa.models import ScheduledEvent, Page, SermonSeries, RegularEvent
 from kanisa.tests.utils import KanisaViewTestCase
+from kanisa.views.xhr.users import AssignPermissionView
+
 import factory
 
 
@@ -78,86 +81,93 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     method = 'post'
     permission_text = 'manage users'
 
+    def setUp(self):
+        super(XHRUserPermissionViewTest, self).setUp()
+        factory = RequestFactory()
+        self.request = factory.post(self.url)
+        self.request.session = {}
+        self.request.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+
     def test_must_provide_required_inputs(self):
-        self.client.login(username='fred', password='secret')
+        self.request.user = self.fred
+        self.request.POST = {'user': '3',
+                             'assigned': 'true'}
 
         # No permission
-        resp = self.fetch({'user': '3',
-                           'assigned': 'true'})
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'permission' not found.")
 
         # No user
-        resp = self.fetch({'permission': 'foo',
-                           'assigned': 'true'})
+        self.request.POST = {'permission': 'foo',
+                             'assigned': 'true'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'user' not found.")
 
         # No 'assigned'
-        resp = self.fetch({'permission': 'foo',
-                           'user': '3'})
+        self.request.POST = {'permission': 'foo',
+                             'user': '3'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'assigned' not found.")
 
-        self.client.logout()
-
     def test_input_parsing(self):
-        self.client.login(username='fred', password='secret')
+        self.request.user = self.fred
+        self.request.POST = {'permission': 'kanisa.manage_users',
+                             'user': 2,
+                             'assigned': 'true'}
 
-        resp = self.fetch({'permission': 'kanisa.manage_users',
-                           'user': 2,
-                           'assigned': 'true'})
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can manage your users.')
 
-        resp = self.fetch({'permission': 'kanisa.manage_users',
-                           'user': 2,
-                           'assigned': 'foobar'})
+        self.request.POST = {'permission': 'kanisa.manage_users',
+                             'user': 2,
+                             'assigned': 'foobar'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content,
                          'fred can no longer manage your users.')
 
-        self.client.logout()
-
     def test_bad_user(self):
-        self.client.login(username='fred', password='secret')
-
-        resp = self.fetch({'permission': 'kanisa.manage_users',
-                           'user': 99,
-                           'assigned': 'true'})
+        self.request.user = self.fred
+        self.request.POST = {'permission': 'kanisa.manage_users',
+                             'user': 99,
+                             'assigned': 'true'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'No user found with ID 99.')
 
-        self.client.logout()
-
     def test_bad_permission(self):
-        self.client.login(username='fred', password='secret')
+        self.request.user = self.fred
+        self.request.POST = {'permission': 'kanisa',
+                             'user': 2,
+                             'assigned': 'true'}
 
-        resp = self.fetch({'permission': 'kanisa',
-                           'user': 2,
-                           'assigned': 'true'})
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Malformed permission: \'kanisa\'.')
 
-        resp = self.fetch({'permission': 'kanisa.foo.bar',
-                           'user': 2,
-                           'assigned': 'true'})
+        self.request.POST = {'permission': 'kanisa.foo.bar',
+                             'user': 2,
+                             'assigned': 'true'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Malformed permission: \'kanisa.foo.bar\'.')
 
-        resp = self.fetch({'permission': 'kanisa.raspberries',
-                           'user': 2,
-                           'assigned': 'true'})
+        self.request.POST = {'permission': 'kanisa.raspberries',
+                             'user': 2,
+                             'assigned': 'true'}
+        resp = AssignPermissionView.as_view()(self.request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'Permission \'kanisa.raspberries\' not found.')
-
-        self.client.logout()
 
 
 class PageFactory(factory.Factory):
