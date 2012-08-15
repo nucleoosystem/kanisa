@@ -47,3 +47,12 @@ class KanisaViewTestCase(TestCase):
             request.GET = params
 
         return self.view.as_view()(request, **kwargs)
+
+    def get_request(self):
+        if self.method == 'post':
+            request = self.factory.post(self.url)
+        else:
+            request = self.factory.get(self.url)
+
+        request.session = {}
+        return request

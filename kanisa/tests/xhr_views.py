@@ -15,12 +15,7 @@ import factory
 
 class XHRBaseTestCase(KanisaViewTestCase):
     def get_request(self):
-        if self.method == 'post':
-            request = self.factory.post(self.url)
-        else:
-            request = self.factory.get(self.url)
-
-        request.session = {}
+        request = super(XHRBaseTestCase, self).get_request()
         request.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
         return request
 
