@@ -12,7 +12,7 @@ class PageFactory(factory.Factory):
 class PageTest(TestCase):
     def test_make_non_leaf_node_a_draft(self):
         parent = PageFactory.create()
-        child = PageFactory.create(parent=parent)
+        PageFactory.create(parent=parent)
         p = Page.objects.get(pk=parent.pk)
         p.draft = True
 

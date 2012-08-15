@@ -352,11 +352,11 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
         pk = RegularEventFactory.create().pk
         self.client.login(username='fred', password='secret')
 
-        resp = self.fetch({'event': '1',
+        resp = self.fetch({'event': '%s' % pk,
                            'date': '20120110'})
         self.assertEqual(resp.status_code, 200)
 
-        resp = self.fetch({'event': '1',
+        resp = self.fetch({'event': '%s' % pk,
                            'date': '20120110'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'That event is already scheduled.')
