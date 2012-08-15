@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import AnonymousUser
 from datetime import time
-from django.test.client import RequestFactory
 from kanisa.models import ScheduledEvent, Page, SermonSeries, RegularEvent
 from kanisa.tests.utils import KanisaViewTestCase
 from kanisa.views.xhr.bible import CheckBiblePassageView
@@ -15,10 +14,6 @@ import factory
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
-    def setUp(self):
-        super(XHRBaseTestCase, self).setUp()
-        self.factory = RequestFactory()
-
     def get_request(self):
         if self.method == 'post':
             request = self.factory.post(self.url)
@@ -26,17 +21,8 @@ class XHRBaseTestCase(KanisaViewTestCase):
             request = self.factory.get(self.url)
 
         request.session = {}
-        request.user = self.fred
         request.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
         return request
-
-    def fetch_from_factory(self, request, params={}, **kwargs):
-        if self.method == 'post':
-            request.POST = params
-        elif self.method == 'get':
-            request.GET = params
-
-        return self.view.as_view()(request, **kwargs)
 
     def test_xhr_only(self):
         request = self.get_request()
@@ -73,27 +59,35 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
     view = CheckBiblePassageView
 
     def test_must_provide_passage(self):
-        resp = self.fetch_from_factory(self.get_request(), {'foo': 'bar'})
+        request = self.get_request()
+        request.user = self.fred
+        resp = self.fetch_from_factory(request, {'foo': 'bar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'passage' not found.")
 
     def test_invalid_passage(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+        resp = self.fetch_from_factory(request,
                                        {'passage': 'Foobar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          '"Foobar" is not a valid Bible passage.')
 
     def test_valid_book_invalid_range(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+        resp = self.fetch_from_factory(request,
                                        {'passage': 'Ps 151'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          'There are only 150 chapters in Psalms.')
 
     def test_valid_passage(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+        resp = self.fetch_from_factory(request,
                                        {'passage': 'Matt 3v1-7'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Matthew 3:1-7')
@@ -106,8 +100,11 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
     view = AssignPermissionView
 
     def test_must_provide_required_inputs(self):
+        request = self.get_request()
+        request.user = self.fred
+
         # No permission
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'user': '3',
                                         'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
@@ -115,7 +112,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
                          "Required argument 'permission' not found.")
 
         # No user
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'foo',
                                         'assigned': 'true'})
         self.assertEqual(resp.status_code, 400)
@@ -123,7 +120,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
                          "Required argument 'user' not found.")
 
         # No 'assigned'
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'foo',
                                         'user': '3'})
         self.assertEqual(resp.status_code, 400)
@@ -131,7 +128,10 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
                          "Required argument 'assigned' not found.")
 
     def test_input_parsing(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa.manage_users',
                                         'user': 2,
                                         'assigned': 'true'})
@@ -139,7 +139,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.assertEqual(resp.content,
                          'fred can manage your users.')
 
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa.manage_users',
                                         'user': 2,
                                         'assigned': 'foobar'})
@@ -149,7 +149,10 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
                          'fred can no longer manage your users.')
 
     def test_bad_user(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa.manage_users',
                                         'user': 99,
                                         'assigned': 'true'})
@@ -157,7 +160,10 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.assertEqual(resp.content, 'No user found with ID 99.')
 
     def test_bad_permission(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa',
                                         'user': 2,
                                         'assigned': 'true'})
@@ -165,7 +171,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Malformed permission: \'kanisa\'.')
 
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa.foo.bar',
                                         'user': 2,
                                         'assigned': 'true'})
@@ -173,7 +179,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
         self.assertEqual(resp.content,
                          'Malformed permission: \'kanisa.foo.bar\'.')
 
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'permission': 'kanisa.raspberries',
                                         'user': 2,
                                         'assigned': 'true'})
@@ -194,42 +200,57 @@ class XHRCreatePageViewTest(XHRBaseTestCase):
     view = CreatePageView
 
     def test_must_provide_required_inputs(self):
+        request = self.get_request()
+        request.user = self.fred
+
         # No title
-        resp = self.fetch_from_factory(self.get_request(), {'parent': '3', })
+        resp = self.fetch_from_factory(request, {'parent': '3', })
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'title' not found.")
 
         # No parent
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'title': 'Test page', })
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'parent' not found.")
 
     def test_empty_title(self):
+        request = self.get_request()
+        request.user = self.fred
+
         # Empty title
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'title': '', 'parent': ''})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Title must not be empty.')
 
     def test_nonexistent_parent(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'title': 'Test page', 'parent': '99'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, 'Page with ID \'99\' not found.')
 
     def test_empty_parent(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'title': 'Test page', 'parent': ''})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Page created.')
 
     def test_good_parent(self):
+        request = self.get_request()
+        request.user = self.fred
+
         pk = PageFactory.create().pk
 
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'title': 'Test page',
                                         'parent': '%s' % pk})
         self.assertEqual(resp.status_code, 200)
@@ -243,12 +264,15 @@ class XHRListPagesViewTest(XHRBaseTestCase):
     view = ListPagesView
 
     def test_success(self):
+        request = self.get_request()
+        request.user = self.fred
+
         # Make some sample data
         parent = PageFactory.create()
         PageFactory.create(parent=parent)
         PageFactory.create()
 
-        resp = self.fetch_from_factory(self.get_request())
+        resp = self.fetch_from_factory(request)
         self.assertEqual(resp.status_code, 200)
 
 
@@ -264,27 +288,39 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
     view = MarkSermonSeriesCompleteView
 
     def test_fails_without_required_parameters(self):
-        resp = self.fetch_from_factory(self.get_request())
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request)
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'series' not found.")
 
     def test_fails_with_non_numeric_series(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'series': 'nonnumeric'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "No sermon series found with ID 'nonnumeric'.")
 
     def test_fails_with_non_existent_series(self):
-        resp = self.fetch_from_factory(self.get_request(), {'series': 99})
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request, {'series': 99})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "No sermon series found with ID '99'.")
 
     def test_success(self):
+        request = self.get_request()
+        request.user = self.fred
+
         pk = SermonSeriesFactory.create().pk
 
-        resp = self.fetch_from_factory(self.get_request(), {'series': pk})
+        resp = self.fetch_from_factory(request, {'series': pk})
         self.assertEqual(resp.status_code, 200)
 
 
@@ -303,33 +339,45 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
     view = ScheduleRegularEventView
 
     def test_required_attributes_are_required(self):
-        resp = self.fetch_from_factory(self.get_request(), {'date': 'foobar'})
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request, {'date': 'foobar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'event' not found.")
 
-        resp = self.fetch_from_factory(self.get_request(), {'event': 'foobar'})
+        resp = self.fetch_from_factory(request, {'event': 'foobar'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content,
                          "Required argument 'date' not found.")
 
     def test_bad_date_format(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'event': 'foobar',
                                         'date': '20121301'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "'20121301' is not a valid date.")
 
     def test_bad_event_id(self):
-        resp = self.fetch_from_factory(self.get_request(),
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
                                        {'event': '99',
                                         'date': '20121201'})
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "No event found with ID '99'.")
 
     def test_success(self):
+        request = self.get_request()
+        request.user = self.fred
+
         pk = RegularEventFactory.create().pk
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'event': '%s' % pk,
                                         'date': '20120103'})
         self.assertEqual(resp.status_code, 200)
@@ -340,13 +388,16 @@ class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
         self.assertEqual(len(events), 1)
 
     def test_double_schedule(self):
+        request = self.get_request()
+        request.user = self.fred
+
         pk = RegularEventFactory.create().pk
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'event': '%s' % pk,
                                         'date': '20120110'})
         self.assertEqual(resp.status_code, 200)
 
-        resp = self.fetch_from_factory(self.get_request(),
+        resp = self.fetch_from_factory(request,
                                        {'event': '%s' % pk,
                                         'date': '20120110'})
         self.assertEqual(resp.status_code, 400)
@@ -361,10 +412,16 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
     view = DiaryGetSchedule
 
     def test_success(self):
-        resp = self.fetch_from_factory(self.get_request(), date='20120101')
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request, date='20120101')
         self.assertEqual(resp.status_code, 200)
 
     def test_baddate(self):
-        resp = self.fetch_from_factory(self.get_request(), date='2012')
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request, date='2012')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "Invalid date '2012' provided.")

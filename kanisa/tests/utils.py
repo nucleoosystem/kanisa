@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Permission
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.test import TestCase
+from django.test.client import RequestFactory
 from django.test.utils import override_settings
 
 
@@ -23,6 +24,7 @@ class KanisaViewTestCase(TestCase):
         self.fred.user_permissions.add(p)
 
         self.fred.save()
+        self.factory = RequestFactory()
 
     @override_settings(LOGIN_URL=reverse_lazy('kanisa_public_login'))
     def view_is_restricted(self, url):
@@ -37,3 +39,11 @@ class KanisaViewTestCase(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 403)
         self.client.logout()
+
+    def fetch_from_factory(self, request, params={}, **kwargs):
+        if self.method == 'post':
+            request.POST = params
+        elif self.method == 'get':
+            request.GET = params
+
+        return self.view.as_view()(request, **kwargs)
