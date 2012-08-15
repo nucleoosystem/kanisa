@@ -69,6 +69,8 @@
 * Check coverage of diary/banner CRUD views.
 * Add tests for search views.
 * Make sure search results for test runs are kept separately.
+* Don't inherit from TestCase for tests which don't use the database
+* Unit test views directly, rather than via URLs.
 
 # Misc
 
