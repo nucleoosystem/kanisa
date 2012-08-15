@@ -31,15 +31,18 @@
   </div>
   <div class="span9">
 
-<h1 class="primary">
-  {{ object.title }}
-</h1>
+    <h1 class="primary">
+      {{ object.title }}
+    </h1>
 
-<p class="lead">{{ object.title }} is on {{ object.get_day_display }}s at {{ object.start_time }}</p>
+    <p class="lead">
+      {{ object.title }} is on
+      {{ object.get_day_display }}s at {{ object.start_time }}
+    </p>
 
-{% if object.details %}
-{{ object.details|markdown }}
-{% endif %}
+    {% if object.details %}
+    {{ object.details|markdown }}
+    {% endif %}
   </div>
 </div>
 
