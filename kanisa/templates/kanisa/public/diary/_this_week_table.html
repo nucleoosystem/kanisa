@@ -1,0 +1,34 @@
+{% load url from future %}
+
+<h2>This Week</h2>
+<table class="table">
+  {% for date, items in thisweek %}
+  <tr>
+    <td>
+      <strong>{{ date|date:"l" }}</strong>
+      <br />
+      {{ date|date:"jS F" }}
+    </td>
+    <td>
+      {% for item in items %}
+      <span style="width: 5em; display:inline-block">
+        {{ item.start_time|date:"P" }}
+      </span>
+
+      {% if item.event %}
+      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}">
+        {{ item }}
+      </a>
+      {% else %}
+      {{ item }}
+      {% endif %}
+
+      {% if not forloop.last %}<br />{% endif %}
+
+      {% empty %}
+      <em>Nothing scheduled</em>
+      {% endfor %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
