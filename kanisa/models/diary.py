@@ -29,6 +29,10 @@ class RegularEvent(SearchableModel):
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
+    intro = models.CharField(max_length=200,
+                             help_text=('Brief description (no Markdown here) '
+                                        'of what the event is and who it is '
+                                        'for.'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '

@@ -7,6 +7,7 @@
       "details": "Afternoon tea's always lovely.",
       "start_time": "14:00:00",
       "day": 1,
+      "intro": "Join us for a cup of tea and a chat.",
       "title": "Afternoon Tea",
       "slug": "afternoon-tea",
       "modified": "2012-01-01 07:00+03:00"
@@ -20,6 +21,7 @@
       "details": "",
       "start_time": "08:00:00",
       "day": 4,
+      "intro": "Join us for a breakfast and a chat.",
       "title": "Breakfast Club",
       "slug": "breakfast-club",
       "modified": "2012-01-01 07:00+03:00"
@@ -33,6 +35,7 @@
       "details": "",
       "start_time": "19:00:00",
       "day": 2,
+      "intro": "Sports, games consoles, random games, and space to relax.",
       "title": "Youth Club",
       "slug": "youth-club",
       "modified": "2012-01-01 07:00+03:00"
@@ -46,6 +49,7 @@
       "details": "",
       "start_time": "19:30:00",
       "day": 3,
+      "intro": "Our Church business meeting, where we deal with issues affecting the Church.",
       "title": "Church Meeting",
       "slug": "church-meeting",
       "autoschedule": false,
