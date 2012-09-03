@@ -6,6 +6,19 @@
 
 # Diary
 
+* Add week-to-view to public site.
+* Add something like event categories (for children; for teenagers;
+  for adults etc).
+* Fix bug in management interface when scheduling subsequent events
+  whilst another event schedule request is in progress - the spinner
+  disappears as it's not part of the rendering process (possible
+  solution is to block redrawing until the last request is done, or
+  just re-render the single event, which is tricky).
+* Add support for event logos.
+* Add support for event contacts (probably an online contact form,
+  rather than an e-mail address).
+* Add support for event reminders directly from the public site
+  (provided you're logged in).
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
 * Allow creating RegularEvents on timetables other than day x of week.
