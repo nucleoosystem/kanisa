@@ -23,6 +23,7 @@
   (e.g. Football/Football Training).
 * Allow creating RegularEvents on timetables other than day x of week.
 * Add support for linking scheduled events to sermons.
+* Check support for multi-day events.
 
 # Sermons
 
