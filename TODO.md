@@ -14,7 +14,6 @@
   disappears as it's not part of the rendering process (possible
   solution is to block redrawing until the last request is done, or
   just re-render the single event, which is tricky).
-* Add support for event logos.
 * Add support for event contacts (probably an online contact form,
   rather than an e-mail address).
 * Add support for event reminders directly from the public site
