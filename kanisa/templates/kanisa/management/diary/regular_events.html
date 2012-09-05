@@ -10,6 +10,7 @@
   </a>
 </p>
 
+{% if regularevent_list %}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -30,5 +31,11 @@
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<hr />
+<p class="alert alert-info">
+  No regular events have been created yet - why don't you <a href="{% url 'kanisa_manage_diary_regular_create' %}">create one</a>?
+</p>
+{% endif %}
 
 {% endblock %}
