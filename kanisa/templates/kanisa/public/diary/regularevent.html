@@ -29,8 +29,8 @@
 
     <div class="row">
       <div class="span3">
-        <div class="thumbnail">
-          {% thumbnail object.image "260x260" crop="center" as im %}
+        <div class="thumbnail" style="width:200px">
+          {% thumbnail object.image "200x200" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
           {% endthumbnail %}
         </div>
