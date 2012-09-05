@@ -32,3 +32,7 @@
   </tr>
   {% endfor %}
 </table>
+
+{% if perms.kanisa.manage_diary %}
+<a class="btn" href="{% url 'kanisa_manage_diary' %}" title="Manage the diary">Manage the diary</a>
+{% endif %}
