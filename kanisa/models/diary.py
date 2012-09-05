@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from autoslug import AutoSlugField
 from datetime import datetime, timedelta
 from django.db import models
+from sorl.thumbnail import ImageField
 
 from .base import SearchableModel
 
@@ -21,6 +22,8 @@ DAYS_OF_WEEK = (
 class RegularEvent(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
+    image = ImageField(upload_to='kanisa/diary/events/',
+                       help_text=u'Must be at least 200px by 200px.')
     slug = AutoSlugField(populate_from='title', unique=True)
     day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,
                                            help_text=('What day of the week '

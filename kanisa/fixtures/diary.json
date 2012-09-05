@@ -9,6 +9,7 @@
       "day": 1,
       "intro": "Join us for a cup of tea and a chat.",
       "title": "Afternoon Tea",
+      "image": "kanisa/diary/greenflowers.jpg",
       "slug": "afternoon-tea",
       "modified": "2012-01-01 07:00+03:00"
     }
@@ -23,6 +24,7 @@
       "day": 4,
       "intro": "Join us for a breakfast and a chat.",
       "title": "Breakfast Club",
+      "image": "kanisa/diary/theshard.jpg",
       "slug": "breakfast-club",
       "modified": "2012-01-01 07:00+03:00"
     }
@@ -37,6 +39,7 @@
       "day": 2,
       "intro": "Sports, games consoles, random games, and space to relax.",
       "title": "Youth Club",
+      "image": "kanisa/diary/blueflowers.jpg",
       "slug": "youth-club",
       "modified": "2012-01-01 07:00+03:00"
     }
@@ -51,6 +54,7 @@
       "day": 3,
       "intro": "Our Church business meeting, where we deal with issues affecting the Church.",
       "title": "Church Meeting",
+      "image": "kanisa/diary/church.jpg",
       "slug": "church-meeting",
       "autoschedule": false,
       "modified": "2012-01-01 07:00+03:00"
