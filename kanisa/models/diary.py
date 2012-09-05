@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from autoslug import AutoSlugField
 from datetime import datetime, timedelta
 from django.db import models
+from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
 from .base import SearchableModel
@@ -29,6 +30,7 @@ class RegularEvent(SearchableModel):
                                            help_text=('What day of the week '
                                                       'does this event '
                                                       'happen on?'))
+    pattern = RecurrenceField(blank=True, null=True, verbose_name='Timetable')
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')

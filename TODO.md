@@ -20,10 +20,10 @@
   (provided you're logged in).
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
-* Allow creating RegularEvents on timetables other than day x of week.
 * Add support for linking scheduled events to sermons.
 * Check support for multi-day events.
 * Add links for non-regular events from the Church diary table.
+* Make the recurrence pattern required, and remove the old "day" field.
 
 # Sermons
 

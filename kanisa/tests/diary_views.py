@@ -11,6 +11,7 @@ class RegularEventFactory(factory.Factory):
     start_time = time(14, 0)
     duration = 60
     day = 1
+    pattern = ''
 
 
 class DiaryManagementViewTest(KanisaViewTestCase):
