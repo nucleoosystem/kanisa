@@ -6,7 +6,7 @@
 {% block contents %}
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.get_day_display }}s</strong> at <strong>{{ object.start_time }}</strong>.</p>
-{{ object.details|markdown|striptags|truncatewords:75 }}
+{{ object.intro }}
 </blockquote>
 {% endblock %}
 
