@@ -103,6 +103,13 @@ class RegularEvent(SearchableModel):
 
         return events[0]
 
+    def pattern_description(self):
+        if self.pattern and len(self.pattern.rrules) == 1:
+            text = self.pattern.rrules[0].to_text()
+            return text[0].capitalize() + text[1:]
+
+        return 'Unknown'
+
 
 class ScheduledEvent(SearchableModel):
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
