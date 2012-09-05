@@ -21,9 +21,9 @@
     {% include 'kanisa/public/diary/_this_week_table.html' %}
   </div>
   <div class="span8">
-    <div class="row">
       {% for event in events %}
-      <div class="span4" style="margin-bottom: 1em;">
+      {% cycle '<div class="row">' '' %}
+      <div class="span4" style="margin-bottom: 1em">
         <h3>
           <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">
             {{ event.title }}
@@ -31,6 +31,7 @@
         </h3>
         <p>{{ event.intro }}</p>
       </div>
+      {% cycle '' '</div>' %}
       {% endfor %}
     </div>
   </div>
