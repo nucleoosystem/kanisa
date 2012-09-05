@@ -23,52 +23,32 @@
 {% block content %}
 <div class="row">
   <div class="span9">
-    {% with object.get_next as next_event %}
     <h1 class="primary">
       {{ object.title }}
     </h1>
 
-    <div class="thumbnail" style="float: left; margin: 0 10px 10px 0">
-      {% thumbnail object.image "200x200" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-      {% endthumbnail %}
+    <div class="row">
+      <div class="span3">
+        <div class="thumbnail">
+          {% thumbnail object.image "260x260" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+          {% endthumbnail %}
+        </div>
+
+        <hr />
+
+        {% include 'kanisa/public/diary/_next_event.html' %}
+      </div>
+      <div class="span6">
+        <p class="lead">
+          {{ object.intro }}
+        </p>
+
+        {% if object.details %}
+        {{ object.details|markdown }}
+        {% endif %}
+      </div>
     </div>
-
-    <p class="lead">
-      {{ object.intro }}
-    </p>
-
-    {% if next_event %}
-    <div class="well" style="float: left;">
-      <h3>Coming Up</h3>
-      <p>
-        The next <em>{{ next_event.title }}</em> is on
-        <strong>{{ next_event.date|date:"l, jS F Y" }}</strong>
-        at
-        <strong>{{ next_event.start_time }}</strong>
-      </p>
-
-      {% if object.details != next_event.details %}
-      {% if next_event.details %}
-      {{ next_event.details|markdown }}
-      {% endif %}
-      {% endif %}
-
-      {% if perms.kanisa.manage_diary %}
-      <a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' next_event.pk %}">
-        <i class="icon-edit"></i>
-        Edit this scheduled event
-      </a>
-      {% endif %}
-    </div>
-    {% endif %}
-
-    {% endwith %}
-
-    {% if object.details %}
-    {{ object.details|markdown }}
-    {% endif %}
-
   </div>
   <div class="span3">
     <div class="well" style="padding:8px 0">

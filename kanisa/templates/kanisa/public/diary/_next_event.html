@@ -1,0 +1,29 @@
+{% load url from future %}
+{% load markup %}
+
+{% with object.get_next as next_event %}
+{% if next_event %}
+
+<h3>Coming Up</h3>
+<p>
+  The next <em>{{ next_event.title }}</em> is on
+  <strong>{{ next_event.date|date:"l, jS F Y" }}</strong>
+  at
+  <strong>{{ next_event.start_time }}</strong>
+</p>
+
+{% if object.details != next_event.details %}
+{% if next_event.details %}
+{{ next_event.details|markdown }}
+{% endif %}
+{% endif %}
+
+{% if perms.kanisa.manage_diary %}
+<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' next_event.pk %}">
+  <i class="icon-edit"></i>
+  Edit this scheduled event
+</a>
+{% endif %}
+
+{% endif %}
+{% endwith %}
