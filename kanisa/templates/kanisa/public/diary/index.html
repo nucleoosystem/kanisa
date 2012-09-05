@@ -2,6 +2,7 @@
 
 {% load url from future %}
 {% load markup %}
+{% load thumbnail %}
 
 {% block precontent %}
 <ul class="breadcrumb">
@@ -21,9 +22,18 @@
     {% include 'kanisa/public/diary/_this_week_table.html' %}
   </div>
   <div class="span8">
+    <h1>Regular Events</h1>
+    <hr />
       {% for event in events %}
       {% cycle '<div class="row">' '' %}
       <div class="span4" style="margin-bottom: 1em">
+        <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">
+        <div class="thumbnail" style="float: left; margin: 0 10px 10px 0">
+          {% thumbnail event.image "80x80" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+          {% endthumbnail %}
+        </div>
+        </a>
         <h3>
           <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">
             {{ event.title }}
