@@ -40,8 +40,8 @@ admin.site.register(Banner, BannerAdmin)
 
 class RegularEventAdmin(admin.ModelAdmin):
     search_fields = ('title', 'details', )
-    list_display = ('title', 'day', 'start_time', 'autoschedule', )
-    list_filter = ('day', 'autoschedule', )
+    list_display = ('title', 'start_time', 'autoschedule', )
+    list_filter = ('autoschedule', )
 
 admin.site.register(RegularEvent, RegularEventAdmin)
 
