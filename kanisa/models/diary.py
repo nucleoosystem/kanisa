@@ -53,7 +53,7 @@ class RegularEvent(SearchableModel):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
-        ordering = ('day', 'start_time', )
+        ordering = ('title', )
         permissions = (
             ('manage_diary',
              'Can manage your diary'),
