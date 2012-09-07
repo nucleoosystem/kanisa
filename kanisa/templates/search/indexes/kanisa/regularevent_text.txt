@@ -11,6 +11,5 @@
 {{ object.intro }}
 {% endif %}
 
-{{ object.get_day_display }}
 {% endautoescape %}
 {% endblock %}
