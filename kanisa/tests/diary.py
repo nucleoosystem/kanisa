@@ -11,7 +11,6 @@ class RegularEventFactory(factory.Factory):
     title = factory.Sequence(lambda n: 'Regular Event #' + n)
     start_time = time(14, 0)
     duration = 60
-    day = 1
     pattern = ''
 
 
@@ -35,7 +34,6 @@ class DiaryTest(TestCase):
     def testInstanceUnicode(self):
         friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
         event = RegularEventFactory.build(title='Breakfast Club',
-                                          day=4,
                                           pattern=friday)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
@@ -101,10 +99,10 @@ class DiaryGetScheduleTest(TestCase):
         wednesday = "RRULE:FREQ=WEEKLY;BYDAY=WE"
         thursday = "RRULE:FREQ=WEEKLY;BYDAY=TH"
         friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
-        event1 = RegularEventFactory.create(day=1, pattern=tuesday)
-        event2 = RegularEventFactory.create(day=4, pattern=friday)
-        RegularEventFactory.create(day=2, pattern=wednesday)
-        RegularEventFactory.create(day=3, pattern=thursday)
+        event1 = RegularEventFactory.create(pattern=tuesday)
+        event2 = RegularEventFactory.create(pattern=friday)
+        RegularEventFactory.create(pattern=wednesday)
+        RegularEventFactory.create(pattern=thursday)
         schedule = get_schedule()
         self.assertTrue(hasattr(schedule, 'calendar_entries'))
         self.assertEqual(len(schedule.calendar_entries), 7)
@@ -126,10 +124,8 @@ class DiaryGetScheduleTest(TestCase):
 
     def testScheduled(self):
         tuesday = "RRULE:FREQ=WEEKLY;BYDAY=TU"
-        event1 = RegularEventFactory.create(day=1,
-                                            pattern=tuesday)
-        RegularEventFactory.create(day=2,
-                                   pattern="RRULE:FREQ=WEEKLY;BYDAY=WE")
+        event1 = RegularEventFactory.create(pattern=tuesday)
+        RegularEventFactory.create(pattern="RRULE:FREQ=WEEKLY;BYDAY=WE")
 
         event1.schedule(date(2012, 1, 1),
                         date(2012, 1, 8))

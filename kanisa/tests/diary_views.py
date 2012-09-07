@@ -10,7 +10,6 @@ class RegularEventFactory(factory.Factory):
     title = factory.Sequence(lambda n: 'Regular Event #' + n)
     start_time = time(14, 0)
     duration = 60
-    day = 1
     pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"
 
 
@@ -147,9 +146,9 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         wednesdays = "RRULE:FREQ=WEEKLY;BYDAY=WE"
         thursdays = "RRULE:FREQ=WEEKLY;BYDAY=TH"
 
-        RegularEventFactory.create(day=1, pattern=tuesdays)
-        RegularEventFactory.create(day=2, pattern=wednesdays)
-        RegularEventFactory.create(day=3, pattern=thursdays)
+        RegularEventFactory.create(pattern=tuesdays)
+        RegularEventFactory.create(pattern=wednesdays)
+        RegularEventFactory.create(pattern=thursdays)
 
         # Check preconditions
         self.assertEqual(len(ScheduledEvent.objects.all()), 0)
