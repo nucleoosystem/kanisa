@@ -21,7 +21,7 @@ class DiaryTest(TestCase):
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
     def testSchedule(self):
-        event = RegularEventFactory.build(day=1)
+        event = RegularEventFactory.build(pattern="RRULE:FREQ=WEEKLY;BYDAY=TU")
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instances = event.scheduledevent_set.all()
@@ -33,8 +33,10 @@ class DiaryTest(TestCase):
         self.assertEqual(instance.duration, 60)
 
     def testInstanceUnicode(self):
+        friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
         event = RegularEventFactory.build(title='Breakfast Club',
-                                          day=4)
+                                          day=4,
+                                          pattern=friday)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = ScheduledEvent.objects.get(pk=1)
@@ -46,7 +48,9 @@ class DiaryTest(TestCase):
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
     def testGetNextWithEventScheduled(self):
-        event = RegularEventFactory.create(title='Breakfast Club')
+        tuesdays = "RRULE:FREQ=WEEKLY;BYDAY=TU"
+        event = RegularEventFactory.create(title='Breakfast Club',
+                                           pattern=tuesdays)
 
         # I should probably mock out datetime.now() here, so I don't
         # have to use such a far-future date.
@@ -117,8 +121,11 @@ class DiaryGetScheduleTest(TestCase):
                          event2)
 
     def testScheduled(self):
-        event1 = RegularEventFactory.create(day=1)
-        RegularEventFactory.create(day=2)
+        tuesday = "RRULE:FREQ=WEEKLY;BYDAY=TU"
+        event1 = RegularEventFactory.create(day=1,
+                                            pattern=tuesday)
+        RegularEventFactory.create(day=2,
+                                   pattern="RRULE:FREQ=WEEKLY;BYDAY=WE")
 
         event1.schedule(date(2012, 1, 1),
                         date(2012, 1, 8))

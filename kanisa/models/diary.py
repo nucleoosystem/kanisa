@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from autoslug import AutoSlugField
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from django.db import models
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
@@ -69,14 +69,20 @@ class RegularEvent(SearchableModel):
         end_date.
         """
 
-        def daterange(start_date, end_date):
-            for n in range((end_date - start_date).days):
-                yield start_date + timedelta(n)
+        # We need to remove one day from the start_date, since
+        # "between" is not inclusive of the start and end dates.
+        tz_start_date = datetime.combine(start_date - timedelta(days=1),
+                                         time())
+        tz_end_date = datetime.combine(end_date, time())
 
-        for single_date in daterange(start_date, end_date):
-            if single_date.weekday() != self.day:
-                continue
+        before_end_date = tz_start_date - timedelta(days=1)
 
+        occurrences = self.pattern.between(tz_start_date, tz_end_date,
+                                           dtstart=before_end_date,
+                                           dtend=tz_end_date)
+        dates = [d.date() for d in occurrences]
+
+        for single_date in dates:
             self.scheduledevent_set.\
                 create(date=single_date,
                        title=self.title,
