@@ -75,10 +75,10 @@ class RegularEvent(SearchableModel):
                                          time())
         tz_end_date = datetime.combine(end_date, time())
 
-        before_end_date = tz_start_date - timedelta(days=1)
+        before_start_date = tz_start_date - timedelta(days=1)
 
         occurrences = self.pattern.between(tz_start_date, tz_end_date,
-                                           dtstart=before_end_date,
+                                           dtstart=before_start_date,
                                            dtend=tz_end_date)
         dates = [d.date() for d in occurrences]
 
