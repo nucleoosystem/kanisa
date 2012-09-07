@@ -30,7 +30,7 @@ class RegularEvent(SearchableModel):
                                            help_text=('What day of the week '
                                                       'does this event '
                                                       'happen on?'))
-    pattern = RecurrenceField(blank=True, null=True, verbose_name='Timetable')
+    pattern = RecurrenceField(verbose_name='Timetable')
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
