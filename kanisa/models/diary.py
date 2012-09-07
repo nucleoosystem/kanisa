@@ -62,11 +62,9 @@ class RegularEvent(SearchableModel):
     def __unicode__(self):
         return self.title
 
-    def schedule(self, start_date, end_date):
-        """Schedule an instance of this event, with no custom details
-        set up. The instance will be scheduled for all matching dates
-        on or after start_date, and before (and not including)
-        end_date.
+    def get_matching_dates(self, start_date, end_date):
+        """Get a list of dates which match our recurrence pattern from
+        start_date and before end_date.
         """
 
         # We need to remove one day from the start_date, since
@@ -80,7 +78,15 @@ class RegularEvent(SearchableModel):
         occurrences = self.pattern.between(tz_start_date, tz_end_date,
                                            dtstart=before_start_date,
                                            dtend=tz_end_date)
-        dates = [d.date() for d in occurrences]
+        return [d.date() for d in occurrences]
+
+    def schedule(self, start_date, end_date):
+        """Schedule an instance of this event, with no custom details
+        set up. The instance will be scheduled for all matching dates
+        on or after start_date, and before (and not including)
+        end_date.
+        """
+        dates = self.get_matching_dates(start_date, end_date)
 
         for single_date in dates:
             self.scheduledevent_set.\
