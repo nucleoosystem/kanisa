@@ -26,12 +26,6 @@ class RegularEvent(SearchableModel):
     image = ImageField(upload_to='kanisa/diary/events/',
                        help_text=u'Must be at least 200px by 200px.')
     slug = AutoSlugField(populate_from='title', unique=True)
-    day = models.PositiveSmallIntegerField(blank=True,
-                                           null=True,
-                                           choices=DAYS_OF_WEEK,
-                                           help_text=('What day of the week '
-                                                      'does this event '
-                                                      'happen on?'))
     pattern = RecurrenceField(verbose_name='Timetable')
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
