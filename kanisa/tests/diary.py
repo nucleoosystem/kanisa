@@ -97,10 +97,14 @@ class DiaryGetWeekBoundsTest(TestCase):
 
 class DiaryGetScheduleTest(TestCase):
     def testBasics(self):
-        event1 = RegularEventFactory.create(day=1)
-        event2 = RegularEventFactory.create(day=4)
-        RegularEventFactory.create(day=2)
-        RegularEventFactory.create(day=3)
+        tuesday = "RRULE:FREQ=WEEKLY;BYDAY=TU"
+        wednesday = "RRULE:FREQ=WEEKLY;BYDAY=WE"
+        thursday = "RRULE:FREQ=WEEKLY;BYDAY=TH"
+        friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
+        event1 = RegularEventFactory.create(day=1, pattern=tuesday)
+        event2 = RegularEventFactory.create(day=4, pattern=friday)
+        RegularEventFactory.create(day=2, pattern=wednesday)
+        RegularEventFactory.create(day=3, pattern=thursday)
         schedule = get_schedule()
         self.assertTrue(hasattr(schedule, 'calendar_entries'))
         self.assertEqual(len(schedule.calendar_entries), 7)

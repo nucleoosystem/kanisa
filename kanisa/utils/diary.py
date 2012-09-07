@@ -36,8 +36,12 @@ class DaySchedule(object):
 
         self.regular_events = []
 
+        tomorrow = self.date + timedelta(days=1)
+
         for event in regular_events:
-            if event.day != day:
+            dates = event.get_matching_dates(self.date, tomorrow)
+
+            if len(dates) == 0:
                 continue
 
             scheduled = False
