@@ -68,6 +68,11 @@ class Page(MPTTModel):
         self.check_parent_status()
         self.check_draft_status()
 
+    def get_path(self):
+        ancestors_path = [p.slug for p in self.get_ancestors()]
+        ancestors_path.append(self.slug)
+        return '/'.join(ancestors_path) + '/'
+
 
 def get_page_for_request(request):
     parts = request.path.split('/')

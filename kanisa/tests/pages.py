@@ -73,6 +73,30 @@ class PageTest(TestCase):
                          ['Invalid parent - cyclical hierarchy '
                           'detected.', ])
 
+    def test_get_path_for_root_node(self):
+        page = PageFactory.create(title='hello')
+
+        with self.assertNumQueries(0):
+            self.assertEqual('hello/', page.get_path())
+
+    def test_get_path_for_grandchild_node(self):
+        root = PageFactory.create(title='hello')
+        child = PageFactory.create(title='comma', parent=root)
+        grandchild = PageFactory.create(title='world', parent=child)
+
+        with self.assertNumQueries(1):
+            self.assertEqual('hello/comma/', child.get_path())
+
+        with self.assertNumQueries(1):
+            self.assertEqual('hello/comma/world/', grandchild.get_path())
+
+        # Check we still only do one query even if we reload the
+        # object from scratch (just in case fetching the path for the
+        # child node cached things in object).
+        grandchild = Page.objects.get(pk=grandchild.pk)
+        with self.assertNumQueries(1):
+            self.assertEqual('hello/comma/world/', grandchild.get_path())
+
 
 class GetPageFromPathTest(TestCase):
     def setUp(self):
