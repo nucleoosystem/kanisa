@@ -130,3 +130,54 @@ class GetPageFromPathTest(TestCase):
         request = factory.get('root/child/grandchild')
 
         self.assertEqual(grandchild, get_page_for_request(request))
+
+    def test_fetch_child_page_with_repeated_part(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+        child2 = PageFactory.create(title='child2', parent=root)
+        PageFactory.create(title='grandchild', parent=child)
+        PageFactory.create(title='grandchild2', parent=child)
+        PageFactory.create(title='grandchild3', parent=child2)
+
+        factory = RequestFactory()
+        request = factory.get('root/root/child/grandchild')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+        request = factory.get('root/child/child/grandchild')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+    def test_fetch_path_with_existent_prefix_fails_on_nonexistent_suffix(self):
+        root = PageFactory.create(title='root')
+        PageFactory.create(title='child', parent=root)
+
+        factory = RequestFactory()
+        request = factory.get('root/child/foobar')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+    def test_fetch_path_with_missing_part_halfway_through(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+        PageFactory.create(title='grandchild', parent=child)
+
+        factory = RequestFactory()
+        request = factory.get('root/foobar/child')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+    def test_fetch_path_with_wrong_parent(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+        PageFactory.create(title='grandchild', parent=child)
+
+        factory = RequestFactory()
+        request = factory.get('root/grandchild')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
