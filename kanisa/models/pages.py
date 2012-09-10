@@ -72,6 +72,12 @@ class Page(MPTTModel):
 def get_page_for_request(request):
     parts = request.path.split('/')
 
+    # We have to end in a trailing slash
+    if parts[-1] != '':
+        raise Http404
+
+    parts.pop()
+
     if len(parts) == 0:
         raise Http404
 

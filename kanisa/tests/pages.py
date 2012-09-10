@@ -84,15 +84,37 @@ class GetPageFromPathTest(TestCase):
         with self.assertRaises(Http404):
             get_page_for_request(request)
 
+        request = self.factory.get('/')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
     def test_root_page(self):
         page = PageFactory.create(title='Hello')
         self.assertEqual(page.slug, 'hello')
 
-        request = self.factory.get('hello')
+        request = self.factory.get('hello/')
         self.assertEqual(page, get_page_for_request(request))
 
-    def test_nonexistent_root_page(self):
+    def test_root_page_double_slash(self):
+        page = PageFactory.create(title='Hello')
+        self.assertEqual(page.slug, 'hello')
+
+        request = self.factory.get('hello//')
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+    def test_root_page_without_trailing_slash(self):
+        page = PageFactory.create(title='Hello')
+        self.assertEqual(page.slug, 'hello')
+
         request = self.factory.get('hello')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
+
+    def test_nonexistent_root_page(self):
+        request = self.factory.get('hello/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -102,7 +124,7 @@ class GetPageFromPathTest(TestCase):
                                   draft=True)
         self.assertEqual(page.slug, 'hello')
 
-        request = self.factory.get('hello')
+        request = self.factory.get('hello/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -111,7 +133,7 @@ class GetPageFromPathTest(TestCase):
         root = PageFactory.create(title='root')
         PageFactory.create(title='child', parent=root)
 
-        request = self.factory.get('child')
+        request = self.factory.get('child/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -124,9 +146,22 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild2', parent=child)
         PageFactory.create(title='grandchild3', parent=child2)
 
-        request = self.factory.get('root/child/grandchild')
+        request = self.factory.get('root/child/grandchild/')
 
         self.assertEqual(grandchild, get_page_for_request(request))
+
+    def test_fetch_child_page_without_trailing_slash(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+        child2 = PageFactory.create(title='child2', parent=root)
+        PageFactory.create(title='grandchild', parent=child)
+        PageFactory.create(title='grandchild2', parent=child)
+        PageFactory.create(title='grandchild3', parent=child2)
+
+        request = self.factory.get('root/child/grandchild')
+
+        with self.assertRaises(Http404):
+            get_page_for_request(request)
 
     def test_fetch_child_page_with_repeated_part(self):
         root = PageFactory.create(title='root')
@@ -136,12 +171,12 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild2', parent=child)
         PageFactory.create(title='grandchild3', parent=child2)
 
-        request = self.factory.get('root/root/child/grandchild')
+        request = self.factory.get('root/root/child/grandchild/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
 
-        request = self.factory.get('root/child/child/grandchild')
+        request = self.factory.get('root/child/child/grandchild/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -150,7 +185,7 @@ class GetPageFromPathTest(TestCase):
         root = PageFactory.create(title='root')
         PageFactory.create(title='child', parent=root)
 
-        request = self.factory.get('root/child/foobar')
+        request = self.factory.get('root/child/foobar/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -160,7 +195,7 @@ class GetPageFromPathTest(TestCase):
         child = PageFactory.create(title='child', parent=root)
         PageFactory.create(title='grandchild', parent=child)
 
-        request = self.factory.get('root/foobar/child')
+        request = self.factory.get('root/foobar/child/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
@@ -170,7 +205,7 @@ class GetPageFromPathTest(TestCase):
         child = PageFactory.create(title='child', parent=root)
         PageFactory.create(title='grandchild', parent=child)
 
-        request = self.factory.get('root/grandchild')
+        request = self.factory.get('root/grandchild/')
 
         with self.assertRaises(Http404):
             get_page_for_request(request)
