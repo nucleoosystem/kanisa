@@ -37,6 +37,7 @@
 # Pages
 
 * Drag-and-drop page moving.
+* Allow logged-in users to see unpublished pages.
 
 # Social Media
 
