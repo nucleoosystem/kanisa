@@ -103,7 +103,6 @@ def get_page_for_request(request):
                 parent_node = descendant
                 this_part = descendant
         if not this_part:
-            print "Failed to match %s." % part
             raise Http404
 
     return this_part
