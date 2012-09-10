@@ -6,7 +6,6 @@
 
 # Diary
 
-* Add week-to-view to public site.
 * Add something like event categories (for children; for teenagers;
   for adults etc).
 * Fix bug in management interface when scheduling subsequent events
