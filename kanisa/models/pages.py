@@ -108,6 +108,7 @@ def get_page_for_request(request):
         return root_node
 
     descendants = root_node.get_descendants()
+    descendants = [d for d in descendants if not d.draft]
 
     # Look for a page in our list of descendants where the parent is
     # the root node, and the slug is the next part of our path

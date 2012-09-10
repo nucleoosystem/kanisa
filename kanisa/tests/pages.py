@@ -248,3 +248,13 @@ class GetPageFromPathTest(TestCase):
         with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
+
+    def test_fetch_non_root_draft_page(self):
+        root = PageFactory.create(title='root')
+        PageFactory.create(title='child', parent=root, draft=True)
+
+        request = self.factory.get('/root/child/')
+
+        with self.assertNumQueries(2):
+            with self.assertRaises(Http404):
+                get_page_for_request(request)

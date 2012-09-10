@@ -44,7 +44,11 @@
         </a>
         {% endif %}
       </td>
-      <td class="iconcell"><a href="/{{ page.get_path }}" title="View on site"><i class="icon-eye-open"></i></a></td>
+      <td class="iconcell">
+        {% if not page.draft %}
+        <a href="/{{ page.get_path }}" title="View on site"><i class="icon-eye-open"></i></a>
+        {% endif %}
+      </td>
     </tr>
     {% endfor %}
 </tbody>
