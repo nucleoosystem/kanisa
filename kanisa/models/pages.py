@@ -115,7 +115,7 @@ def get_page_for_request(request):
             # If the descendant we're looking at does not have a
             # parent matching the last part we matched, it's not
             # relevant at this stage.
-            if descendant.parent != parent_node:
+            if descendant.parent_id != parent_node.pk:
                 continue
 
             # If slug of the descendant we're looking at does not

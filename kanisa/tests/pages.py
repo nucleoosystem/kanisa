@@ -156,7 +156,7 @@ class GetPageFromPathTest(TestCase):
 
         request = self.factory.get('/root/child/grandchild/')
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(2):
             self.assertEqual(grandchild, get_page_for_request(request))
 
     def test_fetch_child_page_without_trailing_slash(self):
@@ -183,13 +183,13 @@ class GetPageFromPathTest(TestCase):
 
         request = self.factory.get('/root/root/child/grandchild/')
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
 
         request = self.factory.get('/root/child/child/grandchild/')
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
 
@@ -199,7 +199,7 @@ class GetPageFromPathTest(TestCase):
 
         request = self.factory.get('/root/child/foobar/')
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
 
@@ -210,7 +210,7 @@ class GetPageFromPathTest(TestCase):
 
         request = self.factory.get('/root/foobar/child/')
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
 
@@ -221,6 +221,6 @@ class GetPageFromPathTest(TestCase):
 
         request = self.factory.get('/root/grandchild/')
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(2):
             with self.assertRaises(Http404):
                 get_page_for_request(request)
