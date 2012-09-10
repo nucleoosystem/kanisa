@@ -11,7 +11,7 @@
   </li>
   {% for p in page.get_ancestors %}
   <li>
-    {{ p }}
+    <a href="/{{ p.get_path }}">{{ p }}</a>
     <span class="divider">/</span>
   </li>
   {% endfor %}
