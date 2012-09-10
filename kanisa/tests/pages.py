@@ -40,8 +40,8 @@ class PageTest(TestCase):
         errors = cm.exception.message_dict
         self.assertTrue('draft' in errors)
         self.assertEqual(errors['draft'],
-                         ['Cannot mark this page as published, as it '
-                          'has non-published ancestors.', ])
+                         ['Cannot mark this page as published, as its '
+                          'parent page (Page Title) is currently a draft.', ])
 
     def test_page_cannot_be_its_own_parent(self):
         p = PageFactory.create()
