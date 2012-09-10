@@ -19,7 +19,6 @@
   (provided you're logged in).
 * Allow multiple schedules for regular events, with different names
   (e.g. Football/Football Training).
-* Add support for linking scheduled events to sermons.
 * Check support for multi-day events.
 * Add links for non-regular events from the Church diary table.
 
