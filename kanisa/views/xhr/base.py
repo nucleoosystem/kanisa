@@ -44,7 +44,7 @@ class XHRBaseView(View):
         try:
             return self.render(request, *args, **kwargs)
         except BadArgument, e:
-            return HttpResponseBadRequest(e.message)
+            return HttpResponseBadRequest(e)
 
 
 class XHRBasePostView(XHRBaseView):
