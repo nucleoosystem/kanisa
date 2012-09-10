@@ -49,6 +49,15 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'kanisa.context_processors.kanisa_settings',
 )
 
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'kanisa.middle.KanisaPageFallbackMiddleware',
+)
+
 DATE_FORMAT = 'j M Y'
 TIME_FORMAT = 'P'
 SHORT_DATE_FORMAT = 'm/d/Y'
