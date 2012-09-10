@@ -96,13 +96,25 @@ def get_page_for_request(request):
 
     for part in parts[1:]:
         this_part = None
+
         for descendant in descendants:
+            # If the descendant we're looking at does not have a
+            # parent matching the last part we matched, it's not
+            # relevant at this stage.
             if descendant.parent != parent_node:
                 continue
+
+            # If slug of the descendant we're looking at does not
+            # match the path we're looking at, it's not relevant
             if descendant.slug == part:
                 parent_node = descendant
                 this_part = descendant
+
+        # If we've not found a match for this part, we've not found a
+        # match for the whole thing.
         if not this_part:
             raise Http404
 
+    # If we've not hit an Http404 yet, then we've matched every part,
+    # and this_part is the page for the last part.
     return this_part
