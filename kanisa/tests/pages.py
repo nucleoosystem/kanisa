@@ -1,6 +1,9 @@
 from django.core.exceptions import ValidationError
+from django.http import Http404
 from django.test import TestCase
+from django.test.client import RequestFactory
 from kanisa.models import Page
+from kanisa.models.pages import get_page_for_request
 import factory
 
 
@@ -69,3 +72,61 @@ class PageTest(TestCase):
         self.assertEqual(errors['parent'],
                          ['Invalid parent - cyclical hierarchy '
                           'detected.', ])
+
+
+class GetPageFromPathTest(TestCase):
+    def test_raises_http_404_on_empty_request(self):
+        factory = RequestFactory()
+        request = factory.get('')
+
+        with self.assertRaises(Http404) as cm:
+            get_page_for_request(request)
+
+    def test_root_page(self):
+        page = PageFactory.create(title='Hello')
+        self.assertEqual(page.slug, 'hello')
+
+        factory = RequestFactory()
+        request = factory.get('hello')
+        self.assertEqual(page, get_page_for_request(request))
+
+    def test_nonexistent_root_page(self):
+        factory = RequestFactory()
+        request = factory.get('hello')
+
+        with self.assertRaises(Http404) as cm:
+            get_page_for_request(request)
+
+    def test_fetch_unpublished_page_fails(self):
+        page = PageFactory.create(title='Hello',
+                                  draft=True)
+        self.assertEqual(page.slug, 'hello')
+
+        factory = RequestFactory()
+        request = factory.get('hello')
+
+        with self.assertRaises(Http404) as cm:
+            get_page_for_request(request)
+
+    def test_fetch_child_page_without_path_fails(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+
+        factory = RequestFactory()
+        request = factory.get('child')
+
+        with self.assertRaises(Http404) as cm:
+            get_page_for_request(request)
+
+    def test_fetch_child_page(self):
+        root = PageFactory.create(title='root')
+        child = PageFactory.create(title='child', parent=root)
+        child2 = PageFactory.create(title='child2', parent=root)
+        grandchild = PageFactory.create(title='grandchild', parent=child)
+        grandchild2 = PageFactory.create(title='grandchild2', parent=child)
+        grandchild3 = PageFactory.create(title='grandchild3', parent=child2)
+
+        factory = RequestFactory()
+        request = factory.get('root/child/grandchild')
+
+        self.assertEqual(grandchild, get_page_for_request(request))

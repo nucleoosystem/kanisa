@@ -1,6 +1,7 @@
 from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.http import Http404
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -66,3 +67,43 @@ class Page(MPTTModel):
     def clean_fields(self, exclude=None):
         self.check_parent_status()
         self.check_draft_status()
+
+
+def get_page_for_request(request):
+    parts = request.path.split('/')
+
+    if len(parts) == 0:
+        raise Http404
+
+    root_slug = parts[0]
+
+    try:
+        root_node = Page.objects.get(parent=None,
+                                     slug=root_slug,
+                                     draft=False)
+    except Page.DoesNotExist:
+        raise Http404
+
+    # If we've only got a single slug in our path, we're done
+    if len(parts) == 1:
+        return root_node
+
+    descendants = root_node.get_descendants()
+
+    # Look for a page in our list of descendants where the parent is
+    # the root node, and the slug is the next part of our path
+    parent_node = root_node
+
+    for part in parts[1:]:
+        this_part = None
+        for descendant in descendants:
+            if descendant.parent != parent_node:
+                continue
+            if descendant.slug == part:
+                parent_node = descendant
+                this_part = descendant
+        if not this_part:
+            print "Failed to match %s." % part
+            raise Http404
+
+    return this_part
