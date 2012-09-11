@@ -73,17 +73,15 @@ class Page(MPTTModel):
         return '/'.join(ancestors_path) + '/'
 
 
-def get_page_for_part(part, parent, candidates):
-    for candidate in candidates:
-        # If the candidate we're looking at does not have a
-        # parent matching the last part we matched, it's not
-        # relevant at this stage.
-        if candidate.parent_id != parent.pk:
-            continue
+def get_page_for_part(slug, parent, candidates):
+    """Returns the page in candidates which has parent as its parent,
+    and a slug matching slug, or raises Page.DoesNotExist if such a
+    page does not exist.
 
-        # If the slug of the candidate we're looking at matches the
-        # part we're looking for, we're done.
-        if candidate.slug == part:
+    """
+
+    for candidate in candidates:
+        if candidate.parent_id == parent.pk and candidate.slug == slug:
             return candidate
 
     # We've gone through all our candidates and failed to find a
