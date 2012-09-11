@@ -73,6 +73,24 @@ class Page(MPTTModel):
         return '/'.join(ancestors_path) + '/'
 
 
+def get_page_for_part(part, parent, candidates):
+    for candidate in candidates:
+        # If the candidate we're looking at does not have a
+        # parent matching the last part we matched, it's not
+        # relevant at this stage.
+        if candidate.parent_id != parent.pk:
+            continue
+
+        # If the slug of the candidate we're looking at matches the
+        # part we're looking for, we're done.
+        if candidate.slug == part:
+            return candidate
+
+    # We've gone through all our candidates and failed to find a
+    # match, so we're done.
+    raise Page.DoesNotExist
+
+
 def get_page_from_path(path):
     # path must start and end with a slash, and have a valid slug in
     # between, which means at least 3 characters
@@ -87,44 +105,30 @@ def get_page_from_path(path):
     root_slug = parts[0]
 
     try:
-        root_node = Page.objects.get(parent=None,
-                                     slug=root_slug,
-                                     draft=False)
+        parent_node = Page.objects.get(parent=None,
+                                       slug=root_slug,
+                                       draft=False)
     except Page.DoesNotExist:
         raise Page.DoesNotExist
 
-    # If we've only got a single slug in our path, we're done
-    if len(parts) == 1:
-        return root_node
+    # We've matched the first part of our path - that's parent_node
+    parts.pop(0)
 
-    descendants = root_node.get_descendants()
+    # If we've got nothing left to match, we're done
+    if not parts:
+        return parent_node
+
+    descendants = parent_node.get_descendants()
     descendants = [d for d in descendants if not d.draft]
 
-    # Look for a page in our list of descendants where the parent is
-    # the root node, and the slug is the next part of our path
-    parent_node = root_node
-
-    for part in parts[1:]:
-        this_part = None
-
-        for descendant in descendants:
-            # If the descendant we're looking at does not have a
-            # parent matching the last part we matched, it's not
-            # relevant at this stage.
-            if descendant.parent_id != parent_node.pk:
-                continue
-
-            # If slug of the descendant we're looking at does not
-            # match the path we're looking at, it's not relevant
-            if descendant.slug == part:
-                parent_node = descendant
-                this_part = descendant
-
-        # If we've not found a match for this part, we've not found a
-        # match for the whole thing.
-        if not this_part:
-            raise Page.DoesNotExist
+    # For each part in our path, look for a page in our list of
+    # descendants where the parent is the root node, and the slug is
+    # the next part of our path
+    for part in parts:
+        parent_node = get_page_for_part(part,
+                                        parent_node,
+                                        descendants)
 
     # If we've not hit a Page.DoesNotExist yet, then we've matched
-    # every part, and this_part is the page for the last part.
-    return this_part
+    # every part, and parent_node is the page for the last part.
+    return parent_node
