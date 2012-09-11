@@ -74,7 +74,7 @@ class Page(MPTTModel):
         return '/'.join(ancestors_path) + '/'
 
 
-def get_page_for_request(path):
+def get_page_from_path(path):
     parts = path.split('/')
 
     # We have to start with a slash

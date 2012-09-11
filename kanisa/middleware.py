@@ -2,7 +2,7 @@ from django.http import Http404
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from kanisa.models.pages import get_page_for_request
+from kanisa.models.pages import get_page_from_path
 
 
 class KanisaPageFallbackMiddleware(object):
@@ -11,7 +11,7 @@ class KanisaPageFallbackMiddleware(object):
             # No need to check for a page for non-404 responses.
             return response
         try:
-            page = get_page_for_request(request.path)
+            page = get_page_from_path(request.path)
             return render_to_response('kanisa/public/pages/page.html',
                                       {'page': page},
                                       context_instance=RequestContext(request))
