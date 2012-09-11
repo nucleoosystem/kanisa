@@ -1,5 +1,4 @@
 from django.core.exceptions import ValidationError
-from django.http import Http404
 from django.test import TestCase
 from kanisa.models import Page
 from kanisa.models.pages import get_page_from_path
@@ -100,10 +99,10 @@ class PageTest(TestCase):
 class GetPageFromPathTest(TestCase):
     def test_raises_http_404_on_empty_request(self):
         with self.assertNumQueries(0):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('')
 
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/')
 
     def test_root_page(self):
@@ -118,7 +117,7 @@ class GetPageFromPathTest(TestCase):
         self.assertEqual(page.slug, 'hello')
 
         with self.assertNumQueries(1):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/hello//')
 
     def test_root_page_without_trailing_slash(self):
@@ -126,12 +125,12 @@ class GetPageFromPathTest(TestCase):
         self.assertEqual(page.slug, 'hello')
 
         with self.assertNumQueries(0):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/hello')
 
     def test_nonexistent_root_page(self):
         with self.assertNumQueries(1):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/hello/')
 
     def test_fetch_unpublished_page_fails(self):
@@ -140,7 +139,7 @@ class GetPageFromPathTest(TestCase):
         self.assertEqual(page.slug, 'hello')
 
         with self.assertNumQueries(1):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/hello/')
 
     def test_fetch_child_page_without_path_fails(self):
@@ -148,7 +147,7 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='child', parent=root)
 
         with self.assertNumQueries(1):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/child/')
 
     def test_fetch_child_page(self):
@@ -172,7 +171,7 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild3', parent=child2)
 
         with self.assertNumQueries(0):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/grandchild')
 
     def test_fetch_child_page_with_repeated_part(self):
@@ -184,11 +183,11 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild3', parent=child2)
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/root/child/grandchild/')
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/child/grandchild/')
 
     def test_fetch_path_with_existent_prefix_fails_on_nonexistent_suffix(self):
@@ -196,7 +195,7 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='child', parent=root)
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/foobar/')
 
     def test_fetch_path_with_missing_part_halfway_through(self):
@@ -205,7 +204,7 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild', parent=child)
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/foobar/child/')
 
     def test_fetch_path_with_wrong_parent(self):
@@ -214,7 +213,7 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='grandchild', parent=child)
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/grandchild/')
 
     def test_fetch_non_root_draft_page(self):
@@ -222,5 +221,5 @@ class GetPageFromPathTest(TestCase):
         PageFactory.create(title='child', parent=root, draft=True)
 
         with self.assertNumQueries(2):
-            with self.assertRaises(Http404):
+            with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/')

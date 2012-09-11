@@ -2,7 +2,7 @@ from django.http import Http404
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from kanisa.models.pages import get_page_from_path
+from kanisa.models.pages import Page, get_page_from_path
 
 
 class KanisaPageFallbackMiddleware(object):
@@ -16,6 +16,8 @@ class KanisaPageFallbackMiddleware(object):
                                       {'page': page},
                                       context_instance=RequestContext(request))
 
+        except Page.DoesNotExist:
+            return response
         # Return the original response if any errors happened. Because
         # this is a middleware, we can't assume the errors will be
         # caught elsewhere.

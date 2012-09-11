@@ -1,7 +1,6 @@
 from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.http import Http404
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -78,10 +77,10 @@ def get_page_from_path(path):
     # path must start and end with a slash, and have a valid slug in
     # between, which means at least 3 characters
     if len(path) <= 2:
-        raise Http404
+        raise Page.DoesNotExist
 
     if path[0] != '/' or path[-1] != '/':
-        raise Http404
+        raise Page.DoesNotExist
 
     parts = path[1:-1].split('/')
 
@@ -92,7 +91,7 @@ def get_page_from_path(path):
                                      slug=root_slug,
                                      draft=False)
     except Page.DoesNotExist:
-        raise Http404
+        raise Page.DoesNotExist
 
     # If we've only got a single slug in our path, we're done
     if len(parts) == 1:
@@ -124,8 +123,8 @@ def get_page_from_path(path):
         # If we've not found a match for this part, we've not found a
         # match for the whole thing.
         if not this_part:
-            raise Http404
+            raise Page.DoesNotExist
 
-    # If we've not hit an Http404 yet, then we've matched every part,
-    # and this_part is the page for the last part.
+    # If we've not hit a Page.DoesNotExist yet, then we've matched
+    # every part, and this_part is the page for the last part.
     return this_part
