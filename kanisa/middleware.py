@@ -12,7 +12,6 @@ class KanisaPageFallbackMiddleware(object):
             return response
         try:
             page = get_page_for_request(request)
-            print page.get_ancestors()
             return render_to_response('kanisa/public/pages/page.html',
                                       {'page': page},
                                       context_instance=RequestContext(request))
