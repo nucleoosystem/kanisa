@@ -11,7 +11,7 @@ class KanisaPageFallbackMiddleware(object):
             # No need to check for a page for non-404 responses.
             return response
         try:
-            page = get_page_for_request(request)
+            page = get_page_for_request(request.path)
             return render_to_response('kanisa/public/pages/page.html',
                                       {'page': page},
                                       context_instance=RequestContext(request))
