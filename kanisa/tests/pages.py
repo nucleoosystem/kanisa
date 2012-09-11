@@ -223,3 +223,10 @@ class GetPageFromPathTest(TestCase):
         with self.assertNumQueries(2):
             with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/')
+
+    def test_fetch_child_of_page_with_no_children(self):
+        root = PageFactory.create(title='root')
+
+        with self.assertNumQueries(1):
+            with self.assertRaises(Page.DoesNotExist):
+                get_page_from_path('/root/child/')
