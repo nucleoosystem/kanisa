@@ -75,27 +75,15 @@ class Page(MPTTModel):
 
 
 def get_page_from_path(path):
-    parts = path.split('/')
-
-    # We have to start with a slash
-    if parts[0] != '':
+    # path must start and end with a slash, and have a valid slug in
+    # between, which means at least 3 characters
+    if len(path) <= 2:
         raise Http404
 
-    # Remove the first slash
-    parts.pop(0)
-
-    if len(parts) == 0:
+    if path[0] != '/' or path[-1] != '/':
         raise Http404
 
-    # We have to end in a trailing slash
-    if parts[-1] != '':
-        raise Http404
-
-    # Remove the last slash
-    parts.pop()
-
-    if len(parts) == 0:
-        raise Http404
+    parts = path[1:-1].split('/')
 
     root_slug = parts[0]
 
