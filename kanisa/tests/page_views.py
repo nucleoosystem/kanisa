@@ -1,4 +1,6 @@
 from django.core.urlresolvers import reverse
+from django.test import TestCase
+from django.test.utils import override_settings
 from kanisa.models import Page
 from kanisa.tests.utils import KanisaViewTestCase
 import factory
@@ -144,3 +146,35 @@ class PageManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 302)
 
         self.client.logout()
+
+
+class PagePublicViewTest(TestCase):
+    @override_settings(APPEND_SLASH=True)
+    def test_root_view_without_trailing_slash_append_slash_on(self):
+        PageFactory.create(title="About Us")
+        response = self.client.get('/about-us')
+        self.assertRedirects(response, '/about-us/', 301)
+
+    @override_settings(APPEND_SLASH=False)
+    def test_root_view_without_trailing_slash_append_slash_off(self):
+        PageFactory.create(title="About Us")
+        response = self.client.get('/about-us')
+        self.assertEqual(response.status_code, 404)
+
+    def test_root_view_with_trailing_slash(self):
+        parent_page = PageFactory.create(title="About Us")
+        response = self.client.get('/about-us/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['page'], parent_page)
+
+    def test_child_view(self):
+        parent_page = PageFactory.create(title="About Us")
+        child_page = PageFactory.create(title="Staff", parent=parent_page)
+        response = self.client.get('/about-us/staff/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['page'], child_page)
+
+    def test_non_existent_page(self):
+        PageFactory.create(title="About Us")
+        response = self.client.get('/about-uss/')
+        self.assertEqual(response.status_code, 404)
