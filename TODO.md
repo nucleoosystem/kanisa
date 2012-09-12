@@ -97,6 +97,8 @@
   text bold, or pasting in rich text).
 * Make sure each page has a descriptive title (i.e. the <title> tag
   contains something other than just the name of the Church).
+* Detect references to dates in text, and flag for cleanup around that
+  date on the home page of the Kanisa management interface.
 
 # Frontend
 
