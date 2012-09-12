@@ -1,7 +1,6 @@
 {% extends 'kanisa/base.html' %}
 
 {% load url from future %}
-{% load markup %}
 
 {% block precontent %}
 <ul class="breadcrumb">
@@ -65,11 +64,7 @@
   </div>
 
   <div class="span9">
-    <h1>{{ page.title }}</h1>
-
-    {% if page.contents %}
-    {{ page.contents|markdown }}
-    {% endif %}
+    {% include 'kanisa/public/pages/_page_contents.html' %}
   </div>
 </div>
 {% endblock %}
