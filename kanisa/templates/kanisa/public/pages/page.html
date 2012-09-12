@@ -22,15 +22,15 @@
 
 {% block content %}
 
+{% with page.parent as parent %}
+{% with page.get_published_children as children %}
+
+{% if parent or children %}
 <div class="row">
 
   <div class="span3">
     <div class="well" style="padding: 8px 0;">
-      {% with page.parent as parent %}
-      {% with page.get_published_children as children %}
       {% include 'kanisa/public/pages/_page_nav.html' %}
-      {% endwith %}
-      {% endwith %}
     </div>
 
   </div>
@@ -39,4 +39,11 @@
     {% include 'kanisa/public/pages/_page_contents.html' with page=page only %}
   </div>
 </div>
+{% else %}
+    {% include 'kanisa/public/pages/_page_contents.html' with page=page only %}
+{% endif %}
+
+{% endwith %}
+{% endwith %}
+
 {% endblock %}
