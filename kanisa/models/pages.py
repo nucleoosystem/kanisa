@@ -72,6 +72,9 @@ class Page(MPTTModel):
         ancestors_path.append(self.slug)
         return '/'.join(ancestors_path) + '/'
 
+    def get_published_children(self):
+        return self.get_children().filter(draft=False)
+
 
 def get_page_for_part(slug, parent, candidates):
     """Returns the page in candidates which has parent as its parent,
