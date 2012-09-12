@@ -31,9 +31,9 @@
         {% with page.parent as parent %}
         {% if parent %}
         <li class="nav-header">
-          <a href="/{{ page.parent.get_path }}" style="color: inherit">{{ page.parent }}</a>
+          <a href="/{{ parent.get_path }}" style="color: inherit">{{ parent }}</a>
         </li>
-        {% for p in page.parent.get_published_children %}
+        {% for p in parent.get_published_children %}
         {% if p.pk == page.pk %}
         <li class="active">
           <a href="/{{ p.get_path }}">{{ p }}</a>
