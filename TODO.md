@@ -38,6 +38,8 @@
 
 * Drag-and-drop page moving.
 * Allow logged-in users to see unpublished pages.
+* Pages should have a lead paragraph.
+* Allow pages to use multiple templates?
 
 # Social Media
 
