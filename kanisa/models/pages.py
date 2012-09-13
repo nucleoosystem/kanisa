@@ -81,8 +81,14 @@ class Page(MPTTModel):
                 self.title = title
                 self.path = path
 
-        return [Breadcrumb(p.title, "/" + p.get_path())
-                for p in self.get_ancestors()]
+        breadcrumbs = []
+        last_path = '/'
+        for p in self.get_ancestors():
+            last_path = last_path + p.slug + '/'
+            b = Breadcrumb(p.title, last_path)
+            breadcrumbs.append(b)
+
+        return breadcrumbs
 
 
 def get_page_for_part(slug, parent, candidates):

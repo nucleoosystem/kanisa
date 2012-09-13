@@ -241,7 +241,6 @@ class PageTemplatesTest(TestCase):
         greatgrandchild = PageFactory.create(title='Exclamation Mark',
                                              parent=grandchild)
 
-        # Uh-oh - looks O(n)'y
         with self.assertNumQueries(0):
             result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
                                       {'page': root})
@@ -250,11 +249,11 @@ class PageTemplatesTest(TestCase):
             result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
                                       {'page': child})
 
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
                                       {'page': grandchild})
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(1):
             result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
                                       {'page': greatgrandchild})
 
