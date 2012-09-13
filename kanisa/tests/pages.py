@@ -279,7 +279,7 @@ class PageTemplatesTest(TestCase):
                     'children': page.get_published_children()}
 
         context = _get_context(root)
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(1):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)
 
@@ -289,6 +289,6 @@ class PageTemplatesTest(TestCase):
                              context)
 
         context = _get_context(grandchild)
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(5):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)

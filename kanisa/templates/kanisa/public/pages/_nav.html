@@ -24,10 +24,15 @@
   <li class="nav-header">
     In this section
   </li>
+
+  {% with page.get_path as parent_path %}
   {% for p in children %}
   <li>
-    <a href="/{{ p.get_path }}">{{ p }}</a>
+    <a href="/{{ parent_path }}/{{ p.slug }}/">{{ p }}</a>
   </li>
   {% endfor %}
+
+  {% endwith %}
+
   {% endif %}
 </ul>
