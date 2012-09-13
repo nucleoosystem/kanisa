@@ -4,11 +4,23 @@
 {% load url from future %}
 
 {% block contents %}
+<p class="footnote">
+{% for p in object.get_breadcrumb_trail %}
+  <a href="{{ p.path }}">{{ p.title }}</a>
+  &raquo;
+{% endfor %}
+<strong>{{ object.title }}</strong>
+</p>
+
 <blockquote>
-<p>{{ object.contents|markdown|striptags|truncatewords:75 }}</p>
+{% if object.lead %}
+<p>{{ object.lead }}</p>
+{% endif %}
 </blockquote>
+
 {% endblock %}
 
 {% block buttons %}
+
 <a class="btn btn-mini" href="{% url 'kanisa_manage_pages_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
 {% endblock %}
