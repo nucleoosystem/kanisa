@@ -75,6 +75,15 @@ class Page(MPTTModel):
     def get_published_children(self):
         return self.get_children().filter(draft=False)
 
+    def get_breadcrumb_trail(self):
+        class Breadcrumb(object):
+            def __init__(self, title, path):
+                self.title = title
+                self.path = path
+
+        return [Breadcrumb(p.title, "/" + p.get_path())
+                for p in self.get_ancestors()]
+
 
 def get_page_for_part(slug, parent, candidates):
     """Returns the page in candidates which has parent as its parent,
