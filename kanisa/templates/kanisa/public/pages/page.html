@@ -11,14 +11,22 @@
 {% with page.parent as parent %}
 {% with page.get_published_children as children %}
 
-{% if parent or children %}
+{% if parent or children or perms.kanisa.manage_diary %}
 <div class="row">
 
   <div class="span2">
+    {% if parent or children %}
     <div class="well" style="padding: 8px 0;">
       {% include 'kanisa/public/pages/_nav.html' %}
     </div>
+    {% endif %}
 
+    {% if perms.kanisa.manage_diary %}
+    <a class="btn" href="{% url 'kanisa_manage_pages_update' page.pk %}">
+      <i class="icon-edit"></i>
+      Edit this Page
+    </a>
+    {% endif %}
   </div>
 
   <div class="span10">
