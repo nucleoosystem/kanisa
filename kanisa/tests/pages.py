@@ -281,15 +281,15 @@ class PageTemplatesTest(TestCase):
 
         context = _get_context(root)
         with self.assertNumQueries(3):
-            render_to_string('kanisa/public/pages/_page_nav.html',
+            render_to_string('kanisa/public/pages/_nav.html',
                              context)
 
         context = _get_context(child)
         with self.assertNumQueries(2):
-            render_to_string('kanisa/public/pages/_page_nav.html',
+            render_to_string('kanisa/public/pages/_nav.html',
                              context)
 
         context = _get_context(grandchild)
         with self.assertNumQueries(4):
-            render_to_string('kanisa/public/pages/_page_nav.html',
+            render_to_string('kanisa/public/pages/_nav.html',
                              context)
