@@ -3,8 +3,9 @@
 
 {% with object.get_next as next_event %}
 {% if next_event %}
+<hr />
 
-<h3>Coming Up</h3>
+<h3 style="margin-top: 0">Coming Up</h3>
 <p>
   The next <em>{{ next_event.title }}</em> is on
   <strong>{{ next_event.date|date:"l, jS F Y" }}</strong>
