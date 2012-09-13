@@ -18,7 +18,9 @@ from .document_views import DocumentManagementViewTest
 from .management_views import ManagementViewTest
 from .page_views import (PageManagementViewTest,
                          PagePublicViewTest)
-from .pages import PageTest, GetPageFromPathTest
+from .pages import (PageTest,
+                    GetPageFromPathTest,
+                    PageTemplatesTest)
 from .public_views import PublicViewTest
 from .sermons import SermonTest
 from .sermon_views import (SermonManagementViewTest,

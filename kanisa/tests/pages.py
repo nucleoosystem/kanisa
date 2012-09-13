@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.template.loader import render_to_string
 from django.test import TestCase
 from kanisa.models import Page
 from kanisa.models.pages import get_page_from_path
@@ -230,3 +231,65 @@ class GetPageFromPathTest(TestCase):
         with self.assertNumQueries(1):
             with self.assertRaises(Page.DoesNotExist):
                 get_page_from_path('/root/child/')
+
+
+class PageTemplatesTest(TestCase):
+    def test_breadcrumbs(self):
+        root = PageFactory.create(title='hello')
+        child = PageFactory.create(title='comma', parent=root)
+        grandchild = PageFactory.create(title='world', parent=child)
+        greatgrandchild = PageFactory.create(title='Exclamation Mark',
+                                             parent=grandchild)
+
+        # Uh-oh - looks O(n)'y
+        with self.assertNumQueries(0):
+            result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
+                                      {'page': root})
+
+        with self.assertNumQueries(1):
+            result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
+                                      {'page': child})
+
+        with self.assertNumQueries(2):
+            result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
+                                      {'page': grandchild})
+
+        with self.assertNumQueries(3):
+            result = render_to_string('kanisa/public/pages/_breadcrumbs.html',
+                                      {'page': greatgrandchild})
+
+        self.assertTrue('"/hello/"' in result)
+        self.assertTrue('"/hello/comma/"' in result)
+        self.assertTrue('"/hello/comma/world/"' in result)
+
+    def test_nav(self):
+        root = PageFactory.create(title='hello')
+        child = PageFactory.create(title='comma', parent=root)
+        PageFactory.create(title='Full Stop', parent=root)
+        grandchild = PageFactory.create(title='world', parent=child)
+        PageFactory.create(title='Exclamation Mark',
+                           parent=grandchild)
+        PageFactory.create(title='Colon',
+                           parent=grandchild)
+        PageFactory.create(title='Semicolon',
+                           parent=grandchild)
+
+        def _get_context(page):
+            return {'page': page,
+                    'parent': None,
+                    'children': page.get_published_children()}
+
+        context = _get_context(root)
+        with self.assertNumQueries(3):
+            render_to_string('kanisa/public/pages/_page_nav.html',
+                             context)
+
+        context = _get_context(child)
+        with self.assertNumQueries(2):
+            render_to_string('kanisa/public/pages/_page_nav.html',
+                             context)
+
+        context = _get_context(grandchild)
+        with self.assertNumQueries(4):
+            render_to_string('kanisa/public/pages/_page_nav.html',
+                             context)
