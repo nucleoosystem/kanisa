@@ -3,17 +3,21 @@
   <li class="nav-header">
     <a href="/{{ parent.get_path }}" style="color: inherit">{{ parent }}</a>
   </li>
+  {% with parent.get_path as parent_path %}
+
   {% for p in parent.get_published_children %}
   {% if p.pk == page.pk %}
   <li class="active">
-    <a href="/{{ p.get_path }}">{{ p }}</a>
+    <a href="/{{ parent_path }}/{{ p.slug }}/">{{ p }}</a>
   </li>
   {% else %}
   <li>
-    <a href="/{{ p.get_path }}">{{ p }}</a>
+    <a href="/{{ parent_path }}/{{ p.slug }}/">{{ p }}</a>
   </li>
   {% endif %}
   {% endfor %}
+
+  {% endwith %}
   <li class="divider"></li>
   {% endif %}
   {% if children %}
