@@ -289,6 +289,6 @@ class PageTemplatesTest(TestCase):
                              context)
 
         context = _get_context(grandchild)
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(4):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)

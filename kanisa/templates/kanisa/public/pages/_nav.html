@@ -1,9 +1,10 @@
 <ul class="nav nav-list">
   {% if parent %}
-  <li class="nav-header">
-    <a href="/{{ parent.get_path }}" style="color: inherit">{{ parent }}</a>
-  </li>
   {% with parent.get_path as parent_path %}
+
+  <li class="nav-header">
+    <a href="/{{ parent_path }}" style="color: inherit">{{ parent }}</a>
+  </li>
 
   {% for p in parent.get_published_children %}
   {% if p.pk == page.pk %}
@@ -20,6 +21,7 @@
   {% endwith %}
   <li class="divider"></li>
   {% endif %}
+
   {% if children %}
   <li class="nav-header">
     In this section
