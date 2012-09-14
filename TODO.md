@@ -98,6 +98,9 @@
   contains something other than just the name of the Church).
 * Detect references to dates in text, and flag for cleanup around that
   date on the home page of the Kanisa management interface.
+* Stop including Bootstrap generated code - use LESS instead, and add
+  compilation of stylesheets as a pre-deploy step (or perhaps just use
+  django-compressor's `COMPRESS_PRECOMPILERS` setting).
 
 # Frontend
 
