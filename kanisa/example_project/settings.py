@@ -35,7 +35,14 @@ INSTALLED_APPS = (
     'haystack',
     'mptt',
     'recurrence',
+    'compressor',
     'kanisa',
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -76,3 +83,7 @@ HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, "whoosh_index")
 
 USE_TZ = True
 LOGIN_URL = '/login/'
+
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
