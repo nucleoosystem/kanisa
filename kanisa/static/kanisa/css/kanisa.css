@@ -121,3 +121,7 @@ h3 span.help_text {
 .thumbnail-no-caption a {
     color: inherit;
 }
+
+td h5 {
+    margin-top: 0;
+}

@@ -1,0 +1,84 @@
+{% extends 'kanisa/public/sermons/base.html' %}
+
+{% load url from future %}
+{% load thumbnail %}
+
+{% block precontent %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa.views.index' %}">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a> <span class="divider">/</span>
+  </li>
+  <li class="active">
+    The Archives
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1 class="primary">
+  Sermon Archives
+</h1>
+
+<p class="lead">
+  Take a look through a complete list of all the sermons currently available from {{ KANISA_CHURCH_NAME }}.</p>
+</p>
+
+<table class="table table-striped">
+  <tbody>
+    {% for sermon in object_list %}
+    <tr>
+      <td style="width: 90px; height: 80px">
+        {% if sermon.series %}
+
+        {% thumbnail sermon.series.image "80x80" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid" />
+        {% endthumbnail %}
+
+        {% endif %}
+      </td>
+      <td style="vertical-align: middle">
+        {% if sermon.series %}
+        <h5><a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a></h5>
+        Part of the series <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">
+          {{ sermon.series }}</a>.
+        <br />
+        {% else %}
+        <h5><a href="{% url 'kanisa_public_standalone_sermon_detail' sermon.slug %}">{{ sermon.title }}</a></h5>
+        {% endif %}
+        Preached on {{ sermon.date|date:"jS F Y"}} by {{ sermon.speaker }}.<br />
+        A sermon on <em>{{ sermon.passage }}</em>.
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if is_paginated %}
+<div class="pagination pagination-centered">
+  <ul>
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&laquo;</a></li>
+    {% endif %}
+
+    {% for page in page_obj.paginator.page_range %}
+    {% if page == page_obj.number %}
+    <li class="active"><a href="#">{{ page }}</a></li>
+    {% else %}
+    <li><a href="?page={{ page }}">{{ page }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><a href="#">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock %}

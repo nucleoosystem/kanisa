@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from kanisa.models import Sermon, SermonSeries
 
 
@@ -52,3 +53,17 @@ class SermonDetailView(DetailView):
             raise Http404
 
         return object
+
+
+class SermonArchiveView(ListView):
+    model = Sermon
+    template_name = 'kanisa/public/sermons/archive.html'
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super(SermonArchiveView,
+                        self).get_context_data(**kwargs)
+
+        context['kanisa_title'] = 'Sermon Archives'
+
+        return context
