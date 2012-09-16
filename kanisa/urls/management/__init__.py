@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 
                        url(r'^banners/',
                            include('kanisa.urls.management.banners')),
+                       url(r'^branding/',
+                           include('kanisa.urls.management.branding')),
                        url(r'^diary/',
                            include('kanisa.urls.management.diary')),
                        url(r'^documents/',

@@ -7,7 +7,10 @@ from django.http import (HttpResponse,
 from django.utils.http import urlquote
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import (CreateView,
+                                       UpdateView,
+                                       DeleteView,
+                                       FormView)
 from django.views.generic.list import ListView
 
 
@@ -69,6 +72,16 @@ class KanisaAnyAuthorizationMixin(KanisaAuthorizationMixin):
 class KanisaTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(KanisaTemplateView,
+                        self).get_context_data(**kwargs)
+
+        context = add_kanisa_context(self, context)
+
+        return context
+
+
+class KanisaFormView(FormView):
+    def get_context_data(self, **kwargs):
+        context = super(KanisaFormView,
                         self).get_context_data(**kwargs)
 
         context = add_kanisa_context(self, context)
