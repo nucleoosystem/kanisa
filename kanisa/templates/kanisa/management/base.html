@@ -121,6 +121,18 @@
                 </a>
               </li>
               {% endif %}
+              {% if user.is_superuser %}
+              <li class="nav-header">
+                <i class="icon-tag"></i>
+                Branding
+              </li>
+              <li>
+                <a href="{% url 'kanisa_manage_branding' %}">
+                  Manage Branding
+                </a>
+              </li>
+              {% endif %}
+
             </ul>
           </div>
         </div>
