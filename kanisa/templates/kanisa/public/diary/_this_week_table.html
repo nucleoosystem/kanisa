@@ -20,7 +20,9 @@
         {{ item }}
       </a>
       {% else %}
-      {{ item }}
+      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}">
+        {{ item }}
+      </a>
       {% endif %}
 
       {% if not forloop.last %}<br />{% endif %}

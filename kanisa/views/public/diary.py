@@ -51,3 +51,18 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
         context['kanisa_title'] = unicode(self.object)
 
         return context
+
+
+class ScheduledEventDetailView(DiaryBaseView, DetailView):
+    queryset = ScheduledEvent.objects.filter(event__isnull=True)
+    template_name = 'kanisa/public/diary/scheduledevent.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ScheduledEventDetailView,
+                        self).get_context_data(**kwargs)
+
+        context.update(self.get_diary_context_data())
+
+        context['kanisa_title'] = unicode(self.object)
+
+        return context

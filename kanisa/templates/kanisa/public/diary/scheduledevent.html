@@ -1,0 +1,50 @@
+{% extends 'kanisa/public/sermons/base.html' %}
+
+{% load markup %}
+{% load url from future %}
+{% load thumbnail %}
+
+{% block precontent %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa.views.index' %}">Home</a>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_diary_index' %}">Diary</a>
+    <span class="divider">/</span>
+  </li>
+  <li class="active">
+    {{ object.title }} ({{ object.date|date:"jS F Y" }})
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="span9">
+    <h1 class="primary">
+      {{ object.title }}
+    </h1>
+
+    <p class="lead">{{ object.title }} is on {{ object.date|date:"jS F Y" }}
+      at {{ object.start_time }}</p>
+
+    {% if object.details %}
+    {{ object.details|markdown }}
+    {% endif %}
+  </div>
+  <div class="span3">
+    <div class="well" style="padding:8px 0">
+      {% include "kanisa/public/diary/_diary_nav.html" %}
+    </div>
+    {% if perms.kanisa.manage_diary %}
+    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
+      <i class="icon-edit"></i>
+      Edit this regular event
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
