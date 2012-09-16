@@ -10,7 +10,8 @@ def public_page_view(request):
         page = get_page_from_path(request.path)
 
         return render_to_response('kanisa/public/pages/page.html',
-                                  {'page': page},
+                                  {'page': page,
+                                   'kanisa_title': unicode(page)},
                                   context_instance=RequestContext(request))
     except Page.DoesNotExist:
         if not request.path.endswith('/') and settings.APPEND_SLASH:

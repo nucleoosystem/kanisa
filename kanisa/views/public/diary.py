@@ -33,6 +33,7 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
 
         context.update(self.get_diary_context_data())
         context['thisweek'] = self.get_this_week()
+        context['kanisa_title'] = 'What\'s On'
 
         return context
 
@@ -46,5 +47,7 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
                         self).get_context_data(**kwargs)
 
         context.update(self.get_diary_context_data())
+
+        context['kanisa_title'] = unicode(self.object)
 
         return context

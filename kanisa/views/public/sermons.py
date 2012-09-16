@@ -15,6 +15,7 @@ class SermonIndexView(TemplateView):
         context['active_series'] = series
         latest_sermons = Sermon.objects.all()
         context['latest_sermons'] = latest_sermons[:5]
+        context['kanisa_title'] = 'Sermons'
 
         return context
 
@@ -23,10 +24,21 @@ class SermonSeriesDetailView(DetailView):
     model = SermonSeries
     template_name = 'kanisa/public/sermons/series.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(SermonSeriesDetailView,
+                        self).get_context_data(**kwargs)
+        context['kanisa_title'] = unicode(self.object)
+        return context
+
 
 class SermonDetailView(DetailView):
     model = Sermon
     template_name = 'kanisa/public/sermons/sermon.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SermonDetailView, self).get_context_data(**kwargs)
+        context['kanisa_title'] = unicode(self.object)
+        return context
 
     def get_object(self, queryset=None):
         object = super(SermonDetailView, self).get_object(queryset)
