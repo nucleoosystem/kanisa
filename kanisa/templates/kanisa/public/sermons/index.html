@@ -19,50 +19,50 @@
 </h1>
 
 <div class="row">
-<div class="span7">
-{% if active_series %}
-{% include "kanisa/public/sermons/_series_list.html" %}
-{% endif %}
-</div>
-<div class="span5">
-<h2>Latest Sermons</h2>
+  <div class="span7">
+    {% if active_series %}
+    {% include "kanisa/public/sermons/_series_list.html" %}
+    {% endif %}
+  </div>
+  <div class="span5">
+    <h2>Latest Sermons</h2>
 
-{% if latest_sermons %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Sermon</th>
-      <th>Series</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for sermon in latest_sermons %}
-    <tr>
-      <td>
-        <a href="{{ sermon.url }}">{{ sermon.title }}</a>
-        <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
-      </td>
-      <td>
-        {% if sermon.series %}
-        {{ sermon.series }}
-        {% endif %}
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<p class="alert alert-info">There are no sermons available yet.</p>
-{% endif %}
+    {% if latest_sermons %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sermon</th>
+          <th>Series</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sermon in latest_sermons %}
+        <tr>
+          <td>
+            <a href="{{ sermon.url }}">{{ sermon.title }}</a>
+            <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
+          </td>
+          <td>
+            {% if sermon.series %}
+            {{ sermon.series }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="alert alert-info">There are no sermons available yet.</p>
+    {% endif %}
 
-{% if perms.kanisa.manage_sermons %}
-<a class="btn btn-primary" href="{% url 'kanisa_manage_sermons' %}">
-  <i class="icon-white icon-headphones"></i>
-  Manage Sermons
-</a>
-{% endif %}
+    {% if perms.kanisa.manage_sermons %}
+    <a class="btn btn-primary" href="{% url 'kanisa_manage_sermons' %}">
+      <i class="icon-white icon-headphones"></i>
+      Manage Sermons
+    </a>
+    {% endif %}
 
-</div>
+  </div>
 </div>
 
 {% endblock %}
