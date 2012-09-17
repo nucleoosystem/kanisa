@@ -1,5 +1,6 @@
 import os
 from django.conf import settings
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
 from kanisa.forms.branding import (LogoBrandingForm,
@@ -76,6 +77,9 @@ class BrandingManagementUpdateView(BrandingBaseView,
         with open(destination_name, 'wb') as destination:
             for chunk in form.files['image'].chunks():
                 destination.write(chunk)
+
+        messages.success(self.request, ('Image updated - changes may take '
+                                        'a few minutes to take effect.'))
 
         return super(BrandingManagementUpdateView,
                      self).form_valid(form)

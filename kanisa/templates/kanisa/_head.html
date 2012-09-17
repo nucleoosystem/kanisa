@@ -1,3 +1,4 @@
+{% load cache %}
 {% load kanisa_branding %}
 {% load thumbnail %}
 
@@ -11,6 +12,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/bootstrap/css/bootstrap-responsive.min.css" />
 <link href="{{ STATIC_URL }}kanisa/css/kanisa.css" rel="stylesheet">
 
+{% cache 60 kanisa_branding_icons %}
 {% kanisa_branding 'favicon' as favicon %}
 {% if favicon %}
 <link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon }}">
@@ -36,6 +38,7 @@
 <link rel="apple-touch-icon-precomposed" href="{{ im.url }}">
 {% endthumbnail %}
 {% endif %}
+{% endcache %}
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
