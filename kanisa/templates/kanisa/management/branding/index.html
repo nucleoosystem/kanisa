@@ -42,16 +42,22 @@
 <div class="row">
   <div class="span5">
     {% if favicon_location %}
-    {{ favicon_location }}
+    <p><img src="{{ MEDIA_URL }}{{ favicon_location }}" height="32px" width="32px" /></p>
     {% else %}
     <p class="alert warning">No favicon uploaded.</p>
     {% endif %}
+
+    <a href="{% url 'kanisa_manage_branding_logo' 'favicon' %}" class="btn btn-small btn-success">
+      Update Favicon
+    </a>
   </div>
 
-  <div class="span5">
-    <p class="muted">A <em>favicon</em> is used when adding sites to
-    favourites, and in most browsers' tabs, to allow people to quickly
-    identify the tab they're after.</p>
+  <div class="span5 muted">
+    <p>A <em>favicon</em> is used when adding sites to favourites, and
+    in most browsers' tabs, to allow people to quickly identify the
+    tab they're after.</p>
+
+    <p>Uploaded favicons should be exactly 32px by 32px.</p>
   </div>
 </div>
 
@@ -88,7 +94,7 @@
     {% endif %}
 
     <a href="{% url 'kanisa_manage_branding_logo' 'apple' %}" class="btn btn-small btn-success">
-      Update Logo
+      Update Icons
     </a>
 
   </div>

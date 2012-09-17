@@ -33,4 +33,7 @@ def kanisa_branding(branding_component):
     if branding_component == 'apple':
         return __fetch('apple.jpg')
 
+    if branding_component == 'favicon':
+        return __fetch('favicon.ico')
+
     return None

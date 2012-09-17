@@ -80,3 +80,23 @@ class AppleBrandingForm(BrandingForm):
             raise forms.ValidationError('The uploaded image must be at least '
                                         '144px high (the uploaded image was '
                                         '%s%s).' % (height, 'px'))
+
+
+class FaviconBrandingForm(BrandingForm):
+    expected_format = 'PNG'
+
+    def __init__(self, *args, **kwargs):
+        super(FaviconBrandingForm, self).__init__(*args, **kwargs)
+        self.fields['image'].help_text = ('This should be a PNG file '
+                                          'exactly 32px by 32px.')
+
+    def check_size(self, width, height):
+        if height != width:
+            raise forms.ValidationError('The uploaded image must be exactly '
+                                        'square (the uploaded image was '
+                                        '%s by %s).' % (width, height))
+
+        if height != 32:
+            raise forms.ValidationError('The uploaded image must be exactly '
+                                        '32px high (the uploaded image was '
+                                        '%s%s).' % (height, 'px'))

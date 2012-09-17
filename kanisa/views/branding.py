@@ -1,8 +1,10 @@
 import os
 from django.conf import settings
 from django.core.urlresolvers import reverse_lazy
+from django.http import Http404
 from kanisa.forms.branding import (LogoBrandingForm,
-                                   AppleBrandingForm)
+                                   AppleBrandingForm,
+                                   FaviconBrandingForm)
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
                                   KanisaFormView)
@@ -37,6 +39,11 @@ class BrandingManagementUpdateView(BrandingBaseView,
 
         if self.kwargs['resource'] == 'apple':
             return AppleBrandingForm
+
+        if self.kwargs['resource'] == 'favicon':
+            return FaviconBrandingForm
+
+        raise Http404
 
     def get_destination_filename(self):
         resource = self.kwargs['resource']
