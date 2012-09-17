@@ -50,13 +50,13 @@ class LogoBrandingForm(BrandingForm):
         super(LogoBrandingForm, self).__init__(*args, **kwargs)
         self.fields['image'].help_text = ('Your site logo is used at the top '
                                           'of every page. It should be a JPEG '
-                                          'exactly 140px high, and no wider '
+                                          'exactly 85px high, and no wider '
                                           'than 500px.')
 
     def check_size(self, width, height):
-        if height < 140:
+        if height < 85:
             raise forms.ValidationError('The uploaded image must be at least '
-                                        '140px high (the uploaded image was '
+                                        '85px high (the uploaded image was '
                                         '%s%s).' % (height, 'px'))
 
 
