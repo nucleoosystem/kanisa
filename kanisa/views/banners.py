@@ -61,7 +61,7 @@ class RetireBannerView(BannerBaseView,
         banner = get_object_or_404(Banner, pk=banner_id)
         banner.set_retired()
 
-        message = u'Banner "%s" retired.' % unicode(banner)
+        message = 'Banner "%s" retired.' % unicode(banner)
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_banners')
