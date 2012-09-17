@@ -1,3 +1,6 @@
+{% load kanisa_branding %}
+{% load thumbnail %}
+
 <meta charset="utf-8">
 <title>{% if kanisa_title %}{{ kanisa_title }} - {% endif %}{{ KANISA_CHURCH_NAME }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +10,32 @@
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/bootstrap/css/bootstrap-responsive.min.css" />
 <link href="{{ STATIC_URL }}kanisa/css/kanisa.css" rel="stylesheet">
+
+{% kanisa_branding 'favicon' as favicon %}
+{% if favicon %}
+<link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon }}">
+{% endif %}
+
+{% kanisa_branding 'apple' as apple_location %}
+
+{% if apple_location %}
+
+{% thumbnail apple_location "144x144" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "114x114" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "72x72" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "57x57" as im %}
+<link rel="apple-touch-icon-precomposed" href="{{ im.url }}">
+{% endthumbnail %}
+{% endif %}
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
