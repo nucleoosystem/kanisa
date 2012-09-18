@@ -24,6 +24,16 @@ class BrandingBaseView(KanisaAuthorizationMixin):
         return user.is_superuser
 
 
+def get_brand_colours(filename):
+    with open(filename, 'r') as destination:
+        return json.loads(destination.read())
+
+
+def flush_brand_colours(filename, colours):
+    with open(filename, 'w') as destination:
+        destination.write(json.dumps(colours))
+
+
 class BrandingManagementIndexView(BrandingBaseView,
                                   KanisaTemplateView):
     template_name = 'kanisa/management/branding/index.html'
@@ -33,15 +43,11 @@ class BrandingManagementIndexView(BrandingBaseView,
         context = super(BrandingManagementIndexView,
                         self).get_context_data(**kwargs)
 
-        root = settings.MEDIA_ROOT
-        destination_name = os.path.join(root,
+        destination_name = os.path.join(settings.MEDIA_ROOT,
                                         'branding',
                                         'colours.json', )
 
-        with open(destination_name, 'r') as destination:
-            colours = json.loads(destination.read())
-
-        context['colours'] = colours
+        context['colours'] = get_brand_colours(destination_name)
 
         return context
 
@@ -123,9 +129,7 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
                                         'colours.json', )
 
         colours = {'logo_background': form.cleaned_data['colour'], }
-
-        with open(destination_name, 'w') as destination:
-            destination.write(json.dumps(colours))
+        flush_brand_colours(destination_name, colours)
 
         messages.success(self.request, ('Colours updated - changes may take '
                                         'a few minutes to take effect.'))
