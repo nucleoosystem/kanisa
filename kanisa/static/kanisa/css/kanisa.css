@@ -125,3 +125,17 @@ h3 span.help_text {
 td h5 {
     margin-top: 0;
 }
+
+.colour-swatch {
+    display: block;
+    padding: 3px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+}
+
+.colour-swatch div {
+    height: 40px;
+    width: 40px;
+}

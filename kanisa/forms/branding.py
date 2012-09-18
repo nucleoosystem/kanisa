@@ -100,3 +100,21 @@ class FaviconBrandingForm(BrandingForm):
             raise forms.ValidationError('The uploaded image must be exactly '
                                         '32px high (the uploaded image was '
                                         '%s%s).' % (height, 'px'))
+
+
+class BrandingColoursForm(forms.Form):
+    colour = forms.RegexField(regex='^#([0-9a-fA-F]{6})$',
+                              help_text=('Should be a hex colour code - e.g. '
+                                         '#000000 for black.'))
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+
+        css = "btn-primary btn-large btn-success"
+        submit_text = 'Update Colours'
+        self.helper.add_input(Submit('submit',
+                                     submit_text,
+                                     css_class=css))
+        self.helper.form_class = 'form-horizontal'
+
+        super(BrandingColoursForm, self).__init__(*args, **kwargs)
