@@ -123,13 +123,18 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
     kanisa_title = 'Update Colours'
     form_class = BrandingColoursForm
 
+    def get_form(self, form_class):
+        form = super(BrandingManagementUpdateColoursView,
+                     self).get_form(form_class)
+        form.initial = get_brand_colours()
+        return form
+
     def form_valid(self, form):
         root = settings.MEDIA_ROOT
 
         ensure_branding_directory_exists()
 
-        colours = {'logo_background': form.cleaned_data['colour'], }
-        flush_brand_colours(colours)
+        flush_brand_colours(form.cleaned_data)
 
         messages.success(self.request, ('Colours updated - changes may take '
                                         'a few minutes to take effect.'))
