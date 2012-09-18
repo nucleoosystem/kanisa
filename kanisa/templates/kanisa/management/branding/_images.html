@@ -1,0 +1,98 @@
+{% load kanisa_branding %}
+{% load thumbnail %}
+{% load url from future %}
+
+<h3>Site Logo</h3>
+
+{% kanisa_branding 'logo' as logo_location %}
+
+{% if logo_location %}
+{% thumbnail logo_location "460x140" as im %}
+<p><img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid "/></p>
+{% endthumbnail %}
+
+{% else %}
+<p class="alert warning">No logo uploaded.</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'kanisa_manage_branding_logo' 'logo' %}" class="btn btn-small btn-success">
+    Update Logo
+  </a>
+</p>
+
+<p class="muted">Your site logo is used at the top of every
+  page. It should be exactly 140px high, and no wider than
+  500px.</p>
+
+<hr />
+
+<h3>Site Favicon</h3>
+
+{% kanisa_branding 'favicon' as favicon_location %}
+
+{% if favicon_location %}
+<p><img src="{{ MEDIA_URL }}{{ favicon_location }}" height="32px" width="32px" /></p>
+{% else %}
+<p class="alert warning">No favicon uploaded.</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'kanisa_manage_branding_logo' 'favicon' %}" class="btn btn-small btn-success">
+    Update Favicon
+  </a>
+</p>
+
+<p class="muted">A <em>favicon</em> is used when adding sites to
+  favourites, and in most browsers' tabs, to allow people to quickly
+  identify the tab they're after.</p>
+
+<p class="muted">Uploaded favicons should be exactly 32px by
+  32px.</p>
+
+<hr />
+
+<h3>Apple Icons</h3>
+
+{% kanisa_branding 'apple' as apple_location %}
+
+{% if apple_location %}
+
+<p>
+  {% thumbnail apple_location "144x144" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid "/>
+  {% endthumbnail %}
+
+  {% thumbnail apple_location "114x114" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid "/>
+  {% endthumbnail %}
+
+  {% thumbnail apple_location "72x72" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid "/>
+  {% endthumbnail %}
+
+  {% thumbnail apple_location "57x57" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid "/>
+  {% endthumbnail %}
+</p>
+
+{% else %}
+<p class="alert warning">No Apple icon uploaded.</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'kanisa_manage_branding_logo' 'apple' %}" class="btn btn-small btn-success">
+    Update Icons
+  </a>
+</p>
+
+<p class="muted">These icons are used where people add your site
+  to their home screens.</p>
+
+<p class="muted">The Apple icon needs to be 144px by 144px. This
+  will be scaled down for non-retina iPads to 72px by 72px (and for
+  iPhones to 114px and 57px respectively). Images that are uploaded
+  which are larger than 144px by 144px will be scaled down as
+  necessary.</p>
+
+<hr />
