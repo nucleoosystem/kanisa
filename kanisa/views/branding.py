@@ -24,13 +24,19 @@ class BrandingBaseView(KanisaAuthorizationMixin):
         return user.is_superuser
 
 
-def get_brand_colours(filename):
-    with open(filename, 'r') as destination:
+def get_brand_colours_filename():
+    return os.path.join(settings.MEDIA_ROOT,
+                        'branding',
+                        'colours.json', )
+
+
+def get_brand_colours():
+    with open(get_brand_colours_filename(), 'r') as destination:
         return json.loads(destination.read())
 
 
-def flush_brand_colours(filename, colours):
-    with open(filename, 'w') as destination:
+def flush_brand_colours(colours):
+    with open(get_brand_colours_filename(), 'w') as destination:
         destination.write(json.dumps(colours))
 
 
@@ -51,11 +57,7 @@ class BrandingManagementIndexView(BrandingBaseView,
         context = super(BrandingManagementIndexView,
                         self).get_context_data(**kwargs)
 
-        destination_name = os.path.join(settings.MEDIA_ROOT,
-                                        'branding',
-                                        'colours.json', )
-
-        context['colours'] = get_brand_colours(destination_name)
+        context['colours'] = get_brand_colours()
 
         return context
 
@@ -126,12 +128,8 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
 
         ensure_branding_directory_exists()
 
-        destination_name = os.path.join(root,
-                                        'branding',
-                                        'colours.json', )
-
         colours = {'logo_background': form.cleaned_data['colour'], }
-        flush_brand_colours(destination_name, colours)
+        flush_brand_colours(colours)
 
         messages.success(self.request, ('Colours updated - changes may take '
                                         'a few minutes to take effect.'))
