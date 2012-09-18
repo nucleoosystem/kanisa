@@ -102,10 +102,13 @@ class FaviconBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
+HEX_COLOUR_REGEX = '^#([0-9a-fA-F]{6})$'
+HEX_HELP = 'Should be a hex colour code - e.g. #000000 for black.'
+
+
 class BrandingColoursForm(forms.Form):
-    colour = forms.RegexField(regex='^#([0-9a-fA-F]{6})$',
-                              help_text=('Should be a hex colour code - e.g. '
-                                         '#000000 for black.'))
+    logo_background = forms.RegexField(regex=HEX_COLOUR_REGEX,
+                                       help_text=HEX_HELP)
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
