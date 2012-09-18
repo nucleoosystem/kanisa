@@ -34,6 +34,14 @@ def flush_brand_colours(filename, colours):
         destination.write(json.dumps(colours))
 
 
+def ensure_branding_directory_exists():
+    try:
+        os.makedirs(os.path.join(settings.MEDIA_ROOT,
+                                 'branding'))
+    except OSError:
+        pass
+
+
 class BrandingManagementIndexView(BrandingBaseView,
                                   KanisaTemplateView):
     template_name = 'kanisa/management/branding/index.html'
@@ -85,10 +93,7 @@ class BrandingManagementUpdateView(BrandingBaseView,
     def form_valid(self, form):
         root = settings.MEDIA_ROOT
 
-        try:
-            os.makedirs(os.path.join(root, 'branding'))
-        except OSError:
-            pass
+        ensure_branding_directory_exists()
 
         destination_name = os.path.join(root,
                                         'branding',
@@ -119,10 +124,7 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
     def form_valid(self, form):
         root = settings.MEDIA_ROOT
 
-        try:
-            os.makedirs(os.path.join(root, 'branding'))
-        except OSError:
-            pass
+        ensure_branding_directory_exists()
 
         destination_name = os.path.join(root,
                                         'branding',
