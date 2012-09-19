@@ -11,5 +11,9 @@
 {{ object.intro }}
 {% endif %}
 
+{% if object.contact %}
+{{ object.contact.name }}
+{% endif %}
+
 {% endautoescape %}
 {% endblock %}
