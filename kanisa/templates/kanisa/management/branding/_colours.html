@@ -2,6 +2,7 @@
 
 <h3>Colours</h3>
 
+{% if colours %}
 <table class="table table-striped">
   <tbody>
     {% for value, description in colours %}
@@ -17,6 +18,11 @@
     </tr>
     {% endfor %}
 </table>
+{% else %}
+<p class="alert alert-warning">
+  You don't have any custom colours set up yet.
+</p>
+{% endif %}
 
 <p>
   <a href="{% url 'kanisa_manage_branding_colours' %}" class="btn btn-small btn-success">

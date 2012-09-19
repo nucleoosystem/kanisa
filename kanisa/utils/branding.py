@@ -10,8 +10,11 @@ def get_brand_colours_filename():
 
 
 def get_brand_colours():
-    with open(get_brand_colours_filename(), 'r') as destination:
-        return json.loads(destination.read())
+    try:
+        with open(get_brand_colours_filename(), 'r') as destination:
+            return json.loads(destination.read())
+    except IOError:
+        return {}
 
 
 def flush_brand_colours(colours):
