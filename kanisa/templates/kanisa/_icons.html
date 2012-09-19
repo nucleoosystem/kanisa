@@ -28,4 +28,10 @@
 <link rel="apple-touch-icon-precomposed" href="{{ im.url }}">
 {% endthumbnail %}
 {% endif %}
+
+{% kanisa_branding 'colours' as colours_location %}
+{% if colours_location %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}{{ colours_location }}" />
+{% endif %}
+
 {% endcache %}

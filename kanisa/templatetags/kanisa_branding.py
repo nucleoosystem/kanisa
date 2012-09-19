@@ -36,4 +36,7 @@ def kanisa_branding(branding_component):
     if branding_component == 'favicon':
         return __fetch('favicon.ico')
 
+    if branding_component == 'colours':
+        return __fetch('colours.css')
+
     return None

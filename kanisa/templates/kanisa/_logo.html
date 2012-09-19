@@ -1,0 +1,14 @@
+{% load kanisa_branding %}
+{% load thumbnail %}
+
+{% kanisa_branding 'logo' as logo_location %}
+
+{% if logo_location %}
+<div class="row" style="margin-bottom: 10px">
+  <div class="span12" id="logo">
+    {% thumbnail logo_location "460x140" as im %}
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px"/>
+    {% endthumbnail %}
+  </div>
+</div>
+{% endif %}

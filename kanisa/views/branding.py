@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
+from django.template.loader import render_to_string
 from kanisa.forms.branding import (LogoBrandingForm,
                                    AppleBrandingForm,
                                    FaviconBrandingForm,
@@ -127,6 +128,16 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
         ensure_branding_directory_exists()
 
         flush_brand_colours(form.cleaned_data)
+
+        rendered = render_to_string('kanisa/_branding.html',
+                                    get_brand_colours())
+
+        destination_name = os.path.join(settings.MEDIA_ROOT,
+                                        'branding',
+                                        'colours.css')
+
+        with open(destination_name, 'w') as destination:
+            destination.write(rendered)
 
         messages.success(self.request, ('Colours updated - changes may take '
                                         'a few minutes to take effect.'))
