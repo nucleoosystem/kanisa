@@ -11,14 +11,7 @@ var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|dat
 {% endblock %}
 
 {% block content %}
-<ul class="nav nav-tabs">
-  <li class="active">
-    <a href="{% url 'kanisa_manage_diary' %}">This Week</a>
-  </li>
-  <li>
-    <a href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
-  </li>
-</ul>
+{% include "kanisa/management/diary/_nav.html" with current="index" %}
 
 {% if events_to_schedule %}
 <p><a href="{% url 'kanisa_manage_diary_schedule_weeks_regular_event' %}?date={{ monday|date:"Ymd" }}" class="btn btn-large btn-primary" id="schedule-weeks-events">

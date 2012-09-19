@@ -3,14 +3,7 @@
 {% load url from future %}
 
 {% block content %}
-<ul class="nav nav-tabs">
-  <li>
-    <a href="{% url 'kanisa_manage_diary' %}">This Week</a>
-  </li>
-  <li class="active">
-    <a href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
-  </li>
-</ul>
+{% include "kanisa/management/diary/_nav.html" with current="regular_events" %}
 
 <p>
   <a href="{% url 'kanisa_manage_diary_regular_create' %}" class="btn btn-large btn-success">

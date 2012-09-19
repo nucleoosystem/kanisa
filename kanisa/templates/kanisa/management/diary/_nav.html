@@ -1,0 +1,10 @@
+{% load url from future %}
+
+<ul class="nav nav-tabs">
+  <li{% if current = "index" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_diary' %}">This Week</a>
+  </li>
+  <li{% if current = "regular_events" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
+  </li>
+</ul>
