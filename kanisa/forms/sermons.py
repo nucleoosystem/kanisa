@@ -30,6 +30,28 @@ class SermonForm(KanisaBaseForm):
         model = Sermon
         widgets = {'details': EpicWidget(), }
 
+    def apply_id3(self, cleaned_data):
+        audio = EasyID3(self.files['mp3'].temporary_file_path())
+        audio['title'] = cleaned_data['title']
+        audio['artist'] = unicode(cleaned_data['speaker'])
+
+        if not cleaned_data['series']:
+            album_title = 'Sermons from %s' % conf.KANISA_CHURCH_NAME
+        else:
+            album_title = unicode(cleaned_data['series'])
+
+        audio['album'] = album_title
+
+        audio['albumartistsort'] = conf.KANISA_CHURCH_NAME
+        audio['organization'] = conf.KANISA_CHURCH_NAME
+        audio['genre'] = 'Speech'
+
+        # Not sure if this date format is right - the MP3 players I've
+        # got to test with don't show anything more than the year.
+        audio['date'] = cleaned_data['date'].strftime('%Y%m%d')
+
+        audio.save()
+
     def clean(self):
         super(SermonForm, self).clean()
         cleaned_data = self.cleaned_data
@@ -47,25 +69,6 @@ class SermonForm(KanisaBaseForm):
                 self._errors["mp3"] = errors
                 del cleaned_data["mp3"]
             else:
-                audio = EasyID3(self.files['mp3'].temporary_file_path())
-                audio['title'] = cleaned_data['title']
-                audio['artist'] = unicode(cleaned_data['speaker'])
-
-                if not cleaned_data['series']:
-                    album_title = 'Sermons from %s' % conf.KANISA_CHURCH_NAME
-                else:
-                    album_title = unicode(cleaned_data['series'])
-                audio['album'] = album_title
-
-                audio['albumartistsort'] = conf.KANISA_CHURCH_NAME
-                audio['organization'] = conf.KANISA_CHURCH_NAME
-                audio['genre'] = 'Speech'
-
-                # Not sure if this date format is right - the MP3
-                # players I've got to test with don't show anything
-                # more than the year.
-                audio['date'] = cleaned_data['date'].strftime('%Y%m%d')
-
-                audio.save()
+                self.apply_id3(cleaned_data)
 
         return cleaned_data
