@@ -1,4 +1,3 @@
-import json
 import os
 from django.conf import settings
 from django.contrib import messages
@@ -8,6 +7,9 @@ from kanisa.forms.branding import (LogoBrandingForm,
                                    AppleBrandingForm,
                                    FaviconBrandingForm,
                                    BrandingColoursForm)
+from kanisa.utils.branding import (flush_brand_colours,
+                                   get_brand_colours,
+                                   ensure_branding_directory_exists)
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
                                   KanisaFormView)
@@ -22,30 +24,6 @@ class BrandingBaseView(KanisaAuthorizationMixin):
 
     def authorization_check(self, user):
         return user.is_superuser
-
-
-def get_brand_colours_filename():
-    return os.path.join(settings.MEDIA_ROOT,
-                        'branding',
-                        'colours.json', )
-
-
-def get_brand_colours():
-    with open(get_brand_colours_filename(), 'r') as destination:
-        return json.loads(destination.read())
-
-
-def flush_brand_colours(colours):
-    with open(get_brand_colours_filename(), 'w') as destination:
-        destination.write(json.dumps(colours))
-
-
-def ensure_branding_directory_exists():
-    try:
-        os.makedirs(os.path.join(settings.MEDIA_ROOT,
-                                 'branding'))
-    except OSError:
-        pass
 
 
 class BrandingManagementIndexView(BrandingBaseView,
