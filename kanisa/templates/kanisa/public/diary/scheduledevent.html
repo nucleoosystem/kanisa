@@ -38,7 +38,16 @@
     <div class="well" style="padding:8px 0">
       {% include "kanisa/public/diary/_diary_nav.html" %}
     </div>
+
+    {% if object.contact %}
+    <hr />
+    {% include 'kanisa/public/diary/_contact.html' %}
+    {% endif %}
+
+
     {% if perms.kanisa.manage_diary %}
+    <hr />
+
     <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
       <i class="icon-edit"></i>
       Edit this regular event
