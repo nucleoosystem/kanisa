@@ -5,6 +5,7 @@ from kanisa.forms import KanisaBaseForm, BootstrapDateField
 from kanisa.widgets import EpicWidget
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
+from mutagen.id3 import ID3NoHeaderError, TIT2
 
 from kanisa.models import (SermonSeries,
                            Sermon,
@@ -31,6 +32,14 @@ class SermonForm(KanisaBaseForm):
         widgets = {'details': EpicWidget(), }
 
     def apply_id3(self, cleaned_data):
+        try:
+            audio = EasyID3(self.files['mp3'].temporary_file_path())
+        except ID3NoHeaderError:
+            audio = MP3(self.files['mp3'].temporary_file_path())
+            audio["TIT2"] = TIT2(encoding=3, text=[cleaned_data['title']])
+            audio.save()
+            audio = EasyID3(self.files['mp3'].temporary_file_path())
+
         audio = EasyID3(self.files['mp3'].temporary_file_path())
         audio['title'] = cleaned_data['title']
         audio['artist'] = unicode(cleaned_data['speaker'])
