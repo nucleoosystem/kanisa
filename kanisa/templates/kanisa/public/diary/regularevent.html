@@ -35,18 +35,7 @@
 
         {% if object.contact %}
         <hr />
-        <p>
-          {% if object.contact.image %}
-          {% thumbnail object.contact.image "50x50" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid" style="float: left; margin: 0 5px 5px 0" />
-          {% endthumbnail %}
-          {% endif %}
-          You can find out more by e-mailing
-          <strong>{{ object.contact }}</strong>
-          at
-          <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a>.
-        </p>
-
+        {% include 'kanisa/public/diary/_contact.html' %}
         {% endif %}
 
         {% include 'kanisa/public/diary/_next_event.html' %}
