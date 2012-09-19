@@ -1,6 +1,24 @@
 [
   {
     "pk": 1,
+    "model": "kanisa.eventcontact",
+    "fields": {
+      "image": "kanisa/diary/greenflowers.jpg",
+      "name": "Adalgrim Took",
+      "email": "adalgrim@took.com"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "kanisa.eventcontact",
+    "fields": {
+      "image": "kanisa/diary/blueflowers.jpg",
+      "name": "Elfstan Fairbairn",
+      "email": "elfstan@fairbairn.com"
+    }
+  },
+  {
+    "pk": 1,
     "model": "kanisa.regularevent",
     "fields": {
       "duration": 60,
@@ -37,6 +55,7 @@
       "details": "",
       "start_time": "19:00:00",
       "pattern": "RRULE:FREQ=WEEKLY;BYDAY=WE",
+      "contact": 1,
       "intro": "Sports, games consoles, random games, and space to relax.",
       "title": "Youth Club",
       "image": "kanisa/diary/blueflowers.jpg",
@@ -52,6 +71,7 @@
       "details": "",
       "start_time": "19:30:00",
       "pattern": "RRULE:FREQ=WEEKLY;BYDAY=TH",
+      "contact": 2,
       "intro": "Our Church business meeting, where we deal with issues affecting the Church.",
       "title": "Church Meeting",
       "image": "kanisa/diary/church.jpg",

@@ -20,6 +20,25 @@ DAYS_OF_WEEK = (
 )
 
 
+class EventContact(models.Model):
+    name = models.CharField(max_length=60,
+                            help_text='The full name of the contact')
+    email = models.EmailField(help_text=('Bear in mind that this will be '
+                                         'displayed on a public website.'))
+    image = ImageField(blank=True,
+                       null=True,
+                       upload_to='kanisa/diary/contacts/',
+                       help_text='Must be at least 200px by 200px')
+
+    class Meta:
+        # Need this because I've split up models.py into multiple
+        # files.
+        app_label = 'kanisa'
+
+    def __unicode__(self):
+        return self.name
+
+
 class RegularEvent(SearchableModel):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
@@ -30,6 +49,9 @@ class RegularEvent(SearchableModel):
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
+    contact = models.ForeignKey(EventContact,
+                                blank=True,
+                                null=True)
     intro = models.CharField(max_length=200,
                              help_text=('Brief description (no Markdown here) '
                                         'of what the event is and who it is '
@@ -89,7 +111,8 @@ class RegularEvent(SearchableModel):
                 create(date=single_date,
                        title=self.title,
                        start_time=self.start_time,
-                       duration=self.duration)
+                       duration=self.duration,
+                       contact=self.contact)
 
     class AlreadyScheduled(Exception):
         pass
@@ -129,6 +152,9 @@ class ScheduledEvent(SearchableModel):
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text=u'Duration in minutes.')
+    contact = models.ForeignKey(EventContact,
+                                blank=True,
+                                null=True)
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '

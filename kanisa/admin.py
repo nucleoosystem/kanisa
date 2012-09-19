@@ -1,7 +1,7 @@
 from django.contrib import admin
 from kanisa.conf import KANISA_ADMIN_THUMBS_SIZE
 from kanisa.models import (Banner,
-                           RegularEvent, ScheduledEvent,
+                           EventContact, RegularEvent, ScheduledEvent,
                            Document,
                            SermonSeries, SermonSpeaker, Sermon,
                            Page)
@@ -36,6 +36,14 @@ class BannerAdmin(KanisaBaseAdmin, AdminImageMixin):
                      'url', )
 
 admin.site.register(Banner, BannerAdmin)
+
+
+class EventContactAdmin(KanisaBaseAdmin, AdminImageMixin):
+    search_fields = ('name', 'email', )
+    list_display = ('image_thumb',
+                    'name', )
+
+admin.site.register(EventContact, EventContactAdmin)
 
 
 class RegularEventAdmin(admin.ModelAdmin):
