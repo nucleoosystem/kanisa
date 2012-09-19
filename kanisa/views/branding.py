@@ -130,8 +130,6 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
         return form
 
     def form_valid(self, form):
-        root = settings.MEDIA_ROOT
-
         ensure_branding_directory_exists()
 
         flush_brand_colours(form.cleaned_data)
