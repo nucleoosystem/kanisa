@@ -9,6 +9,7 @@ from kanisa.forms.branding import (LogoBrandingForm,
                                    BrandingColoursForm)
 from kanisa.utils.branding import (flush_brand_colours,
                                    get_brand_colours,
+                                   get_available_colours,
                                    ensure_branding_directory_exists)
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
@@ -35,7 +36,20 @@ class BrandingManagementIndexView(BrandingBaseView,
         context = super(BrandingManagementIndexView,
                         self).get_context_data(**kwargs)
 
-        context['colours'] = get_brand_colours()
+        colour_values = get_brand_colours()
+        colour_descriptions = get_available_colours()
+
+        colours = []
+
+        for key, value in colour_values.items():
+            try:
+                colours.append((value, colour_descriptions[key]))
+            except KeyError:
+                # We've presumably removed a colour that was once
+                # defined.
+                pass
+
+        context['colours'] = colours
 
         return context
 
@@ -100,6 +114,8 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
     success_url = reverse_lazy('kanisa_manage_branding')
     kanisa_title = 'Update Colours'
     form_class = BrandingColoursForm
+    kanisa_form_warning = ("Colours must be entered as their 6 digit hex code "
+                           "(including the preceding '#'), e.g. #FF00FF.")
 
     def get_form(self, form_class):
         form = super(BrandingManagementUpdateColoursView,

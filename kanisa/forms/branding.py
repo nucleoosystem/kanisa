@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
+from kanisa.utils.branding import get_available_colours
 from PIL import Image
 
 
@@ -102,13 +103,7 @@ class FaviconBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
-HEX_COLOUR_REGEX = '^#([0-9a-fA-F]{6})$'
-HEX_HELP = 'Should be a hex colour code - e.g. #000000 for black.'
-
-
 class BrandingColoursForm(forms.Form):
-    logo_background = forms.RegexField(regex=HEX_COLOUR_REGEX,
-                                       help_text=HEX_HELP)
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
@@ -119,5 +114,12 @@ class BrandingColoursForm(forms.Form):
                                      submit_text,
                                      css_class=css))
         self.helper.form_class = 'form-horizontal'
+
+        colours = get_available_colours()
+
+        for name, info in colours.items():
+            field = forms.RegexField(regex='^#([0-9a-fA-F]{6})$',
+                                     help_text=info)
+            self.base_fields[name] = field
 
         super(BrandingColoursForm, self).__init__(*args, **kwargs)

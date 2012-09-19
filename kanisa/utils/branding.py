@@ -25,3 +25,9 @@ def ensure_branding_directory_exists():
                                  'branding'))
     except OSError:
         pass
+
+
+def get_available_colours():
+    return {
+        'logo_background': 'Used in the header bar alongside your logo.',
+        }

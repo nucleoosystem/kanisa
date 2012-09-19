@@ -4,16 +4,18 @@
 
 <table class="table table-striped">
   <tbody>
+    {% for value, description in colours %}
     <tr>
       <td>
         <div class="colour-swatch">
-          <div style="background-color: {{ colours.logo_background }}"></div>
+          <div style="background-color: {{ value }}"></div>
         </div>
       </td>
       <td class="muted" style="vertical-align: middle">
-        Used in the header bar alongside your logo.
+        {{ description }}
       </td>
     </tr>
+    {% endfor %}
 </table>
 
 <p>
