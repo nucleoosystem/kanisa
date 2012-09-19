@@ -1,0 +1,124 @@
+{% load url from future %}
+
+<div class="sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">
+      Manage {{ KANISA_CHURCH_NAME }}
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_index' %}">
+        <i class="icon-home"></i>
+        Home
+      </a>
+    </li>
+    {% if perms.kanisa.manage_pages %}
+    <li class="nav-header">
+      <i class="icon-font"></i>
+      Pages
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_pages' %}">
+        Manage Pages
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_diary %}
+    <li class="nav-header">
+      <i class="icon-calendar"></i>
+      Diary
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_diary' %}">
+        Manage Diary
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_diary_regularevents' %}">
+        View Regular Events
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_sermons %}
+    <li class="nav-header">
+      <i class="icon-headphones"></i>
+      Sermons
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_sermons' %}">
+        Manage Sermons
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_sermons_speaker' %}">
+        Manage Speakers
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_banners %}
+    <li class="nav-header">
+      <i class="icon-picture"></i>
+      Banners
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_banners' %}">
+        Manage Banners
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_banners_inactive' %}">
+        View Inactive Banners
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_documents %}
+    <li class="nav-header">
+      <i class="icon-file"></i>
+      Documents
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_documents' %}">
+        Manage Documents
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_social %}
+    <li class="nav-header">
+      <i class="icon-fire"></i>
+      Social
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_social' %}">
+        Manage Networks
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_social_twitter' %}">
+        Scheduled Tweets
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.kanisa.manage_users %}
+    <li class="nav-header">
+      <i class="icon-user"></i>
+      Users
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_users' %}">
+        Manage Users
+      </a>
+    </li>
+    {% endif %}
+    {% if user.is_superuser %}
+    <li class="nav-header">
+      <i class="icon-tag"></i>
+      Branding
+    </li>
+    <li>
+      <a href="{% url 'kanisa_manage_branding' %}">
+        Manage Branding
+      </a>
+    </li>
+    {% endif %}
+
+  </ul>
+</div>
