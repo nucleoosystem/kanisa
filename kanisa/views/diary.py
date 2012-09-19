@@ -8,8 +8,9 @@ from django.views.generic.base import RedirectView
 
 from kanisa.forms.diary import (RegularEventForm,
                                 ScheduledEventEditForm,
-                                ScheduledEventCreationForm)
-from kanisa.models import RegularEvent, ScheduledEvent
+                                ScheduledEventCreationForm,
+                                EventContactForm)
+from kanisa.models import EventContact, RegularEvent, ScheduledEvent
 from kanisa.utils.diary import (get_schedule, get_week_bounds,
                                 datetime_to_string)
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -249,3 +250,31 @@ class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
         messages.success(self.request, message)
 
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
+
+
+class EventContactBaseView(DiaryBaseView):
+    kanisa_lead = ('Event contacts help people get in touch with the person '
+                   'relevant to their questions about your events.')
+
+
+class EventContactIndexView(EventContactBaseView,
+                            KanisaListView):
+    model = EventContact
+    queryset = EventContact.objects.all()
+
+    template_name = 'kanisa/management/diary/contacts.html'
+    kanisa_title = 'Manage Contacts'
+
+
+class EventContactCreateView(EventContactBaseView,
+                             KanisaCreateView):
+    form_class = EventContactForm
+    kanisa_title = 'Add an Event Contact'
+    success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+
+
+class EventContactUpdateView(EventContactBaseView,
+                             KanisaUpdateView):
+    form_class = EventContactForm
+    model = EventContact
+    success_url = reverse_lazy('kanisa_manage_sermons_speaker')

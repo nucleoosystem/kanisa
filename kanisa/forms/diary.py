@@ -3,7 +3,12 @@ from kanisa.forms import (KanisaBaseForm,
                           BootstrapTimeField,
                           BootstrapDateField)
 from kanisa.widgets import EpicWidget
-from kanisa.models import RegularEvent, ScheduledEvent
+from kanisa.models import EventContact, RegularEvent, ScheduledEvent
+
+
+class EventContactForm(KanisaBaseForm):
+    class Meta:
+        model = EventContact
 
 
 class RegularEventForm(KanisaBaseForm):

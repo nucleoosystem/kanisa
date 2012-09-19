@@ -7,4 +7,8 @@
   <li{% if current = "regular_events" %} class="active"{% endif %}>
     <a href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
   </li>
+  <li{% if current = "contacts" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_diary_contacts' %}">Contacts</a>
+  </li>
+
 </ul>
