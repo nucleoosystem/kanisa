@@ -42,7 +42,7 @@ class SermonForm(KanisaBaseForm):
                 # django.core.files.uploadhandler.TemporaryFileUploadHandler
                 audio = None
 
-            if not audio or not audio.info or audio.info.sketchy:
+            if audio is None or not audio.info or audio.info.sketchy:
                 errors = ErrorList([u'Please upload a valid MP3.'])
                 self._errors["mp3"] = errors
                 del cleaned_data["mp3"]
