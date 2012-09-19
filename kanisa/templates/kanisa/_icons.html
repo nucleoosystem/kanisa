@@ -1,0 +1,31 @@
+{% load cache %}
+{% load kanisa_branding %}
+{% load thumbnail %}
+
+{% cache 60 kanisa_branding_icons %}
+{% kanisa_branding 'favicon' as favicon %}
+{% if favicon %}
+<link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon }}">
+{% endif %}
+
+{% kanisa_branding 'apple' as apple_location %}
+
+{% if apple_location %}
+
+{% thumbnail apple_location "144x144" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "114x114" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "72x72" as im %}
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ im.url }}">
+{% endthumbnail %}
+
+{% thumbnail apple_location "57x57" as im %}
+<link rel="apple-touch-icon-precomposed" href="{{ im.url }}">
+{% endthumbnail %}
+{% endif %}
+{% endcache %}
