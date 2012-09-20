@@ -64,8 +64,8 @@
   <div class="span5">
     {% with object.series as series %}
     {% if series %}
-    <h2>
-      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}">{{ series.title }}</a>
+    <h2 style="line-height: 1em">
+      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}">{{ series.title }}</a><br />
       {% include "kanisa/public/sermons/_subtitle.html" with object=series %}
     </h2>
     <div class="thumbnail" style="width:130; float: left; margin: 0 1em 1em 0">
