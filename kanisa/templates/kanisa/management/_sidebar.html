@@ -12,90 +12,67 @@
       </a>
     </li>
     {% if perms.kanisa.manage_pages %}
-    <li class="nav-header">
-      <i class="icon-font"></i>
-      Pages
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_pages' %}">
-        Manage Pages
+        <i class="icon-font"></i>
+        Pages
       </a>
     </li>
     {% endif %}
     {% if perms.kanisa.manage_diary %}
-    <li class="nav-header">
-      <i class="icon-calendar"></i>
-      Diary
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_diary' %}">
-        Manage Diary
+        <i class="icon-calendar"></i>
+        Diary
       </a>
     </li>
     {% endif %}
     {% if perms.kanisa.manage_sermons %}
-    <li class="nav-header">
-      <i class="icon-headphones"></i>
-      Sermons
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_sermons' %}">
-        Manage Sermons
+        <i class="icon-headphones"></i>
+        Sermons
       </a>
     </li>
     {% endif %}
     {% if perms.kanisa.manage_banners %}
-    <li class="nav-header">
-      <i class="icon-picture"></i>
-      Banners
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_banners' %}">
-        Manage Banners
+        <i class="icon-picture"></i>
+        Banners
       </a>
     </li>
+    <li>
     {% endif %}
     {% if perms.kanisa.manage_documents %}
-    <li class="nav-header">
-      <i class="icon-file"></i>
-      Documents
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_documents' %}">
-        Manage Documents
+        <i class="icon-file"></i>
+        Documents
       </a>
     </li>
     {% endif %}
     {% if perms.kanisa.manage_social %}
-    <li class="nav-header">
-      <i class="icon-fire"></i>
-      Social
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_social' %}">
-        Manage Networks
+        <i class="icon-fire"></i>
+        Social
       </a>
     </li>
     {% endif %}
     {% if perms.kanisa.manage_users %}
-    <li class="nav-header">
-      <i class="icon-user"></i>
-      Users
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_users' %}">
-        Manage Users
+        <i class="icon-user"></i>
+        Users
       </a>
     </li>
     {% endif %}
     {% if user.is_superuser %}
-    <li class="nav-header">
-      <i class="icon-tag"></i>
-      Branding
-    </li>
     <li>
       <a href="{% url 'kanisa_manage_branding' %}">
-        Manage Branding
+        <i class="icon-tag"></i>
+        Branding
       </a>
     </li>
     {% endif %}
