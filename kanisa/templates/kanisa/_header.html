@@ -27,6 +27,12 @@
         <form class="navbar-search pull-right" style="margin-right: 20px;" action="{% url 'kanisa_manage_search' %}">
           <input type="text" class="search-query" placeholder="Search" name="query">
         </form>
+        {% else %}
+        <ul class="nav pull-right">
+          <li>
+            <a href="{% url 'kanisa_public_login' %}">Login</a>
+          </li>
+        </p>
         {% endif %}
       </div><!--/.nav-collapse -->
     </div>
