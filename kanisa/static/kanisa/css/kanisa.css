@@ -134,3 +134,7 @@ td h5 {
     height: 40px;
     width: 40px;
 }
+
+.sidebar-nav {
+    padding: 8px 0;
+}
