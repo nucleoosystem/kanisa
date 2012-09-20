@@ -52,7 +52,7 @@
           </td>
           <td>
             {% if sermon.series %}
-            {{ sermon.series }}
+            <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">{{ sermon.series }}</a>
             {% endif %}
           </td>
         </tr>
