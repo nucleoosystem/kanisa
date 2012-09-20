@@ -15,6 +15,7 @@ class PageBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Pages',
                          'url': reverse_lazy('kanisa_manage_pages')}
     permission = 'kanisa.manage_pages'
+    kanisa_nav_component = 'pages'
 
 
 class PageIndexView(PageBaseView,

@@ -9,7 +9,7 @@
       </a>
     </li>
     {% if perms.kanisa.manage_pages %}
-    <li>
+    <li{% if kanisa_nav_component = "pages" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_pages' %}">
         <i class="icon-font"></i>
         Pages
@@ -17,7 +17,7 @@
     </li>
     {% endif %}
     {% if perms.kanisa.manage_diary %}
-    <li>
+    <li{% if kanisa_nav_component = "diary" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_diary' %}">
         <i class="icon-calendar"></i>
         Diary
@@ -25,7 +25,7 @@
     </li>
     {% endif %}
     {% if perms.kanisa.manage_sermons %}
-    <li>
+    <li{% if kanisa_nav_component = "sermons" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_sermons' %}">
         <i class="icon-headphones"></i>
         Sermons
@@ -33,7 +33,7 @@
     </li>
     {% endif %}
     {% if perms.kanisa.manage_banners %}
-    <li>
+    <li{% if kanisa_nav_component = "banners" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_banners' %}">
         <i class="icon-picture"></i>
         Banners
@@ -42,7 +42,7 @@
     <li>
     {% endif %}
     {% if perms.kanisa.manage_documents %}
-    <li>
+    <li{% if kanisa_nav_component = "documents" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_documents' %}">
         <i class="icon-file"></i>
         Documents
@@ -50,7 +50,7 @@
     </li>
     {% endif %}
     {% if perms.kanisa.manage_social %}
-    <li>
+    <li{% if kanisa_nav_component = "social" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_social' %}">
         <i class="icon-fire"></i>
         Social
@@ -58,7 +58,7 @@
     </li>
     {% endif %}
     {% if perms.kanisa.manage_users %}
-    <li>
+    <li{% if kanisa_nav_component = "users" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_users' %}">
         <i class="icon-user"></i>
         Users
@@ -66,7 +66,7 @@
     </li>
     {% endif %}
     {% if user.is_superuser %}
-    <li>
+    <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_branding' %}">
         <i class="icon-tag"></i>
         Branding

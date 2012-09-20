@@ -18,6 +18,7 @@ class SermonBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Sermons',
                          'url': reverse_lazy('kanisa_manage_sermons')}
     permission = 'kanisa.manage_sermons'
+    kanisa_nav_component = 'sermons'
 
 
 class SermonIndexView(SermonBaseView,

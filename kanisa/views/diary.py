@@ -25,6 +25,7 @@ class DiaryBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Diary',
                          'url': reverse_lazy('kanisa_manage_diary')}
     permission = 'kanisa.manage_diary'
+    kanisa_nav_component = 'diary'
 
     def date_from_yyymmdd(self):
         yyyymmdd = self.request.GET.get('date', None)

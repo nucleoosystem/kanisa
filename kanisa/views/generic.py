@@ -33,6 +33,9 @@ def add_kanisa_context(cls, context):
     if hasattr(cls, 'kanisa_form_warning'):
         context['kanisa_form_warning'] = cls.kanisa_form_warning
 
+    if hasattr(cls, 'kanisa_nav_component'):
+        context['kanisa_nav_component'] = cls.kanisa_nav_component
+
     return context
 
 

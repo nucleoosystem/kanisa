@@ -10,6 +10,7 @@ class UserBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Users',
                          'url': reverse_lazy('kanisa_manage_users')}
     permission = 'kanisa.manage_users'
+    kanisa_nav_component = 'users'
 
 
 class UserManagementView(UserBaseView,

@@ -20,6 +20,7 @@ class SocialBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Social',
                          'url': reverse_lazy('kanisa_manage_social')}
     permission = 'kanisa.manage_social'
+    kanisa_nav_component = 'social'
 
     def get_twitter_context(self):
         twitter = cache.get('twitter_handle')

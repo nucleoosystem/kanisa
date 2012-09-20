@@ -23,6 +23,7 @@ class BrandingBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Branding',
                          'url': reverse_lazy('kanisa_manage_branding')}
     kanisa_title = 'Manage Branding'
+    kanisa_nav_component = 'branding'
 
     def authorization_check(self, user):
         return user.is_superuser

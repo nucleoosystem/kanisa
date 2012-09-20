@@ -18,6 +18,7 @@ class DocumentBaseView(KanisaAuthorizationMixin):
     kanisa_root_crumb = {'text': 'Documents',
                          'url': reverse_lazy('kanisa_manage_documents')}
     permission = 'kanisa.manage_documents'
+    kanisa_nav_component = 'documents'
 
 
 class DocumentIndexView(DocumentBaseView,
