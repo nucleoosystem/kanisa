@@ -1,0 +1,12 @@
+{% load url from future %}
+
+<ul class="nav nav-tabs">
+  <li{% if current = "sermons" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_sermons' %}">Manage Sermons</a>
+  </li>
+  <li{% if current = "speakers" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_sermons_speaker' %}">
+      Manage Speakers
+    </a>
+  </li>
+</ul>

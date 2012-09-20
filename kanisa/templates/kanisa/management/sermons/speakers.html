@@ -4,6 +4,7 @@
 {% load thumbnail %}
 
 {% block content %}
+{% include "kanisa/management/sermons/_nav.html" with current="speakers" %}
 <p>
   <a href="{% url 'kanisa_manage_sermons_speaker_create' %}" class="btn btn-large btn-success">
     <i class="icon-white icon-plus"></i>
