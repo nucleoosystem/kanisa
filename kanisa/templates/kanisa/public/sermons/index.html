@@ -22,6 +22,14 @@
   <div class="span7">
     {% if active_series %}
     {% include "kanisa/public/sermons/_series_list.html" %}
+    {% else %}
+
+    <p>
+      There are no sermon series running right now - you might want to
+      take a look at our
+      <a href="{% url 'kanisa_public_sermon_archive' %}">archives</a>.
+    </p>
+
     {% endif %}
   </div>
   <div class="span5">
