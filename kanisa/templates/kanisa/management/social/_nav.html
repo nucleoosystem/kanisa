@@ -1,0 +1,14 @@
+{% load url from future %}
+
+<ul class="nav nav-tabs">
+  <li{% if current = "index" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_social' %}">
+      General
+    </a>
+  </li>
+  <li{% if current = "twitter" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_social_twitter' %}">
+      Twitter
+    </a>
+  </li>
+</ul>
