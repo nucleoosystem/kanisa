@@ -44,7 +44,8 @@ class NavigationElement(MPTTModel):
     def check_parent_status(self):
         if self.pk and self.parent:
             if self.pk == self.parent.pk:
-                raise ValidationError({'parent': ['A page cannot be its own '
+                raise ValidationError({'parent': ['A navigation element '
+                                                  'cannot be its own '
                                                   'parent.', ]})
 
             if self.is_ancestor_of(self.parent):
