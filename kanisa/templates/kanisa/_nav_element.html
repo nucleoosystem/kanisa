@@ -12,7 +12,7 @@
     <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
-    {% for child in element.children.all %}
+    {% for child in children %}
     {% if not child.require_login or user.is_authenticated %}
     <li>
       <a href="{{ child.url }}" title="{{ child.description }}">{{ child.title }}</a>

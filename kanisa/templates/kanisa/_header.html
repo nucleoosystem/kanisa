@@ -13,7 +13,7 @@
           <li>
             <a href="/">Home</a>
           </li>
-          {% for element in KANISA_NAVIGATION %}
+          {% for element, children in KANISA_NAVIGATION %}
           {% if not element.require_login or user.is_authenticated %}
           {% include 'kanisa/_nav_element.html' %}
           {% endif %}
