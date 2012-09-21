@@ -65,6 +65,14 @@
       </a>
     </li>
     {% endif %}
+    {% if perms.kanisa.manage_users %}
+    <li{% if kanisa_nav_component = "navigation" %} class="active"{% endif %}>
+      <a href="{% url 'kanisa_manage_navigation' %}">
+        <i class="icon-road"></i>
+        Navigation
+      </a>
+    </li>
+    {% endif %}
     {% if user.is_superuser %}
     <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_branding' %}">

@@ -1,0 +1,48 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+<p>
+  <a href="{% url 'kanisa_manage_navigation_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Create a new navigation element
+  </a>
+</p>
+
+<hr />
+
+{% if object_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Navigation Element
+      </th>
+      <th>
+        <abbr title="Uniform Resource Locator">URL</abbr>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for element in object_list %}
+    <tr>
+      <td>
+        <span style="display: inline-block; width: {{ element.get_level }}em"></span>
+        {% if element.get_level != 0 %}&#8627;{% endif %}
+        <a href="{% url 'kanisa_manage_navigation_update' element.pk %}">{{ element.title }}</a>
+      </td>
+      <td>{{ element.url }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-info">
+  There are no navigation elements set up - why don't you
+  <a href="{% url 'kanisa_manage_navigation_create' %}">add one</a>?
+</p>
+{% endif %}
+
+{% endblock %}
