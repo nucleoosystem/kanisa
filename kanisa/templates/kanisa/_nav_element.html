@@ -1,0 +1,24 @@
+{% if element.is_leaf_node %}
+<li>
+  <a href="{{ element.url }}" title="{{ element.description }}">{{ element.title }}</a>
+</li>
+{% else %}
+<li class="dropdown">
+  <a href="{{ element.url }}"
+     title="{{ element.description }}"
+     class="dropdown-toggle"
+     data-toggle="dropdown">
+    {{ element.title }}
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    {% for child in element.children.all %}
+    {% if not child.require_login or user.is_authenticated %}
+    <li>
+      <a href="{{ child.url }}" title="{{ child.description }}">{{ child.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</li>
+{% endif %}

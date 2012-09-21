@@ -13,19 +13,11 @@
           <li>
             <a href="/">Home</a>
           </li>
-          <li>
-            <a href="{% url 'kanisa_public_diary_index' %}" title="View the Church diary">Diary</a>
-          </li>
-          <li>
-            <a href="{% url 'kanisa_public_sermon_index' %}" title="Browse our sermon archive">Sermons</a>
-          </li>
-          {% if user.is_staff %}
-          <li>
-            <a href="{% url 'kanisa_manage_index' %}">
-              Members
-            </a>
-          </li>
+          {% for element in KANISA_NAVIGATION %}
+          {% if not element.require_login or user.is_authenticated %}
+          {% include 'kanisa/_nav_element.html' %}
           {% endif %}
+          {% endfor %}
         </ul>
         {% if user.is_authenticated %}
         <p class="navbar-text pull-right">Welcome, {{ user }}

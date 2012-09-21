@@ -1,5 +1,11 @@
 from kanisa import conf
+from kanisa.models import NavigationElement
 
 
 def kanisa_settings(context):
-    return {'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
+    elements = NavigationElement.objects.filter(parent=None)
+
+    return {
+        'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
+        'KANISA_NAVIGATION': elements,
+        }
