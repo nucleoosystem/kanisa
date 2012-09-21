@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import Http404
 from kanisa.forms.navigation import NavigationElementForm
 from kanisa.models import NavigationElement
 from kanisa.views.generic import (KanisaAuthorizationMixin,
