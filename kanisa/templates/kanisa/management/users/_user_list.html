@@ -28,7 +28,7 @@
     <a href="{% url 'admin:auth_user_change' theuser.pk %}">{{ theuser.username }}</a>
 
     {% if user.pk = theuser.pk %}
-    <span class="help_text">
+    <span class="muted">
       (this is you)
     </span>
     {% endif %}
