@@ -49,16 +49,19 @@ class NavigationElement(MPTTModel):
             raise NavigationElement.DoesNotExist
 
         self.move_to(next_sibling, 'right')
-
         cache.delete('kanisa_navigation')
 
     def move_up(self):
         previous_sibling = self.get_previous_sibling()
 
         if not previous_sibling:
-            raise Http404
-        self.move_to(previous_sibling, 'left')
+            raise NavigationElement.DoesNotExist
 
+        self.move_to(previous_sibling, 'left')
+        cache.delete('kanisa_navigation')
+
+    def save(self, *args, **kwargs):
+        super(NavigationElement, self).save(*args, **kwargs)
         cache.delete('kanisa_navigation')
 
     def check_parent_status(self):
