@@ -19,7 +19,11 @@ class NavigationElement(MPTTModel):
                             null=True,
                             blank=True,
                             related_name='children')
-    require_login = models.BooleanField(default=False)
+    require_login = models.BooleanField(default=False,
+                                        help_text=('If checked, this '
+                                                   'navigation element will '
+                                                   'only be shown to users '
+                                                   'who are logged in.'))
     modified = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
