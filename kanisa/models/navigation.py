@@ -5,6 +5,11 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class NavigationElement(MPTTModel):
     title = models.CharField(max_length=20)
+    description = models.CharField(max_length=30,
+                                   help_text=('This will be displayed on '
+                                              'mouseover, so should describe '
+                                              'the linked to page in a few '
+                                              'words.'))
     url = models.CharField(max_length=200,
                            verbose_name='URL',
                            help_text=('Should be specified relative to the '
