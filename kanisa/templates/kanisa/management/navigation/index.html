@@ -14,55 +14,7 @@
 <hr />
 
 {% if object_list %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>
-        Navigation Element
-      </th>
-      <th>
-        <abbr title="Uniform Resource Locator">URL</abbr>
-      </th>
-      <th>
-      </th>
-      <th>
-      </th>
-      <th>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for element in object_list %}
-    <tr>
-      <td>
-        <span style="display: inline-block; width: {{ element.get_level }}em"></span>
-        {% if element.get_level != 0 %}&#8627;{% endif %}
-        <a href="{% url 'kanisa_manage_navigation_update' element.pk %}">{{ element.title }}</a>
-      </td>
-      <td>{{ element.url }}</td>
-      <td class="iconcell">
-        {% if element.require_login %}
-        <i class="icon icon-lock" title="This navigation element is only displayed for logged-in users."></i>
-        {% endif %}
-      </td>
-      <td class="iconcell">
-        {% if element.get_previous_sibling %}
-        <a href="{% url 'kanisa_manage_navigation_move_up' element.pk %}" title="Move {{ element }} up in the navigation">
-          <i class="icon icon-arrow-up"></i>
-        </a>
-        {% endif %}
-      </td>
-      <td class="iconcell">
-        {% if element.get_next_sibling %}
-        <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation">
-          <i class="icon icon-arrow-down"></i>
-        </a>
-        {% endif %}
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% include 'kanisa/management/navigation/_item_list.html' %}
 {% else %}
 <p class="alert alert-info">
   There are no navigation elements set up - why don't you
