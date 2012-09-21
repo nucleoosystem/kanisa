@@ -20,10 +20,10 @@ class PublicViewTest(TestCase):
         banner5 = BannerFactory.create()
         banner4.set_retired()
 
-        url = reverse('kanisa.views.index')
+        url = reverse('kanisa_public_index')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, 'kanisa/index.html')
+        self.assertTemplateUsed(resp, 'kanisa/public/index.html')
 
         self.assertTrue('banners' in resp.context)
         self.assertEqual([banner.pk for banner in resp.context['banners']],

@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, include, url
+from kanisa.views import KanisaIndexView
 
 
 urlpatterns = patterns('',
-                       url(r'^$', 'kanisa.views.index'),
+                       url(r'^$', KanisaIndexView.as_view(),
+                           {}, 'kanisa_public_index'),
                        url(r'^account/',
                            include('kanisa.urls.public.account')),
                        url(r'^banners/',

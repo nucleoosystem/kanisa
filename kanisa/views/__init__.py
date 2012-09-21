@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from haystack.query import SearchQuerySet
 
@@ -14,12 +15,11 @@ from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
                                   KanisaTemplateView)
 
 
-def index(request):
-    banners = Banner.active_objects.all()
+class KanisaIndexView(TemplateView):
+    template_name = 'kanisa/public/index.html'
 
-    return render_to_response('kanisa/index.html',
-                              {'banners': banners},
-                              context_instance=RequestContext(request))
+    def get_context_data(self, **kwargs):
+        return {'banners': Banner.active_objects.all()}
 
 
 class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
