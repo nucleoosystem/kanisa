@@ -18,7 +18,7 @@
             <a href="{% url 'kanisa_public_sermon_index' %}" title="Browse our sermon archive">Sermons</a>
           </li>
           {% if user.is_staff %}
-          <li class="dropdown">
+          <li>
             <a href="{% url 'kanisa_manage_index' %}">
               Members
             </a>
