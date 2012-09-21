@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
@@ -35,12 +36,20 @@ class NavigationElementCreateView(NavigationElementBaseView,
     kanisa_title = 'Create Navigation Element'
     success_url = reverse_lazy('kanisa_manage_navigation')
 
+    def form_valid(self, form):
+        cache.delete('kanisa_navigation')
+        return super(NavigationElementCreateView, self).form_valid(form)
+
 
 class NavigationElementUpdateView(NavigationElementBaseView,
                                   KanisaUpdateView):
     form_class = NavigationElementForm
     model = NavigationElement
     success_url = reverse_lazy('kanisa_manage_navigation')
+
+    def form_valid(self, form):
+        cache.delete('kanisa_navigation')
+        return super(NavigationElementUpdateView, self).form_valid(form)
 
 
 class NavigationElementMoveDownView(NavigationElementBaseView,
@@ -55,6 +64,8 @@ class NavigationElementMoveDownView(NavigationElementBaseView,
             raise Http404
 
         element.move_to(next_sibling, 'right')
+
+        cache.delete('kanisa_navigation')
 
         message = "Moved '%s' down." % element
         messages.success(self.request, message)
@@ -74,6 +85,8 @@ class NavigationElementMoveUpView(NavigationElementBaseView,
             raise Http404
 
         element.move_to(previous_sibling, 'left')
+
+        cache.delete('kanisa_navigation')
 
         message = "Moved '%s' up." % element
         messages.success(self.request, message)
