@@ -41,7 +41,7 @@ class Command(BaseCommand):
             create_permissions(app, None, 2)
 
     def load_fixtures(self):
-        for subapp in ['banners', 'diary', 'sermons', 'pages', ]:
+        for subapp in ['banners', 'diary', 'sermons', 'pages', 'navigation', ]:
             print "Loading data for %s." % subapp
             call_command('loaddata', '%s.json' % subapp)
             self.copy_media(subapp)
