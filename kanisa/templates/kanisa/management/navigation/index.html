@@ -25,6 +25,10 @@
       </th>
       <th>
       </th>
+      <th>
+      </th>
+      <th>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -39,6 +43,20 @@
       <td class="iconcell">
         {% if element.require_login %}
         <i class="icon icon-lock" title="This navigation element is only displayed for logged-in users."></i>
+        {% endif %}
+      </td>
+      <td class="iconcell">
+        {% if element.get_previous_sibling %}
+        <a href="{% url 'kanisa_manage_navigation_move_up' element.pk %}" title="Move {{ element }} up in the navigation">
+          <i class="icon icon-arrow-up"></i>
+        </a>
+        {% endif %}
+      </td>
+      <td class="iconcell">
+        {% if element.get_next_sibling %}
+        <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation">
+          <i class="icon icon-arrow-down"></i>
+        </a>
         {% endif %}
       </td>
     </tr>

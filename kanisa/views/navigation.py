@@ -1,5 +1,8 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+from django.views.generic.base import RedirectView
 from kanisa.forms.navigation import NavigationElementForm
 from kanisa.models import NavigationElement
 from kanisa.views.generic import (KanisaAuthorizationMixin,
@@ -38,3 +41,41 @@ class NavigationElementUpdateView(NavigationElementBaseView,
     form_class = NavigationElementForm
     model = NavigationElement
     success_url = reverse_lazy('kanisa_manage_navigation')
+
+
+class NavigationElementMoveDownView(NavigationElementBaseView,
+                                    RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, pk):
+        element = get_object_or_404(NavigationElement, pk=pk)
+        next_sibling = element.get_next_sibling()
+
+        if not next_sibling:
+            raise Http404
+
+        element.move_to(next_sibling, 'right')
+
+        message = "Moved '%s' down." % element
+        messages.success(self.request, message)
+
+        return reverse('kanisa_manage_navigation')
+
+
+class NavigationElementMoveUpView(NavigationElementBaseView,
+                                  RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, pk):
+        element = get_object_or_404(NavigationElement, pk=pk)
+        previous_sibling = element.get_previous_sibling()
+
+        if not previous_sibling:
+            raise Http404
+
+        element.move_to(previous_sibling, 'left')
+
+        message = "Moved '%s' up." % element
+        messages.success(self.request, message)
+
+        return reverse('kanisa_manage_navigation')

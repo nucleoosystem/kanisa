@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, url
 from kanisa.views.navigation import (NavigationElementIndexView,
                                      NavigationElementCreateView,
-                                     NavigationElementUpdateView)
+                                     NavigationElementUpdateView,
+                                     NavigationElementMoveDownView,
+                                     NavigationElementMoveUpView)
 
 
 urlpatterns = patterns('',
@@ -17,4 +19,12 @@ urlpatterns = patterns('',
                            NavigationElementUpdateView.as_view(),
                            {},
                            'kanisa_manage_navigation_update'),
+                       url(r'^down/(?P<pk>\d+)$',
+                           NavigationElementMoveDownView.as_view(),
+                           {},
+                           'kanisa_manage_navigation_move_down'),
+                       url(r'^up/(?P<pk>\d+)$',
+                           NavigationElementMoveUpView.as_view(),
+                           {},
+                           'kanisa_manage_navigation_move_up'),
                        )
