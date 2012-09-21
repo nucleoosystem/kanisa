@@ -2,6 +2,16 @@
 
 {% load url from future %}
 
+{% block extrajs %}
+<script type="text/javascript">
+var list_navigation_url = "{% url 'kanisa_manage_xhr_list_navigation' %}";
+var navigation_up_url = "{% url 'kanisa_manage_xhr_navigation_up' %}";
+var navigation_down_url = "{% url 'kanisa_manage_xhr_navigation_down' %}";
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_navigation.js"></script>
+{% endblock %}
+
+
 {% block content %}
 
 <p>
@@ -13,13 +23,15 @@
 
 <hr />
 
-{% if object_list %}
-{% include 'kanisa/management/navigation/_item_list.html' %}
-{% else %}
-<p class="alert alert-info">
-  There are no navigation elements set up - why don't you
-  <a href="{% url 'kanisa_manage_navigation_create' %}">add one</a>?
-</p>
-{% endif %}
+<div id="navigation_details_container">
+  {% if object_list %}
+  {% include 'kanisa/management/navigation/_item_list.html' %}
+  {% else %}
+  <p class="alert alert-info">
+    There are no navigation elements set up - why don't you
+    <a href="{% url 'kanisa_manage_navigation_create' %}">add one</a>?
+  </p>
+  {% endif %}
+</div>
 
 {% endblock %}

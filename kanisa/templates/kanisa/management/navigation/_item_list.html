@@ -33,14 +33,14 @@
       </td>
       <td class="iconcell">
         {% if element.get_previous_sibling %}
-        <a href="{% url 'kanisa_manage_navigation_move_up' element.pk %}" title="Move {{ element }} up in the navigation">
+        <a href="{% url 'kanisa_manage_navigation_move_up' element.pk %}" title="Move {{ element }} up in the navigation" data-navigation-id="{{ element.pk }}" class="move_up">
           <i class="icon icon-arrow-up"></i>
         </a>
         {% endif %}
       </td>
       <td class="iconcell">
         {% if element.get_next_sibling %}
-        <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation">
+        <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation" data-navigation-id="{{ element.pk }}" class="move_down">
           <i class="icon icon-arrow-down"></i>
         </a>
         {% endif %}
