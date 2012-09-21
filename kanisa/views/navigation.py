@@ -58,14 +58,11 @@ class NavigationElementMoveDownView(NavigationElementBaseView,
 
     def get_redirect_url(self, pk):
         element = get_object_or_404(NavigationElement, pk=pk)
-        next_sibling = element.get_next_sibling()
 
-        if not next_sibling:
+        try:
+            element.move_down()
+        except NavigationElement.DoesNotExist:
             raise Http404
-
-        element.move_to(next_sibling, 'right')
-
-        cache.delete('kanisa_navigation')
 
         message = "Moved '%s' down." % element
         messages.success(self.request, message)
@@ -79,14 +76,11 @@ class NavigationElementMoveUpView(NavigationElementBaseView,
 
     def get_redirect_url(self, pk):
         element = get_object_or_404(NavigationElement, pk=pk)
-        previous_sibling = element.get_previous_sibling()
 
-        if not previous_sibling:
+        try:
+            element.move_up()
+        except NavigationElement.DoesNotExist:
             raise Http404
-
-        element.move_to(previous_sibling, 'left')
-
-        cache.delete('kanisa_navigation')
 
         message = "Moved '%s' up." % element
         messages.success(self.request, message)

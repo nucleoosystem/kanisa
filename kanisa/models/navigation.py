@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
@@ -40,6 +41,25 @@ class NavigationElement(MPTTModel):
 
     def __unicode__(self):
         return self.title
+
+    def move_down(self):
+        next_sibling = self.get_next_sibling()
+
+        if not next_sibling:
+            raise NavigationElement.DoesNotExist
+
+        self.move_to(next_sibling, 'right')
+
+        cache.delete('kanisa_navigation')
+
+    def move_up(self):
+        previous_sibling = self.get_previous_sibling()
+
+        if not previous_sibling:
+            raise Http404
+        self.move_to(previous_sibling, 'left')
+
+        cache.delete('kanisa_navigation')
 
     def check_parent_status(self):
         if self.pk and self.parent:
