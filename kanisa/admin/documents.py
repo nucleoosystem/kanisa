@@ -1,5 +1,4 @@
 from django.contrib import admin
-from kanisa.admin.base import KanisaBaseAdmin
 from kanisa.models import Document
 
 
