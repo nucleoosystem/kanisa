@@ -1,31 +1,31 @@
 [
   {
-    "pk": 1, 
-    "model": "kanisa.navigationelement", 
+    "pk": 1,
+    "model": "kanisa.navigationelement",
     "fields": {
-      "rght": 2, 
-      "parent": null, 
-      "title": "Diary", 
-      "url": "/diary/", 
-      "require_login": false, 
-      "level": 0, 
-      "modified": "2012-09-21T07:13:14.538Z", 
-      "lft": 1, 
+      "rght": 2,
+      "parent": null,
+      "title": "Diary",
+      "url": "/diary/",
+      "require_login": false,
+      "level": 0,
+      "modified": "2012-09-21T07:13:14.538Z",
+      "lft": 1,
       "tree_id": 1
     }
-  }, 
+  },
   {
-    "pk": 2, 
-    "model": "kanisa.navigationelement", 
+    "pk": 2,
+    "model": "kanisa.navigationelement",
     "fields": {
-      "rght": 2, 
-      "parent": null, 
-      "title": "Sermons", 
-      "url": "/sermons/", 
-      "require_login": false, 
-      "level": 0, 
-      "modified": "2012-09-21T07:13:22.375Z", 
-      "lft": 1, 
+      "rght": 2,
+      "parent": null,
+      "title": "Sermons",
+      "url": "/sermons/",
+      "require_login": false,
+      "level": 0,
+      "modified": "2012-09-21T07:13:22.375Z",
+      "lft": 1,
       "tree_id": 2
     }
   }
