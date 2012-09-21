@@ -1,21 +1,13 @@
 from django.contrib import admin
 from kanisa.admin.base import KanisaBaseAdmin
-from kanisa.models import (Document,
-                           SermonSeries, SermonSpeaker, Sermon,
+from kanisa.models import (SermonSeries, SermonSpeaker, Sermon,
                            Page)
 from mptt.admin import MPTTModelAdmin
-from sorl.thumbnail import default
 from sorl.thumbnail.admin import AdminImageMixin
 
 import kanisa.admin.banners
 import kanisa.admin.diary
-
-
-class DocumentAdmin(admin.ModelAdmin):
-    search_fields = ('title', 'details', )
-    list_display = ('title', 'modified', )
-
-admin.site.register(Document, DocumentAdmin)
+import kanisa.admin.documents
 
 
 class SermonSeriesAdmin(KanisaBaseAdmin):
