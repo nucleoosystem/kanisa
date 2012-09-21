@@ -17,6 +17,7 @@
       <th class="iconcell"><i class="icon icon-file" title="Manage Documents"></i></th>
       <th class="iconcell"><i class="icon icon-fire" title="Manage Social Networks"></i></th>
       <th class="iconcell"><i class="icon icon-user" title="Manage Users"></i></th>
+      <th class="iconcell"><i class="icon icon-road" title="Manage Navigation"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,7 @@
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_navigation' %}</td>
 </tr>
 {% endfor %}
 </tbody>
