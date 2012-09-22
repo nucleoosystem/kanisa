@@ -30,6 +30,5 @@ setup(
         "tweepy==1.9",
         "Whoosh==2.4.1",
         "wsgiref==0.1.2",
-        "git+https://github.com/dominicrodger/django-recurrence.git@dev",
     ],
 )
