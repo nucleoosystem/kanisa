@@ -5,7 +5,19 @@
 {% block pagetitle %}Manage {{ KANISA_CHURCH_NAME }}{% endblock %}
 
 {% block content %}
+
+<p class="lead">Welcome to the Kanisa management interface, you are currently logged in as <strong>{{ user }}</strong>.</p>
+
+<h4>Your Account</h4>
+
+<ul>
+  <li><a href="{% url 'kanisa_password_change' %}">Change your password</a></li>
+</ul>
+
+
+
 {% if user.is_staff %}
+<hr />
 <p class="muted">If you're stuck, you may be able to make some changes via the <a href="{% url 'admin:index' %}">admin</a>.</p>
 {% endif %}
 {% endblock %}
