@@ -27,39 +27,41 @@ class InactiveBannerManager(models.Manager):
 
 class Banner(SearchableModel):
     headline = models.CharField(max_length=60,
-                                help_text=u'Keep this short, summarise your'
-                                ' banner in a few words.')
+                                help_text=('Keep this short, summarise your '
+                                           'banner in a few words.'))
     contents = models.TextField(blank=True,
                                 null=True,
-                                help_text=u'At most two sentences, give extra'
-                                ' details about what you\'re advertising.')
+                                help_text=('At most two sentences, give extra '
+                                           'details about what you\'re '
+                                           'advertising.'))
     image = ImageField(upload_to='kanisa/banners/',
-                       help_text=u'Must be at least 800px by 600px.')
+                       help_text='Must be at least 800px by 600px.')
     link_text = models.CharField(max_length=60,
                                  blank=True,
                                  null=True,
-                                 help_text=u'The text that users will click'
-                                 ' on to visit the URL for this banner.')
-    url = models.URLField(verbose_name=u'URL',
+                                 help_text=('The text that users will click '
+                                            ' on to visit the URL for this '
+                                            'banner.'))
+    url = models.URLField(verbose_name='URL',
                           blank=True,
                           null=True,
                           help_text=('The web address your banner will link '
                                      'to.'))
     publish_from = models.DateField(blank=True,
                                     null=True,
-                                    help_text=u'The date at which your banner'
-                                    ' will become visible on the website.'
-                                    ' If left blank the start date is'
-                                    ' unrestricted.')
+                                    help_text=('The date at which your banner '
+                                               'will become visible on the '
+                                               'website. If left blank the '
+                                               'start date is unrestricted.'))
     publish_until = models.DateField(blank=True,
                                      null=True,
-                                     help_text=u'The final date on which your'
-                                     ' banner will be visible. If left'
-                                     ' blank your banner will be visible'
-                                     ' indefinitely.')
+                                     help_text=('The final date on which your '
+                                                'banner will be visible. If '
+                                                'left blank your banner will '
+                                                'be visible indefinitely.'))
     visits = models.IntegerField(default=0,
-                                 help_text='The number of click-throughs this'
-                                 ' banner has had.')
+                                 help_text=('The number of click-throughs '
+                                            'this banner has had.'))
     modified = models.DateTimeField(auto_now=True)
 
     # Managers
