@@ -6,7 +6,7 @@
     <tr>
       <th>Title</th>
       <th class="iconcell"></th>
-      <th>Draft</th>
+      <th>Published</th>
       <th>Modified</th>
       <th></th>
       <th></th>
@@ -28,8 +28,10 @@
         </a>
       </td>
       <td class="iconcell">
-        {% if page.draft %}
-        <i class="icon icon-ok" title="This page is a draft"></i>
+        {% if not page.draft %}
+        <i class="icon icon-ok" title="This page is published"></i>
+        {% else %}
+        <i class="icon icon-remove" title="This page is not published"></i>
         {% endif %}
       </td>
       <td>
