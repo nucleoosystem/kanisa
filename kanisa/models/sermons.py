@@ -21,7 +21,7 @@ class SermonSeries(SearchableModel):
                              help_text='The name of the series.')
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(upload_to='kanisa/sermons/series/',
-                       help_text=u'Must be at least 400px by 300px.')
+                       help_text='Must be at least 400px by 300px.')
     intro = models.TextField(blank=True, null=True,
                              help_text=('Sum up this series in a few '
                                         'sentences. In some places this may '
@@ -94,7 +94,7 @@ class SermonSpeaker(SearchableModel):
     surname = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from=sermon_speaker_slug, unique=True)
     image = ImageField(upload_to='kanisa/sermons/speakers/',
-                       help_text=u'Must be at least 400px by 300px.')
+                       help_text='Must be at least 400px by 300px.')
     modified = models.DateTimeField(auto_now=True)
 
     objects = SpeakerManager()
