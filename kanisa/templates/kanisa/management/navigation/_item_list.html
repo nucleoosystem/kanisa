@@ -18,6 +18,9 @@
       <th>
         <!-- Move Down -->
       </th>
+      <th>
+        <!-- Delete -->
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -45,6 +48,13 @@
         {% if element.get_next_sibling %}
         <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation" data-navigation-id="{{ element.pk }}" class="move_down">
           <i class="icon icon-arrow-down"></i>
+        </a>
+        {% endif %}
+      </td>
+      <td>
+        {% if element.is_leaf_node %}
+        <a class="btn btn-danger btn-mini navigation_delete" href="{% url 'kanisa_manage_navigation_delete' element.pk %}" data-navigation-title="{{ element.title }}">
+          Delete
         </a>
         {% endif %}
       </td>

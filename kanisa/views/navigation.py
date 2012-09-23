@@ -8,7 +8,8 @@ from kanisa.models import NavigationElement
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaListView,
                                   KanisaCreateView,
-                                  KanisaUpdateView)
+                                  KanisaUpdateView,
+                                  KanisaDeleteView)
 
 
 class NavigationElementBaseView(KanisaAuthorizationMixin):
@@ -77,3 +78,24 @@ class NavigationElementMoveUpView(NavigationElementBaseView,
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_navigation')
+
+
+class NavigationElementDeleteView(NavigationElementBaseView,
+                                  KanisaDeleteView):
+    model = NavigationElement
+
+    def get_cancel_url(self):
+        return reverse('kanisa_manage_navigation')
+
+    def get_success_url(self):
+        message = '%s deleted.' % self.object
+        messages.success(self.request, message)
+        return reverse('kanisa_manage_navigation')
+
+    def get_object(self, queryset=None):
+        rval = super(NavigationElementDeleteView, self).get_object(queryset)
+
+        if not rval.is_leaf_node():
+            raise Http404
+
+        return rval

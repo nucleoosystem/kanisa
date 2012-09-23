@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 from kanisa.views.navigation import (NavigationElementIndexView,
                                      NavigationElementCreateView,
                                      NavigationElementUpdateView,
+                                     NavigationElementDeleteView,
                                      NavigationElementMoveDownView,
                                      NavigationElementMoveUpView)
 
@@ -27,4 +28,8 @@ urlpatterns = patterns('',
                            NavigationElementMoveUpView.as_view(),
                            {},
                            'kanisa_manage_navigation_move_up'),
+                       url(r'^delete/(?P<pk>\d+)$',
+                           NavigationElementDeleteView.as_view(),
+                           {},
+                           'kanisa_manage_navigation_delete'),
                        )
