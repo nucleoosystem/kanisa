@@ -130,13 +130,18 @@ class Sermon(SearchableModel):
                                blank=True, null=True,
                                help_text=('What series the sermon is from, if '
                                           'any.'))
-    speaker = models.ForeignKey(SermonSpeaker)
+    speaker = models.ForeignKey(SermonSpeaker,
+                                help_text=('These can be added by clicking '
+                                           '\'Manage Speaker\' from the '
+                                           'sermon management home page'))
     passage = BiblePassageField(blank=True, null=True)
     mp3 = models.FileField(blank=True,
                            null=True,
                            upload_to='kanisa/sermons/mp3s/%Y/',
                            max_length=200,
-                           verbose_name='MP3')
+                           verbose_name='MP3',
+                           help_text=('The MP3 will automatically have ID3 '
+                                      'data filled in (e.g. title, genre).'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '
                                           'cover?'))
