@@ -11,7 +11,8 @@ from kanisa.forms.banners import BannerForm
 
 
 class BannerBaseView(KanisaAuthorizationMixin):
-    kanisa_lead = ('Banners are a high-impact way of advertising content or '
+    kanisa_lead = ('Banners are the images that scroll across the home page, '
+                   'and are a high-impact way of advertising content or '
                    'events for your site.')
     kanisa_root_crumb = {'text': 'Banners',
                          'url': reverse_lazy('kanisa_manage_banners')}
