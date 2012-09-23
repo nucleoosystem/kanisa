@@ -24,9 +24,9 @@ class SermonSeries(SearchableModel):
                        help_text=u'Must be at least 400px by 300px.')
     intro = models.TextField(blank=True, null=True,
                              help_text=('Sum up this series in a few '
-                                        'sentences. This may be displayed '
-                                        'without the details section '
-                                        'below.'))
+                                        'sentences. In some places this may '
+                                        'be displayed without the details '
+                                        'section below.'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the series '
                                           'cover?'))
