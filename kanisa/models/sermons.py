@@ -35,8 +35,8 @@ class SermonSeries(SearchableModel):
     active = models.BooleanField(default=True,
                                  help_text='Is this series currently ongoing?')
     passage = BiblePassageField(blank=True, null=True,
-                                help_text=('NB. This doesn\'t currently support '
-                                           'multiple passages.'))
+                                help_text=('NB. This doesn\'t currently '
+                                           'support multiple passages.'))
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonSeriesManager()
@@ -139,8 +139,8 @@ class Sermon(SearchableModel):
                                           '<a href="/manage/sermons/speaker/'
                                           'create/">this form</a>.'))
     passage = BiblePassageField(blank=True, null=True,
-                                help_text=('NB. This doesn\'t currently support '
-                                           'multiple passages.'))
+                                help_text=('NB. This doesn\'t currently '
+                                           'support multiple passages.'))
     mp3 = models.FileField(blank=True,
                            null=True,
                            upload_to='kanisa/sermons/mp3s/%Y/',
