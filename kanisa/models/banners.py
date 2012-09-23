@@ -43,8 +43,8 @@ class Banner(SearchableModel):
     url = models.URLField(verbose_name=u'URL',
                           blank=True,
                           null=True,
-                          help_text=u'The web address your banner will link'
-                          'to.')
+                          help_text=('The web address your banner will link '
+                                     'to.'))
     publish_from = models.DateField(blank=True,
                                     null=True,
                                     help_text=u'The date at which your banner'
