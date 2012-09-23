@@ -129,11 +129,13 @@ class Sermon(SearchableModel):
     series = models.ForeignKey(SermonSeries,
                                blank=True, null=True,
                                help_text=('What series the sermon is from, if '
-                                          'any.'))
+                                          'any - you can add a series using '
+                                          '<a href="/manage/sermons/series/'
+                                          'create/">this form</a>.'))
     speaker = models.ForeignKey(SermonSpeaker,
-                                help_text=('These can be added by clicking '
-                                           '\'Manage Speaker\' from the '
-                                           'sermon management home page'))
+                                help_text=('You can add a speaker using '
+                                          '<a href="/manage/sermons/speaker/'
+                                          'create/">this form</a>.'))
     passage = BiblePassageField(blank=True, null=True)
     mp3 = models.FileField(blank=True,
                            null=True,
