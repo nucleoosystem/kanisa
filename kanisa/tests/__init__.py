@@ -16,6 +16,7 @@ from .diary_views import (DiaryManagementViewTest,
                           DiaryPublicViewTest)
 from .document_views import DocumentManagementViewTest
 from .management_views import ManagementViewTest
+from .navigation import NavigationElementTest
 from .page_views import (PageManagementViewTest,
                          PagePublicViewTest)
 from .pages import (PageTest,
