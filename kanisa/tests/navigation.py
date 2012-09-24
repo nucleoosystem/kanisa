@@ -80,6 +80,12 @@ class NavigationElementTest(TestCase):
 
         self.assertEqual(pks, [element.pk, sibling.pk])
 
+        element = NavigationElement.objects.get(pk=element.pk)
+        sibling = NavigationElement.objects.get(pk=sibling.pk)
+
+        with self.assertRaises(NavigationElement.DoesNotExist):
+            sibling.move_down()
+
     def test_move_up_sole_element(self):
         element = NavigationFactory.create()
 
@@ -104,3 +110,9 @@ class NavigationElementTest(TestCase):
         pks = [n.pk for n in NavigationElement.objects.all()]
 
         self.assertEqual(pks, [element.pk, sibling.pk])
+
+        element = NavigationElement.objects.get(pk=element.pk)
+        sibling = NavigationElement.objects.get(pk=sibling.pk)
+
+        with self.assertRaises(NavigationElement.DoesNotExist):
+            element.move_up()
