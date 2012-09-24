@@ -3,7 +3,7 @@ from kanisa.forms import (KanisaBaseForm,
                           BootstrapTimeField,
                           BootstrapDateField)
 from kanisa.forms.widgets import (KanisaMainInputWidget,
-                                  KanisaIntroInputWidget)
+                                  KanisaTinyInputWidget)
 from kanisa.models import EventContact, RegularEvent, ScheduledEvent
 
 
@@ -17,7 +17,7 @@ class RegularEventForm(KanisaBaseForm):
 
     class Meta:
         model = RegularEvent
-        widgets = {'intro': KanisaIntroInputWidget(),
+        widgets = {'intro': KanisaTinyInputWidget(),
                    'details': KanisaMainInputWidget(), }
 
 

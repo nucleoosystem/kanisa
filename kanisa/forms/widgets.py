@@ -1,4 +1,8 @@
-from django.forms import Textarea
+from django.forms import Textarea, TextInput
+
+
+class KanisaTinyInputWidget(TextInput):
+    pass
 
 
 class KanisaIntroInputWidget(Textarea):
