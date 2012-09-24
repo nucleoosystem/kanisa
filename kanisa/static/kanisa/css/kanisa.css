@@ -95,10 +95,6 @@ td.iconcell {
     position: relative;
 }
 
-.epiceditor {
-  border: 1px solid #ccc;
-}
-
 .inline-status {
     display: inline-block;
     vertical-align: middle;

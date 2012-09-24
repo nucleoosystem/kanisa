@@ -2,7 +2,6 @@ from django.forms.util import ErrorList
 
 from kanisa import conf
 from kanisa.forms import KanisaBaseForm, BootstrapDateField
-from kanisa.widgets import EpicWidget
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3NoHeaderError, TIT2
@@ -15,8 +14,6 @@ from kanisa.models import (SermonSeries,
 class SermonSeriesForm(KanisaBaseForm):
     class Meta:
         model = SermonSeries
-        widgets = {'intro': EpicWidget(),
-                   'details': EpicWidget(), }
 
 
 class SermonSpeakerForm(KanisaBaseForm):
@@ -29,7 +26,6 @@ class SermonForm(KanisaBaseForm):
 
     class Meta:
         model = Sermon
-        widgets = {'details': EpicWidget(), }
 
     def apply_id3(self, cleaned_data):
         try:

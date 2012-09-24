@@ -2,7 +2,6 @@ from django import forms
 from kanisa.forms import (KanisaBaseForm,
                           BootstrapTimeField,
                           BootstrapDateField)
-from kanisa.widgets import EpicWidget
 from kanisa.models import EventContact, RegularEvent, ScheduledEvent
 
 
@@ -16,7 +15,6 @@ class RegularEventForm(KanisaBaseForm):
 
     class Meta:
         model = RegularEvent
-        widgets = {'details': EpicWidget(), }
 
 
 class ScheduledEventEditForm(KanisaBaseForm):
@@ -26,7 +24,6 @@ class ScheduledEventEditForm(KanisaBaseForm):
     class Meta:
         model = ScheduledEvent
         exclude = ('event', )
-        widgets = {'details': EpicWidget(), }
 
 
 class ScheduledEventCreationForm(KanisaBaseForm):
@@ -38,7 +35,6 @@ class ScheduledEventCreationForm(KanisaBaseForm):
 
     class Meta:
         model = ScheduledEvent
-        widgets = {'details': EpicWidget(), }
 
     class Media:
         js = ('kanisa/js/scheduled_event.js', )
