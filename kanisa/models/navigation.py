@@ -75,5 +75,10 @@ class NavigationElement(MPTTModel):
                 raise ValidationError({'parent': ['Invalid parent - cyclical '
                                                   'hierarchy detected.', ]})
 
+        if self.parent and self.parent.parent:
+            raise ValidationError({'parent': ['Navigation elements cannot be '
+                                              'nested more than 2 levels '
+                                              'deep.', ]})
+
     def clean_fields(self, exclude=None):
         self.check_parent_status()

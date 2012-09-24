@@ -41,6 +41,20 @@ class NavigationElementTest(TestCase):
                          ['Invalid parent - cyclical hierarchy '
                           'detected.', ])
 
+    def test_navigation_element_cannot_have_more_than_two_levels(self):
+        parent = NavigationFactory.create()
+        child = NavigationFactory.create(parent=parent)
+        grandchild = NavigationFactory.create(parent=child)
+
+        with self.assertRaises(ValidationError) as cm:
+            grandchild.full_clean()
+
+        errors = cm.exception.message_dict
+        self.assertTrue('parent' in errors)
+        self.assertEqual(errors['parent'],
+                         ['Navigation elements cannot be nested more than 2 '
+                          'levels deep.', ])
+
     def test_move_down_sole_element(self):
         element = NavigationFactory.create()
 
