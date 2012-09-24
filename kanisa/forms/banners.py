@@ -1,5 +1,6 @@
 from kanisa.models import Banner
 from kanisa.forms import KanisaBaseForm, BootstrapDateField
+from kanisa.forms.widgets import KanisaIntroInputWidget
 
 
 class BannerForm(KanisaBaseForm):
@@ -19,3 +20,4 @@ class BannerForm(KanisaBaseForm):
     class Meta:
         exclude = ('visits', )
         model = Banner
+        widgets = {'contents': KanisaIntroInputWidget(), }
