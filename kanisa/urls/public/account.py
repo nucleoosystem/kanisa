@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.views import password_change
-from kanisa.forms.account import KanisaChangePasswordForm
+from kanisa.forms.auth import KanisaChangePasswordForm
 from kanisa.views import KanisaLoginView
 
 
