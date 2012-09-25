@@ -1,5 +1,17 @@
+function show_spinner(thelink) {
+    thelink.siblings(".spinner_placeholder").show();
+}
+
+function hide_spinner(thelink) {
+    thelink.siblings(".spinner_placeholder").hide();
+}
+
 function get_placeholder_from_link(thelink) {
     return $(thelink.parents("div")[0]).find(".selection_placeholder");
+}
+
+function get_cancel_from_link(thelink) {
+    return thelink.siblings(".main_input_widget_cancel");
 }
 
 function clear_placeholder(event) {
@@ -19,16 +31,18 @@ function get_images(event) {
     event.preventDefault();
 
     var thelink = $(this);
-    var cancel_button = thelink.siblings(".main_input_widget_cancel");
-    cancel_button.show();
     thelink.hide();
 
     var theurl = thelink.attr("data-url");
     var placeholder = get_placeholder_from_link(thelink);
+    show_spinner(thelink);
 
     $.get(theurl,
           function(data) {
+              var cancel_button = get_cancel_from_link(thelink);
+              cancel_button.show();
               placeholder.html(data);
+              hide_spinner(thelink);
           });
 }
 
