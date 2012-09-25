@@ -18,6 +18,9 @@ class KanisaIntroInputWidget(Textarea):
 
 
 class KanisaMainInputWidget(Textarea):
+    class Media:
+        js = ('kanisa/js/main_input_widget.js', )
+
     def render(self, name, value, attrs=None):
         if value is None:
             value = ''
@@ -26,4 +29,5 @@ class KanisaMainInputWidget(Textarea):
 
         return render_to_string("kanisa/management/_main_input_widget.html",
                                 {'attrs': mark_safe(flatatt(final_attrs)),
+                                 'id': final_attrs['id'],
                                  'value': value})

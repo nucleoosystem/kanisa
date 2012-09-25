@@ -1,0 +1,13 @@
+{% load thumbnail %}
+
+<ul class="thumbnails">
+{% for image in object_list %}
+  <li class="span2">
+    <a href="#" class="thumbnail">
+      {% thumbnail image.image "160x120" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+      {% endthumbnail %}
+    </a>
+  </li>
+{% endfor %}
+</ul>

@@ -1,1 +1,16 @@
-<textarea{{ attrs }}>{{ value }}</textarea>
+{% load url from future %}
+
+<div id="main_input_widget_{{ id }}">
+  <p>
+    <a class="btn btn-small btn-info main_input_widget_insert_image main_input_widget_action" data-url="{% url 'kanisa_manage_xhr_media_inline_images' %}">
+      <i class="icon-white icon-camera"></i>
+      Insert Image
+    </a>
+    <a class="btn btn-small btn-danger main_input_widget_cancel" style="display: none">Cancel</a>
+  </p>
+
+  <div class="selection_placeholder">
+  </div>
+
+  <textarea{{ attrs }}>{{ value }}</textarea>
+</div>
