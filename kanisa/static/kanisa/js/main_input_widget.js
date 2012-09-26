@@ -2,19 +2,17 @@ function get_container(el) {
     return $(el.parents("div.main_input_widget_container")[0]);
 }
 
-function show_spinner(el) {
-    var container = get_container(el);
-    container.find(".spinner_placeholder").show();
-}
-
-function hide_spinner(el) {
-    var container = get_container(el);
-    container.find(".spinner_placeholder").hide();
-}
-
 function get_matching_elements(src, selector) {
     var container = get_container(src);
     return container.find(selector);
+}
+
+function show_spinner(el) {
+    get_matching_elements(el, ".spinner_placeholder").show();
+}
+
+function hide_spinner(el) {
+    get_matching_elements(el, ".spinner_placeholder").hide();
 }
 
 function get_placeholder(el) {
@@ -44,10 +42,12 @@ function select_image(event) {
     var theimage = $(this);
     var detail_url = theimage.attr("data-select-url");
     var placeholder = get_placeholder(theimage);
+    show_spinner(placeholder);
 
     $.get(detail_url,
           function(data) {
               placeholder.html(data);
+              hide_spinner(placeholder);
           });
 }
 
