@@ -1,8 +1,13 @@
 {% load thumbnail %}
 {% load url from future %}
+
+{% if object_list %}
 <p><strong>Select an Image:</strong></p>
 {% for image in object_list %}
 {% thumbnail image.image "80x60" crop="center" as im %}
 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="cursor: pointer; margin-bottom: 5px" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
 {% endthumbnail %}
 {% endfor %}
+{% else %}
+<p class="alert alert-info">There are no images uploaded yet, please upload an image to get started.</p>
+{% endif %}
