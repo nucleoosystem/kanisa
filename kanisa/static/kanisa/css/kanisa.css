@@ -135,8 +135,9 @@ td h5 {
     padding: 8px 0;
 }
 
-.kanisamaininputwidget {
+textarea.kanisamaininputwidget {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .kanisaintroinputwidget {
