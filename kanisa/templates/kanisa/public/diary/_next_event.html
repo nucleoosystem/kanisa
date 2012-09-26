@@ -1,5 +1,5 @@
 {% load url from future %}
-{% load markup %}
+{% load kanisa_markup %}
 
 {% with object.get_next as next_event %}
 {% if next_event %}
@@ -15,7 +15,7 @@
 
 {% if object.details != next_event.details %}
 {% if next_event.details %}
-{{ next_event.details|markdown }}
+{{ next_event.details|kanisa_markdown }}
 {% endif %}
 {% endif %}
 

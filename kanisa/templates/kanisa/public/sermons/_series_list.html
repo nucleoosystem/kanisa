@@ -1,4 +1,4 @@
-{% load markup %}
+{% load kanisa_markup %}
 {% load thumbnail %}
 {% load url from future %}
 
@@ -21,7 +21,7 @@
 
     {% if series.intro %}
     <div class="lead">
-    {{ series.intro|markdown }}
+    {{ series.intro|kanisa_markdown }}
     </div>
     {% else %}
     {% with series.sermons as sermons %}

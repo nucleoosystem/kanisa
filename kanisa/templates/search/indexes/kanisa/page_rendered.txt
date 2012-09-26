@@ -1,6 +1,6 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load url from future %}
 
 {% block contents %}

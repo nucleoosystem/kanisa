@@ -1,6 +1,6 @@
 {% extends 'kanisa/public/base.html' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load thumbnail %}
 {% load url from future %}
 
@@ -36,7 +36,7 @@
 <div class="row">
   <div class="span7">
     {% if object.details %}
-    {{ object.markdown }}
+    {{ object.kanisa_markdown }}
     {% endif %}
 
     {% if object.passage %}
@@ -75,7 +75,7 @@
     </div>
 
     {% if series.intro %}
-    {{ series.intro|markdown }}
+    {{ series.intro|kanisa_markdown }}
     {% endif %}
 
     {% with series.sermons as sermons %}

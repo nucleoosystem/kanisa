@@ -1,6 +1,6 @@
 {% extends 'kanisa/public/base.html' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load url from future %}
 {% load thumbnail %}
 
@@ -46,7 +46,7 @@
         </p>
 
         {% if object.details %}
-        {{ object.details|markdown }}
+        {{ object.details|kanisa_markdown }}
         {% endif %}
       </div>
     </div>

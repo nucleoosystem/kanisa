@@ -1,6 +1,6 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load thumbnail %}
 {% load url from future %}
 
@@ -15,7 +15,7 @@
 {% if object.passage %}
 <p><strong>Passage:</strong> {{ object.passage }}</p>
 {% endif %}
-{{ object.intro|markdown|striptags|truncatewords:75 }}
+{{ object.intro|kanisa_markdown|striptags|truncatewords:75 }}
 </blockquote>
 {% endblock %}
 

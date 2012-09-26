@@ -1,12 +1,12 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load static %}
 {% load url from future %}
 
 {% block contents %}
 <blockquote>
-<p>{{ object.details|markdown|striptags|truncatewords:75 }}</p>
+<p>{{ object.details|kanisa_markdown|striptags|truncatewords:75 }}</p>
 <strong>File:</strong> <a href="{% get_media_prefix %}{{ object.file.name }}">{{ object.file_name }}</a>
 </blockquote>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
-{% load markup %}
+{% load kanisa_markup %}
 {% load url from future %}
 
 {% block subtitle %}{{ object.date|date:"l, jS F Y" }} - {% endblock %}
@@ -9,7 +9,7 @@
 <blockquote>
 <p>{{ object.title }} is on <strong>{{ object.date|date:"jS F Y" }}</strong> at <strong>{{ object.start_time }}</strong>.</p>
 {% if object.details %}
-{{ object.details|markdown|striptags|truncatewords:75 }}
+{{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
 {% endif %}
 </blockquote>
 {% endblock %}
