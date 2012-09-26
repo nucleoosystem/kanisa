@@ -4,7 +4,8 @@ from kanisa.views.xhr.pages import (CreatePageView,
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
 from kanisa.views.xhr.diary import (ScheduleRegularEventView,
                                     DiaryGetSchedule)
-from kanisa.views.xhr.media import InlineImagesListView
+from kanisa.views.xhr.media import (InlineImagesListView,
+                                    InlineImagesDetailView)
 from kanisa.views.xhr.navigation import (ListNavigationView,
                                          MoveNavigationElementDownView,
                                          MoveNavigationElementUpView)
@@ -52,4 +53,8 @@ urlpatterns = patterns('',
                            InlineImagesListView.as_view(),
                            {},
                            'kanisa_manage_xhr_media_inline_images'),
+                       url(r'^media/images/(?P<pk>\d+)$',
+                           InlineImagesDetailView.as_view(),
+                           {},
+                           'kanisa_manage_xhr_media_inline_images_detail'),
                        )

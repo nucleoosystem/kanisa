@@ -27,6 +27,19 @@ function clear_placeholder(event) {
     placeholder.html("");
 }
 
+function select_image(event) {
+    event.preventDefault(event);
+
+    var theimage = $(this);
+    var detail_url = theimage.attr("data-select-url");
+    var placeholder = theimage.parent();
+
+    $.get(detail_url,
+          function(data) {
+              placeholder.html(data);
+          });
+}
+
 function get_images(event) {
     event.preventDefault();
 
@@ -42,6 +55,7 @@ function get_images(event) {
               var cancel_button = get_cancel_from_link(thelink);
               cancel_button.show();
               placeholder.html(data);
+              $(".main_input_widget_image_choice").click(select_image);
               hide_spinner(thelink);
           });
 }

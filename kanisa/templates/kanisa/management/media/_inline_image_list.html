@@ -1,13 +1,8 @@
 {% load thumbnail %}
-
-<ul class="thumbnails">
+{% load url from future %}
+<p><strong>Select an Image:</strong></p>
 {% for image in object_list %}
-  <li class="span2">
-    <a href="#" class="thumbnail">
-      {% thumbnail image.image "160x120" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
-      {% endthumbnail %}
-    </a>
-  </li>
+{% thumbnail image.image "80x60" crop="center" as im %}
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="cursor: pointer; margin-bottom: 5px" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
+{% endthumbnail %}
 {% endfor %}
-</ul>
