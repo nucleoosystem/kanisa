@@ -1,17 +1,28 @@
-function show_spinner(thelink) {
-    thelink.siblings(".spinner_placeholder").show();
+function get_container(el) {
+    return $(el.parents("div.main_input_widget_container")[0]);
 }
 
-function hide_spinner(thelink) {
-    thelink.siblings(".spinner_placeholder").hide();
+function show_spinner(el) {
+    var container = get_container(el);
+    container.find(".spinner_placeholder").show();
 }
 
-function get_placeholder_from_link(thelink) {
-    return $(thelink.parents("div")[0]).find(".selection_placeholder");
+function hide_spinner(el) {
+    var container = get_container(el);
+    container.find(".spinner_placeholder").hide();
 }
 
-function get_cancel_from_link(thelink) {
-    return thelink.siblings(".main_input_widget_cancel");
+function get_matching_elements(src, selector) {
+    var container = get_container(src);
+    return container.find(selector);
+}
+
+function get_placeholder(el) {
+    return get_matching_elements(el, ".selection_placeholder");
+}
+
+function get_cancel(el) {
+    return get_matching_elements(el, ".main_input_widget_cancel");
 }
 
 function clear_placeholder(event) {
@@ -20,10 +31,10 @@ function clear_placeholder(event) {
     var thelink = $(this);
     thelink.hide();
 
-    var other_buttons = thelink.siblings(".main_input_widget_action");
+    var other_buttons = get_matching_elements(thelink, ".main_input_widget_action");
     other_buttons.show();
 
-    var placeholder = get_placeholder_from_link(thelink);
+    var placeholder = get_placeholder(thelink);
     placeholder.html("");
 }
 
@@ -32,7 +43,7 @@ function select_image(event) {
 
     var theimage = $(this);
     var detail_url = theimage.attr("data-select-url");
-    var placeholder = theimage.parent();
+    var placeholder = get_placeholder(theimage);
 
     $.get(detail_url,
           function(data) {
@@ -47,13 +58,12 @@ function get_images(event) {
     thelink.hide();
 
     var theurl = thelink.attr("data-url");
-    var placeholder = get_placeholder_from_link(thelink);
+    var placeholder = get_placeholder(thelink);
     show_spinner(thelink);
 
     $.get(theurl,
           function(data) {
-              var cancel_button = get_cancel_from_link(thelink);
-              cancel_button.show();
+              get_cancel(thelink).show();
               placeholder.html(data);
               $(".main_input_widget_image_choice").click(select_image);
               hide_spinner(thelink);
