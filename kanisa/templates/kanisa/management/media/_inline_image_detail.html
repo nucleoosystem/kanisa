@@ -2,7 +2,7 @@
 {% load url from future %}
 
 {% thumbnail image.image "240x180" crop="center" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" />
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
 {% endthumbnail %}
 
 <form class="form-horizontal">
@@ -28,7 +28,7 @@
     </label>
   </div>
 
-  <a class="btn btn-small btn-success" style="margin: 1em 0">
+  <a class="btn btn-small btn-success main_input_widget_image_insert" style="margin: 1em 0">
     Insert image &raquo;
   </a>
 </form>

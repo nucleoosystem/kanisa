@@ -44,6 +44,26 @@ function show_alignment(event) {
     get_matching_elements($(this), ".alignment").show();
 }
 
+function insert_image(event) {
+    event.preventDefault(event);
+    var btn = $(this);
+    var image_pk = get_matching_elements(btn, ".main_input_widget_image_choice").attr("data-img-pk");
+    var size = get_matching_elements(btn, "input[name=size]:checked").attr("value");
+    var alignment = get_matching_elements(btn, "input[name=alignment]:checked").attr("value");
+
+    var textarea = get_matching_elements(btn, "textarea");
+    var image_code = "![img-" + image_pk + " " + size;
+
+    if (size != "headline") {
+        image_code += " " + alignment;
+    }
+
+    image_code += "]";
+
+    textarea.val(textarea.val() + image_code);
+    get_cancel(btn).click();
+}
+
 function select_image(event) {
     event.preventDefault(event);
 
@@ -57,6 +77,7 @@ function select_image(event) {
               placeholder.html(data);
               get_matching_elements(placeholder, ".headline_radio").click(hide_alignment);
               get_matching_elements(placeholder, ".medium_radio").click(show_alignment);
+              get_matching_elements(placeholder, ".main_input_widget_image_insert").click(insert_image);
               hide_spinner(placeholder);
           });
 }
