@@ -36,6 +36,14 @@ function clear_placeholder(event) {
     placeholder.html("");
 }
 
+function hide_alignment(event) {
+    get_matching_elements($(this), ".alignment").hide();
+}
+
+function show_alignment(event) {
+    get_matching_elements($(this), ".alignment").show();
+}
+
 function select_image(event) {
     event.preventDefault(event);
 
@@ -47,6 +55,8 @@ function select_image(event) {
     $.get(detail_url,
           function(data) {
               placeholder.html(data);
+              get_matching_elements(placeholder, ".headline_radio").click(hide_alignment);
+              get_matching_elements(placeholder, ".medium_radio").click(show_alignment);
               hide_spinner(placeholder);
           });
 }
