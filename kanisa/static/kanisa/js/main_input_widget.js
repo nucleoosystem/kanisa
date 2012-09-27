@@ -86,8 +86,12 @@ function change_size(event) {
 
     if (size == "headline") {
         hide_alignment(radio);
+        get_matching_elements(radio, ".thumbnail-medium").hide();
+        get_matching_elements(radio, ".thumbnail-headline").show();
     } else {
         show_alignment(radio);
+        get_matching_elements(radio, ".thumbnail-headline").hide();
+        get_matching_elements(radio, ".thumbnail-medium").show();
     }
 }
 

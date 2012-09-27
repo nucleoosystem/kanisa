@@ -1,9 +1,7 @@
 {% load thumbnail %}
 {% load url from future %}
 
-{% thumbnail image.image "240x180" crop="center" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
-{% endthumbnail %}
+{% include "kanisa/management/media/_inline_image_thumbnail.html" with size="medium" %}
 
 <form class="form-horizontal">
   <p><strong>Set the image size:</strong></p>
