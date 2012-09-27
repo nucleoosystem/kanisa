@@ -71,12 +71,20 @@ function show_alignment(event) {
     get_matching_elements($(this), ".alignment").show();
 }
 
+function get_size(element) {
+    return get_matching_elements(element, "input[name=size]:checked").attr("value");
+}
+
+function get_alignment(element) {
+    return get_matching_elements(element, "input[name=alignment]:checked").attr("value");
+}
+
 function insert_image(event) {
     event.preventDefault(event);
     var btn = $(this);
     var image_pk = get_matching_elements(btn, ".main_input_widget_image_choice").attr("data-img-pk");
-    var size = get_matching_elements(btn, "input[name=size]:checked").attr("value");
-    var alignment = get_matching_elements(btn, "input[name=alignment]:checked").attr("value");
+    var size = get_size(btn);
+    var alignment = get_alignment(btn);
 
     var textarea = get_matching_elements(btn, "textarea");
     var image_code = "![img-" + image_pk + " " + size;
