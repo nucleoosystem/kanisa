@@ -137,14 +137,14 @@ function get_images(event) {
 
     var theurl = thelink.attr("data-url");
     var placeholder = get_placeholder(thelink);
-    show_spinner(thelink);
+    show_spinner(placeholder);
 
     $.get(theurl,
           function(data) {
               get_cancel(thelink).show();
               placeholder.html(data);
               $(".main_input_widget_image_choice").click(select_image);
-              hide_spinner(thelink);
+              hide_spinner(placeholder);
           });
 }
 
