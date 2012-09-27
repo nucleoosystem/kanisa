@@ -63,12 +63,12 @@ function clear_placeholder(event) {
     placeholder.html("");
 }
 
-function hide_alignment(event) {
-    get_matching_elements($(this), ".alignment").hide();
+function hide_alignment(element) {
+    get_matching_elements(element, ".alignment").hide();
 }
 
-function show_alignment(event) {
-    get_matching_elements($(this), ".alignment").show();
+function show_alignment(element) {
+    get_matching_elements(element, ".alignment").show();
 }
 
 function get_size(element) {
@@ -77,6 +77,18 @@ function get_size(element) {
 
 function get_alignment(element) {
     return get_matching_elements(element, "input[name=alignment]:checked").attr("value");
+}
+
+function change_size(event) {
+    var radio = $(this);
+
+    var size = get_size(radio);
+
+    if (size == "headline") {
+        hide_alignment(radio);
+    } else {
+        show_alignment(radio);
+    }
 }
 
 function insert_image(event) {
@@ -111,8 +123,8 @@ function select_image(event) {
     $.get(detail_url,
           function(data) {
               placeholder.html(data);
-              get_matching_elements(placeholder, ".headline_radio").click(hide_alignment);
-              get_matching_elements(placeholder, ".medium_radio").click(show_alignment);
+              get_matching_elements(placeholder, ".headline_radio").click(change_size);
+              get_matching_elements(placeholder, ".medium_radio").click(change_size);
               get_matching_elements(placeholder, ".main_input_widget_image_insert").click(insert_image);
               hide_spinner(placeholder);
           });
