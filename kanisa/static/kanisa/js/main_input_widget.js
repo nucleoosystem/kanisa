@@ -144,7 +144,7 @@ function get_images(event) {
           function(data) {
               get_cancel(thelink).show();
               placeholder.html(data);
-              $(".main_input_widget_image_choice").click(select_image);
+              get_matching_elements(placeholder, ".main_input_widget_image_choice").click(select_image);
               hide_spinner(placeholder);
           });
 }
