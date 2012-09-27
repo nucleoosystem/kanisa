@@ -95,6 +95,18 @@ function change_size(event) {
     }
 }
 
+function get_code(pk, size, alignment) {
+    var image_code = "![img-" + pk + " " + size;
+
+    if (size != "headline") {
+        image_code += " " + alignment;
+    }
+
+    image_code += "]";
+
+    return image_code;
+}
+
 function insert_image(event) {
     event.preventDefault(event);
     var btn = $(this);
@@ -103,15 +115,8 @@ function insert_image(event) {
     var alignment = get_alignment(btn);
 
     var textarea = get_matching_elements(btn, "textarea");
-    var image_code = "![img-" + image_pk + " " + size;
 
-    if (size != "headline") {
-        image_code += " " + alignment;
-    }
-
-    image_code += "]";
-
-    textarea.insertAtCaret(image_code);
+    textarea.insertAtCaret(get_code(image_pk, size, alignment));
 
     get_cancel(btn).click();
 }
