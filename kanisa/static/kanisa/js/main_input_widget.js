@@ -125,6 +125,7 @@ function select_image(event) {
               placeholder.html(data);
               get_matching_elements(placeholder, "input[name=size]").click(change_size);
               get_matching_elements(placeholder, ".main_input_widget_image_insert").click(insert_image);
+              get_matching_elements(placeholder, ".main_input_widget_get_images").click(get_images);
               hide_spinner(placeholder);
           });
 }
