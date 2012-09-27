@@ -123,8 +123,7 @@ function select_image(event) {
     $.get(detail_url,
           function(data) {
               placeholder.html(data);
-              get_matching_elements(placeholder, ".headline_radio").click(change_size);
-              get_matching_elements(placeholder, ".medium_radio").click(change_size);
+              get_matching_elements(placeholder, "input[name=size]").click(change_size);
               get_matching_elements(placeholder, ".main_input_widget_image_insert").click(insert_image);
               hide_spinner(placeholder);
           });
