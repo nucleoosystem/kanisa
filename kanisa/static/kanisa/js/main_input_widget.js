@@ -95,8 +95,12 @@ function change_size(event) {
     }
 }
 
-function get_code(pk, size, alignment) {
-    var image_code = "![img-" + pk + " " + size;
+function get_code(element) {
+    var image_pk = get_matching_elements(element, ".main_input_widget_image_choice").attr("data-img-pk");
+    var size = get_size(element);
+    var alignment = get_alignment(element);
+
+    var image_code = "![img-" + image_pk + " " + size;
 
     if (size != "headline") {
         image_code += " " + alignment;
@@ -107,16 +111,22 @@ function get_code(pk, size, alignment) {
     return image_code;
 }
 
+function update_code_preview(element) {
+    var image_code = get_code(element);
+    get_matching_elements(element, ".image-code").html(image_code);
+}
+
+function on_image_attribute_change(event) {
+    update_code_preview($(this));
+}
+
 function insert_image(event) {
     event.preventDefault(event);
     var btn = $(this);
-    var image_pk = get_matching_elements(btn, ".main_input_widget_image_choice").attr("data-img-pk");
-    var size = get_size(btn);
-    var alignment = get_alignment(btn);
 
     var textarea = get_matching_elements(btn, "textarea");
 
-    textarea.insertAtCaret(get_code(image_pk, size, alignment));
+    textarea.insertAtCaret(get_code(btn));
 
     get_cancel(btn).click();
 }
@@ -135,6 +145,8 @@ function select_image(event) {
               get_matching_elements(placeholder, "input[name=size]").click(change_size);
               get_matching_elements(placeholder, ".main_input_widget_image_insert").click(insert_image);
               get_matching_elements(placeholder, ".main_input_widget_get_images").click(get_images);
+              update_code_preview(placeholder);
+              get_matching_elements(placeholder, "input[type=radio]").click(on_image_attribute_change);
               hide_spinner(placeholder);
           });
 }
