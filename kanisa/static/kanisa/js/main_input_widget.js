@@ -30,8 +30,7 @@ function get_container(el) {
 }
 
 function get_matching_elements(src, selector) {
-    var container = get_container(src);
-    return container.find(selector);
+    return get_container(src).find(selector);
 }
 
 function show_spinner(el) {
@@ -98,12 +97,11 @@ function change_size(event) {
 function get_code(element) {
     var image_pk = get_matching_elements(element, ".main_input_widget_image_choice").attr("data-img-pk");
     var size = get_size(element);
-    var alignment = get_alignment(element);
 
     var image_code = "![img-" + image_pk + " " + size;
 
     if (size != "headline") {
-        image_code += " " + alignment;
+        image_code += " " + get_alignment(element);
     }
 
     image_code += "]";
@@ -112,8 +110,7 @@ function get_code(element) {
 }
 
 function update_code_preview(element) {
-    var image_code = get_code(element);
-    get_matching_elements(element, ".image-code").html(image_code);
+    get_matching_elements(element, ".image-code").html(get_code(element));
 }
 
 function on_image_attribute_change(event) {
@@ -124,9 +121,7 @@ function insert_image(event) {
     event.preventDefault(event);
     var btn = $(this);
 
-    var textarea = get_matching_elements(btn, "textarea");
-
-    textarea.insertAtCaret(get_code(btn));
+    get_matching_elements(btn, "textarea").insertAtCaret(get_code(btn));
 
     get_cancel(btn).click();
 }
@@ -135,11 +130,10 @@ function select_image(event) {
     event.preventDefault(event);
 
     var theimage = $(this);
-    var detail_url = theimage.attr("data-select-url");
     var placeholder = get_placeholder(theimage);
     show_spinner(placeholder);
 
-    $.get(detail_url,
+    $.get(theimage.attr("data-select-url"),
           function(data) {
               placeholder.html(data);
               get_matching_elements(placeholder, "input[name=size]").click(change_size);
@@ -157,11 +151,10 @@ function get_images(event) {
     var thelink = $(this);
     get_matching_elements(thelink, ".main_input_widget_action").hide();
 
-    var theurl = thelink.attr("data-url");
     var placeholder = get_placeholder(thelink);
     show_spinner(placeholder);
 
-    $.get(theurl,
+    $.get(thelink.attr("data-url"),
           function(data) {
               get_cancel(thelink).show();
               placeholder.html(data);
