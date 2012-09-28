@@ -1,0 +1,26 @@
+{% if object_list %}
+
+<p><strong>Select a Document:</strong></p>
+<table class="table table-striped table-condensed media-documents">
+  {% for document in object_list %}
+  <tr>
+    <td>
+      <a href="#" data-pk="{{ document.pk }}">{{ document }}</a>
+    </td>
+    <td>
+      Modified
+      <abbr title="{{ document.modified|date:"r"}}">
+        {{ document.modified|timesince }}
+      </abbr>
+      ago
+    </td>
+    <td class="muted">
+      <tt>{% templatetag openbrace %}@document-{{ document.pk }}{% templatetag closebrace %}</tt>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+<p class="alert alert-info">There are no documents uploaded yet, please upload a document to get started.</p>
+{% endif %}

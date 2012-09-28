@@ -5,7 +5,8 @@ from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
 from kanisa.views.xhr.diary import (ScheduleRegularEventView,
                                     DiaryGetSchedule)
 from kanisa.views.xhr.media import (InlineImagesListView,
-                                    InlineImagesDetailView)
+                                    InlineImagesDetailView,
+                                    AttachmentsListView)
 from kanisa.views.xhr.navigation import (ListNavigationView,
                                          MoveNavigationElementDownView,
                                          MoveNavigationElementUpView)
@@ -57,4 +58,8 @@ urlpatterns = patterns('',
                            InlineImagesDetailView.as_view(),
                            {},
                            'kanisa_manage_xhr_media_inline_images_detail'),
+                       url(r'^media/attachments/$',
+                           AttachmentsListView.as_view(),
+                           {},
+                           'kanisa_manage_xhr_media_attachments'),
                        )

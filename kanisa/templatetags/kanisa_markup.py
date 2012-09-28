@@ -1,7 +1,7 @@
 from django import template
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
-from kanisa.models import InlineImage
+from kanisa.models import InlineImage, Document
 from sorl.thumbnail import get_thumbnail
 import markdown
 import re
@@ -14,6 +14,9 @@ image_expression = re.compile(r'(!\[img-([0-9]+)'
                               '( (headline|medium))?'
                               '( (left|right))?\]'
                               '(\[(.+?)\])?)')
+
+
+document_expression = re.compile(r'({@document-([0-9]+)})')
 
 
 class ImageMatch(object):
@@ -65,11 +68,37 @@ def get_images(markdown_text):
     return images
 
 
+class DocumentMatch(object):
+    def __init__(self, match):
+        self.full = match[0]
+        self.document = Document.objects.get(pk=match[1])
+
+    def tag(self):
+        return '<a href="%s">Download %s</a>' % (self.document.file.url,
+                                                 self.document.title)
+
+
+def get_documents(markdown_text):
+    documents = []
+    for match in document_expression.findall(markdown_text):
+        try:
+            documents.append(DocumentMatch(match))
+        except Document.DoesNotExist:
+            # Just ignore bad document pks
+            pass
+
+    return documents
+
+
 @register.filter(is_safe=True)
 def kanisa_markdown(value):
     value = force_unicode(value)
+
     for image_match in get_images(value):
         value = value.replace(image_match.full, image_match.tag())
+
+    for document_match in get_documents(value):
+        value = value.replace(document_match.full, document_match.tag())
 
     return mark_safe(markdown.markdown(value,
                                        extensions=['nl2br', ]))

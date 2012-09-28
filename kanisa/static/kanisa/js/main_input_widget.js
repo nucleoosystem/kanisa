@@ -163,7 +163,35 @@ function get_images(event) {
           });
 }
 
+function insert_attachment(event) {
+    event.preventDefault();
+    var document_link = $(this);
+    var document_pk = document_link.attr("data-pk");
+    var code = "{@document-" + document_pk + "}";
+    get_matching_elements(document_link, "textarea").insertAtCaret(code);
+    get_cancel(document_link).click();
+}
+
+function get_attachments(event) {
+    event.preventDefault();
+
+    var thelink = $(this);
+    get_matching_elements(thelink, ".main_input_widget_action").hide();
+
+    var placeholder = get_placeholder(thelink);
+    show_spinner(placeholder);
+
+    $.get(thelink.attr("data-url"),
+          function(data) {
+              get_cancel(thelink).show();
+              placeholder.html(data);
+              get_matching_elements(placeholder, ".media-documents a").click(insert_attachment);
+              hide_spinner(placeholder);
+          });
+}
+
 $(function() {
     $(".main_input_widget_insert_image").click(get_images);
+    $(".main_input_widget_add_attachment").click(get_attachments);
     $(".main_input_widget_cancel").click(clear_placeholder);
 });
