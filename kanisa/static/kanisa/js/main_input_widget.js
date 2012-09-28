@@ -155,7 +155,7 @@ function get_images(event) {
     event.preventDefault();
 
     var thelink = $(this);
-    thelink.hide();
+    get_matching_elements(thelink, ".main_input_widget_action").hide();
 
     var theurl = thelink.attr("data-url");
     var placeholder = get_placeholder(thelink);
