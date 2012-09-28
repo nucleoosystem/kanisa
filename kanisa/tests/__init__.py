@@ -15,6 +15,7 @@ from .diary import (DiaryTest,
 from .diary_views import (DiaryManagementViewTest,
                           DiaryPublicViewTest)
 from .document_views import DocumentManagementViewTest
+from .kanisa_markup import KanisaMarkupTest
 from .management_views import ManagementViewTest
 from .navigation import NavigationElementTest
 from .page_views import (PageManagementViewTest,
