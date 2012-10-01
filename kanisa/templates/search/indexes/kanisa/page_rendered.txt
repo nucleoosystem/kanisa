@@ -21,6 +21,11 @@
 {% endblock %}
 
 {% block buttons %}
+<a class="btn btn-mini" href="{% url 'kanisa_manage_pages_update' object.pk %}">
+  <i class="icon-edit"></i> Edit
+</a>
 
-<a class="btn btn-mini" href="{% url 'kanisa_manage_pages_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
+<a class="btn btn-mini" href="/{{ object.get_path }}">
+  <i class="icon-eye-open"></i> View
+</a>
 {% endblock %}
