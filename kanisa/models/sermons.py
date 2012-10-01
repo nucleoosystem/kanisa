@@ -93,7 +93,7 @@ def sermon_speaker_slug(speaker):
     return '%s %s' % (speaker.forename, speaker.surname)
 
 
-class SermonSpeaker(SearchableModel):
+class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from=sermon_speaker_slug, unique=True)

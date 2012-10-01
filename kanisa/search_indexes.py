@@ -1,6 +1,6 @@
 from haystack import indexes
 from haystack import site
-from kanisa.models import (Sermon, SermonSeries, SermonSpeaker,
+from kanisa.models import (Sermon, SermonSeries,
                            RegularEvent, ScheduledEvent,
                            Page)
 
@@ -15,7 +15,6 @@ class KanisaBaseSearchIndex(indexes.SearchIndex):
 
 site.register(SermonSeries, KanisaBaseSearchIndex)
 site.register(Sermon, KanisaBaseSearchIndex)
-site.register(SermonSpeaker, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, KanisaBaseSearchIndex)
 site.register(Page, KanisaBaseSearchIndex)
