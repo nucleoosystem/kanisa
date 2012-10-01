@@ -50,10 +50,9 @@ class KanisaLoginView(FormView):
         return HttpResponseRedirect(redirect_to)
 
 
-class KanisaSearchView(KanisaAnyAuthorizationMixin,
-                       KanisaTemplateView):
+class KanisaSearchView(KanisaTemplateView):
     kanisa_title = 'Search'
-    template_name = 'kanisa/management/search.html'
+    template_name = 'kanisa/public/search.html'
 
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', None)

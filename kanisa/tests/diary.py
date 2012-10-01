@@ -20,7 +20,8 @@ class DiaryTest(TestCase):
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
     def testSchedule(self):
-        event = RegularEventFactory.build(pattern="RRULE:FREQ=WEEKLY;BYDAY=TU")
+        pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"
+        event = RegularEventFactory.create(pattern=pattern)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instances = event.scheduledevent_set.all()
@@ -33,8 +34,8 @@ class DiaryTest(TestCase):
 
     def testInstanceUnicode(self):
         friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
-        event = RegularEventFactory.build(title='Breakfast Club',
-                                          pattern=friday)
+        event = RegularEventFactory.create(title='Breakfast Club',
+                                           pattern=friday)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = ScheduledEvent.objects.get(pk=1)

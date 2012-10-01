@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
-from kanisa.views import (KanisaManagementIndexView,
-                          KanisaSearchView)
+from kanisa.views import KanisaManagementIndexView
 
 
 urlpatterns = patterns('',
@@ -8,10 +7,6 @@ urlpatterns = patterns('',
                            KanisaManagementIndexView.as_view(),
                            {},
                            'kanisa_manage_index'),
-                       url(r'^search/$',
-                           KanisaSearchView.as_view(),
-                           {},
-                           'kanisa_manage_search'),
 
                        url(r'^banners/',
                            include('kanisa.urls.management.banners')),

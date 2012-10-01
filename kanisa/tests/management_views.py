@@ -3,10 +3,8 @@ from kanisa.tests.utils import KanisaViewTestCase
 
 
 class ManagementViewTest(KanisaViewTestCase):
-
     def test_views_protected(self):
         self.view_is_restricted(reverse('kanisa_manage_index'))
-        self.view_is_restricted(reverse('kanisa_manage_search'))
 
     def test_root_view(self):
         url = reverse('kanisa_manage_index')
