@@ -76,6 +76,8 @@ function clear_placeholder(event) {
 
     var placeholder = get_placeholder(thelink);
     placeholder.html("");
+
+    on_popup_close = function() {};
 }
 
 function hide_alignment(element) {
