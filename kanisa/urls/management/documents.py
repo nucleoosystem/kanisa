@@ -2,18 +2,13 @@ from django.conf.urls import patterns, url
 from kanisa.views.documents import (DocumentIndexView,
                                     DocumentCreateView,
                                     DocumentUpdateView,
-                                    DocumentDeleteView,
-                                    DocumentSearchView)
+                                    DocumentDeleteView)
 
 urlpatterns = patterns('',
                        url(r'^$',
                            DocumentIndexView.as_view(),
                            {},
                            'kanisa_manage_documents'),
-                       url(r'^search/$',
-                           DocumentSearchView.as_view(),
-                           {},
-                           'kanisa_manage_documents_search'),
                        url(r'^create/$',
                            DocumentCreateView.as_view(),
                            {},

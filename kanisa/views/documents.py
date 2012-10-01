@@ -1,15 +1,10 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from haystack.query import SearchQuerySet
 from kanisa.forms.documents import DocumentForm
 from kanisa.models import Document
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaDeleteView,
-                                  KanisaTemplateView)
+                                  KanisaListView, KanisaDeleteView)
 
 
 class DocumentBaseView(KanisaAuthorizationMixin):
@@ -29,33 +24,6 @@ class DocumentIndexView(DocumentBaseView,
     template_name = 'kanisa/management/documents/index.html'
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
-
-
-class DocumentSearchView(DocumentBaseView,
-                         KanisaTemplateView):
-    kanisa_title = 'Search Documents'
-    template_name = 'kanisa/management/documents/search.html'
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect(reverse('kanisa_manage_documents'))
-
-    def post(self, request, *args, **kwargs):
-        query = request.POST.get('query', None)
-
-        if not query:
-            messages.warning(self.request, 'No search query entered.')
-            return HttpResponseRedirect(reverse('kanisa_manage_documents'))
-
-        matching = SearchQuerySet().models(Document).\
-            filter(content=request.POST['query'])
-
-        context = self.get_context_data(**kwargs)
-        context['results'] = matching
-        context['search_term'] = query
-
-        return render_to_response(self.template_name,
-                                  context,
-                                  context_instance=RequestContext(request))
 
 
 class DocumentCreateView(DocumentBaseView,
