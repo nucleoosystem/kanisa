@@ -3,12 +3,14 @@
 {% load kanisa_markup %}
 {% load url from future %}
 
+{% block title %}
+<a href="{% url 'kanisa_public_diary_regularevent_detail' object.slug %}">
+   {{ object.title }}
+</a>
+{% endblock %}
+
 {% block contents %}
 <blockquote>
 {{ object.intro }}
 </blockquote>
-{% endblock %}
-
-{% block buttons %}
-<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
 {% endblock %}

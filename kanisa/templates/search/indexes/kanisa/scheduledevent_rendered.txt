@@ -3,19 +3,24 @@
 {% load kanisa_markup %}
 {% load url from future %}
 
-{% block subtitle %}{{ object.date|date:"l, jS F Y" }} - {% endblock %}
+{% block title %}
+
+{% if object.event %}
+<a href="{% url 'kanisa_public_diary_regularevent_detail' object.event.slug %}">{{ object.title }}</a>
+{% else %}
+<a href="{% url 'kanisa_public_diary_scheduledevent_detail' object.pk %}">{{ object.title }}</a>
+{% endif %}
+
+<small>
+  {{ object.date|date:"l, jS F Y" }} at
+  <strong>{{ object.start_time }}</strong>
+</small>
+{% endblock %}
 
 {% block contents %}
 <blockquote>
-<p>{{ object.title }} is on <strong>{{ object.date|date:"jS F Y" }}</strong> at <strong>{{ object.start_time }}</strong>.</p>
-{% if object.details %}
-{{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
-{% endif %}
+  {% if object.details %}
+  {{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
+  {% endif %}
 </blockquote>
-{% endblock %}
-
-{% block buttons %}
-<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' object.pk %}"><i class="icon-edit"></i> Edit</a>
-<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ object.pk }}">Clone</a>
-<a class="btn btn-mini btn-danger" href="{% url 'kanisa_manage_diary_cancel_scheduled_event' object.pk %}"><i class="icon-white icon-trash"></i> Cancel</a>
 {% endblock %}

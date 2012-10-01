@@ -4,6 +4,12 @@
 {% load thumbnail %}
 {% load url from future %}
 
+{% block title %}
+<a href="{{ object.url }}">
+   {{ object.title }}
+</a>
+{% endblock %}
+
 {% block contents %}
 {% if object.series and object.series.image %}
 <blockquote class="withthumbnail">
@@ -28,16 +34,4 @@ A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
 {{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
 {% endif %}
 </blockquote>
-{% endblock %}
-
-{% block buttons %}
-<a class="btn btn-mini" href="{{ object.url }}">
-   <i class="icon-eye-open"></i>
-   View on site
-</a>
-
-<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}">
-   <i class="icon-edit"></i>
-   Edit
-</a>
 {% endblock %}

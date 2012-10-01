@@ -4,6 +4,12 @@
 {% load thumbnail %}
 {% load url from future %}
 
+{% block title %}
+<a href="{% url 'kanisa_public_sermon_series_detail' object.slug %}">
+   {{ object.title }}
+</a>
+{% endblock %}
+
 {% block contents %}
 <blockquote class="withthumbnail">
 {% if object.image %}
@@ -17,20 +23,4 @@
 {% endif %}
 {{ object.intro|kanisa_markdown|striptags|truncatewords:75 }}
 </blockquote>
-{% endblock %}
-
-{% block buttons %}
-<a class="btn btn-mini" href="{% url 'kanisa_public_sermon_series_detail' object.slug %}">
-   <i class="icon-eye-open"></i>
-   View on site
-</a>
-<a class="btn btn-mini" href="{% url 'kanisa_manage_sermons_series_update' object.pk %}">
-   <i class="icon-edit"></i>
-   Edit
-</a>
-<a  class="btn btn-mini btn-success" href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}">
-   <i class="icon-white icon-plus"></i>
-   Add a sermon to this series
-</a>
-</p>
 {% endblock %}
