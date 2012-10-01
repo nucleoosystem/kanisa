@@ -1,8 +1,9 @@
 import urlparse
 
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
+from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
@@ -53,6 +54,25 @@ class KanisaLoginView(FormView):
 class KanisaSearchView(KanisaTemplateView):
     kanisa_title = 'Search'
     template_name = 'kanisa/public/search.html'
+    results_per_page = 10
+
+    def slice_results(self, request, results):
+        try:
+            page_no = int(request.GET.get('page', 1))
+        except (TypeError, ValueError):
+            raise Http404("Not a valid number for page.")
+
+        if page_no < 1:
+            raise Http404("Pages should be 1 or greater.")
+
+        paginator = Paginator(results, self.results_per_page)
+
+        try:
+            page = paginator.page(page_no)
+        except InvalidPage:
+            raise Http404("No such page!")
+
+        return (paginator, page)
 
     def get(self, request, *args, **kwargs):
         query = request.GET.get('query', None)
@@ -62,7 +82,9 @@ class KanisaSearchView(KanisaTemplateView):
         if query:
             context['search_term'] = query
             matching = SearchQuerySet().filter(content=request.GET['query'])
-            context['results'] = matching
+            paginator, page = self.slice_results(request, matching)
+
+            context['page_obj'] = page
 
         return render_to_response(self.template_name,
                                   context,
