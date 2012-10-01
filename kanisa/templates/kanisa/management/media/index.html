@@ -1,0 +1,39 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+{% load thumbnail %}
+
+{% block content %}
+
+<p>
+  <a href="{% url 'kanisa_manage_media_inlineimage_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Upload a new inline image
+  </a>
+</p>
+
+<hr />
+
+{% if object_list %}
+<ul class="thumbnails">
+  {% for image in object_list %}
+  <li class="span2">
+    <div class="thumbnail">
+      <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}">
+        {% thumbnail image.image "160x120" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+        {% endthumbnail %}
+      </a>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p class="alert alert-warning">
+  There are no images to display.
+</p>
+{% endif %}
+
+
+{% endblock %}

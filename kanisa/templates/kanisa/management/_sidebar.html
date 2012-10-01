@@ -73,6 +73,14 @@
       </a>
     </li>
     {% endif %}
+    {% if perms.kanisa.manage_media %}
+    <li{% if kanisa_nav_component = "media" %} class="active"{% endif %}>
+      <a href="{% url 'kanisa_manage_media' %}">
+        <i class="icon-camera"></i>
+        Media
+      </a>
+    </li>
+    {% endif %}
     {% if user.is_superuser %}
     <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_branding' %}">
