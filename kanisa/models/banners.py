@@ -5,7 +5,6 @@ from django.db import models
 from django.db.models import Q
 from sorl.thumbnail import ImageField
 
-from .base import SearchableModel
 from .utils import date_has_passed, today_in_range
 
 
@@ -25,7 +24,7 @@ class InactiveBannerManager(models.Manager):
         return qs.filter(not_yet_active | expired)
 
 
-class Banner(SearchableModel):
+class Banner(models.Model):
     headline = models.CharField(max_length=60,
                                 help_text=('Keep this short, summarise your '
                                            'banner in a few words.'))
