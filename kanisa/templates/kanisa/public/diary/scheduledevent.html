@@ -48,9 +48,9 @@
     {% if perms.kanisa.manage_diary %}
     <hr />
 
-    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
+    <a class="btn" href="{% url 'kanisa_manage_diary_scheduled_update' object.pk %}">
       <i class="icon-edit"></i>
-      Edit this regular event
+      Edit this scheduled event
     </a>
     {% endif %}
   </div>
