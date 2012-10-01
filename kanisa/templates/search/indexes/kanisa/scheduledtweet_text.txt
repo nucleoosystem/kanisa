@@ -1,8 +1,0 @@
-{% extends 'search/indexes/kanisa/base_text.txt' %}
-
-{% block details %}
-{% autoescape off %}
-
-{{ object.tweet }}
-{% endautoescape %}
-{% endblock %}

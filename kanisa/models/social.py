@@ -2,8 +2,6 @@ from __future__ import absolute_import
 
 from django.db import models
 
-from .base import SearchableModel
-
 
 class FutureScheduledTweetsManager(models.Manager):
     def get_query_set(self):
@@ -12,7 +10,7 @@ class FutureScheduledTweetsManager(models.Manager):
         return qs
 
 
-class ScheduledTweet(SearchableModel):
+class ScheduledTweet(models.Model):
     tweet = models.CharField(max_length=140)
     date = models.DateField()
     time = models.TimeField()
