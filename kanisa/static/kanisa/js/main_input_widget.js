@@ -163,6 +163,18 @@ function select_image(event) {
           });
 }
 
+function refresh_images(placeholder, url) {
+    show_spinner(placeholder);
+
+    $.get(url,
+          function(data) {
+              get_cancel(placeholder).show();
+              placeholder.html(data);
+              get_matching_elements(placeholder, ".main_input_widget_image_choice").click(select_image);
+              hide_spinner(placeholder);
+          });
+}
+
 function get_images(event) {
     event.preventDefault();
 
@@ -170,15 +182,13 @@ function get_images(event) {
     get_matching_elements(thelink, ".main_input_widget_action").hide();
 
     var placeholder = get_placeholder(thelink);
-    show_spinner(placeholder);
+    var url = thelink.attr("data-url");
 
-    $.get(thelink.attr("data-url"),
-          function(data) {
-              get_cancel(thelink).show();
-              placeholder.html(data);
-              get_matching_elements(placeholder, ".main_input_widget_image_choice").click(select_image);
-              hide_spinner(placeholder);
-          });
+    refresh_images(placeholder, url);
+
+    on_popup_close = function() {
+        refresh_images(placeholder, url);
+    };
 }
 
 function insert_attachment(event) {
