@@ -1,3 +1,4 @@
+from datetime import date
 from haystack import indexes
 from haystack import site
 from kanisa.models import (Sermon, SermonSeries,
@@ -13,8 +14,13 @@ class KanisaBaseSearchIndex(indexes.SearchIndex):
         return 'modified'
 
 
+class ScheduledEventIndex(KanisaBaseSearchIndex):
+    def index_queryset(self):
+        return ScheduledEvent.objects.filter(date__gte=date.today())
+
+
 site.register(SermonSeries, KanisaBaseSearchIndex)
 site.register(Sermon, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
-site.register(ScheduledEvent, KanisaBaseSearchIndex)
+site.register(ScheduledEvent, ScheduledEventIndex)
 site.register(Page, KanisaBaseSearchIndex)
