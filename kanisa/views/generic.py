@@ -4,6 +4,8 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.http import (HttpResponse,
                          HttpResponseForbidden,
                          HttpResponseRedirect)
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.utils.http import urlquote
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
@@ -106,9 +108,23 @@ class KanisaDetailView(DetailView):
 
 
 class KanisaCreateView(CreateView):
-    template_name = 'kanisa/management/create.html'
+    def is_popup(self):
+        return '_popup' in self.request.META['QUERY_STRING']
+
+    def get_template_names(self):
+        if self.is_popup():
+            return ['kanisa/management/popup.html', ]
+
+        return ['kanisa/management/create.html', ]
 
     def form_valid(self, form):
+        if self.is_popup():
+            self.object = form.save()
+            req = self.request
+            return render_to_response('kanisa/management/popup_close.html',
+                                      {},
+                                      context_instance=RequestContext(req))
+
         model_name = form.instance._meta.verbose_name.title()
         message = u'%s "%s" created.' % (model_name,
                                          unicode(form.instance))

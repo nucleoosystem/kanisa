@@ -1,0 +1,35 @@
+{% load url from future %}
+{% load kanisa_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "kanisa/_head.html" %}
+    <script type="text/javascript">
+      function on_close() {
+      }
+      window.onbeforeunload = on_close;
+    </script>
+    {% block extrajs %}
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          {% include 'kanisa/management/_alerts.html' %}
+
+          <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
+
+          {% if kanisa_form_warning %}
+          <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">&times;</button>
+            {{ kanisa_form_warning }}
+          </div>
+          {% endif %}
+
+          {% include 'kanisa/management/_form.html' %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

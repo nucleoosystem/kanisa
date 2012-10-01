@@ -1,3 +1,19 @@
+var on_popup_close = function() {};
+
+function popup_closed() {
+    on_popup_close();
+}
+
+function open_popup(url) {
+    var newwindow = window.open(url,'name','height=500,width=800');
+
+    if (window.focus) {
+        newwindow.focus();
+    }
+
+    return false;
+}
+
 jQuery.fn.extend({
     insertAtCaret: function(myValue){
         return this.each(function(i) {
@@ -172,6 +188,18 @@ function insert_attachment(event) {
     get_cancel(document_link).click();
 }
 
+function refresh_attachments(placeholder, url) {
+   show_spinner(placeholder);
+
+    $.get(url,
+          function(data) {
+              get_cancel(placeholder).show();
+              placeholder.html(data);
+              get_matching_elements(placeholder, ".media-documents a").click(insert_attachment);
+              hide_spinner(placeholder);
+          });
+}
+
 function get_attachments(event) {
     event.preventDefault();
 
@@ -179,16 +207,14 @@ function get_attachments(event) {
     get_matching_elements(thelink, ".main_input_widget_action").hide();
 
     var placeholder = get_placeholder(thelink);
-    show_spinner(placeholder);
 
-    $.get(thelink.attr("data-url"),
-          function(data) {
-              get_cancel(thelink).show();
-              placeholder.html(data);
-              get_matching_elements(placeholder, ".media-documents a").click(insert_attachment);
-              hide_spinner(placeholder);
-          });
-}
+    var url = thelink.attr("data-url")
+    refresh_attachments(placeholder, url);
+
+    on_popup_close = function() {
+        refresh_attachments(placeholder, url);
+    };
+ }
 
 $(function() {
     $(".main_input_widget_insert_image").click(get_images);

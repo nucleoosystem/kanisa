@@ -1,6 +1,11 @@
+{% load url from future %}
 {% if object_list %}
 
-<p><strong>Select a Document:</strong></p>
+<p>
+  Select a document from the list below, or
+  <a href="#" onclick="return open_popup('{% url 'kanisa_manage_documents_create' %}?_popup=1')">upload a new document</a>.
+</p>
+
 <table class="table table-striped table-condensed media-documents">
   {% for document in object_list %}
   <tr>
@@ -23,6 +28,8 @@
 
 {% else %}
 <p class="alert alert-info">
-  There are no documents uploaded yet, please upload a document to get started.
+  There are no documents uploaded yet, please
+  <a href="#" onclick="return open_popup('{% url 'kanisa_manage_documents_create' %}?_popup=1')">upload</a>
+  a document to get started.
 </p>
 {% endif %}
