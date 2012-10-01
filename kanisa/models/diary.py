@@ -6,8 +6,6 @@ from django.db import models
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
-from .base import SearchableModel
-
 
 DAYS_OF_WEEK = (
     (0, 'Monday'),
@@ -39,7 +37,7 @@ class EventContact(models.Model):
         return self.name
 
 
-class RegularEvent(SearchableModel):
+class RegularEvent(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
     image = ImageField(upload_to='kanisa/diary/events/',
@@ -142,7 +140,7 @@ class RegularEvent(SearchableModel):
         return 'Unknown'
 
 
-class ScheduledEvent(SearchableModel):
+class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
                               help_text=('You can leave this blank, but if '
                                          'you do you must give the event a '

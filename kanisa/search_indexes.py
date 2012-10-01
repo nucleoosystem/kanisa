@@ -6,7 +6,7 @@ from kanisa.models import (Sermon, SermonSeries,
                            Page)
 
 
-class KanisaBaseSearchIndex(indexes.SearchIndex):
+class KanisaBaseSearchIndex(indexes.RealTimeSearchIndex):
     text = indexes.CharField(document=True, use_template=True)
     rendered = indexes.CharField(use_template=True)
 

@@ -7,7 +7,6 @@ from django.db.models import Count
 from sorl.thumbnail import ImageField
 
 from kanisa.models.bible.db_field import BiblePassageField
-from .base import SearchableModel
 
 
 class SermonSeriesManager(models.Manager):
@@ -16,7 +15,7 @@ class SermonSeriesManager(models.Manager):
         return qs.annotate(the_num_sermons=Count('sermon'))
 
 
-class SermonSeries(SearchableModel):
+class SermonSeries(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the series.')
     slug = AutoSlugField(populate_from='title', unique=True)
@@ -123,7 +122,7 @@ class SermonManager(models.Manager):
         return qs.select_related(depth=1)
 
 
-class Sermon(SearchableModel):
+class Sermon(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
     slug = AutoSlugField(populate_from='title', unique=True)

@@ -38,11 +38,6 @@ class Page(MPTTModel):
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        super(Page, self).save(*args, **kwargs)
-        from haystack import site as haystack_site
-        haystack_site.get_index(self.__class__).update_object(self)
-
     def check_parent_status(self):
         if self.pk and self.parent:
             if self.pk == self.parent.pk:
