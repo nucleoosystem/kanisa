@@ -109,7 +109,7 @@ def get_page_for_part(slug, parent, candidates):
     raise Page.DoesNotExist
 
 
-def get_page_from_path(path):
+def get_page_from_path_including_drafts(path):
     # path must start and end with a slash, and have a valid slug in
     # between, which means at least 3 characters
     if len(path) <= 2:
@@ -124,8 +124,7 @@ def get_page_from_path(path):
 
     try:
         parent_node = Page.objects.get(parent=None,
-                                       slug=root_slug,
-                                       draft=False)
+                                       slug=root_slug)
     except Page.DoesNotExist:
         raise Page.DoesNotExist
 
@@ -137,7 +136,6 @@ def get_page_from_path(path):
         return parent_node
 
     descendants = parent_node.get_descendants()
-    descendants = [d for d in descendants if not d.draft]
 
     # For each part in our path, look for a page in our list of
     # descendants where the parent is the root node, and the slug is
@@ -150,3 +148,12 @@ def get_page_from_path(path):
     # If we've not hit a Page.DoesNotExist yet, then we've matched
     # every part, and parent_node is the page for the last part.
     return parent_node
+
+
+def get_page_from_path(path):
+    page = get_page_from_path_including_drafts(path)
+
+    if page.draft:
+        raise Page.DoesNotExist
+
+    return page
