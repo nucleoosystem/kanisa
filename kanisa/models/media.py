@@ -4,7 +4,9 @@ from sorl.thumbnail import ImageField
 
 
 class InlineImage(models.Model):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60,
+                             help_text=('This will be used to help you find '
+                                        'it later.'))
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(upload_to='kanisa/media/')
     modified = models.DateTimeField(auto_now=True)
