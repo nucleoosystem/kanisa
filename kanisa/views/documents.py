@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from kanisa.forms.documents import DocumentForm
+from kanisa.forms.documents import DocumentForm, DocumentFormSimple
 from kanisa.models import Document
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
@@ -28,9 +28,13 @@ class DocumentIndexView(DocumentBaseView,
 
 class DocumentCreateView(DocumentBaseView,
                          KanisaCreateView):
-    form_class = DocumentForm
     kanisa_title = 'Upload a Document'
     success_url = reverse_lazy('kanisa_manage_documents')
+
+    def get_form_class(self):
+        if self.is_popup():
+            return DocumentFormSimple
+        return DocumentForm
 
 
 class DocumentUpdateView(DocumentBaseView,

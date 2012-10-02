@@ -7,3 +7,9 @@ class DocumentForm(KanisaBaseForm):
     class Meta:
         model = Document
         widgets = {'details': KanisaMainInputWidget(), }
+
+
+class DocumentFormSimple(KanisaBaseForm):
+    class Meta:
+        model = Document
+        exclude = ('details', )
