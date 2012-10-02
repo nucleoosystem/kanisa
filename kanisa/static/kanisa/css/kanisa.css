@@ -147,3 +147,7 @@ textarea.kanisamaininputwidget {
 .kanisatinyinputwidget {
     width: 100%
 }
+
+.alert a {
+    text-decoration: underline;
+}
