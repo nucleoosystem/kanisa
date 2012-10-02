@@ -11,25 +11,31 @@
     </script>
     {% block extrajs %}
     {% endblock %}
+    <style type="text/css">
+      body, form {
+      margin: 0;
+      padding: 0;
+      }
+      .form-actions {
+      margin-bottom: 0;
+      }
+      h1 {
+      margin: 10px;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="span12">
-          {% include 'kanisa/management/_alerts.html' %}
+    {% include 'kanisa/management/_alerts.html' %}
 
-          <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
+    <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
 
-          {% if kanisa_form_warning %}
-          <div class="alert alert-info">
-            <button class="close" data-dismiss="alert">&times;</button>
-            {{ kanisa_form_warning }}
-          </div>
-          {% endif %}
-
-          {% include 'kanisa/management/_form.html' %}
-        </div>
-      </div>
+    {% if kanisa_form_warning %}
+    <div class="alert alert-info">
+      <button class="close" data-dismiss="alert">&times;</button>
+      {{ kanisa_form_warning }}
     </div>
+    {% endif %}
+
+    {% include 'kanisa/management/_form.html' %}
   </body>
 </html>
