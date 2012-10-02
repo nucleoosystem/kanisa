@@ -11,7 +11,7 @@
 {% with page.parent as parent %}
 {% with page.get_published_children as children %}
 
-{% if parent or children or perms.kanisa.manage_diary %}
+{% if parent or children or perms.kanisa.manage_pages %}
 <div class="row">
 
   <div class="span2">
@@ -21,7 +21,7 @@
     </div>
     {% endif %}
 
-    {% if perms.kanisa.manage_diary %}
+    {% if perms.kanisa.manage_pages %}
     <a class="btn" href="{% url 'kanisa_manage_pages_update' page.pk %}">
       <i class="icon-edit"></i>
       Edit this Page
