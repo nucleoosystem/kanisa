@@ -163,6 +163,15 @@ function select_image(event) {
           });
 }
 
+function paginate_images(event) {
+    event.preventDefault();
+
+    var thelink = $(this);
+    var url = thelink.attr("href");
+    var placeholder = get_placeholder(thelink);
+    refresh_images(placeholder, url);
+}
+
 function refresh_images(placeholder, url) {
     show_spinner(placeholder);
 
@@ -172,6 +181,7 @@ function refresh_images(placeholder, url) {
               placeholder.html(data);
               get_matching_elements(placeholder, ".main_input_widget_image_choice").click(select_image);
               hide_spinner(placeholder);
+              get_matching_elements(placeholder, ".main_input_widget_image_paginate").click(paginate_images);
           });
 }
 

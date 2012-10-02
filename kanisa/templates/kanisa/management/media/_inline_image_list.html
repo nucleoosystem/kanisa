@@ -1,17 +1,40 @@
 {% load thumbnail %}
 {% load url from future %}
 
-{% if object_list %}
+{% if page_obj.object_list %}
 <p>
   <strong>Select an image</strong> from the list below, or
   <strong><a href="#" onclick="return open_popup('{% url 'kanisa_manage_media_inlineimage_create' %}?_popup=1')">upload a new image</a></strong>.
 </p>
 
-{% for image in object_list %}
+<p style="text-align: center">
+{% for image in page_obj.object_list %}
 {% thumbnail image.image "80x60" crop="center" as im %}
 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="cursor: pointer; margin-bottom: 5px" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
 {% endthumbnail %}
 {% endfor %}
+</p>
+
+{% if page_obj.has_other_pages %}
+<ul class="pager" style="margin:0 0 1em 0;">
+  {% if page_obj.has_previous %}
+  <li class="previous">
+    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_image_paginate">&larr; Older</a>
+  </li>
+  {% else %}
+  <li class="disabled previous"><a href="#">&larr; Older</a></li>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+  <li class="next">
+    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_image_paginate">Newer &rarr;</a>
+  </li>
+  {% else %}
+  <li class="disabled next"><a href="#">Newer &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+
 {% else %}
 <p class="alert alert-info">
   There are no images uploaded yet, please
