@@ -30,6 +30,13 @@
   </div>
 
   <div class="span10">
+    {% if page.draft %}
+    <p class="alert alert-warning">
+      <strong>Warning!</strong> This page is marked as draft - it will
+      not be visible to users unless they have permission to manage pages.
+    </p>
+
+    {% endif %}
     {% include 'kanisa/public/pages/_page_contents.html' with page=page only %}
   </div>
 </div>
