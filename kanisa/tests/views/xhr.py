@@ -1,11 +1,18 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import AnonymousUser
 from datetime import time
-from kanisa.models import ScheduledEvent, Page, SermonSeries, RegularEvent
+from kanisa.models import (ScheduledEvent,
+                           Page,
+                           SermonSeries,
+                           RegularEvent,
+                           NavigationElement)
 from kanisa.tests.utils import KanisaViewTestCase
 from kanisa.views.xhr.bible import CheckBiblePassageView
 from kanisa.views.xhr.diary import (ScheduleRegularEventView,
                                     DiaryGetSchedule)
+from kanisa.views.xhr.navigation import (ListNavigationView,
+                                         MoveNavigationElementUpView,
+                                         MoveNavigationElementDownView)
 from kanisa.views.xhr.pages import CreatePageView, ListPagesView
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
 from kanisa.views.xhr.users import AssignPermissionView
@@ -420,3 +427,112 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
         resp = self.fetch_from_factory(request, date='2012')
         self.assertEqual(resp.status_code, 400)
         self.assertEqual(resp.content, "Invalid date '2012' provided.")
+
+
+class NavigationElementFactory(factory.Factory):
+    FACTORY_FOR = NavigationElement
+    title = 'Navigation Title'
+
+
+class XHRListNavigationViewTest(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_manage_xhr_list_navigation')
+    method = 'get'
+    permission_text = 'manage navigation'
+    view = ListNavigationView
+
+    def test_success(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        # Make some sample data
+        parent = NavigationElementFactory.create()
+        NavigationElementFactory.create(parent=parent)
+        NavigationElementFactory.create()
+
+        resp = self.fetch_from_factory(request)
+        self.assertEqual(resp.status_code, 200)
+        tmpl = 'kanisa/management/navigation/_item_list.html'
+        self.assertTemplateUsed(tmpl)
+
+
+class XHRMoveNavigationUpViewTest(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_manage_xhr_navigation_up')
+    method = 'post'
+    permission_text = 'manage navigation'
+    view = MoveNavigationElementUpView
+
+    def test_required_arguments(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request)
+        self.assertEqual(resp.content,
+                         "Required argument 'navigation_element' not found.")
+        self.assertEqual(resp.status_code, 400)
+
+        resp = self.fetch_from_factory(request,
+                                       {'navigation_element': "foobar"})
+        self.assertEqual(resp.content,
+                         "No navigation element found with ID 'foobar'.")
+        self.assertEqual(resp.status_code, 400)
+
+        resp = self.fetch_from_factory(request,
+                                       {'navigation_element': 3})
+        self.assertEqual(resp.content,
+                         "No navigation element found with ID '3'.")
+        self.assertEqual(resp.status_code, 400)
+
+    def test_move_topmost_element(self):
+        first = NavigationElementFactory.create(title='ABC')
+
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
+                                       {'navigation_element': first.pk})
+        self.assertEqual(resp.content,
+                         "Cannot move element.")
+        self.assertEqual(resp.status_code, 400)
+
+    def test_success(self):
+        first = NavigationElementFactory.create(title='ABC')
+        second = NavigationElementFactory.create(title='XYZ')
+
+        request = self.get_request()
+        request.user = self.fred
+
+        self.assertEqual([n.pk for n in NavigationElement.objects.all()],
+                         [first.pk, second.pk, ])
+
+        resp = self.fetch_from_factory(request,
+                                       {'navigation_element': second.pk})
+        self.assertEqual(resp.content,
+                         "Element moved.")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual([n.pk for n in NavigationElement.objects.all()],
+                         [second.pk, first.pk, ])
+
+
+class XHRMoveNavigationDownViewTest(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_manage_xhr_navigation_down')
+    method = 'post'
+    permission_text = 'manage navigation'
+    view = MoveNavigationElementDownView
+
+    def test_success(self):
+        first = NavigationElementFactory.create(title='ABC')
+        second = NavigationElementFactory.create(title='XYZ')
+
+        request = self.get_request()
+        request.user = self.fred
+
+        self.assertEqual([n.pk for n in NavigationElement.objects.all()],
+                         [first.pk, second.pk, ])
+
+        resp = self.fetch_from_factory(request,
+                                       {'navigation_element': first.pk})
+        self.assertEqual(resp.content,
+                         "Element moved.")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual([n.pk for n in NavigationElement.objects.all()],
+                         [second.pk, first.pk, ])

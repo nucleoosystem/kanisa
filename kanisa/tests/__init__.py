@@ -37,4 +37,7 @@ from .views.xhr import (XHRBiblePassageViewTest,
                         XHRListPagesViewTest,
                         XHRMarkSermonSeriesComplete,
                         XHRScheduleRegularEventViewTest,
-                        XHRFetchScheduleViewTest)
+                        XHRFetchScheduleViewTest,
+                        XHRListNavigationViewTest,
+                        XHRMoveNavigationUpViewTest,
+                        XHRMoveNavigationDownViewTest)
