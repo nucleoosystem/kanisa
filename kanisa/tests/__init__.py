@@ -2,8 +2,8 @@
 
 from __future__ import absolute_import
 from .banners import BannerTest
-from .banner_views import (BannerManagementViewTest,
-                           BannerPublicViewTest)
+from .views.banners import (BannerManagementViewTest,
+                            BannerPublicViewTest)
 from .bible_passages import (BiblePassageBadInput,
                              BiblePassage,
                              ToPassageBadInput,
@@ -12,24 +12,24 @@ from .bible_passages import (BiblePassageBadInput,
 from .diary import (DiaryTest,
                     DiaryGetWeekBoundsTest,
                     DiaryGetScheduleTest)
-from .diary_views import (DiaryManagementViewTest,
+from .views.diary import (DiaryManagementViewTest,
                           DiaryPublicViewTest)
-from .document_views import DocumentManagementViewTest
+from .views.documents import DocumentManagementViewTest
 from .kanisa_markup import KanisaMarkupTest
-from .management_views import ManagementViewTest
+from .views.management import ManagementViewTest
 from .navigation import NavigationElementTest
-from .page_views import (PageManagementViewTest,
-                         PagePublicViewTest)
+from .views.pages import (PageManagementViewTest,
+                          PagePublicViewTest)
 from .pages import (PageTest,
                     GetPageFromPathTest,
                     PageTemplatesTest)
-from .public_views import PublicViewTest
+from .views.public import PublicViewTest
 from .sermons import SermonTest
-from .sermon_views import (SermonManagementViewTest,
-                           SermonPublicViewTest)
-from .social_views import SocialViewTest
-from .user_views import UserManagementViewTest
-from .xhr_views import (XHRBiblePassageViewTest,
+from .views.sermons import (SermonManagementViewTest,
+                            SermonPublicViewTest)
+from .views.social import SocialViewTest
+from .views.user import UserManagementViewTest
+from .views.xhr import (XHRBiblePassageViewTest,
                         XHRUserPermissionViewTest,
                         XHRCreatePageViewTest,
                         XHRListPagesViewTest,
