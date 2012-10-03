@@ -23,6 +23,7 @@ from .views.diary import (DiaryManagementViewTest,
                           DiaryPublicViewTest)
 from .views.documents import DocumentManagementViewTest
 from .views.management import ManagementViewTest
+from .views.navigation import NavigationManagementViewTest
 from .views.pages import (PageManagementViewTest,
                           PagePublicViewTest)
 from .views.public import PublicViewTest

@@ -22,6 +22,8 @@ class KanisaViewTestCase(TestCase):
         self.fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_pages')
         self.fred.user_permissions.add(p)
+        p = Permission.objects.get(codename='manage_navigation')
+        self.fred.user_permissions.add(p)
 
         self.fred.save()
         self.factory = RequestFactory()
