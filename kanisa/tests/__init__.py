@@ -2,8 +2,6 @@
 
 from __future__ import absolute_import
 from .banners import BannerTest
-from .views.banners import (BannerManagementViewTest,
-                            BannerPublicViewTest)
 from .bible_passages import (BiblePassageBadInput,
                              BiblePassage,
                              ToPassageBadInput,
@@ -12,19 +10,22 @@ from .bible_passages import (BiblePassageBadInput,
 from .diary import (DiaryTest,
                     DiaryGetWeekBoundsTest,
                     DiaryGetScheduleTest)
-from .views.diary import (DiaryManagementViewTest,
-                          DiaryPublicViewTest)
-from .views.documents import DocumentManagementViewTest
 from .kanisa_markup import KanisaMarkupTest
-from .views.management import ManagementViewTest
 from .navigation import NavigationElementTest
-from .views.pages import (PageManagementViewTest,
-                          PagePublicViewTest)
 from .pages import (PageTest,
                     GetPageFromPathTest,
                     PageTemplatesTest)
-from .views.public import PublicViewTest
 from .sermons import SermonTest
+
+from .views.banners import (BannerManagementViewTest,
+                            BannerPublicViewTest)
+from .views.diary import (DiaryManagementViewTest,
+                          DiaryPublicViewTest)
+from .views.documents import DocumentManagementViewTest
+from .views.management import ManagementViewTest
+from .views.pages import (PageManagementViewTest,
+                          PagePublicViewTest)
+from .views.public import PublicViewTest
 from .views.sermons import (SermonManagementViewTest,
                             SermonPublicViewTest)
 from .views.social import SocialViewTest
