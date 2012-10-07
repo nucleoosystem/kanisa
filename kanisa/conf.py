@@ -10,3 +10,7 @@ KANISA_CHURCH_NAME = getattr(settings,
 REGISTRATION_ALLOWED = getattr(settings,
                                'KANISA_ALLOW_REGISTRATION',
                                True)
+
+KANISA_FROM_EMAIL = getattr(settings,
+                            'KANISA_FROM_EMAIL',
+                            'noreply@noreply.com')

@@ -1,8 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.template.loader import get_template
+from django.template import Context
 from django.views.generic.base import RedirectView
+from kanisa import conf
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaListView)
 
@@ -35,6 +39,23 @@ class UserActivateView(UserBaseView,
             message = '%s\'s account is already active.' % unicode(user)
             messages.success(self.request, message)
             return reverse('kanisa_manage_users')
+
+        template_root = 'kanisa/emails/accountactivation/contents'
+        plaintext_email = get_template('%s.txt' % template_root)
+        html_email = get_template('%s.html' % template_root)
+
+        d = Context({'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
+
+        subject = '%s Account Activated' % conf.KANISA_CHURCH_NAME
+        plaintext_content = plaintext_email.render(d)
+        html_content = html_email.render(d)
+
+        msg = EmailMultiAlternatives(subject,
+                                     plaintext_content,
+                                     conf.KANISA_FROM_EMAIL,
+                                     [user.email, ])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
 
         user.is_active = True
         user.save()
