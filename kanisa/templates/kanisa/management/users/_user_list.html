@@ -42,6 +42,7 @@
     {% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
+  {% if theuser.is_active %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_pages' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
@@ -51,6 +52,11 @@
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_navigation' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_media' %}</td>
+  {% else %}
+  <td colspan="9" class="muted" style="text-align: center">
+    This user is not yet active, so cannot be assigned permissions.
+  </td>
+  {% endif %}
 </tr>
 {% endfor %}
 </tbody>
