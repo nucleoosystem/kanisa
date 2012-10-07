@@ -1,5 +1,4 @@
-$(function() {
-    $(".kanisa_user_perm").change(function() {
+function on_user_checkbox_change(event) {
         checkbox = $(this);
 
         perm_id = checkbox.attr("data-permission-id");
@@ -32,5 +31,8 @@ $(function() {
                    spinner.remove();
                    checkbox.show();
                });
-    });
+}
+
+$(function() {
+    $(".kanisa_user_perm").change(on_user_checkbox_change);
 });
