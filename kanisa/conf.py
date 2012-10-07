@@ -7,9 +7,9 @@ KANISA_CHURCH_NAME = getattr(settings,
                              'KANISA_CHURCH_NAME',
                              'Your Church')
 
-REGISTRATION_ALLOWED = getattr(settings,
-                               'KANISA_ALLOW_REGISTRATION',
-                               True)
+KANISA_REGISTRATION_ALLOWED = getattr(settings,
+                                      'KANISA_ALLOW_REGISTRATION',
+                                      True)
 
 KANISA_FROM_EMAIL = getattr(settings,
                             'KANISA_FROM_EMAIL',

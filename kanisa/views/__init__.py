@@ -105,7 +105,7 @@ class KanisaRegistrationView(CreateView):
         return rval
 
     def get_context_data(self, *args, **kwargs):
-        if not conf.REGISTRATION_ALLOWED:
+        if not conf.KANISA_REGISTRATION_ALLOWED:
             raise Http404
 
         return super(KanisaRegistrationView,
@@ -117,7 +117,7 @@ class KanisaRegistrationThanksView(KanisaTemplateView):
     template_name = 'kanisa/registration_thanks.html'
 
     def get_context_data(self, *args, **kwargs):
-        if not conf.REGISTRATION_ALLOWED:
+        if not conf.KANISA_REGISTRATION_ALLOWED:
             raise Http404
 
         return super(KanisaRegistrationThanksView,
