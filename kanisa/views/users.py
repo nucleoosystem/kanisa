@@ -1,5 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.views.generic.base import RedirectView
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaListView)
 
@@ -19,3 +22,24 @@ class UserManagementView(UserBaseView,
     template_name = 'kanisa/management/users/index.html'
     kanisa_title = 'Manage Users'
     kanisa_is_root_view = True
+
+
+class UserActivateView(UserBaseView,
+                       RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, user_id):
+        user = get_object_or_404(User, pk=user_id)
+
+        if user.is_active:
+            message = '%s\'s account is already active.' % unicode(user)
+            messages.success(self.request, message)
+            return reverse('kanisa_manage_users')
+
+        user.is_active = True
+        user.save()
+
+        message = '%s\'s account is now activated.' % unicode(user)
+        messages.success(self.request, message)
+
+        return reverse('kanisa_manage_users')

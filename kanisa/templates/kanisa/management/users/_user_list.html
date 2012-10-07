@@ -40,6 +40,12 @@
       (this is you)
     </span>
     {% endif %}
+
+    {% if not theuser.is_active %}
+    <a class="btn btn-mini btn-info" style="float: right" href="{% url 'kanisa_manage_users_activate' theuser.pk %}">
+      Activate
+    </a>
+    {% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
   {% if theuser.is_active %}

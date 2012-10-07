@@ -18,6 +18,8 @@ class UserManagementViewTest(KanisaViewTestCase):
 
     def test_views_protected(self):
         self.view_is_restricted(reverse('kanisa_manage_users'))
+        self.view_is_restricted(reverse('kanisa_manage_users_activate',
+                                        args=[1, ]))
 
     def test_base_view(self):
         self.client.login(username='fred', password='secret')
