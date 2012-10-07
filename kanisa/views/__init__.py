@@ -102,6 +102,6 @@ class KanisaRegistrationView(CreateView):
         return rval
 
 
-class KanisaRegistrationThanksView(TemplateView):
+class KanisaRegistrationThanksView(KanisaTemplateView):
     kanisa_title = 'Registration Complete'
     template_name = 'kanisa/registration_thanks.html'
