@@ -99,6 +99,8 @@ class KanisaRegistrationView(CreateView):
     def form_valid(self, form):
         rval = super(KanisaRegistrationView, self).form_valid(form)
 
+        # TODO: Notify users with user management rights of signup.
+
         return rval
 
 
