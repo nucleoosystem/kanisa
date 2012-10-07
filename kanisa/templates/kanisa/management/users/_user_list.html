@@ -26,6 +26,13 @@
 {% for theuser in user_list %}
 <tr>
   <td>
+    {% if not theuser.is_active %}
+    <i class="icon icon-exclamation-sign" alt="Pending account approval"></i>
+    {% else %}
+    {% if theuser.is_superuser %}
+    <i class="icon icon-star" alt="Administrator"></i>
+    {% endif %}
+    {% endif %}
     <a href="{% url 'admin:auth_user_change' theuser.pk %}">{{ theuser.username }}</a>
 
     {% if user.pk = theuser.pk %}
