@@ -44,7 +44,8 @@ class UserActivateView(UserBaseView,
         plaintext_email = get_template('%s.txt' % template_root)
         html_email = get_template('%s.html' % template_root)
 
-        d = Context({'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
+        d = Context({'user': user,
+                     'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
 
         subject = '%s Account Activated' % conf.KANISA_CHURCH_NAME
         plaintext_content = plaintext_email.render(d)
