@@ -15,7 +15,7 @@ class UserBaseView(KanisaAuthorizationMixin):
 
 class UserManagementView(UserBaseView,
                          KanisaListView):
-    model = User
+    queryset = User.objects.all().order_by('username')
     template_name = 'kanisa/management/users/index.html'
     kanisa_title = 'Manage Users'
     kanisa_is_root_view = True
