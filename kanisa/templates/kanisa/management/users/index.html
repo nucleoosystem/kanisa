@@ -1,5 +1,9 @@
 {% extends 'kanisa/management/base.html' %}
 
+{% block extrajs %}
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_users.js"></script>
+{% endblock %}
+
 {% block content %}
 {% include "kanisa/management/users/_user_list.html" %}
 {% endblock %}
