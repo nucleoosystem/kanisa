@@ -12,6 +12,7 @@ def kanisa_settings(context):
         cache.set('kanisa_navigation', elements)
 
     return {
+        'KANISA_ALLOW_REGISTRATION': conf.REGISTRATION_ALLOWED,
         'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
         'KANISA_NAVIGATION': elements,
         }

@@ -10,6 +10,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
 from haystack.query import SearchQuerySet
 
+from kanisa import conf
 from kanisa.forms.auth import KanisaLoginForm, KanisaUserCreationForm
 from kanisa.models.banners import Banner
 from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
@@ -103,7 +104,21 @@ class KanisaRegistrationView(CreateView):
 
         return rval
 
+    def get_context_data(self, *args, **kwargs):
+        if not conf.REGISTRATION_ALLOWED:
+            raise Http404
+
+        return super(KanisaRegistrationView,
+                     self).get_context_data(*args, **kwargs)
+
 
 class KanisaRegistrationThanksView(KanisaTemplateView):
     kanisa_title = 'Registration Complete'
     template_name = 'kanisa/registration_thanks.html'
+
+    def get_context_data(self, *args, **kwargs):
+        if not conf.REGISTRATION_ALLOWED:
+            raise Http404
+
+        return super(KanisaRegistrationThanksView,
+                     self).get_context_data(*args, **kwargs)

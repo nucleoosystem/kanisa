@@ -26,8 +26,10 @@
         {% else %}
         <p class="navbar-text pull-right">
           <a href="{% url 'kanisa_public_login' %}">Login</a>
+          {% if KANISA_ALLOW_REGISTRATION %}
           /
           <a href="{% url 'kanisa_public_registration' %}">Register</a>
+          {% endif %}
         </p>
         {% endif %}
         <form class="navbar-search pull-right" style="margin-right: 20px;" action="{% url 'kanisa_public_search' %}">
