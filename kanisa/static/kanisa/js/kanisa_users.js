@@ -1,15 +1,15 @@
 function on_user_checkbox_change(event) {
-    checkbox = $(this);
+    var checkbox = $(this);
 
-    perm_id = checkbox.attr("data-permission-id");
-    user_id = checkbox.attr("data-user-id");
-    assigned = checkbox.attr("checked") == "checked";
-    spinner_id = "spinner-" + perm_id.replace(".", "_");
+    var perm_id = checkbox.attr("data-permission-id");
+    var user_id = checkbox.attr("data-user-id");
+    var assigned = checkbox.attr("checked") == "checked";
+    var spinner_id = "spinner-" + perm_id.replace(".", "_");
 
     checkbox.hide();
 
     checkbox.after("<i class=\"spinner\" id=\"" + spinner_id + "\"></i>");
-    spinner = $("#" + spinner_id);
+    var spinner = $("#" + spinner_id);
 
     $.post(permission_change_url,
            { 'permission': perm_id,
