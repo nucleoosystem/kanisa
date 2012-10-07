@@ -151,3 +151,7 @@ textarea.kanisamaininputwidget {
 .alert a {
     text-decoration: underline;
 }
+
+.navbar-text a {
+    color: inherit;
+}

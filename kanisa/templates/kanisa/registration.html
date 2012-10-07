@@ -1,0 +1,12 @@
+{% extends 'kanisa/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+  <div class="span6 offset3">
+    <h1>Get an Account!</h1>
+    {% crispy form %}
+  </div>
+</div>
+{% endblock %}

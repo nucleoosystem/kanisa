@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.views import password_change
 from kanisa.forms.auth import KanisaChangePasswordForm
-from kanisa.views import KanisaLoginView
+from kanisa.views import (KanisaLoginView,
+                          KanisaRegistrationView,
+                          KanisaRegistrationThanksView)
 
 
 urlpatterns = patterns('',
@@ -9,6 +11,14 @@ urlpatterns = patterns('',
                            KanisaLoginView.as_view(),
                            {},
                            'kanisa_public_login'),
+                       url(r'^registration/$',
+                           KanisaRegistrationView.as_view(),
+                           {},
+                           'kanisa_public_registration'),
+                       url(r'^registration/thanks/$',
+                           KanisaRegistrationThanksView.as_view(),
+                           {},
+                           'kanisa_public_registration_thanks'),
                        url(r'^logout/$',
                            'django.contrib.auth.views.logout',
                            {'template_name': 'kanisa/logout.html', },

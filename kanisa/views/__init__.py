@@ -7,10 +7,10 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 from haystack.query import SearchQuerySet
 
-from kanisa.forms.auth import KanisaLoginForm
+from kanisa.forms.auth import KanisaLoginForm, KanisaUserCreationForm
 from kanisa.models.banners import Banner
 from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
                                   KanisaTemplateView)
@@ -89,3 +89,19 @@ class KanisaSearchView(KanisaTemplateView):
         return render_to_response(self.template_name,
                                   context,
                                   context_instance=RequestContext(request))
+
+
+class KanisaRegistrationView(CreateView):
+    template_name = 'kanisa/registration.html'
+    form_class = KanisaUserCreationForm
+    success_url = reverse_lazy('kanisa_public_registration_thanks')
+
+    def form_valid(self, form):
+        rval = super(KanisaRegistrationView, self).form_valid(form)
+
+        return rval
+
+
+class KanisaRegistrationThanksView(TemplateView):
+    kanisa_title = 'Registration Complete'
+    template_name = 'kanisa/registration_thanks.html'

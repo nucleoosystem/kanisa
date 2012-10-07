@@ -1,0 +1,15 @@
+{% extends 'kanisa/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+<div class="row">
+  <div class="span6 offset3">
+    <h1>Thanks for registering!</h1>
+    <p class="lead">
+      Thanks for registering - you'll receive an e-mail once your account is activated.
+    </p>
+    <p>Go back to <a href="{% url 'kanisa_public_index' %}">the home page</a>.</p>
+  </div>
+</div>
+{% endblock %}

@@ -24,11 +24,11 @@
           (<a href="{% url 'kanisa_public_logout' %}">Logout</a>)
         </p>
         {% else %}
-        <ul class="nav pull-right">
-          <li>
-            <a href="{% url 'kanisa_public_login' %}">Login</a>
-          </li>
-        </ul>
+        <p class="navbar-text pull-right">
+          <a href="{% url 'kanisa_public_login' %}">Login</a>
+          /
+          <a href="{% url 'kanisa_public_registration' %}">Register</a>
+        </p>
         {% endif %}
         <form class="navbar-search pull-right" style="margin-right: 20px;" action="{% url 'kanisa_public_search' %}">
           <input type="text" class="search-query" placeholder="Search" name="query">
