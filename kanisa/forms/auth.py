@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import (AuthenticationForm,
                                        PasswordChangeForm,
                                        UserCreationForm)
@@ -35,11 +36,15 @@ class KanisaChangePasswordForm(PasswordChangeForm):
 
 
 class KanisaUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
     email = forms.EmailField(help_text=('We\'ll need an email address to get '
                                         'in touch with you to verify your '
                                         'account.'))
 
-    fields = ('username', 'email', )
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', )
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
