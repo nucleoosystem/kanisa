@@ -2,6 +2,7 @@ import urlparse
 
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import Permission, User
+from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse_lazy
@@ -103,6 +104,8 @@ class KanisaRegistrationView(CreateView):
 
     def form_valid(self, form):
         rval = super(KanisaRegistrationView, self).form_valid(form)
+
+        cache.delete('kanisa_inactive_users')
 
         template_root = 'kanisa/emails/accountregistration/contents'
         plaintext_email = get_template('%s.txt' % template_root)

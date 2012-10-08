@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -63,5 +64,7 @@ class UserActivateView(UserBaseView,
 
         message = '%s\'s account is now activated.' % unicode(user)
         messages.success(self.request, message)
+
+        cache.delete('kanisa_inactive_users')
 
         return reverse('kanisa_manage_users')

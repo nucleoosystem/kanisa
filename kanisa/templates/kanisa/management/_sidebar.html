@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load kanisa_sidebar %}
 
 <div class="sidebar-nav well">
   <ul class="nav nav-list">
@@ -62,6 +63,13 @@
       <a href="{% url 'kanisa_manage_users' %}">
         <i class="icon-user"></i>
         Users
+
+        {% kanisa_inactive_users as inactive_users %}
+        {% if inactive_users != 0 %}
+        <span class="badge badge-important" title="There are currently {{ inactive_users }} inactive users">
+          {{ inactive_users }}
+        </span>
+        {% endif %}
       </a>
     </li>
     {% endif %}
