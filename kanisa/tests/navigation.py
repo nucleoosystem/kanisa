@@ -128,8 +128,8 @@ class NavigationElementTest(TestCase):
                                           title='ABC')
         child_page_2 = PageFactory.create(parent=root_page,
                                           title='XYZ')
-        child_page_3 = PageFactory.create(parent=root_page, draft=True)
-        grandchild_page_1 = PageFactory.create(parent=child_page_1)
+        PageFactory.create(parent=root_page, draft=True)
+        PageFactory.create(parent=child_page_1)
 
         url = '/' + root_page.get_path()
         root_navigation = NavigationFactory.create(url=url)
