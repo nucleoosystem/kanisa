@@ -1,6 +1,6 @@
 from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, DEFAULT_DB_ALIAS
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -37,6 +37,22 @@ class Page(MPTTModel):
 
     def __unicode__(self):
         return self.title
+
+    def remove_matching_navigation_elements(self):
+        from kanisa.models.navigation import NavigationElement
+        url = '/' + self.get_path()
+
+        elements = NavigationElement.objects.filter(url=url,
+                                                    parent__isnull=False)
+
+        if not elements:
+            return
+
+        elements.delete()
+
+    def delete(self, using=DEFAULT_DB_ALIAS):
+        self.remove_matching_navigation_elements()
+        return super(Page, self).delete(using)
 
     def check_parent_status(self):
         if self.pk and self.parent:
