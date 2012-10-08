@@ -81,6 +81,8 @@ class NavigationElement(MPTTModel):
         for child in children:
             # Page leads can be null, navigation descriptions can't
             description = child.lead or child.title
+            # Navigation descriptions are limited to 30 characters
+            description = description[:30]
 
             NavigationElement.objects.create(title=child.title,
                                              description=description,
