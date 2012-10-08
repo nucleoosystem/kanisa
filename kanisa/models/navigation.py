@@ -1,6 +1,7 @@
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
+from kanisa.models.pages import Page, get_page_from_path
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -60,8 +61,41 @@ class NavigationElement(MPTTModel):
         self.move_to(previous_sibling, 'left')
         cache.delete('kanisa_navigation')
 
+    def automatically_add_page_children(self):
+        # If this navigation element points to a Page, then
+        # automatically add its child pages, provided this navigation
+        # element is top-level.
+        if self.parent:
+            return
+
+        try:
+            page = get_page_from_path(self.url)
+        except Page.DoesNotExist:
+            return
+
+        if page.is_leaf_node():
+            return
+
+        children = page.children.filter(draft=False)
+
+        for child in children:
+            # Page leads can be null, navigation descriptions can't
+            description = child.lead or child.title
+
+            NavigationElement.objects.create(title=child.title,
+                                             description=description,
+                                             url='/' + child.get_path(),
+                                             parent=self,
+                                             require_login=self.require_login)
+
     def save(self, *args, **kwargs):
+        is_new_element = self.pk is None
+
         super(NavigationElement, self).save(*args, **kwargs)
+
+        if is_new_element:
+            self.automatically_add_page_children()
+
         cache.delete('kanisa_navigation')
 
     def check_parent_status(self):

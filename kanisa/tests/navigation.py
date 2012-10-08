@@ -1,12 +1,17 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from kanisa.models import NavigationElement
+from kanisa.models import NavigationElement, Page
 import factory
 
 
 class NavigationFactory(factory.Factory):
     FACTORY_FOR = NavigationElement
     title = 'Title'
+
+
+class PageFactory(factory.Factory):
+    FACTORY_FOR = Page
+    title = 'Page Title'
 
 
 class NavigationElementTest(TestCase):
@@ -116,3 +121,44 @@ class NavigationElementTest(TestCase):
 
         with self.assertRaises(NavigationElement.DoesNotExist):
             element.move_up()
+
+    def test_add_top_level_navigation_element_for_page(self):
+        root_page = PageFactory.create()
+        child_page_1 = PageFactory.create(parent=root_page,
+                                          title='ABC')
+        child_page_2 = PageFactory.create(parent=root_page,
+                                          title='XYZ')
+        child_page_3 = PageFactory.create(parent=root_page, draft=True)
+        grandchild_page_1 = PageFactory.create(parent=child_page_1)
+
+        url = '/' + root_page.get_path()
+        root_navigation = NavigationFactory.create(url=url)
+
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 2)
+        self.assertEqual(children[0].url,
+                         '/' + child_page_1.get_path())
+        self.assertEqual(children[1].url,
+                         '/' + child_page_2.get_path())
+
+    def test_add_second_level_navigation_element_for_page(self):
+        root_page = PageFactory.create()
+        PageFactory.create(parent=root_page,
+                           title='ABC')
+
+        root_navigation = NavigationFactory.create(url='/foo/')
+        url = '/' + root_page.get_path()
+        second_navigation = NavigationFactory.create(url=url,
+                                                     parent=root_navigation)
+
+        children = NavigationElement.objects.filter(parent=second_navigation)
+        self.assertEqual(len(children), 0)
+
+    def test_add_top_level_navigation_element_for_leaf_page(self):
+        root_page = PageFactory.create(draft=True)
+
+        url = '/' + root_page.get_path()
+        root_navigation = NavigationFactory.create(url=url)
+
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 0)
