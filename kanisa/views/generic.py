@@ -117,6 +117,11 @@ class KanisaCreateView(CreateView):
 
         return ['kanisa/management/create.html', ]
 
+    def get_message(self, instance):
+        model_name = instance._meta.verbose_name.title()
+        return '%s "%s" created.' % (model_name,
+                                     unicode(instance))
+
     def form_valid(self, form):
         if self.is_popup():
             self.object = form.save()
@@ -125,11 +130,11 @@ class KanisaCreateView(CreateView):
                                       {},
                                       context_instance=RequestContext(req))
 
-        model_name = form.instance._meta.verbose_name.title()
-        message = u'%s "%s" created.' % (model_name,
-                                         unicode(form.instance))
-        messages.success(self.request, message)
-        return super(KanisaCreateView, self).form_valid(form)
+        rval = super(KanisaCreateView, self).form_valid(form)
+
+        messages.success(self.request, self.get_message(form.instance))
+
+        return rval
 
     def get_context_data(self, **kwargs):
         context = super(KanisaCreateView,
