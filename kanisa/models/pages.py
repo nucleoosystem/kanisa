@@ -54,6 +54,12 @@ class Page(MPTTModel):
         self.remove_matching_navigation_elements()
         return super(Page, self).delete(using)
 
+    def get_navigation_description(self):
+        # Page leads can be null, navigation descriptions can't
+        description = self.lead or self.title
+        # Navigation descriptions are limited to 30 characters
+        return description[:30]
+
     def check_parent_status(self):
         if self.pk and self.parent:
             if self.pk == self.parent.pk:
