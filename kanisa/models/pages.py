@@ -48,7 +48,8 @@ class Page(MPTTModel):
         if not elements:
             return
 
-        elements.delete()
+        for element in elements:
+            element.delete()
 
     def delete(self, using=DEFAULT_DB_ALIAS):
         self.remove_matching_navigation_elements()

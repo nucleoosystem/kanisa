@@ -1,6 +1,6 @@
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, DEFAULT_DB_ALIAS
 from kanisa.models.pages import Page, get_page_from_path
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -95,6 +95,11 @@ class NavigationElement(MPTTModel):
             self.automatically_add_page_children()
 
         cache.delete('kanisa_navigation')
+
+    def delete(self, using=DEFAULT_DB_ALIAS):
+        rval = super(NavigationElement, self).delete(using)
+        cache.delete('kanisa_navigation')
+        return rval
 
     def check_parent_status(self):
         if self.pk and self.parent:
