@@ -172,7 +172,7 @@ class NavigationElementTest(TestCase):
         children = NavigationElement.objects.filter(parent=root_navigation)
         self.assertEqual(len(children), 0)
 
-        child_page = PageFactory.create(parent=root_page)
+        PageFactory.create(parent=root_page)
         children = NavigationElement.objects.filter(parent=root_navigation)
         self.assertEqual(len(children), 1)
 
@@ -182,7 +182,7 @@ class NavigationElementTest(TestCase):
 
         root_navigation = NavigationFactory.create(url=url)
 
-        child_page = PageFactory.create(parent=root_page, draft=True)
+        PageFactory.create(parent=root_page, draft=True)
         children = NavigationElement.objects.filter(parent=root_navigation)
         self.assertEqual(len(children), 0)
 
