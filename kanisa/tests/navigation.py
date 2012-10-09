@@ -162,3 +162,43 @@ class NavigationElementTest(TestCase):
 
         children = NavigationElement.objects.filter(parent=root_navigation)
         self.assertEqual(len(children), 0)
+
+    def test_add_page_as_child_of_top_level_navigation_element(self):
+        root_page = PageFactory.create()
+        url = '/' + root_page.get_path()
+
+        root_navigation = NavigationFactory.create(url=url)
+
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 0)
+
+        child_page = PageFactory.create(parent=root_page)
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 1)
+
+    def test_add_draft_page_as_child_of_top_level_navigation_element(self):
+        root_page = PageFactory.create()
+        url = '/' + root_page.get_path()
+
+        root_navigation = NavigationFactory.create(url=url)
+
+        child_page = PageFactory.create(parent=root_page, draft=True)
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 0)
+
+    def test_edit_page_which_is_child_of_top_level_navigation_element(self):
+        root_page = PageFactory.create()
+        child_page = PageFactory.create(parent=root_page)
+        url = '/' + root_page.get_path()
+
+        root_navigation = NavigationFactory.create(url=url)
+
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 1)
+        children.delete()
+
+        child_page.title = 'Foobar'
+        child_page.save()
+
+        children = NavigationElement.objects.filter(parent=root_navigation)
+        self.assertEqual(len(children), 0)

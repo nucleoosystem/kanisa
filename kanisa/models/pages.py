@@ -60,6 +60,39 @@ class Page(MPTTModel):
         # Navigation descriptions are limited to 30 characters
         return description[:30]
 
+    def amend_navigation(self):
+        from kanisa.models.navigation import NavigationElement
+
+        if not self.parent:
+            return
+
+        if self.draft:
+            return
+
+        parent_url = '/' + self.parent.get_path()
+
+        try:
+            element = NavigationElement.objects.get(url=parent_url)
+        except NavigationElement.DoesNotExist:
+            return
+
+        if element.parent:
+            return
+
+        description = self.get_navigation_description()
+        NavigationElement.objects.create(parent=element,
+                                         title=self.title,
+                                         description=description,
+                                         url='/' + self.get_path())
+
+    def save(self, *args, **kwargs):
+        is_new_element = self.pk is None
+
+        super(Page, self).save(*args, **kwargs)
+
+        if is_new_element:
+            self.amend_navigation()
+
     def check_parent_status(self):
         if self.pk and self.parent:
             if self.pk == self.parent.pk:
