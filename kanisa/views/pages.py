@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 from kanisa.forms.pages import PageForm
-from kanisa.models import Page
+from kanisa.models import Page, NavigationElement
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaCreateView, KanisaUpdateView,
                                   KanisaDeleteView,
@@ -47,6 +47,17 @@ class PageCreateView(PageBaseView,
                 raise Http404
 
         return initial
+
+    def get_message(self, instance):
+        try:
+            page_url = '/' + instance.get_path()
+            element = NavigationElement.objects.get(url=page_url,
+                                                    parent__isnull=False)
+            return ('Page "%s" created (and added to the '
+                    'site navigation under "%s").'
+                    % (unicode(instance), element.parent.title))
+        except NavigationElement.DoesNotExist:
+            return 'Page "%s" created.' % unicode(instance)
 
 
 class PageUpdateView(PageBaseView,
