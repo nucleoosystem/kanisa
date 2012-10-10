@@ -23,7 +23,7 @@ from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
 
 
 class KanisaIndexView(TemplateView):
-    template_name = 'kanisa/public/index.html'
+    template_name = 'kanisa/public/homepage/index.html'
 
     def get_context_data(self, **kwargs):
         return {'banners': Banner.active_objects.all()}

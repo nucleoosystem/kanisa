@@ -23,7 +23,7 @@ class PublicViewTest(TestCase):
         url = reverse('kanisa_public_index')
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
-        self.assertTemplateUsed(resp, 'kanisa/public/index.html')
+        self.assertTemplateUsed(resp, 'kanisa/public/homepage/index.html')
 
         self.assertTrue('banners' in resp.context)
         self.assertEqual([banner.pk for banner in resp.context['banners']],
