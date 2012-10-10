@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Public</th>
       <th>Uploaded</th>
       <th>Modified</th>
       <th></th>
@@ -16,6 +17,13 @@
         <a href="{% url 'kanisa_manage_documents_update' document.pk %}">
           {{ document.title }}
         </a>
+      </td>
+      <td class="iconcell">
+        {% if document.public %}
+        <i class="icon icon-ok" title="This document is public"></i>
+        {% else %}
+        <i class="icon icon-remove" title="This document is not public"></i>
+        {% endif %}
       </td>
       <td>
         <abbr title="{{ document.created|date:"r"}}">
