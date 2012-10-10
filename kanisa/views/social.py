@@ -29,7 +29,7 @@ class SocialBaseView(KanisaAuthorizationMixin):
 
         try:
             if not twitter:
-                api = get_tweepy_handle(self.request)
+                api = get_tweepy_handle()
                 twitter = api.me()
                 cache.set('twitter_handle', twitter, 120)
 
@@ -108,7 +108,7 @@ class SocialTwitterPostView(SocialBaseView, RedirectView):
             return reverse('kanisa_manage_social')
 
         try:
-            twitter = get_tweepy_handle(self.request)
+            twitter = get_tweepy_handle()
         except TwitterException, e:
             messages.error(self.request, "Error posting tweet: %s" % e.value)
             return reverse('kanisa_manage_social')

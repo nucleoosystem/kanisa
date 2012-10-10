@@ -10,7 +10,7 @@ class TwitterException(Exception):
         return repr(self.value)
 
 
-def get_tweepy_handle(request):
+def get_tweepy_handle():
     required_attrs = ['TWITTER_CONSUMER_KEY',
                       'TWITTER_CONSUMER_SECRET',
                       'TWITTER_ACCESS_TOKEN',
