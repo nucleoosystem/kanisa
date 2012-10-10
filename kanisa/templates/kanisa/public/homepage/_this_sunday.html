@@ -1,5 +1,6 @@
 {% load kanisa_homepage %}
 {% load kanisa_markup %}
+{% load url from future %}
 
 {% kanisa_this_sunday as this_sunday %}
 
@@ -9,10 +10,18 @@
 <tbody>
 {% for event in this_sunday %}
 <tr>
-  <td width="60px">{{ event.start_time }}</td>
+  <td width="70px">{{ event.start_time }}</td>
   <td>
     <strong>
-      {{ event }}
+      {% if event.event %}
+      <a href="{% url 'kanisa_public_diary_regularevent_detail' event.event.slug %}">
+        {{ event }}
+      </a>
+      {% else %}
+      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' event.pk %}">
+        {{ event }}
+      </a>
+      {% endif %}
     </strong>
     <br />
     {% if event.event %}
