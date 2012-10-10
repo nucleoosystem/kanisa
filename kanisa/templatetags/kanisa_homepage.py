@@ -1,5 +1,5 @@
 from django import template
-from kanisa.models import ScheduledEvent
+from kanisa.models import ScheduledEvent, Sermon
 from kanisa.utils.diary import get_week_bounds
 
 
@@ -13,3 +13,8 @@ def kanisa_this_sunday():
     events = ScheduledEvent.objects.filter(date=sunday)
 
     return events
+
+
+@register.assignment_tag
+def kanisa_sermons():
+    return Sermon.objects.all()[:5]

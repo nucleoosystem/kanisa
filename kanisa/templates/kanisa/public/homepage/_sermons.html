@@ -1,0 +1,36 @@
+{% load kanisa_homepage %}
+{% load url from future %}
+
+<h3>Listen Online</h3>
+
+{% kanisa_sermons as sermons %}
+
+{% if sermons %}
+<table class="table">
+  {% for sermon in sermons %}
+  <tr>
+    <td>
+      <strong>
+        {% if sermon.series %}
+        <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">
+          {{ sermon.title }}
+        </a>
+        {% else %}
+        <a href="{% url 'kanisa_public_standalone_sermon_detail' sermon.slug %}">
+          {{ sermon.title }}
+        </a>
+        {% endif %}
+      </strong>
+      <br />
+      {{ sermon.speaker }}
+    </td>
+    <td>{{ sermon.date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-block">
+  <h4>No sermons available</h4>
+  Sorry - there are no sermons available for download at present.
+</div>
+{% endif %}
