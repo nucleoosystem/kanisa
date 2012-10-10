@@ -79,5 +79,39 @@
       "autoschedule": false,
       "modified": "2012-01-01 07:00+03:00"
     }
+  },
+  {
+    "pk": 5,
+    "model": "kanisa.regularevent",
+    "fields": {
+      "duration": 90,
+      "details": "",
+      "start_time": "10:30:00",
+      "pattern": "RRULE:FREQ=WEEKLY;BYDAY=SU",
+      "contact": 2,
+      "intro": "Our Sunday morning service.",
+      "title": "Morning Service",
+      "image": "kanisa/diary/blueflowers.jpg",
+      "slug": "morning-service",
+      "autoschedule": true,
+      "modified": "2012-01-01 07:00+03:00"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "kanisa.regularevent",
+    "fields": {
+      "duration": 90,
+      "details": "",
+      "start_time": "18:00:00",
+      "pattern": "RRULE:FREQ=WEEKLY;BYDAY=SU",
+      "contact": 1,
+      "intro": "Our Sunday evening service.",
+      "title": "Evening Service",
+      "image": "kanisa/diary/theshard.jpg",
+      "slug": "evening-service",
+      "autoschedule": true,
+      "modified": "2012-01-01 07:00+03:00"
+    }
   }
 ]
