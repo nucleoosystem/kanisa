@@ -3,12 +3,12 @@
 {% load thumbnail %}
 {% load url from future %}
 
-<div id="banners_carousel" class="carousel slide" style="height: 400px">
+<div id="banners_carousel" class="carousel slide">
   <!-- Carousel items -->
   <div class="carousel-inner">
     {% for banner in banners %}
-    <div class="item{% if forloop.first %} active {% endif %}">
-      {% thumbnail banner.image "770x400" crop="center" as im %}
+    <div class="item{% if forloop.first %} active{% endif %}">
+      {% thumbnail banner.image "570x296" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
       {% endthumbnail %}
       <div class="carousel-caption">
