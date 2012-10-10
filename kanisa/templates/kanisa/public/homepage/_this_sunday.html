@@ -1,0 +1,27 @@
+{% load kanisa_homepage %}
+{% load kanisa_markup %}
+
+{% kanisa_this_sunday as this_sunday %}
+
+{% if this_sunday %}
+<h2>This Sunday</h2>
+<table class="table">
+<tbody>
+{% for event in this_sunday %}
+<tr>
+  <td width="60px">{{ event.start_time }}</td>
+  <td>
+    <strong>
+      {{ event }}
+    </strong>
+    <br />
+    {% if event.event %}
+    {{ event.event.intro }}
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% endif %}
