@@ -71,7 +71,8 @@ def get_images(markdown_text):
 class DocumentMatch(object):
     def __init__(self, match):
         self.full = match[0]
-        self.document = Document.objects.get(pk=match[1])
+        self.document = Document.objects.get(pk=match[1],
+                                             public=True)
 
     def tag(self):
         return '<a href="%s">Download %s</a>' % (self.document.file.url,

@@ -12,4 +12,4 @@ class DocumentForm(KanisaBaseForm):
 class DocumentFormSimple(KanisaBaseForm):
     class Meta:
         model = Document
-        exclude = ('details', )
+        exclude = ('details', 'public', )

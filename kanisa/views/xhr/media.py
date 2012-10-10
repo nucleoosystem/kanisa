@@ -55,7 +55,7 @@ class AttachmentsListView(XHRBaseGetView):
     permission = 'kanisa.manage_media'
 
     def render(self, request, *args, **kwargs):
-        documents = Document.objects.all()
+        documents = Document.objects.filter(public=True)
         tmpl = 'kanisa/management/media/_attachment_list.html'
         return render_to_response(tmpl,
                                   {'object_list': documents},
