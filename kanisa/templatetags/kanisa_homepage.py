@@ -33,7 +33,7 @@ def kanisa_twitter_status():
             cache.set('twitter_handle', twitter, 120)
 
         return twitter.status
-    except TwitterException, e:
+    except TwitterException:
         return None
 
 
@@ -48,6 +48,5 @@ def kanisa_twitter_username():
             cache.set('twitter_handle', twitter, 120)
 
         return twitter.screen_name
-    except TwitterException, e:
+    except TwitterException:
         return None
-
