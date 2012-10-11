@@ -47,9 +47,13 @@ class BlockIndexView(BlockBaseView,
 
 class BlockUpdateView(BlockBaseView,
                       KanisaUpdateView):
-    success_url = reverse_lazy('kanisa_manage_blocks')
     form_class = BlockForm
     model = Block
+
+    def get_initial(self):
+        initial = super(BlockUpdateView, self).get_initial()
+        initial['referer'] = self.request.META.get('HTTP_REFERER', '')
+        return initial
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -66,3 +70,13 @@ class BlockUpdateView(BlockBaseView,
 
         object = queryset.get_or_create(slug=slug)
         return object[0]
+
+    def form_valid(self, form):
+        self.referer = form.cleaned_data['referer']
+        return super(BlockUpdateView, self).form_valid(form)
+
+    def get_success_url(self):
+        if self.referer:
+            return self.referer
+
+        return reverse_lazy('kanisa_manage_blocks')
