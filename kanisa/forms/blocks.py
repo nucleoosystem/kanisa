@@ -5,7 +5,7 @@ from kanisa.models import Block
 
 
 class BlockForm(KanisaBaseForm):
-    referer = forms.CharField(widget=forms.HiddenInput,required=False)
+    referer = forms.CharField(widget=forms.HiddenInput, required=False)
 
     class Meta:
         model = Block
