@@ -4,8 +4,8 @@ from django.db import models
 KNOWN_BLOCKS = {
     'homepage': ('Homepage Welcome',
                  'Appears on the homepage at the top.'),
-     'address': ('Address',
-                 'Appears on the homepage under the contact us section.'),
+    'address': ('Address',
+                'Appears on the homepage under the contact us section.'),
     }
 
 
