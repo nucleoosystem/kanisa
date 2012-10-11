@@ -1,0 +1,7 @@
+{% load kanisa_markup %}
+
+{% if block %}
+
+{{ block.contents|kanisa_markdown }}
+
+{% endif %}

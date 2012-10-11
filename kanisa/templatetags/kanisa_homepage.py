@@ -1,6 +1,7 @@
 from django import template
 from django.core.cache import cache
-from kanisa.models import ScheduledEvent, Sermon
+from django.template.loader import render_to_string
+from kanisa.models import ScheduledEvent, Sermon, Block
 from kanisa.utils.diary import get_week_bounds
 from kanisa.utils.social import get_tweepy_handle, TwitterException
 
@@ -50,3 +51,21 @@ def kanisa_twitter_username():
         return twitter.screen_name
     except TwitterException:
         return None
+
+
+@register.simple_tag(takes_context=True)
+def kanisa_content_block(context, slug):
+    try:
+        block = Block.objects.get(slug=slug)
+        if not block.contents:
+            block = None
+    except Block.DoesNotExist:
+        block = None
+
+    if context['user'].has_perm('kanisa.manage_blocks'):
+        tmpl = 'kanisa/management/blocks/_fragment_editable.html'
+        return render_to_string(tmpl,
+                                {'block': block, 'slug': slug})
+
+    return render_to_string('kanisa/management/blocks/_fragment_display.html',
+                            {'block': block})

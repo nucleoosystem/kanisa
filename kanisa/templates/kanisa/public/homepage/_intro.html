@@ -1,2 +1,7 @@
+{% load kanisa_homepage %}
+
 <h1>Welcome to {{ KANISA_CHURCH_NAME }}</h1>
-<p class="lead">I need to fill this out with actual text.</p>
+
+<div class="lead">
+  {% kanisa_content_block 'homepage' %}
+</div>
