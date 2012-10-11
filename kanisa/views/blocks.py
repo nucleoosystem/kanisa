@@ -27,8 +27,7 @@ class BlockIndexView(BlockBaseView,
         context = super(BlockIndexView,
                         self).get_context_data(**kwargs)
 
-        existing_blocks = {block.slug: block
-                           for block in Block.objects.all()}
+        existing_blocks = dict((b.slug, b) for b in Block.objects.all())
 
         class BlockEntry(object):
             def __init__(self, slug, info, existing_blocks):
