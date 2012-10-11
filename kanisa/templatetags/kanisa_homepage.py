@@ -53,14 +53,28 @@ def kanisa_twitter_username():
         return None
 
 
-@register.simple_tag(takes_context=True)
-def kanisa_content_block(context, slug):
+def get_block(slug):
     try:
         block = Block.objects.get(slug=slug)
         if not block.contents:
-            block = None
+            return None
+        else:
+            return block
     except Block.DoesNotExist:
-        block = None
+        return None
+
+
+@register.simple_tag(takes_context=True)
+def kanisa_content_block(context, slug):
+    cache_key = 'kanisa_content_block:%s' % slug
+
+    block = cache.get(cache_key)
+
+    if block is None:
+        block = get_block(slug)
+
+        if block is not None:
+            cache.set(cache_key, block)
 
     if context['user'].has_perm('kanisa.manage_blocks'):
         tmpl = 'kanisa/management/blocks/_fragment_editable.html'

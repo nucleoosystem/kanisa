@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db import models
 
 
@@ -17,6 +18,10 @@ class Block(models.Model):
 
     def __unicode__(self):
         return KNOWN_BLOCKS[self.slug][0]
+
+    def save(self, *args, **kwargs):
+        super(Block, self).save(*args, **kwargs)
+        cache.delete('kanisa_content_block:%s' % self.slug)
 
     class Meta:
         # Need this because I've split up models.py into multiple
