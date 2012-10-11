@@ -8,6 +8,8 @@
 {% kanisa_twitter_status as twitter_status %}
 {% kanisa_twitter_username as twitter_username %}
 
+{% if kanisa_twitter_username and kanisa_twitter_status %}
+
 <p class="lead">
   {{ twitter_status.text|urlize }}
 
@@ -17,5 +19,7 @@
     </a>
   </small>
 </p>
+
+{% endif %}
 
 {% endcache %}
