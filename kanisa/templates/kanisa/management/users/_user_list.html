@@ -19,6 +19,7 @@
       <th class="iconcell"><i class="icon icon-user" title="Manage Users"></i></th>
       <th class="iconcell"><i class="icon icon-road" title="Manage Navigation"></i></th>
       <th class="iconcell"><i class="icon icon-camera" title="Manage Media"></i></th>
+      <th class="iconcell"><i class="icon icon-th-large" title="Manage Content Blocks"></i></th>
     </tr>
   </thead>
   <tbody>
@@ -58,8 +59,9 @@
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_navigation' %}</td>
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_media' %}</td>
+  <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_blocks' %}</td>
   {% else %}
-  <td colspan="9" class="muted" style="text-align: center">
+  <td colspan="10" class="muted" style="text-align: center">
     This user is not yet active, so cannot be assigned permissions.
   </td>
   {% endif %}

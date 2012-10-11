@@ -89,6 +89,14 @@
       </a>
     </li>
     {% endif %}
+    {% if perms.kanisa.manage_blocks %}
+    <li{% if kanisa_nav_component = "blocks" %} class="active"{% endif %}>
+      <a href="{% url 'kanisa_manage_blocks' %}">
+        <i class="icon-th-large"></i>
+        Content Blocks
+      </a>
+    </li>
+    {% endif %}
     {% if user.is_superuser %}
     <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_branding' %}">

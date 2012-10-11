@@ -1,0 +1,38 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Content Block</th>
+      <th>Description</th>
+      <th>Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for block in blocks %}
+  <tr>
+    <td>
+      <a href="{% url 'kanisa_manage_blocks_update' block.slug %}">
+        {{ block.identifier }}
+      </a>
+    </td>
+    <td>
+      {{ block.description }}
+    </td>
+    <td>
+      {% if block.existing_block %}
+      {{ block.existing_block.modified|timesince }} ago
+      {% else %}
+      <em>Never</em>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
