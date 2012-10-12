@@ -8,7 +8,7 @@
 
 {% if logo_location %}
 {% thumbnail logo_location "460x140" as im %}
-<p><img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/></p>
+<p><img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/></p>
 {% endthumbnail %}
 
 {% else %}
@@ -32,7 +32,7 @@
 {% kanisa_branding 'favicon' as favicon_location %}
 
 {% if favicon_location %}
-<p><img src="{{ MEDIA_URL }}{{ favicon_location }}" height="32px" width="32px" /></p>
+<p><img src="{{ MEDIA_URL }}{{ favicon_location }}?{% now 'c' %}" height="32px" width="32px" /></p>
 {% else %}
 <p class="alert warning">No favicon uploaded.</p>
 {% endif %}
@@ -60,19 +60,19 @@
 
 <p>
   {% thumbnail apple_location "144x144" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+  <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
   {% thumbnail apple_location "114x114" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+  <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
   {% thumbnail apple_location "72x72" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+  <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
   {% thumbnail apple_location "57x57" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+  <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 </p>
 
