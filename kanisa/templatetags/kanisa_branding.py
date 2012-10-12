@@ -43,7 +43,6 @@ def kanisa_branding(branding_component):
     url = cache.get(cache_key)
 
     if url is not None:
-        print "Fetched branding URL %s from cache key '%s'." % (url, cache_key)
         return url
 
     url = __fetch(file)
