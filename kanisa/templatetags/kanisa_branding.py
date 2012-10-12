@@ -25,18 +25,17 @@ def __fetch(filename):
     return None
 
 
+COMPONENTS = {'logo': 'logo.jpg',
+              'apple': 'apple.jpg',
+              'favicon': 'favicon.ico',
+              'colours': 'colours.css'}
+
+
 @register.assignment_tag
 def kanisa_branding(branding_component):
-    if branding_component == 'logo':
-        return __fetch('logo.jpg')
+    file = COMPONENTS.get(branding_component, None)
 
-    if branding_component == 'apple':
-        return __fetch('apple.jpg')
+    if file is None:
+        return None
 
-    if branding_component == 'favicon':
-        return __fetch('favicon.ico')
-
-    if branding_component == 'colours':
-        return __fetch('colours.css')
-
-    return None
+    return __fetch(file)
