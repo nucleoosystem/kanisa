@@ -16,11 +16,11 @@
       </span>
 
       {% if item.event %}
-      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}">
+      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}>
         {{ item }}
       </a>
       {% else %}
-      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}">
+      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}>
         {{ item }}
       </a>
       {% endif %}

@@ -108,6 +108,7 @@ class RegularEvent(models.Model):
             self.scheduledevent_set.\
                 create(date=single_date,
                        title=self.title,
+                       intro=self.intro,
                        start_time=self.start_time,
                        duration=self.duration,
                        contact=self.contact)
@@ -153,6 +154,10 @@ class ScheduledEvent(models.Model):
     contact = models.ForeignKey(EventContact,
                                 blank=True,
                                 null=True)
+    intro = models.CharField(max_length=200,
+                             help_text=('Brief description (no Markdown here) '
+                                        'of what the event is and who it is '
+                                        'for.'))
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '

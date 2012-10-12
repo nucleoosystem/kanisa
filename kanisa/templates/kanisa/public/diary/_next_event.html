@@ -13,6 +13,12 @@
   <strong>{{ next_event.start_time }}</strong>
 </p>
 
+{% if object.intro != next_event.intro %}
+{% if next_event.intro %}
+<p>{{ next_event.intro }}</p>
+{% endif %}
+{% endif %}
+
 {% if object.details != next_event.details %}
 {% if next_event.details %}
 {{ next_event.details|kanisa_markdown }}
