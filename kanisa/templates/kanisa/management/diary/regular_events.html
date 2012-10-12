@@ -19,6 +19,7 @@
       <th>Event</th>
       <th>Timetable</th>
       <th>Time</th>
+      <th></th>
       <th class="iconcell"></th>
     </tr>
   </thead>
@@ -28,7 +29,16 @@
       <td><a href="{% url 'kanisa_manage_diary_regular_update' event.pk %}">{{ event.title }}</a></td>
       <td>{{ event.pattern_description }}</td>
       <td>{{ event.start_time }}</td>
-      <td class="iconcell"><a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site"><i class="icon-eye-open"></i></a></td>
+      <td>
+        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-mini">
+          Edit Upcoming
+        </a>
+      </td>
+      <td class="iconcell">
+        <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site">
+          <i class="icon-eye-open"></i>
+        </a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

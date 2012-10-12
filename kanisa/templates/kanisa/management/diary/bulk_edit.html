@@ -1,0 +1,31 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+
+{% if events %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Intro</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in events %}
+    <tr>
+      <td>{{ event.title }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.start_time }}</td>
+      <td>{{ event.intro }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-info">
+  There are no instances of {{ object }} scheduled.
+</p>
+{% endif %}
+{% endblock %}

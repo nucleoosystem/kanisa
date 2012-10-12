@@ -16,6 +16,7 @@ from kanisa.utils.diary import (get_schedule, get_week_bounds,
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
                                   KanisaDeleteView,
+                                  KanisaDetailView,
                                   KanisaAuthorizationMixin)
 
 
@@ -100,6 +101,25 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
     kanisa_form_warning = ('Changes made here will not affect events already '
                            'in the diary (whether they\'re future events or '
                            'not).')
+
+
+class DiaryRegularEventBulkEditView(DiaryBaseView,
+                                    KanisaDetailView):
+    template_name = 'kanisa/management/diary/bulk_edit.html'
+    model = RegularEvent
+
+    def get_kanisa_title(self):
+        return 'Bulk Edit: %s' % unicode(self.object)
+
+    def get_context_data(self, **kwargs):
+        context = super(DiaryRegularEventBulkEditView,
+                        self).get_context_data(**kwargs)
+
+        events = ScheduledEvent.objects.filter(event=self.object)
+        events = events.filter(date__gte=datetime.today())
+        context['events'] = events
+
+        return context
 
 
 class DiaryScheduledEventBaseView(DiaryBaseView):
