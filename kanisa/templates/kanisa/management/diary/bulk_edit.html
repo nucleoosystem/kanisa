@@ -3,6 +3,8 @@
 {% block content %}
 
 {% if events %}
+<form method="post" action=".">
+{% csrf_token %}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -18,11 +20,13 @@
       <td>{{ event.title }}</td>
       <td>{{ event.date }}</td>
       <td>{{ event.start_time }}</td>
-      <td>{{ event.intro }}</td>
+      <td><input type="text" value="{{ event.intro }}" name="intro_{{ event.pk}}" style="width: 90%" maxlength="200" /></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<input type="submit" value="Save Changes" class="btn btn-large btn-success pull-right" />
+</form>
 {% else %}
 <p class="alert alert-info">
   There are no instances of {{ object }} scheduled.

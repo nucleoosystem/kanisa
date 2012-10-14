@@ -2,7 +2,7 @@ from datetime import date, datetime, time, timedelta
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
@@ -16,7 +16,6 @@ from kanisa.utils.diary import (get_schedule, get_week_bounds,
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
                                   KanisaListView, KanisaTemplateView,
                                   KanisaDeleteView,
-                                  KanisaDetailView,
                                   KanisaAuthorizationMixin)
 
 
@@ -104,20 +103,51 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
 
 
 class DiaryRegularEventBulkEditView(DiaryBaseView,
-                                    KanisaDetailView):
+                                    KanisaTemplateView):
     template_name = 'kanisa/management/diary/bulk_edit.html'
     model = RegularEvent
 
+    def get_object(self):
+        if hasattr(self, 'object'):
+            return self.object
+
+        pk = int(self.kwargs.get('pk', None))
+
+        return get_object_or_404(RegularEvent, pk=pk)
+
     def get_kanisa_title(self):
-        return 'Bulk Edit: %s' % unicode(self.object)
+        return 'Bulk Edit: %s' % unicode(self.get_object())
+
+    def get_events(self):
+        events = ScheduledEvent.objects.filter(event=self.get_object())
+        events = events.filter(date__gte=datetime.today())
+        return events
+
+    def save_event(self, key, value):
+        pk = int(key[len("intro_"):])
+        event = ScheduledEvent.objects.get(pk=pk)
+        event.intro = value
+        event.save()
+
+    def post(self, request, *args, **kwargs):
+        number_of_events = 0
+        for key, value in self.request.POST.items():
+            if key.startswith("intro_"):
+                self.save_event(key, value)
+                number_of_events = number_of_events + 1
+
+        messages.success(request, "Events saved.")
+
+        url = reverse('kanisa_manage_diary_regularevents')
+
+        return HttpResponseRedirect(url)
 
     def get_context_data(self, **kwargs):
         context = super(DiaryRegularEventBulkEditView,
                         self).get_context_data(**kwargs)
 
-        events = ScheduledEvent.objects.filter(event=self.object)
-        events = events.filter(date__gte=datetime.today())
-        context['events'] = events
+        context['events'] = self.get_events()
+        context['object'] = self.get_object()
 
         return context
 
