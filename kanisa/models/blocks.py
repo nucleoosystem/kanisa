@@ -7,7 +7,7 @@ KNOWN_BLOCKS = {
                  'Appears on the homepage at the top.'),
     'address': ('Address',
                 'Appears on the homepage under the contact us section.'),
-    }
+}
 
 
 class Block(models.Model):
@@ -31,4 +31,4 @@ class Block(models.Model):
         permissions = (
             ('manage_blocks',
              'Can manage your content blocks.'),
-            )
+        )

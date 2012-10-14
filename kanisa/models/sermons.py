@@ -79,7 +79,7 @@ class SermonSeries(models.Model):
         permissions = (
             ('manage_sermons',
              'Can manage your sermons'),
-            )
+        )
 
 
 class SpeakerManager(models.Manager):
@@ -135,8 +135,8 @@ class Sermon(models.Model):
                                           'create/">this form</a>.'))
     speaker = models.ForeignKey(SermonSpeaker,
                                 help_text=('You can add a speaker using '
-                                          '<a href="/manage/sermons/speaker/'
-                                          'create/">this form</a>.'))
+                                           '<a href="/manage/sermons/speaker/'
+                                           'create/">this form</a>.'))
     passage = BiblePassageField(blank=True, null=True,
                                 help_text=('NB. This doesn\'t currently '
                                            'support multiple passages.'))

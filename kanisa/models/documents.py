@@ -32,4 +32,4 @@ class Document(models.Model):
         permissions = (
             ('manage_documents',
              'Can manage your documents'),
-            )
+        )

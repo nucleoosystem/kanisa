@@ -34,7 +34,7 @@ class ScheduledTweet(models.Model):
              'Can manage your social networks'),
             ('manage_users',
              'Can manage your users'),
-            )
+        )
 
     def __unicode__(self):
         return self.tweet

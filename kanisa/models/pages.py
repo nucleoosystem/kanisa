@@ -33,7 +33,7 @@ class Page(MPTTModel):
         permissions = (
             ('manage_pages',
              'Can manage your pages'),
-            )
+        )
 
     def __unicode__(self):
         return self.title

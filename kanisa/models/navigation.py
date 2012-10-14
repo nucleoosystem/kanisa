@@ -38,7 +38,7 @@ class NavigationElement(MPTTModel):
         permissions = (
             ('manage_navigation',
              'Can manage your navigation'),
-            )
+        )
 
     def __unicode__(self):
         return self.title

@@ -75,7 +75,7 @@ class Banner(models.Model):
         permissions = (
             ('manage_banners',
              'Can manage your banners'),
-            )
+        )
 
     def __unicode__(self):
         return self.headline

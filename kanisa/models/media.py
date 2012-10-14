@@ -18,7 +18,7 @@ class InlineImage(models.Model):
         permissions = (
             ('manage_media',
              'Can manage your media'),
-            )
+        )
 
     def __unicode__(self):
         return self.title

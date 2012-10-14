@@ -73,7 +73,7 @@ class RegularEvent(models.Model):
         permissions = (
             ('manage_diary',
              'Can manage your diary'),
-            )
+        )
 
     def __unicode__(self):
         return self.title
