@@ -104,7 +104,6 @@ class FaviconBrandingForm(BrandingForm):
 
 
 class BrandingColoursForm(forms.Form):
-
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
 
