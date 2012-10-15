@@ -179,3 +179,9 @@ class ScheduledEvent(models.Model):
 
         # Hopefully this only occurs during event editing
         return u'None'
+
+try:
+    from south.modelsinspector import add_introspection_rules as air
+    air([], ["^recurrence\.fields\.RecurrenceField"])
+except ImportError:
+    pass

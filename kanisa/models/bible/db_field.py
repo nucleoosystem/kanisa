@@ -39,3 +39,9 @@ class BiblePassageField(models.CharField):
             return None
 
         return unicode(value)
+
+try:
+    from south.modelsinspector import add_introspection_rules as air
+    air([], ["^kanisa\.models\.bible\.db_field\.BiblePassageField"])
+except ImportError:
+    pass
