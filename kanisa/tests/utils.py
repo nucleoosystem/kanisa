@@ -26,6 +26,11 @@ class KanisaViewTestCase(TestCase):
         self.fred.user_permissions.add(p)
 
         self.fred.save()
+
+        self.superman = User.objects.create_user('superman', '', 'secret')
+        self.superman.is_superuser = True
+        self.superman.save()
+
         self.factory = RequestFactory()
 
     @override_settings(LOGIN_URL=reverse_lazy('kanisa_public_login'))

@@ -27,19 +27,15 @@ class AssignPermissionView(XHRBasePostView):
         except Permission.DoesNotExist:
             raise BadArgument("Permission '%s' not found." % input_perm)
 
-    def check_requesting_users_permission(self):
-        permission = self.arguments['permission']
-
-        if not self.request.user.has_perm(permission):
-            raise HttpResponseForbidden("You do not have permission to "
-                                        "grant or deny this permission.")
-
     def render(self, request, *args, **kwargs):
-        self.check_requesting_users_permission()
-
         assigned = self.arguments['assigned'] == 'true'
         user = self.get_user()
         permission = self.get_permission()
+
+        permission_text = self.arguments['permission']
+        if not self.request.user.has_perm(permission_text):
+            return HttpResponseForbidden("You do not have permission to "
+                                         "grant or deny this permission.")
 
         if assigned:
             user.user_permissions.add(permission)
