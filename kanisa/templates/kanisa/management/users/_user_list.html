@@ -10,16 +10,36 @@
     <tr>
       <th>Username</th>
       <th>Full name</th>
+      {% if perms.kanisa.manage_pages %}
       <th class="iconcell"><i class="icon icon-font" title="Manage Page"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_diary %}
       <th class="iconcell"><i class="icon icon-calendar" title="Manage Diary"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_sermons %}
       <th class="iconcell"><i class="icon icon-headphones" title="Manage Sermons"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_banners %}
       <th class="iconcell"><i class="icon icon-picture" title="Manage Banners"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_documents %}
       <th class="iconcell"><i class="icon icon-file" title="Manage Documents"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_social %}
       <th class="iconcell"><i class="icon icon-fire" title="Manage Social Networks"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_users %}
       <th class="iconcell"><i class="icon icon-user" title="Manage Users"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_navigation %}
       <th class="iconcell"><i class="icon icon-road" title="Manage Navigation"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_media %}
       <th class="iconcell"><i class="icon icon-camera" title="Manage Media"></i></th>
+      {% endif %}
+      {% if perms.kanisa.manage_blocks %}
       <th class="iconcell"><i class="icon icon-th-large" title="Manage Content Blocks"></i></th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -50,16 +70,36 @@
   </td>
   <td>{{ theuser.get_full_name }}</td>
   {% if theuser.is_active %}
+  {% if perms.kanisa.manage_pages %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_pages' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_diary %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_diary' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_sermons %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_sermons' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_banners %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_banners' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_documents %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_documents' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_social %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_social' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_users %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_users' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_navigation %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_navigation' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_media %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_media' %}</td>
+  {% endif %}
+  {% if perms.kanisa.manage_blocks %}
   <td class="iconcell">{% kanisa_user_has_perm 'kanisa.manage_blocks' %}</td>
+  {% endif %}
   {% else %}
   <td colspan="10" class="muted" style="text-align: center">
     This user is not yet active, so cannot be assigned permissions.
