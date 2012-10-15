@@ -42,6 +42,9 @@ def kanisa_user_has_perm(context, perm):
     if user.has_perm(perm):
         attributes['checked'] = 'checked'
 
+    if context['user'] == user:
+        attributes['disabled'] = 'true'
+
     html_attr = ['%s="%s"' % (k, v) for k, v in attributes.items()]
 
     return input % ' '.join(html_attr)
