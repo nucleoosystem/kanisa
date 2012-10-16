@@ -56,6 +56,10 @@ class Banner(models.Model):
                                                 'banner will be visible. If '
                                                 'left blank your banner will '
                                                 'be visible indefinitely.'))
+    order = models.IntegerField(default=100,
+                                help_text=('Lower numbers here mean this '
+                                           'banner will appear earlier in '
+                                           'the list of banners.'))
     visits = models.IntegerField(default=0,
                                  help_text=('The number of click-throughs '
                                             'this banner has had.'))
@@ -74,7 +78,7 @@ class Banner(models.Model):
             ('manage_banners',
              'Can manage your banners'),
         )
-        ordering = ('publish_from', '-publish_until')
+        ordering = ('order', 'publish_from', '-publish_until')
 
     def __unicode__(self):
         return self.headline

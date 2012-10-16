@@ -9,6 +9,7 @@
       "image": "kanisa/banners/greenflowers.jpg",
       "url": "",
       "contents": "Found them? In Mercia?! The coconut's tropical! The swallow may fly south with the sun.",
+      "order": 100,
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -23,6 +24,7 @@
       "url": "http://www.google.com",
       "contents": "Help, help, I'm being repressed! You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person!",
       "link_text": "I love them pig-dogs",
+      "order": 100,
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -36,6 +38,7 @@
       "image": "kanisa/banners/church.jpg",
       "url": "",
       "contents": "Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force.",
+      "order": 100,
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -49,6 +52,7 @@
       "image": "kanisa/banners/theshard.jpg",
       "url": "",
       "contents": "Every time I learn something new, it pushes some old stuff out of my brain.",
+      "order": 100,
       "modified": "2012-01-01 07:00+03:00"
     }
   },
@@ -62,6 +66,7 @@
       "image": "kanisa/banners/lamppost.jpg",
       "url": "",
       "contents": "It will not go out of my mind that if we pass this post and lantern either we shall find strange adventures or else some great changes of our fortunes.",
+      "order": 100,
       "modified": "2012-01-01 07:00+03:00"
     }
   }
