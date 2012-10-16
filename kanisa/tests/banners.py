@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 from django.test import TestCase
 from kanisa.models import Banner
-from kanisa.models.utils import date_has_passed, today_in_range
+from kanisa.utils.banners import date_has_passed, today_in_range
 import factory
 
 
