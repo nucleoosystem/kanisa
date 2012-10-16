@@ -1,3 +1,4 @@
+# flake8: noqa
 from optparse import make_option
 from django.conf import settings
 from django.core.management import call_command
