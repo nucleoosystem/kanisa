@@ -61,6 +61,12 @@
       {% endif %}
     </p>
 
+    {% if object.transcript %}
+    <hr />
+    <h3>Transcript</h3>
+    {{ object.transcript|kanisa_markdown }}
+    {% endif %}
+
   </div>
   <div class="span5">
     {% with object.series as series %}

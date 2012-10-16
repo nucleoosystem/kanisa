@@ -150,6 +150,10 @@ class Sermon(models.Model):
     details = models.TextField(blank=True, null=True,
                                help_text=('e.g. What themes does the sermon '
                                           'cover?'))
+    transcript = models.TextField(blank=True, null=True,
+                                  help_text=('For audio-impaired users - as '
+                                             'close to a verbatim transcript '
+                                             'as possible.'))
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()

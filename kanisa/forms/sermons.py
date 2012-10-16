@@ -28,7 +28,8 @@ class SermonForm(KanisaBaseForm):
 
     class Meta:
         model = Sermon
-        widgets = {'details': KanisaMainInputWidget(), }
+        widgets = {'details': KanisaMainInputWidget(),
+                   'transcript': KanisaMainInputWidget()}
 
     def apply_id3(self, cleaned_data):
         try:
