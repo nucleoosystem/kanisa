@@ -23,7 +23,17 @@ class Command(BaseCommand):
             raise CommandError("Please define MEDIA_ROOT.")
 
         call_command('reset', 'kanisa', **options)
-        call_command('kanisa_update_permissions', 'kanisa', **options)
+
+        try:
+            import south
+            fake_options = options.copy()
+            fake_options['fake'] = True
+            call_command('migrate', 'kanisa', '0001', **fake_options)
+            call_command('migrate', 'kanisa', **options)
+        except ImportError:
+            pass
+
+        call_command('kanisa_update_permissions', **options)
         self.load_fixtures()
         print ""
         print "Resetting search indexes..."
