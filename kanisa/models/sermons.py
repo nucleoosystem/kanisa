@@ -53,7 +53,7 @@ class SermonSeries(models.Model):
         """Returns a (first_date, last_date) tuple representing the
         date of the first sermon and the date of the last sermon. If
         the series is currently active (implying the last sermon has
-        not yet been added to the series, the second element in the
+        not yet been added to the series), the second element in the
         tuple will be None. If the series has no sermons, None will be
         returned.
 
