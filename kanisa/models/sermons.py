@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from autoslug import AutoSlugField
 from django.core.urlresolvers import reverse
 from django.db import models
