@@ -74,6 +74,7 @@ class Banner(models.Model):
             ('manage_banners',
              'Can manage your banners'),
         )
+        ordering = ('publish_from', '-publish_until')
 
     def __unicode__(self):
         return self.headline
