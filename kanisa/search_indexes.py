@@ -19,8 +19,16 @@ class ScheduledEventIndex(KanisaBaseSearchIndex):
         return ScheduledEvent.objects.filter(date__gte=date.today())
 
 
+class SermonIndex(KanisaBaseSearchIndex):
+    def should_update(self, instance, **kwargs):
+        return not instance.in_the_future
+
+    def index_queryset(self):
+        return Sermon.preached_objects.all()
+
+
 site.register(SermonSeries, KanisaBaseSearchIndex)
-site.register(Sermon, KanisaBaseSearchIndex)
+site.register(Sermon, SermonIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, ScheduledEventIndex)
 site.register(Page, KanisaBaseSearchIndex)

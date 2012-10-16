@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from datetime import date
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
@@ -120,6 +121,12 @@ class SermonManager(models.Manager):
         return qs.select_related(depth=1)
 
 
+class PreachedSermonManager(SermonManager):
+    def get_query_set(self):
+        qs = super(SermonManager, self).get_query_set()
+        return qs.filter(date__lte=date.today())
+
+
 class Sermon(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The title of the sermon.')
@@ -155,6 +162,7 @@ class Sermon(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()
+    preached_objects = PreachedSermonManager()
 
     def __unicode__(self):
         return self.title
@@ -170,6 +178,9 @@ class Sermon(models.Model):
 
         return reverse('kanisa_public_sermon_detail',
                        args=[self.series.slug, self.slug, ])
+
+    def in_the_future(self):
+        return self.date > date.today()
 
     class Meta:
         # Need this because I've split up models.py into multiple

@@ -74,6 +74,10 @@ label.requiredField {
     color: #555;
 }
 
+.muted .extra_details {
+    color: #aaa;
+}
+
 i.spinner {
     background-image: url(../img/ajax.gif);
     background-repeat: no-repeat;

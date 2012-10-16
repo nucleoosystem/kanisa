@@ -14,7 +14,7 @@ class SermonIndexView(TemplateView):
 
         series = SermonSeries.objects.filter(active=True)
         context['active_series'] = series
-        latest_sermons = Sermon.objects.all()
+        latest_sermons = Sermon.preached_objects.all()
         context['latest_sermons'] = latest_sermons[:5]
         context['kanisa_title'] = 'Sermons'
 
@@ -33,7 +33,7 @@ class SermonSeriesDetailView(DetailView):
 
 
 class SermonDetailView(DetailView):
-    model = Sermon
+    queryset = Sermon.preached_objects.all()
     template_name = 'kanisa/public/sermons/sermon.html'
 
     def get_context_data(self, **kwargs):
