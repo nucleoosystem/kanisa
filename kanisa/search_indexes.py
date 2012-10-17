@@ -21,7 +21,7 @@ class ScheduledEventIndex(KanisaBaseSearchIndex):
 
 class SermonIndex(KanisaBaseSearchIndex):
     def should_update(self, instance, **kwargs):
-        return not instance.in_the_future
+        return not instance.in_the_future()
 
     def index_queryset(self):
         return Sermon.preached_objects.all()
