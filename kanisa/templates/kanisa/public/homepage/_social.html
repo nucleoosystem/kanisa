@@ -3,18 +3,18 @@
 
 <h3>Connect with Us</h3>
 
-{% cache 120 twitter_status_template%}
+{% cache 120 twitter_status_template %}
 
 {% kanisa_twitter_status as twitter_status %}
 {% kanisa_twitter_username as twitter_username %}
 
-{% if kanisa_twitter_username and kanisa_twitter_status %}
+{% if twitter_username and twitter_status %}
 
 <p class="lead">
-  {{ twitter_status.text|urlize }}
+  {{ twitter_status.text|urlize }}<br />
 
   <small class="pull-right">
-    <a href="http://twitter.com/{{ twitter_username }}/status/{{ twitter_status.id }}">
+    &mdash; <a href="http://twitter.com/{{ twitter_username }}/status/{{ twitter_status.id }}">
       {{ twitter_status.created_at|timesince }} ago
     </a>
   </small>
