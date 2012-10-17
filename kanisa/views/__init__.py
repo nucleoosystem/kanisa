@@ -1,22 +1,19 @@
-import urlparse
-
-from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import Permission, User
 from django.core.cache import cache
 from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Q
-from django.http import HttpResponseRedirect, Http404
+from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
 from django.template.loader import get_template
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import CreateView
 from haystack.query import SearchQuerySet
 
 from kanisa import conf
-from kanisa.forms.auth import KanisaLoginForm, KanisaUserCreationForm
+from kanisa.forms.auth import KanisaUserCreationForm
 from kanisa.models.banners import Banner
 from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
                                   KanisaTemplateView)
@@ -32,29 +29,6 @@ class KanisaIndexView(TemplateView):
 class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
                                 KanisaTemplateView):
     template_name = 'kanisa/management/index.html'
-
-
-class KanisaLoginView(FormView):
-    template_name = 'kanisa/login.html'
-    form_class = KanisaLoginForm
-    success_url = reverse_lazy('kanisa_manage_index')
-
-    def form_valid(self, form):
-        redirect_to = self.request.REQUEST.get(REDIRECT_FIELD_NAME, '')
-        netloc = urlparse.urlparse(redirect_to)[1]
-
-        # Use default setting if redirect_to is empty
-        if not redirect_to:
-            redirect_to = self.success_url
-
-        # Heavier security check -- don't allow redirection to a
-        # different host.
-        elif netloc and netloc != self.request.get_host():
-            redirect_to = self.success_url
-
-        # Okay, security checks complete. Log the user in.
-        login(self.request, form.get_user())
-        return HttpResponseRedirect(redirect_to)
 
 
 class KanisaSearchView(KanisaTemplateView):

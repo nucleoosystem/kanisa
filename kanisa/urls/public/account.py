@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
 from django.contrib.auth.views import password_change
 from kanisa.forms.auth import KanisaChangePasswordForm
-from kanisa.views import (KanisaLoginView,
-                          KanisaRegistrationView,
+from kanisa.views import (KanisaRegistrationView,
                           KanisaRegistrationThanksView)
+from kanisa.views.public.auth import KanisaLoginView
 
 
 urlpatterns = patterns('',
