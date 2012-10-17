@@ -60,3 +60,6 @@
     border-radius: 4px 4px 4px 4px;
 }
 
+input.bootstraptimewidget {
+    width: 5em;
+}
