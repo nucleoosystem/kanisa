@@ -3,8 +3,13 @@
 {% block details %}
 {% autoescape off %}
 {{ object.title }}
+
 {% if object.details %}
 {{ object.details }}
+{% endif %}
+
+{% if object.transcript %}
+{{ object.transcript }}
 {% endif %}
 
 {% if object.passage %}
