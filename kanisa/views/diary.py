@@ -97,9 +97,9 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
     form_class = RegularEventForm
     model = RegularEvent
     success_url = reverse_lazy('kanisa_manage_diary_regularevents')
-    kanisa_form_warning = ('Changes made here will not affect events already '
-                           'in the diary (whether they\'re future events or '
-                           'not).')
+    kanisa_form_warning = ('Changes made here will not affect events '
+                           'already in the diary (whether they\'ve '
+                           'happened already or not).')
 
 
 class DiaryRegularEventBulkEditView(DiaryBaseView,
