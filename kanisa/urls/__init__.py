@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from kanisa.views import KanisaIndexView, KanisaSearchView
+from kanisa.views import KanisaIndexView
+from kanisa.views.public.search import KanisaSearchView
 
 
 urlpatterns = patterns('',
