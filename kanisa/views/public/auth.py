@@ -16,7 +16,7 @@ from kanisa.views.generic import KanisaTemplateView
 
 
 class KanisaLoginView(FormView):
-    template_name = 'kanisa/login.html'
+    template_name = 'kanisa/auth/login.html'
     form_class = KanisaLoginForm
     success_url = reverse_lazy('kanisa_manage_index')
 
@@ -39,7 +39,7 @@ class KanisaLoginView(FormView):
 
 
 class KanisaRegistrationView(CreateView):
-    template_name = 'kanisa/registration.html'
+    template_name = 'kanisa/auth/registration.html'
     form_class = KanisaUserCreationForm
     success_url = reverse_lazy('kanisa_public_registration_thanks')
 
@@ -85,7 +85,7 @@ class KanisaRegistrationView(CreateView):
 
 class KanisaRegistrationThanksView(KanisaTemplateView):
     kanisa_title = 'Registration Complete'
-    template_name = 'kanisa/registration_thanks.html'
+    template_name = 'kanisa/auth/registration_thanks.html'
 
     def get_context_data(self, *args, **kwargs):
         if not conf.KANISA_REGISTRATION_ALLOWED:
