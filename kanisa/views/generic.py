@@ -14,6 +14,7 @@ from django.views.generic.edit import (CreateView,
                                        DeleteView,
                                        FormView)
 from django.views.generic.list import ListView
+from kanisa.utils.auth import has_any_kanisa_permission
 
 
 def add_kanisa_context(cls, context):
@@ -69,9 +70,7 @@ class KanisaAuthorizationMixin(object):
 
 class KanisaAnyAuthorizationMixin(KanisaAuthorizationMixin):
     def authorization_check(self, user):
-        perms = user.get_all_permissions()
-        kanisa_management = [p for p in perms if p.startswith('kanisa.manage')]
-        return len(kanisa_management) > 0
+        return has_any_kanisa_permission(user)
 
 
 class KanisaTemplateView(TemplateView):
