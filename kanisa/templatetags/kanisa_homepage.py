@@ -20,7 +20,7 @@ def kanisa_this_sunday():
 
 @register.assignment_tag
 def kanisa_sermons():
-    return Sermon.objects.all()[:5]
+    return Sermon.preached_objects.all()[:5]
 
 
 @register.assignment_tag
