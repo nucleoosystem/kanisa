@@ -123,18 +123,26 @@ class DiaryRegularEventBulkEditView(DiaryBaseView,
         events = events.filter(date__gte=datetime.today())
         return events
 
-    def save_event(self, key, value):
-        pk = int(key[len("intro_"):])
+    def save_event(self, pk, intro, start_time):
         event = ScheduledEvent.objects.get(pk=pk)
-        event.intro = value
+        event.intro = intro
+        event.start_time = start_time
         event.save()
 
-    def post(self, request, *args, **kwargs):
-        number_of_events = 0
-        for key, value in self.request.POST.items():
+    def get_event_pks(self, items):
+        pks = []
+        for key, value in items:
             if key.startswith("intro_"):
-                self.save_event(key, value)
-                number_of_events = number_of_events + 1
+                pks.append(int(key[len("intro_"):]))
+
+        return pks
+
+    def post(self, request, *args, **kwargs):
+        pks = self.get_event_pks(self.request.POST.items())
+        for pk in pks:
+            self.save_event(pk,
+                            self.request.POST['intro_%d' % pk],
+                            self.request.POST['start_time_%d' % pk])
 
         messages.success(request, "Events saved.")
 
