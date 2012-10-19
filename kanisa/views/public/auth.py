@@ -45,15 +45,13 @@ class KanisaRegistrationView(CreateView):
 
         cache.delete('kanisa_inactive_users')
 
-        subject = ('Registration for %s Pending Approval'
-                   % form.instance.username)
         template = 'accountregistration'
         context = {'user': form.instance,
                    'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
 
         users = users_with_perm('manage_users')
 
-        send_bulk_mail(users, subject, template, context)
+        send_bulk_mail(users, template, context)
 
         return rval
 
