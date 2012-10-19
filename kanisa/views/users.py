@@ -38,7 +38,8 @@ class UserActivateView(UserBaseView,
             messages.success(self.request, message)
             return reverse('kanisa_manage_users')
 
-        send_single_mail(user, 'accountactivation',
+        send_single_mail(user,
+                         'on_account_activation',
                          {'user': user})
 
         user.is_active = True

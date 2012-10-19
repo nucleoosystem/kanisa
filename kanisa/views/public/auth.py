@@ -55,7 +55,7 @@ class KanisaRegistrationView(KanisaRegistrationMixin, CreateView):
         cache.delete('kanisa_inactive_users')
 
         send_bulk_mail(users_with_perm('manage_users'),
-                       'accountregistration',
+                       'on_account_registration',
                        {'user': form.instance})
 
         return rval
