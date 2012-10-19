@@ -6,22 +6,22 @@ from kanisa import conf
 
 def send_bulk_mail(users, template, ctx):
     context = Context(ctx)
-    template_root = 'kanisa/emails/'
+    template_root = 'kanisa/emails/' + template
 
-    subject_tmpl = get_template(template_root + template + ".subj")
-    plaintext_email = get_template(template_root + template + ".txt")
-    html_email = get_template(template_root + template + ".html")
+    subject_tmpl = get_template(template_root + ".subj")
+    plaintext_tmpl = get_template(template_root + ".txt")
+    html_tmpl = get_template(template_root + ".html")
 
     subject = subject_tmpl.render(context).strip()
-    plaintext_content = plaintext_email.render(context)
-    html_content = html_email.render(context)
+    plaintext = plaintext_tmpl.render(context)
+    html = html_tmpl.render(context)
 
     for u in users:
         msg = EmailMultiAlternatives(subject,
-                                     plaintext_content,
+                                     plaintext,
                                      conf.KANISA_FROM_EMAIL,
                                      [u.email, ])
-        msg.attach_alternative(html_content, "text/html")
+        msg.attach_alternative(html, "text/html")
         msg.send()
 
 
