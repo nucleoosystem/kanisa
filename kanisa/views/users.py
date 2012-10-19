@@ -39,11 +39,10 @@ class UserActivateView(UserBaseView,
             messages.success(self.request, message)
             return reverse('kanisa_manage_users')
 
-        template = 'accountactivation'
         context = {'user': user,
                    'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
 
-        send_single_mail(user, template, context)
+        send_single_mail(user, 'accountactivation', context)
 
         user.is_active = True
         user.save()
