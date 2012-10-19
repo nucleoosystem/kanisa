@@ -1,10 +1,13 @@
 from django.core.mail import EmailMultiAlternatives
+from django.template import Context
 from django.template.loader import get_template
 from kanisa import conf
 
 
-def send_bulk_mail(users, subject, template, context):
+def send_bulk_mail(users, subject, template, ctx):
+    context = Context(ctx)
     template_root = 'kanisa/emails/'
+
     plaintext_email = get_template(template_root + template + ".txt")
     html_email = get_template(template_root + template + ".html")
 

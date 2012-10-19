@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
-from django.template import Context
 from django.views.generic.base import RedirectView
 from kanisa import conf
 from kanisa.utils.mail import send_single_mail
@@ -42,8 +41,8 @@ class UserActivateView(UserBaseView,
 
         subject = '%s Account Activated' % conf.KANISA_CHURCH_NAME
         template = 'accountactivation'
-        context = Context({'user': user,
-                           'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
+        context = {'user': user,
+                   'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
 
         send_single_mail(user, subject, template, context)
 

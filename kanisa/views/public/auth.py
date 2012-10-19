@@ -3,7 +3,6 @@ from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.core.cache import cache
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from django.template import Context
 from django.views.generic.edit import FormView, CreateView
 from kanisa import conf
 from kanisa.forms.auth import (KanisaLoginForm,
@@ -49,8 +48,8 @@ class KanisaRegistrationView(CreateView):
         subject = ('Registration for %s Pending Approval'
                    % form.instance.username)
         template = 'accountregistration'
-        context = Context({'user': form.instance,
-                           'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
+        context = {'user': form.instance,
+                   'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
 
         users = users_with_perm('manage_users')
 
