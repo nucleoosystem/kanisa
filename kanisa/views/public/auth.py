@@ -35,7 +35,16 @@ class KanisaLoginView(FormView):
         return HttpResponseRedirect(redirect_to)
 
 
-class KanisaRegistrationView(CreateView):
+class KanisaRegistrationMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        if not conf.KANISA_REGISTRATION_ALLOWED:
+            raise Http404
+
+        return super(KanisaRegistrationMixin,
+                     self).dispatch(request, *args, **kwargs)
+
+
+class KanisaRegistrationView(KanisaRegistrationMixin, CreateView):
     template_name = 'kanisa/auth/registration.html'
     form_class = KanisaUserCreationForm
     success_url = reverse_lazy('kanisa_public_registration_thanks')
@@ -51,21 +60,7 @@ class KanisaRegistrationView(CreateView):
 
         return rval
 
-    def get_context_data(self, *args, **kwargs):
-        if not conf.KANISA_REGISTRATION_ALLOWED:
-            raise Http404
 
-        return super(KanisaRegistrationView,
-                     self).get_context_data(*args, **kwargs)
-
-
-class KanisaRegistrationThanksView(KanisaTemplateView):
+class KanisaRegistrationThanksView(KanisaRegistrationMixin, KanisaTemplateView):
     kanisa_title = 'Registration Complete'
     template_name = 'kanisa/auth/registration_thanks.html'
-
-    def get_context_data(self, *args, **kwargs):
-        if not conf.KANISA_REGISTRATION_ALLOWED:
-            raise Http404
-
-        return super(KanisaRegistrationThanksView,
-                     self).get_context_data(*args, **kwargs)
