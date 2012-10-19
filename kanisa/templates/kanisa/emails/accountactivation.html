@@ -1,4 +1,4 @@
-<p>Dear {{ user.first_name }},</p>
+<p>Dear {% firstof user.first_name user.username %},</p>
 
 <p>Thank you for registering at {{ KANISA_CHURCH_NAME }}. Your account
 has now been activated.</p>
