@@ -41,7 +41,7 @@ class UserActivateView(UserBaseView,
             return reverse('kanisa_manage_users')
 
         subject = '%s Account Activated' % conf.KANISA_CHURCH_NAME
-        template = 'accountactivation/contents'
+        template = 'accountactivation'
         context = Context({'user': user,
                            'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
 

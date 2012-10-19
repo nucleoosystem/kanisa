@@ -48,7 +48,7 @@ class KanisaRegistrationView(CreateView):
 
         subject = ('Registration for %s Pending Approval'
                    % form.instance.username)
-        template = 'accountregistration/contents'
+        template = 'accountregistration'
         context = Context({'user': form.instance,
                            'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
 
