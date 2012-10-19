@@ -45,12 +45,9 @@ class KanisaRegistrationView(CreateView):
 
         cache.delete('kanisa_inactive_users')
 
-        context = {'user': form.instance,
-                   'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
-
         send_bulk_mail(users_with_perm('manage_users'),
                        'accountregistration',
-                       context)
+                       {'user': form.instance})
 
         return rval
 

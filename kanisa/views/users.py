@@ -4,7 +4,6 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from kanisa import conf
 from kanisa.utils.mail import send_single_mail
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaListView)
@@ -39,10 +38,8 @@ class UserActivateView(UserBaseView,
             messages.success(self.request, message)
             return reverse('kanisa_manage_users')
 
-        context = {'user': user,
-                   'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME}
-
-        send_single_mail(user, 'accountactivation', context)
+        send_single_mail(user, 'accountactivation',
+                         {'user': user})
 
         user.is_active = True
         user.save()
