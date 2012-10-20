@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import (AuthenticationForm,
                                        PasswordChangeForm,
                                        UserCreationForm)
-
+from password_reset.forms import PasswordRecoveryForm, PasswordResetForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -62,3 +62,29 @@ class KanisaUserCreationForm(UserCreationForm):
         user.is_active = False
         user.save()
         return user
+
+
+class KanisaPasswordRecoveryForm(PasswordRecoveryForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+
+        css = "btn-primary btn-large btn-success"
+        submit_text = 'Recover my password'
+        self.helper.add_input(Submit('submit',
+                                     submit_text,
+                                     css_class=css))
+
+        super(KanisaPasswordRecoveryForm, self).__init__(*args, **kwargs)
+
+
+class KanisaPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+
+        css = "btn-primary btn-large btn-success"
+        submit_text = 'Reset my password'
+        self.helper.add_input(Submit('submit',
+                                     submit_text,
+                                     css_class=css))
+
+        super(KanisaPasswordResetForm, self).__init__(*args, **kwargs)

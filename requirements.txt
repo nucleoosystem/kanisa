@@ -6,6 +6,7 @@ django-compressor==1.1.2
 django-crispy-forms==1.2.0
 django-haystack==1.2.7
 django-mptt==0.5.4
+django-password-reset==0.2
 factory-boy==1.2.0
 lxml==2.3.6
 markdown==2.2.0

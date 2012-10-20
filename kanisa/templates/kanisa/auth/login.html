@@ -1,6 +1,7 @@
 {% extends 'kanisa/base.html' %}
 
 {% load crispy_forms_tags %}
+{% load url from future %}
 
 {% block extrajs %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/login.js"></script>
@@ -11,7 +12,8 @@
   <div class="span6 offset3">
     <h1>Welcome to Kanisa</h1>
     <p class="lead">
-      Please enter your username and password to continue.
+      Please enter your username and password to continue.<br />
+      <span class="muted" style="font-size:70%">If you've forgotten your username or password, you can <a href="{% url 'kanisa_public_recover_password' %}">reset them</a>.</span>
     </p>
 
     {% crispy form %}

@@ -1,0 +1,19 @@
+{% extends 'kanisa/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load url from future %}
+
+{% block content %}
+<div class="row">
+  <div class="span6 offset3">
+    <h1>Recover your Password</h1>
+    <p class="lead">
+      Please enter your username or email address to continue.
+
+      If you've forgotten - your username is <strong>{{ username }}</strong>.
+    </p>
+
+    {% crispy form %}
+  </div>
+</div>
+{% endblock %}

@@ -3,7 +3,10 @@ from django.contrib.auth.views import password_change
 from kanisa.forms.auth import KanisaChangePasswordForm
 from kanisa.views.public.auth import (KanisaLoginView,
                                       KanisaRegistrationView,
-                                      KanisaRegistrationThanksView)
+                                      KanisaRegistrationThanksView,
+                                      KanisaRecoverPasswordView,
+                                      KanisaResetPasswordView,
+                                      KanisaResetPasswordDoneView)
 
 
 urlpatterns = patterns('',
@@ -30,4 +33,16 @@ urlpatterns = patterns('',
                             'post_change_redirect': '/manage/',
                             'password_change_form': KanisaChangePasswordForm},
                            'kanisa_password_change'),
+                       url(r'^recover/$',
+                           KanisaRecoverPasswordView.as_view(),
+                           {},
+                           'kanisa_public_recover_password'),
+                       url(r'^reset/(?P<token>[\w:-]+)/$',
+                           KanisaResetPasswordView.as_view(),
+                           {},
+                           'kanisa_public_reset_password'),
+                       url(r'^done/$',
+                           KanisaResetPasswordDoneView.as_view(),
+                           {},
+                           'kanisa_public_password_reset_done'),
                        )
