@@ -88,6 +88,7 @@ class KanisaRecoverPasswordView(Recover):
                          'on_forgotten_password',
                          context)
 
+
 class KanisaResetPasswordView(Reset):
     template_name = 'kanisa/auth/passwordreset/reset_form.html'
     form_class = KanisaPasswordResetForm
