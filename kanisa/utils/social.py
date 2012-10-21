@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.cache import cache
 import tweepy
 
 
@@ -39,3 +40,20 @@ def get_tweepy_handle():
                                'invalid.')
     except tweepy.TweepError:
         raise TwitterException('Twitter appears to be unreachable.')
+
+
+def get_cached_twitter_handle():
+    twitter = cache.get('twitter_handle')
+
+    if not twitter:
+        api = get_tweepy_handle()
+        twitter = api.me()
+        cache.set('twitter_handle', twitter, 120)
+
+    return twitter
+
+
+def post_to_twitter(status):
+    twitter = get_tweepy_handle()
+    twitter.update_status(status)
+    cache.delete('twitter_handle')

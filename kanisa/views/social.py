@@ -1,11 +1,12 @@
 from datetime import time
 from django.contrib import messages
-from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.base import RedirectView
 from kanisa.forms.social import ScheduledTweetForm
 from kanisa.models import ScheduledTweet
-from kanisa.utils.social import get_tweepy_handle, TwitterException
+from kanisa.utils.social import (TwitterException,
+                                 post_to_twitter,
+                                 get_cached_twitter_handle)
 from kanisa.views.generic import (KanisaAuthorizationMixin,
                                   KanisaTemplateView,
                                   KanisaCreateView,
@@ -23,16 +24,10 @@ class SocialBaseView(KanisaAuthorizationMixin):
     kanisa_nav_component = 'social'
 
     def get_twitter_context(self):
-        twitter = cache.get('twitter_handle')
-
+        twitter = get_cached_twitter_handle()
         context = {}
 
         try:
-            if not twitter:
-                api = get_tweepy_handle()
-                twitter = api.me()
-                cache.set('twitter_handle', twitter, 120)
-
             context['twitter_username'] = twitter.screen_name
             context['followers'] = twitter.followers_count
             context['statuses'] = twitter.statuses_count
@@ -108,15 +103,12 @@ class SocialTwitterPostView(SocialBaseView, RedirectView):
             return reverse('kanisa_manage_social')
 
         try:
-            twitter = get_tweepy_handle()
+            post_to_twitter(twitter_status)
         except TwitterException, e:
             messages.error(self.request, "Error posting tweet: %s" % e.value)
             return reverse('kanisa_manage_social')
 
-        twitter.update_status(twitter_status)
-
         message = 'Tweet posted.'
         messages.success(self.request, message)
 
-        cache.delete('twitter_handle')
         return reverse('kanisa_manage_social')
