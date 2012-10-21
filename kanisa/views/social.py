@@ -77,12 +77,14 @@ class ScheduledTweetCreateView(SocialBaseView, KanisaCreateView):
 
 class ScheduledTweetUpdateView(SocialBaseView, KanisaUpdateView):
     form_class = ScheduledTweetForm
-    model = ScheduledTweet
+    queryset = ScheduledTweet.future_objects.all()
     success_url = reverse_lazy('kanisa_manage_social_twitter')
+    kanisa_title = 'Edit Scheduled Tweet'
 
 
 class ScheduledTweetDeleteView(SocialBaseView, KanisaDeleteView):
-    model = ScheduledTweet
+    queryset = ScheduledTweet.future_objects.all()
+    kanisa_title = 'Delete Scheduled Tweet'
 
     def get_cancel_url(self):
         return reverse('kanisa_manage_social_twitter')
