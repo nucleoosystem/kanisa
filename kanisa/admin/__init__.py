@@ -6,3 +6,4 @@ import kanisa.admin.media
 import kanisa.admin.navigation
 import kanisa.admin.pages
 import kanisa.admin.sermons
+import kanisa.admin.social
