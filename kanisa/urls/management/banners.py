@@ -1,29 +1,26 @@
 from django.conf.urls import patterns, url
-from kanisa.views.banners import (BannerCreateView,
-                                  BannerUpdateView,
-                                  InactiveBannerManagementView,
-                                  BannerManagementView,
-                                  RetireBannerView)
+import kanisa.views.banners as views
+
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           BannerManagementView.as_view(),
+                           views.banner_management,
                            {},
                            'kanisa_manage_banners'),
                        url(r'^inactive/$',
-                           InactiveBannerManagementView.as_view(),
+                           views.banner_inactive_management,
                            {},
                            'kanisa_manage_banners_inactive'),
                        url(r'^create/$',
-                           BannerCreateView.as_view(),
+                           views.banner_create,
                            {},
                            'kanisa_manage_banners_create'),
                        url(r'^edit/(?P<pk>\d+)$',
-                           BannerUpdateView.as_view(),
+                           views.banner_update,
                            {},
                            'kanisa_manage_banners_update'),
                        url(r'^retire/(?P<banner_id>\d+)$',
-                           RetireBannerView.as_view(),
+                           views.banner_retire,
                            {},
                            'kanisa_manage_banners_retire'),
                        )

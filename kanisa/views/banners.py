@@ -5,7 +5,8 @@ from django.views.generic.base import RedirectView
 
 from kanisa.models import Banner
 from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaCreateView, KanisaUpdateView,
+                                  KanisaCreateView,
+                                  KanisaUpdateView,
                                   KanisaListView)
 from kanisa.forms.banners import BannerForm
 
@@ -27,6 +28,7 @@ class BannerManagementView(BannerBaseView,
     template_name = 'kanisa/management/banners/index.html'
     kanisa_title = 'Manage Banners'
     kanisa_is_root_view = True
+banner_management = BannerManagementView.as_view()
 
 
 class InactiveBannerManagementView(BannerBaseView,
@@ -35,6 +37,7 @@ class InactiveBannerManagementView(BannerBaseView,
     queryset = Banner.inactive_objects.all()
     template_name = 'kanisa/management/banners/inactive.html'
     kanisa_title = 'Manage Inactive Banners'
+banner_inactive_management = InactiveBannerManagementView.as_view()
 
 
 class BannerCreateView(BannerBaseView,
@@ -42,6 +45,7 @@ class BannerCreateView(BannerBaseView,
     form_class = BannerForm
     kanisa_title = 'Create Banner'
     success_url = reverse_lazy('kanisa_manage_banners')
+banner_create = BannerCreateView.as_view()
 
 
 class BannerUpdateView(BannerBaseView,
@@ -53,6 +57,7 @@ class BannerUpdateView(BannerBaseView,
         if self.object.active():
             return reverse('kanisa_manage_banners')
         return reverse('kanisa_manage_banners_inactive')
+banner_update = BannerUpdateView.as_view()
 
 
 class RetireBannerView(BannerBaseView,
@@ -67,3 +72,4 @@ class RetireBannerView(BannerBaseView,
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_banners')
+banner_retire = RetireBannerView.as_view()
