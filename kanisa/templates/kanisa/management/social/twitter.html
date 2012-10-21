@@ -1,6 +1,7 @@
 {% extends 'kanisa/management/base.html' %}
 
 {% load url from future %}
+{% load humanize %}
 
 {% block content %}
 {% include "kanisa/management/social/_nav.html" with current="twitter" %}
@@ -23,8 +24,8 @@
   <tbody>
     {% for tweet in object_list %}
     <tr>
-      <td>{{ tweet.tweet }}</td>
-      <td>{{ tweet.date|date:"jS F Y" }} at {{ tweet.time|date:"H:i" }}</td>
+      <td width="50%">{{ tweet.tweet }}</td>
+      <td>{{ tweet.date|naturalday:"jS F Y"|title }} at {{ tweet.time|date:"H:i" }}</td>
       <td>
         <a class="btn btn-mini" href="{% url 'kanisa_manage_social_twitter_update' tweet.pk %}"><i class="icon-edit"></i> Edit</a>
         <a class="btn btn-mini btn-danger" href="{% url 'kanisa_manage_social_twitter_delete' tweet.pk %}"><i class="icon-trash icon-white"></i> Delete</a>
