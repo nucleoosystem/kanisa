@@ -93,6 +93,15 @@ class ScheduledTweetDeleteView(SocialBaseView, KanisaDeleteView):
         messages.success(self.request, 'Tweet deleted')
         return reverse('kanisa_manage_social_twitter')
 
+    def get_deletion_confirmation_message(self):
+        return 'Are you sure you want to delete this tweet?'
+
+    def get_extra_context(self):
+        return self.object
+
+    def get_deletion_button_title(self):
+        return 'Yes, delete this tweet'
+
 
 class SocialTwitterPostView(SocialBaseView, RedirectView):
     permanent = False

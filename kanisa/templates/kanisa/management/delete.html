@@ -2,13 +2,17 @@
 
 {% block lead %}
     <p class="lead">{{ kanisa_delete_confirm }}</p>
+
+    {% if kanisa_delete_extra %}
+    <p class="lead muted">{{ kanisa_delete_extra }}</p>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 
 <form method="post" action="">
     {% csrf_token %}
-    <input class="btn btn-danger" type="submit" value="Yes, delete &ldquo;{{ object }}&rdquo;"/>
+    <input class="btn btn-danger" type="submit" value="{{ kanisa_delete_button }}"/>
     <a class="btn" href="{{ kanisa_cancel_url }}">No, go back</a>
 </form>
 

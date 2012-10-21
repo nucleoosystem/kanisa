@@ -186,6 +186,9 @@ class KanisaDeleteView(DeleteView):
     def get_kanisa_default_title(self):
         return 'Delete %s' % self.model._meta.verbose_name.title()
 
+    def get_deletion_button_title(self):
+        return 'Yes, delete "%s"' % unicode(self.object)
+
     def get_context_data(self, **kwargs):
         context = super(KanisaDeleteView,
                         self).get_context_data(**kwargs)
@@ -193,7 +196,11 @@ class KanisaDeleteView(DeleteView):
         context = add_kanisa_context(self, context)
         msg = self.get_deletion_confirmation_message()
         context['kanisa_delete_confirm'] = msg
+        context['kanisa_delete_button'] = self.get_deletion_button_title()
         context['kanisa_cancel_url'] = self.get_cancel_url()
+
+        if hasattr(self, 'get_extra_context'):
+            context['kanisa_delete_extra'] = self.get_extra_context()
 
         return context
 
