@@ -3,6 +3,7 @@ from django import forms
 from kanisa.forms import (KanisaBaseForm,
                           BootstrapDateField,
                           BootstrapTimeField)
+from kanisa.forms.widgets import KanisaTinyInputWidget
 from kanisa.models import ScheduledTweet
 
 
@@ -29,3 +30,4 @@ class ScheduledTweetForm(KanisaBaseForm):
     class Meta:
         model = ScheduledTweet
         exclude = ('posted', )
+        widgets = {'tweet': KanisaTinyInputWidget(), }
