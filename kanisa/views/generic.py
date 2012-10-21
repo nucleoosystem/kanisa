@@ -163,7 +163,7 @@ class KanisaUpdateView(UpdateView):
         return context
 
     def get_kanisa_default_title(self):
-        return 'Edit %s: %s' % (self.model._meta.verbose_name.title(),
+        return 'Edit %s: %s' % (self.object._meta.verbose_name.title(),
                                 unicode(self.object))
 
 
