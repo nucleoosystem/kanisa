@@ -147,8 +147,10 @@ class ScheduledEvent(models.Model):
     title = models.CharField(max_length=60)
     date = models.DateField()
     start_time = models.TimeField(help_text='What time does the event start?')
-    duration = models.IntegerField(default=60,
-                                   help_text='Duration in minutes.')
+    duration = models.IntegerField(blank=True, null=True,
+                                   help_text=('Duration in minutes (leave '
+                                              'blank for unknown duration and '
+                                              'for multi-day events).'))
     contact = models.ForeignKey(EventContact,
                                 blank=True,
                                 null=True)
