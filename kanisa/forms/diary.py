@@ -21,19 +21,19 @@ class RegularEventForm(KanisaBaseForm):
                    'details': KanisaMainInputWidget(), }
 
 
-class ScheduledEventEditForm(KanisaBaseForm):
+class ScheduledEventBaseForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
 
+
+class ScheduledEventEditForm(ScheduledEventBaseForm):
     class Meta:
         model = ScheduledEvent
         exclude = ('event', )
         widgets = {'details': KanisaMainInputWidget(), }
 
 
-class ScheduledEventCreationForm(KanisaBaseForm):
-    start_time = BootstrapTimeField()
-    date = BootstrapDateField()
+class ScheduledEventCreationForm(ScheduledEventBaseForm):
     event = forms.ModelChoiceField(queryset=RegularEvent.objects.
                                    order_by('title').all(),
                                    required=False)
