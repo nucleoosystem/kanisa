@@ -151,6 +151,9 @@ class ScheduledEvent(models.Model):
                                    help_text=('Duration in minutes (leave '
                                               'blank for unknown duration and '
                                               'for multi-day events).'))
+    end_date = models.DateField(blank=True, null=True,
+                                help_text=('If an end date is specified, any '
+                                           'duration given will be ignored.'))
     contact = models.ForeignKey(EventContact,
                                 blank=True,
                                 null=True)

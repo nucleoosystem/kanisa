@@ -25,6 +25,33 @@ function on_event_type_selection_change() {
     title_input.attr("data-last-automatic-value", selection);
 }
 
+function on_event_multi_day_change() {
+    if ($(this).is(":checked")) {
+        $("#div_id_duration").slideUp();
+        $("#div_id_end_date").slideDown();
+    }
+    else {
+        $("#div_id_duration").slideDown();
+        $("#div_id_end_date").slideUp();
+    }
+}
+
+function set_initial_multiday_state() {
+    var end_date = $("#id_end_date").val();
+
+    if (end_date.length > 0) {
+        $("#id_is_multi_day").attr("checked", "checked");
+        $("#div_id_duration").hide();
+    }
+    else {
+        $("#id_is_multi_day").removeAttr("checked");
+        $("#div_id_end_date").hide();
+    }
+}
+
 $(function() {
     $("#id_event").change(on_event_type_selection_change);
+    $("#id_is_multi_day").change(on_event_multi_day_change);
+
+    set_initial_multiday_state();
 });
