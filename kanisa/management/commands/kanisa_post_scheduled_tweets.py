@@ -1,4 +1,5 @@
-import datetime, time
+import datetime
+import time
 from datetime import date
 from django.core.management.base import BaseCommand
 from kanisa.models import ScheduledTweet
@@ -13,6 +14,7 @@ def in_the_past(tweet):
         return True
 
     return False
+
 
 class Command(BaseCommand):
     help = 'Posts any scheduled tweets that are due for posting'
