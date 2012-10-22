@@ -1,5 +1,5 @@
 $(function() {
-    var last_set_value = ''
+    var last_automatic_event_title = ''
 
     $("#id_event").change(function() {
         var selection = $(this).find(":selected").text();
@@ -13,11 +13,11 @@ $(function() {
 
         var title_input = $("#id_title");
 
-        if (title_input.val() != last_set_value) {
+        if (title_input.val() != last_automatic_event_title) {
             return;
         }
 
         title_input.val(selection);
-        last_set_value = selection;
+        last_automatic_event_title = selection;
     });
 });
