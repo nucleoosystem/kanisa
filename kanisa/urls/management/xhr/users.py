@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr.users import AssignPermissionView
+import kanisa.views.xhr.users as views
 
 
 urlpatterns = patterns('',
                        url(r'^permissions/$',
-                           AssignPermissionView.as_view(),
+                           views.assign_permission,
                            {},
                            'kanisa_manage_xhr_assign_permission'),
                        )

@@ -40,6 +40,7 @@ class CreatePageView(XHRBasePostView):
                             draft=True)
 
         return HttpResponse("Page created.")
+create_page = CreatePageView.as_view()
 
 
 class ListPagesView(XHRBaseGetView):
@@ -60,3 +61,4 @@ class ListPagesView(XHRBaseGetView):
         response = {'page_table': page_table,
                     'options': options}
         return HttpResponse(json.dumps(response))
+list_pages = ListPagesView.as_view()

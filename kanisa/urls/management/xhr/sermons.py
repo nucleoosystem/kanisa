@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
+import kanisa.views.xhr.sermons as views
 
 
 urlpatterns = patterns('',
                        url(r'^markcomplete/$',
-                           MarkSermonSeriesCompleteView.as_view(),
+                           views.mark_complete,
                            {},
                            'kanisa_manage_xhr_sermon_series_complete'),
                        )

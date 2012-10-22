@@ -20,3 +20,4 @@ class MarkSermonSeriesCompleteView(XHRBasePostView):
         series.active = False
         series.save()
         return HttpResponse("Series marked complete.")
+mark_complete = MarkSermonSeriesCompleteView.as_view()

@@ -17,6 +17,7 @@ class ListNavigationView(XHRBaseGetView):
         return render_to_response(tmpl,
                                   {'object_list': elements},
                                   context_instance=RequestContext(request))
+list_navigation = ListNavigationView.as_view()
 
 
 class MoveNavigationElementBase(XHRBasePostView):
@@ -44,8 +45,10 @@ class MoveNavigationElementBase(XHRBasePostView):
 class MoveNavigationElementDownView(MoveNavigationElementBase):
     def move(self, element):
         element.move_down()
+move_navigation_down = MoveNavigationElementDownView.as_view()
 
 
 class MoveNavigationElementUpView(MoveNavigationElementBase):
     def move(self, element):
         element.move_up()
+move_navigation_up = MoveNavigationElementUpView.as_view()

@@ -1,15 +1,14 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr.pages import (CreatePageView,
-                                    ListPagesView)
+import kanisa.views.xhr.pages as views
 
 
 urlpatterns = patterns('',
                        url(r'^create/$',
-                           CreatePageView.as_view(),
+                           views.create_page,
                            {},
                            'kanisa_manage_xhr_create_page'),
                        url(r'^list/$',
-                           ListPagesView.as_view(),
+                           views.list_pages,
                            {},
                            'kanisa_manage_xhr_list_pages'),
                        )

@@ -48,3 +48,4 @@ class AssignPermissionView(XHRBasePostView):
         user.save()
 
         return HttpResponse(msg)
+assign_permission = AssignPermissionView.as_view()

@@ -36,6 +36,7 @@ class InlineImagesListView(XHRBaseGetView):
         return render_to_response(tmpl,
                                   {'page_obj': page},
                                   context_instance=RequestContext(request))
+list_inline_images = InlineImagesListView.as_view()
 
 
 class InlineImagesDetailView(XHRBaseGetView):
@@ -49,6 +50,7 @@ class InlineImagesDetailView(XHRBaseGetView):
         return render_to_response(tmpl,
                                   {'image': image},
                                   context_instance=RequestContext(request))
+inline_image_detail = InlineImagesDetailView.as_view()
 
 
 class AttachmentsListView(XHRBaseGetView):
@@ -60,3 +62,4 @@ class AttachmentsListView(XHRBaseGetView):
         return render_to_response(tmpl,
                                   {'object_list': documents},
                                   context_instance=RequestContext(request))
+list_attachments = AttachmentsListView.as_view()

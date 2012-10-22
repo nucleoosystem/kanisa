@@ -38,6 +38,7 @@ class ScheduleRegularEventView(XHRBasePostView):
             return HttpResponse("Event scheduled.")
         except event.AlreadyScheduled:
             return HttpResponseBadRequest("That event is already scheduled.")
+schedule_regular_events = ScheduleRegularEventView.as_view()
 
 
 class DiaryGetSchedule(XHRBaseGetView):
@@ -59,3 +60,4 @@ class DiaryGetSchedule(XHRBaseGetView):
         return render_to_response(tmpl,
                                   {'calendar': schedule.calendar_entries},
                                   context_instance=RequestContext(request))
+get_schedule_view = DiaryGetSchedule.as_view()

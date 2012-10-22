@@ -1,20 +1,18 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr.navigation import (ListNavigationView,
-                                         MoveNavigationElementDownView,
-                                         MoveNavigationElementUpView)
+import kanisa.views.xhr.navigation as views
 
 
 urlpatterns = patterns('',
                        url(r'^list/$',
-                           ListNavigationView.as_view(),
+                           views.list_navigation,
                            {},
                            'kanisa_manage_xhr_list_navigation'),
                        url(r'^up/$',
-                           MoveNavigationElementUpView.as_view(),
+                           views.move_navigation_up,
                            {},
                            'kanisa_manage_xhr_navigation_up'),
                        url(r'^down/$',
-                           MoveNavigationElementDownView.as_view(),
+                           views.move_navigation_down,
                            {},
                            'kanisa_manage_xhr_navigation_down'),
                        )
