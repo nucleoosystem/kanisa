@@ -39,12 +39,12 @@ class RegularEvent(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
     image = ImageField(upload_to='kanisa/diary/events/',
-                       help_text=u'Must be at least 200px by 200px.')
+                       help_text='Must be at least 200px by 200px.')
     slug = AutoSlugField(populate_from='title', unique=True)
     pattern = RecurrenceField(verbose_name='Timetable')
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
-                                   help_text=u'Duration in minutes.')
+                                   help_text='Duration in minutes.')
     contact = models.ForeignKey(EventContact,
                                 blank=True,
                                 null=True)
@@ -148,7 +148,7 @@ class ScheduledEvent(models.Model):
     date = models.DateField()
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
-                                   help_text=u'Duration in minutes.')
+                                   help_text='Duration in minutes.')
     contact = models.ForeignKey(EventContact,
                                 blank=True,
                                 null=True)
@@ -176,7 +176,7 @@ class ScheduledEvent(models.Model):
             return self.event.title
 
         # Hopefully this only occurs during event editing
-        return u'None'
+        return 'None'
 
 try:
     from south.modelsinspector import add_introspection_rules as air
