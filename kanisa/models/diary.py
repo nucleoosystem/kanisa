@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from autoslug import AutoSlugField
 from datetime import datetime, timedelta, time
 from django.db import models
