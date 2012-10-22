@@ -54,6 +54,7 @@ class BrandingManagementIndexView(BrandingBaseView,
         context['colours'] = colours
 
         return context
+branding_management = BrandingManagementIndexView.as_view()
 
 
 class BrandingManagementUpdateView(BrandingBaseView,
@@ -108,6 +109,7 @@ class BrandingManagementUpdateView(BrandingBaseView,
 
         return super(BrandingManagementUpdateView,
                      self).form_valid(form)
+branding_update = BrandingManagementUpdateView.as_view()
 
 
 class BrandingManagementUpdateColoursView(BrandingBaseView,
@@ -145,3 +147,4 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
 
         return super(BrandingManagementUpdateColoursView,
                      self).form_valid(form)
+branding_update_colours = BrandingManagementUpdateColoursView.as_view()

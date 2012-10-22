@@ -28,6 +28,7 @@ class NavigationElementIndexView(NavigationElementBaseView,
     template_name = 'kanisa/management/navigation/index.html'
     kanisa_title = 'Manage Navigation'
     kanisa_is_root_view = True
+navigation_management = NavigationElementIndexView.as_view()
 
 
 class NavigationElementCreateView(NavigationElementBaseView,
@@ -35,6 +36,7 @@ class NavigationElementCreateView(NavigationElementBaseView,
     form_class = NavigationElementForm
     kanisa_title = 'Create Navigation Element'
     success_url = reverse_lazy('kanisa_manage_navigation')
+navigation_create = NavigationElementCreateView.as_view()
 
 
 class NavigationElementUpdateView(NavigationElementBaseView,
@@ -42,6 +44,7 @@ class NavigationElementUpdateView(NavigationElementBaseView,
     form_class = NavigationElementForm
     model = NavigationElement
     success_url = reverse_lazy('kanisa_manage_navigation')
+navigation_update = NavigationElementUpdateView.as_view()
 
 
 class NavigationElementMoveDownView(NavigationElementBaseView,
@@ -60,6 +63,7 @@ class NavigationElementMoveDownView(NavigationElementBaseView,
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_navigation')
+navigation_move_down = NavigationElementMoveDownView.as_view()
 
 
 class NavigationElementMoveUpView(NavigationElementBaseView,
@@ -78,6 +82,7 @@ class NavigationElementMoveUpView(NavigationElementBaseView,
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_navigation')
+navigation_move_up = NavigationElementMoveUpView.as_view()
 
 
 class NavigationElementDeleteView(NavigationElementBaseView,
@@ -99,3 +104,4 @@ class NavigationElementDeleteView(NavigationElementBaseView,
             raise Http404
 
         return rval
+navigation_delete = NavigationElementDeleteView.as_view()

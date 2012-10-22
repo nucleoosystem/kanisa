@@ -1,14 +1,14 @@
 from django.conf.urls import patterns, url
-from kanisa.views.blocks import (BlockIndexView,
-                                 BlockUpdateView)
+import kanisa.views.blocks as views
+
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           BlockIndexView.as_view(),
+                           views.block_management,
                            {},
                            'kanisa_manage_blocks'),
                        url(r'^edit/(?P<slug>[a-z0-9-]+)/$',
-                           BlockUpdateView.as_view(),
+                           views.block_update,
                            {},
                            'kanisa_manage_blocks_update'),
                        )

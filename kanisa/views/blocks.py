@@ -43,6 +43,7 @@ class BlockIndexView(BlockBaseView,
         context['blocks'] = blocks
 
         return context
+block_management = BlockIndexView.as_view()
 
 
 class BlockUpdateView(BlockBaseView,
@@ -80,3 +81,4 @@ class BlockUpdateView(BlockBaseView,
             return self.referer
 
         return reverse_lazy('kanisa_manage_blocks')
+block_update = BlockUpdateView.as_view()

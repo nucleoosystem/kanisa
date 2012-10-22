@@ -24,6 +24,7 @@ class UserManagementView(UserBaseView,
     template_name = 'kanisa/management/users/index.html'
     kanisa_title = 'Manage Users'
     kanisa_is_root_view = True
+user_management = UserManagementView.as_view()
 
 
 class UserActivateView(UserBaseView,
@@ -51,3 +52,4 @@ class UserActivateView(UserBaseView,
         cache.delete('kanisa_inactive_users')
 
         return reverse('kanisa_manage_users')
+user_activate = UserActivateView.as_view()

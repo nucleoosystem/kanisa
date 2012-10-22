@@ -49,6 +49,7 @@ class SocialIndexView(SocialBaseView, KanisaTemplateView):
 
         context.update(self.get_twitter_context())
         return context
+social_management = SocialIndexView.as_view()
 
 
 class SocialTwitterIndexView(SocialBaseView, KanisaListView):
@@ -62,6 +63,7 @@ class SocialTwitterIndexView(SocialBaseView, KanisaListView):
 
         context.update(self.get_twitter_context())
         return context
+twitter_management = SocialTwitterIndexView.as_view()
 
 
 class ScheduledTweetCreateView(SocialBaseView, KanisaCreateView):
@@ -73,6 +75,7 @@ class ScheduledTweetCreateView(SocialBaseView, KanisaCreateView):
         initial = super(ScheduledTweetCreateView, self).get_initial()
         initial['time'] = time(17, 0, 0)
         return initial
+scheduled_tweet_create = ScheduledTweetCreateView.as_view()
 
 
 class ScheduledTweetUpdateView(SocialBaseView, KanisaUpdateView):
@@ -80,6 +83,7 @@ class ScheduledTweetUpdateView(SocialBaseView, KanisaUpdateView):
     queryset = ScheduledTweet.future_objects.all()
     success_url = reverse_lazy('kanisa_manage_social_twitter')
     kanisa_title = 'Edit Scheduled Tweet'
+scheduled_tweet_update = ScheduledTweetUpdateView.as_view()
 
 
 class ScheduledTweetDeleteView(SocialBaseView, KanisaDeleteView):
@@ -101,6 +105,7 @@ class ScheduledTweetDeleteView(SocialBaseView, KanisaDeleteView):
 
     def get_deletion_button_title(self):
         return 'Yes, delete this tweet'
+scheduled_tweet_delete = ScheduledTweetDeleteView.as_view()
 
 
 class SocialTwitterPostView(SocialBaseView, RedirectView):
@@ -123,3 +128,4 @@ class SocialTwitterPostView(SocialBaseView, RedirectView):
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_social')
+twitter_post = SocialTwitterPostView.as_view()

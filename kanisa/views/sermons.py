@@ -36,12 +36,14 @@ class SermonIndexView(SermonBaseView,
         context['standalone'] = Sermon.objects.filter(series__isnull=True)
 
         return context
+sermon_management = SermonIndexView.as_view()
 
 
 class SermonSeriesDetailView(SermonBaseView,
                              KanisaDetailView):
     model = SermonSeries
     template_name = 'kanisa/management/sermons/series_detail.html'
+sermon_series_detail = SermonSeriesDetailView.as_view()
 
 
 class SermonSeriesCreateView(SermonBaseView,
@@ -49,6 +51,7 @@ class SermonSeriesCreateView(SermonBaseView,
     form_class = SermonSeriesForm
     kanisa_title = 'Create a Sermon Series'
     success_url = reverse_lazy('kanisa_manage_sermons')
+sermon_series_create = SermonSeriesCreateView.as_view()
 
 
 class SermonSeriesUpdateView(SermonBaseView,
@@ -56,6 +59,7 @@ class SermonSeriesUpdateView(SermonBaseView,
     form_class = SermonSeriesForm
     model = SermonSeries
     success_url = reverse_lazy('kanisa_manage_sermons')
+sermon_series_update = SermonSeriesUpdateView.as_view()
 
 
 class SermonSeriesCompleteView(SermonBaseView,
@@ -67,10 +71,11 @@ class SermonSeriesCompleteView(SermonBaseView,
         series.active = False
         series.save()
 
-        message = u'Series "%s" marked as complete.' % unicode(series)
+        message = 'Series "%s" marked as complete.' % unicode(series)
         messages.success(self.request, message)
 
         return reverse('kanisa_manage_sermons')
+sermon_series_mark_complete = SermonSeriesCompleteView.as_view()
 
 
 class SermonCreateView(SermonBaseView,
@@ -102,6 +107,7 @@ class SermonCreateView(SermonBaseView,
             return reverse('kanisa_manage_sermons_series_detail',
                            args=[self.object.series.pk, ])
         return reverse('kanisa_manage_sermons')
+sermon_create = SermonCreateView.as_view()
 
 
 class SermonUpdateView(SermonBaseView,
@@ -114,6 +120,7 @@ class SermonUpdateView(SermonBaseView,
             return reverse('kanisa_manage_sermons_series_detail',
                            args=[self.object.series.pk, ])
         return reverse('kanisa_manage_sermons')
+sermon_update = SermonUpdateView.as_view()
 
 
 class SermonSpeakerIndexView(SermonBaseView,
@@ -123,6 +130,7 @@ class SermonSpeakerIndexView(SermonBaseView,
 
     template_name = 'kanisa/management/sermons/speakers.html'
     kanisa_title = 'Manage Speakers'
+sermon_speaker_management = SermonSpeakerIndexView.as_view()
 
 
 class SermonSpeakerCreateView(SermonBaseView,
@@ -130,6 +138,7 @@ class SermonSpeakerCreateView(SermonBaseView,
     form_class = SermonSpeakerForm
     kanisa_title = 'Add a Speaker'
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+sermon_speaker_create = SermonSpeakerCreateView.as_view()
 
 
 class SermonSpeakerUpdateView(SermonBaseView,
@@ -137,3 +146,4 @@ class SermonSpeakerUpdateView(SermonBaseView,
     form_class = SermonSpeakerForm
     model = SermonSpeaker
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+sermon_speaker_update = SermonSpeakerUpdateView.as_view()

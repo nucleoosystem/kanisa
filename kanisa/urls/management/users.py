@@ -1,14 +1,14 @@
 from django.conf.urls import patterns, url
-from kanisa.views.users import (UserManagementView,
-                                UserActivateView)
+import kanisa.views.users as views
+
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           UserManagementView.as_view(),
+                           views.user_management,
                            {},
                            'kanisa_manage_users'),
                        url(r'^activate/(?P<user_id>\d+)$',
-                           UserActivateView.as_view(),
+                           views.user_activate,
                            {},
                            'kanisa_manage_users_activate'),
                        )

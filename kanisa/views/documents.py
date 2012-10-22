@@ -24,6 +24,7 @@ class DocumentIndexView(DocumentBaseView,
     template_name = 'kanisa/management/documents/index.html'
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
+document_management = DocumentIndexView.as_view()
 
 
 class DocumentCreateView(DocumentBaseView,
@@ -35,6 +36,7 @@ class DocumentCreateView(DocumentBaseView,
         if self.is_popup():
             return DocumentFormSimple
         return DocumentForm
+document_create = DocumentCreateView.as_view()
 
 
 class DocumentUpdateView(DocumentBaseView,
@@ -42,6 +44,7 @@ class DocumentUpdateView(DocumentBaseView,
     form_class = DocumentForm
     model = Document
     success_url = reverse_lazy('kanisa_manage_documents')
+document_update = DocumentUpdateView.as_view()
 
 
 class DocumentDeleteView(DocumentBaseView,
@@ -55,3 +58,4 @@ class DocumentDeleteView(DocumentBaseView,
         message = '%s deleted.' % self.object
         messages.success(self.request, message)
         return reverse('kanisa_manage_documents')
+document_delete = DocumentDeleteView.as_view()

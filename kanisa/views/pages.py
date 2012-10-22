@@ -26,6 +26,7 @@ class PageIndexView(PageBaseView,
     template_name = 'kanisa/management/pages/index.html'
     kanisa_title = 'Manage Pages'
     kanisa_is_root_view = True
+page_management = PageIndexView.as_view()
 
 
 class PageCreateView(PageBaseView,
@@ -58,6 +59,7 @@ class PageCreateView(PageBaseView,
                     % (unicode(instance), element.parent.title))
         except NavigationElement.DoesNotExist:
             return 'Page "%s" created.' % unicode(instance)
+page_create = PageCreateView.as_view()
 
 
 class PageUpdateView(PageBaseView,
@@ -65,6 +67,7 @@ class PageUpdateView(PageBaseView,
     form_class = PageForm
     model = Page
     success_url = reverse_lazy('kanisa_manage_pages')
+page_update = PageUpdateView.as_view()
 
 
 class PageDeleteView(PageBaseView,
@@ -86,3 +89,4 @@ class PageDeleteView(PageBaseView,
             raise Http404
 
         return rval
+page_delete = PageDeleteView.as_view()

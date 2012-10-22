@@ -71,6 +71,7 @@ class DiaryEventIndexView(DiaryBaseView,
         context['events_to_schedule'] = schedule.events_to_schedule
 
         return context
+diary_management = DiaryEventIndexView.as_view()
 
 
 class DiaryRegularEventsView(DiaryBaseView,
@@ -78,6 +79,7 @@ class DiaryRegularEventsView(DiaryBaseView,
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
+diary_regular_events = DiaryRegularEventsView.as_view()
 
 
 class DiaryRegularEventCreateView(DiaryBaseView,
@@ -90,6 +92,7 @@ class DiaryRegularEventCreateView(DiaryBaseView,
         initial = super(DiaryRegularEventCreateView, self).get_initial()
         initial['start_time'] = time(9, 0, 0)
         return initial
+diary_regular_event_create = DiaryRegularEventCreateView.as_view()
 
 
 class DiaryRegularEventUpdateView(DiaryBaseView,
@@ -100,6 +103,7 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
     kanisa_form_warning = ('Changes made here will not affect events '
                            'already in the diary (whether they\'ve '
                            'happened already or not).')
+diary_regular_event_update = DiaryRegularEventUpdateView.as_view()
 
 
 class DiaryRegularEventBulkEditView(DiaryBaseView,
@@ -158,6 +162,7 @@ class DiaryRegularEventBulkEditView(DiaryBaseView,
         context['object'] = self.get_object()
 
         return context
+diary_regular_event_bulk_edit = DiaryRegularEventBulkEditView.as_view()
 
 
 class DiaryScheduledEventBaseView(DiaryBaseView):
@@ -187,6 +192,7 @@ class DiaryScheduledEventCreateView(DiaryScheduledEventBaseView,
                 pass
 
         return initial
+diary_scheduled_event_create = DiaryScheduledEventCreateView.as_view()
 
 
 class DiaryScheduledEventUpdateView(DiaryScheduledEventBaseView,
@@ -196,6 +202,7 @@ class DiaryScheduledEventUpdateView(DiaryScheduledEventBaseView,
 
     def get_success_url(self):
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
+diary_scheduled_event_update = DiaryScheduledEventUpdateView.as_view()
 
 
 class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
@@ -225,6 +232,7 @@ class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
 
     def get_success_url(self):
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
+diary_scheduled_event_clone = DiaryScheduledEventCloneView.as_view()
 
 
 class DiaryScheduleRegularEventView(DiaryBaseView,
@@ -255,6 +263,7 @@ class DiaryScheduleRegularEventView(DiaryBaseView,
             messages.info(self.request, message)
 
         return self.get_relative_root_url(thedate)
+diary_schedule_regular_event = DiaryScheduleRegularEventView.as_view()
 
 
 class DiaryScheduleWeeksRegularEventView(DiaryBaseView,
@@ -282,6 +291,7 @@ class DiaryScheduleWeeksRegularEventView(DiaryBaseView,
             messages.info(self.request, 'No events to schedule.')
 
         return self.get_relative_root_url()
+diary_schedule_weeks_events = DiaryScheduleWeeksRegularEventView.as_view()
 
 
 class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
@@ -309,6 +319,7 @@ class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
         messages.success(self.request, message)
 
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
+diary_cancel_scheduled_event = DiaryCancelScheduledEventView.as_view()
 
 
 class EventContactBaseView(DiaryBaseView):
@@ -323,6 +334,7 @@ class EventContactIndexView(EventContactBaseView,
 
     template_name = 'kanisa/management/diary/contacts.html'
     kanisa_title = 'Manage Contacts'
+diary_event_contact_management = EventContactIndexView.as_view()
 
 
 class EventContactCreateView(EventContactBaseView,
@@ -330,6 +342,7 @@ class EventContactCreateView(EventContactBaseView,
     form_class = EventContactForm
     kanisa_title = 'Add an Event Contact'
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+diary_event_contact_create = EventContactCreateView.as_view()
 
 
 class EventContactUpdateView(EventContactBaseView,
@@ -337,3 +350,4 @@ class EventContactUpdateView(EventContactBaseView,
     form_class = EventContactForm
     model = EventContact
     success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+diary_event_contact_update = EventContactUpdateView.as_view()

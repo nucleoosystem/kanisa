@@ -1,24 +1,22 @@
 from django.conf.urls import patterns, url
-from kanisa.views.pages import (PageIndexView,
-                                PageCreateView,
-                                PageUpdateView,
-                                PageDeleteView)
+import kanisa.views.pages as views
+
 
 urlpatterns = patterns('',
                        url(r'^$',
-                           PageIndexView.as_view(),
+                           views.page_management,
                            {},
                            'kanisa_manage_pages'),
                        url(r'^create/$',
-                           PageCreateView.as_view(),
+                           views.page_create,
                            {},
                            'kanisa_manage_pages_create'),
                        url(r'^edit/(?P<pk>\d+)$',
-                           PageUpdateView.as_view(),
+                           views.page_update,
                            {},
                            'kanisa_manage_pages_update'),
                        url(r'^delete/(?P<pk>\d+)$',
-                           PageDeleteView.as_view(),
+                           views.page_delete,
                            {},
                            'kanisa_manage_pages_delete'),
                        )

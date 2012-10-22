@@ -23,6 +23,7 @@ class MediaIndexView(MediaBaseView,
     template_name = 'kanisa/management/media/index.html'
     kanisa_title = 'Manage Media'
     kanisa_is_root_view = True
+media_management = MediaIndexView.as_view()
 
 
 class InlineImageCreateView(MediaBaseView,
@@ -30,6 +31,7 @@ class InlineImageCreateView(MediaBaseView,
     form_class = InlineImageForm
     kanisa_title = 'Upload an Inline Image'
     success_url = reverse_lazy('kanisa_manage_media')
+media_inline_image_create = InlineImageCreateView.as_view()
 
 
 class InlineImageUpdateView(MediaBaseView,
@@ -37,3 +39,4 @@ class InlineImageUpdateView(MediaBaseView,
     form_class = InlineImageForm
     model = InlineImage
     success_url = reverse_lazy('kanisa_manage_media')
+media_inline_image_update = InlineImageUpdateView.as_view()
