@@ -1,13 +1,10 @@
 from django.conf.urls import patterns, include, url
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
-from kanisa.views.xhr.users import AssignPermissionView
 
 
 urlpatterns = patterns('',
-                       url(r'^permissions/$',
-                           AssignPermissionView.as_view(),
-                           {},
-                           'kanisa_manage_xhr_assign_permission'),
+                       url(r'^users/',
+                           include('kanisa.urls.management.xhr.users')),
                        url(r'^navigation/',
                            include('kanisa.urls.management.xhr.navigation')),
                        url(r'^pages/',
