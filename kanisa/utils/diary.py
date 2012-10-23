@@ -83,8 +83,8 @@ class WeekSchedule(object):
 
         regular_events = RegularEvent.objects.all().order_by('start_time')
 
-        scheduled = ScheduledEvent.objects.filter(date__gte=self.monday,
-                                                  date__lte=self.sunday)
+        scheduled = ScheduledEvent.events_between(self.monday,
+                                                  self.sunday)
 
         self.calendar_entries = []
 

@@ -15,8 +15,8 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
 
     def get_this_week(self):
         monday, sunday = get_week_bounds()
-        events = ScheduledEvent.objects.filter(date__gte=monday,
-                                               date__lte=sunday)
+        events = ScheduledEvent.events_between(monday,
+                                               sunday)
 
         thisweek = []
 

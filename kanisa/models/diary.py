@@ -183,6 +183,13 @@ class ScheduledEvent(models.Model):
         # Hopefully this only occurs during event editing
         return 'None'
 
+    @classmethod
+    def events_between(cls, start_date, end_date):
+        events = ScheduledEvent.objects.filter(date__gte=start_date,
+                                               date__lte=end_date)
+        return events
+
+
 try:
     from south.modelsinspector import add_introspection_rules as air
     air([], ["^recurrence\.fields\.RecurrenceField"])
