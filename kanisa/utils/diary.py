@@ -21,6 +21,10 @@ def get_week_bounds(containing=None):
     return (monday, sunday)
 
 
+def event_covers_date(event, thedate):
+    return event.date == thedate
+
+
 class DaySchedule(object):
     def __init__(self, day, thedate, regular_events, scheduled_events):
         self.date = thedate
@@ -29,7 +33,7 @@ class DaySchedule(object):
         self.scheduled_events = []
 
         for event in scheduled_events:
-            if event.date != self.date:
+            if not event_covers_date(event, self.date):
                 continue
 
             self.scheduled_events.append(event)
