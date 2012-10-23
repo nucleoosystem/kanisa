@@ -83,9 +83,8 @@ class WeekSchedule(object):
 
         regular_events = RegularEvent.objects.all().order_by('start_time')
 
-        scheduled_events = ScheduledEvent.objects.\
-            exclude(date__lt=self.monday,
-                    date__gt=self.sunday)
+        scheduled = ScheduledEvent.objects.filter(date__gte=self.monday,
+                                                  date__lte=self.sunday)
 
         self.calendar_entries = []
 
@@ -96,7 +95,7 @@ class WeekSchedule(object):
             day_schedule = DaySchedule(i,
                                        this_date,
                                        regular_events,
-                                       scheduled_events)
+                                       scheduled)
             self.calendar_entries.append(day_schedule)
 
             if [s for s in day_schedule.regular_events if s.autoschedule]:
