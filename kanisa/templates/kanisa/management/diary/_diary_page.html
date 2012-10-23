@@ -40,23 +40,45 @@
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-      <div class="{% if not forloop.last %} notlast{% endif %}">{{ e.start_time }}</div>
+      <div class="{% if not forloop.last %} notlast{% endif %}">
+        {% if e.date == entry.date %}
+        {{ e.start_time }}
+        {% else %}
+        &nbsp;
+        {% endif %}
+      </div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.scheduled_events %}
-      <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a></div>
-      {% endfor %}
-      </td>
-      <td>
-      {% for e in entry.scheduled_events %}
-        <div class="{% if not forloop.last %} notlast{% endif %}"><a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-mini">Clone</a></div>
+      <div class="{% if not forloop.last %} notlast{% endif %}">
+        {% if e.date == entry.date %}
+        <a href="{% url 'kanisa_manage_diary_scheduled_update' e.pk %}">{{ e }}</a>
+        {% else %}
+        <span class="muted">{{ e }} <em>(contd.)</em></span>
+        {% endif %}
+      </div>
       {% endfor %}
       </td>
       <td>
       {% for e in entry.scheduled_events %}
         <div class="{% if not forloop.last %} notlast{% endif %}">
+          {% if e.date == entry.date %}
+          <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-mini">Clone</a>
+          {% else %}
+          &nbsp;
+          {% endif %}
+        </div>
+      {% endfor %}
+      </td>
+      <td>
+      {% for e in entry.scheduled_events %}
+        <div class="{% if not forloop.last %} notlast{% endif %}">
+          {% if e.date == entry.date %}
           <a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-mini btn-danger scheduled_event_cancel" data-event-title="{{ e.title }}">Cancel</a>
+          {% else %}
+          &nbsp;
+          {% endif %}
         </div>
       {% endfor %}
       </td>

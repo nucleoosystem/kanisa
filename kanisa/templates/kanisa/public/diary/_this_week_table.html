@@ -12,16 +12,26 @@
     <td style="vertical-align: middle">
       {% for item in items %}
       <span style="width: 5em; display:inline-block">
+        {% if item.date == date %}
         {{ item.start_time|date:"P" }}
+        {% else %}
+        &nbsp;
+        {% endif %}
       </span>
 
       {% if item.event %}
-      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}>
+      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
         {{ item }}
+        {% if item.date != date %}
+        <em>(contd.)</em>
+        {% endif %}
       </a>
       {% else %}
-      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}>
+      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
         {{ item }}
+        {% if item.date != date %}
+        <em>(contd.)</em>
+        {% endif %}
       </a>
       {% endif %}
 

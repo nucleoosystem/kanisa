@@ -22,6 +22,17 @@ def get_week_bounds(containing=None):
 
 
 def event_covers_date(event, thedate):
+    if event.end_date is not None:
+        # If the event starts after our target date, or ends before
+        # it, the event does not cover our target date. Otherwise, it
+        # does.
+        if event.date > thedate:
+            return False
+        if event.end_date < thedate:
+            return False
+
+        return True
+
     return event.date == thedate
 
 

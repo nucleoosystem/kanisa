@@ -2,7 +2,7 @@ from datetime import timedelta
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from kanisa.models import RegularEvent, ScheduledEvent
-from kanisa.utils.diary import get_week_bounds
+from kanisa.utils.diary import get_week_bounds, event_covers_date
 
 
 class DiaryBaseView(object):
@@ -23,7 +23,8 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         for i in range(0, 7):
             thedate = monday + timedelta(days=i)
             thisweek.append((thedate,
-                            [e for e in events if e.date == thedate]))
+                            [e for e in events
+                             if event_covers_date(e, thedate)]))
 
         return thisweek
 
