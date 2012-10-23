@@ -29,10 +29,12 @@ function on_event_multi_day_change() {
     if ($(this).is(":checked")) {
         $("#div_id_duration").slideUp();
         $("#div_id_end_date").slideDown();
+        $("#id_duration").val("");
     }
     else {
         $("#div_id_duration").slideDown();
         $("#div_id_end_date").slideUp();
+        $("#id_end_date").val("");
     }
 }
 
