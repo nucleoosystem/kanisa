@@ -221,7 +221,7 @@ class DiaryScheduledEventTest(TestCase):
 
         # This one starts after the range we care about
         ScheduledEventFactory.create(date=date(2012, 6, 16),
-                                              end_date=date(2012, 6, 20))
+                                     end_date=date(2012, 6, 20))
 
         events = ScheduledEvent.events_between(date(2012, 6, 11),
                                                date(2012, 6, 15))
