@@ -39,15 +39,17 @@ function on_event_multi_day_change() {
 }
 
 function set_initial_multiday_state() {
+    var start_date = $("#id_date").val();
     var end_date = $("#id_end_date").val();
 
-    if (end_date.length > 0) {
+    if (start_date != end_date) {
         $("#id_is_multi_day").attr("checked", "checked");
         $("#div_id_duration").hide();
     }
     else {
         $("#id_is_multi_day").removeAttr("checked");
         $("#div_id_end_date").hide();
+        $("#id_end_date").val("");
     }
 }
 

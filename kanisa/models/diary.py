@@ -183,10 +183,16 @@ class ScheduledEvent(models.Model):
         # Hopefully this only occurs during event editing
         return 'None'
 
+    def save(self, *args, **kwargs):
+        if self.end_date is None:
+            self.end_date = self.date
+
+        super(ScheduledEvent, self).save(*args, **kwargs)
+
     @classmethod
     def events_between(cls, start_date, end_date):
-        events = ScheduledEvent.objects.filter(date__gte=start_date,
-                                               date__lte=end_date)
+        events = ScheduledEvent.objects.exclude(end_date__lt=start_date)
+        events = events.exclude(date__gt=end_date)
         return events
 
 

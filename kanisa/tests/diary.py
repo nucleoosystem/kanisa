@@ -147,3 +147,84 @@ class DiaryGetScheduleTest(TestCase):
         # events which are scheduled.
         self.assertEqual([len(e.scheduled_events) for e in entries],
                          [0, 1, 0, 0, 0, 0, 0])
+
+
+class ScheduledEventFactory(factory.Factory):
+    FACTORY_FOR = ScheduledEvent
+    title = factory.Sequence(lambda n: 'Event #' + n)
+    start_time = time(14, 0)
+    date = date(2012, 6, 15)
+
+
+class DiaryScheduledEventTest(TestCase):
+    def testUnicode(self):
+        event = ScheduledEventFactory.build(title='Afternoon Tea')
+        self.assertEqual(unicode(event), 'Afternoon Tea')
+
+    def testEndDate(self):
+        # end_date should be auto-populated
+        event1 = ScheduledEventFactory.create()
+        self.assertEqual(event1.end_date, date(2012, 6, 15))
+
+    def testEventsBetween(self):
+        event1 = ScheduledEventFactory.create(title='1')
+        event2 = ScheduledEventFactory.create(title='2',
+                                              date=date(2012, 6, 12))
+        event3 = ScheduledEventFactory.create(title='3',
+                                              date=date(2012, 6, 19))
+        early_event = ScheduledEventFactory.create(title='early',
+                                                   date=date(2012, 6, 11))
+        late_event = ScheduledEventFactory.create(title='late',
+                                                  date=date(2012, 6, 20))
+
+        events = ScheduledEvent.events_between(date(2012, 6, 12),
+                                               date(2012, 6, 19))
+
+        self.assertEqual(list(events),
+                         [event2, event1, event3, ])
+
+        events = ScheduledEvent.events_between(date(2012, 6, 11),
+                                               date(2012, 6, 15))
+
+        self.assertEqual(list(events),
+                         [early_event, event2, event1, ])
+
+        events = ScheduledEvent.events_between(date(2012, 6, 12),
+                                               date(2012, 6, 20))
+
+        self.assertEqual(list(events),
+                         [event2, event1, event3, late_event, ])
+
+    def testEventsBetweenMultiDayDuring(self):
+        event1 = ScheduledEventFactory.create(end_date=date(2012, 6, 16))
+        events = ScheduledEvent.events_between(date(2012, 6, 11),
+                                               date(2012, 6, 15))
+
+        self.assertEqual(list(events),
+                         [event1, ])
+
+    def testEventsBetweenMultiDayBefore(self):
+        event1 = ScheduledEventFactory.create(date=date(2012, 6, 10),
+                                              end_date=date(2012, 6, 16))
+        # This one ends before the range we care about
+        ScheduledEventFactory.create(date=date(2012, 6, 9),
+                                     end_date=date(2012, 6, 10))
+
+        events = ScheduledEvent.events_between(date(2012, 6, 11),
+                                               date(2012, 6, 15))
+
+        self.assertEqual(list(events),
+                         [event1, ])
+
+    def testEventsBetweenMultiDayAfter(self):
+        event1 = ScheduledEventFactory.create(end_date=date(2012, 6, 20))
+
+        # This one starts after the range we care about
+        ScheduledEventFactory.create(date=date(2012, 6, 16),
+                                              end_date=date(2012, 6, 20))
+
+        events = ScheduledEvent.events_between(date(2012, 6, 11),
+                                               date(2012, 6, 15))
+
+        self.assertEqual(list(events),
+                         [event1, ])

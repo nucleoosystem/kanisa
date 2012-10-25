@@ -9,7 +9,8 @@ from .bible_passages import (BiblePassageBadInput,
                              BiblePassageModelField)
 from .diary import (DiaryTest,
                     DiaryGetWeekBoundsTest,
-                    DiaryGetScheduleTest)
+                    DiaryGetScheduleTest,
+                    DiaryScheduledEventTest)
 from .kanisa_markup import KanisaMarkupTest
 from .navigation import NavigationElementTest
 from .pages import (PageTest,
