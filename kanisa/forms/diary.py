@@ -52,22 +52,24 @@ class ScheduledEventBaseForm(KanisaBaseForm):
 
             if multiday:
                 if not ed:
-                    errors = ErrorList(['Multi-day events must have an end date'])
+                    errors = ErrorList(['Multi-day events must have an end '
+                                        'date'])
                     self._errors["is_multi_day"] = errors
                     del cleaned_data["is_multi_day"]
 
                 if ed and ed < sd:
-                    errors = ErrorList(['The event cannot end before it starts.'])
+                    errors = ErrorList(['The event cannot end before it '
+                                        'starts.'])
                     self._errors["end_date"] = errors
                     del cleaned_data["end_date"]
 
             if not multiday and not duration:
-                errors = ErrorList(['Single-day events must have a duration.'])
+                errors = ErrorList(['Single-day events must have a '
+                                    'duration.'])
                 self._errors["duration"] = errors
                 del cleaned_data["duration"]
 
         return cleaned_data
-
 
     class Media:
         js = ('kanisa/js/scheduled_event.js', )

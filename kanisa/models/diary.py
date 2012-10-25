@@ -205,8 +205,10 @@ class ScheduledEvent(models.Model):
 
     def url(self):
         if not self.is_special():
-            return reverse('kanisa_public_diary_regularevent_detail', args=[self.event.slug, ])
-        return reverse('kanisa_public_diary_scheduledevent_detail', args=[self.pk, ])
+            return reverse('kanisa_public_diary_regularevent_detail',
+                           args=[self.event.slug, ])
+        return reverse('kanisa_public_diary_scheduledevent_detail',
+                       args=[self.pk, ])
 
     @classmethod
     def events_between(cls, start_date, end_date):
