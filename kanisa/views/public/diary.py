@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from kanisa.models import RegularEvent, ScheduledEvent
@@ -55,8 +56,16 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
 
 
 class ScheduledEventDetailView(DiaryBaseView, DetailView):
-    queryset = ScheduledEvent.objects.filter(event__isnull=True)
+    model = ScheduledEvent
     template_name = 'kanisa/public/diary/scheduledevent.html'
+
+    def get_object(self, queryset=None):
+        object = super(ScheduledEventDetailView, self).get_object(queryset)
+
+        if object.event:
+            raise Http404("You can't view details for regular events.")
+
+        return object
 
     def get_context_data(self, **kwargs):
         context = super(ScheduledEventDetailView,
