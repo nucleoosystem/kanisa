@@ -1,15 +1,10 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
 {% load kanisa_markup %}
-{% load url from future %}
 
 {% block title %}
 
-{% if object.event %}
-<a href="{% url 'kanisa_public_diary_regularevent_detail' object.event.slug %}">{{ object.title }}</a>
-{% else %}
-<a href="{% url 'kanisa_public_diary_scheduledevent_detail' object.pk %}">{{ object.title }}</a>
-{% endif %}
+<a href="{{ object.url }}">{{ object.title }}</a>
 
 <small>
   {{ object.date|date:"l, jS F Y" }} at

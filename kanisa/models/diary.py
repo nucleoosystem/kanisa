@@ -1,5 +1,6 @@
 from autoslug import AutoSlugField
 from datetime import datetime, timedelta, time
+from django.core.urlresolvers import reverse
 from django.db import models
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
@@ -188,6 +189,11 @@ class ScheduledEvent(models.Model):
             self.end_date = self.date
 
         super(ScheduledEvent, self).save(*args, **kwargs)
+
+    def url(self):
+        if self.event:
+            return reverse('kanisa_public_diary_regularevent_detail', args=[self.event.slug, ])
+        return reverse('kanisa_public_diary_scheduledevent_detail', args=[self.pk, ])
 
     @classmethod
     def events_between(cls, start_date, end_date):

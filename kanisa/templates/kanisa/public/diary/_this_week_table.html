@@ -19,21 +19,12 @@
         {% endif %}
       </span>
 
-      {% if item.event %}
-      <a href="{% url 'kanisa_public_diary_regularevent_detail' item.event.slug %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
+      <a href="{{ item.url }}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
         {{ item }}
         {% if item.date != date %}
         <em>(contd.)</em>
         {% endif %}
       </a>
-      {% else %}
-      <a href="{% url 'kanisa_public_diary_scheduledevent_detail' item.pk %}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
-        {{ item }}
-        {% if item.date != date %}
-        <em>(contd.)</em>
-        {% endif %}
-      </a>
-      {% endif %}
 
       {% if not forloop.last %}<br />{% endif %}
 
