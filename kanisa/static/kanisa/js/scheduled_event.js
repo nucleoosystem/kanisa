@@ -42,7 +42,7 @@ function set_initial_multiday_state() {
     var start_date = $("#id_date").val();
     var end_date = $("#id_end_date").val();
 
-    if (start_date != end_date) {
+    if (start_date != end_date && end_date.length > 0) {
         $("#id_is_multi_day").attr("checked", "checked");
         $("#div_id_duration").hide();
     }
