@@ -27,8 +27,15 @@
       {{ object.title }}
     </h1>
 
-    <p class="lead">{{ object.title }} is on {{ object.date|date:"jS F Y" }}
-      at {{ object.start_time }}</p>
+    <p class="lead">
+      {% if object.date == object.end_date %}
+      {{ object.title }} is on {{ object.date|date:"jS F Y" }}
+{% else %}
+      {{ object.title }} begins on {{ object.date|date:"jS F Y" }}
+      at {{ object.start_time }}
+      and finishes on {{ object.end_date|date:"jS F" }}.
+      {% endif %}
+    </p>
 
     {% if object.details %}
     {{ object.details|kanisa_markdown }}
