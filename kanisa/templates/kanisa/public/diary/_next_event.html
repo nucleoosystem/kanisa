@@ -21,16 +21,18 @@
   {% endif %}
 </p>
 
-{% if object.intro != next_event.intro %}
-{% if next_event.intro %}
-<p>{{ next_event.intro }}</p>
-{% endif %}
+{% if next_event.intro != object.intro %}
+<p>
+  <em>{{ next_event.intro }}</em>
+</p>
 {% endif %}
 
-{% if object.details != next_event.details %}
-{% if next_event.details %}
-{{ next_event.details|kanisa_markdown }}
-{% endif %}
+{% if next_event.is_special %}
+<p>
+  Find out more about
+  <a href="{{ next_event.url }}" title="Find out more">
+    the next {{ next_event.title }}</a>.
+</p>
 {% endif %}
 
 {% if perms.kanisa.manage_diary %}

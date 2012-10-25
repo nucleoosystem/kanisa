@@ -190,8 +190,21 @@ class ScheduledEvent(models.Model):
 
         super(ScheduledEvent, self).save(*args, **kwargs)
 
+    def is_special(self):
+        if not self.event:
+            return True
+
+        if self.end_date and self.end_date != self.date:
+            return True
+
+        if self.event and self.details:
+            if self.event.details != self.details:
+                return True
+
+        return False
+
     def url(self):
-        if self.event:
+        if not self.is_special():
             return reverse('kanisa_public_diary_regularevent_detail', args=[self.event.slug, ])
         return reverse('kanisa_public_diary_scheduledevent_detail', args=[self.pk, ])
 

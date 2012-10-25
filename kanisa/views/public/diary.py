@@ -62,8 +62,9 @@ class ScheduledEventDetailView(DiaryBaseView, DetailView):
     def get_object(self, queryset=None):
         object = super(ScheduledEventDetailView, self).get_object(queryset)
 
-        if object.event:
-            raise Http404("You can't view details for regular events.")
+        if not object.is_special():
+            raise Http404("You can't view details for events that aren't "
+                          "special.")
 
         return object
 
