@@ -45,7 +45,10 @@ class ScheduledEventBaseForm(KanisaBaseForm):
         cleaned_data = self.cleaned_data
 
         if cleaned_data['end_date'] and cleaned_data['date']:
-            if cleaned_data['end_date'] < cleaned_data['date']:
+            sd = cleaned_data['date']
+            ed = cleaned_data['end_date']
+
+            if ed < sd:
                 errors = ErrorList(['The event cannot end before it starts.'])
                 self._errors["end_date"] = errors
                 del cleaned_data["end_date"]
