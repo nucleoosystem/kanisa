@@ -65,7 +65,7 @@ class SermonForm(KanisaBaseForm):
         super(SermonForm, self).clean()
         cleaned_data = self.cleaned_data
 
-        if u'mp3' in self.files:
+        if 'mp3' in self.files:
             if hasattr(self.files['mp3'], 'temporary_file_path'):
                 audio = MP3(self.files['mp3'].temporary_file_path())
             else:
@@ -74,7 +74,7 @@ class SermonForm(KanisaBaseForm):
                 audio = None
 
             if audio is None or not audio.info or audio.info.sketchy:
-                errors = ErrorList([u'Please upload a valid MP3.'])
+                errors = ErrorList(['Please upload a valid MP3.'])
                 self._errors["mp3"] = errors
                 del cleaned_data["mp3"]
             else:
