@@ -7,10 +7,18 @@
 
 <h3 style="margin-top: 0">Coming Up</h3>
 <p>
-  The next <em>{{ next_event.title }}</em> is on
+  The next <em>{{ next_event.title }}</em>
+  {% if next_event.date == next_event.end_date %}
+  is on
+  {% else %}
+  begins on
+  {% endif %}
   <strong>{{ next_event.date|date:"l, jS F Y" }}</strong>
   at
   <strong>{{ next_event.start_time }}</strong>
+  {% if next_event.date != next_event.end_date %}
+  and ends on <strong>{{ next_event.end_date|date:"l, jS F" }}</strong>.
+  {% endif %}
 </p>
 
 {% if object.intro != next_event.intro %}
