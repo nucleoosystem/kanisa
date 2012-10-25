@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.util import ErrorList
 from kanisa.forms import (KanisaBaseForm,
                           BootstrapTimeField,
                           BootstrapDateField)
@@ -38,6 +39,19 @@ class ScheduledEventBaseForm(KanisaBaseForm):
                          if x == 'start_time'][0]
         self.fields.keyOrder.pop()
         self.fields.keyOrder.insert(index_of_date + 1, 'is_multi_day')
+
+    def clean(self):
+        super(ScheduledEventBaseForm, self).clean()
+        cleaned_data = self.cleaned_data
+
+        if cleaned_data['end_date'] and cleaned_data['date']:
+            if cleaned_data['end_date'] < cleaned_data['date']:
+                errors = ErrorList(['The event cannot end before it starts.'])
+                self._errors["end_date"] = errors
+                del cleaned_data["end_date"]
+
+        return cleaned_data
+
 
     class Media:
         js = ('kanisa/js/scheduled_event.js', )
