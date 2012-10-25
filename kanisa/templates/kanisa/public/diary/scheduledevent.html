@@ -30,6 +30,7 @@
     <p class="lead">
       {% if object.date == object.end_date %}
       {{ object.title }} is on {{ object.date|date:"jS F Y" }}
+      at {{ object.start_time }}
       {% else %}
       {{ object.title }} begins on {{ object.date|date:"jS F Y" }}
       at {{ object.start_time }}
