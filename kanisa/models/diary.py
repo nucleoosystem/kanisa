@@ -36,9 +36,24 @@ class EventContact(models.Model):
         return self.name
 
 
+class EventCategory(models.Model):
+    title = models.CharField(max_length=30)
+
+    class Meta:
+        app_label = 'kanisa'
+        ordering = ('title', )
+        verbose_name_plural = 'Event categories'
+
+    def __unicode__(self):
+        return self.title
+
+
 class RegularEvent(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the event.')
+    categories = models.ManyToManyField(EventCategory,
+                                        verbose_name='Event Categories',
+                                        blank=True, null=True)
     image = ImageField(upload_to='kanisa/diary/events/',
                        help_text='Must be at least 200px by 200px.')
     slug = AutoSlugField(populate_from='title', unique=True)

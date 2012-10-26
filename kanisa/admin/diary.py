@@ -1,6 +1,9 @@
 from django.contrib import admin
 from kanisa.admin.base import KanisaBaseAdmin
-from kanisa.models import EventContact, RegularEvent, ScheduledEvent
+from kanisa.models import (EventContact,
+                           RegularEvent,
+                           ScheduledEvent,
+                           EventCategory)
 from sorl.thumbnail.admin import AdminImageMixin
 
 
@@ -28,3 +31,10 @@ class ScheduledEventAdmin(admin.ModelAdmin):
     list_display = ('title', 'event', 'date', )
 
 admin.site.register(ScheduledEvent, ScheduledEventAdmin)
+
+
+class EventCategoryAdmin(admin.ModelAdmin):
+    search_fields = ('title',)
+    list_display = ('title', )
+
+admin.site.register(EventCategory, EventCategoryAdmin)

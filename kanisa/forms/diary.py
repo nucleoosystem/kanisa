@@ -5,7 +5,10 @@ from kanisa.forms import (KanisaBaseForm,
                           BootstrapDateField)
 from kanisa.forms.widgets import (KanisaMainInputWidget,
                                   KanisaTinyInputWidget)
-from kanisa.models import EventContact, RegularEvent, ScheduledEvent
+from kanisa.models import (EventCategory,
+                           EventContact,
+                           RegularEvent,
+                           ScheduledEvent)
 
 
 class EventContactForm(KanisaBaseForm):
@@ -15,6 +18,12 @@ class EventContactForm(KanisaBaseForm):
 
 class RegularEventForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
+
+    def __init__(self, *args, **kwargs):
+        super(RegularEventForm, self).__init__(*args, **kwargs)
+
+        if len(EventCategory.objects.all()) == 0:
+            del self.fields['categories']
 
     class Meta:
         model = RegularEvent
