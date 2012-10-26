@@ -2,6 +2,13 @@
 
 {% load url from future %}
 
+{% block extrajs %}
+<script type="text/javascript">
+var update_regular_events_list = "{% url 'kanisa_public_diary_xhr_regular_events' %}";
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/regular_events.js"></script>
+{% endblock %}
+
 {% block precontent %}
 <ul class="breadcrumb">
   <li>
@@ -21,7 +28,25 @@
   </div>
   <div class="span8">
     <h1 class="primary">Regular Events</h1>
-    {% include 'kanisa/public/diary/_regular_event_list.html' %}
+    <strong>Filter down to events for:</strong>
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a href="#" class="event_category_filter" data-cat-id="0">
+          All
+        </a>
+      </li>
+      {% for category in event_categories %}
+      <li>
+        <a href="#" class="event_category_filter" data-cat-id="{{ category.pk }}">
+          {{ category }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div id="regular_event_list">
+      {% include 'kanisa/public/diary/_regular_event_list.html' %}
+    </div>
   </div>
 </div>
 </div>

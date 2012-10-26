@@ -2,7 +2,7 @@ from datetime import timedelta
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
-from kanisa.models import RegularEvent, ScheduledEvent
+from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
 from kanisa.utils.diary import get_week_bounds, event_covers_date
 
 
@@ -36,6 +36,7 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         context.update(self.get_diary_context_data())
         context['thisweek'] = self.get_this_week()
         context['kanisa_title'] = 'What\'s On'
+        context['event_categories'] = EventCategory.objects.all()
 
         return context
 
