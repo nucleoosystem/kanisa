@@ -18,4 +18,9 @@
     <p>{{ event.intro }}</p>
   </div>
   {% cycle '' '</div>' %}
+{% empty %}
+<p class="alert alert-info">
+  <strong>Sorry!</strong>
+  There are no events set up here yet.
+</p>
 {% endfor %}
