@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 from datetime import datetime, timedelta, time
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Count
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
@@ -36,8 +37,16 @@ class EventContact(models.Model):
         return self.name
 
 
+class EventCategoryManager(models.Manager):
+    def get_query_set(self):
+        qs = super(EventCategoryManager, self).get_query_set()
+        return qs.annotate(num_events=Count('regularevent'))
+
+
 class EventCategory(models.Model):
     title = models.CharField(max_length=30)
+
+    objects = EventCategoryManager()
 
     class Meta:
         app_label = 'kanisa'

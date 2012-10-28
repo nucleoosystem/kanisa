@@ -36,7 +36,8 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         context.update(self.get_diary_context_data())
         context['thisweek'] = self.get_this_week()
         context['kanisa_title'] = 'What\'s On'
-        context['event_categories'] = EventCategory.objects.all()
+        categories = EventCategory.objects.filter(num_events__gt=0)
+        context['event_categories'] = categories
 
         return context
 
