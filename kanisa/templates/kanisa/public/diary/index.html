@@ -28,6 +28,8 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_xhr_regular_events
   </div>
   <div class="span8">
     <h1 class="primary">Regular Events</h1>
+
+    {% if event_categories %}
     <strong>Filter down to events for:</strong>
     <ul class="nav nav-pills">
       <li class="active">
@@ -43,6 +45,7 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_xhr_regular_events
       </li>
       {% endfor %}
     </ul>
+    {% endif %}
 
     <div id="regular_event_list">
       {% include 'kanisa/public/diary/_regular_event_list.html' %}
