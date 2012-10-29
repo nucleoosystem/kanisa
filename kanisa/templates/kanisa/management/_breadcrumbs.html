@@ -15,6 +15,16 @@
     {% endif %}
   </li>
   {% endif %}
+
+  {% for crumb in kanisa_intermediate_crumbs %}
+  <li>
+    <span class="divider">/</span>
+    <a href="{{ crumb.url }}">
+    {{ crumb.title }}
+    </a>
+  </li>
+  {% endfor %}
+
   {% if kanisa_title and not kanisa_is_root_view %}
   <li>
     <span class="divider">/</span> {{ kanisa_title }}

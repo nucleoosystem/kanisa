@@ -74,15 +74,23 @@ class DiaryEventIndexView(DiaryBaseView,
 diary_management = DiaryEventIndexView.as_view()
 
 
+class DiaryRegularEventsBaseView(DiaryBaseView):
+    def get_kanisa_intermediate_crumbs(self):
+        return [{'url': reverse('kanisa_manage_diary_regularevents'),
+                 'title': 'Regular Events'},
+                ]
+
+
 class DiaryRegularEventsView(DiaryBaseView,
                              KanisaListView):
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
+
 diary_regular_events = DiaryRegularEventsView.as_view()
 
 
-class DiaryRegularEventCreateView(DiaryBaseView,
+class DiaryRegularEventCreateView(DiaryRegularEventsBaseView,
                                   KanisaCreateView):
     form_class = RegularEventForm
     kanisa_title = 'Create a Regular Event'
@@ -95,7 +103,7 @@ class DiaryRegularEventCreateView(DiaryBaseView,
 diary_regular_event_create = DiaryRegularEventCreateView.as_view()
 
 
-class DiaryRegularEventUpdateView(DiaryBaseView,
+class DiaryRegularEventUpdateView(DiaryRegularEventsBaseView,
                                   KanisaUpdateView):
     form_class = RegularEventForm
     model = RegularEvent
@@ -103,10 +111,11 @@ class DiaryRegularEventUpdateView(DiaryBaseView,
     kanisa_form_warning = ('Changes made here will not affect events '
                            'already in the diary (whether they\'ve '
                            'happened already or not).')
+
 diary_regular_event_update = DiaryRegularEventUpdateView.as_view()
 
 
-class DiaryRegularEventBulkEditView(DiaryBaseView,
+class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
                                     KanisaTemplateView):
     template_name = 'kanisa/management/diary/bulk_edit.html'
     model = RegularEvent
@@ -326,6 +335,11 @@ class EventContactBaseView(DiaryBaseView):
     kanisa_lead = ('Event contacts help people get in touch with the person '
                    'relevant to their questions about your events.')
 
+    def get_kanisa_intermediate_crumbs(self):
+        return [{'url': reverse('kanisa_manage_diary_contacts'),
+                 'title': 'Contacts'},
+                ]
+
 
 class EventContactIndexView(EventContactBaseView,
                             KanisaListView):
@@ -333,7 +347,11 @@ class EventContactIndexView(EventContactBaseView,
     queryset = EventContact.objects.all()
 
     template_name = 'kanisa/management/diary/contacts.html'
-    kanisa_title = 'Manage Contacts'
+    kanisa_title = 'Contacts'
+
+    def get_kanisa_intermediate_crumbs(self):
+        return []
+
 diary_event_contact_management = EventContactIndexView.as_view()
 
 
