@@ -9,8 +9,12 @@ from django.views.generic.base import RedirectView
 from kanisa.forms.diary import (RegularEventForm,
                                 ScheduledEventEditForm,
                                 ScheduledEventCreationForm,
-                                EventContactForm)
-from kanisa.models import EventContact, RegularEvent, ScheduledEvent
+                                EventContactForm,
+                                EventCategoryForm)
+from kanisa.models import (EventContact,
+                           RegularEvent,
+                           ScheduledEvent,
+                           EventCategory)
 from kanisa.utils.diary import (get_schedule, get_week_bounds,
                                 datetime_to_string)
 from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
@@ -369,3 +373,43 @@ class EventContactUpdateView(EventContactBaseView,
     model = EventContact
     success_url = reverse_lazy('kanisa_manage_diary_contacts')
 diary_event_contact_update = EventContactUpdateView.as_view()
+
+
+class EventCategoryBaseView(DiaryBaseView):
+    kanisa_lead = ('Event categories help people find events relevant to '
+                   'them')
+
+    def get_kanisa_intermediate_crumbs(self):
+        return [{'url': reverse('kanisa_manage_diary_categories'),
+                 'title': 'Contacts'},
+                ]
+
+
+class EventCategoryIndexView(EventCategoryBaseView,
+                             KanisaListView):
+    model = EventCategory
+    queryset = EventCategory.objects.all()
+
+    template_name = 'kanisa/management/diary/categories.html'
+    kanisa_title = 'Categories'
+
+    def get_kanisa_intermediate_crumbs(self):
+        return []
+
+diary_event_category_management = EventCategoryIndexView.as_view()
+
+
+class EventCategoryCreateView(EventCategoryBaseView,
+                              KanisaCreateView):
+    form_class = EventCategoryForm
+    kanisa_title = 'Add an Event Category'
+    success_url = reverse_lazy('kanisa_manage_diary_categories')
+diary_event_category_create = EventCategoryCreateView.as_view()
+
+
+class EventCategoryUpdateView(EventCategoryBaseView,
+                              KanisaUpdateView):
+    form_class = EventCategoryForm
+    model = EventCategory
+    success_url = reverse_lazy('kanisa_manage_diary_categories')
+diary_event_category_update = EventCategoryUpdateView.as_view()

@@ -16,6 +16,11 @@ class EventContactForm(KanisaBaseForm):
         model = EventContact
 
 
+class EventCategoryForm(KanisaBaseForm):
+    class Meta:
+        model = EventCategory
+
+
 class RegularEventForm(KanisaBaseForm):
     start_time = BootstrapTimeField()
 

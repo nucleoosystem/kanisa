@@ -1,0 +1,42 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% load url from future %}
+{% load thumbnail %}
+
+{% block content %}
+{% include "kanisa/management/diary/_nav.html" with current="categories" %}
+
+<p>
+  <a href="{% url 'kanisa_manage_diary_categories_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Add an event category
+  </a>
+</p>
+<hr />
+
+{% if eventcategory_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Events</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in eventcategory_list %}
+    <tr>
+      <td><a href="{% url 'kanisa_manage_diary_categories_update' category.pk %}">{{ category.title }}</a></td>
+      <td>{{ category.num_events }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-info">
+  No categories have been created yet - why don't you <a href="{% url 'kanisa_manage_diary_categories_create' %}">create one</a>?
+</p>
+{% endif %}
+
+
+
+{% endblock %}
