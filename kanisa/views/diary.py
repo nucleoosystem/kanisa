@@ -341,7 +341,7 @@ class EventContactCreateView(EventContactBaseView,
                              KanisaCreateView):
     form_class = EventContactForm
     kanisa_title = 'Add an Event Contact'
-    success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+    success_url = reverse_lazy('kanisa_manage_diary_contacts')
 diary_event_contact_create = EventContactCreateView.as_view()
 
 
@@ -349,5 +349,5 @@ class EventContactUpdateView(EventContactBaseView,
                              KanisaUpdateView):
     form_class = EventContactForm
     model = EventContact
-    success_url = reverse_lazy('kanisa_manage_sermons_speaker')
+    success_url = reverse_lazy('kanisa_manage_diary_contacts')
 diary_event_contact_update = EventContactUpdateView.as_view()
