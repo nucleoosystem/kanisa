@@ -1,5 +1,7 @@
 from datetime import timedelta
 from django.http import Http404
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
@@ -29,7 +31,9 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
 
         return thisweek
 
-    def get_category(self, category_key):
+    def get_category(self, request):
+        category_key = request.GET.get('category', 0)
+
         try:
             category = int(category_key)
         except ValueError:
@@ -44,6 +48,25 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         except EventCategory.DoesNotExist:
             raise Http404("Non-existent category value provided.")
 
+    def get(self, request, *args, **kwargs):
+        self.category = self.get_category(request)
+        context = self.get_context_data(**kwargs)
+
+        if request.is_ajax():
+            req = RequestContext(request)
+            tmpl = 'kanisa/public/diary/_regular_event_list.html'
+            return render_to_response(tmpl,
+                                      context,
+                                      context_instance=req)
+
+        return self.render_to_response(context)
+
+    def get_events(self):
+        if self.category is None:
+            return None
+        else:
+            return self.category.regularevent_set.all()
+
     def get_context_data(self, **kwargs):
         context = super(DiaryIndexView,
                         self).get_context_data(**kwargs)
@@ -53,13 +76,13 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         context['kanisa_title'] = 'What\'s On'
         categories = EventCategory.objects.filter(num_events__gt=0)
         context['event_categories'] = categories
-        category = self.get_category(self.request.GET.get('category', 0))
-        context['category'] = category
+        context['category'] = self.category
 
-        if context['category'] is None:
+        events = self.get_events()
+        if events is None:
             context['events_to_display'] = context['events']
         else:
-            context['events_to_display'] = category.regularevent_set.all()
+            context['events_to_display'] = events
 
         return context
 

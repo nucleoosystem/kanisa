@@ -4,7 +4,7 @@ from django.http import (HttpResponse,
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from kanisa.models import RegularEvent, EventCategory
+from kanisa.models import RegularEvent
 from kanisa.utils.diary import get_schedule
 from kanisa.views.xhr.base import XHRBasePostView, XHRBaseGetView, BadArgument
 
@@ -61,37 +61,3 @@ class DiaryGetSchedule(XHRBaseGetView):
                                   {'calendar': schedule.calendar_entries},
                                   context_instance=RequestContext(request))
 get_schedule_view = DiaryGetSchedule.as_view()
-
-
-class DiaryGetRegularEvents(XHRBaseGetView):
-    permission = None
-    required_arguments = ['category', ]
-
-    def get_category(self, category_key):
-        try:
-            category = int(category_key)
-        except ValueError:
-            raise BadArgument("Bad category value '%s' provided."
-                              % category_key)
-
-        if category == 0:
-            return None
-
-        try:
-            return EventCategory.objects.get(pk=category)
-        except EventCategory.DoesNotExist:
-            raise BadArgument("Non-existent category value provided.")
-
-    def render(self, request, *args, **kwargs):
-        category = self.get_category(request.GET['category'])
-
-        if category is None:
-            events = RegularEvent.objects.all()
-        else:
-            events = category.regularevent_set.all()
-
-        tmpl = 'kanisa/public/diary/_regular_event_list.html'
-        return render_to_response(tmpl,
-                                  {'events_to_display': events},
-                                  context_instance=RequestContext(request))
-get_regular_events_view = DiaryGetRegularEvents.as_view()
