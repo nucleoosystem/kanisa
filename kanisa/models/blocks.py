@@ -7,6 +7,8 @@ KNOWN_BLOCKS = {
                  'Appears on the homepage at the top.'),
     'address': ('Address',
                 'Appears on the homepage under the contact us section.'),
+    'members_welcome': ('Members\' Welcome',
+                        'Appears after login by non-staff members.'),
 }
 
 

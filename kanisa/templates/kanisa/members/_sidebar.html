@@ -1,0 +1,18 @@
+{% load url from future %}
+
+<div class="sidebar-nav well">
+  <ul class="nav nav-list">
+    <li>
+      <a href="{% url 'kanisa_members_index' %}">
+        <i class="icon-home"></i>
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'kanisa_password_change' %}">
+        <i class="icon-lock"></i>
+        Change Password
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {% include "kanisa/_head.html" %}
+  {% block extrajs %}
+  {% endblock %}
+  </head>
+  <body>
+
+    <div class="container">
+      {% include "kanisa/_logo.html" %}
+      {% include "kanisa/_header.html" %}
+
+      {% block precontent %}
+      {% endblock %}
+
+      <div class="row">
+        <div class="span2">
+          {% block sidebar %}
+          {% include 'kanisa/members/_sidebar.html' %}
+          {% endblock %}
+        </div>
+
+        <div class="span10">
+          <h1>{% block pagetitle %}Hello!{% endblock %}</h1>
+
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

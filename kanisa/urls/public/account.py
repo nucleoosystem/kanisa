@@ -30,7 +30,7 @@ urlpatterns = patterns('',
                            password_change,
                            {'template_name': ('kanisa/management/'
                                               'password_reset.html'),
-                            'post_change_redirect': '/manage/',
+                            'post_change_redirect': '/members/',
                             'password_change_form': KanisaChangePasswordForm},
                            'kanisa_password_change'),
                        url(r'^recover/$',

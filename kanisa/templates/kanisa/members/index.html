@@ -1,0 +1,15 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% load kanisa_homepage %}
+
+{% block pagetitle %}
+<h1>Hello!</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="lead">
+  {% kanisa_content_block 'members_welcome' %}
+</div>
+
+{% endblock %}
