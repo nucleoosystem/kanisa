@@ -2,7 +2,7 @@
 {% load thumbnail %}
 {% load url from future %}
 
-{% for event in events %}
+{% for event in events_to_display %}
 {% cycle '<div class="row">' '' %}
   <div class="span4" style="margin-bottom: 1em">
     <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" style="float: left; margin: 0 10px 10px 0">

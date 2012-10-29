@@ -29,6 +29,21 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
 
         return thisweek
 
+    def get_category(self, category_key):
+        try:
+            category = int(category_key)
+        except ValueError:
+            raise Http404("Bad category value '%s' provided."
+                          % category_key)
+
+        if category == 0:
+            return None
+
+        try:
+            return EventCategory.objects.get(pk=category)
+        except EventCategory.DoesNotExist:
+            raise Http404("Non-existent category value provided.")
+
     def get_context_data(self, **kwargs):
         context = super(DiaryIndexView,
                         self).get_context_data(**kwargs)
@@ -38,6 +53,13 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         context['kanisa_title'] = 'What\'s On'
         categories = EventCategory.objects.filter(num_events__gt=0)
         context['event_categories'] = categories
+        category = self.get_category(self.request.GET.get('category', 0))
+        context['category'] = category
+
+        if context['category'] is None:
+            context['events_to_display'] = context['events']
+        else:
+            context['events_to_display'] = category.regularevent_set.all()
 
         return context
 

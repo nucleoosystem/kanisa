@@ -92,6 +92,6 @@ class DiaryGetRegularEvents(XHRBaseGetView):
 
         tmpl = 'kanisa/public/diary/_regular_event_list.html'
         return render_to_response(tmpl,
-                                  {'events': events},
+                                  {'events_to_display': events},
                                   context_instance=RequestContext(request))
 get_regular_events_view = DiaryGetRegularEvents.as_view()
