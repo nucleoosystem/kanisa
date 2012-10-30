@@ -1,0 +1,15 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+{% if document_list %}
+{% include 'kanisa/members/_document_table.html' %}
+{% else %}
+<div class="alert alert-warning">
+There are no documents to display.
+</div>
+{% endif %}
+
+{% endblock %}

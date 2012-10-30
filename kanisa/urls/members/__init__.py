@@ -7,4 +7,8 @@ urlpatterns = patterns('',
                            views.index,
                            {},
                            'kanisa_members_index'),
+                       url(r'^documents/$',
+                           views.documents,
+                           {},
+                           'kanisa_members_documents'),
                        )

@@ -1,0 +1,30 @@
+{% load url from future %}
+
+<table class="table table-striped kanisa_diary">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Uploaded</th>
+      <th>Modified</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for document in document_list %}
+    <tr>
+      <td>
+        {{ document.title }}
+      </td>
+      <td>
+        <abbr title="{{ document.created|date:"r"}}">
+          {{ document.created|timesince }} ago
+        </abbr>
+      </td>
+      <td>
+        <abbr title="{{ document.modified|date:"r"}}">
+          {{ document.modified|timesince }} ago
+        </abbr>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
