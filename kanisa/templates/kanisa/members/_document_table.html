@@ -1,5 +1,7 @@
 {% load url from future %}
 
+{% load kanisa_markup %}
+
 <table class="table table-striped kanisa_diary">
   <thead>
     <tr>
@@ -12,14 +14,26 @@
     {% for document in document_list %}
     <tr>
       <td>
-        <a href="{{ document.file.url }}">{{ document.title }}</a> ({{ document.extension_description }}, {{ document.file.size|filesizeformat }})
+        <strong>
+          <a href="{{ document.file.url }}">{{ document.title }}</a>
+        </strong>
+        ({{ document.extension_description }}, {{ document.file.size|filesizeformat }})
+        {% if document.details %}
+        <div class="document_details_short">
+          {{ document.details|kanisa_markdown|striptags|truncatewords_html:20 }}
+          <span class="muted">(Click to expand)</span>
+        </div>
+        <div class="document_details_full" style="display:none">
+          {{ document.details|kanisa_markdown }}
+        </div>
+        {% endif %}
       </td>
-      <td>
+      <td style="vertical-align: top; width:12em">
         <abbr title="{{ document.created|date:"r"}}">
           {{ document.created|timesince }} ago
         </abbr>
       </td>
-      <td>
+      <td style="vertical-align: top; width:12em">
         <abbr title="{{ document.modified|date:"r"}}">
           {{ document.modified|timesince }} ago
         </abbr>
@@ -28,3 +42,6 @@
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+</script>

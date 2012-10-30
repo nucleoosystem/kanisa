@@ -2,6 +2,11 @@
 
 {% load url from future %}
 
+{% block extrajs %}
+<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/members_documents.js"></script>
+{% endblock %}
+
+
 {% block content %}
 
 {% if document_list %}

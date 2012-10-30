@@ -174,3 +174,12 @@ textarea.kanisamaininputwidget {
 .lead .editable_block_btn {
     font-size: 11px;
 }
+
+.document_details_short:hover,
+.document_details_full:hover {
+    cursor: pointer;
+}
+
+.document_details_short span {
+    font-size: 90%;
+}
