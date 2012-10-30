@@ -23,7 +23,15 @@
 
         <div class="span10">
           {% include 'kanisa/management/_alerts.html' %}
-          <h1>{% block pagetitle %}Hello!{% endblock %}</h1>
+          <h1>
+            {% block pagetitle %}
+            {% if kanisa_title %}
+            {{ kanisa_title }}
+            {% else %}
+            Hello!
+            {% endif %}
+            {% endblock %}
+          </h1>
 
           {% block content %}
           {% endblock %}
