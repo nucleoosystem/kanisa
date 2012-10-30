@@ -12,4 +12,13 @@
   {% kanisa_content_block 'members_welcome' %}
 </div>
 
+<p>
+  You are logged in as <strong>{{ user.username }}</strong>.
+  {% if user.email %}
+  Your registered email address is <strong>{{ user.email }}</strong>.
+  {% else %}
+  We do not have an email address registered for you.
+  {% endif %}
+</p>
+
 {% endblock %}
