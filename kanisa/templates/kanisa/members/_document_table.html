@@ -12,7 +12,7 @@
     {% for document in document_list %}
     <tr>
       <td>
-        {{ document.title }}
+        <a href="{{ document.file.url }}">{{ document.title }}</a> ({{ document.extension_description }}, {{ document.file.size|filesizeformat }})
       </td>
       <td>
         <abbr title="{{ document.created|date:"r"}}">

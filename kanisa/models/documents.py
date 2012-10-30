@@ -2,6 +2,12 @@ from django.db import models
 import os
 
 
+KNOWN_EXTENSIONS = {'.doc': 'Word Document',
+                    '.pdf': 'PDF',
+                    '.xls': 'Excel Document',
+                    }
+
+
 class Document(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the document.')
@@ -23,6 +29,16 @@ class Document(models.Model):
 
     def file_name(self):
         return os.path.basename(self.file.name)
+
+    def extension_description(self):
+        prefix, extension = os.path.splitext(self.file.name)
+
+        extension = extension.lower()
+
+        if extension in KNOWN_EXTENSIONS:
+            return KNOWN_EXTENSIONS[extension]
+
+        return extension
 
     class Meta:
         # Need this because I've split up models.py into multiple
