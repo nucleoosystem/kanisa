@@ -20,7 +20,8 @@
           {% endfor %}
         </ul>
         {% if user.is_authenticated %}
-        <p class="navbar-text pull-right">Welcome, {{ user }}
+        <p class="navbar-text pull-right">Welcome,
+          <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
           (<a href="{% url 'kanisa_public_logout' %}">Logout</a>)
         </p>
         {% else %}
