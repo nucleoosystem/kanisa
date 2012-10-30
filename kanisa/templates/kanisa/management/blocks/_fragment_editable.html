@@ -1,9 +1,9 @@
 {% load kanisa_markup %}
 {% load url from future %}
 
-{{ block.contents|kanisa_markdown }}
-
-<a class="btn btn-mini" href="{% url 'kanisa_manage_blocks_update' slug %}">
+<div class="editable_block_wrapper">
+<a class="btn btn-mini editable_block_btn" href="{% url 'kanisa_manage_blocks_update' slug %}">
   <i class="icon icon-edit"></i>
-  Edit this block
 </a>
+{{ block.contents|kanisa_markdown }}
+</div>

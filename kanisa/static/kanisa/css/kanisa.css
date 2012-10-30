@@ -159,3 +159,18 @@ textarea.kanisamaininputwidget {
 .navbar-text a {
     color: inherit;
 }
+
+.editable_block_wrapper {
+    position: relative;
+}
+
+.editable_block_wrapper .editable_block_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.8;
+}
+
+.lead .editable_block_btn {
+    font-size: 11px;
+}
