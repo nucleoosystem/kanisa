@@ -199,6 +199,9 @@ class ScheduledEvent(models.Model):
         ordering = ('date', 'start_time')
 
     def __unicode__(self):
+        return self.get_title()
+
+    def get_title(self):
         if self.title:
             return self.title
 
