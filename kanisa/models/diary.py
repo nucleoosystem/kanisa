@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, time
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
+from django.utils import formats
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
@@ -199,7 +200,9 @@ class ScheduledEvent(models.Model):
         ordering = ('date', 'start_time')
 
     def __unicode__(self):
-        return self.get_title()
+        event_date = formats.date_format(self.date, "DATE_FORMAT")
+        return '%s (%s)' % (self.get_title(),
+                            event_date)
 
     def get_title(self):
         if self.title:
