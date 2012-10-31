@@ -41,6 +41,9 @@ class Service(models.Model):
     band_leader = models.ForeignKey(User)
     songs = models.ManyToManyField(Song, through='SongInService')
 
+    def __unicode__(self):
+        return unicode(self.event)
+
     class Meta:
         app_label = 'kanisa'
 
@@ -52,3 +55,4 @@ class SongInService(models.Model):
 
     class Meta:
         app_label = 'kanisa'
+        verbose_name = 'Song'
