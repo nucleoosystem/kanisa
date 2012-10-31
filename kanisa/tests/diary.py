@@ -39,12 +39,12 @@ class DiaryTest(TestCase):
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = ScheduledEvent.objects.get(pk=1)
-        self.assertEqual(instance.get_title(), 'Breakfast Club')
+        self.assertEqual(unicode(instance), 'Breakfast Club')
         instance.title = 'Special Breakfast'
         instance.save()
 
         instance = ScheduledEvent.objects.get(pk=1)
-        self.assertEqual(instance.get_title(), 'Special Breakfast')
+        self.assertEqual(unicode(instance), 'Special Breakfast')
 
     def testGetNextWithEventScheduled(self):
         tuesdays = "RRULE:FREQ=WEEKLY;BYDAY=TU"
@@ -157,9 +157,9 @@ class ScheduledEventFactory(factory.Factory):
 
 
 class DiaryScheduledEventTest(TestCase):
-    def testGetTitle(self):
+    def testUnicode(self):
         event = ScheduledEventFactory.build(title='Afternoon Tea')
-        self.assertEqual(event.get_title(), 'Afternoon Tea')
+        self.assertEqual(unicode(event), 'Afternoon Tea')
 
     def testEndDate(self):
         # end_date should be auto-populated
