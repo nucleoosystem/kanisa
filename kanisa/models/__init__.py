@@ -9,4 +9,5 @@ from .media import InlineImage
 from .navigation import NavigationElement
 from .pages import Page
 from .sermons import SermonSeries, Sermon, SermonSpeaker
+from .service import Composer, Song, SongInService, Service
 from .social import ScheduledTweet
