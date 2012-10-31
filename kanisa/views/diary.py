@@ -327,7 +327,7 @@ class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 
     def get_success_url(self):
-        message = u'%s cancelled on %s' % (unicode(self.object),
+        message = u'%s cancelled on %s' % (self.object.get_title(),
                                            self.get_date_string())
         messages.success(self.request, message)
 
