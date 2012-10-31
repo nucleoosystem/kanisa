@@ -23,9 +23,10 @@ admin.site.register(Song, SongAdmin)
 class SongInline(admin.TabularInline):
     model = SongInService
 
+
 class ServiceAdmin(KanisaBaseAdmin):
     inlines = [
         SongInline,
-        ]
+    ]
 
 admin.site.register(Service, ServiceAdmin)
