@@ -2,4 +2,14 @@
 
 {% block content %}
 
+
+{% if service_list %}
+{% include 'kanisa/members/services/_serviceplan_table.html' %}
+{% else %}
+<p class="alert alert-warning">
+  <strong>Sorry!</strong>
+  There aren't any service plans set up yet. Why not create one?
+</p>
+{% endif %}
+
 {% endblock %}

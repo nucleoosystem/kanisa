@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
 from kanisa.models import ScheduledEvent
@@ -36,10 +37,20 @@ class Song(models.Model):
         app_label = 'kanisa'
 
 
+class FutureServicesManager(models.Manager):
+    def get_query_set(self):
+        qs = super(FutureServicesManager, self).get_query_set()
+        qs = qs.filter(event__date__gte=date.today())
+        return qs
+
+
 class Service(models.Model):
     event = models.ForeignKey(ScheduledEvent)
     band_leader = models.ForeignKey(User)
     songs = models.ManyToManyField(Song, through='SongInService')
+
+    objects = models.Manager()
+    future_objects = FutureServicesManager()
 
     def __unicode__(self):
         return unicode(self.event)
