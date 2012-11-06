@@ -1,6 +1,8 @@
 {% extends 'kanisa/members/base.html' %}
 
 {% load kanisa_homepage %}
+{% load kanisa_tags %}
+{% load url from future %}
 
 {% block pagetitle %}
 <h1>Members&rsquo; Area</h1>
@@ -20,5 +22,15 @@
   We do not have an email address registered for you.
   {% endif %}
 </p>
+
+{% kanisa_is_permissioned_user as is_permissioned %}
+{% if is_permissioned %}
+<hr />
+
+<p class="muted">
+  Looking for the
+  <a href="{% url 'kanisa_manage_index' %}">site management area</a>?
+</p>
+{% endif %}
 
 {% endblock %}

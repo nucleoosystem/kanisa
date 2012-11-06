@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>
+      Event
+    </th>
+    <th>
+      Date
+    </th>
+    <th>
+      Last Modified
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    {% for plan in service_list %}
+    <tr>
+      <td>{{ plan.event }}</td>
+      <td>{{ plan.event.date }}</td>
+      <td>{{ plan.event.modified }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
