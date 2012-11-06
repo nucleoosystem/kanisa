@@ -12,4 +12,19 @@
 </p>
 {% endif %}
 
+<hr />
+
+{% if showing_all %}
+<p class="muted">
+  These are all the service plans. Want to <a href="?">just see plans
+  for upcoming services</a>?
+</p>
+
+{% else %}
+<p class="muted">
+  Not including past service plans. Want to <a href="?all=1">see old
+  plans too</a>?
+</p>
+{% endif %}
+
 {% endblock %}
