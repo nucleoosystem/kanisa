@@ -1,12 +1,7 @@
 from django.views.generic.base import TemplateView
 from kanisa.models import Document
-from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaListView)
-
-
-class MembersBaseView(KanisaAuthorizationMixin):
-    def authorization_check(self, user):
-        return user.is_active
+from kanisa.views.members.auth import MembersBaseView
+from kanisa.views.generic import KanisaListView
 
 
 class MembersIndexView(MembersBaseView, TemplateView):
