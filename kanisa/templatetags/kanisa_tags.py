@@ -1,6 +1,7 @@
 from django import template
 from django.contrib.auth.models import Permission
 from django.core.cache import cache
+from kanisa.utils.auth import has_any_kanisa_permission
 
 
 register = template.Library()
@@ -48,6 +49,14 @@ def kanisa_user_has_perm(context, perm):
     html_attr = ['%s="%s"' % (k, v) for k, v in attributes.items()]
 
     return input % ' '.join(html_attr)
+
+
+@register.assignment_tag(takes_context=True)
+def kanisa_is_permissioned_user(context):
+    if not 'user' in context:
+        return False
+
+    return has_any_kanisa_permission(context['user'])
 
 
 @register.filter
