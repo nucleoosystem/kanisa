@@ -123,7 +123,7 @@ class SermonManager(models.Manager):
 
 class PreachedSermonManager(SermonManager):
     def get_query_set(self):
-        qs = super(SermonManager, self).get_query_set()
+        qs = super(PreachedSermonManager, self).get_query_set()
         return qs.filter(date__lte=date.today())
 
 
