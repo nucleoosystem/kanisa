@@ -16,9 +16,15 @@
   <tbody>
     {% for plan in service_list %}
     <tr>
-      <td>{{ plan.event }}</td>
-      <td>{{ plan.event.date }}</td>
-      <td>{{ plan.event.modified }}</td>
+      <td>
+        {{ plan.event }}
+      </td>
+      <td>
+        {{ plan.event.date }}
+      </td>
+      <td>
+        {{ plan.event.modified }}
+      </td>
     </tr>
     {% endfor %}
   </tbody>
