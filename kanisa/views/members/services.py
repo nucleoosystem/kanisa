@@ -8,10 +8,7 @@ class MembersServicesView(MembersBaseView, KanisaListView):
     kanisa_title = 'Service Planning'
 
     def get_queryset(self):
-        show_all_arg = self.request.GET.get('all', 0)
-        self.show_all = show_all_arg == '1'
-
-        if self.show_all:
+        if self.kwargs['show_all']:
             return Service.objects.all()
         else:
             return Service.future_objects.all()
@@ -19,7 +16,7 @@ class MembersServicesView(MembersBaseView, KanisaListView):
     def get_context_data(self, **kwargs):
         context = super(MembersServicesView,
                         self).get_context_data(**kwargs)
-        context['showing_all'] = self.show_all
+        context['showing_all'] = self.kwargs['show_all']
         return context
 
 index = MembersServicesView.as_view()
