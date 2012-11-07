@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.utils import formats
 from kanisa.forms.services import AddSongToServiceForm
 from kanisa.models import Service
@@ -42,20 +43,23 @@ class AddSongView(MembersBaseView, KanisaFormView):
     form_class = AddSongToServiceForm
     template_name = 'kanisa/members/form.html'
 
-    def get_service(self):
-        if hasattr(self, 'service'):
-            return self.service
+    @property
+    def service(self):
+        if hasattr(self, "service_"):
+            return self.service_
 
-        self.service = get_object_or_404(Service,
+        self.service_ = get_object_or_404(Service,
                                          pk=int(self.kwargs['pk']))
 
-        return self.service
+        return self.service_
 
     def get_success_url(self):
         return '/'
 
     def get_kanisa_title(self):
-        import pdb; pdb.set_trace()
-        return 'Foobar'
+        formatted_date = formats.date_format(self.service.event.date,
+                                             "DATE_FORMAT")
+        return 'Add a song to %s (%s)' % (self.service.event.title,
+                                          formatted_date)
 
 add_song = AddSongView.as_view()
