@@ -69,5 +69,4 @@ class AddSongView(MembersBaseView, KanisaFormView):
                                              "DATE_FORMAT")
         return 'Add a song to %s (%s)' % (self.service.event.title,
                                           formatted_date)
-
 add_song = AddSongView.as_view()
