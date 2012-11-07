@@ -70,3 +70,4 @@ class SongInService(models.Model):
     class Meta:
         app_label = 'kanisa'
         verbose_name = 'Song'
+        ordering = ('order', )
