@@ -1,3 +1,5 @@
+{% load url from future %}
+
 {% if service_list %}
 <table class="table table-striped">
   <thead>
@@ -17,7 +19,7 @@
     {% for plan in service_list %}
     <tr>
       <td>
-        {{ plan.event }}
+        <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>
       <td>
         {{ plan.event.date }}

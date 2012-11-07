@@ -11,4 +11,8 @@ urlpatterns = patterns('',
                            views.index,
                            {'show_all': True},
                            'kanisa_members_services_index_all'),
+                       url(r'^service/(?P<pk>\d+)$',
+                           views.service_detail,
+                           {},
+                           'kanisa_members_services_detail'),
                        )

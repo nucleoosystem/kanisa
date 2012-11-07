@@ -1,0 +1,22 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% load url from future %}
+
+{% block content %}
+
+<p class="lead">
+  This is a service plan for <strong>{{ object.event.title }}</strong>
+  on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
+  about music should be directed to
+  <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>.
+</p>
+
+<ul class="pager">
+<li class="previous">
+<a href="{% url 'kanisa_members_services_index' %}">
+&larr; Back to the list of plans
+</a>
+</li>
+</ul>
+
+{% endblock %}
