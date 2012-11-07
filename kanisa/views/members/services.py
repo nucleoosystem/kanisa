@@ -19,7 +19,6 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
         return context
-
 index = ServiceIndexView.as_view()
 
 
@@ -33,5 +32,4 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
         title = 'Plan for %s (%s)' % (self.object.event.title,
                                       formatted_date)
         return title
-
 service_detail = ServiceDetailView.as_view()
