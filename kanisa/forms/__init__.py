@@ -61,8 +61,8 @@ class KanisaPrettyForm(object):
         helper = FormHelper()
 
         helper.add_input(Submit('submit',
-                                     self.get_submit_text(),
-                                     css_class=self.get_submit_css()))
+                                self.get_submit_text(),
+                                css_class=self.get_submit_css()))
         helper.form_class = 'form-horizontal'
         return helper
 
