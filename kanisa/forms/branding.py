@@ -1,10 +1,10 @@
 from django import forms
-from kanisa.forms import KanisaBaseModellessForm
+from kanisa.forms import KanisaBaseForm
 from kanisa.utils.branding import get_available_colours
 from PIL import Image
 
 
-class BrandingForm(KanisaBaseModellessForm, forms.Form):
+class BrandingForm(KanisaBaseForm, forms.Form):
     image = forms.FileField()
     submit_text = 'Update Image'
 
@@ -91,7 +91,7 @@ class FaviconBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
-class BrandingColoursForm(KanisaBaseModellessForm):
+class BrandingColoursForm(KanisaBaseForm):
     submit_text = 'Update Colours'
 
     def __init__(self, *args, **kwargs):

@@ -86,7 +86,7 @@ class KanisaBaseModelForm(KanisaPrettyForm, ModelForm):
         return 'Save %s' % self._meta.model._meta.verbose_name.title()
 
 
-class KanisaBaseModellessForm(KanisaPrettyForm, forms.Form):
+class KanisaBaseForm(KanisaPrettyForm, forms.Form):
     def __init__(self, *args, **kwargs):
         self.helper = self.get_form_helper()
-        super(KanisaBaseModellessForm, self).__init__(*args, **kwargs)
+        super(KanisaBaseForm, self).__init__(*args, **kwargs)
