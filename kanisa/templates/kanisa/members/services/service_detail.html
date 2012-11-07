@@ -11,7 +11,7 @@
   <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>.
 </p>
 
-{% include 'kanisa/members/services/_song_table.html' with songs=object.songs.all %}
+{% include 'kanisa/members/services/_song_table.html' with songs=object.songinservice_set.all %}
 
 <a class="btn btn-success" href="{% url 'kanisa_members_services_add_song' object.pk %}">
   <i class="icon-white icon-plus"></i>

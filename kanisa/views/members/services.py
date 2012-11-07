@@ -1,6 +1,9 @@
 from django.core.urlresolvers import reverse
+from django.db.models import Max
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.utils import formats
+from django.views.generic.base import View
 from kanisa.forms.services import AddSongToServiceForm
 from kanisa.models import Service, SongInService
 from kanisa.views.members.auth import MembersBaseView
@@ -55,9 +58,21 @@ class AddSongView(MembersBaseView, KanisaFormView):
         return self.service_
 
     def form_valid(self, form):
+        # This code has a race condition that I just don't care about
+        # very much.
+        qs = SongInService.objects.filter(service=self.service)
+        order = qs.aggregate(Max('order'))['order__max']
+
+        if order is None:
+            order = 0
+
+        order += 1
+
         sis = SongInService.objects.create(song=form.cleaned_data['song'],
-                                           service=self.service)
+                                           service=self.service,
+                                           order=order)
         self.service.songinservice_set.add(sis)
+
         return super(AddSongView, self).form_valid(form)
 
     def get_success_url(self):
@@ -70,3 +85,49 @@ class AddSongView(MembersBaseView, KanisaFormView):
         return 'Add a song to %s (%s)' % (self.service.event.title,
                                           formatted_date)
 add_song = AddSongView.as_view()
+
+
+class MoveSongDownView(MembersBaseView, View):
+    def post(self, request, *args, **kwargs):
+        service = get_object_or_404(Service,
+                                    pk=int(self.kwargs['service_pk']))
+
+        songs = service.songinservice_set.all()
+
+        pks = [song.pk for song in songs]
+
+        i = pks.index(int(self.kwargs['song_pk']))
+
+        if i == len(songs) - 1:
+            raise Http404("That song can't move down.")
+
+        songs[i].order, songs[i + 1].order = songs[i + 1].order, songs[i].order
+        songs[i].save()
+        songs[i + 1].save()
+
+        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
+                                            args=[service.pk, ]))
+move_down = MoveSongDownView.as_view()
+
+
+class MoveSongUpView(MembersBaseView, View):
+    def post(self, request, *args, **kwargs):
+        service = get_object_or_404(Service,
+                                    pk=int(self.kwargs['service_pk']))
+
+        songs = service.songinservice_set.all()
+
+        pks = [song.pk for song in songs]
+
+        i = pks.index(int(self.kwargs['song_pk']))
+
+        if i == 0:
+            raise Http404("That song can't move up.")
+
+        songs[i].order, songs[i - 1].order = songs[i - 1].order, songs[i].order
+        songs[i].save()
+        songs[i - 1].save()
+
+        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
+                                            args=[service.pk, ]))
+move_up = MoveSongUpView.as_view()
