@@ -1,6 +1,6 @@
 from django import forms
 from kanisa.forms import KanisaBaseForm
-from kanisa.models import Service, Song
+from kanisa.models import Song
 
 
 class AddSongToServiceForm(KanisaBaseForm):
