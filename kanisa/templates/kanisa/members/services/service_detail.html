@@ -13,6 +13,11 @@
 
 {% include 'kanisa/members/services/_song_table.html' with songs=object.songs.all %}
 
+<a class="btn btn-success" href="{% url 'kanisa_members_services_add_song' object.pk %}">
+  <i class="icon-white icon-plus"></i>
+  Add a song to this service plan
+</a>
+
 <ul class="pager">
 <li class="previous">
 <a href="{% url 'kanisa_members_services_index' %}">

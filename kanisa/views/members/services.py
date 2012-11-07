@@ -1,7 +1,10 @@
 from django.utils import formats
+from kanisa.forms.services import AddSongToServiceForm
 from kanisa.models import Service
 from kanisa.views.members.auth import MembersBaseView
-from kanisa.views.generic import KanisaListView, KanisaDetailView
+from kanisa.views.generic import (KanisaListView,
+                                  KanisaDetailView,
+                                  KanisaFormView)
 
 
 class ServiceIndexView(MembersBaseView, KanisaListView):
@@ -33,3 +36,26 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
                                       formatted_date)
         return title
 service_detail = ServiceDetailView.as_view()
+
+
+class AddSongView(MembersBaseView, KanisaFormView):
+    form_class = AddSongToServiceForm
+    template_name = 'kanisa/members/form.html'
+
+    def get_service(self):
+        if hasattr(self, 'service'):
+            return self.service
+
+        self.service = get_object_or_404(Service,
+                                         pk=int(self.kwargs['pk']))
+
+        return self.service
+
+    def get_success_url(self):
+        return '/'
+
+    def get_kanisa_title(self):
+        import pdb; pdb.set_trace()
+        return 'Foobar'
+
+add_song = AddSongView.as_view()
