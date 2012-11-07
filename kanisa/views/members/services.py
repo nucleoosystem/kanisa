@@ -3,7 +3,7 @@ from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import KanisaListView
 
 
-class MembersServicesView(MembersBaseView, KanisaListView):
+class ServiceIndexView(MembersBaseView, KanisaListView):
     template_name = 'kanisa/members/services/index.html'
     kanisa_title = 'Service Planning'
 
@@ -14,9 +14,9 @@ class MembersServicesView(MembersBaseView, KanisaListView):
             return Service.future_objects.all()
 
     def get_context_data(self, **kwargs):
-        context = super(MembersServicesView,
+        context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
         return context
 
-index = MembersServicesView.as_view()
+index = ServiceIndexView.as_view()
