@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.util import ErrorList
-from kanisa.forms import (KanisaBaseForm,
+from kanisa.forms import (KanisaBaseModelForm,
                           BootstrapTimeField,
                           BootstrapDateField)
 from kanisa.forms.widgets import (KanisaMainInputWidget,
@@ -11,17 +11,17 @@ from kanisa.models import (EventCategory,
                            ScheduledEvent)
 
 
-class EventContactForm(KanisaBaseForm):
+class EventContactForm(KanisaBaseModelForm):
     class Meta:
         model = EventContact
 
 
-class EventCategoryForm(KanisaBaseForm):
+class EventCategoryForm(KanisaBaseModelForm):
     class Meta:
         model = EventCategory
 
 
-class RegularEventForm(KanisaBaseForm):
+class RegularEventForm(KanisaBaseModelForm):
     start_time = BootstrapTimeField()
 
     def __init__(self, *args, **kwargs):
@@ -36,7 +36,7 @@ class RegularEventForm(KanisaBaseForm):
                    'details': KanisaMainInputWidget(), }
 
 
-class ScheduledEventBaseForm(KanisaBaseForm):
+class ScheduledEventBaseForm(KanisaBaseModelForm):
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
     end_date = BootstrapDateField(required=False)

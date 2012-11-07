@@ -1,7 +1,7 @@
-from kanisa.forms import KanisaBaseForm
+from kanisa.forms import KanisaBaseModelForm
 from kanisa.models import InlineImage
 
 
-class InlineImageForm(KanisaBaseForm):
+class InlineImageForm(KanisaBaseModelForm):
     class Meta:
         model = InlineImage

@@ -1,9 +1,9 @@
 from kanisa.models import Banner
-from kanisa.forms import KanisaBaseForm, BootstrapDateField
+from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
 from kanisa.forms.widgets import KanisaIntroInputWidget
 
 
-class BannerForm(KanisaBaseForm):
+class BannerForm(KanisaBaseModelForm):
     publish_from = BootstrapDateField(required=False,
                                       help_text=('The date at which your '
                                                  'banner will become visible '

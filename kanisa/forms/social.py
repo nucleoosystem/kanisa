@@ -1,13 +1,13 @@
 from datetime import datetime
 from django import forms
-from kanisa.forms import (KanisaBaseForm,
+from kanisa.forms import (KanisaBaseModelForm,
                           BootstrapDateField,
                           BootstrapTimeField)
 from kanisa.forms.widgets import KanisaTinyInputWidget
 from kanisa.models import ScheduledTweet
 
 
-class ScheduledTweetForm(KanisaBaseForm):
+class ScheduledTweetForm(KanisaBaseModelForm):
     date = BootstrapDateField()
     time = BootstrapTimeField()
 

@@ -1,15 +1,15 @@
-from kanisa.forms import KanisaBaseForm
+from kanisa.forms import KanisaBaseModelForm
 from kanisa.forms.widgets import KanisaMainInputWidget
 from kanisa.models import Document
 
 
-class DocumentForm(KanisaBaseForm):
+class DocumentForm(KanisaBaseModelForm):
     class Meta:
         model = Document
         widgets = {'details': KanisaMainInputWidget(), }
 
 
-class DocumentFormSimple(KanisaBaseForm):
+class DocumentFormSimple(KanisaBaseModelForm):
     class Meta:
         model = Document
         exclude = ('details', 'public', )

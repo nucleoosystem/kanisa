@@ -77,10 +77,10 @@ class KanisaPrettyForm(object):
                                    "defined.")
 
 
-class KanisaBaseForm(KanisaPrettyForm, ModelForm):
+class KanisaBaseModelForm(KanisaPrettyForm, ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = self.get_form_helper()
-        super(KanisaBaseForm, self).__init__(*args, **kwargs)
+        super(KanisaBaseModelForm, self).__init__(*args, **kwargs)
 
     def get_submit_text(self):
         return 'Save %s' % self._meta.model._meta.verbose_name.title()

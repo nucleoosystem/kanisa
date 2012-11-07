@@ -1,7 +1,7 @@
-from kanisa.forms import KanisaBaseForm
+from kanisa.forms import KanisaBaseModelForm
 from kanisa.models import NavigationElement
 
 
-class NavigationElementForm(KanisaBaseForm):
+class NavigationElementForm(KanisaBaseModelForm):
     class Meta:
         model = NavigationElement

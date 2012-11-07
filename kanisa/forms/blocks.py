@@ -1,10 +1,10 @@
 from django import forms
-from kanisa.forms import KanisaBaseForm
+from kanisa.forms import KanisaBaseModelForm
 from kanisa.forms.widgets import KanisaMainInputWidget
 from kanisa.models import Block
 
 
-class BlockForm(KanisaBaseForm):
+class BlockForm(KanisaBaseModelForm):
     referer = forms.CharField(widget=forms.HiddenInput, required=False)
 
     class Meta:

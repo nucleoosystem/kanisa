@@ -1,7 +1,7 @@
 from django.forms.util import ErrorList
 
 from kanisa import conf
-from kanisa.forms import KanisaBaseForm, BootstrapDateField
+from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
 from kanisa.forms.widgets import KanisaMainInputWidget
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
@@ -12,18 +12,18 @@ from kanisa.models import (SermonSeries,
                            SermonSpeaker)
 
 
-class SermonSeriesForm(KanisaBaseForm):
+class SermonSeriesForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSeries
         widgets = {'details': KanisaMainInputWidget(), }
 
 
-class SermonSpeakerForm(KanisaBaseForm):
+class SermonSpeakerForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSpeaker
 
 
-class SermonForm(KanisaBaseForm):
+class SermonForm(KanisaBaseModelForm):
     date = BootstrapDateField()
 
     class Meta:
