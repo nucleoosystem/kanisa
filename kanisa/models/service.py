@@ -67,6 +67,9 @@ class SongInService(models.Model):
     service = models.ForeignKey(Service)
     order = models.IntegerField(default=1)
 
+    def __unicode__(self):
+        return '%s (%s)' % (self.song, self.service)
+
     class Meta:
         app_label = 'kanisa'
         verbose_name = 'Song'
