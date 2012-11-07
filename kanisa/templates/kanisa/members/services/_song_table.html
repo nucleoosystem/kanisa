@@ -1,0 +1,23 @@
+{% if songs %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Composers</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in songs %}
+    <tr>
+      <td>{{ song.title }}</td>
+      <td>{{ song.composer_list|join:", " }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-warning">
+  <strong>Sorry!</strong>
+  There are no songs associated with this service plan. Why not add one?
+</p>
+{% endif %}

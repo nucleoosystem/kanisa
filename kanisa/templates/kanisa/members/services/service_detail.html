@@ -11,6 +11,8 @@
   <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>.
 </p>
 
+{% include 'kanisa/members/services/_song_table.html' with songs=object.songs.all %}
+
 <ul class="pager">
 <li class="previous">
 <a href="{% url 'kanisa_members_services_index' %}">

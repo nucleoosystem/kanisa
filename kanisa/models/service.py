@@ -33,6 +33,9 @@ class Song(models.Model):
     def __unicode__(self):
         return self.title
 
+    def composer_list(self):
+        return list(self.composers.all())
+
     class Meta:
         app_label = 'kanisa'
 
