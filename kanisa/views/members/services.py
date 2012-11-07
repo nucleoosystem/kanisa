@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import formats
 from kanisa.forms.services import AddSongToServiceForm
@@ -54,7 +55,8 @@ class AddSongView(MembersBaseView, KanisaFormView):
         return self.service_
 
     def get_success_url(self):
-        return '/'
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
 
     def get_kanisa_title(self):
         formatted_date = formats.date_format(self.service.event.date,
