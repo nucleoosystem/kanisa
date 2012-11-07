@@ -4,7 +4,7 @@ from kanisa.utils.branding import get_available_colours
 from PIL import Image
 
 
-class BrandingForm(KanisaBaseForm, forms.Form):
+class BrandingForm(KanisaBaseForm):
     image = forms.FileField()
     submit_text = 'Update Image'
 
