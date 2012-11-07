@@ -1,6 +1,6 @@
 from django import forms
+from django.core.exceptions import ImproperlyConfigured
 from django.forms import ModelForm
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -56,11 +56,7 @@ class BootstrapDateField(forms.DateField):
         super(BootstrapDateField, self).__init__(*args, **kwargs)
 
 
-class KanisaBaseForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.helper = self.get_form_helper()
-        super(KanisaBaseForm, self).__init__(*args, **kwargs)
-
+class KanisaPrettyForm(object):
     def get_form_helper(self):
         helper = FormHelper()
 
@@ -70,8 +66,21 @@ class KanisaBaseForm(ModelForm):
         helper.form_class = 'form-horizontal'
         return helper
 
-    def get_submit_text(self):
-        return 'Save %s' % self._meta.model._meta.verbose_name.title()
-
     def get_submit_css(self):
         return "btn-primary btn-large btn-success"
+
+    def get_submit_text(self):
+        if hasattr(self, 'submit_text'):
+            return self.submit_text
+
+        raise ImproperlyConfigured("Pretty forms must have submit_text "
+                                   "defined.")
+
+
+class KanisaBaseForm(KanisaPrettyForm, ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = self.get_form_helper()
+        super(KanisaBaseForm, self).__init__(*args, **kwargs)
+
+    def get_submit_text(self):
+        return 'Save %s' % self._meta.model._meta.verbose_name.title()
