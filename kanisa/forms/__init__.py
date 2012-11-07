@@ -58,13 +58,20 @@ class BootstrapDateField(forms.DateField):
 
 class KanisaBaseForm(ModelForm):
     def __init__(self, *args, **kwargs):
-        self.helper = FormHelper()
-
-        css = "btn-primary btn-large btn-success"
-        submit_text = 'Save %s' % self._meta.model._meta.verbose_name.title()
-        self.helper.add_input(Submit('submit',
-                                     submit_text,
-                                     css_class=css))
-        self.helper.form_class = 'form-horizontal'
-
+        self.helper = self.get_form_helper()
         super(KanisaBaseForm, self).__init__(*args, **kwargs)
+
+    def get_form_helper(self):
+        helper = FormHelper()
+
+        helper.add_input(Submit('submit',
+                                     self.get_submit_text(),
+                                     css_class=self.get_submit_css()))
+        helper.form_class = 'form-horizontal'
+        return helper
+
+    def get_submit_text(self):
+        return 'Save %s' % self._meta.model._meta.verbose_name.title()
+
+    def get_submit_css(self):
+        return "btn-primary btn-large btn-success"
