@@ -49,7 +49,7 @@ class AddSongView(MembersBaseView, KanisaFormView):
             return self.service_
 
         self.service_ = get_object_or_404(Service,
-                                         pk=int(self.kwargs['pk']))
+                                          pk=int(self.kwargs['pk']))
 
         return self.service_
 
