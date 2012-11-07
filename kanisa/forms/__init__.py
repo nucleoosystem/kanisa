@@ -84,3 +84,9 @@ class KanisaBaseForm(KanisaPrettyForm, ModelForm):
 
     def get_submit_text(self):
         return 'Save %s' % self._meta.model._meta.verbose_name.title()
+
+
+class KanisaBaseModellessForm(KanisaPrettyForm, forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.helper = self.get_form_helper()
+        super(KanisaBaseModellessForm, self).__init__(*args, **kwargs)

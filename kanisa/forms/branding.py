@@ -1,24 +1,12 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
+from kanisa.forms import KanisaBaseModellessForm
 from kanisa.utils.branding import get_available_colours
 from PIL import Image
 
 
-class BrandingForm(forms.Form):
+class BrandingForm(KanisaBaseModellessForm, forms.Form):
     image = forms.FileField()
-
-    def __init__(self, *args, **kwargs):
-        self.helper = FormHelper()
-
-        css = "btn-primary btn-large btn-success"
-        submit_text = 'Update Image'
-        self.helper.add_input(Submit('submit',
-                                     submit_text,
-                                     css_class=css))
-        self.helper.form_class = 'form-horizontal'
-
-        super(BrandingForm, self).__init__(*args, **kwargs)
+    submit_text = 'Update Image'
 
     def check_format(self, format):
         if format != self.expected_format:
@@ -103,17 +91,10 @@ class FaviconBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
-class BrandingColoursForm(forms.Form):
+class BrandingColoursForm(KanisaBaseModellessForm):
+    submit_text = 'Update Colours'
+
     def __init__(self, *args, **kwargs):
-        self.helper = FormHelper()
-
-        css = "btn-primary btn-large btn-success"
-        submit_text = 'Update Colours'
-        self.helper.add_input(Submit('submit',
-                                     submit_text,
-                                     css_class=css))
-        self.helper.form_class = 'form-horizontal'
-
         colours = get_available_colours()
 
         for name, info in colours.items():
