@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import formats
 from kanisa.forms.services import AddSongToServiceForm
-from kanisa.models import Service
+from kanisa.models import Service, SongInService
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
                                   KanisaDetailView,
@@ -53,6 +53,12 @@ class AddSongView(MembersBaseView, KanisaFormView):
                                           pk=int(self.kwargs['pk']))
 
         return self.service_
+
+    def form_valid(self, form):
+        sis = SongInService.objects.create(song=form.cleaned_data['song'],
+                                           service=self.service)
+        self.service.songinservice_set.add(sis)
+        return super(AddSongView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('kanisa_members_services_detail',
