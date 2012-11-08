@@ -32,6 +32,7 @@ index = ServiceIndexView.as_view()
 
 class ServiceDetailView(MembersBaseView, KanisaDetailView):
     model = Service
+    pk_url_kwarg = 'service_pk'
     template_name = 'kanisa/members/services/service_detail.html'
 
     def get_kanisa_title(self):
@@ -53,7 +54,7 @@ class AddSongView(MembersBaseView, KanisaFormView):
             return self.service_
 
         self.service_ = get_object_or_404(Service,
-                                          pk=int(self.kwargs['pk']))
+                                          pk=int(self.kwargs['service_pk']))
 
         return self.service_
 
