@@ -60,6 +60,7 @@ class Service(models.Model):
 
     class Meta:
         app_label = 'kanisa'
+        verbose_name = 'Service Plan'
 
 
 class SongInService(models.Model):
