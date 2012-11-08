@@ -44,10 +44,7 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
 service_detail = ServiceDetailView.as_view()
 
 
-class AddSongView(MembersBaseView, KanisaFormView):
-    form_class = AddSongToServiceForm
-    template_name = 'kanisa/members/form.html'
-
+class BaseServiceManagementView(MembersBaseView):
     @property
     def service(self):
         if hasattr(self, "service_"):
@@ -57,6 +54,11 @@ class AddSongView(MembersBaseView, KanisaFormView):
                                           pk=int(self.kwargs['service_pk']))
 
         return self.service_
+
+
+class AddSongView(BaseServiceManagementView, KanisaFormView):
+    form_class = AddSongToServiceForm
+    template_name = 'kanisa/members/form.html'
 
     def form_valid(self, form):
         # This code has a race condition that I just don't care about
@@ -88,12 +90,9 @@ class AddSongView(MembersBaseView, KanisaFormView):
 add_song = AddSongView.as_view()
 
 
-class MoveSongDownView(MembersBaseView, View):
+class MoveSongDownView(BaseServiceManagementView, View):
     def post(self, request, *args, **kwargs):
-        service = get_object_or_404(Service,
-                                    pk=int(self.kwargs['service_pk']))
-
-        songs = service.songinservice_set.all()
+        songs = self.service.songinservice_set.all()
 
         pks = [song.pk for song in songs]
 
@@ -107,16 +106,13 @@ class MoveSongDownView(MembersBaseView, View):
         songs[i + 1].save()
 
         return HttpResponseRedirect(reverse('kanisa_members_services_detail',
-                                            args=[service.pk, ]))
+                                            args=[self.service.pk, ]))
 move_down = MoveSongDownView.as_view()
 
 
-class MoveSongUpView(MembersBaseView, View):
+class MoveSongUpView(BaseServiceManagementView, View):
     def post(self, request, *args, **kwargs):
-        service = get_object_or_404(Service,
-                                    pk=int(self.kwargs['service_pk']))
-
-        songs = service.songinservice_set.all()
+        songs = self.service.songinservice_set.all()
 
         pks = [song.pk for song in songs]
 
@@ -130,5 +126,5 @@ class MoveSongUpView(MembersBaseView, View):
         songs[i - 1].save()
 
         return HttpResponseRedirect(reverse('kanisa_members_services_detail',
-                                            args=[service.pk, ]))
+                                            args=[self.service.pk, ]))
 move_up = MoveSongUpView.as_view()
