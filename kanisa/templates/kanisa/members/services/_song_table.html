@@ -42,6 +42,8 @@
 {% else %}
 <p class="alert alert-warning">
   <strong>Sorry!</strong>
-  There are no songs associated with this service plan. Why not add one?
+
+  There are no songs associated with this service plan. Why not
+  <a href="{% url 'kanisa_members_services_add_song' object.pk %}">add one</a>?
 </p>
 {% endif %}
