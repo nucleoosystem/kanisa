@@ -1,15 +1,17 @@
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import View
-from kanisa.forms.services import AddSongToServiceForm
+from kanisa.forms.services import AddSongToServiceForm, ServiceForm
 from kanisa.models import Service, SongInService
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
                                   KanisaDetailView,
-                                  KanisaFormView)
+                                  KanisaFormView,
+                                  KanisaCreateView,
+                                  KanisaUpdateView)
 
 
 class ServiceIndexView(MembersBaseView, KanisaListView):
@@ -44,6 +46,17 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
 service_detail = ServiceDetailView.as_view()
 
 
+class ServiceCreateView(MembersBaseView,
+                        KanisaCreateView):
+    form_class = ServiceForm
+    kanisa_title = 'Create a Service Plan'
+    success_url = reverse_lazy('kanisa_members_services_index')
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+service_create = ServiceCreateView.as_view()
+
+
 class BaseServiceManagementView(MembersBaseView):
     @property
     def service(self):
@@ -54,6 +67,20 @@ class BaseServiceManagementView(MembersBaseView):
                                           pk=int(self.kwargs['service_pk']))
 
         return self.service_
+
+
+class ServiceUpdateView(BaseServiceManagementView,
+                        KanisaUpdateView):
+    form_class = ServiceForm
+    model = Service
+    success_url = reverse_lazy('kanisa_members_services_index')
+    template_name = 'kanisa/members/form.html'
+    pk_url_kwarg = 'service_pk'
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
+service_update = ServiceUpdateView.as_view()
 
 
 class AddSongView(BaseServiceManagementView, KanisaFormView):

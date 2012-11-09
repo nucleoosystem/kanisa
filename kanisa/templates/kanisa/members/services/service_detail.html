@@ -8,20 +8,35 @@
   This is a service plan for <strong>{{ object.event.title }}</strong>
   on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
   about music should be directed to
-  <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>.
+  <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>
+  <span class="muted">(<a href="{% url 'kanisa_members_services_update' object.pk %}" class="muted">change this</a>)</span>.
 </p>
 
-{% include 'kanisa/members/services/_song_table.html' with songs=object.songinservice_set.all %}
+<p>
+  <a class="btn btn-large" href="{% url 'kanisa_members_services_update' object.pk %}">
+    <i class="icon-edit"></i>
+    Edit this Service Plan
+  </a>
+</p>
+<hr />
 
+{% with songs=object.songinservice_set.all %}
+{% include 'kanisa/members/services/_song_table.html' %}
+
+{% if songs %}
 <a class="btn btn-success" href="{% url 'kanisa_members_services_add_song' object.pk %}">
   <i class="icon-white icon-plus"></i>
-  Add a song to this service plan
+  Add a song to this Service Plan
 </a>
+{% endif %}
+{% endwith %}
+
+<hr />
 
 <ul class="pager">
 <li class="previous">
 <a href="{% url 'kanisa_members_services_index' %}">
-&larr; Back to the list of plans
+&larr; Back to the list of Service Plans
 </a>
 </li>
 </ul>

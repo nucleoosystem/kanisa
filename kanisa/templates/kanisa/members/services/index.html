@@ -4,6 +4,16 @@
 
 {% block content %}
 
+<p>
+  <a class="btn btn-large btn-success" href="{% url 'kanisa_members_services_create' %}">
+    <i class="icon-white icon-plus"></i>
+    Create a Service Plan
+  </a>
+</p>
+
+<hr />
+
+
 {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
 <hr />
