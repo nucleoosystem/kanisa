@@ -183,3 +183,14 @@ textarea.kanisamaininputwidget {
 .document_details_short span {
     font-size: 90%;
 }
+
+.controls div.recurrence-widget .add-button:link,
+.controls div.recurrence-widget .add-button:visited,
+.controls div.recurrence-widget .add-button:hover {
+    text-decoration: none;
+    color: #08c;
+}
+
+.controls div.recurrence-widget .add-button:hover {
+    color: #005580;
+}
