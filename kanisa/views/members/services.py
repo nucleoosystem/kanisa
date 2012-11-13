@@ -73,7 +73,6 @@ class ServiceUpdateView(BaseServiceManagementView,
                         KanisaUpdateView):
     form_class = ServiceForm
     model = Service
-    success_url = reverse_lazy('kanisa_members_services_index')
     template_name = 'kanisa/members/form.html'
     pk_url_kwarg = 'service_pk'
 
