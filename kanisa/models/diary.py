@@ -239,10 +239,3 @@ class ScheduledEvent(models.Model):
         events = ScheduledEvent.objects.exclude(end_date__lt=start_date)
         events = events.exclude(date__gt=end_date)
         return events
-
-
-try:
-    from south.modelsinspector import add_introspection_rules as air
-    air([], ["^recurrence\.fields\.RecurrenceField"])
-except ImportError:
-    pass
