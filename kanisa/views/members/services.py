@@ -117,41 +117,51 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
 add_song = AddSongView.as_view()
 
 
-class MoveSongDownView(BaseServiceManagementView, View):
-    def post(self, request, *args, **kwargs):
-        songs = self.service.songinservice_set.all()
+class BaseMoveSongView(BaseServiceManagementView, View):
+    @property
+    def songs(self):
+        if hasattr(self, 'songs_'):
+            return self.songs_
 
-        pks = [song.pk for song in songs]
+        self.songs_ = self.service.songinservice_set.all()
+        return self.songs_
 
-        i = pks.index(int(self.kwargs['song_pk']))
+    def get_index_of_song(self):
+        pks = [song.pk for song in self.songs]
 
-        if i == len(songs) - 1:
-            raise Http404("That song can't move down.")
+        return pks.index(int(self.kwargs['song_pk']))
 
-        songs[i].order, songs[i + 1].order = songs[i + 1].order, songs[i].order
-        songs[i].save()
-        songs[i + 1].save()
-
+    def success(self):
         return HttpResponseRedirect(reverse('kanisa_members_services_detail',
                                             args=[self.service.pk, ]))
+
+class MoveSongDownView(BaseMoveSongView):
+    def post(self, request, *args, **kwargs):
+        i = self.get_index_of_song()
+        if i == len(self.songs) - 1:
+            raise Http404("That song can't move down.")
+
+        song = self.songs[i]
+        target_song = self.songs[i + 1]
+        song.order, target_song.order = target_song.order, song.order
+        song.save()
+        target_song.save()
+
+        return self.success()
 move_down = MoveSongDownView.as_view()
 
 
-class MoveSongUpView(BaseServiceManagementView, View):
+class MoveSongUpView(BaseMoveSongView):
     def post(self, request, *args, **kwargs):
-        songs = self.service.songinservice_set.all()
-
-        pks = [song.pk for song in songs]
-
-        i = pks.index(int(self.kwargs['song_pk']))
-
+        i = self.get_index_of_song()
         if i == 0:
             raise Http404("That song can't move up.")
 
-        songs[i].order, songs[i - 1].order = songs[i - 1].order, songs[i].order
-        songs[i].save()
-        songs[i - 1].save()
+        song = self.songs[i]
+        target_song = self.songs[i - 1]
+        song.order, target_song.order = target_song.order, song.order
+        song.save()
+        target_song.save()
 
-        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
-                                            args=[self.service.pk, ]))
+        return self.success()
 move_up = MoveSongUpView.as_view()
