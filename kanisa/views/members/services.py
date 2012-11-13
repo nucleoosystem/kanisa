@@ -131,37 +131,34 @@ class BaseMoveSongView(BaseServiceManagementView, View):
 
         return pks.index(int(self.kwargs['song_pk']))
 
-    def success(self):
-        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
-                                            args=[self.service.pk, ]))
+    def swap(self):
+        index = self.get_index_of_song()
+        target = self.adjust_index(index)
 
-class MoveSongDownView(BaseMoveSongView):
-    def post(self, request, *args, **kwargs):
-        i = self.get_index_of_song()
-        if i == len(self.songs) - 1:
-            raise Http404("That song can't move down.")
+        if target < 0 or target >= len(self.songs):
+            raise Http404("Can't move the song to position %d (valid range is "
+                          "0 to %d)." % (target, len(self.songs) - 1))
 
-        song = self.songs[i]
-        target_song = self.songs[i + 1]
+        song = self.songs[index]
+        target_song = self.songs[target]
         song.order, target_song.order = target_song.order, song.order
         song.save()
         target_song.save()
 
-        return self.success()
+    def post(self, request, *args, **kwargs):
+        self.swap()
+
+        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
+                                            args=[self.service.pk, ]))
+
+
+class MoveSongDownView(BaseMoveSongView):
+    def adjust_index(self, index):
+        return index + 1
 move_down = MoveSongDownView.as_view()
 
 
 class MoveSongUpView(BaseMoveSongView):
-    def post(self, request, *args, **kwargs):
-        i = self.get_index_of_song()
-        if i == 0:
-            raise Http404("That song can't move up.")
-
-        song = self.songs[i]
-        target_song = self.songs[i - 1]
-        song.order, target_song.order = target_song.order, song.order
-        song.save()
-        target_song.save()
-
-        return self.success()
+    def adjust_index(self, index):
+        return index - 1
 move_up = MoveSongUpView.as_view()
