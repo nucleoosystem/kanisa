@@ -38,6 +38,7 @@ class Song(models.Model):
 
     class Meta:
         app_label = 'kanisa'
+        ordering = ('title', )
 
 
 class FutureServicesManager(models.Manager):
