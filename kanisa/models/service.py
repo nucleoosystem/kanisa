@@ -62,6 +62,7 @@ class Service(models.Model):
     class Meta:
         app_label = 'kanisa'
         verbose_name = 'Service Plan'
+        ordering = ('event__date', )
 
 
 class SongInService(models.Model):
