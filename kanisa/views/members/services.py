@@ -11,7 +11,8 @@ from kanisa.views.generic import (KanisaListView,
                                   KanisaDetailView,
                                   KanisaFormView,
                                   KanisaCreateView,
-                                  KanisaUpdateView)
+                                  KanisaUpdateView,
+                                  KanisaDeleteView)
 
 
 class ServiceIndexView(MembersBaseView, KanisaListView):
@@ -119,6 +120,15 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
         return 'Add a song to %s (%s)' % (self.service.event.title,
                                           formatted_date)
 add_song = AddSongView.as_view()
+
+
+class RemoveSongView(BaseServiceManagementView, KanisaDeleteView):
+    model = SongInService
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
+remove_song = RemoveSongView.as_view()
 
 
 class BaseMoveSongView(BaseServiceManagementView, View):

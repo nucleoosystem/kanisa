@@ -8,6 +8,7 @@
       <th>Composers</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,15 @@
           </button>
         </form>
         {% endif %}
+      </td>
+      <td>
+        <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}" style="margin:0">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-mini btn-danger">
+            <i class="icon-white icon-trash"></i>
+            Remove
+          </button>
+        </form>
       </td>
     </tr>
     {% endfor %}

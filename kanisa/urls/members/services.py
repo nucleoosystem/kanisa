@@ -27,6 +27,11 @@ urlpatterns = patterns('',
                            views.add_song,
                            {},
                            'kanisa_members_services_add_song'),
+                       url((r'^service/(?P<service_pk>\d+)/remove/'
+                            r'(?P<pk>\d+)/$'),
+                           views.remove_song,
+                           {},
+                           'kanisa_members_services_remove_song'),
                        url((r'^service/(?P<service_pk>\d+)/move/'
                             r'(?P<song_pk>\d+)/down/$'),
                            views.move_down,
