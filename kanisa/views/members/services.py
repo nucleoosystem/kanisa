@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import AddSongToServiceForm, ServiceForm
-from kanisa.models import Service, SongInService
+from kanisa.models import Service, Song, SongInService
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
                                   KanisaDetailView,
@@ -36,6 +36,11 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
     model = Service
     pk_url_kwarg = 'service_pk'
     template_name = 'kanisa/members/services/service_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceDetailView, self).get_context_data(**kwargs)
+        context['all_songs'] = Song.objects.all()
+        return context
 
     def get_kanisa_title(self):
         formatted_date = formats.date_format(self.object.event.date,

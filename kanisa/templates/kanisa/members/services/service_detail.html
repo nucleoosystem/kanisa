@@ -22,14 +22,20 @@
 
 {% with songs=object.songinservice_set.all %}
 {% include 'kanisa/members/services/_song_table.html' %}
-
-{% if songs %}
-<a class="btn btn-success" href="{% url 'kanisa_members_services_add_song' object.pk %}">
-  <i class="icon-white icon-plus"></i>
-  Add a song to this Service Plan
-</a>
-{% endif %}
 {% endwith %}
+
+<form class="form-inline" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
+  {% csrf_token %}
+  <select name="song" id="id_song">
+    {% for song in all_songs %}
+    <option value="{{ song.pk }}">{{ song.title }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-success">
+    <i class="icon-white icon-plus"></i>
+    Add this song
+  </button>
+</form>
 
 <hr />
 
