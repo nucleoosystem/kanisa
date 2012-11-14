@@ -10,6 +10,13 @@ class AddSongToServiceForm(KanisaBaseForm):
     submit_text = 'Add Song'
 
 
+class CreateSongForm(KanisaBaseModelForm):
+    submit_text = 'Create Song'
+
+    class Meta:
+        model = Song
+
+
 class EventChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         event_date = formats.date_format(obj.date, "DATE_FORMAT")

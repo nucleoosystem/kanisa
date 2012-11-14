@@ -4,7 +4,9 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import View
-from kanisa.forms.services import AddSongToServiceForm, ServiceForm
+from kanisa.forms.services import (AddSongToServiceForm,
+                                   ServiceForm,
+                                   CreateSongForm)
 from kanisa.models import Service, Song, SongInService
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
@@ -88,26 +90,29 @@ class ServiceUpdateView(BaseServiceManagementView,
 service_update = ServiceUpdateView.as_view()
 
 
+def add_song_to_service(song, service):
+    # This code has a race condition that I just don't care about
+    # very much.
+    qs = SongInService.objects.filter(service=service)
+    order = qs.aggregate(Max('order'))['order__max']
+
+    if order is None:
+        order = 0
+
+    order += 1
+
+    sis = SongInService.objects.create(song=song,
+                                       service=service,
+                                       order=order)
+    service.songinservice_set.add(sis)
+
+
 class AddSongView(BaseServiceManagementView, KanisaFormView):
     form_class = AddSongToServiceForm
     template_name = 'kanisa/members/form.html'
 
     def form_valid(self, form):
-        # This code has a race condition that I just don't care about
-        # very much.
-        qs = SongInService.objects.filter(service=self.service)
-        order = qs.aggregate(Max('order'))['order__max']
-
-        if order is None:
-            order = 0
-
-        order += 1
-
-        sis = SongInService.objects.create(song=form.cleaned_data['song'],
-                                           service=self.service,
-                                           order=order)
-        self.service.songinservice_set.add(sis)
-
+        add_song_to_service(form.cleaned_data['song'], self.service)
         return super(AddSongView, self).form_valid(form)
 
     def get_success_url(self):
@@ -176,3 +181,21 @@ class MoveSongUpView(BaseMoveSongView):
     def adjust_index(self, index):
         return index - 1
 move_up = MoveSongUpView.as_view()
+
+
+class CreateSongView(BaseServiceManagementView, KanisaCreateView):
+    form_class = CreateSongForm
+    kanisa_title = 'Add a New Song'
+
+    def form_valid(self, form):
+        rval = super(KanisaCreateView, self).form_valid(form)
+        add_song_to_service(self.object, self.service)
+        return rval
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
+create_song = CreateSongView.as_view()
