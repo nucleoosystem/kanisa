@@ -28,6 +28,8 @@ class SongInline(admin.TabularInline):
 
 
 class ServiceAdmin(KanisaBaseAdmin):
+    list_display = ('event_title', 'event_date', )
+
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super(ServiceAdmin,
                       self).formfield_for_foreignkey(db_field,

@@ -59,6 +59,12 @@ class Service(models.Model):
     def __unicode__(self):
         return unicode(self.event)
 
+    def event_title(self):
+        return self.event.title
+
+    def event_date(self):
+        return self.event.date
+
     class Meta:
         app_label = 'kanisa'
         verbose_name = 'Service Plan'
