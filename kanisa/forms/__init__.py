@@ -83,6 +83,9 @@ class KanisaBaseModelForm(KanisaPrettyForm, ModelForm):
         super(KanisaBaseModelForm, self).__init__(*args, **kwargs)
 
     def get_submit_text(self):
+        if hasattr(self, 'submit_text'):
+            return self.submit_text
+
         return 'Save %s' % self._meta.model._meta.verbose_name.title()
 
 
