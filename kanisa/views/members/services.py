@@ -58,7 +58,10 @@ class ServiceCreateView(MembersBaseView,
                         KanisaCreateView):
     form_class = ServiceForm
     kanisa_title = 'Create a Service Plan'
-    success_url = reverse_lazy('kanisa_members_services_index')
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.object.pk, ])
 
     def get_template_names(self):
         return ['kanisa/members/form.html', ]
