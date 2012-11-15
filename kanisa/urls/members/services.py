@@ -46,4 +46,8 @@ urlpatterns = patterns('',
                            views.move_up,
                            {},
                            'kanisa_members_services_move_song_up'),
+                       url(r'^composer/add/$',
+                           views.composer_create,
+                           {},
+                           'kanisa_members_services_create_composer'),
                        )

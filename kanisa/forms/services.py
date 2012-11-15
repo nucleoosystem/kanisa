@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import formats
 from crispy_forms.layout import Layout, HTML
 from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
-from kanisa.models import Song, Service, ScheduledEvent
+from kanisa.models import Song, Service, ScheduledEvent, Composer
 
 
 class AddSongToServiceForm(KanisaBaseForm):
@@ -46,3 +46,8 @@ class ServiceForm(KanisaBaseModelForm):
     class Meta:
         model = Service
         exclude = ('songs', )
+
+
+class ComposerForm(KanisaBaseModelForm):
+    class Meta:
+        model = Composer

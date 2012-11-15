@@ -6,7 +6,8 @@ from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (AddSongToServiceForm,
                                    ServiceForm,
-                                   CreateSongForm)
+                                   CreateSongForm,
+                                   ComposerForm)
 from kanisa.models import Service, Song, SongInService
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
@@ -202,3 +203,10 @@ class CreateSongView(BaseServiceManagementView, KanisaCreateView):
         return reverse('kanisa_members_services_detail',
                        args=[self.service.pk, ])
 create_song = CreateSongView.as_view()
+
+
+class ComposerCreateView(MembersBaseView,
+                         KanisaCreateView):
+    form_class = ComposerForm
+    kanisa_title = 'Add a Composer'
+composer_create = ComposerCreateView.as_view()
