@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils import formats
+from crispy_forms.layout import Layout, HTML
 from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
 from kanisa.models import Song, Service, ScheduledEvent
 
@@ -12,6 +13,15 @@ class AddSongToServiceForm(KanisaBaseForm):
 
 class CreateSongForm(KanisaBaseModelForm):
     submit_text = 'Create Song'
+
+    def get_form_helper(self):
+        helper = super(CreateSongForm, self).get_form_helper()
+        helper.layout = Layout(
+            'title',
+            'composers',
+            HTML('{% include "kanisa/members/services/_composer_add.html" %}'),
+            )
+        return helper
 
     class Meta:
         model = Song
