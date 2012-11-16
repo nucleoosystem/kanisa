@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "kanisa/_head.html" %}
+    <script type="text/javascript">
+      window.opener.update_with_composer({{ object.pk }}, "{{ object }}");
+      window.close();
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -26,6 +26,9 @@ class CreateSongForm(KanisaBaseModelForm):
     class Meta:
         model = Song
 
+    class Media:
+        js = ('kanisa/js/services_add_song.js', )
+
 
 class EventChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
