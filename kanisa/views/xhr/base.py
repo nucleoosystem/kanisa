@@ -38,7 +38,7 @@ class XHRBaseView(View):
         try:
             self.check_required_arguments()
         except MissingArgument, e:
-            message = "Required argument '%s' not found." % e.message
+            message = "Required argument '%s' not found." % str(e)
             return HttpResponseBadRequest(message)
 
         try:
