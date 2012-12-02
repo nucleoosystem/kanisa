@@ -20,7 +20,7 @@ class CreateSongForm(KanisaBaseModelForm):
             'title',
             'composers',
             HTML('{% include "kanisa/members/services/_composer_add.html" %}'),
-            )
+        )
         return helper
 
     class Meta:

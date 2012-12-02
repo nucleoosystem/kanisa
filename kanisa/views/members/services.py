@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
@@ -82,7 +82,8 @@ class ServiceCreateView(MembersBaseView,
                           ("There are no events without a service plan, "
                            "please create an event before adding a service "
                            "plan."))
-            return HttpResponseRedirect(reverse('kanisa_members_services_index'))
+            url = reverse('kanisa_members_services_index')
+            return HttpResponseRedirect(url)
 
         return super(ServiceCreateView, self).get(request, *args, **kwargs)
 
