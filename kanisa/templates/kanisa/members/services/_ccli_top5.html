@@ -1,11 +1,13 @@
+{% load url from future %}
+
 <h3>CCLI <span class="amp">&amp;</span> Song Usage</h3>
 <p class="lead">
-  Generate a
-  <acronym title="Christian Copyright License Information">CCLI</acronym>
-  report, or just view song usage.
+  View a complete <a href="{% url 'kanisa_members_services_ccli' %}">song usage report</a>.
 </p>
 
 {% if top_five_songs %}
+<hr />
+<h4>Top 5 Songs</h4>
 <table class="table table-striped">
   <thead>
     <tr>
