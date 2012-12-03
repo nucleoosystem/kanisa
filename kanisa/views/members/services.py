@@ -99,11 +99,10 @@ service_create = ServiceCreateView.as_view()
 class BaseServiceManagementView(MembersBaseView):
     @property
     def service(self):
-        if hasattr(self, "service_"):
-            return self.service_
-
-        self.service_ = get_object_or_404(Service,
-                                          pk=int(self.kwargs['service_pk']))
+        if not hasattr(self, "service_"):
+            pk = int(self.kwargs['service_pk'])
+            self.service_ = get_object_or_404(Service,
+                                              pk=pk)
 
         return self.service_
 
@@ -170,10 +169,9 @@ remove_song = RemoveSongView.as_view()
 class BaseMoveSongView(BaseServiceManagementView, View):
     @property
     def songs(self):
-        if hasattr(self, 'songs_'):
-            return self.songs_
+        if not hasattr(self, 'songs_'):
+            self.songs_ = self.service.songinservice_set.all()
 
-        self.songs_ = self.service.songinservice_set.all()
         return self.songs_
 
     def get_index_of_song(self):
