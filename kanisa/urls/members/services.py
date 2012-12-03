@@ -50,4 +50,8 @@ urlpatterns = patterns('',
                            views.composer_create,
                            {},
                            'kanisa_members_services_create_composer'),
+                       url(r'^ccli/$',
+                           views.ccli_view,
+                           {},
+                           'kanisa_members_services_ccli'),
                        )

@@ -17,7 +17,8 @@ from kanisa.views.generic import (KanisaListView,
                                   KanisaFormView,
                                   KanisaCreateView,
                                   KanisaUpdateView,
-                                  KanisaDeleteView)
+                                  KanisaDeleteView,
+                                  KanisaTemplateView)
 
 
 class ServiceIndexView(MembersBaseView, KanisaListView):
@@ -48,6 +49,23 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
         return context
 index = ServiceIndexView.as_view()
 
+
+class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
+    template_name = 'kanisa/members/services/ccli.html'
+    kanisa_title = 'Song Usage Reports'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceCCLIView,
+                        self).get_context_data(**kwargs)
+
+        songs = Song.objects.all()
+        songs = songs.annotate(usage=Count('songinservice'))
+        songs = songs.order_by('-usage')
+
+        context['songs'] = songs
+
+        return context
+ccli_view = ServiceCCLIView.as_view()
 
 class ServiceDetailView(MembersBaseView, KanisaDetailView):
     model = Service
