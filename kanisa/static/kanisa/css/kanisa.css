@@ -194,3 +194,9 @@ textarea.kanisamaininputwidget {
 .controls div.recurrence-widget .add-button:hover {
     color: #005580;
 }
+
+span.amp {
+    font-style: italic;
+    font-family: Baskerville, Palatino, "Book Antiqua", "URW Bookman L", serif;
+    font-weight: normal;
+}

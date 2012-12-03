@@ -4,33 +4,64 @@
 
 {% block content %}
 
-<p>
-  <a class="btn btn-large btn-success" href="{% url 'kanisa_members_services_create' %}">
-    <i class="icon-white icon-plus"></i>
-    Create a Service Plan
-  </a>
-</p>
-
 <hr />
 
+<div class="row">
+  <div class="span5">
+    <h3>View Service Plans</h3>
+    {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
-{% include 'kanisa/members/services/_serviceplan_table.html' %}
+    <p>
+      <a class="btn btn-success" href="{% url 'kanisa_members_services_create' %}">
+        <i class="icon-white icon-plus"></i>
+        Create a Service Plan
+      </a>
+    </p>
 
-<hr />
+    <hr />
 
-{% if showing_all %}
-<p class="muted">
-  These are all the service plans. Want to
-  <a href="{% url 'kanisa_members_services_index' %}">just see
-  plans for upcoming services</a>?
-</p>
+    {% if showing_all %}
+    <p class="muted">
+      These are all the service plans. Want to
+      <a href="{% url 'kanisa_members_services_index' %}">just see
+        plans for upcoming services</a>?
+    </p>
 
-{% else %}
-<p class="muted">
-  Not including past service plans. Want to
-  <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
-  too</a>?
-</p>
-{% endif %}
+    {% else %}
+    <p class="muted">
+      Not including past service plans. Want to
+      <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
+        too</a>?
+    </p>
+    {% endif %}
 
+  </div>
+  <div class="span5">
+    <h3>CCLI <span class="amp">&amp;</span> Song Usage</h3>
+    <p class="lead">
+      Generate a
+      <acronym title="Christian Copyright License Information">CCLI</acronym>
+      report, or just view song usage.
+    </p>
+
+    {% if top_five_songs %}
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Song</th>
+        <th>All-time Usage</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for song in top_five_songs %}
+      <tr>
+        <td>{{ song.title }}</td>
+        <td>{{ song.usage }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

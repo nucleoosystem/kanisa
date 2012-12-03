@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.db.models import Max
+from django.db.models import Max, Count
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -34,6 +34,13 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
         context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
+
+        songs = Song.objects.all()
+        songs = songs.annotate(usage=Count('songinservice'))
+        songs = songs.order_by('-usage')
+        songs = songs[:5]
+        context['top_five_songs'] = songs
+
         return context
 index = ServiceIndexView.as_view()
 
