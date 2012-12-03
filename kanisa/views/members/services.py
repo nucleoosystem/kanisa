@@ -39,7 +39,11 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
         songs = songs.annotate(usage=Count('songinservice'))
         songs = songs.order_by('-usage')
         songs = songs[:5]
-        context['top_five_songs'] = songs
+
+        total_songs = SongInService.objects.count()
+        percents = [(s.usage * 100.0) / total_songs for s in songs]
+
+        context['top_five_songs'] = zip(songs, percents)
 
         return context
 index = ServiceIndexView.as_view()

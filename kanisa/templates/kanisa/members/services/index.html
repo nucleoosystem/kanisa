@@ -53,10 +53,14 @@
       </tr>
       </thead>
       <tbody>
-      {% for song in top_five_songs %}
+      {% for song,percent in top_five_songs %}
       <tr>
         <td>{{ song.title }}</td>
-        <td>{{ song.usage }}</td>
+        <td>
+          <div class="progress" style="margin: 0">
+            <div class="bar" style="width: {{ percent }}%;"></div>
+          </div>
+        </td>
       </tr>
       {% endfor %}
       </tbody>
