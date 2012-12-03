@@ -1,0 +1,29 @@
+<h3>CCLI <span class="amp">&amp;</span> Song Usage</h3>
+<p class="lead">
+  Generate a
+  <acronym title="Christian Copyright License Information">CCLI</acronym>
+  report, or just view song usage.
+</p>
+
+{% if top_five_songs %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>All-time Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song,percent in top_five_songs %}
+    <tr>
+      <td>{{ song.title }}</td>
+      <td>
+        <div class="progress" style="margin: 0">
+          <div class="bar" style="width: {{ percent }}%;"></div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
