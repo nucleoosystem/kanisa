@@ -67,6 +67,7 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         return context
 ccli_view = ServiceCCLIView.as_view()
 
+
 class ServiceDetailView(MembersBaseView, KanisaDetailView):
     model = Service
     pk_url_kwarg = 'service_pk'
