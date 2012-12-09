@@ -1,0 +1,29 @@
+<form class="form" method="get" action=".">
+  <fieldset>
+    <legend>Filter Usage</legend>
+    {% if filters %}
+    <p>Showing counts only for songs used:
+      <ul>
+        {% if filters.event %}
+        <li>
+          in <strong>{{ filters.event }}</strong>
+          <a href="?"><i class="icon-remove-sign"></i></a>
+        </li>
+        {% endif %}
+      </ul>
+    </p>
+    {% endif %}
+    <div class="control-group">
+      <label for="limit_event" class="control-label">Limit to:</label>
+      <div class="controls">
+        <select name="limit_event">
+          <option value="">All events</option>
+          {% for event in events %}
+          <option value="{{ event.pk }}"{% if filters.event.pk == event.pk %} selected="selected"{% endif %}>{{ event.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </fieldset>
+  <input type="submit" value="Filter" class="btn btn-primary" />
+</form>

@@ -1,0 +1,32 @@
+{% if songs %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Song
+      </th>
+      <th>
+        Composers
+      </th>
+      <th>
+        Usage
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in songs %}
+    <tr>
+      <td>{{ song.title }}</td>
+      <td>{{ song.composer_list|join:"; " }}</td>
+      <td>{{ song.usage }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="alert alert-warning">
+  <strong>Sorry!</strong>
+
+  There aren't any songs recorded yet.
+</p>
+{% endif %}
