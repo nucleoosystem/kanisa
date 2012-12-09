@@ -1,0 +1,10 @@
+<p>Showing counts only for songs used:
+  <ul>
+    {% if filters.event %}
+    <li>
+      in <strong>{{ filters.event }}</strong>
+      <a href="?"><i class="icon-remove-sign"></i></a>
+    </li>
+    {% endif %}
+  </ul>
+</p>
