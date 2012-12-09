@@ -10,7 +10,11 @@ from kanisa.forms.services import (AddSongToServiceForm,
                                    ServiceForm,
                                    CreateSongForm,
                                    ComposerForm)
-from kanisa.models import Service, Song, SongInService, ScheduledEvent
+from kanisa.models import (Service,
+                           Song,
+                           SongInService,
+                           ScheduledEvent,
+                           RegularEvent)
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
                                   KanisaDetailView,
@@ -54,15 +58,49 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
     template_name = 'kanisa/members/services/ccli.html'
     kanisa_title = 'Song Usage Reports'
 
+    def get_selected_event(self):
+        if hasattr(self, 'selected_event'):
+            return self.selected_event
+
+        if 'limit_event' not in self.request.GET:
+            return None
+
+        try:
+            pk = int(self.request.GET['limit_event'])
+        except ValueError:
+            return None
+
+        self.selected_event = RegularEvent.objects.get(pk=pk)
+        return self.selected_event
+
+    def get_songs(self):
+        if self.get_selected_event():
+            songs = Song.objects.filter(service__event=
+                                        self.get_selected_event())
+        else:
+            songs = Song.objects.all()
+
+        songs = songs.annotate(usage=Count('songinservice'))
+        songs = songs.order_by('-usage')
+
+        return songs
+
+    def get_active_filters(self):
+        filters = {}
+        if self.get_selected_event():
+            filters['event'] = self.get_selected_event()
+
+        return filters
+
     def get_context_data(self, **kwargs):
         context = super(ServiceCCLIView,
                         self).get_context_data(**kwargs)
 
-        songs = Song.objects.all()
-        songs = songs.annotate(usage=Count('songinservice'))
-        songs = songs.order_by('-usage')
-
-        context['songs'] = songs
+        services = Service.objects.all().select_related('event',
+                                                        'event__event')
+        context['filters'] = self.get_active_filters()
+        context['events'] = set([s.event.event for s in services])
+        context['songs'] = self.get_songs()
 
         return context
 ccli_view = ServiceCCLIView.as_view()
