@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.db.models import Max
+from django.db.models import Max, Count
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -17,7 +17,8 @@ from kanisa.views.generic import (KanisaListView,
                                   KanisaFormView,
                                   KanisaCreateView,
                                   KanisaUpdateView,
-                                  KanisaDeleteView)
+                                  KanisaDeleteView,
+                                  KanisaTemplateView)
 
 
 class ServiceIndexView(MembersBaseView, KanisaListView):
@@ -34,8 +35,37 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
         context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
+
+        songs = Song.objects.all()
+        songs = songs.annotate(usage=Count('songinservice'))
+        songs = songs.order_by('-usage')
+        songs = songs[:5]
+
+        total_songs = SongInService.objects.count()
+        percents = [(s.usage * 100.0) / total_songs for s in songs]
+
+        context['top_five_songs'] = zip(songs, percents)
+
         return context
 index = ServiceIndexView.as_view()
+
+
+class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
+    template_name = 'kanisa/members/services/ccli.html'
+    kanisa_title = 'Song Usage Reports'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceCCLIView,
+                        self).get_context_data(**kwargs)
+
+        songs = Song.objects.all()
+        songs = songs.annotate(usage=Count('songinservice'))
+        songs = songs.order_by('-usage')
+
+        context['songs'] = songs
+
+        return context
+ccli_view = ServiceCCLIView.as_view()
 
 
 class ServiceDetailView(MembersBaseView, KanisaDetailView):
@@ -99,11 +129,10 @@ service_create = ServiceCreateView.as_view()
 class BaseServiceManagementView(MembersBaseView):
     @property
     def service(self):
-        if hasattr(self, "service_"):
-            return self.service_
-
-        self.service_ = get_object_or_404(Service,
-                                          pk=int(self.kwargs['service_pk']))
+        if not hasattr(self, "service_"):
+            pk = int(self.kwargs['service_pk'])
+            self.service_ = get_object_or_404(Service,
+                                              pk=pk)
 
         return self.service_
 
@@ -170,10 +199,9 @@ remove_song = RemoveSongView.as_view()
 class BaseMoveSongView(BaseServiceManagementView, View):
     @property
     def songs(self):
-        if hasattr(self, 'songs_'):
-            return self.songs_
+        if not hasattr(self, 'songs_'):
+            self.songs_ = self.service.songinservice_set.all()
 
-        self.songs_ = self.service.songinservice_set.all()
         return self.songs_
 
     def get_index_of_song(self):

@@ -4,33 +4,40 @@
 
 {% block content %}
 
-<p>
-  <a class="btn btn-large btn-success" href="{% url 'kanisa_members_services_create' %}">
-    <i class="icon-white icon-plus"></i>
-    Create a Service Plan
-  </a>
-</p>
-
 <hr />
 
+<div class="row">
+  <div class="span5">
+    <h3>View Service Plans</h3>
+    {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
-{% include 'kanisa/members/services/_serviceplan_table.html' %}
+    <p>
+      <a class="btn btn-success" href="{% url 'kanisa_members_services_create' %}">
+        <i class="icon-white icon-plus"></i>
+        Create a Service Plan
+      </a>
+    </p>
 
-<hr />
+    <hr />
 
-{% if showing_all %}
-<p class="muted">
-  These are all the service plans. Want to
-  <a href="{% url 'kanisa_members_services_index' %}">just see
-  plans for upcoming services</a>?
-</p>
+    {% if showing_all %}
+    <p class="muted">
+      These are all the service plans. Want to
+      <a href="{% url 'kanisa_members_services_index' %}">just see
+        plans for upcoming services</a>?
+    </p>
 
-{% else %}
-<p class="muted">
-  Not including past service plans. Want to
-  <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
-  too</a>?
-</p>
-{% endif %}
+    {% else %}
+    <p class="muted">
+      Not including past service plans. Want to
+      <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
+        too</a>?
+    </p>
+    {% endif %}
 
+  </div>
+  <div class="span5">
+    {% include 'kanisa/members/services/_ccli_top5.html' %}
+  </div>
+</div>
 {% endblock %}

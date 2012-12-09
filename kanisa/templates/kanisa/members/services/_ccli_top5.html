@@ -1,0 +1,31 @@
+{% load url from future %}
+
+<h3>CCLI <span class="amp">&amp;</span> Song Usage</h3>
+<p class="lead">
+  View a complete <a href="{% url 'kanisa_members_services_ccli' %}">song usage report</a>.
+</p>
+
+{% if top_five_songs %}
+<hr />
+<h4>Top 5 Songs</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>All-time Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song,percent in top_five_songs %}
+    <tr>
+      <td>{{ song.title }}</td>
+      <td>
+        <div class="progress" style="margin: 0">
+          <div class="bar" style="width: {{ percent }}%;"></div>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
