@@ -11,6 +11,9 @@
       <label for="filter_start_date" class="control-label">From:</label>
       <input type="text" id="filter_start_date" name="start_date" class="datepicker"{% if filters.start_date %} value="{{ filters.start_date|date:"m/d/Y" }}"{% endif %}/>
 
+      <label for="filter_end_date" class="control-label">To:</label>
+      <input type="text" id="filter_end_date" name="end_date" class="datepicker"{% if filters.end_date %} value="{{ filters.end_date|date:"m/d/Y" }}"{% endif %}/>
+
       <label for="filter_event" class="control-label">Limit by Event:</label>
       <div class="controls">
         <select id="filter_event" name="event">

@@ -1,4 +1,5 @@
 from datetime import datetime
+import collections
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max, Count
@@ -83,25 +84,47 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
 
         try:
             self.start_date = datetime.strptime(self.request.GET['start_date'],
-                                                '%m/%d/%Y')
+                                                '%m/%d/%Y').date()
         except ValueError:
             return None
 
         return self.start_date
 
+    def get_end_date(self):
+        if hasattr(self, 'end_date'):
+            return self.end_date
+
+        if 'end_date' not in self.request.GET:
+            return None
+
+        try:
+            self.end_date = datetime.strptime(self.request.GET['end_date'],
+                                              '%m/%d/%Y').date()
+        except ValueError:
+            return None
+
+        return self.end_date
+
     def get_songs(self):
-        songs = Song.objects.all()
+        qs = SongInService.objects.all()
 
         if self.get_selected_event():
-            songs = songs.filter(service__event__event=
-                                 self.get_selected_event())
+            qs = qs.filter(service__event__event=
+                           self.get_selected_event())
 
         if self.get_start_date():
-            songs = songs.filter(service__event__date__gte=
-                                 self.get_start_date())
+            qs = qs.filter(service__event__date__gte=
+                           self.get_start_date())
 
-        songs = songs.annotate(usage=Count('songinservice'))
-        songs = songs.order_by('-usage')
+        if self.get_end_date():
+            qs = qs.filter(service__event__date__lte=
+                           self.get_end_date())
+
+        qs = qs.only('song')
+        qs = [s.song for s in qs]
+
+        songs = [i for i in collections.Counter(qs).viewitems()]
+        songs = sorted(songs, key=lambda s: s[1], reverse=True)
 
         return songs
 
@@ -109,8 +132,12 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         filters = {}
         if self.get_selected_event():
             filters['event'] = self.get_selected_event()
+
         if self.get_start_date():
             filters['start_date'] = self.get_start_date()
+
+        if self.get_end_date():
+            filters['end_date'] = self.get_end_date()
 
         return filters
 
