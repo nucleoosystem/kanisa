@@ -74,11 +74,11 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         return self.selected_event
 
     def get_songs(self):
+        songs = Song.objects.all()
+
         if self.get_selected_event():
-            songs = Song.objects.filter(service__event=
-                                        self.get_selected_event())
-        else:
-            songs = Song.objects.all()
+            songs = songs.filter(service__event__event=
+                                 self.get_selected_event())
 
         songs = songs.annotate(usage=Count('songinservice'))
         songs = songs.order_by('-usage')
