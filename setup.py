@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
-        "Django==1.4.1",
+        "Django==1.4.2",
         "PIL==1.1.7",
         "django-autoslug==1.6.1",
         "django-compressor==1.1.2",
