@@ -3,7 +3,13 @@
     {% if filters.event %}
     <li>
       in <strong>{{ filters.event }}</strong>
-      <a href="?"><i class="icon-remove-sign"></i></a>
+      <a href="?start_date={{ filters.start_date|date:"m/d/Y" }}"><i class="icon-remove-sign"></i></a>
+    </li>
+    {% endif %}
+    {% if filters.start_date %}
+    <li>
+      on or after <strong>{{ filters.start_date|date:"jS F Y" }}</strong>
+      <a href="?event={{ filters.event.pk }}"><i class="icon-remove-sign"></i></a>
     </li>
     {% endif %}
   </ul>

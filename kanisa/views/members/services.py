@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Max, Count
@@ -62,16 +63,31 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         if hasattr(self, 'selected_event'):
             return self.selected_event
 
-        if 'limit_event' not in self.request.GET:
+        if 'event' not in self.request.GET:
             return None
 
         try:
-            pk = int(self.request.GET['limit_event'])
+            pk = int(self.request.GET['event'])
         except ValueError:
             return None
 
         self.selected_event = RegularEvent.objects.get(pk=pk)
         return self.selected_event
+
+    def get_start_date(self):
+        if hasattr(self, 'start_date'):
+            return self.start_date
+
+        if 'start_date' not in self.request.GET:
+            return None
+
+        try:
+            self.start_date = datetime.strptime(self.request.GET['start_date'],
+                                                '%m/%d/%Y')
+        except ValueError:
+            return None
+
+        return self.start_date
 
     def get_songs(self):
         songs = Song.objects.all()
@@ -79,6 +95,10 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         if self.get_selected_event():
             songs = songs.filter(service__event__event=
                                  self.get_selected_event())
+
+        if self.get_start_date():
+            songs = songs.filter(service__event__date__gte=
+                                 self.get_start_date())
 
         songs = songs.annotate(usage=Count('songinservice'))
         songs = songs.order_by('-usage')
@@ -89,6 +109,8 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
         filters = {}
         if self.get_selected_event():
             filters['event'] = self.get_selected_event()
+        if self.get_start_date():
+            filters['start_date'] = self.get_start_date()
 
         return filters
 
