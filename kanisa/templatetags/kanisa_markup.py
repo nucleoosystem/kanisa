@@ -41,19 +41,20 @@ class ImageMatch(object):
                                       '960x200',
                                       crop='center')
             style = ""
-        elif self.size == 'medium':
-            thumbnail = get_thumbnail(self.image.image.file, '260x260')
-            if self.align == "left":
-                style = "float: left; margin-right: 10px; margin-bottom: 10px;"
-            else:
-                style = "float: right; margin-left: 10px; margin-bottom: 10px;"
-        elif self.size == 'small':
-            thumbnail = get_thumbnail(self.image.image.file, '174x174')
-            if self.align == "left":
-                style = "float: left; margin-right: 10px; margin-bottom: 10px;"
-            else:
-                style = "float: right; margin-left: 10px; margin-bottom: 10px;"
+        else:
+            style = "float: %s; margin-" % self.align
 
+            if self.align == "left":
+                style = style + "right"
+            else:
+                style = style + "left"
+
+            style = style + ": 10px; margin-bottom: 10px;"
+
+            if self.size == 'medium':
+                thumbnail = get_thumbnail(self.image.image.file, '260x260')
+            elif self.size == 'small':
+                thumbnail = get_thumbnail(self.image.image.file, '174x174')
 
         return ('<img src="%s" alt="%s" class="img-polaroid" '
                 'height="%spx" width="%spx" style="%s"/>' % (thumbnail.url,
