@@ -1,7 +1,7 @@
 from datetime import datetime
 import collections
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Max, Count
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
@@ -27,9 +27,15 @@ from kanisa.views.generic import (KanisaListView,
                                   KanisaTemplateView)
 
 
-class ServiceIndexView(MembersBaseView, KanisaListView):
+class ServiceBaseView(MembersBaseView):
+    kanisa_root_crumb = {'text': 'Services',
+                         'url': reverse_lazy('kanisa_members_services_index')}
+
+
+class ServiceIndexView(ServiceBaseView, KanisaListView):
     template_name = 'kanisa/members/services/index.html'
     kanisa_title = 'Service Planning'
+    kanisa_is_root_view = True
 
     def get_queryset(self):
         if self.kwargs['show_all']:
@@ -56,7 +62,7 @@ class ServiceIndexView(MembersBaseView, KanisaListView):
 index = ServiceIndexView.as_view()
 
 
-class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
+class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
     template_name = 'kanisa/members/services/ccli.html'
     kanisa_title = 'Song Usage Reports'
 
@@ -155,7 +161,7 @@ class ServiceCCLIView(MembersBaseView, KanisaTemplateView):
 ccli_view = ServiceCCLIView.as_view()
 
 
-class ServiceDetailView(MembersBaseView, KanisaDetailView):
+class ServiceDetailView(ServiceBaseView, KanisaDetailView):
     model = Service
     pk_url_kwarg = 'service_pk'
     template_name = 'kanisa/members/services/service_detail.html'
@@ -174,7 +180,7 @@ class ServiceDetailView(MembersBaseView, KanisaDetailView):
 service_detail = ServiceDetailView.as_view()
 
 
-class ServiceCreateView(MembersBaseView,
+class ServiceCreateView(ServiceBaseView,
                         KanisaCreateView):
     form_class = ServiceForm
     kanisa_title = 'Create a Service Plan'
@@ -213,7 +219,7 @@ class ServiceCreateView(MembersBaseView,
 service_create = ServiceCreateView.as_view()
 
 
-class BaseServiceManagementView(MembersBaseView):
+class BaseServiceManagementView(ServiceBaseView):
     @property
     def service(self):
         if not hasattr(self, "service_"):
@@ -347,7 +353,7 @@ class CreateSongView(BaseServiceManagementView, KanisaCreateView):
 create_song = CreateSongView.as_view()
 
 
-class ComposerCreateView(MembersBaseView,
+class ComposerCreateView(ServiceBaseView,
                          KanisaCreateView):
     form_class = ComposerForm
     kanisa_title = 'Add a Composer'

@@ -1,0 +1,34 @@
+{% load url from future %}
+
+<ul class="breadcrumb">
+  {% block breadcrumbs %}
+  <li>
+    <a href="{% url 'kanisa_members_index' %}">Members' Home</a>
+  </li>
+  {% if kanisa_root_crumb %}
+  <li>
+    <span class="divider">/</span>
+    {% if not kanisa_is_root_view %}
+    <a href="{{ kanisa_root_crumb.url }}">{{ kanisa_root_crumb.text }}</a>
+    {% else %}
+    {{ kanisa_root_crumb.text }}
+    {% endif %}
+  </li>
+  {% endif %}
+
+  {% for crumb in kanisa_intermediate_crumbs %}
+  <li>
+    <span class="divider">/</span>
+    <a href="{{ crumb.url }}">
+    {{ crumb.title }}
+    </a>
+  </li>
+  {% endfor %}
+
+  {% if kanisa_title and not kanisa_is_root_view %}
+  <li>
+    <span class="divider">/</span> {{ kanisa_title }}
+  </li>
+{% endif %}
+{% endblock %}
+</ul>
