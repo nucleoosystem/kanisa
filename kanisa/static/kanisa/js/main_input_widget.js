@@ -229,8 +229,15 @@ function get_attachments(event) {
     };
  }
 
+function insert_break(event) {
+    event.preventDefault();
+    var thelink = $(this);
+    get_matching_elements(thelink, "textarea").insertAtCaret("\n\n####\n\n");
+}
+
 $(function() {
     $(".main_input_widget_insert_image").click(get_images);
     $(".main_input_widget_add_attachment").click(get_attachments);
+    $(".main_input_widget_insert_break").click(insert_break);
     $(".main_input_widget_cancel").click(clear_placeholder);
 });

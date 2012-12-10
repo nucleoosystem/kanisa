@@ -109,5 +109,7 @@ def kanisa_markdown(value):
     for document_match in get_documents(value):
         value = value.replace(document_match.full, document_match.tag())
 
+    value = value.replace("####", "<br style=\"clear: both\" />")
+
     return mark_safe(markdown.markdown(value,
                                        extensions=['nl2br', ]))
