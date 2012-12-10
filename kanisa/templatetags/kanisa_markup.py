@@ -27,10 +27,10 @@ class ImageMatch(object):
         self.align = match[5]
 
         if not self.size:
-            self.size = u'medium'
+            self.size = 'medium'
 
         if not self.align:
-            self.align = u'left'
+            self.align = 'left'
 
         self.alt = match[7]
         self.image = InlineImage.objects.get(pk=pk)
