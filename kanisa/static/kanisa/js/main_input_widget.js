@@ -87,12 +87,19 @@ function change_size(event) {
 
     if (size == "headline") {
         hide_alignment(radio);
+        get_matching_elements(radio, ".thumbnail-small").hide();
         get_matching_elements(radio, ".thumbnail-medium").hide();
         get_matching_elements(radio, ".thumbnail-headline").show();
+    } else if (size == "medium") {
+        show_alignment(radio);
+        get_matching_elements(radio, ".thumbnail-small").hide();
+        get_matching_elements(radio, ".thumbnail-medium").show();
+        get_matching_elements(radio, ".thumbnail-headline").hide();
     } else {
         show_alignment(radio);
+        get_matching_elements(radio, ".thumbnail-small").show();
+        get_matching_elements(radio, ".thumbnail-medium").hide();
         get_matching_elements(radio, ".thumbnail-headline").hide();
-        get_matching_elements(radio, ".thumbnail-medium").show();
     }
 }
 

@@ -11,7 +11,7 @@ register = template.Library()
 
 
 image_expression = re.compile(r'(!\[img-([0-9]+)'
-                              '( (headline|medium))?'
+                              '( (headline|medium|small))?'
                               '( (left|right))?\]'
                               '(\[(.+?)\])?)')
 
@@ -47,6 +47,13 @@ class ImageMatch(object):
                 style = "float: left; margin-right: 10px; margin-bottom: 10px;"
             else:
                 style = "float: right; margin-left: 10px; margin-bottom: 10px;"
+        elif self.size == 'small':
+            thumbnail = get_thumbnail(self.image.image.file, '174x174')
+            if self.align == "left":
+                style = "float: left; margin-right: 10px; margin-bottom: 10px;"
+            else:
+                style = "float: right; margin-left: 10px; margin-bottom: 10px;"
+
 
         return ('<img src="%s" alt="%s" class="img-polaroid" '
                 'height="%spx" width="%spx" style="%s"/>' % (thumbnail.url,

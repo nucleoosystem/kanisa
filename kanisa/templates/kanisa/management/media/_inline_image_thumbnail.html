@@ -12,3 +12,9 @@
 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
 {% endthumbnail %}
 </div>
+
+<div  style="display: none;" class="thumbnail-small">
+{% thumbnail image.image "160x120" as im %}
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
+{% endthumbnail %}
+</div>
