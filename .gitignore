@@ -18,13 +18,12 @@ develop-eggs
 pip-log.txt
 
 # Unit test / coverage reports
-.coverage
+coverage.xml
 .tox
+pep8.txt
+.test_whoosh/
 
 #Translations
 *.mo
-
-#Mr Developer
-.mr.developer.cfg
 
 docs/_build
