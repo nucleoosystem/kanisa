@@ -33,4 +33,8 @@ setup(
         "Whoosh==2.4.1",
         "wsgiref==0.1.2",
     ],
+    tests_require=(
+        'django-setuptest==0.1.2',
+    ),
+    test_suite='setuptest.setuptest.SetupTestSuite',
 )
