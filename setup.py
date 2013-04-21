@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
-        "Django==1.4.2",
+        "Django==1.4.3",
         "PIL==1.1.7",
         "django-autoslug==1.6.1",
         "django-compressor==1.1.2",
@@ -23,6 +23,7 @@ setup(
         "django-haystack==1.2.7",
         "django-mptt==0.5.4",
         "django-password-reset==0.2",
+        "django-recurrence==1.0.1",
         "factory-boy==1.2.0",
         "lxml==2.3.6",
         "markdown==2.2.0",
