@@ -45,7 +45,7 @@ INSTALLED_APPS = (
 
 LOGIN_URL = '/account/login/'
 
-ROOT_URLCONF = 'test_urls'
+ROOT_URLCONF = 'kanisa.tests.tox.urls'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
@@ -56,7 +56,7 @@ import os
 PROJECT_DIR = os.path.dirname(__file__)
 j = lambda filename: os.path.join(PROJECT_DIR, filename)
 
-HAYSTACK_SITECONF = 'test_search_sites'
+HAYSTACK_SITECONF = 'kanisa.tests.tox.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = j('.test_whoosh')
 
