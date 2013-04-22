@@ -15,11 +15,11 @@ class RegularEventFactory(factory.Factory):
 
 
 class DiaryTest(TestCase):
-    def testUnicode(self):
+    def test_unicode(self):
         event = RegularEventFactory.build(title='Afternoon Tea')
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
-    def testSchedule(self):
+    def test_schedule(self):
         pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"
         event = RegularEventFactory.create(pattern=pattern)
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
@@ -32,7 +32,7 @@ class DiaryTest(TestCase):
         self.assertEqual(instance.start_time, time(14, 0, 0))
         self.assertEqual(instance.duration, 60)
 
-    def testInstanceUnicode(self):
+    def test_instance_unicode(self):
         friday = "RRULE:FREQ=WEEKLY;BYDAY=FR"
         event = RegularEventFactory.create(title='Breakfast Club',
                                            pattern=friday)
@@ -46,7 +46,7 @@ class DiaryTest(TestCase):
         instance = ScheduledEvent.objects.get(pk=1)
         self.assertEqual(unicode(instance), 'Special Breakfast')
 
-    def testGetNextWithEventScheduled(self):
+    def test_get_next_with_event_scheduled(self):
         tuesdays = "RRULE:FREQ=WEEKLY;BYDAY=TU"
         event = RegularEventFactory.create(title='Breakfast Club',
                                            pattern=tuesdays)
@@ -58,35 +58,35 @@ class DiaryTest(TestCase):
         self.assertEqual(next.title, 'Breakfast Club')
         self.assertEqual(next.date, date(2020, 1, 7))
 
-    def testGetNextWithoutEventScheduled(self):
+    def test_get_next_without_event_scheduled(self):
         event = RegularEventFactory.create(title='Breakfast Club')
         next = event.get_next()
         self.assertEqual(next, None)
 
 
 class DiaryGetWeekBoundsTest(TestCase):
-    def testGetWeekBoundsToday(self):
+    def test_get_week_bounds_today(self):
         monday, sunday = get_week_bounds()
         self.assertEqual(monday.weekday(), 0)
         self.assertEqual(sunday.weekday(), 6)
         self.assertTrue(monday <= date.today())
         self.assertTrue(sunday >= date.today())
 
-    def testGetWeekBoundsOnDate(self):
+    def test_get_week_bounds_on_date(self):
         monday, sunday = get_week_bounds(date(2012, 6, 12))
         self.assertEqual(monday.weekday(), 0)
         self.assertEqual(sunday.weekday(), 6)
         self.assertEqual(monday, date(2012, 6, 11))
         self.assertEqual(sunday, date(2012, 6, 17))
 
-    def testGetWeekBoundsOnAMonday(self):
+    def test_get_week_bounds_on_a_monday(self):
         monday, sunday = get_week_bounds(date(2012, 6, 11))
         self.assertEqual(monday.weekday(), 0)
         self.assertEqual(sunday.weekday(), 6)
         self.assertEqual(monday, date(2012, 6, 11))
         self.assertEqual(sunday, date(2012, 6, 17))
 
-    def testGetWeekBoundsOnASunday(self):
+    def test_get_week_bounds_on_a_sunday(self):
         monday, sunday = get_week_bounds(date(2012, 6, 17))
         self.assertEqual(monday.weekday(), 0)
         self.assertEqual(sunday.weekday(), 6)
@@ -95,7 +95,7 @@ class DiaryGetWeekBoundsTest(TestCase):
 
 
 class DiaryGetScheduleTest(TestCase):
-    def testBasics(self):
+    def test_basics(self):
         tuesday = "RRULE:FREQ=WEEKLY;BYDAY=TU"
         wednesday = "RRULE:FREQ=WEEKLY;BYDAY=WE"
         thursday = "RRULE:FREQ=WEEKLY;BYDAY=TH"
@@ -123,7 +123,7 @@ class DiaryGetScheduleTest(TestCase):
         self.assertEqual(entries[4].regular_events[0],
                          event2)
 
-    def testScheduled(self):
+    def test_scheduled(self):
         tuesday = "RRULE:FREQ=WEEKLY;BYDAY=TU"
         event1 = RegularEventFactory.create(pattern=tuesday)
         RegularEventFactory.create(pattern="RRULE:FREQ=WEEKLY;BYDAY=WE")
@@ -157,16 +157,16 @@ class ScheduledEventFactory(factory.Factory):
 
 
 class DiaryScheduledEventTest(TestCase):
-    def testUnicode(self):
+    def test_unicode(self):
         event = ScheduledEventFactory.build(title='Afternoon Tea')
         self.assertEqual(unicode(event), 'Afternoon Tea')
 
-    def testEndDate(self):
+    def test_end_date(self):
         # end_date should be auto-populated
         event1 = ScheduledEventFactory.create()
         self.assertEqual(event1.end_date, date(2012, 6, 15))
 
-    def testEventsBetween(self):
+    def test_events_between(self):
         event1 = ScheduledEventFactory.create(title='1')
         event2 = ScheduledEventFactory.create(title='2',
                                               date=date(2012, 6, 12))
@@ -195,7 +195,7 @@ class DiaryScheduledEventTest(TestCase):
         self.assertEqual(list(events),
                          [event2, event1, event3, late_event, ])
 
-    def testEventsBetweenMultiDayDuring(self):
+    def test_events_between_multi_day_during(self):
         event1 = ScheduledEventFactory.create(end_date=date(2012, 6, 16))
         events = ScheduledEvent.events_between(date(2012, 6, 11),
                                                date(2012, 6, 15))
@@ -203,7 +203,7 @@ class DiaryScheduledEventTest(TestCase):
         self.assertEqual(list(events),
                          [event1, ])
 
-    def testEventsBetweenMultiDayBefore(self):
+    def test_events_between_multi_days_before(self):
         event1 = ScheduledEventFactory.create(date=date(2012, 6, 10),
                                               end_date=date(2012, 6, 16))
         # This one ends before the range we care about
@@ -216,7 +216,7 @@ class DiaryScheduledEventTest(TestCase):
         self.assertEqual(list(events),
                          [event1, ])
 
-    def testEventsBetweenMultiDayAfter(self):
+    def test_events_between_multi_day_after(self):
         event1 = ScheduledEventFactory.create(end_date=date(2012, 6, 20))
 
         # This one starts after the range we care about

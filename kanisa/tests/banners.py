@@ -13,7 +13,7 @@ class BannerFactory(factory.Factory):
 
 
 class BannerTest(TestCase):
-    def testIsActive(self):
+    def test_is_active(self):
         # A banner with no expiry date or publication date
         banner = BannerFactory.build()
         self.assertTrue(banner.active())
@@ -28,7 +28,7 @@ class BannerTest(TestCase):
                                      publish_until=date(2020, 1, 1))
         self.assertTrue(banner.active())
 
-    def testHasExpired(self):
+    def test_has_expired(self):
         # A banner with no expiry date or publication date
         banner = BannerFactory.build()
         self.assertFalse(banner.expired())
@@ -43,30 +43,30 @@ class BannerTest(TestCase):
                                      publish_until=date(2020, 1, 1))
         self.assertFalse(banner.expired())
 
-    def testFetchActive(self):
+    def test_fetch_active(self):
         BannerFactory.create()
         BannerFactory.create(publish_until=date(2012, 1, 1))
         BannerFactory.create(publish_from=date(2020, 1, 1))
         banners = Banner.active_objects.all()
         self.assertEqual(len(banners), 1)
 
-    def testFetchInactive(self):
+    def test_fetch_inactive(self):
         BannerFactory.create()
         BannerFactory.create(publish_until=date(2012, 1, 1))
         BannerFactory.create(publish_from=date(2020, 1, 1))
         banners = Banner.inactive_objects.all()
         self.assertEqual(len(banners), 2)
 
-    def testUnicode(self):
+    def test_unicode(self):
         banner = BannerFactory.build(headline='Green Flowers')
         self.assertEqual(unicode(banner), 'Green Flowers')
 
-    def testDateHasPassed(self):
+    def test_date_has_passed(self):
         self.assertFalse(date_has_passed(None))
         self.assertTrue(date_has_passed(date(2012, 1, 1)))
         self.assertFalse(date_has_passed(date.today()))
 
-    def testTodayInRange(self):
+    def test_today_in_range(self):
         self.assertTrue(today_in_range(None, None))
         self.assertTrue(today_in_range(date.today(), None))
         self.assertTrue(today_in_range(None, date.today()))
@@ -82,7 +82,7 @@ class BannerTest(TestCase):
         self.assertFalse(today_in_range(None,
                                         date.today() - timedelta(days=1)))
 
-    def testSetRetired(self):
+    def test_set_retired(self):
         # Confirm initial state
         banner = BannerFactory.create()
         self.assertTrue(banner.active())

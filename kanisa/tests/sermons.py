@@ -25,14 +25,14 @@ class SermonFactory(factory.Factory):
 
 
 class SermonTest(TestCase):
-    def testUnicode(self):
+    def test_unicode(self):
         series = SermonSeriesFactory.build(title='Series Title')
         self.assertEqual(unicode(series), 'Series Title')
 
         sermon = SermonFactory.build(title='Sermon Title')
         self.assertEqual(unicode(sermon), 'Sermon Title')
 
-    def testNumSermons(self):
+    def test_num_sermons(self):
         series1 = SermonSeriesFactory.create()
         series2 = SermonSeriesFactory.create()
 
@@ -52,7 +52,7 @@ class SermonTest(TestCase):
             self.assertEqual([s.num_sermons() for s in series],
                              [3, 0])
 
-    def testGetSermonSpeakerIsFree(self):
+    def test_get_sermon_speaker_is_free(self):
         speaker = SermonSpeakerFactory(forename='Bugs',
                                        surname='Bunny')
         sermon = SermonFactory.create(speaker=speaker)
@@ -61,18 +61,18 @@ class SermonTest(TestCase):
         with self.assertNumQueries(0):
             self.assertEqual(unicode(sermon.speaker), 'Bugs Bunny')
 
-    def testGetSermonSpeakerName(self):
+    def test_get_sermon_speaker_name(self):
         speaker = SermonSpeakerFactory.build(forename='Bugs',
                                              surname='Bunny')
         self.assertEqual(speaker.name(), 'Bugs Bunny')
 
-    def testAutoSlugForSermonSpeaker(self):
+    def test_auto_slug_for_sermon_speaker(self):
         speaker = SermonSpeaker.objects.create(forename="Mickey",
                                                surname="Mouse")
         speaker.save()
         self.assertEqual(speaker.slug, 'mickey-mouse')
 
-    def testFetchSermonsForSeries(self):
+    def test_fetch_sermons_for_series(self):
         series1 = SermonSeriesFactory.create()
         SermonFactory.create(series=series1,
                              date=date(2012, 4, 29))
