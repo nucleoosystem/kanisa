@@ -12,6 +12,7 @@ from .diary import (DiaryTest,
                     DiaryGetScheduleTest,
                     DiaryScheduledEventTest)
 from .kanisa_markup import KanisaMarkupTest
+from .media import InlineImageTest
 from .navigation import NavigationElementTest
 from .pages import (PageTest,
                     GetPageFromPathTest,
