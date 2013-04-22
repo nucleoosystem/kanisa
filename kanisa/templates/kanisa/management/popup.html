@@ -11,23 +11,11 @@
     </script>
     {% block extrajs %}
     {% endblock %}
-    <style type="text/css">
-      body, form {
-      margin: 0;
-      padding: 0;
-      }
-      .form-actions {
-      margin-bottom: 0;
-      }
-      h1 {
-      margin: 10px;
-      }
-    </style>
   </head>
-  <body>
+  <body class="popup">
     {% include 'kanisa/management/_alerts.html' %}
 
-    <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
+    <h2>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h2>
 
     {% if kanisa_form_warning %}
     <div class="alert alert-info">
