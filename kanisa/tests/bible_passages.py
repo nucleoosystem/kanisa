@@ -6,7 +6,7 @@ from django.test import TestCase
 
 
 class BiblePassageBadInput(TestCase):
-    def testInvalidArguments(self):
+    def test_invalid_arguments(self):
         self.assertRaises(bible.InvalidPassage, bible.BiblePassage,
                           'foo')
         self.assertRaises(bible.InvalidPassage, bible.BiblePassage,
@@ -43,7 +43,7 @@ class BiblePassageBadInput(TestCase):
         self.assertRaises(bible.InvalidPassage, bible.BiblePassage,
                           '1 Peter', None, None, None, 4)
 
-    def testOutOfRange(self):
+    def test_out_of_range(self):
         self.assertRaises(bible.BookBoundsError, bible.BiblePassage,
                           'Matthew', 29)
         self.assertRaises(bible.BookBoundsError, bible.BiblePassage,
@@ -59,7 +59,7 @@ class BiblePassageBadInput(TestCase):
 
 
 class BiblePassage(TestCase):
-    def testToString(self):
+    def test_to_string(self):
         self.assertEqual(unicode(bible.to_passage('1 thessalonians')),
                          '1 Thessalonians')
         self.assertEqual(unicode(bible.to_passage('1 thessalonians  3')),
@@ -80,7 +80,7 @@ class BiblePassage(TestCase):
         self.assertEqual(unicode(bible.to_passage('1 cor 2-3')),
                          '1 Corinthians 2-3')
 
-    def testLength(self):
+    def test_length(self):
         self.assertEqual(len(bible.to_passage('1 cor 2 v 3 - 7')),
                          len('1 Corinthians 2:3-7'))
         self.assertEqual(len(bible.to_passage('1 cor 2-3')),
@@ -88,13 +88,13 @@ class BiblePassage(TestCase):
 
 
 class ToPassageBadInput(TestCase):
-    def testNonString(self):
+    def test_non_string(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 4000)
 
-    def testNonBook(self):
+    def test_non_book(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 'foo')
 
-    def testInvalidRange(self):
+    def test_invalid_range(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage,
                           '1 Thessalonians 2:1 - 1v2')
         self.assertRaises(bible.InvalidPassage, bible.to_passage,
@@ -102,13 +102,13 @@ class ToPassageBadInput(TestCase):
         self.assertRaises(bible.InvalidPassage, bible.to_passage,
                           '1 Thessalonians 2:2-2:1')
 
-    def testGoodBookStupidRange(self):
+    def test_good_book_stupid_range(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage,
                           '1 Thessalonians Fish')
 
 
 class ToPassageGoodInput(TestCase):
-    def testBooksOnly(self):
+    def test_books_only(self):
         for b in bible.BOOKS_OF_THE_BIBLE:
             passage = bible.to_passage(b)
             self.assertEqual(passage.book, b)
@@ -118,7 +118,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage.end_chapter, None)
             self.assertEqual(passage.end_verse, None)
 
-    def testUppercaseBooksOnly(self):
+    def test_uppercase_books_only(self):
         for b in bible.BOOKS_OF_THE_BIBLE:
             passage = bible.to_passage(b.upper())
             self.assertEqual(passage.book, b)
@@ -127,7 +127,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage.end_chapter, None)
             self.assertEqual(passage.end_verse, None)
 
-    def testLowerCaseFullPassage(self):
+    def test_lower_case_full_passage(self):
         passage = bible.to_passage('1 thessalonians 3:1-4:5')
         self.assertEqual(passage.book, '1 Thessalonians')
         self.assertEqual(passage.start_chapter, 3)
@@ -135,7 +135,7 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(passage.end_chapter, 4)
         self.assertEqual(passage.end_verse, 5)
 
-    def testBooksWithChapter1(self):
+    def test_books_with_chapter_one(self):
         for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1')
             self.assertEqual(passage.book, b)
@@ -145,7 +145,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage.end_chapter, None)
             self.assertEqual(passage.end_verse, None)
 
-    def testBooksWithChapter1To2(self):
+    def test_books_with_chapter_one_to_two(self):
         for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1 - 2')
             self.assertEqual(passage.book, b)
@@ -155,7 +155,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage.end_chapter, 2)
             self.assertEqual(passage.end_verse, None)
 
-    def testBooksWithChapter1Verse1(self):
+    def test_books_with_chapter_one_verse_one(self):
         for b in bible.BOOKS_OF_THE_BIBLE:
             passage = bible.to_passage(b + ' 1:2')
             self.assertEqual(passage.book, b)
@@ -171,7 +171,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage2.end_chapter, None)
             self.assertEqual(passage2.end_verse, None)
 
-    def testBooksWithChapterAndVerseRange(self):
+    def test_books_with_chapter_and_verse_range(self):
         for b in bible.BOOKS_OF_THE_BIBLE:
             passage = bible.to_passage(b + ' 1:1-2')
             self.assertEqual(passage.book, b)
@@ -187,7 +187,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage2.end_chapter, 1)
             self.assertEqual(passage2.end_verse, 2)
 
-    def testBooksWithFullRange(self):
+    def test_books_with_full_range(self):
         for b in MULTI_CHAPTER_BOOKS:
             passage = bible.to_passage(b + ' 1:3-2:4')
             self.assertEqual(passage.book, b)
@@ -203,7 +203,7 @@ class ToPassageGoodInput(TestCase):
             self.assertEqual(passage2.end_chapter, 2)
             self.assertEqual(passage2.end_verse, 4)
 
-    def testBookPseudonyms(self):
+    def test_book_pseudonyms(self):
         self.assertEqual(bible.normalise_passage('Psalms 23:1-6'),
                          'Psalm 23:1-6')
         self.assertEqual(bible.normalise_passage('1 Jn 4:1-5'),
@@ -219,14 +219,14 @@ class ToPassageGoodInput(TestCase):
         self.assertEqual(bible.normalise_passage('1 Jo 1:1-5:5'),
                          '1 John 1:1-5:5')
 
-    def testAmbiguousNames(self):
+    def test_ambiguous_names(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 'J 3:16')
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 'Ez 3:16')
 
-    def testOverlyLongNames(self):
+    def test_overly_long_names(self):
         self.assertRaises(bible.InvalidPassage, bible.to_passage, 'Johns 3:16')
 
-    def testLessLikelyInputs(self):
+    def test_less_likely_inputs(self):
         passage = bible.to_passage('1 John ch 2 v 3-5')
         self.assertEqual(unicode(passage), '1 John 2:3-5')
 
@@ -239,14 +239,14 @@ class ToPassageGoodInput(TestCase):
         passage = bible.to_passage('1 John ch 2 v 3 - ch 4:5')
         self.assertEqual(unicode(passage), '1 John 2:3-4:5')
 
-    def testSameStartAndEndChapter(self):
+    def test_same_start_and_end_chapter(self):
         passage = bible.to_passage('1 John 1-1')
         self.assertEqual(unicode(passage), '1 John 1')
 
         passage = bible.to_passage('1 John 1:3-1:4')
         self.assertEqual(unicode(passage), '1 John 1:3-4')
 
-    def testSingleChapterBooks(self):
+    def test_single_chapter_books(self):
         passage = bible.to_passage('Jude 1:2-3')
         self.assertEqual(passage.book, 'Jude')
         self.assertEqual(passage.start_chapter, 1)
@@ -292,7 +292,7 @@ class ToPassageGoodInput(TestCase):
         self.assertRaises(bible.BookBoundsError, bible.to_passage,
                           '2 John 2:1-2:2')
 
-    def testCommonNames(self):
+    def test_common_names(self):
         COMMON_ABBREVIATIONS = [['gen', ],
                                 ['ex', ],
                                 ['lev', ],
@@ -378,7 +378,7 @@ class ToPassageGoodInput(TestCase):
 
 
 class BiblePassageModelField(TestCase):
-    def testAssignPassage(self):
+    def test_assign_passage(self):
         p = bible.to_passage('2 John 1')
         m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
@@ -392,7 +392,7 @@ class BiblePassageModelField(TestCase):
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), '2 John 1')
 
-    def testAssignStringToModel(self):
+    def test_assign_string_to_model(self):
         p = 'Psalm'
         m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
@@ -401,7 +401,7 @@ class BiblePassageModelField(TestCase):
         self.assertTrue(isinstance(m1.passage, bible.BiblePassage))
         self.assertEqual(unicode(m1.passage), 'Psalms')
 
-    def testSerialization(self):
+    def test_serialization(self):
         p = 'Psalm'
         m = SermonSeries(passage=p, title='test_title', slug='test-title')
         m.save()
@@ -413,14 +413,14 @@ class BiblePassageModelField(TestCase):
         self.assertEqual(unicode(objects[0].object.passage),
                          'Psalms')
 
-    def testNone(self):
+    def test_none(self):
         m = SermonSeries(title='test_title', slug='test-title')
         m.save()
 
         m1 = SermonSeries.objects.get(pk=m.pk)
         self.assertEqual(m1.passage, None)
 
-    def testBadPassageSavedAsString(self):
+    def test_bad_passage_saved_as_string(self):
         m = SermonSeries(title='test_title', slug='test-title')
         m.passage = 'Not a Bible Passage'
         m.save()
