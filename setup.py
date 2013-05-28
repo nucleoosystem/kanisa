@@ -15,7 +15,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
-        "Django==1.4.3",
+        "Django==1.4.5",
         "PIL==1.1.7",
         "django-autoslug==1.6.1",
         "django-compressor==1.1.2",
@@ -27,7 +27,7 @@ setup(
         "factory-boy==1.2.0",
         "lxml==2.3.6",
         "markdown==2.2.0",
-        "mutagen==1.20",
+        "mutagen==1.21",
         "sorl-thumbnail==11.12",
         "tweepy==1.11",
         "Whoosh==2.4.1",
