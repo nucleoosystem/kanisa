@@ -1,12 +1,12 @@
 language: python
-python:
-  - "2.7"
+python: 2.7
 env:
-  - DJANGO=1.4
+  - TOX_ENV=py27-1.5.X
+  - TOX_ENV=py27-1.4.X
+  - TOX_ENV=py26-1.5.X
+  - TOX_ENV=py26-1.4.X
+  - TOX_ENV=flake8
 install:
-  - pip install -q Django==$DJANGO
-  - pip install -r requirements.txt
-  - pip install flake8
+  - pip install tox
 script:
-  - flake8 kanisa
-  - ./kanisa/example_project/manage.py test kanisa
+  - tox -e $TOX_ENV
