@@ -381,7 +381,7 @@ class EventCategoryBaseView(DiaryBaseView):
 
     def get_kanisa_intermediate_crumbs(self):
         return [{'url': reverse('kanisa_manage_diary_categories'),
-                 'title': 'Contacts'},
+                 'title': 'Categories'},
                 ]
 
 
