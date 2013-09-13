@@ -7,10 +7,12 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, Http404
 from django.views.generic.edit import FormView, CreateView
 from kanisa import conf
-from kanisa.forms.auth import (KanisaLoginForm,
-                               KanisaUserCreationForm,
-                               KanisaPasswordRecoveryForm,
-                               KanisaPasswordResetForm)
+from kanisa.forms.auth import (
+    KanisaLoginForm,
+    KanisaUserCreationForm,
+    KanisaPasswordRecoveryForm,
+    KanisaPasswordResetForm
+)
 from kanisa.utils.auth import has_any_kanisa_permission, users_with_perm
 from kanisa.utils.mail import send_bulk_mail, send_single_mail
 from kanisa.views.generic import KanisaTemplateView
