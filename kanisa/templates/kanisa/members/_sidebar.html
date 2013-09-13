@@ -27,14 +27,18 @@
         Service Planning
       </a>
     </li>
-    {% kanisa_is_permissioned_user as is_permissioned %}
-    {% if is_permissioned %}
-    <li>
-      <a href="{% url 'kanisa_manage_index' %}">
-        <i class="icon-cog"></i>
-        Site Management
-      </a>
-    </l>
-    {% endif %}
   </ul>
+
+  {% kanisa_is_permissioned_user as is_permissioned %}
+  {% if is_permissioned %}
+    <hr />
+    <ul class="nav nav-list">
+      <li>
+        <a href="{% url 'kanisa_manage_index' %}">
+          <i class="icon-cog"></i>
+          Site Management
+        </a>
+      </li>
+    </ul>
+  {% endif %}
 </div>
