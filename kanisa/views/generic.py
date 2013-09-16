@@ -155,7 +155,7 @@ class KanisaCreateView(CreateView):
 class KanisaUpdateView(UpdateView):
     template_name = 'kanisa/management/create.html'
 
-    def add_message(self, form):
+    def get_message(self, form):
         model_name = form.instance._meta.verbose_name.title()
         return u'%s "%s" saved.' % (model_name,
                                     unicode(form.instance))
