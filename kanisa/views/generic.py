@@ -160,8 +160,6 @@ class KanisaUpdateView(UpdateView):
         return u'%s "%s" saved.' % (model_name,
                                     unicode(form.instance))
 
-
-
     def form_valid(self, form):
         messages.success(self.request, self.get_message(form))
         return super(KanisaUpdateView, self).form_valid(form)
