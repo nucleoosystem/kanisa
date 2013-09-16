@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import (AuthenticationForm,
                                        PasswordChangeForm,
                                        UserCreationForm)
-from kanisa.forms import KanisaPrettyForm
+from kanisa.forms import (
+    KanisaBaseModelForm,
+    KanisaPrettyForm
+)
 from password_reset.forms import PasswordRecoveryForm, PasswordResetForm
 
 
@@ -61,3 +64,11 @@ class KanisaPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         self.helper = self.get_form_helper()
         super(KanisaPasswordResetForm, self).__init__(*args, **kwargs)
+
+
+class KanisaAccountModificationForm(KanisaBaseModelForm):
+    submit_text = 'Save Changes'
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', ]

@@ -1,5 +1,6 @@
 import urlparse
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
+from django.contrib.auth.models import User
 from django.contrib.sites.models import RequestSite
 from django.core import signing
 from django.core.cache import cache
@@ -8,6 +9,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.views.generic.edit import FormView, CreateView
 from kanisa import conf
 from kanisa.forms.auth import (
+    KanisaAccountModificationForm,
     KanisaLoginForm,
     KanisaUserCreationForm,
     KanisaPasswordRecoveryForm,
@@ -15,7 +17,11 @@ from kanisa.forms.auth import (
 )
 from kanisa.utils.auth import has_any_kanisa_permission, users_with_perm
 from kanisa.utils.mail import send_bulk_mail, send_single_mail
-from kanisa.views.generic import KanisaTemplateView
+from kanisa.views.generic import (
+    KanisaTemplateView,
+    KanisaUpdateView
+)
+from kanisa.views.members.auth import MembersBaseView
 from password_reset.views import Recover, Reset
 
 
@@ -106,3 +112,18 @@ class KanisaResetPasswordView(Reset):
 class KanisaResetPasswordDoneView(KanisaTemplateView):
     kanisa_title = 'Password Reset Complete'
     template_name = 'kanisa/auth/passwordreset/reset_done.html'
+
+
+class KanisaAccountModificationView(MembersBaseView,
+                                    KanisaUpdateView):
+    template_name = 'kanisa/auth/account.html'
+    form_class = KanisaAccountModificationForm
+    success_url = reverse_lazy('kanisa_members_index')
+    model = User
+    kanisa_title = 'Update your account'
+
+    def get_object(self):
+        return self.request.user
+
+    def get_message(self, form):
+        return 'Changes saved.'
