@@ -1,18 +1,22 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.http import (HttpResponse,
-                         HttpResponseForbidden,
-                         HttpResponseRedirect)
+from django.http import (
+    HttpResponse,
+    HttpResponseForbidden,
+    HttpResponseRedirect
+)
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.http import urlquote
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import (CreateView,
-                                       UpdateView,
-                                       DeleteView,
-                                       FormView)
+from django.views.generic.edit import (
+    CreateView,
+    UpdateView,
+    DeleteView,
+    FormView
+)
 from django.views.generic.list import ListView
 from kanisa.utils.auth import has_any_kanisa_permission
 
