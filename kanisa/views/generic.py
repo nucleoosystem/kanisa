@@ -155,11 +155,15 @@ class KanisaCreateView(CreateView):
 class KanisaUpdateView(UpdateView):
     template_name = 'kanisa/management/create.html'
 
-    def form_valid(self, form):
+    def add_message(self, form):
         model_name = form.instance._meta.verbose_name.title()
-        message = u'%s "%s" saved.' % (model_name,
-                                       unicode(form.instance))
-        messages.success(self.request, message)
+        return u'%s "%s" saved.' % (model_name,
+                                    unicode(form.instance))
+
+
+
+    def form_valid(self, form):
+        messages.success(self.request, self.get_message(form))
         return super(KanisaUpdateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
