@@ -1,9 +1,20 @@
 {% extends 'kanisa/management/base.html' %}
 
+{% load url from future %}
+
 {% block extrajs %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_users.js"></script>
 {% endblock %}
 
 {% block content %}
+<p>
+  <a href="{% url 'admin:auth_user_add' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Add an account
+  </a>
+</p>
+
+<hr />
+
 {% include "kanisa/management/users/_user_list.html" %}
 {% endblock %}
