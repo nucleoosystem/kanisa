@@ -23,7 +23,7 @@ coverage.xml
 pep8.txt
 .test_whoosh/
 
-#Translations
+# Translations
 *.mo
 
 docs/_build
