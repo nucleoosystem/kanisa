@@ -57,7 +57,8 @@ class SermonSeries(models.Model):
         returned.
 
         """
-        sermons = list(self.sermons().only('date'))
+        sermons = Sermon.basic_objects.filter(series=self)
+        sermons = list(sermons.order_by('date').only('date'))
 
         if not sermons:
             return None
@@ -162,6 +163,7 @@ class Sermon(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()
+    basic_objects = models.Manager()
     preached_objects = PreachedSermonManager()
 
     def __unicode__(self):
