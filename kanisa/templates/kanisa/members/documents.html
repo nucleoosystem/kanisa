@@ -3,18 +3,18 @@
 {% load url from future %}
 
 {% block extrajs %}
-<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/members_documents.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/members_documents.js"></script>
 {% endblock %}
 
 
 {% block content %}
 
-{% if document_list %}
-{% include 'kanisa/members/_document_table.html' %}
-{% else %}
-<div class="alert alert-warning">
-There are no documents to display.
-</div>
-{% endif %}
+  {% if document_list %}
+    {% include 'kanisa/members/_document_table.html' %}
+  {% else %}
+    <div class="alert alert-warning">
+      There are no documents to display.
+    </div>
+  {% endif %}
 
 {% endblock %}
