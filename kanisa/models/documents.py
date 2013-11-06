@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 import os
 
@@ -23,6 +24,8 @@ class Document(models.Model):
                                             'your site.'))
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    downloads = models.IntegerField(default=0,
+                                    editable=False)
 
     def __unicode__(self):
         return self.title
@@ -39,6 +42,9 @@ class Document(models.Model):
             return KNOWN_EXTENSIONS[extension]
 
         return extension
+
+    def download_url(self):
+        return reverse('kanisa_members_documents_download', args=[self.pk,])
 
     class Meta:
         # Need this because I've split up models.py into multiple
