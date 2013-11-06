@@ -16,6 +16,7 @@ class MembersDocumentView(MembersBaseView, KanisaListView):
     kanisa_is_root_view = True
 index = MembersDocumentView.as_view()
 
+
 class MembersDocumentDownloadView(MembersBaseView, RedirectView):
     permanent = False
 

@@ -44,7 +44,7 @@ class Document(models.Model):
         return extension
 
     def download_url(self):
-        return reverse('kanisa_members_documents_download', args=[self.pk,])
+        return reverse('kanisa_members_documents_download', args=[self.pk, ])
 
     class Meta:
         # Need this because I've split up models.py into multiple
