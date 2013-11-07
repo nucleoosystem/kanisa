@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block contents %}
+{% with object.get_breadcrumb_trail as breadcrumbs %}
+{% if breadcrumbs|length > 1 %}
 <p class="footnote">
 {% for p in object.get_breadcrumb_trail %}
   <a href="{{ p.path }}">{{ p.title }}</a>
@@ -15,6 +17,8 @@
 {% endfor %}
 <strong>{{ object.title }}</strong>
 </p>
+{% endif %}
+{% endwith %}
 
 <blockquote>
 {% if object.lead %}
