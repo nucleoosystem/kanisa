@@ -31,7 +31,7 @@
         {% if element.get_level != 0 %}&#8627;{% endif %}
         <a href="{% url 'kanisa_manage_navigation_update' element.pk %}">{{ element.title }}</a>
       </td>
-      <td>{{ element.url }}</td>
+      <td><a href="{{ element.url }}">{{ element.url }}</a></td>
       <td class="iconcell">
         {% if element.require_login %}
         <i class="icon icon-lock" title="This navigation element is only displayed for logged-in users."></i>
