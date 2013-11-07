@@ -23,6 +23,8 @@
 <blockquote>
 {% if object.lead %}
 <p>{{ object.lead }}</p>
+{% else %}
+<p>{{ object.contents|kanisa_markdown|striptags|truncatewords:75 }}</p>
 {% endif %}
 </blockquote>
 
