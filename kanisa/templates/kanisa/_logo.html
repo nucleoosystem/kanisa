@@ -1,5 +1,6 @@
 {% load kanisa_branding %}
 {% load thumbnail %}
+{% load url from future %}
 
 {% kanisa_branding 'logo' as logo_location %}
 
@@ -9,6 +10,9 @@
     {% thumbnail logo_location "460x140" as im %}
     <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px"/>
     {% endthumbnail %}
+    <form class="navbar-search pull-right" style="margin-right: 20px;" action="{% url 'kanisa_public_search' %}">
+      <input type="text" class="search-query" placeholder="Search" name="query" />
+    </form>
   </div>
 </div>
 {% endif %}
