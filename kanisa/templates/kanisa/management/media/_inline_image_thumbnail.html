@@ -2,19 +2,19 @@
 
 <div style="display: none; float: right" class="thumbnail-headline">
 {% thumbnail image.image "360x75" crop="center" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px;" data-img-pk="{{ image.pk }}" />
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px;" data-img-slug="{{ image.slug }}" />
 {% endthumbnail %}<br />
 <span class="muted" style="font-size: 90%;">Actual size will bigger - sufficient to span the width of the page.</span>
 </div>
 
 <div class="thumbnail-medium">
 {% thumbnail image.image "240x180" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-slug="{{ image.slug }}" />
 {% endthumbnail %}
 </div>
 
 <div  style="display: none;" class="thumbnail-small">
 {% thumbnail image.image "160x120" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-pk="{{ image.pk }}" />
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-polaroid main_input_widget_image_choice" style="margin-bottom: 5px; margin-right: 5px; float: right" data-img-slug="{{ image.slug }}" />
 {% endthumbnail %}
 </div>

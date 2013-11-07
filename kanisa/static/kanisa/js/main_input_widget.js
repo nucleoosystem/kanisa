@@ -104,10 +104,10 @@ function change_size(event) {
 }
 
 function get_code(element) {
-    var image_pk = get_matching_elements(element, ".main_input_widget_image_choice").attr("data-img-pk");
+    var image_slug = get_matching_elements(element, ".main_input_widget_image_choice").attr("data-img-slug");
     var size = get_size(element);
 
-    var image_code = "![img-" + image_pk + " " + size;
+    var image_code = "![" + image_slug + " " + size;
 
     if (size != "headline") {
         image_code += " " + get_alignment(element);

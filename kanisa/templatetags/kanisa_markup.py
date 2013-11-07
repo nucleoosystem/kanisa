@@ -10,7 +10,7 @@ import re
 register = template.Library()
 
 
-image_expression = re.compile(r'(!\[img-([0-9]+)'
+image_expression = re.compile(r'(!\[([A-Za-z0-9\-]+)'
                               '( (headline|medium|small))?'
                               '( (left|right))?\]'
                               '(\[(.+?)\])?)')
@@ -22,7 +22,7 @@ document_expression = re.compile(r'({@document-([0-9]+)})')
 class ImageMatch(object):
     def __init__(self, match):
         self.full = match[0]
-        pk = match[1]
+        slug = match[1]
         self.size = match[3]
         self.align = match[5]
 
@@ -33,7 +33,7 @@ class ImageMatch(object):
             self.align = 'left'
 
         self.alt = match[7]
-        self.image = InlineImage.objects.get(pk=pk)
+        self.image = InlineImage.objects.get(slug=slug)
 
     def tag(self):
         if self.size == 'headline':
