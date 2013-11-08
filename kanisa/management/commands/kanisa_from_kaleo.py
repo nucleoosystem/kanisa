@@ -24,6 +24,9 @@ class Command(BaseCommand):
     args = '<path_to_json> <path_to_media>'
     help = 'Loads data from a dump of a Kaleo installation'
 
+    seen_page_pks = {}
+    seen_navigation_link_pks = {}
+
     def handle(self, *args, **options):
         if len(args) != 2:
             raise CommandError("Insufficient arguments")
@@ -111,8 +114,6 @@ class Command(BaseCommand):
         print "Created image %s." % title
 
     def handle_kaleo_page(self, item):
-        if not hasattr(self, 'seen_page_pks'):
-            self.seen_page_pks = {}
 
         pk = item['pk']
 
@@ -172,8 +173,6 @@ class Command(BaseCommand):
         pass
 
     def handle_navigation_link(self, item):
-        if not hasattr(self, 'seen_navigation_link_pks'):
-            self.seen_navigation_link_pks = {}
 
         title = item['fields']['title']
         description = item['fields']['description']
