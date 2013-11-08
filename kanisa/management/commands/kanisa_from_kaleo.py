@@ -70,6 +70,15 @@ class Command(BaseCommand):
     def handle_serviceplans_band(self, item):
         pass
 
+    def handle_serviceplans_composer(self, item):
+        pass
+
+    def handle_serviceplans_song(self, item):
+        pass
+
+    def handle_serviceplans_serviceplansongchoice(self, item):
+        pass
+
     def handle_members_userprofile(self, item):
         pass
 
@@ -212,12 +221,3 @@ class Command(BaseCommand):
         document.created = uploaded
         document.save()
         print "Created document with title %s." % document.title
-
-    def handle_serviceplans_composer(self, item):
-        pass
-
-    def handle_serviceplans_song(self, item):
-        pass
-
-    def handle_serviceplans_serviceplansongchoice(self, item):
-        pass
