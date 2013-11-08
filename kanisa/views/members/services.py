@@ -54,7 +54,11 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
         songs = songs[:5]
 
         total_songs = SongInService.objects.count()
-        percents = [(s.usage * 100.0) / total_songs for s in songs]
+
+        if total_songs == 0:
+            percents = [0 for s in songs]
+        else:
+            percents = [(s.usage * 100.0) / total_songs for s in songs]
 
         context['top_five_songs'] = zip(songs, percents)
 
