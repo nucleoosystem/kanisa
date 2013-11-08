@@ -3,10 +3,11 @@ from django.db import models
 import os
 
 
-KNOWN_EXTENSIONS = {'.doc': 'Word Document',
-                    '.pdf': 'PDF',
-                    '.xls': 'Excel Document',
-                    }
+KNOWN_EXTENSIONS = {
+    '.doc': 'Word Document',
+    '.pdf': 'PDF',
+    '.xls': 'Excel Document',
+}
 
 
 class Document(models.Model):
