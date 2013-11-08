@@ -44,6 +44,18 @@ class Command(BaseCommand):
 
         func(item)
 
+    def copy_file(self, original_pk, original_file_name, dest_dir):
+        target_file_name = '%s-%s' % (str(original_pk),
+                                      basename(original_file_name))
+        path_for_django = os.path.join('kanisa/%s' % dest_dir,
+                                       target_file_name)
+        path_to_write_file = os.path.join(settings.MEDIA_ROOT,
+                                          path_for_django)
+        origin_path = os.path.join(self.uploads_path, original_file_name)
+        shutil.copyfile(origin_path, path_to_write_file)
+
+        return path_for_django
+
     def handle_serviceplans_serviceplan(self, item):
         pass
 
@@ -74,12 +86,7 @@ class Command(BaseCommand):
         slug = item['fields']['slug']
         image_path = item['fields']['image']
 
-        path_for_django = os.path.join('kanisa/media',
-                                       str(pk) + '-' + basename(image_path))
-        path_to_write_file = os.path.join(settings.MEDIA_ROOT,
-                                          path_for_django)
-        origin_path = os.path.join(self.uploads_path, image_path)
-        shutil.copyfile(origin_path, path_to_write_file)
+        path_for_django = self.copy_file(pk, image_path, 'media')
 
         InlineImage.objects.create(title=title,
                                    slug=slug,
