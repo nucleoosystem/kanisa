@@ -1,15 +1,23 @@
+from datetime import datetime
 import json
 import os.path
 from os.path import basename
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.utils.timezone import make_aware, get_current_timezone
 import shutil
 
 from kanisa.models import (
+    Document,
     Page,
     NavigationElement,
     InlineImage
 )
+
+
+def datetime_from_str(str):
+    return make_aware(datetime.strptime(str, '%Y-%m-%dT%H:%M:%S'),
+                      get_current_timezone())
 
 
 class Command(BaseCommand):
@@ -187,7 +195,23 @@ class Command(BaseCommand):
         self.seen_navigation_link_pks[pk] = link
 
     def handle_members_document(self, item):
-        pass
+        pk = item['pk']
+        title = item['fields']['name']
+        uploaded = item['fields']['uploaded']
+        description = item['fields']['description']
+        downloads = item['fields']['downloads']
+        path_for_django = self.copy_file(pk, item['fields']['file'],
+                                         'documents')
+
+        uploaded = datetime_from_str(uploaded)
+        document = Document.objects.create(title=title,
+                                           file=path_for_django,
+                                           details=description,
+                                           public=True,
+                                           downloads=downloads)
+        document.created = uploaded
+        document.save()
+        print "Created document with title %s." % document.title
 
     def handle_serviceplans_composer(self, item):
         pass
