@@ -9,9 +9,9 @@ import shutil
 
 from kanisa.models import (
     Document,
-    Page,
+    InlineImage,
     NavigationElement,
-    InlineImage
+    Page,
 )
 
 
