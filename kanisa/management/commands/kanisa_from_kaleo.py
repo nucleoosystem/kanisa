@@ -147,7 +147,6 @@ class Command(BaseCommand):
         print "Created image %s." % title
 
     def handle_kaleo_page(self, item):
-
         pk = item['pk']
 
         parent = item['fields']['parent']
@@ -206,7 +205,6 @@ class Command(BaseCommand):
         pass
 
     def handle_navigation_link(self, item):
-
         title = item['fields']['title']
         description = item['fields']['description']
         url = item['fields']['url']
