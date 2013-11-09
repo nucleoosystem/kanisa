@@ -27,6 +27,34 @@ class Command(BaseCommand):
     seen_page_pks = {}
     seen_navigation_link_pks = {}
 
+    ordering = [
+        'auth_group',
+        'auth_user',
+        'auth_permission',
+        'members_userprofile',
+        'serviceplans_composer',
+        'serviceplans_song',
+        'serviceplans_band',
+        'serviceplans_serviceplan',
+        'serviceplans_serviceplansongchoice',
+        'people_person',
+        'attachments_attachment',
+        'attachments_inlineimage',
+        'kaleo_page',
+        'kaleo_legacypathmapping',
+        'sermons_sermonseries',
+        'sermons_sermon',
+        'diary_diaryeventcategory',
+        'diary_diaryeventtype',
+        'diary_diaryeventlocation',
+        'diary_diaryeventseries',
+        'diary_diaryevent',
+        'banners_datelessbanner',
+        'banners_banner',
+        'navigation_link',
+        'members_document',
+    ]
+
     def handle(self, *args, **options):
         if len(args) != 2:
             raise CommandError("Insufficient arguments")
@@ -42,11 +70,16 @@ class Command(BaseCommand):
         except ValueError as e:
             raise CommandError("Invalid JSON file %s: %s." % (filename, e))
 
-        for item in data:
-            self.handle_item(item)
+        for model in self.ordering:
+            for item in data:
+                self.handle_item(item, model)
 
-    def handle_item(self, item):
+    def handle_item(self, item, model_to_process):
         model = item['model'].replace('.', '_')
+
+        if model != model_to_process:
+            return
+
         funcname = 'handle_%s' % model
         try:
             func = getattr(self, funcname)
