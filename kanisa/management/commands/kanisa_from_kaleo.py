@@ -8,10 +8,12 @@ from django.utils.timezone import make_aware, get_current_timezone
 import shutil
 
 from kanisa.models import (
+    Composer,
     Document,
     InlineImage,
     NavigationElement,
     Page,
+    Song,
 )
 
 
@@ -24,6 +26,7 @@ class Command(BaseCommand):
     args = '<path_to_json> <path_to_media>'
     help = 'Loads data from a dump of a Kaleo installation'
 
+    seen_composer_pks = {}
     seen_page_pks = {}
     seen_navigation_link_pks = {}
 
@@ -107,10 +110,25 @@ class Command(BaseCommand):
         pass
 
     def handle_serviceplans_composer(self, item):
-        pass
+        pk = item['pk']
+        surname = item['fields']['last_name']
+        forename = item['fields']['forenames']
+
+        composer = Composer.objects.create(forename=forename,
+                                           surname=surname)
+        self.seen_composer_pks[pk] = composer
+        print "Created composer %s %s." % (forename, surname)
 
     def handle_serviceplans_song(self, item):
-        pass
+        composers = item['fields']['composers']
+        title = item['fields']['title']
+
+        song = Song.objects.create(title=title)
+
+        for c in composers:
+            song.composers.add(self.seen_composer_pks[c])
+
+        print "Created song %s." % title
 
     def handle_serviceplans_serviceplansongchoice(self, item):
         pass
