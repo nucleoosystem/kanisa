@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import os
 import os.path
 from os.path import basename
 from django.conf import settings
@@ -95,12 +96,24 @@ class Command(BaseCommand):
     def copy_file(self, original_pk, original_file_name, dest_dir):
         target_file_name = '%s-%s' % (str(original_pk),
                                       basename(original_file_name))
-        path_for_django = os.path.join('kanisa/%s' % dest_dir,
+        path_for_django = os.path.join('kanisa', dest_dir,
                                        target_file_name)
+        try:
+            os.makedirs(os.path.join(settings.MEDIA_ROOT,
+                                     'kanisa', dest_dir))
+        except OSError:
+            pass
+
         path_to_write_file = os.path.join(settings.MEDIA_ROOT,
                                           path_for_django)
         origin_path = os.path.join(self.uploads_path, original_file_name)
-        shutil.copyfile(origin_path, path_to_write_file)
+
+        try:
+            shutil.copyfile(origin_path, path_to_write_file)
+        except IOError:
+            print ("Failed to copy %s to %s." % (origin_path,
+                                                 path_to_write_file))
+            raise
 
         return path_for_django
 
