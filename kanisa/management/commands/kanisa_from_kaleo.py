@@ -8,6 +8,7 @@ from django.utils.timezone import make_aware, get_current_timezone
 import shutil
 
 from kanisa.models import (
+    Banner,
     Composer,
     Document,
     InlineImage,
@@ -217,10 +218,28 @@ class Command(BaseCommand):
         pass
 
     def handle_banners_datelessbanner(self, item):
-        pass
+        self.handle_banners_banner(item)
 
     def handle_banners_banner(self, item):
-        pass
+        pk = item['pk']
+        headline = item['fields']['headline']
+        url = item['fields']['url']
+        link_text = item['fields']['link_text']
+        contents = item['fields']['contents']
+        image_path = item['fields']['image']
+        path_for_django = self.copy_file(pk, image_path, 'banners')
+
+        publish_from = item['fields'].get('publish_from', None)
+        publish_until = item['fields'].get('publish_until', None)
+
+        Banner.objects.create(headline=headline,
+                              contents=contents,
+                              image=path_for_django,
+                              link_text=link_text,
+                              url=url,
+                              publish_from=publish_from,
+                              publish_until=publish_until)
+        print "Created banner %s." % headline
 
     def handle_navigation_link(self, item):
         title = item['fields']['title']
