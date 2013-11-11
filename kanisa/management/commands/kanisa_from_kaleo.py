@@ -167,6 +167,7 @@ class Command(BaseCommand):
                                               email=email,
                                               image=path_for_django)
         self.seen_event_contacts[pk] = contact
+        print "Created event contact %s." % name
 
     def handle_auth_user(self, item):
         pass
