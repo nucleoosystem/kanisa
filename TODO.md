@@ -26,6 +26,12 @@ Version 1.0
       mobiles)
 - [ ] Add support for rota management
 - [ ] Check layout on mobile
+- [ ] Check Twitter integration still works
+- [ ] Add Facebook integration
+  - [ ] Support for delayed posting
+  - [ ] Facility for adding Like/Share buttons on individual pages
+  - [ ] Showing recent posts?
+- [ ] Consider adding Twilio integration
 
 Version 1.1
 ===========
