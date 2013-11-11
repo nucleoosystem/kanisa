@@ -12,6 +12,7 @@ from kanisa.models import (
     Banner,
     Composer,
     Document,
+    EventContact,
     InlineImage,
     NavigationElement,
     Page,
@@ -31,6 +32,7 @@ class Command(BaseCommand):
     seen_composer_pks = {}
     seen_page_pks = {}
     seen_navigation_link_pks = {}
+    seen_event_contacts = {}
 
     ordering = [
         'auth_group',
@@ -151,7 +153,22 @@ class Command(BaseCommand):
         pass
 
     def handle_people_person(self, item):
-        pass
+        pk = item['pk']
+        first_name = item['fields']['first_name']
+        last_name = item['fields']['last_name']
+        name = '%s %s' % (first_name, last_name)
+        email = item['fields']['email']
+        image_path = item['fields']['image']
+
+        if image_path:
+            path_for_django = self.copy_file(pk, image_path, 'diary/contacts')
+        else:
+            path_for_django = None
+
+        contact = EventContact.objects.create(name=name,
+                                              email=email,
+                                              image=path_for_django)
+        self.seen_event_contacts[pk] = contact
 
     def handle_auth_user(self, item):
         pass
