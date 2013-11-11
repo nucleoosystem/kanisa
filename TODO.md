@@ -20,6 +20,8 @@ Version 0.9
 - [ ] Add support for user photos
 - [ ] Think through who can see Service Planning links (just those in
       a band?)
+- [ ] Remove support for Django 1.4 (to make having a custom user
+      easier)
 
 Version 1.0
 ===========
@@ -34,10 +36,15 @@ Version 1.0
   - [ ] Facility for adding Like/Share buttons on individual pages
   - [ ] Showing recent posts?
 - [ ] Consider adding Twilio integration
+- [ ] Switch to Pillow
+- [ ] Version check requirements in setup.py
+- [ ] See if any dependencies can be removed (e.g. django-compressor,
+      django-password-reset?)
 
 Version 1.1
 ===========
 
+- [ ] Improve test coverage
 - [ ] Improve usability of management views on mobile
 - [ ] Allow customisable home page templates
 - [ ] Find references to media, and ensure media can't be deleted if
@@ -47,3 +54,4 @@ Version 1.1
 - [ ] Fix O(n)ness of user-management views
 - [ ] Allow pages to use multiple templates
 - [ ] Fix bug in rendering of event table when scheduling multiple events
+- [ ] Python 3 support
