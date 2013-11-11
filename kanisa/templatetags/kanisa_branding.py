@@ -26,10 +26,12 @@ def __fetch(filename):
     return None
 
 
-COMPONENTS = {'logo': 'logo.jpg',
-              'apple': 'apple.jpg',
-              'favicon': 'favicon.ico',
-              'colours': 'colours.css'}
+COMPONENTS = {
+    'logo': 'logo.jpg',
+    'apple': 'apple.jpg',
+    'favicon': 'favicon.ico',
+    'colours': 'colours.css'
+}
 
 
 @register.assignment_tag
