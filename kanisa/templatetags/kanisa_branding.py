@@ -8,11 +8,21 @@ register = template.Library()
 
 
 COMPONENTS = {
-    'logo': 'logo.jpg',
-    'logo_square': 'logo_square.jpg',
-    'apple': 'apple.jpg',
-    'favicon': 'favicon.ico',
-    'colours': 'colours.css'
+    'logo': {
+        'filename': 'logo.jpg',
+    },
+    'logo_square': {
+        'filename':'logo_square.jpg',
+    },
+    'apple': {
+        'filename': 'apple.jpg',
+    },
+    'favicon':  {
+        'filename': 'favicon.ico',
+    },
+    'colours':  {
+        'filename': 'colours.css'
+    },
 }
 
 
@@ -25,7 +35,7 @@ class BrandingInformation(object):
         self.url = self.get_cached_url()
 
     def get_cached_url(self):
-        file = COMPONENTS[self.component]
+        file = COMPONENTS[self.component]['filename']
 
         cache_key = 'kanisa_branding_component:%s' % file
         url = cache.get(cache_key)
