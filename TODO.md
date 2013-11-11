@@ -1,6 +1,7 @@
 Version 0.9
 ===========
 
+- [ ] Add support for ScheduledEvent series
 - [ ] Create default image for event contacts
 - [ ] Create default image for sermon series
 - [ ] Support importing from Kaleo
@@ -8,16 +9,15 @@ Version 0.9
   - [ ] Import users
   - [ ] Import groups
   - [ ] Import permissions
-  - [ ] Import attachments
-  - [ ] Import sermons and sermon series
   - [ ] Import bands
   - [ ] Import service plans
+  - [ ] Import attachments (and ensure the Markdown parser finds them)
+  - [ ] Import sermons and sermon series
   - [ ] Import legacy paths (not just LegacyPathMapping, but common
         Kaleo paths that will have moved, such as podcasts)
   - [x] Clean up unused contacts
 - [ ] Add support for podcasts
 - [ ] Add support for user photos
-- [ ] Add support for ScheduledEvent series
 - [ ] Think through who can see Service Planning links (just those in
       a band?)
 
