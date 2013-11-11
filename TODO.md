@@ -20,8 +20,6 @@ Version 0.9
 - [ ] Add support for user photos
 - [ ] Think through who can see Service Planning links (just those in
       a band?)
-- [ ] Remove support for Django 1.4 (to make having a custom user
-      easier)
 
 Version 1.0
 ===========
