@@ -1,0 +1,32 @@
+{% load kanisa_branding %}
+{% load thumbnail %}
+{% load url from future %}
+
+{% kanisa_branding image_key as logo_information %}
+
+<h3>{{ logo_information.verbose_name }}</h3>
+
+{% if logo_information.url %}
+<p>
+  {% for size in logo_information.sizes %}
+    {% thumbnail logo_information.url size as im %}
+      <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+    {% endthumbnail %}
+  {% endfor %}
+</p>
+
+{% else %}
+<p class="alert warning">No {{ logo_information.verbose_name }} uploaded.</p>
+{% endif %}
+
+<p>
+  <a href="{% url 'kanisa_manage_branding_logo' 'logo' %}" class="btn btn-small btn-success">
+    Update {{ logo_information.verbose_name }}
+  </a>
+</p>
+
+<p class="muted">
+  {{ logo_information.notes }}
+</p>
+
+<hr />

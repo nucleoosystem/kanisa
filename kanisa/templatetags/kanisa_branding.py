@@ -10,6 +10,8 @@ register = template.Library()
 COMPONENTS = {
     'logo': {
         'filename': 'logo.jpg',
+        'verbose_name': 'Site Logo',
+        'sizes': ['480x140', ],
         'notes': (
             'Your site logo is used at the top of every page. It should be '
             'exactly 140px high, and no wider than 500px.'
@@ -17,6 +19,8 @@ COMPONENTS = {
     },
     'apple': {
         'filename': 'apple.jpg',
+        'verbose_name': 'Apple Icons',
+        'sizes': ['144x144', '114x114', '72x72', '57x57', ],
         'notes': (
             'These icons are used where people add your site to their home '
             'screens. The Apple icon needs to be 144px by 144px. This will '
@@ -28,6 +32,8 @@ COMPONENTS = {
     },
     'favicon':  {
         'filename': 'favicon.ico',
+        'verbose_name': 'Site Favicon',
+        'sizes': ['32x32', ],
         'notes': (
             'A favicon is used when adding sites to favourites, and in '
             'most browsers\' tabs, to allow people to quickly identify '
@@ -36,7 +42,8 @@ COMPONENTS = {
         )
     },
     'colours':  {
-        'filename': 'colours.css'
+        'filename': 'colours.css',
+        'verbose_name': 'Colour settings'
     },
 }
 
@@ -49,6 +56,8 @@ class BrandingInformation(object):
         self.component = component
         self.url = self.get_cached_url()
         self.notes = COMPONENTS[self.component].get('notes', None)
+        self.sizes = COMPONENTS[self.component].get('sizes', [])
+        self.verbose_name = COMPONENTS[self.component]['verbose_name']
 
     def get_cached_url(self):
         file = COMPONENTS[self.component]['filename']
