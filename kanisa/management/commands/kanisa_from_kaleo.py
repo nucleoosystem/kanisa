@@ -12,6 +12,7 @@ from kanisa.models import (
     Banner,
     Composer,
     Document,
+    EventCategory,
     EventContact,
     InlineImage,
     NavigationElement,
@@ -32,6 +33,7 @@ class Command(BaseCommand):
     seen_composer_pks = {}
     seen_page_pks = {}
     seen_navigation_link_pks = {}
+    seen_event_categories = {}
     seen_event_contacts = {}
 
     ordering = [
@@ -233,7 +235,12 @@ class Command(BaseCommand):
         pass
 
     def handle_diary_diaryeventcategory(self, item):
-        pass
+        pk = item['pk']
+        title = item['fields']['title']
+        category = EventCategory.objects.create(title=title)
+
+        self.seen_event_categories[pk] = category
+        print "Created event category %s." % title
 
     def handle_diary_diaryeventtype(self, item):
         pass
