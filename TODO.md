@@ -14,7 +14,7 @@ Version 0.9
   - [ ] Import service plans
   - [ ] Import legacy paths (not just LegacyPathMapping, but common
         Kaleo paths that will have moved, such as podcasts)
-  - [ ] Clean up unused contacts
+  - [x] Clean up unused contacts
 - [ ] Add support for podcasts
 - [ ] Add support for user photos
 - [ ] Add support for ScheduledEvent series

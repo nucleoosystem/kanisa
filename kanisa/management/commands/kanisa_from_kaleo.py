@@ -82,6 +82,15 @@ class Command(BaseCommand):
             for item in data:
                 self.handle_item(item, model)
 
+        for model in self.ordering:
+            funcname = 'cleanup_%s' % model
+            try:
+                func = getattr(self, funcname)
+            except AttributeError:
+                continue
+
+            func()
+
     def handle_item(self, item, model_to_process):
         model = item['model'].replace('.', '_')
 
@@ -340,3 +349,15 @@ class Command(BaseCommand):
         document.created = uploaded
         document.save()
         print "Created document with title %s." % document.title
+
+    def cleanup_people_person(self):
+        for contact in self.seen_event_contacts.values():
+            if contact.regularevent_set.all().count() != 0:
+                continue
+
+            print "Removing unused contact %s." % contact.name
+
+            if contact.image:
+                os.remove(contact.image.file.name)
+
+            contact.delete()
