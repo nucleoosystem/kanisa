@@ -41,7 +41,6 @@ class Command(BaseCommand):
         'auth_group',
         'auth_user',
         'auth_permission',
-        'members_userprofile',
         'serviceplans_composer',
         'serviceplans_song',
         'serviceplans_band',
@@ -149,9 +148,6 @@ class Command(BaseCommand):
         print "Created song %s." % title
 
     def handle_serviceplans_serviceplansongchoice(self, item):
-        pass
-
-    def handle_members_userprofile(self, item):
         pass
 
     def handle_people_person(self, item):
