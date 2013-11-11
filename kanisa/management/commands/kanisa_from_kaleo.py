@@ -55,7 +55,6 @@ class Command(BaseCommand):
         'people_person',
         'diary_diaryeventcategory',
         'diary_diaryeventtype',
-        'diary_diaryeventlocation',
         'diary_diaryeventseries',
         'diary_diaryevent',
         'banners_datelessbanner',
@@ -245,8 +244,6 @@ class Command(BaseCommand):
     def handle_diary_diaryeventtype(self, item):
         pass
 
-    def handle_diary_diaryeventlocation(self, item):
-        pass
 
     def handle_diary_diaryeventseries(self, item):
         pass
