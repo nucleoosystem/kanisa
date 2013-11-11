@@ -18,6 +18,8 @@ Version 0.9
 - [ ] Add support for podcasts
 - [ ] Add support for user photos
 - [ ] Add support for ScheduledEvent series
+- [ ] Think through who can see Service Planning links (just those in
+      a band?)
 
 Version 1.0
 ===========
