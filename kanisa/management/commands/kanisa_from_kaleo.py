@@ -17,6 +17,7 @@ from kanisa.models import (
     InlineImage,
     NavigationElement,
     Page,
+    RegularEvent,
     Song,
 )
 
@@ -242,8 +243,28 @@ class Command(BaseCommand):
         print "Created event category %s." % title
 
     def handle_diary_diaryeventtype(self, item):
-        pass
+        pk = item['pk']
+        title = item['fields']['title']
+        category_pk = item['fields']['category']
+        contact_pk = item['fields']['contact']
+        details = item['fields']['details']
+        intro = item['fields']['intro']
+        image_path = item['fields']['image']
 
+        if image_path:
+            path_for_django = self.copy_file(pk, image_path, 'diary/events')
+        else:
+            path_for_django = None
+
+        contact = self.seen_event_contacts[contact_pk]
+        event = RegularEvent.objects.create(title=title,
+                                            image=path_for_django,
+                                            contact=contact,
+                                            start_time='19:00',
+                                            intro=intro,
+                                            details=details)
+        event.categories.add(self.seen_event_categories[category_pk])
+        print "Created event %s." % title
 
     def handle_diary_diaryeventseries(self, item):
         pass
