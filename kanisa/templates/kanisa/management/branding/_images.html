@@ -4,10 +4,10 @@
 
 <h3>Site Logo</h3>
 
-{% kanisa_branding 'logo' as logo_location %}
+{% kanisa_branding 'logo' as logo_information %}
 
-{% if logo_location %}
-{% thumbnail logo_location "460x140" as im %}
+{% if logo_information.url %}
+{% thumbnail logo_information.url "460x140" as im %}
 <p><img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/></p>
 {% endthumbnail %}
 
@@ -30,10 +30,10 @@
 
 <h3>Site Favicon</h3>
 
-{% kanisa_branding 'favicon' as favicon_location %}
+{% kanisa_branding 'favicon' as favicon_information %}
 
-{% if favicon_location %}
-<p><img src="{{ MEDIA_URL }}{{ favicon_location }}?{% now 'c' %}" height="32px" width="32px" /></p>
+{% if favicon_information.url %}
+<p><img src="{{ MEDIA_URL }}{{ favicon_information.url }}?{% now 'c' %}" height="32px" width="32px" /></p>
 {% else %}
 <p class="alert warning">No favicon uploaded.</p>
 {% endif %}
@@ -58,24 +58,24 @@
 
 <h3>Apple Icons</h3>
 
-{% kanisa_branding 'apple' as apple_location %}
+{% kanisa_branding 'apple' as apple_information %}
 
-{% if apple_location %}
+{% if apple_information.url %}
 
 <p>
-  {% thumbnail apple_location "144x144" as im %}
+  {% thumbnail apple_information.url "144x144" as im %}
   <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
-  {% thumbnail apple_location "114x114" as im %}
+  {% thumbnail apple_information.url "114x114" as im %}
   <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
-  {% thumbnail apple_location "72x72" as im %}
+  {% thumbnail apple_information.url "72x72" as im %}
   <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 
-  {% thumbnail apple_location "57x57" as im %}
+  {% thumbnail apple_information.url "57x57" as im %}
   <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
   {% endthumbnail %}
 </p>

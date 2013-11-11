@@ -3,35 +3,35 @@
 {% load thumbnail %}
 
 {% cache 60 kanisa_branding_icons %}
-{% kanisa_branding 'favicon' as favicon %}
+{% kanisa_branding 'favicon' as favicon_information %}
 {% if favicon %}
-<link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon }}">
+<link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon_information.url }}">
 {% endif %}
 
-{% kanisa_branding 'apple' as apple_location %}
+{% kanisa_branding 'apple' as apple_information %}
 
-{% if apple_location %}
+{% if apple_information.url %}
 
-{% thumbnail apple_location "144x144" as im %}
+{% thumbnail apple_information.url "144x144" as im %}
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ im.url }}">
 {% endthumbnail %}
 
-{% thumbnail apple_location "114x114" as im %}
+{% thumbnail apple_information.url "114x114" as im %}
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ im.url }}">
 {% endthumbnail %}
 
-{% thumbnail apple_location "72x72" as im %}
+{% thumbnail apple_information.url "72x72" as im %}
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ im.url }}">
 {% endthumbnail %}
 
-{% thumbnail apple_location "57x57" as im %}
+{% thumbnail apple_information.url "57x57" as im %}
 <link rel="apple-touch-icon-precomposed" href="{{ im.url }}">
 {% endthumbnail %}
 {% endif %}
 
-{% kanisa_branding 'colours' as colours_location %}
-{% if colours_location %}
-<link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}{{ colours_location }}" />
+{% kanisa_branding 'colours' as colours_information %}
+{% if colours_information %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}{{ colours_information.url }}" />
 {% endif %}
 
 {% endcache %}
