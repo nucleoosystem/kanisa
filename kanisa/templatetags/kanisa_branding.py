@@ -2,6 +2,8 @@ import os
 from django.core.cache import cache
 from django import template
 from django.conf import settings
+from django.template import TemplateDoesNotExist
+from django.template.loader import get_template
 
 
 register = template.Library()
@@ -38,8 +40,14 @@ class BrandingInformation(object):
         self.component = component
         self.url = self.get_cached_url()
         self.sizes = COMPONENTS[self.component].get('sizes', [])
-        template_prefix = 'kanisa/management/branding/notes/'
-        self.template_name = '%s/_%s.html' % (template_prefix, component)
+        try:
+            template_prefix = 'kanisa/management/branding/notes/'
+            template_name = '%s/_%s.html' % (template_prefix, component)
+            get_template(template_name)
+            self.template_name = template_name
+        except TemplateDoesNotExist:
+            self.template_name = None
+
         self.verbose_name = COMPONENTS[self.component]['verbose_name']
 
     def get_cached_url(self):

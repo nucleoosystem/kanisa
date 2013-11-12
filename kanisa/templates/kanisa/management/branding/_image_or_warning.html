@@ -25,6 +25,8 @@
   </a>
 </p>
 
-{% include logo_information.template_name %}
+{% if logo_information.template_name %}
+  {% include logo_information.template_name %}
+{% endif %}
 
 <hr />
