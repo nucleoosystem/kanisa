@@ -14,15 +14,17 @@
 
 <ul class="thumbnails">
   {% for speaker in sermonspeaker_list %}
-  <li class="span3">
+  <li class="span2">
     <div class="thumbnail">
       <div style="position: relative;">
         <a href="{% url 'kanisa_manage_sermons_speaker_update' speaker.pk %}" title="Edit this speaker's profile">
-          {% thumbnail speaker.image "260x220" crop="center" as im %}
+          {% if speaker.image_or_default %}
+          {% thumbnail speaker.image_or_default "130x130" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
           {% endthumbnail %}
+          {% endif %}
 
-          <div class="carousel-caption">
+          <div class="carousel-caption tiny-carousel">
             <p>
               <strong>
                 {{ speaker }}

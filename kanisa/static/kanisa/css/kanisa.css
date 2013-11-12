@@ -11,6 +11,10 @@
     text-decoration: inherit;
 }
 
+.thumbnail .carousel-caption.tiny-carousel {
+    padding: 5px;
+}
+
 .kanisa_diary td {
     vertical-align: middle;
 }

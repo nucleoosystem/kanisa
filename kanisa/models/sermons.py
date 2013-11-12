@@ -3,6 +3,7 @@ from datetime import date
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
+from kanisa.utils.branding import BrandingInformation
 from sorl.thumbnail import ImageField
 
 from kanisa.models.bible.db_field import BiblePassageField
@@ -97,8 +98,10 @@ class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from=sermon_speaker_slug, unique=True)
-    image = ImageField(upload_to='kanisa/sermons/speakers/',
-                       help_text='Must be at least 400px by 300px.')
+    image = ImageField(
+        null=True, blank=True,
+        upload_to='kanisa/sermons/speakers/',
+        help_text='Must be at least 400px by 300px.')
     modified = models.DateTimeField(auto_now=True)
 
     objects = SpeakerManager()
@@ -108,6 +111,13 @@ class SermonSpeaker(models.Model):
 
     def name(self):
         return unicode(self)
+
+    def image_or_default(self):
+        if self.image:
+            return self.image
+
+        branding = BrandingInformation('apple')
+        return branding.url
 
     class Meta:
         # Need this because I've split up models.py into multiple
