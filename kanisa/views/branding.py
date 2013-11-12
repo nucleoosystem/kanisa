@@ -14,7 +14,8 @@ from kanisa.utils.branding import (
     flush_brand_colours,
     get_brand_colours,
     get_available_colours,
-    ensure_branding_directory_exists
+    ensure_branding_directory_exists,
+    BRANDING_COMPONENTS
 )
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
@@ -84,14 +85,7 @@ class BrandingManagementUpdateView(BrandingBaseView,
     def get_destination_filename(self):
         resource = self.kwargs['resource']
 
-        if resource == 'logo':
-            return 'logo.jpg'
-
-        if resource == 'apple':
-            return 'apple.jpg'
-
-        if resource == 'favicon':
-            return 'favicon.ico'
+        return BRANDING_COMPONENTS[resource]['filename']
 
     def form_valid(self, form):
         root = settings.MEDIA_ROOT
