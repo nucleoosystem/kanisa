@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, time
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
+from kanisa.utils.branding import BrandingInformation
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
@@ -35,6 +36,13 @@ class EventContact(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def image_or_default(self):
+        if self.image:
+            return self.image
+
+        branding = BrandingInformation('apple')
+        return branding.url
 
 
 class EventCategoryManager(models.Manager):

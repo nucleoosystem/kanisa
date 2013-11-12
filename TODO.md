@@ -2,7 +2,6 @@ Version 0.9
 ===========
 
 - Add support for ScheduledEvent series
-- Create default image for event contacts (#73)
 - Create default image for sermon series
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
