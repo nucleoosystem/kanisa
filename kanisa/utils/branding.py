@@ -3,6 +3,29 @@ import os
 from django.conf import settings
 
 
+BRANDING_COMPONENTS = {
+    'logo': {
+        'filename': 'logo.jpg',
+        'verbose_name': 'Site Logo',
+        'sizes': ['480x140', ],
+    },
+    'apple': {
+        'filename': 'apple.jpg',
+        'verbose_name': 'Apple Icons',
+        'sizes': ['144x144', '114x114', '72x72', '57x57', ],
+    },
+    'favicon':  {
+        'filename': 'favicon.ico',
+        'verbose_name': 'Site Favicon',
+        'sizes': ['32x32', ],
+    },
+    'colours':  {
+        'filename': 'colours.css',
+        'verbose_name': 'Colour settings'
+    },
+}
+
+
 def get_brand_colours_filename():
     return os.path.join(settings.MEDIA_ROOT,
                         'branding',

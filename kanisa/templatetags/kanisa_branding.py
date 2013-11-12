@@ -4,42 +4,19 @@ from django import template
 from django.conf import settings
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
-
+from kanisa.utils.branding import BRANDING_COMPONENTS
 
 register = template.Library()
 
 
-COMPONENTS = {
-    'logo': {
-        'filename': 'logo.jpg',
-        'verbose_name': 'Site Logo',
-        'sizes': ['480x140', ],
-    },
-    'apple': {
-        'filename': 'apple.jpg',
-        'verbose_name': 'Apple Icons',
-        'sizes': ['144x144', '114x114', '72x72', '57x57', ],
-    },
-    'favicon':  {
-        'filename': 'favicon.ico',
-        'verbose_name': 'Site Favicon',
-        'sizes': ['32x32', ],
-    },
-    'colours':  {
-        'filename': 'colours.css',
-        'verbose_name': 'Colour settings'
-    },
-}
-
-
 class BrandingInformation(object):
     def __init__(self, component):
-        if component not in COMPONENTS:
+        if component not in BRANDING_COMPONENTS:
             raise ValueError("Bad branding key: %s." % component)
 
         self.component = component
         self.url = self.get_cached_url()
-        self.sizes = COMPONENTS[self.component].get('sizes', [])
+        self.sizes = BRANDING_COMPONENTS[self.component].get('sizes', [])
         try:
             template_prefix = 'kanisa/management/branding/notes/'
             template_name = '%s/_%s.html' % (template_prefix, component)
@@ -48,10 +25,10 @@ class BrandingInformation(object):
         except TemplateDoesNotExist:
             self.template_name = None
 
-        self.verbose_name = COMPONENTS[self.component]['verbose_name']
+        self.verbose_name = BRANDING_COMPONENTS[self.component]['verbose_name']
 
     def get_cached_url(self):
-        file = COMPONENTS[self.component]['filename']
+        file = BRANDING_COMPONENTS[self.component]['filename']
 
         cache_key = 'kanisa_branding_component:%s' % file
         url = cache.get(cache_key)
