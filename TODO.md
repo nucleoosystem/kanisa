@@ -46,6 +46,7 @@ Version 0.9
 Version 1.0
 ===========
 
+- Add South migrations
 - Check Twitter integration still works
 - Figure out what should go on the management home page (#41)
 - Allow customisable home page templates (#56)
