@@ -4,6 +4,8 @@ Version 0.9
 - Add support for ScheduledEvent series
 - Create default image for event contacts (#73)
 - Create default image for sermon series
+- Add support for user photos, ensuring they can be set by users with
+  user management permissions (#25)
 - Support importing from Kaleo (#62)
   - Import scheduled events
   - Import users
@@ -16,7 +18,6 @@ Version 0.9
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4)
-- Add support for user photos (#25)
 - Think through who can see Service Planning links (just those in a
   band?)
 
