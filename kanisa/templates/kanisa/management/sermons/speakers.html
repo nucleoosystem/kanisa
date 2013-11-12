@@ -19,7 +19,7 @@
       <div style="position: relative;">
         <a href="{% url 'kanisa_manage_sermons_speaker_update' speaker.pk %}" title="Edit this speaker's profile">
           {% if speaker.image_or_default %}
-          {% thumbnail speaker.image_or_default "130x130" crop="center" as im %}
+          {% thumbnail speaker.image_or_default "160x160" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
           {% endthumbnail %}
           {% endif %}
