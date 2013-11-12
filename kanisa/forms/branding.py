@@ -54,10 +54,10 @@ class AppleBrandingForm(BrandingForm):
 
     def __init__(self, *args, **kwargs):
         super(AppleBrandingForm, self).__init__(*args, **kwargs)
-        self.fields['image'].help_text = ('The Apple icon needs to be 144px '
-                                          'by 144px. This will be scaled down '
-                                          'for non-retina devices to 72px by '
-                                          '72px.')
+        self.fields['image'].help_text = (
+            'The Apple icon needs to be 144px by 144px. This will be '
+            'scaled down for non-retina devices to 72px by 72px.'
+        )
 
     def check_size(self, width, height):
         if height != width:
