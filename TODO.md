@@ -36,6 +36,8 @@ Version 0.9
   - Import bands
   - Import service plans
   - Import attachments (and ensure the Markdown parser finds them)
+  - Import sermon speakers (ensure they're not deleted by the contact
+    cleanup process)
   - Import sermons and sermon series
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
