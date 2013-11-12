@@ -9,17 +9,15 @@ Version 0.8
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
   - Version check requirements in setup.py
-    - django-autoslug
-    - django-crispy-forms
-    - django-haystack
-    - django-mptt
-    - factory-boy
-    - lxml
-    - markdown
-    - mutagen
-    - sorl-thumbnail
-    - tweepy
-    - Whoosh
+    - django-autoslug (upgrade to 1.7.1)
+    - django-crispy-forms (upgrade to 1.4.0)
+    - django-mptt (upgrade to 0.6.0)
+    - factory-boy (upgrade to 2.2.1)
+    - lxml (upgrade to 3.2.4)
+    - markdown (upgrade to 2.3.1)
+    - mutagen (upgrade to 1.22)
+    - tweepy (upgrade to 2.1)
+    - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 
@@ -77,3 +75,4 @@ Version 1.1
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
+- Upgrade django-haystack to 2.x
