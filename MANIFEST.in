@@ -1,4 +1,3 @@
 include README.md
 recursive-include kanisa/templates *
-recursive-include kanisa/fixtures *
 recursive-include kanisa/static *
