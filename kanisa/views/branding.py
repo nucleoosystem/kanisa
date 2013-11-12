@@ -4,17 +4,23 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
 from django.template.loader import render_to_string
-from kanisa.forms.branding import (LogoBrandingForm,
-                                   AppleBrandingForm,
-                                   FaviconBrandingForm,
-                                   BrandingColoursForm)
-from kanisa.utils.branding import (flush_brand_colours,
-                                   get_brand_colours,
-                                   get_available_colours,
-                                   ensure_branding_directory_exists)
-from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaTemplateView,
-                                  KanisaFormView)
+from kanisa.forms.branding import (
+    LogoBrandingForm,
+    AppleBrandingForm,
+    FaviconBrandingForm,
+    BrandingColoursForm
+)
+from kanisa.utils.branding import (
+    flush_brand_colours,
+    get_brand_colours,
+    get_available_colours,
+    ensure_branding_directory_exists
+)
+from kanisa.views.generic import (
+    KanisaAuthorizationMixin,
+    KanisaTemplateView,
+    KanisaFormView
+)
 from sorl.thumbnail import delete
 
 
