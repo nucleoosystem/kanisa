@@ -1,3 +1,4 @@
+{% load kanisa_tags %}
 {% load url from future %}
 
 <div class="navbar navbar-inverse">
@@ -22,6 +23,12 @@
         {% if user.is_authenticated %}
         <p class="navbar-text pull-right">Welcome,
           <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
+          {% kanisa_is_permissioned_user as is_permissioned %}
+          {% if is_permissioned %}
+            <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" style="text-decoration: none">
+              <i class="icon-white icon-cog"></i>
+            </a>
+          {% endif %}
           (<a href="{% url 'kanisa_public_logout' %}">Logout</a>)
         </p>
         {% else %}
