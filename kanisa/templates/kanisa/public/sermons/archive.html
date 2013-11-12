@@ -48,7 +48,9 @@
         <h5><a href="{% url 'kanisa_public_standalone_sermon_detail' sermon.slug %}">{{ sermon.title }}</a></h5>
         {% endif %}
         Preached on {{ sermon.date|date:"jS F Y"}} by {{ sermon.speaker }}.<br />
+        {% if sermon.passage %}
         A sermon on <em>{{ sermon.passage }}</em>.
+        {% endif %}
     </tr>
     {% endfor %}
   </tbody>
