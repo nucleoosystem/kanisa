@@ -8,6 +8,9 @@
   {% endif %}
   You can find out more by e-mailing
   <strong>{{ object.contact }}</strong>
-  at
-  <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a>.
+  {% if object.contact.email %}
+    at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a>.
+  {% else %}
+    via the Church office.
+  {% endif %}
 </p>
