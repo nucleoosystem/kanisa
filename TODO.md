@@ -27,7 +27,6 @@ Version 0.9
 ===========
 
 - Add support for ScheduledEvent series
-- Create default image for sermon series
 - Support importing from Kaleo (#62)
   - Import scheduled events
   - Import users

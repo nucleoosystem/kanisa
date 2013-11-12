@@ -75,7 +75,7 @@
       {% include "kanisa/public/sermons/_subtitle.html" with object=series %}
     </h2>
     <div class="thumbnail" style="width:130; float: left; margin: 0 1em 1em 0">
-      {% thumbnail series.image "130x90" crop="center" as im %}
+      {% thumbnail series.image_or_default "130x130" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
       {% endthumbnail %}
     </div>

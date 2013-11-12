@@ -20,6 +20,7 @@ class SermonSeries(models.Model):
                              help_text='The name of the series.')
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(
+        null=True, blank=True,
         upload_to='kanisa/sermons/series/',
         help_text=('This will be used in most places where the series is '
                    'shown on the site. Must be at least 400px by 300px.'))
@@ -71,6 +72,13 @@ class SermonSeries(models.Model):
 
         last_sermon = sermons[-1]
         return (first_sermon.date, last_sermon.date)
+
+    def image_or_default(self):
+        if self.image:
+            return self.image
+
+        branding = BrandingInformation('apple')
+        return branding.url
 
     class Meta:
         # Need this because I've split up models.py into multiple

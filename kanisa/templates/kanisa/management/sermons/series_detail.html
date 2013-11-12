@@ -52,7 +52,7 @@
   </div>
   <div class="span3">
     <div class="thumbnail">
-    {% thumbnail object.image "260x180" crop="center" as im %}
+    {% thumbnail object.image_or_default "260x260" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
     {% endthumbnail %}
     </div>
