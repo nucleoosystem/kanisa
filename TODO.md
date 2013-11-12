@@ -2,13 +2,24 @@ Version 0.8
 ===========
 
 - Prune external requirements
-  - Remove django-password-reset, to make having a custom user object
-    easier, and to reduce external dependencies
+  - Upgrade django-password-reset to latest version (which now
+    supports custom users)
   - Switch to Pillow
   - Switch from django-compressor to django-pipeline, and ensure we're
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
   - Version check requirements in setup.py
+    - django-autoslug
+    - django-crispy-forms
+    - django-haystack
+    - django-mptt
+    - factory-boy
+    - lxml
+    - markdown
+    - mutagen
+    - sorl-thumbnail
+    - tweepy
+    - Whoosh
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 
