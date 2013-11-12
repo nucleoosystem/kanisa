@@ -19,8 +19,6 @@ Version 0.9
 - Add support for podcasts (#4)
 - Think through who can see Service Planning links (just those in a
   band?)
-- Remove {% load url from future %}, since it's not needed by Django
-  1.5 or higher
 
 Version 1.0
 ===========
