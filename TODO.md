@@ -9,10 +9,9 @@ Version 0.8
   - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
-- Add fields for downloads/podcast downloads for sermons (refs #4,
-  adding support for podcasts), and ensure populated by
-  `kanisa_from_kaleo`, ensure relevant downloads go through view to
-  increment the counter
+- Add fields for downloads/podcast downloads for sermons, and ensure
+  populated by `kanisa_from_kaleo`, ensure relevant downloads go
+  through view to increment the counter
 
 Version 0.9
 ===========
@@ -28,7 +27,7 @@ Version 0.9
   - Import attachments (and ensure the Markdown parser finds them)
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
-- Add support for podcasts (#4)
+- Add support for podcasts (#4), and track podcast downloads
 - Think through who can see Service Planning links (just those in a
   band?)
 
