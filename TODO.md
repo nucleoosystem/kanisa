@@ -11,7 +11,6 @@ Version 0.8
   - Version check requirements in setup.py
     - django-crispy-forms (upgrade to 1.4.0)
     - factory-boy (upgrade to 2.2.1)
-    - lxml (upgrade to 3.2.4)
     - markdown (upgrade to 2.3.1)
     - tweepy (upgrade to 2.1)
     - Whoosh (upgrade to 2.5.5)
