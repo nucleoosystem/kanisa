@@ -1,17 +1,12 @@
 Version 0.8
 ===========
 
-- Prune external requirements
-  - Upgrade django-password-reset to latest version (which now
-    supports custom users)
-  - Switch to Pillow
-  - Switch from django-compressor to django-pipeline, and ensure we're
-    serving compressed assets (also, should we be including unminified
-    assets in the distributed wheel?)
-  - Version check requirements in setup.py
-    - django-crispy-forms (upgrade to 1.4.0)
-    - tweepy (upgrade to 2.1)
-    - Whoosh (upgrade to 2.5.5)
+- Version check requirements in setup.py
+  - Upgrade django-password-reset to 0.5.1 (which now supports
+    custom users)
+  - django-crispy-forms (upgrade to 1.4.0)
+  - tweepy (upgrade to 2.1)
+  - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 
@@ -39,6 +34,11 @@ Version 0.9
 Version 1.0
 ===========
 
+- Change external requirements to better equivalents
+  - Switch to Pillow
+  - Switch from django-compressor to django-pipeline, and ensure we're
+    serving compressed assets (also, should we be including unminified
+    assets in the distributed wheel?)
 - Add South migrations
 - Check Twitter integration still works
 - Figure out what should go on the management home page (#41)
