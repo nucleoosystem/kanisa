@@ -57,6 +57,8 @@
       <i class="icon icon-headphones"></i>
       {% if not object.mp3 %}
       This sermon doesn't have audio available.
+      {% else %}
+        <a href="{{ object.mp3_url }}" title="Download MP3">Download MP3</a>
       {% endif %}
     </p>
 

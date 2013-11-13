@@ -200,6 +200,12 @@ class Sermon(models.Model):
         return reverse('kanisa_public_sermon_detail',
                        args=[self.series.slug, self.slug, ])
 
+    def mp3_url(self):
+        if not self.mp3:
+            return None
+
+        return self.mp3.url
+
     def in_the_future(self):
         return self.date > date.today()
 
