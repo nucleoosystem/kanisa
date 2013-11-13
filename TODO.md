@@ -9,7 +9,6 @@ Version 0.8
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
   - Version check requirements in setup.py
-    - django-autoslug (upgrade to 1.7.1)
     - django-crispy-forms (upgrade to 1.4.0)
     - django-mptt (upgrade to 0.6.0)
     - factory-boy (upgrade to 2.2.1)

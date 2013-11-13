@@ -17,7 +17,7 @@ setup(
         "BeautifulSoup==3.2.1",
         "Django>=1.4",
         "PIL==1.1.7",
-        "django-autoslug==1.6.1",
+        "django-autoslug==1.7.1",
         "django-compressor==1.1.2",
         "django-crispy-forms==1.2.0",
         "django-haystack==1.2.7",
@@ -34,7 +34,7 @@ setup(
         "wsgiref==0.1.2",
     ],
     tests_require=(
-        'django-setuptest==0.1.3',
+        'django-setuptest==0.1.4',
     ),
     test_suite='setuptest.setuptest.SetupTestSuite',
 )
