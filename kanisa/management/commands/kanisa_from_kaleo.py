@@ -109,6 +109,9 @@ class Command(BaseCommand):
         func(item)
 
     def copy_file(self, original_pk, original_file_name, dest_dir):
+        if not original_file_name:
+            return None
+
         target_file_name = '%s-%s' % (str(original_pk),
                                       basename(original_file_name))
         path_for_django = os.path.join('kanisa', dest_dir,
@@ -254,11 +257,8 @@ class Command(BaseCommand):
         details = item['fields']['details']
         passage = item['fields']['passage']
         image_path = item['fields']['image']
+        path_for_django = self.copy_file(pk, image_path, 'sermons/series')
 
-        if image_path:
-            path_for_django = self.copy_file(pk, image_path, 'sermons/series')
-        else:
-            path_for_django = None
 
         SermonSeries.objects.create(title=title,
                                     image=path_for_django,
@@ -288,10 +288,7 @@ class Command(BaseCommand):
         intro = item['fields']['intro']
         image_path = item['fields']['image']
 
-        if image_path:
-            path_for_django = self.copy_file(pk, image_path, 'diary/events')
-        else:
-            path_for_django = None
+        path_for_django = self.copy_file(pk, image_path, 'diary/events')
 
         contact = self.seen_event_contacts[contact_pk]
         event = RegularEvent.objects.create(title=title,
