@@ -18,6 +18,7 @@ from kanisa.models import (
     NavigationElement,
     Page,
     RegularEvent,
+    Sermon,
     SermonSeries,
     SermonSpeaker,
     Song,
@@ -27,6 +28,10 @@ from kanisa.models import (
 def datetime_from_str(str):
     return make_aware(datetime.strptime(str, '%Y-%m-%dT%H:%M:%S'),
                       get_current_timezone())
+
+
+def date_from_str(str):
+    return datetime.strptime(str, '%Y-%m-%d').date()
 
 
 class Command(BaseCommand):
@@ -39,6 +44,7 @@ class Command(BaseCommand):
     seen_event_categories = {}
     seen_event_contacts = {}
     seen_sermon_speakers = {}
+    seen_sermon_series = {}
 
     ordering = [
         # 'auth_group',
@@ -259,17 +265,43 @@ class Command(BaseCommand):
         image_path = item['fields']['image']
         path_for_django = self.copy_file(pk, image_path, 'sermons/series')
 
+        series = SermonSeries.objects.create(title=title,
+                                             image=path_for_django,
+                                             details=details,
+                                             active=active,
+                                             passage=passage)
 
-        SermonSeries.objects.create(title=title,
-                                    image=path_for_django,
-                                    details=details,
-                                    active=active,
-                                    passage=passage)
-
+        self.seen_sermon_series[pk] = series
         print "Created sermon series %s." % title
 
     def handle_sermons_sermon(self, item):
-        pass
+        pk = item['pk']
+
+        delivered = date_from_str(item['fields']['delivered'])
+        series_pk = item['fields']['series']
+        downloads = item['fields']['downloads']
+        title = item['fields']['title']
+        passage = item['fields']['passage']
+        speaker_pk = item['fields']['speaker']
+        mp3_path = item['fields']['mp3']
+        podcast_downloads = item['fields']['podcast_downloads']
+        transcript = item['fields']['transcript']
+        details = item['fields']['details']
+
+        path_for_django = self.copy_file(pk, mp3_path, 'sermons/mp3s/old/')
+
+        series = self.seen_sermon_series.get(series_pk)
+        speaker = self.seen_sermon_speakers[speaker_pk]
+
+        sermon = Sermon.objects.create(title=title,
+                                       date=delivered,
+                                       series=series,
+                                       speaker=speaker,
+                                       passage=passage,
+                                       mp3=path_for_django,
+                                       details=details,
+                                       transcript=transcript)
+        print "Created sermon %s." % title
 
     def handle_diary_diaryeventcategory(self, item):
         pk = item['pk']
@@ -389,3 +421,14 @@ class Command(BaseCommand):
                 os.remove(contact.image.file.name)
 
             contact.delete()
+
+        for speaker in self.seen_sermon_speakers.values():
+            if speaker.sermon_set.all().count() != 0:
+                continue
+
+            print "Removing unused speaker %s." % speaker.name()
+
+            if speaker.image:
+                os.remove(speaker.image.file.name)
+
+            speaker.delete()
