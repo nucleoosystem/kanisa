@@ -279,12 +279,12 @@ class Command(BaseCommand):
 
         delivered = date_from_str(item['fields']['delivered'])
         series_pk = item['fields']['series']
-        downloads = item['fields']['downloads']
+        # downloads = item['fields']['downloads']
         title = item['fields']['title']
         passage = item['fields']['passage']
         speaker_pk = item['fields']['speaker']
         mp3_path = item['fields']['mp3']
-        podcast_downloads = item['fields']['podcast_downloads']
+        # podcast_downloads = item['fields']['podcast_downloads']
         transcript = item['fields']['transcript']
         details = item['fields']['details']
 
@@ -293,14 +293,14 @@ class Command(BaseCommand):
         series = self.seen_sermon_series.get(series_pk)
         speaker = self.seen_sermon_speakers[speaker_pk]
 
-        sermon = Sermon.objects.create(title=title,
-                                       date=delivered,
-                                       series=series,
-                                       speaker=speaker,
-                                       passage=passage,
-                                       mp3=path_for_django,
-                                       details=details,
-                                       transcript=transcript)
+        Sermon.objects.create(title=title,
+                              date=delivered,
+                              series=series,
+                              speaker=speaker,
+                              passage=passage,
+                              mp3=path_for_django,
+                              details=details,
+                              transcript=transcript)
         print "Created sermon %s." % title
 
     def handle_diary_diaryeventcategory(self, item):
