@@ -4,10 +4,10 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
 from django.template.loader import render_to_string
 from kanisa.forms.branding import (
-    LogoBrandingForm,
     AppleBrandingForm,
+    BrandingColoursForm,
     FaviconBrandingForm,
-    BrandingColoursForm
+    LogoBrandingForm
 )
 from kanisa.utils.branding import (
     ensure_branding_directory_exists,

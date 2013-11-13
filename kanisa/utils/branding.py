@@ -1,7 +1,7 @@
 import json
 import os
-from django.core.cache import cache
 from django.conf import settings
+from django.core.cache import cache
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
 
