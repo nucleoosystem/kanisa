@@ -36,6 +36,7 @@ BRANDING_COMPONENTS = {
 
 def get_branding_disk_file(filename):
     return os.path.join(settings.MEDIA_ROOT,
+                        'kanisa',
                         'branding',
                         filename)
 
@@ -114,7 +115,7 @@ class BrandingInformation(object):
         return os.path.exists(path)
 
     def __url(self, branding_component):
-        return 'branding/%s' % branding_component
+        return 'kanisa/branding/%s' % branding_component
 
     def __fetch(self, filename):
         if self.__exists(filename):
