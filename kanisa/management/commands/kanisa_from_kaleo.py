@@ -131,7 +131,7 @@ class Command(BaseCommand):
         except IOError:
             print ("Failed to copy %s to %s." % (origin_path,
                                                  path_to_write_file))
-            raise
+            return None
 
         return path_for_django
 
