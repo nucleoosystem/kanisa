@@ -10,11 +10,9 @@ Version 0.8
     assets in the distributed wheel?)
   - Version check requirements in setup.py
     - django-crispy-forms (upgrade to 1.4.0)
-    - django-mptt (upgrade to 0.6.0)
     - factory-boy (upgrade to 2.2.1)
     - lxml (upgrade to 3.2.4)
     - markdown (upgrade to 2.3.1)
-    - mutagen (upgrade to 1.22)
     - tweepy (upgrade to 2.1)
     - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
