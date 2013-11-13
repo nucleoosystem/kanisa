@@ -1,5 +1,4 @@
 import os
-from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
@@ -11,10 +10,11 @@ from kanisa.forms.branding import (
     BrandingColoursForm
 )
 from kanisa.utils.branding import (
-    flush_brand_colours,
-    get_brand_colours,
-    get_available_colours,
     ensure_branding_directory_exists,
+    flush_brand_colours,
+    get_available_colours,
+    get_brand_colours,
+    get_branding_disk_file,
     BRANDING_COMPONENTS
 )
 from kanisa.views.generic import (
@@ -88,19 +88,16 @@ class BrandingManagementUpdateView(BrandingBaseView,
         return BRANDING_COMPONENTS[resource]['filename']
 
     def form_valid(self, form):
-        root = settings.MEDIA_ROOT
-
         ensure_branding_directory_exists()
 
-        destination_name = os.path.join(root,
-                                        'branding',
-                                        self.get_destination_filename())
+        dest_name = get_branding_disk_file(self.get_destination_filename())
 
-        if os.path.exists(destination_name):
-            delete(os.path.join('branding',
+        if os.path.exists(dest_name):
+            delete(os.path.join('kanisa',
+                                'branding',
                                 self.get_destination_filename()))
 
-        with open(destination_name, 'wb') as destination:
+        with open(dest_name, 'wb') as destination:
             for chunk in form.files['image'].chunks():
                 destination.write(chunk)
 
@@ -135,9 +132,7 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
         rendered = render_to_string('kanisa/_branding.html',
                                     get_brand_colours())
 
-        destination_name = os.path.join(settings.MEDIA_ROOT,
-                                        'branding',
-                                        'colours.css')
+        destination_name = get_branding_disk_file('colours.css')
 
         with open(destination_name, 'w') as destination:
             destination.write(rendered)

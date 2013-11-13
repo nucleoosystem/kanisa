@@ -34,10 +34,14 @@ BRANDING_COMPONENTS = {
 }
 
 
-def get_brand_colours_filename():
+def get_branding_disk_file(filename):
     return os.path.join(settings.MEDIA_ROOT,
                         'branding',
-                        'colours.json', )
+                        filename)
+
+
+def get_brand_colours_filename():
+    return get_branding_disk_file('colours.json')
 
 
 def get_brand_colours():
@@ -55,8 +59,7 @@ def flush_brand_colours(colours):
 
 def ensure_branding_directory_exists():
     try:
-        os.makedirs(os.path.join(settings.MEDIA_ROOT,
-                                 'branding'))
+        os.makedirs(get_branding_disk_file(''))
     except OSError:
         pass
 
@@ -106,9 +109,7 @@ class BrandingInformation(object):
         return url
 
     def __exists(self, branding_component):
-        path = os.path.join(settings.MEDIA_ROOT,
-                            'branding',
-                            '%s' % branding_component)
+        path = get_branding_disk_file(branding_component)
 
         return os.path.exists(path)
 
