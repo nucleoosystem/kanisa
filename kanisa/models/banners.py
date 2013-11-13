@@ -61,6 +61,7 @@ class Banner(models.Model):
                                            'banner will appear earlier in '
                                            'the list of banners.'))
     visits = models.IntegerField(default=0,
+                                 editable=False,
                                  help_text=('The number of click-throughs '
                                             'this banner has had.'))
     modified = models.DateTimeField(auto_now=True)

@@ -16,4 +16,6 @@ class BannerAdmin(KanisaBaseAdmin, AdminImageMixin):
                      'contents',
                      'url', )
 
+    readonly_fields = ('visits', )
+
 admin.site.register(Banner, BannerAdmin)
