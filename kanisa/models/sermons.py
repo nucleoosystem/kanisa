@@ -179,6 +179,10 @@ class Sermon(models.Model):
                                   help_text=('For audio-impaired users - as '
                                              'close to a verbatim transcript '
                                              'as possible.'))
+    downloads = models.IntegerField(default=0,
+                                    editable=False)
+    podcast_downloads = models.IntegerField(default=0,
+                                            editable=False)
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()

@@ -21,6 +21,14 @@ admin.site.register(SermonSpeaker, SermonSpeakerAdmin)
 
 class SermonAdmin(admin.ModelAdmin):
     search_fields = ('title', 'details', )
-    list_display = ('title', 'date', 'passage', 'series', 'speaker', )
+    list_display = (
+        'title',
+        'date',
+        'passage',
+        'series',
+        'speaker',
+        'downloads',
+    )
+    readonly_fields = ('downloads', 'podcast_downloads', )
 
 admin.site.register(Sermon, SermonAdmin)

@@ -9,9 +9,6 @@ Version 0.8
   - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
-- Add fields for downloads/podcast downloads for sermons, and ensure
-  populated by `kanisa_from_kaleo`, ensure relevant downloads go
-  through view to increment the counter
 
 Version 0.9
 ===========

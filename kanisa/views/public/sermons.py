@@ -1,7 +1,12 @@
+from django.db.models import F
 from django.http import Http404
-from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.shortcuts import get_object_or_404
+from django.views.generic import (
+    DetailView,
+    ListView,
+    RedirectView,
+    TemplateView
+)
 from kanisa.models import Sermon, SermonSeries
 
 
@@ -67,3 +72,22 @@ class SermonArchiveView(ListView):
         context['kanisa_title'] = 'Sermon Archives'
 
         return context
+
+
+class SermonBaseDownloadView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, sermon_id):
+        sermon = get_object_or_404(Sermon, pk=sermon_id)
+
+        if not sermon.mp3_url():
+            raise Http404
+
+        sermon.downloads = F(self.count_field) + 1
+        sermon.save()
+
+        return sermon.mp3_url()
+
+
+class SermonDownloadView(SermonBaseDownloadView):
+    count_field = 'downloads'
