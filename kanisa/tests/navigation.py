@@ -4,12 +4,12 @@ from kanisa.models import NavigationElement, Page
 import factory
 
 
-class NavigationFactory(factory.Factory):
+class NavigationFactory(factory.DjangoModelFactory):
     FACTORY_FOR = NavigationElement
     title = 'Title'
 
 
-class PageFactory(factory.Factory):
+class PageFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Page
     title = 'Page Title'
 

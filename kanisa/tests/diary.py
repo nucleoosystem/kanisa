@@ -6,9 +6,9 @@ from kanisa.utils.diary import get_week_bounds, get_schedule
 import factory
 
 
-class RegularEventFactory(factory.Factory):
+class RegularEventFactory(factory.DjangoModelFactory):
     FACTORY_FOR = RegularEvent
-    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    title = factory.Sequence(lambda n: 'Regular Event #%d' % n)
     start_time = time(14, 0)
     duration = 60
     pattern = ''
@@ -149,9 +149,9 @@ class DiaryGetScheduleTest(TestCase):
                          [0, 1, 0, 0, 0, 0, 0])
 
 
-class ScheduledEventFactory(factory.Factory):
+class ScheduledEventFactory(factory.DjangoModelFactory):
     FACTORY_FOR = ScheduledEvent
-    title = factory.Sequence(lambda n: 'Event #' + n)
+    title = factory.Sequence(lambda n: 'Event #%d' % n)
     start_time = time(14, 0)
     date = date(2012, 6, 15)
 

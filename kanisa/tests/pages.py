@@ -6,7 +6,7 @@ from kanisa.models.pages import get_page_from_path
 import factory
 
 
-class PageFactory(factory.Factory):
+class PageFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Page
     title = 'Page Title'
 

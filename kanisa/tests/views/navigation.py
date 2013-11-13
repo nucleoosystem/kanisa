@@ -4,7 +4,7 @@ from kanisa.tests.utils import KanisaViewTestCase
 import factory
 
 
-class NavigationElementFactory(factory.Factory):
+class NavigationElementFactory(factory.DjangoModelFactory):
     FACTORY_FOR = NavigationElement
     title = 'NavigationElement Title'
 

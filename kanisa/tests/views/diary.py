@@ -5,9 +5,9 @@ from kanisa.tests.utils import KanisaViewTestCase
 import factory
 
 
-class RegularEventFactory(factory.Factory):
+class RegularEventFactory(factory.DjangoModelFactory):
     FACTORY_FOR = RegularEvent
-    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    title = factory.Sequence(lambda n: 'Regular Event #%d' % n)
     start_time = time(14, 0)
     duration = 60
     pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"

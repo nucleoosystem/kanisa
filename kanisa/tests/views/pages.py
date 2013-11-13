@@ -6,7 +6,7 @@ from kanisa.tests.utils import KanisaViewTestCase
 import factory
 
 
-class PageFactory(factory.Factory):
+class PageFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Page
     title = 'Page Title'
 

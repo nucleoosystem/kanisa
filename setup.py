@@ -24,7 +24,6 @@ setup(
         "django-mptt==0.6.0",
         "django-password-reset==0.2",
         "django-recurrence==1.0.1",
-        "factory-boy==1.2.0",
         "lxml==3.2.4",
         "markdown==2.2.0",
         "mutagen==1.22",
@@ -35,6 +34,7 @@ setup(
     ],
     tests_require=(
         "django-setuptest==0.1.4",
+        "factory-boy==2.2.1",
     ),
     test_suite='setuptest.setuptest.SetupTestSuite',
 )

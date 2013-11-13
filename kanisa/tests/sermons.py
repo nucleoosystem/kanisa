@@ -5,22 +5,22 @@ from kanisa.models import SermonSeries, Sermon, SermonSpeaker
 import factory
 
 
-class SermonSpeakerFactory(factory.Factory):
+class SermonSpeakerFactory(factory.DjangoModelFactory):
     FACTORY_FOR = SermonSpeaker
-    forename = factory.Sequence(lambda n: 'John #%s' % n)
-    surname = factory.Sequence(lambda n: 'Doe #%s' % n)
+    forename = factory.Sequence(lambda n: 'John #%d' % n)
+    surname = factory.Sequence(lambda n: 'Doe #%d' % n)
 
 
-class SermonSeriesFactory(factory.Factory):
+class SermonSeriesFactory(factory.DjangoModelFactory):
     FACTORY_FOR = SermonSeries
-    title = factory.Sequence(lambda n: 'Series #%s' % n)
+    title = factory.Sequence(lambda n: 'Series #%d' % n)
 
 
-class SermonFactory(factory.Factory):
+class SermonFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Sermon
     speaker = factory.SubFactory(SermonSpeakerFactory)
     series = factory.SubFactory(SermonSeriesFactory)
-    title = factory.Sequence(lambda n: 'Sermon #%s' % n)
+    title = factory.Sequence(lambda n: 'Sermon #%d' % n)
     date = date(2012, 1, 1)
 
 

@@ -190,7 +190,7 @@ class XHRUserPermissionViewTest(XHRBaseTestCase):
                          'Permission \'kanisa.raspberries\' not found.')
 
 
-class PageFactory(factory.Factory):
+class PageFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Page
     title = 'Page Title'
 
@@ -278,9 +278,9 @@ class XHRListPagesViewTest(XHRBaseTestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-class SermonSeriesFactory(factory.Factory):
+class SermonSeriesFactory(factory.DjangoModelFactory):
     FACTORY_FOR = SermonSeries
-    title = factory.Sequence(lambda n: 'Series #%s' % n)
+    title = factory.Sequence(lambda n: 'Series #%d' % n)
 
 
 class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
@@ -326,9 +326,9 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-class RegularEventFactory(factory.Factory):
+class RegularEventFactory(factory.DjangoModelFactory):
     FACTORY_FOR = RegularEvent
-    title = factory.Sequence(lambda n: 'Regular Event #' + n)
+    title = factory.Sequence(lambda n: 'Regular Event #%d' % n)
     start_time = time(14, 0)
     duration = 60
     pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"
@@ -429,7 +429,7 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
         self.assertEqual(resp.content, "Invalid date '2012' provided.")
 
 
-class NavigationElementFactory(factory.Factory):
+class NavigationElementFactory(factory.DjangoModelFactory):
     FACTORY_FOR = NavigationElement
     title = 'Navigation Title'
 

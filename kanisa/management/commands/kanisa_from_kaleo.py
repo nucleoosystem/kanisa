@@ -18,6 +18,8 @@ from kanisa.models import (
     NavigationElement,
     Page,
     RegularEvent,
+    SermonSeries,
+    SermonSpeaker,
     Song,
 )
 
@@ -36,31 +38,32 @@ class Command(BaseCommand):
     seen_navigation_link_pks = {}
     seen_event_categories = {}
     seen_event_contacts = {}
+    seen_sermon_speakers = {}
 
     ordering = [
-        'auth_group',
-        'auth_user',
-        'auth_permission',
-        'serviceplans_composer',
-        'serviceplans_song',
-        'serviceplans_band',
-        'serviceplans_serviceplan',
-        'serviceplans_serviceplansongchoice',
-        'attachments_attachment',
-        'attachments_inlineimage',
-        'kaleo_page',
-        'kaleo_legacypathmapping',
+        # 'auth_group',
+        # 'auth_user',
+        # 'auth_permission',
+        # 'serviceplans_composer',
+        # 'serviceplans_song',
+        # 'serviceplans_band',
+        # 'serviceplans_serviceplan',
+        # 'serviceplans_serviceplansongchoice',
+        # 'attachments_attachment',
+        # 'attachments_inlineimage',
+        # 'kaleo_page',
+        # 'kaleo_legacypathmapping',
         'sermons_sermonseries',
-        'sermons_sermon',
-        'people_person',
-        'diary_diaryeventcategory',
-        'diary_diaryeventtype',
-        'diary_diaryeventseries',
-        'diary_diaryevent',
-        'banners_datelessbanner',
-        'banners_banner',
-        'navigation_link',
-        'members_document',
+        # 'sermons_sermon',
+        # 'people_person',
+        # 'diary_diaryeventcategory',
+        # 'diary_diaryeventtype',
+        # 'diary_diaryeventseries',
+        # 'diary_diaryevent',
+        # 'banners_datelessbanner',
+        # 'banners_banner',
+        # 'navigation_link',
+        # 'members_document',
     ]
 
     def handle(self, *args, **options):
@@ -161,22 +164,32 @@ class Command(BaseCommand):
 
     def handle_people_person(self, item):
         pk = item['pk']
-        first_name = item['fields']['first_name']
-        last_name = item['fields']['last_name']
+        first_name = item['fields']['first_name'].strip()
+        last_name = item['fields']['last_name'].strip()
         name = '%s %s' % (first_name, last_name)
         email = item['fields']['email']
         image_path = item['fields']['image']
 
         if image_path:
-            path_for_django = self.copy_file(pk, image_path, 'diary/contacts')
+            path_event = self.copy_file(pk, image_path, 'diary/contacts')
+            path_speaker = self.copy_file(pk, image_path, 'sermons/speakers')
         else:
-            path_for_django = None
+            path_event = None
+            path_speaker = None
 
         contact = EventContact.objects.create(name=name,
                                               email=email,
-                                              image=path_for_django)
+                                              image=path_event)
+
+        speaker = SermonSpeaker.objects.create(forename=first_name,
+                                               surname=last_name,
+                                               image=path_speaker)
+
         self.seen_event_contacts[pk] = contact
+        self.seen_sermon_speakers[pk] = speaker
+
         print "Created event contact %s." % name
+        print "Created sermon speaker %s." % name
 
     def handle_auth_user(self, item):
         pass
@@ -235,7 +248,25 @@ class Command(BaseCommand):
         pass
 
     def handle_sermons_sermonseries(self, item):
-        pass
+        pk = item['pk']
+        active = not item['fields']['complete']
+        title = item['fields']['title']
+        details = item['fields']['details']
+        passage = item['fields']['passage']
+        image_path = item['fields']['image']
+
+        if image_path:
+            path_for_django = self.copy_file(pk, image_path, 'sermons/series')
+        else:
+            path_for_django = None
+
+        SermonSeries.objects.create(title=title,
+                                    image=path_for_django,
+                                    details=details,
+                                    active=active,
+                                    passage=passage)
+
+        print "Created sermon series %s." % title
 
     def handle_sermons_sermon(self, item):
         pass

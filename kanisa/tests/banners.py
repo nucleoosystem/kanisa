@@ -5,9 +5,9 @@ from kanisa.utils.banners import date_has_passed, today_in_range
 import factory
 
 
-class BannerFactory(factory.Factory):
+class BannerFactory(factory.DjangoModelFactory):
     FACTORY_FOR = Banner
-    headline = factory.Sequence(lambda n: 'Banner Title #' + n)
+    headline = factory.Sequence(lambda n: 'Banner Title #%d' % n)
     contents = 'Banner contents'
     image = 'non_existent_image.jpg'
 
