@@ -10,7 +10,6 @@ Version 0.8
     assets in the distributed wheel?)
   - Version check requirements in setup.py
     - django-crispy-forms (upgrade to 1.4.0)
-    - markdown (upgrade to 2.3.1)
     - tweepy (upgrade to 2.1)
     - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with

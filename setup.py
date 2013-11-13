@@ -25,7 +25,7 @@ setup(
         "django-password-reset==0.2",
         "django-recurrence==1.0.1",
         "lxml==3.2.4",
-        "markdown==2.2.0",
+        "markdown==2.3.1",
         "mutagen==1.22",
         "sorl-thumbnail==11.12",
         "tweepy==1.11",
