@@ -1,8 +1,10 @@
 from django.conf.urls import patterns, url
-from kanisa.views.public.sermons import (SermonIndexView,
-                                         SermonSeriesDetailView,
-                                         SermonDetailView,
-                                         SermonArchiveView)
+from kanisa.views.public.sermons import (
+    SermonArchiveView
+    SermonDetailView,
+    SermonIndexView,
+    SermonSeriesDetailView,
+)
 
 
 urlpatterns = patterns(
