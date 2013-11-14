@@ -3,8 +3,7 @@ Version 0.8
 
 - Version check requirements in setup.py
   - Work to upgrade django-password-reset
-    - Move URLs into their own module
-    - Remove view logic from urls.public.account
+    - Remove view logic from urls.public.password
     - Upgrade django-password-reset to 0.5.1
   - tweepy (upgrade to 2.1)
   - Whoosh (upgrade to 2.5.5)
