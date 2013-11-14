@@ -22,7 +22,7 @@ setup(
         "django-crispy-forms==1.4.0",
         "django-haystack==1.2.7",
         "django-mptt==0.6.0",
-        "django-password-reset==0.2",
+        "django-password-reset==0.5.1",
         "django-recurrence==1.0.1",
         "lxml==3.2.4",
         "markdown==2.3.1",

@@ -1,0 +1,21 @@
+{% extends 'kanisa/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+  <div class="span6 offset3">
+    <h1>Recover your Password</h1>
+    <p class="lead">
+      An email has just been sent to <strong>{{ email }}</strong>. Use
+      the link in it to set a new password.
+    </p>
+
+    <p>
+      <a class="btn" href="{% url 'kanisa_public_index' %}" title="Go back to the home page">
+        Go back home &raquo;
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock %}

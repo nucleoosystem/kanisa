@@ -24,7 +24,7 @@ from kanisa.views.generic import (
     KanisaUpdateView
 )
 from kanisa.views.members.auth import MembersBaseView
-from password_reset.views import Recover, Reset
+from password_reset.views import Recover, RecoverDone, Reset
 
 
 def kanisa_password_change(request):
@@ -101,6 +101,10 @@ class KanisaRecoverPasswordView(Recover):
     template_name = 'kanisa/auth/passwordreset/recovery_form.html'
     form_class = KanisaPasswordRecoveryForm
 
+    def get_success_url(self):
+        return reverse('kanisa_public_password_reset_sent',
+                       args=[self.mail_signature, ])
+
     def send_notification(self):
         context = {
             'site': RequestSite(self.request),
@@ -118,6 +122,11 @@ class KanisaResetPasswordView(Reset):
     template_name = 'kanisa/auth/passwordreset/reset_form.html'
     form_class = KanisaPasswordResetForm
     success_url = reverse_lazy('kanisa_public_password_reset_done')
+
+
+class KanisaResetPasswordSentView(KanisaTemplateView, RecoverDone):
+    kanisa_title = 'Password Reset Email Sent'
+    template_name = 'kanisa/auth/passwordreset/recovery_mail_sent.html'
 
 
 class KanisaResetPasswordDoneView(KanisaTemplateView):

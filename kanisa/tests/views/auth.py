@@ -41,8 +41,15 @@ class PasswordResetViewTest(KanisaViewTestCase):
 
     def test_password_recovery_by_email(self):
         resp = self.client.post(reverse('kanisa_public_recover_password'),
-                                {'username_or_email': 'fred@example.com'})
+                                {'username_or_email': 'fred@example.com'},
+                                follow=True)
         self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, 'fred@example.com')
+        self.assertTemplateUsed(
+            resp,
+            'kanisa/auth/passwordreset/recovery_mail_sent.html'
+        )
+
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, ['fred@example.com', ])
         self.assertEqual(mail.outbox[0].subject,
@@ -75,8 +82,15 @@ class PasswordResetViewTest(KanisaViewTestCase):
         # Only test up to the email being sent, everything else is the
         # same.
         resp = self.client.post(reverse('kanisa_public_recover_password'),
-                                {'username_or_email': 'fred'})
+                                {'username_or_email': 'fred'},
+                                follow=True)
         self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, 'fred@example.com')
+        self.assertTemplateUsed(
+            resp,
+            'kanisa/auth/passwordreset/recovery_mail_sent.html'
+        )
+
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, ['fred@example.com', ])
         self.assertEqual(mail.outbox[0].subject,
