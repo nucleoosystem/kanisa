@@ -58,7 +58,7 @@ class KanisaPasswordRecoveryForm(KanisaPrettyForm, PasswordRecoveryForm):
         super(KanisaPasswordRecoveryForm, self).__init__(*args, **kwargs)
 
 
-class KanisaPasswordResetForm(PasswordResetForm):
+class KanisaPasswordResetForm(KanisaPrettyForm, PasswordResetForm):
     submit_text = 'Reset my password'
 
     def __init__(self, *args, **kwargs):
