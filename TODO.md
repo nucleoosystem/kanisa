@@ -9,6 +9,7 @@ Version 0.8
     - Upgrade django-password-reset to 0.5.1
   - tweepy (upgrade to 2.1)
   - Whoosh (upgrade to 2.5.5)
+- Swap out Django's default user for our own model
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 
