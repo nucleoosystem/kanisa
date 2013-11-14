@@ -279,12 +279,12 @@ class Command(BaseCommand):
 
         delivered = date_from_str(item['fields']['delivered'])
         series_pk = item['fields']['series']
-        # downloads = item['fields']['downloads']
+        downloads = item['fields']['downloads']
         title = item['fields']['title']
         passage = item['fields']['passage']
         speaker_pk = item['fields']['speaker']
         mp3_path = item['fields']['mp3']
-        # podcast_downloads = item['fields']['podcast_downloads']
+        podcast_downloads = item['fields']['podcast_downloads']
         transcript = item['fields']['transcript']
         details = item['fields']['details']
 
@@ -300,7 +300,9 @@ class Command(BaseCommand):
                               passage=passage,
                               mp3=path_for_django,
                               details=details,
-                              transcript=transcript)
+                              transcript=transcript,
+                              downloads=downloads,
+                              podcast_downloads=podcast_downloads)
         print "Created sermon %s." % title
 
     def handle_diary_diaryeventcategory(self, item):
