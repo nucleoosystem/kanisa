@@ -3,7 +3,6 @@ Version 0.8
 
 - Version check requirements in setup.py
   - Work to upgrade django-password-reset
-    - Add tests for the password reset flow
     - Move URLs into their own module
     - Remove view logic from urls.public.account
     - Upgrade django-password-reset to 0.5.1

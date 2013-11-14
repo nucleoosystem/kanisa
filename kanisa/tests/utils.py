@@ -24,6 +24,7 @@ class KanisaViewTestCase(TestCase):
         self.fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_navigation')
         self.fred.user_permissions.add(p)
+        self.fred.email = 'fred@example.com'
 
         self.fred.save()
 

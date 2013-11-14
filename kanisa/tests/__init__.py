@@ -25,6 +25,9 @@ from .pages import (
 )
 from .sermons import SermonTest
 
+from .views.auth import (
+    PasswordResetViewTest
+)
 from .views.banners import (
     BannerManagementViewTest,
     BannerPublicViewTest
