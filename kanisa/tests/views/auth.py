@@ -35,6 +35,10 @@ class PasswordResetViewTest(KanisaViewTestCase):
         resp = self.client.get(reverse('kanisa_public_recover_password'))
         self.assertEqual(resp.status_code, 200)
 
+    def test_password_recovery_reset_done_view(self):
+        resp = self.client.get(reverse('kanisa_public_password_reset_done'))
+        self.assertEqual(resp.status_code, 200)
+
     def test_password_recovery_by_email(self):
         resp = self.client.post(reverse('kanisa_public_recover_password'),
                                 {'username_or_email': 'fred@example.com'})
