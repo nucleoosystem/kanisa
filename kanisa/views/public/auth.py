@@ -1,6 +1,7 @@
 import urlparse
 from django.contrib.auth import login, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.contrib.auth.views import password_change
 from django.contrib.sites.models import RequestSite
 from django.core import signing
 from django.core.cache import cache
@@ -10,6 +11,7 @@ from django.views.generic.edit import FormView, CreateView
 from kanisa import conf
 from kanisa.forms.auth import (
     KanisaAccountModificationForm,
+    KanisaChangePasswordForm,
     KanisaLoginForm,
     KanisaUserCreationForm,
     KanisaPasswordRecoveryForm,
@@ -23,6 +25,15 @@ from kanisa.views.generic import (
 )
 from kanisa.views.members.auth import MembersBaseView
 from password_reset.views import Recover, Reset
+
+
+def kanisa_password_change(request):
+    return password_change(
+        request,
+        template_name='kanisa/management/password_reset.html',
+        post_change_redirect='/members/',
+        password_change_form=KanisaChangePasswordForm
+    )
 
 
 class KanisaLoginView(FormView):
