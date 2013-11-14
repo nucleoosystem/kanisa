@@ -4,7 +4,6 @@ Version 0.8
 - Version check requirements in setup.py
   - Upgrade django-password-reset to 0.5.1 (which now supports
     custom users)
-  - django-crispy-forms (upgrade to 1.4.0)
   - tweepy (upgrade to 2.1)
   - Whoosh (upgrade to 2.5.5)
 - Add support for user photos, ensuring they can be set by users with
