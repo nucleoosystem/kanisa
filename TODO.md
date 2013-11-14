@@ -1,9 +1,6 @@
 Version 0.8
 ===========
 
-- Version check requirements in setup.py
-  - tweepy (upgrade to 2.1)
-  - Whoosh (upgrade to 2.5.5)
 - Swap out Django's default user for our own model
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
@@ -34,8 +31,12 @@ Version 1.0
   - Switch from django-compressor to django-pipeline, and ensure we're
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
+- Version check requirements in setup.py
+  - tweepy (upgrade to 2.1)
+    - Check Twitter integration still works
+    - Write tests against mock Twitter
+  - Whoosh (upgrade to 2.5.5)
 - Add South migrations
-- Check Twitter integration still works
 - Figure out what should go on the management home page (#41)
 - Allow customisable home page templates (#56)
 - Fix O(n)ness of user-management views (#26)
