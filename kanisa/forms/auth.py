@@ -26,7 +26,7 @@ class KanisaChangePasswordForm(KanisaPrettyForm, PasswordChangeForm):
         super(KanisaChangePasswordForm, self).__init__(*args, **kwargs)
 
 
-class KanisaUserCreationForm(KanisaPrettyForm, UserCreationForm):
+class KanisaAccountCreationForm(KanisaPrettyForm, UserCreationForm):
     submit_text = 'Register'
 
     first_name = forms.CharField(max_length=30)
@@ -41,10 +41,10 @@ class KanisaUserCreationForm(KanisaPrettyForm, UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         self.helper = self.get_form_helper()
-        super(KanisaUserCreationForm, self).__init__(*args, **kwargs)
+        super(KanisaAccountCreationForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        user = super(KanisaUserCreationForm, self).save(commit)
+        user = super(KanisaAccountCreationForm, self).save(commit)
         user.is_active = False
         user.save()
         return user

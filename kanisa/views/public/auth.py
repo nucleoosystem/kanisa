@@ -76,7 +76,7 @@ class KanisaRegistrationMixin(object):
 
 class KanisaRegistrationView(KanisaRegistrationMixin, CreateView):
     template_name = 'kanisa/auth/registration.html'
-    form_class = KanisaUserCreationForm
+    form_class = KanisaAccountCreationForm
     success_url = reverse_lazy('kanisa_public_registration_thanks')
 
     def form_valid(self, form):
