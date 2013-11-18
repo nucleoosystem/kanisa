@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import formats
 from crispy_forms.layout import Layout, HTML
 from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
@@ -44,7 +44,7 @@ class AccountChoiceField(forms.ModelChoiceField):
 
 class ServiceForm(KanisaBaseModelForm):
     event = EventChoiceField(ScheduledEvent.objects.all())
-    band_leader = AccountChoiceField(User.objects.all())
+    band_leader = AccountChoiceField(get_user_model().objects.all())
 
     class Meta:
         model = Service
