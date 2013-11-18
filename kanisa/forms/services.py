@@ -36,7 +36,7 @@ class EventChoiceField(forms.ModelChoiceField):
         return '%s (%s)' % (unicode(obj), event_date)
 
 
-class UserChoiceField(forms.ModelChoiceField):
+class AccountChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         full_name = obj.get_full_name()
         return full_name or obj.username
@@ -44,7 +44,7 @@ class UserChoiceField(forms.ModelChoiceField):
 
 class ServiceForm(KanisaBaseModelForm):
     event = EventChoiceField(ScheduledEvent.objects.all())
-    band_leader = UserChoiceField(User.objects.all())
+    band_leader = AccountChoiceField(User.objects.all())
 
     class Meta:
         model = Service
