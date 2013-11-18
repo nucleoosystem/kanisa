@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import formats
 from kanisa.admin.base import KanisaBaseAdmin
 from kanisa.models import (Composer,
@@ -36,7 +36,7 @@ class ServiceAdmin(KanisaBaseAdmin):
                                                      request,
                                                      **kwargs)
 
-        if db_field.rel.to == User:
+        if db_field.rel.to == get_user_model():
             field.label_from_instance = self.get_user_label
         if db_field.rel.to == ScheduledEvent:
             field.label_from_instance = self.get_event_label

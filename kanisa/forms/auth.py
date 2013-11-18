@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (AuthenticationForm,
                                        PasswordChangeForm,
                                        UserCreationForm)
@@ -36,7 +36,7 @@ class KanisaAccountCreationForm(KanisaPrettyForm, UserCreationForm):
                                         'account.'))
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name', )
 
     def __init__(self, *args, **kwargs):
@@ -70,5 +70,5 @@ class KanisaAccountModificationForm(KanisaBaseModelForm):
     submit_text = 'Save Changes'
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ['first_name', 'last_name', 'email', ]

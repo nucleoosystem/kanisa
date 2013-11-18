@@ -1,6 +1,9 @@
 import urlparse
-from django.contrib.auth import login, REDIRECT_FIELD_NAME
-from django.contrib.auth.models import User
+from django.contrib.auth import (
+    get_user_model,
+    login,
+    REDIRECT_FIELD_NAME
+)
 from django.contrib.auth.views import password_change
 from django.contrib.sites.models import RequestSite
 from django.core import signing
@@ -13,7 +16,7 @@ from kanisa.forms.auth import (
     KanisaAccountModificationForm,
     KanisaChangePasswordForm,
     KanisaLoginForm,
-    KanisaUserCreationForm,
+    KanisaAccountCreationForm,
     KanisaPasswordRecoveryForm,
     KanisaPasswordResetForm
 )
@@ -139,7 +142,7 @@ class KanisaAccountModificationView(MembersBaseView,
     template_name = 'kanisa/auth/account.html'
     form_class = KanisaAccountModificationForm
     success_url = reverse_lazy('kanisa_members_index')
-    model = User
+    model = get_user_model()
     kanisa_title = 'Update your account'
 
     def get_object(self):
