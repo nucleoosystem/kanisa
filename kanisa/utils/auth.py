@@ -1,4 +1,5 @@
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.db.models import Q
 
 
@@ -11,4 +12,5 @@ def has_any_kanisa_permission(user):
 def users_with_perm(perm):
     permission = Permission.objects.get(codename=perm)
     cond = Q(groups__permissions=permission) | Q(user_permissions=permission)
-    return User.objects.filter(cond).distinct().filter(is_active=True)
+    unique_users = get_user_model().objects.filter(cond).distinct()
+    return unique_users.filter(is_active=True)

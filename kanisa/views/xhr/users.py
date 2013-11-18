@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseForbidden
 from kanisa.views.xhr.base import XHRBasePostView, BadArgument
 
@@ -11,8 +13,8 @@ class AssignPermissionView(XHRBasePostView):
         user_pk = self.arguments['user']
 
         try:
-            return User.objects.get(pk=user_pk)
-        except (User.DoesNotExist, ValueError):
+            return get_user_model().objects.get(pk=user_pk)
+        except (ObjectDoesNotExist, ValueError):
             raise BadArgument("No user found with ID %s." % user_pk)
 
     def get_permission(self):
