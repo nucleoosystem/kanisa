@@ -1,5 +1,5 @@
 from django import template
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.cache import cache
 
 
@@ -13,7 +13,7 @@ def kanisa_inactive_users():
     if cached is not None:
         return cached
 
-    users = User.objects.all().filter(is_active=False).count()
+    users = get_user_model().objects.all().filter(is_active=False).count()
     cache.set('kanisa_inactive_users', users, 120)
 
     return users
