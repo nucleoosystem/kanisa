@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.test import TestCase
 from django.test.client import RequestFactory
@@ -7,11 +8,11 @@ from django.test.utils import override_settings
 
 class KanisaViewTestCase(TestCase):
     def setUp(self):
-        self.bob = User.objects.create_user('bob', '', 'secret')
+        self.bob = get_user_model().objects.create_user('bob', '', 'secret')
         self.bob.is_staff = False
         self.bob.save()
 
-        self.fred = User.objects.create_user('fred', '', 'secret')
+        self.fred = get_user_model().objects.create_user('fred', '', 'secret')
         p = Permission.objects.get(codename='manage_banners')
         self.fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_diary')
@@ -28,7 +29,8 @@ class KanisaViewTestCase(TestCase):
 
         self.fred.save()
 
-        self.superman = User.objects.create_user('superman', '', 'secret')
+        self.superman = get_user_model().objects.create_user('superman',
+                                                             '', 'secret')
         self.superman.is_superuser = True
         self.superman.save()
 

@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.contrib.auth.context_processors import PermWrapper
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -8,12 +9,11 @@ from kanisa.tests.utils import KanisaViewTestCase
 
 
 class UserManagementViewTest(KanisaViewTestCase):
-
     def setUp(self):
         super(UserManagementViewTest, self).setUp()
 
         p = Permission.objects.get(codename='manage_users')
-        fred = User.objects.get(username='fred')
+        fred = get_user_model().objects.get(username='fred')
         fred.user_permissions.add(p)
         fred.save()
 
@@ -29,9 +29,9 @@ class UserManagementViewTest(KanisaViewTestCase):
 
         self.assertTrue('user_list' in resp.context)
 
-        bob = User.objects.get(username='bob')
-        fred = User.objects.get(username='fred')
-        superman = User.objects.get(username='superman')
+        bob = get_user_model().objects.get(username='bob')
+        fred = get_user_model().objects.get(username='fred')
+        superman = get_user_model().objects.get(username='superman')
 
         self.assertEqual(list(resp.context['user_list']),
                          [bob, fred, superman, ])
@@ -40,8 +40,8 @@ class UserManagementViewTest(KanisaViewTestCase):
 
     def test_template_complexity(self):
         tmpl = 'kanisa/management/users/_user_list.html'
-        users = list(User.objects.all())
-        user = User.objects.get(username='superman')
+        users = list(get_user_model().objects.all())
+        user = get_user_model().objects.get(username='superman')
         perms = PermWrapper(user)
 
         with self.assertNumQueries(4):
@@ -61,9 +61,9 @@ class UserManagementViewTest(KanisaViewTestCase):
             c = Context({"theuser": user, "user": request_user})
             return t.render(c)
 
-        bob = User.objects.get(username='bob')
-        fred = User.objects.get(username='fred')
-        superman = User.objects.get(username='superman')
+        bob = get_user_model().objects.get(username='bob')
+        fred = get_user_model().objects.get(username='fred')
+        superman = get_user_model().objects.get(username='superman')
 
         # Fred has access to manage users, not to manage social
         # networks.

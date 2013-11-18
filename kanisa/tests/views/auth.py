@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.urlresolvers import reverse
 from kanisa.tests.utils import KanisaViewTestCase
@@ -7,7 +7,7 @@ from kanisa.tests.utils import KanisaViewTestCase
 class PasswordResetViewTest(KanisaViewTestCase):
     def setUp(self):
         super(PasswordResetViewTest, self).setUp()
-        self.fred = User.objects.get(username='fred')
+        self.fred = get_user_model().objects.get(username='fred')
         self.fred.set_password('secret')
         self.fred.save()
 
@@ -75,7 +75,7 @@ class PasswordResetViewTest(KanisaViewTestCase):
         self.assertTemplateUsed(resp,
                                 'kanisa/auth/passwordreset/reset_done.html')
 
-        new_fred = User.objects.get(username='fred')
+        new_fred = get_user_model().objects.get(username='fred')
         self.assertTrue(new_fred.check_password('honeyichangedmypassword'))
 
     def test_password_recovery_by_username(self):
