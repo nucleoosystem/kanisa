@@ -1,5 +1,5 @@
 from datetime import date
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from kanisa.models import ScheduledEvent
 
@@ -50,7 +50,7 @@ class FutureServicesManager(models.Manager):
 
 class Service(models.Model):
     event = models.ForeignKey(ScheduledEvent, unique=True)
-    band_leader = models.ForeignKey(User)
+    band_leader = models.ForeignKey(settings.AUTH_USER_MODEL)
     songs = models.ManyToManyField(Song, through='SongInService')
 
     objects = models.Manager()
