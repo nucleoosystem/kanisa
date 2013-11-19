@@ -1,11 +1,14 @@
 Version 0.8
 ===========
 
+- Modify user edit form to allow managing permissions
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 - Ensure users with user management permissions are emailed on new
   user registration
-- Fix O(n)ness of user-management views (#26)
+- Fix O(n)ness of user-management views (#26) - can be fixed by just
+  removing the checkboxes once permissions can be managed from the
+  user edit form
 
 Version 0.9
 ===========
