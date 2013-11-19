@@ -138,7 +138,7 @@ class SermonSpeaker(models.Model):
 class SermonManager(models.Manager):
     def get_query_set(self):
         qs = super(SermonManager, self).get_query_set()
-        return qs.select_related(depth=1)
+        return qs.select_related('series', 'speaker')
 
 
 class PreachedSermonManager(SermonManager):
