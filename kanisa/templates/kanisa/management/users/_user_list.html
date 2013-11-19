@@ -47,10 +47,10 @@
 <tr>
   <td>
     {% if not theuser.is_active %}
-      <i class="icon icon-exclamation-sign" alt="Pending account approval"></i>
+      <i class="icon icon-exclamation-sign" title="{{ theuser.get_familiar_name }}'s account is pending approval"></i>
     {% else %}
       {% if theuser.is_superuser %}
-        <i class="icon icon-star" alt="Administrator"></i>
+        <i class="icon icon-star" title="{{ theuser.get_familiar_name }} is an administrator"></i>
       {% endif %}
     {% endif %}
 

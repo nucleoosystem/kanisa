@@ -38,7 +38,8 @@ class UserActivateView(UserBaseView,
         user = get_object_or_404(get_user_model(), pk=user_id)
 
         if user.is_active:
-            message = '%s\'s account is already active.' % unicode(user)
+            message = ('%s\'s account is already active.'
+                       % user.get_familiar_name())
             messages.success(self.request, message)
             return reverse('kanisa_manage_users')
 
@@ -49,7 +50,8 @@ class UserActivateView(UserBaseView,
         user.is_active = True
         user.save()
 
-        message = '%s\'s account is now activated.' % unicode(user)
+        message = ('%s\'s account is now activated.'
+                   % user.get_familiar_name())
         messages.success(self.request, message)
 
         cache.delete('kanisa_inactive_users')
