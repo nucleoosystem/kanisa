@@ -4,9 +4,14 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
+from kanisa.forms.user import UserUpdateForm
+from kanisa.models import RegisteredUser
 from kanisa.utils.mail import send_single_mail
-from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaListView)
+from kanisa.views.generic import (
+    KanisaAuthorizationMixin,
+    KanisaListView,
+    KanisaUpdateView
+)
 
 
 class UserBaseView(KanisaAuthorizationMixin):
@@ -58,3 +63,11 @@ class UserActivateView(UserBaseView,
 
         return reverse('kanisa_manage_users')
 user_activate = UserActivateView.as_view()
+
+
+class UserUpdateView(UserBaseView,
+                     KanisaUpdateView):
+    form_class = UserUpdateForm
+    model = RegisteredUser
+    success_url = reverse_lazy('kanisa_manage_users')
+user_update = UserUpdateView.as_view()

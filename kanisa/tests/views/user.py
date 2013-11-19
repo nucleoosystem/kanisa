@@ -164,3 +164,38 @@ class UserManagementViewTest(KanisaViewTestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 404)
         self.client.logout()
+
+    def test_user_update_view_non_existent_user(self):
+        self.client.login(username='fred', password='secret')
+        url = reverse('kanisa_manage_users_update', args=[1337, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        self.client.logout()
+
+    def test_user_update_view_get(self):
+        self.client.login(username='fred', password='secret')
+
+        bob = get_user_model().objects.get(username='bob')
+
+        url = reverse('kanisa_manage_users_update', args=[bob.pk, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+        self.client.logout()
+
+    def test_user_update_view_post(self):
+        self.client.login(username='fred', password='secret')
+
+        bob = get_user_model().objects.get(username='bob')
+
+        url = reverse('kanisa_manage_users_update', args=[bob.pk, ])
+        resp = self.client.post(url, {'email': 'bob@example.net'},
+                                follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+        self.assertEqual([m.message for m in resp.context['messages']],
+                         ['Registered User "bob" saved.', ])
+
+        bob = get_user_model().objects.get(username='bob')
+        self.assertEqual(bob.email, 'bob@example.net')
+
+        self.client.logout()
