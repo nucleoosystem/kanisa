@@ -157,3 +157,10 @@ class UserManagementViewTest(KanisaViewTestCase):
                          'Your Church Account Activated')
 
         self.client.logout()
+
+    def test_user_activate_view_non_existent_user(self):
+        self.client.login(username='fred', password='secret')
+        url = reverse('kanisa_manage_users_activate', args=[1337, ])
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 404)
+        self.client.logout()
