@@ -72,3 +72,5 @@ USE_L10N = True
 USE_TZ = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+AUTH_USER_MODEL = 'kanisa.RegisteredUser'

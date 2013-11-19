@@ -1,6 +1,7 @@
 # flake8: noqa
 from __future__ import absolute_import
 
+from .account import RegisteredUser
 from .banners import Banner
 from .blocks import Block
 from .diary import EventCategory, RegularEvent, ScheduledEvent, EventContact

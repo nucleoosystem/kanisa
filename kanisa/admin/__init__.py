@@ -1,4 +1,5 @@
 # flake8: noqa
+import kanisa.admin.account
 import kanisa.admin.banners
 import kanisa.admin.diary
 import kanisa.admin.documents

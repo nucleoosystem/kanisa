@@ -1,7 +1,6 @@
 Version 0.8
 ===========
 
-- Swap out Django's default user for our own model
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
 
