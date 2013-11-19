@@ -5,6 +5,7 @@ Version 0.8
   user management permissions (#25)
 - Ensure users with user management permissions are emailed on new
   user registration
+- Fix O(n)ness of user-management views (#26)
 
 Version 0.9
 ===========
@@ -37,10 +38,10 @@ Version 1.0
     - Check Twitter integration still works
     - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
+  - django-haystack to 2.x
 - Add South migrations
 - Figure out what should go on the management home page (#41)
 - Allow customisable home page templates (#56)
-- Fix O(n)ness of user-management views (#26)
 
 Version 1.1
 ===========
@@ -66,4 +67,3 @@ Version 1.1
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
-- Upgrade django-haystack to 2.x
