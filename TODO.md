@@ -3,6 +3,8 @@ Version 0.8
 
 - Add support for user photos, ensuring they can be set by users with
   user management permissions (#25)
+- Ensure users with user management permissions are emailed on new
+  user registration
 
 Version 0.9
 ===========
