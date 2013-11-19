@@ -42,6 +42,8 @@ Version 1.0
 - Add South migrations
 - Figure out what should go on the management home page (#41)
 - Allow customisable home page templates (#56)
+- Stop distributing tests (otherwise we need to make all the tests
+  settings-independent, which is more work)
 
 Version 1.1
 ===========
