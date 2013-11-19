@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.contrib.auth.context_processors import PermWrapper
 from django.core.cache import cache
+from django.core import mail
 from django.core.urlresolvers import reverse
 from django.template import Context, Template
 from django.template.loader import render_to_string
@@ -115,3 +116,44 @@ class UserManagementViewTest(KanisaViewTestCase):
                                   'data-user-id="1" '
                                   'title="Can manage your social networks" '
                                   '/>'))
+
+    def test_user_activate_view_user_already_active(self):
+        self.client.login(username='fred', password='secret')
+
+        bob = get_user_model().objects.get(username='bob')
+        bob.is_active = True
+        bob.save()
+
+        url = reverse('kanisa_manage_users_activate', args=[bob.pk, ])
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+        bob = get_user_model().objects.get(username='bob')
+        self.assertTrue(bob.is_active)
+        self.assertContains(resp, 'account is already active.')
+
+        self.assertEqual(len(mail.outbox), 0)
+
+        self.client.logout()
+
+    def test_user_activate_view_on_inactive_user(self):
+        self.client.login(username='fred', password='secret')
+
+        bob = get_user_model().objects.get(username='bob')
+        bob.is_active = False
+        bob.save()
+
+        url = reverse('kanisa_manage_users_activate', args=[bob.pk, ])
+        resp = self.client.get(url, follow=True)
+        self.assertEqual(resp.status_code, 200)
+
+        bob = get_user_model().objects.get(username='bob')
+        self.assertTrue(bob.is_active)
+        self.assertContains(resp, 'account is now activated.')
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ['bob@example.com', ])
+        self.assertEqual(mail.outbox[0].subject,
+                         'Your Church Account Activated')
+
+        self.client.logout()

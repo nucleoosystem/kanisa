@@ -9,6 +9,7 @@ from django.test.utils import override_settings
 class KanisaViewTestCase(TestCase):
     def setUp(self):
         self.bob = get_user_model().objects.create_user('bob', '', 'secret')
+        self.bob.email = 'bob@example.com'
         self.bob.is_staff = False
         self.bob.save()
 
