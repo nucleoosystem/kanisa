@@ -33,7 +33,9 @@ Version 1.0
 ===========
 
 - Change external requirements to better equivalents
-  - Switch to Pillow
+  - Switch to Pillow (might need newer version of sorl-thumbnail,
+    which is back in active development - see
+    https://github.com/mariocesar/sorl-thumbnail/).
   - Switch from django-compressor to django-pipeline, and ensure we're
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
