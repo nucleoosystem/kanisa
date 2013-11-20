@@ -9,16 +9,17 @@ Version 0.8
 - Fix O(n)ness of user-management views (#26) - can be fixed by just
   removing the checkboxes once permissions can be managed from the
   user edit form
+- A bit more support for importing from Kaleo (#62)
+  - Import users
+  - Import groups
+  - Import permissions
 
 Version 0.9
 ===========
 
 - Add support for ScheduledEvent series
-- Support importing from Kaleo (#62)
+- Rest of support for importing from Kaleo (#62)
   - Import scheduled events
-  - Import users
-  - Import groups
-  - Import permissions
   - Import bands
   - Import service plans
   - Import attachments (and ensure the Markdown parser finds them)
