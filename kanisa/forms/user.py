@@ -7,4 +7,4 @@ class UserUpdateForm(KanisaBaseModelForm):
     class Meta:
         fields = ('first_name', 'last_name', 'email', 'image', )
         model = RegisteredUser
-        widgets = {'image': ThumbnailFileInput(), }
+        widgets = {'image': ThumbnailFileInput(100, 100), }
