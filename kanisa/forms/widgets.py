@@ -36,7 +36,8 @@ class KanisaMainInputWidget(Textarea):
 
 
 class ThumbnailFileInput(ClearableFileInput):
-    template_with_initial = '%(initial)s %(clear_template)s<br />%(input_text)s: %(input)s'
+    template_with_initial = ('%(initial)s %(clear_template)s<br />'
+                             '%(input_text)s: %(input)s')
 
     def __init__(self, width, height, attrs=None):
         self.dimensions = {
