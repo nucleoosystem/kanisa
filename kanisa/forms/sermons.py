@@ -2,7 +2,10 @@ from django.forms.util import ErrorList
 
 from kanisa import conf
 from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
-from kanisa.forms.widgets import KanisaMainInputWidget
+from kanisa.forms.widgets import (
+    KanisaMainInputWidget,
+    ThumbnailFileInput
+)
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3NoHeaderError, TIT2
@@ -15,7 +18,8 @@ from kanisa.models import (SermonSeries,
 class SermonSeriesForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSeries
-        widgets = {'details': KanisaMainInputWidget(), }
+        widgets = {'details': KanisaMainInputWidget(),
+                   'image': ThumbnailFileInput(130, 130), }
 
 
 class SermonSpeakerForm(KanisaBaseModelForm):

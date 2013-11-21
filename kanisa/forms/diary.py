@@ -3,8 +3,11 @@ from django.forms.util import ErrorList
 from kanisa.forms import (KanisaBaseModelForm,
                           BootstrapTimeField,
                           BootstrapDateField)
-from kanisa.forms.widgets import (KanisaMainInputWidget,
-                                  KanisaTinyInputWidget)
+from kanisa.forms.widgets import (
+    KanisaMainInputWidget,
+    KanisaTinyInputWidget,
+    ThumbnailFileInput
+)
 from kanisa.models import (EventCategory,
                            EventContact,
                            RegularEvent,
@@ -33,7 +36,8 @@ class RegularEventForm(KanisaBaseModelForm):
     class Meta:
         model = RegularEvent
         widgets = {'intro': KanisaTinyInputWidget(),
-                   'details': KanisaMainInputWidget(), }
+                   'details': KanisaMainInputWidget(),
+                   'image': ThumbnailFileInput(100, 100), }
 
 
 class ScheduledEventBaseForm(KanisaBaseModelForm):
