@@ -9,8 +9,8 @@ from kanisa.models import RegisteredUser
 from kanisa.utils.mail import send_single_mail
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
-    KanisaListView,
-    KanisaUpdateView
+    KanisaFormView,
+    KanisaListView
 )
 
 
@@ -66,8 +66,38 @@ user_activate = UserActivateView.as_view()
 
 
 class UserUpdateView(UserBaseView,
-                     KanisaUpdateView):
+                     KanisaFormView):
     form_class = UserUpdateForm
-    model = RegisteredUser
     success_url = reverse_lazy('kanisa_manage_users')
+    template_name = 'kanisa/management/create.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = get_object_or_404(RegisteredUser, pk=kwargs['pk'])
+        return super(UserUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        return {
+            'first_name': self.object.first_name,
+            'last_name': self.object.last_name,
+            'email': self.object.email,
+            'image': self.object.image
+        }
+
+    def get_kanisa_title(self):
+        return 'Edit User: %s' % self.object.get_display_name()
+
+    def form_valid(self, form):
+        self.object.first_name = form.cleaned_data['first_name']
+        self.object.last_name = form.cleaned_data['last_name']
+        self.object.email = form.cleaned_data['email']
+
+        if not form.cleaned_data['image']:
+            # Comes in as False, need to set to None
+            self.object.image = None
+        else:
+            self.object.image = form.cleaned_data['image']
+
+        self.object.save()
+
+        return super(UserUpdateView, self).form_valid(form)
 user_update = UserUpdateView.as_view()

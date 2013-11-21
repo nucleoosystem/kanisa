@@ -1,7 +1,9 @@
 from django.forms import Textarea, TextInput
 from django.forms.util import flatatt
+from django.forms.widgets import ClearableFileInput
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
+from sorl.thumbnail.shortcuts import get_thumbnail
 
 
 class KanisaTinyInputWidget(TextInput):
@@ -31,3 +33,24 @@ class KanisaMainInputWidget(Textarea):
                                 {'attrs': mark_safe(flatatt(final_attrs)),
                                  'id': final_attrs['id'],
                                  'value': value})
+
+
+class ThumbnailFileInput(ClearableFileInput):
+    class Media:
+        js = ('kanisa/js/thumbnail_widget.js', )
+
+    template_with_initial = '%(initial)s %(clear_template)s<br />%(input_text)s: %(input)s'
+
+    @property
+    def url_markup_template(self):
+        thumbnail = get_thumbnail(self.thumbnail_url, "100x100")
+        return '<img src="%s" /><br />' % thumbnail.url
+
+    def render(self, name, value, attrs=None):
+        self.thumbnail_url = value
+
+        # attrs["class"]="foobar"
+
+        return super(ThumbnailFileInput, self).render(name, value, attrs)
+
+
