@@ -99,5 +99,9 @@ class UserUpdateView(UserBaseView,
 
         self.object.save()
 
+        message = ('Registered User "%s" saved.'
+                   % self.object.get_familiar_name())
+        messages.success(self.request, message)
+
         return super(UserUpdateView, self).form_valid(form)
 user_update = UserUpdateView.as_view()
