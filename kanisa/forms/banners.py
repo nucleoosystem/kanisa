@@ -1,6 +1,9 @@
 from kanisa.models import Banner
 from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
-from kanisa.forms.widgets import KanisaIntroInputWidget
+from kanisa.forms.widgets import (
+    KanisaIntroInputWidget,
+    ThumbnailFileInput
+)
 
 
 class BannerForm(KanisaBaseModelForm):
@@ -20,4 +23,5 @@ class BannerForm(KanisaBaseModelForm):
     class Meta:
         exclude = ('visits', )
         model = Banner
-        widgets = {'contents': KanisaIntroInputWidget(), }
+        widgets = {'contents': KanisaIntroInputWidget(),
+                   'image': ThumbnailFileInput(130, 90)}
