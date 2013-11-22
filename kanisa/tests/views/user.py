@@ -1,3 +1,4 @@
+import django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.contrib.auth.context_processors import PermWrapper
@@ -7,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.template import Context, Template
 from django.template.loader import render_to_string
 from kanisa.tests.utils import KanisaViewTestCase
+from mock import Mock
 
 
 class UserManagementViewTest(KanisaViewTestCase):
@@ -188,14 +190,27 @@ class UserManagementViewTest(KanisaViewTestCase):
         bob = get_user_model().objects.get(username='bob')
 
         url = reverse('kanisa_manage_users_update', args=[bob.pk, ])
-        resp = self.client.post(url, {'email': 'bob@example.net'},
+
+        mock_file = Mock(spec=django.core.files.File)
+        mock_file.configure_mock(name='foo.bar')
+        mock_file.read.return_value = "Just some data"
+
+        resp = self.client.post(url, {'email': 'bob@example.net',
+                                      'first_name': 'Bob',
+                                      'last_name': 'Builder',
+                                      'image': mock_file},
                                 follow=True)
         self.assertEqual(resp.status_code, 200)
+        self.assertTrue('form' not in resp.context)
 
         self.assertEqual([m.message for m in resp.context['messages']],
-                         ['Registered User "bob" saved.', ])
+                         ['Registered User "Bob" saved.', ])
 
         bob = get_user_model().objects.get(username='bob')
+
+        # Clean up after our file
+        bob.image.delete()
+
         self.assertEqual(bob.email, 'bob@example.net')
 
         self.client.logout()
