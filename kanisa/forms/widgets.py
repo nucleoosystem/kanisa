@@ -56,7 +56,8 @@ class KanisaThumbnailFileWidget(ClearableFileInput):
     def render(self, name, value, attrs=None):
         self.thumbnail_url = value
 
-        return super(KanisaThumbnailFileWidget, self).render(name, value, attrs)
+        return super(KanisaThumbnailFileWidget,
+                     self).render(name, value, attrs)
 
     class Media:
         js = ('kanisa/js/thumbnail_widget.js', )
