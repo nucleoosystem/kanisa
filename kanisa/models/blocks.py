@@ -32,5 +32,5 @@ class Block(models.Model):
         ordering = ('-modified', )
         permissions = (
             ('manage_blocks',
-             'Can manage your content blocks.'),
+             'Can manage your content blocks'),
         )
