@@ -4,7 +4,7 @@ from kanisa import conf
 from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
 from kanisa.forms.widgets import (
     KanisaMainInputWidget,
-    ThumbnailFileInput
+    KanisaThumbnailFileWidget
 )
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
@@ -19,7 +19,7 @@ class SermonSeriesForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSeries
         widgets = {'details': KanisaMainInputWidget(),
-                   'image': ThumbnailFileInput(130, 130), }
+                   'image': KanisaThumbnailFileWidget(130, 130), }
 
 
 class SermonSpeakerForm(KanisaBaseModelForm):

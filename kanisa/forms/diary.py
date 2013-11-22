@@ -6,7 +6,7 @@ from kanisa.forms import (KanisaBaseModelForm,
 from kanisa.forms.widgets import (
     KanisaMainInputWidget,
     KanisaTinyInputWidget,
-    ThumbnailFileInput
+    KanisaThumbnailFileWidget
 )
 from kanisa.models import (EventCategory,
                            EventContact,
@@ -37,7 +37,7 @@ class RegularEventForm(KanisaBaseModelForm):
         model = RegularEvent
         widgets = {'intro': KanisaTinyInputWidget(),
                    'details': KanisaMainInputWidget(),
-                   'image': ThumbnailFileInput(100, 100), }
+                   'image': KanisaThumbnailFileWidget(100, 100), }
 
 
 class ScheduledEventBaseForm(KanisaBaseModelForm):

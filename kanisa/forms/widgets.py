@@ -35,7 +35,7 @@ class KanisaMainInputWidget(Textarea):
                                  'value': value})
 
 
-class ThumbnailFileInput(ClearableFileInput):
+class KanisaThumbnailFileWidget(ClearableFileInput):
     template_with_initial = ('%(initial)s %(clear_template)s<br />'
                              '%(input_text)s: %(input)s')
 
@@ -45,7 +45,7 @@ class ThumbnailFileInput(ClearableFileInput):
             'height': height
         }
 
-        super(ThumbnailFileInput, self).__init__(attrs)
+        super(KanisaThumbnailFileWidget, self).__init__(attrs)
 
     @property
     def url_markup_template(self):
@@ -56,7 +56,7 @@ class ThumbnailFileInput(ClearableFileInput):
     def render(self, name, value, attrs=None):
         self.thumbnail_url = value
 
-        return super(ThumbnailFileInput, self).render(name, value, attrs)
+        return super(KanisaThumbnailFileWidget, self).render(name, value, attrs)
 
     class Media:
         js = ('kanisa/js/thumbnail_widget.js', )
