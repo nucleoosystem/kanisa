@@ -1,7 +1,6 @@
 Version 0.8
 ===========
 
-- Modify user edit form to allow managing permissions
 - Modify user edit form to allow creating superusers (sets `is_staff` and
   `is_superuser`, only available to superusers)
 - Ensure first name, last name and email are required fields at all

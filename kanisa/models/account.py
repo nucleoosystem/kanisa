@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 from django.utils.timezone import now
 from sorl.thumbnail import ImageField
@@ -35,3 +35,22 @@ class RegisteredUser(AbstractUser):
             return full
 
         return self.username
+
+    def get_kanisa_permissions(self):
+        permissions = self.user_permissions.filter(
+            content_type__app_label='kanisa'
+        )
+
+        return permissions
+
+    def set_kanisa_permissions(self, perms):
+        # Clear existing permissions
+        existing_permissions = self.get_kanisa_permissions()
+        for p in existing_permissions:
+            self.user_permissions.remove(p)
+
+        # Add the ones we asked for
+        all_perms = Permission.objects.filter(content_type__app_label='kanisa')
+        for p in all_perms:
+            if p.codename in perms:
+                self.user_permissions.add(p)

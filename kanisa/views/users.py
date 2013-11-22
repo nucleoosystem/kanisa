@@ -80,7 +80,9 @@ class UserUpdateView(UserBaseView,
             'first_name': self.object.first_name,
             'last_name': self.object.last_name,
             'email': self.object.email,
-            'image': self.object.image
+            'image': self.object.image,
+            'permissions': [p.codename
+                            for p in self.object.get_kanisa_permissions()],
         }
 
     def get_kanisa_title(self):
@@ -96,6 +98,8 @@ class UserUpdateView(UserBaseView,
             self.object.image = None
         else:
             self.object.image = form.cleaned_data['image']
+
+        self.object.set_kanisa_permissions(form.cleaned_data['permissions'])
 
         self.object.save()
 
