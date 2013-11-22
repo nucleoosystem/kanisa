@@ -1,3 +1,4 @@
+from crispy_forms.bootstrap import InlineCheckboxes
 from django.forms import Textarea, TextInput
 from django.forms.util import flatatt
 from django.forms.widgets import ClearableFileInput
@@ -61,3 +62,7 @@ class KanisaThumbnailFileWidget(ClearableFileInput):
 
     class Media:
         js = ('kanisa/js/thumbnail_widget.js', )
+
+
+class KanisaInlineCheckboxes(InlineCheckboxes):
+    template = "kanisa/management/_checkboxselectmultiple.html"
