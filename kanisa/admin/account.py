@@ -30,5 +30,14 @@ class RegisteredUserAdmin(KanisaBaseAdmin, UserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(RegisteredUserAdmin,
+                     self).get_form(request, obj, **kwargs)
+
+        form.base_fields['first_name'].required = True
+        form.base_fields['last_name'].required = True
+        form.base_fields['email'].required = True
+
+        return form
 
 admin.site.register(RegisteredUser, RegisteredUserAdmin)
