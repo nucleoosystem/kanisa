@@ -47,7 +47,7 @@ class UserManagementViewTest(KanisaViewTestCase):
         user = get_user_model().objects.get(username='superman')
         perms = PermWrapper(user)
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(0):
             render_to_string(tmpl,
                              {'user_list': users,
                               'user': user,

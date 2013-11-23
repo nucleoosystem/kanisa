@@ -9,9 +9,6 @@ Version 0.8
   user management permissions (#25)
 - Ensure users with user management permissions are emailed on new
   user registration
-- Fix O(n)ness of user-management views (#26) - can be fixed by just
-  removing the checkboxes once permissions can be managed from the
-  user edit form
 - A bit more support for importing from Kaleo (#62)
   - Import users
   - Import groups
