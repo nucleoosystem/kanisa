@@ -1,8 +1,6 @@
 Version 0.8
 ===========
 
-- Modify user edit form to allow creating superusers (sets `is_staff` and
-  `is_superuser`, only available to superusers)
 - Ensure first name, last name and email are required fields at all
   points during the registration and account management process
 - Ensure users with user management permissions are emailed on new

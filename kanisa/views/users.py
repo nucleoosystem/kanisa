@@ -76,7 +76,7 @@ class UserUpdateView(UserBaseView,
         return super(UserUpdateView, self).dispatch(request, *args, **kwargs)
 
     def get_initial(self):
-        return {
+        initial = {
             'first_name': self.object.first_name,
             'last_name': self.object.last_name,
             'email': self.object.email,
@@ -85,8 +85,18 @@ class UserUpdateView(UserBaseView,
                             for p in self.object.get_kanisa_permissions()],
         }
 
+        if self.request.user.is_superuser:
+            initial['administrator'] = self.object.is_superuser
+
+        return initial
+
     def get_kanisa_title(self):
         return 'Edit User: %s' % self.object.get_display_name()
+
+    def get_form_kwargs(self):
+        kwargs = super(UserUpdateView, self).get_form_kwargs()
+        kwargs['request_user'] = self.request.user
+        return kwargs
 
     def form_valid(self, form):
         self.object.first_name = form.cleaned_data['first_name']
@@ -98,6 +108,10 @@ class UserUpdateView(UserBaseView,
             self.object.image = None
         else:
             self.object.image = form.cleaned_data['image']
+
+        if self.request.user.is_superuser:
+            self.object.is_superuser = form.cleaned_data['administrator']
+            self.object.is_staff = form.cleaned_data['administrator']
 
         self.object.set_kanisa_permissions(form.cleaned_data['permissions'])
 

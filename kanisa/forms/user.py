@@ -28,8 +28,21 @@ class UserUpdateForm(KanisaBaseForm):
 
     submit_text = 'Save Changes'
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, request_user, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
+
+        permissions_fieldset = Fieldset(
+            'Permissions',
+            KanisaInlineCheckboxes('permissions'),
+        )
+
+        if request_user.is_superuser:
+            self.fields['administrator'] = forms.BooleanField(
+                required=False,
+                label='User is an administrator',
+            )
+            permissions_fieldset.fields.insert(0, 'administrator')
+
         self.helper.layout = Layout(
             Fieldset(
                 'Profile',
@@ -38,8 +51,5 @@ class UserUpdateForm(KanisaBaseForm):
                 'email',
                 'image',
             ),
-            Fieldset(
-                'Permissions',
-                KanisaInlineCheckboxes('permissions'),
-            ),
+            permissions_fieldset
         )
