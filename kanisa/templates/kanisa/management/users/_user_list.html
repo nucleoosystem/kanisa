@@ -1,6 +1,9 @@
+{% load thumbnail %}
+
 <table class="table table-striped table-bordered userpermtable">
   <thead>
     <tr>
+      <th width="50px"></th>
       <th>Username</th>
       <th>Full name</th>
       <th>Email</th>
@@ -10,6 +13,13 @@
 
 {% for theuser in user_list %}
 <tr>
+  <td>
+    {% if theuser.image %}
+      {% thumbnail theuser.image "50x50" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+      {% endthumbnail %}
+    {% endif %}
+  </td>
   <td>
     {% if not theuser.is_active %}
       <i class="icon icon-exclamation-sign" title="{{ theuser.get_familiar_name }}'s account is pending approval"></i>

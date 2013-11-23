@@ -5,8 +5,6 @@ Version 0.8
   `is_superuser`, only available to superusers)
 - Ensure first name, last name and email are required fields at all
   points during the registration and account management process
-- Add support for user photos, ensuring they can be set by users with
-  user management permissions (#25)
 - Ensure users with user management permissions are emailed on new
   user registration
 - A bit more support for importing from Kaleo (#62)
