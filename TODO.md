@@ -44,6 +44,10 @@ Version 1.0
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
 - Add South migrations
+- Add support for users with user management permissions to create
+  accounts based on a first name, last name and email address, and
+  have relevant instructions emailed (e.g. how to log in, what
+  permissions the user has, and how to use them)
 - Figure out what should go on the management home page (#41)
 - Allow customisable home page templates (#56)
 - Stop distributing tests (otherwise we need to make all the tests
