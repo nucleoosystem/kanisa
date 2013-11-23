@@ -23,34 +23,6 @@ def __get_help_text(perm_text):
     return cache.get(cache_key)
 
 
-@register.simple_tag(takes_context=True)
-def kanisa_user_has_perm(context, perm):
-    user = context['theuser']
-    input = '<input %s/>'
-
-    attributes = {}
-    attributes['type'] = 'checkbox'
-    attributes['data-permission-id'] = perm
-    attributes['data-user-id'] = user.pk
-    attributes['class'] = 'kanisa_user_perm'
-
-    attributes['title'] = __get_help_text(perm)
-
-    if user.is_superuser:
-        attributes['disabled'] = 'disabled'
-        attributes['checked'] = 'checked'
-
-    if user.has_perm(perm):
-        attributes['checked'] = 'checked'
-
-    if context['user'] == user:
-        attributes['disabled'] = 'true'
-
-    html_attr = ['%s="%s"' % (k, v) for k, v in attributes.items()]
-
-    return input % ' '.join(html_attr)
-
-
 @register.assignment_tag(takes_context=True)
 def kanisa_is_permissioned_user(context):
     if not 'user' in context:

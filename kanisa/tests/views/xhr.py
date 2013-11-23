@@ -15,7 +15,6 @@ from kanisa.views.xhr.navigation import (ListNavigationView,
                                          MoveNavigationElementDownView)
 from kanisa.views.xhr.pages import CreatePageView, ListPagesView
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
-from kanisa.views.xhr.users import AssignPermissionView
 
 import factory
 
@@ -93,101 +92,6 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
                                        {'passage': 'Matt 3v1-7'})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.content, 'Matthew 3:1-7')
-
-
-class XHRUserPermissionViewTest(XHRBaseTestCase):
-    url = reverse_lazy('kanisa_manage_xhr_assign_permission')
-    method = 'post'
-    permission_text = 'manage users'
-    view = AssignPermissionView
-
-    def test_must_provide_required_inputs(self):
-        request = self.get_request()
-        request.user = self.fred
-
-        # No permission
-        resp = self.fetch_from_factory(request,
-                                       {'user': '3',
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content,
-                         "Required argument 'permission' not found.")
-
-        # No user
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'foo',
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content,
-                         "Required argument 'user' not found.")
-
-        # No 'assigned'
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'foo',
-                                        'user': '3'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content,
-                         "Required argument 'assigned' not found.")
-
-    def test_input_parsing(self):
-        request = self.get_request()
-        request.user = self.fred
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa.manage_users',
-                                        'user': 2,
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content,
-                         'fred can manage your users.')
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa.manage_users',
-                                        'user': 2,
-                                        'assigned': 'foobar'})
-
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content,
-                         'fred can no longer manage your users.')
-
-    def test_bad_user(self):
-        request = self.get_request()
-        request.user = self.fred
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa.manage_users',
-                                        'user': 99,
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'No user found with ID 99.')
-
-    def test_bad_permission(self):
-        request = self.get_request()
-        request.user = self.fred
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa',
-                                        'user': 2,
-                                        'assigned': 'true'})
-
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content, 'Malformed permission: \'kanisa\'.')
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa.foo.bar',
-                                        'user': 2,
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content,
-                         'Malformed permission: \'kanisa.foo.bar\'.')
-
-        resp = self.fetch_from_factory(request,
-                                       {'permission': 'kanisa.raspberries',
-                                        'user': 2,
-                                        'assigned': 'true'})
-        self.assertEqual(resp.status_code, 400)
-        self.assertEqual(resp.content,
-                         'Permission \'kanisa.raspberries\' not found.')
 
 
 class PageFactory(factory.DjangoModelFactory):

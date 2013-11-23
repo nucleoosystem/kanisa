@@ -2,10 +2,8 @@ import django
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.contrib.auth.context_processors import PermWrapper
-from django.core.cache import cache
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.template import Context, Template
 from django.template.loader import render_to_string
 from kanisa.tests.utils import KanisaViewTestCase
 from mock import Mock
@@ -52,72 +50,6 @@ class UserManagementViewTest(KanisaViewTestCase):
                              {'user_list': users,
                               'user': user,
                               'perms': perms})
-
-    def test_template_tags(self):
-        # To make sure this test is independent of other cached keys.
-        cache.clear()
-
-        def check_perm_template(request_user, user, perm):
-            template = ("{%% load kanisa_tags %%}"
-                        "{%% kanisa_user_has_perm '%s' %%}" % perm)
-            t = Template(template)
-            c = Context({"theuser": user, "user": request_user})
-            return t.render(c)
-
-        bob = get_user_model().objects.get(username='bob')
-        fred = get_user_model().objects.get(username='fred')
-        superman = get_user_model().objects.get(username='superman')
-
-        # Fred has access to manage users, not to manage social
-        # networks.
-        with self.assertNumQueries(3):
-            output = check_perm_template(superman, fred,
-                                         'kanisa.manage_users')
-            self.assertHTMLEqual(output,
-                                 ('<input '
-                                  'type="checkbox" '
-                                  'checked="checked" '
-                                  'class="kanisa_user_perm" '
-                                  'data-permission-id="kanisa.manage_users" '
-                                  'data-user-id="2" '
-                                  'title="Can manage your users" '
-                                  '/>'))
-
-            output = check_perm_template(superman, fred,
-                                         'kanisa.manage_social')
-
-            self.assertHTMLEqual(output,
-                                 ('<input '
-                                  'type="checkbox" '
-                                  'class="kanisa_user_perm" '
-                                  'data-permission-id="kanisa.manage_social" '
-                                  'data-user-id="2" '
-                                  'title="Can manage your social networks" '
-                                  '/>'))
-
-        # Bob doesn't have access to either
-        with self.assertNumQueries(2):
-            output = check_perm_template(superman, bob,
-                                         'kanisa.manage_users')
-            self.assertHTMLEqual(output,
-                                 ('<input '
-                                  'type="checkbox" '
-                                  'class="kanisa_user_perm" '
-                                  'data-permission-id="kanisa.manage_users" '
-                                  'data-user-id="1" '
-                                  'title="Can manage your users" '
-                                  '/>'))
-
-            output = check_perm_template(superman, bob,
-                                         'kanisa.manage_social')
-            self.assertHTMLEqual(output,
-                                 ('<input '
-                                  'type="checkbox" '
-                                  'class="kanisa_user_perm" '
-                                  'data-permission-id="kanisa.manage_social" '
-                                  'data-user-id="1" '
-                                  'title="Can manage your social networks" '
-                                  '/>'))
 
     def test_user_activate_view_user_already_active(self):
         self.client.login(username='fred', password='secret')

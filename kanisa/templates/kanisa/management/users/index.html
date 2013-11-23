@@ -1,9 +1,5 @@
 {% extends 'kanisa/management/base.html' %}
 
-{% block extrajs %}
-<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_users.js"></script>
-{% endblock %}
-
 {% block content %}
 <p>
   <a href="{% url 'admin:kanisa_registereduser_add' %}" class="btn btn-large btn-success">
