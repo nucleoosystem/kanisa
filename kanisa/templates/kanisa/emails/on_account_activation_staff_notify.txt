@@ -1,0 +1,7 @@
+Dear {{ addressee.get_familiar_name }},
+
+{{ user.get_display_name }}'s account at {{ KANISA_CHURCH_NAME }} has now been activated, no further action is needed.
+
+Thanks,
+
+The {{ KANISA_CHURCH_NAME }} web team

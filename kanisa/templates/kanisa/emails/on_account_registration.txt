@@ -1,4 +1,4 @@
-{{ user.first_name }} {{ user.last_name }} registered for a web account at {{ KANISA_CHURCH_NAME }}.
+{{ user.get_display_name }} registered for a web account at {{ KANISA_CHURCH_NAME }}.
 
 Please activate their account at your convenience.
 

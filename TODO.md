@@ -1,8 +1,6 @@
 Version 0.8
 ===========
 
-- Ensure users with user management permissions are emailed on new
-  user registration, and CC'ed on approval
 - A bit more support for importing from Kaleo (#62)
   - Import users
   - Import groups

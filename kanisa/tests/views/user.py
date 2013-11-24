@@ -85,10 +85,14 @@ class UserManagementViewTest(KanisaViewTestCase):
         self.assertTrue(bob.is_active)
         self.assertContains(resp, 'account is now activated.')
 
-        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, ['bob@example.com', ])
         self.assertEqual(mail.outbox[0].subject,
                          'Your Church Account Activated')
+
+        self.assertEqual(mail.outbox[1].to, ['fred@example.com', ])
+        self.assertEqual(mail.outbox[1].subject,
+                         'Your Church: bob\'s Account Activated')
 
         self.client.logout()
 

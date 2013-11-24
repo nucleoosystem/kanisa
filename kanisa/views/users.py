@@ -6,7 +6,11 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 from kanisa.forms.user import UserUpdateForm
 from kanisa.models import RegisteredUser
-from kanisa.utils.mail import send_single_mail
+from kanisa.utils.auth import users_with_perm
+from kanisa.utils.mail import (
+    send_bulk_mail,
+    send_single_mail
+)
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
     KanisaFormView,
@@ -49,6 +53,10 @@ class UserActivateView(UserBaseView,
             return reverse('kanisa_manage_users')
 
         send_single_mail(user, 'on_account_activation', {})
+
+        send_bulk_mail(users_with_perm('manage_users'),
+                       'on_account_activation_staff_notify',
+                       {'user': user})
 
         user.is_active = True
         user.save()
