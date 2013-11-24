@@ -8,11 +8,16 @@ def send_bulk_mail(users, template, context):
 
     template_root = 'kanisa/emails/' + template
 
-    subject = render_to_string(template_root + ".subj", context).strip()
-    plaintext = render_to_string(template_root + ".txt", context)
-    html = render_to_string(template_root + ".html", context)
-
     for u in users:
+        user_context = context.copy()
+        user_context['addressee'] = u
+        subject = render_to_string(template_root + ".subj",
+                                   user_context).strip()
+        plaintext = render_to_string(template_root + ".txt",
+                                     user_context)
+        html = render_to_string(template_root + ".html",
+                                user_context)
+
         msg = EmailMultiAlternatives(subject,
                                      plaintext,
                                      conf.KANISA_FROM_EMAIL,

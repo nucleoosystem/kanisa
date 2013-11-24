@@ -111,7 +111,6 @@ class KanisaRecoverPasswordView(Recover):
     def send_notification(self):
         context = {
             'site': RequestSite(self.request),
-            'user': self.user,
             'token': signing.dumps(self.user.pk, salt=self.salt),
             'secure': self.request.is_secure(),
         }

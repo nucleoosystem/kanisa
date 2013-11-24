@@ -1,4 +1,4 @@
-<p>Dear {% firstof user.first_name user.username %},</p>
+<p>Dear {{ addressee.get_familiar_name }},</p>
 
 <p>Thank you for registering at {{ KANISA_CHURCH_NAME }}. Your account
 has now been activated.</p>
