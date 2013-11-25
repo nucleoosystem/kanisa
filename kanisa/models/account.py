@@ -12,6 +12,10 @@ class RegisteredUser(AbstractUser):
     class Meta:
         app_label = 'kanisa'
         ordering = ('last_name', 'first_name', )
+        permissions = (
+            ('manage_users',
+             'Can manage your users'),
+        )
         verbose_name = 'registered user'
         verbose_name_plural = 'registered users'
 
