@@ -1,6 +1,8 @@
 Version 0.9
 ===========
 
+- Add support for bands (at the moment service plans have a band
+  leader, but no bands)
 - Add support for ScheduledEvent series
 - Rest of support for importing from Kaleo (#62)
   - Import scheduled events
