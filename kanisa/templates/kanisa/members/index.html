@@ -14,7 +14,7 @@
 </div>
 
 <p>
-  You are logged in as <strong>{{ user.username }}</strong>.
+  You are logged in as <strong>{{ user.get_display_name }}</strong>.
   {% if user.email %}
   Your registered email address is <strong>{{ user.email }}</strong>.
   {% else %}
