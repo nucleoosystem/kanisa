@@ -6,7 +6,7 @@
       <th width="50px"></th>
       <th>Username</th>
       <th>Full name</th>
-      <th>Email</th>
+      <th>Last login</th>
     </tr>
   </thead>
   <tbody>
@@ -44,7 +44,9 @@
     {% endif %}
   </td>
   <td>{{ theuser.get_full_name }}</td>
-  <td><a href="mailto:{{ theuser.email }}">{{ theuser.email }}</a></td>
+  <td>
+    <abbr title="{{ theuser.last_login|date:"r"}}">{{ theuser.last_login|timesince }}</abbr> ago
+  </td>
 </tr>
 {% endfor %}
 </tbody>
