@@ -4,6 +4,7 @@ import os
 import os.path
 from os.path import basename
 from django.conf import settings
+from django.contrib.auth.models import Permission
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.timezone import make_aware, get_current_timezone
 import shutil
@@ -17,6 +18,7 @@ from kanisa.models import (
     InlineImage,
     NavigationElement,
     Page,
+    RegisteredUser,
     RegularEvent,
     Sermon,
     SermonSeries,
@@ -34,6 +36,39 @@ def date_from_str(str):
     return datetime.strptime(str, '%Y-%m-%d').date()
 
 
+def model_to_permission(model_str):
+    model_to_area = {
+        'attachment': 'documents',
+        'band': 'services',
+        'banner': 'banners',
+        'datelessbanner': 'banners',
+        'diaryevent': 'diary',
+        'diaryeventcategory': 'diary',
+        'diaryeventinstance': 'diary',
+        'diaryeventlocation': 'diary',
+        'diaryeventtype': 'diary',
+        'document': 'documents',
+        'hymn': 'services',
+        'inlineimage': 'media',
+        'link': 'navigation',
+        'page': 'pages',
+        'sermon': 'sermons',
+        'sermonseries': 'sermons',
+        'serviceplan': 'services',
+        'serviceplansongchoice': 'services',
+        'snippet': 'blocks',
+        'song': 'services',
+        'user': 'users',
+    }
+
+    area = model_to_area.get(model_str, None)
+
+    if not area:
+        return None
+
+    return Permission.objects.get(codename='manage_%s' % area)
+
+
 class Command(BaseCommand):
     args = '<path_to_json> <path_to_media>'
     help = 'Loads data from a dump of a Kaleo installation'
@@ -45,31 +80,36 @@ class Command(BaseCommand):
     seen_event_contacts = {}
     seen_sermon_speakers = {}
     seen_sermon_series = {}
+    seen_content_types = {}
+    seen_permissions = {}
+    seen_groups = {}
+    seen_users = {}
 
     ordering = [
-        # 'auth_group',
-        # 'auth_user',
-        # 'auth_permission',
-        'serviceplans_composer',
-        'serviceplans_song',
+        'contenttypes_contenttype',
+        'auth_permission',
+        'auth_group',
+        'auth_user',
+        # 'serviceplans_composer',
+        # 'serviceplans_song',
         # 'serviceplans_band',
         # 'serviceplans_serviceplan',
         # 'serviceplans_serviceplansongchoice',
         # 'attachments_attachment',
-        'attachments_inlineimage',
-        'kaleo_page',
+        # 'attachments_inlineimage',
+        # 'kaleo_page',
         # 'kaleo_legacypathmapping',
-        'people_person',
-        'sermons_sermonseries',
-        'sermons_sermon',
-        'diary_diaryeventcategory',
-        'diary_diaryeventtype',
+        # 'people_person',
+        # 'sermons_sermonseries',
+        # 'sermons_sermon',
+        # 'diary_diaryeventcategory',
+        # 'diary_diaryeventtype',
         # 'diary_diaryeventseries',
         # 'diary_diaryevent',
-        'banners_datelessbanner',
-        'banners_banner',
-        'navigation_link',
-        'members_document',
+        # 'banners_datelessbanner',
+        # 'banners_banner',
+        # 'navigation_link',
+        # 'members_document',
     ]
 
     def handle(self, *args, **options):
@@ -102,7 +142,6 @@ class Command(BaseCommand):
 
     def handle_item(self, item, model_to_process):
         model = item['model'].replace('.', '_')
-
         if model != model_to_process:
             return
 
@@ -201,13 +240,71 @@ class Command(BaseCommand):
         print "Created sermon speaker %s." % name
 
     def handle_auth_user(self, item):
-        pass
+        pk = item['pk']
+        username = item['fields']['username']
+        first_name = item['fields']['first_name']
+        last_name = item['fields']['last_name']
+        is_active = item['fields']['is_active']
+        is_superuser = item['fields']['is_superuser']
+        last_login = datetime_from_str(item['fields']['last_login'])
+        groups = item['fields']['groups']
+        user_permissions = item['fields']['user_permissions']
+        password = item['fields']['password']
+        email = item['fields']['email']
+        date_joined = datetime_from_str(item['fields']['date_joined'])
+
+        permissions = set()
+        for group in groups:
+            for perm in self.seen_groups[group]:
+                permissions.add(perm)
+
+        for perm in user_permissions:
+            permissions.add(self.seen_permissions[perm])
+
+        real_permissions = set()
+
+        for model_str in permissions:
+            perm = model_to_permission(model_str)
+            if not perm:
+                # Model is not one we care about any more
+                continue
+
+            real_permissions.add(perm)
+
+        user = RegisteredUser.objects.create(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            is_active=is_active,
+            is_staff=is_superuser,
+            is_superuser=is_superuser,
+            last_login=last_login,
+            password=password,
+            email=email,
+            date_joined=date_joined
+        )
+
+        for p in real_permissions:
+            user.user_permissions.add(p)
+
+        self.seen_users[pk] = user
+        print "Created user %s." % user.get_display_name()
 
     def handle_auth_group(self, item):
-        pass
+        pk = item['pk']
+        permissions = item['fields']['permissions']
+        self.seen_groups[pk] = set([self.seen_permissions[p]
+                                    for p in permissions])
 
     def handle_auth_permission(self, item):
-        pass
+        pk = item['pk']
+        content_type = item['fields']['content_type']
+        self.seen_permissions[pk] = self.seen_content_types[content_type]
+
+    def handle_contenttypes_contenttype(self, item):
+        pk = item['pk']
+        model = item['fields']['model']
+        self.seen_content_types[pk] = model
 
     def handle_attachments_attachment(self, item):
         pass

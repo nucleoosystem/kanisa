@@ -1,10 +1,7 @@
 Version 0.8
 ===========
 
-- A bit more support for importing from Kaleo (#62)
-  - Import users
-  - Import groups
-  - Import permissions
+- Tag as 0.8.
 
 Version 0.9
 ===========
