@@ -54,7 +54,7 @@ class Service(models.Model):
     songs = models.ManyToManyField(Song, through='SongInService')
     musicians = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='musicians',
+        related_name='service_musicians',
         blank=True,
     )
 
