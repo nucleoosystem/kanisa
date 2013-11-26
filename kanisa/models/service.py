@@ -67,12 +67,12 @@ class Service(models.Model):
 
     class Meta:
         app_label = 'kanisa'
-        verbose_name = 'Service Plan'
         ordering = ('event__date', )
         permissions = (
             ('manage_services',
              'Can manage service plans'),
         )
+        verbose_name = 'Service Plan'
 
 
 class SongInService(models.Model):
@@ -85,5 +85,5 @@ class SongInService(models.Model):
 
     class Meta:
         app_label = 'kanisa'
-        verbose_name = 'Song'
         ordering = ('order', )
+        verbose_name = 'Song'
