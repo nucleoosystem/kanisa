@@ -1,9 +1,11 @@
 from django.contrib import admin
 from kanisa.admin.base import KanisaBaseAdmin
-from kanisa.models import (EventContact,
-                           RegularEvent,
-                           ScheduledEvent,
-                           EventCategory)
+from kanisa.models import (
+    EventContact,
+    RegularEvent,
+    ScheduledEvent,
+    EventCategory
+)
 from sorl.thumbnail.admin import AdminImageMixin
 
 
