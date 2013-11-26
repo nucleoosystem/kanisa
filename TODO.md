@@ -1,8 +1,6 @@
 Version 0.9
 ===========
 
-- Add support for bands (at the moment service plans have a band
-  leader, but no bands)
 - When creating (but not when editing) service plans, allow selecting
   a band to auto-populate band leader/musicians
 - Add support for deleting service plans (ensure song choices are

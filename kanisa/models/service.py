@@ -92,3 +92,21 @@ class SongInService(models.Model):
         app_label = 'kanisa'
         ordering = ('order', )
         verbose_name = 'Song'
+
+
+class Band(models.Model):
+    band_leader = models.ForeignKey(settings.AUTH_USER_MODEL)
+    musicians = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='band_musicians',
+    )
+
+    def __unicode__(self):
+        band_leader_name = self.band_leader.get_display_name()
+        if band_leader_name.endswith('s'):
+            return '%s\' band' % band_leader_name
+
+        return '%s\'s band' % band_leader_name
+
+    class Meta:
+        app_label = 'kanisa'
