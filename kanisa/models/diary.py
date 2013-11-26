@@ -213,7 +213,8 @@ class ScheduledEvent(models.Model):
                                           'cost? Where is it held?'))
     series = models.ForeignKey(
         ScheduledEventSeries,
-        blank=True
+        blank=True,
+        null=True
     )
     modified = models.DateTimeField(auto_now=True)
 
