@@ -42,9 +42,19 @@ class AccountChoiceField(forms.ModelChoiceField):
         return full_name or obj.username
 
 
+class MultipleAccountChoiceField(forms.ModelMultipleChoiceField):
+    def label_from_instance(self, obj):
+        full_name = obj.get_full_name()
+        return full_name or obj.username
+
+
 class ServiceForm(KanisaBaseModelForm):
     event = EventChoiceField(ScheduledEvent.objects.all())
     band_leader = AccountChoiceField(get_user_model().objects.all())
+    musicians = MultipleAccountChoiceField(
+        get_user_model().objects.all(),
+        required=False
+    )
 
     class Meta:
         model = Service
