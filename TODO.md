@@ -8,7 +8,6 @@ Version 0.9
 - Add support for ScheduledEvent series
 - Rest of support for importing from Kaleo (#62)
   - Import scheduled events
-  - Import bands
   - Import service plans
   - Import attachments (and ensure the Markdown parser finds them)
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo

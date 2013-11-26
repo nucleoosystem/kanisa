@@ -10,6 +10,7 @@ from django.utils.timezone import make_aware, get_current_timezone
 import shutil
 
 from kanisa.models import (
+    Band,
     Banner,
     Composer,
     Document,
@@ -184,7 +185,17 @@ class Command(BaseCommand):
         pass
 
     def handle_serviceplans_band(self, item):
-        pass
+        band_leader_user = item['fields']['band_leader_user']
+        band_member_users = item['fields']['band_member_users']
+
+        band = Band.objects.create(
+            band_leader=self.seen_users[band_leader_user]
+        )
+
+        for m in band_member_users:
+            band.musicians.add(self.seen_users[m])
+
+        print "Created band %s." % unicode(band)
 
     def handle_serviceplans_composer(self, item):
         pk = item['pk']
