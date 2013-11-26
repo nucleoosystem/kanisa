@@ -59,7 +59,7 @@ Version 1.1
   (#13)
 - Python 3 support
 - Support for multiple schedules in a single RegularEvent (for events
-  which are logically connected but have different componentes) (#15)
+  which are logically connected but have different components) (#15)
 - Consider adding Twilio integration
 - Add support for rota management (#28)
 - Add Facebook integration
