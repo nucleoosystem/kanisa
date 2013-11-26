@@ -23,10 +23,6 @@ class Composer(models.Model):
 
     class Meta:
         app_label = 'kanisa'
-        permissions = (
-            ('manage_services',
-             'Can manage service plans'),
-        )
         ordering = ('surname', 'forename', )
 
 
@@ -73,6 +69,10 @@ class Service(models.Model):
         app_label = 'kanisa'
         verbose_name = 'Service Plan'
         ordering = ('event__date', )
+        permissions = (
+            ('manage_services',
+             'Can manage service plans'),
+        )
 
 
 class SongInService(models.Model):
