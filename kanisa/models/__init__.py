@@ -8,6 +8,7 @@ from .diary import (
     EventCategory,
     RegularEvent,
     ScheduledEvent,
+    ScheduledEventSeries,
     EventContact
 )
 from .documents import Document

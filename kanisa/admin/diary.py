@@ -4,6 +4,7 @@ from kanisa.models import (
     EventContact,
     RegularEvent,
     ScheduledEvent,
+    ScheduledEventSeries,
     EventCategory
 )
 from sorl.thumbnail.admin import AdminImageMixin
@@ -40,3 +41,10 @@ class EventCategoryAdmin(admin.ModelAdmin):
     list_display = ('title', )
 
 admin.site.register(EventCategory, EventCategoryAdmin)
+
+
+class ScheduledEventSeriesAdmin(admin.ModelAdmin):
+    search_fields = ('name', )
+    list_display = ('name', )
+
+admin.site.register(ScheduledEventSeries, ScheduledEventSeriesAdmin)

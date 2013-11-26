@@ -172,6 +172,19 @@ class RegularEvent(models.Model):
         return 'Unknown'
 
 
+class ScheduledEventSeries(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        # Need this because I've split up models.py into multiple
+        # files.
+        app_label = 'kanisa'
+        ordering = ('name', )
+
+
 class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
                               help_text=('You can leave this blank, but if '
@@ -198,6 +211,10 @@ class ScheduledEvent(models.Model):
                                help_text=('e.g. Who is this event for? What '
                                           'does it involve? How much does it '
                                           'cost? Where is it held?'))
+    series = models.ForeignKey(
+        ScheduledEventSeries,
+        blank=True
+    )
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
