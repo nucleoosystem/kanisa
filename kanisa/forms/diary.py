@@ -1,17 +1,21 @@
 from django import forms
 from django.forms.util import ErrorList
-from kanisa.forms import (KanisaBaseModelForm,
-                          BootstrapTimeField,
-                          BootstrapDateField)
+from kanisa.forms import (
+    KanisaBaseModelForm,
+    BootstrapTimeField,
+    BootstrapDateField
+)
 from kanisa.forms.widgets import (
     KanisaMainInputWidget,
     KanisaTinyInputWidget,
     KanisaThumbnailFileWidget
 )
-from kanisa.models import (EventCategory,
-                           EventContact,
-                           RegularEvent,
-                           ScheduledEvent)
+from kanisa.models import (
+    EventCategory,
+    EventContact,
+    RegularEvent,
+    ScheduledEvent
+)
 
 
 class EventContactForm(KanisaBaseModelForm):
