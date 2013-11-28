@@ -263,7 +263,6 @@ class DiaryScheduledEventTest(TestCase):
                                      end_date=date(2013, 6, 20),
                                      series=series_2)
 
-
         with self.assertNumQueries(2):
             # It takes 2 queries (one each for series_1 and series_2)
             # since we haven't gone through the manager.
