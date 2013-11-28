@@ -1,7 +1,11 @@
 from datetime import date, time
 from django.test import TestCase
 from kanisa.models import diary
-from kanisa.models import RegularEvent, ScheduledEvent
+from kanisa.models import (
+    RegularEvent,
+    ScheduledEvent,
+    ScheduledEventSeries
+)
 from kanisa.utils.diary import get_week_bounds, get_schedule
 import factory
 
@@ -228,3 +232,57 @@ class DiaryScheduledEventTest(TestCase):
 
         self.assertEqual(list(events),
                          [event1, ])
+
+    def test_event_series(self):
+        series_1 = ScheduledEventSeries.objects.create(name='Event 1')
+        series_2 = ScheduledEventSeries.objects.create(name='Event 2')
+        self.assertEqual(unicode(series_1), 'Event 1')
+        self.assertEqual(unicode(series_2), 'Event 2')
+
+        ScheduledEventFactory.create(date=date(2012, 6, 16),
+                                     end_date=date(2012, 6, 20),
+                                     series=series_1)
+
+        ScheduledEventFactory.create(date=date(2012, 6, 14),
+                                     end_date=date(2012, 6, 20),
+                                     series=series_1)
+
+        ScheduledEventFactory.create(date=date(2012, 6, 18),
+                                     end_date=date(2012, 6, 20),
+                                     series=series_1)
+
+        ScheduledEventFactory.create(date=date(2013, 6, 16),
+                                     end_date=date(2013, 6, 20),
+                                     series=series_2)
+
+        ScheduledEventFactory.create(date=date(2013, 6, 14),
+                                     end_date=date(2013, 6, 20),
+                                     series=series_2)
+
+        ScheduledEventFactory.create(date=date(2013, 6, 18),
+                                     end_date=date(2013, 6, 20),
+                                     series=series_2)
+
+
+        with self.assertNumQueries(2):
+            # It takes 2 queries (one each for series_1 and series_2)
+            # since we haven't gone through the manager.
+            self.assertEqual(series_1.start_date(), date(2012, 6, 14))
+            self.assertEqual(series_1.end_date(), date(2012, 6, 18))
+            self.assertEqual(series_2.start_date(), date(2013, 6, 14))
+            self.assertEqual(series_2.end_date(), date(2013, 6, 18))
+
+        with self.assertNumQueries(2):
+            # We do a query for the series, and then queue up a query
+            # for the series.
+            series = list(ScheduledEventSeries.objects.all())
+
+        with self.assertNumQueries(0):
+            # It takes 1 query since we prefetched events through the
+            # manager.
+            self.assertEqual(series[0].start_date(), date(2012, 6, 14))
+            self.assertEqual(series[1].start_date(), date(2013, 6, 14))
+
+        with self.assertNumQueries(0):
+            self.assertEqual(series[0].end_date(), date(2012, 6, 18))
+            self.assertEqual(series[1].end_date(), date(2013, 6, 18))

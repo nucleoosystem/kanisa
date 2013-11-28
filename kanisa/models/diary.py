@@ -172,11 +172,37 @@ class RegularEvent(models.Model):
         return 'Unknown'
 
 
+class ScheduledEventSeriesManager(models.Manager):
+    def get_query_set(self):
+        qs = super(ScheduledEventSeriesManager, self).get_query_set()
+        return qs.prefetch_related('events')
+
+
 class ScheduledEventSeries(models.Model):
     name = models.CharField(max_length=100)
+    objects = ScheduledEventSeriesManager()
 
     def __unicode__(self):
         return self.name
+
+    def get_cached_events(self):
+        if hasattr(self, 'cached_events'):
+            return self.cached_events
+
+        self.cached_events = list(self.events.all())
+        return self.cached_events
+
+    def start_date(self):
+        if not self.get_cached_events():
+            return None
+
+        return self.get_cached_events()[0].date
+
+    def end_date(self):
+        if not self.get_cached_events():
+            return None
+
+        return self.get_cached_events()[-1].date
 
     class Meta:
         # Need this because I've split up models.py into multiple
@@ -214,7 +240,8 @@ class ScheduledEvent(models.Model):
     series = models.ForeignKey(
         ScheduledEventSeries,
         blank=True,
-        null=True
+        null=True,
+        related_name='events'
     )
     modified = models.DateTimeField(auto_now=True)
 
