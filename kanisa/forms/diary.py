@@ -14,7 +14,8 @@ from kanisa.models import (
     EventCategory,
     EventContact,
     RegularEvent,
-    ScheduledEvent
+    ScheduledEvent,
+    ScheduledEventSeries
 )
 
 
@@ -26,6 +27,11 @@ class EventContactForm(KanisaBaseModelForm):
 class EventCategoryForm(KanisaBaseModelForm):
     class Meta:
         model = EventCategory
+
+
+class ScheduledEventSeriesForm(KanisaBaseModelForm):
+    class Meta:
+        model = ScheduledEventSeries
 
 
 class RegularEventForm(KanisaBaseModelForm):

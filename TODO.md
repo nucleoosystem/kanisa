@@ -3,8 +3,6 @@ Version 0.9
 
 - When creating (but not when editing) service plans, allow selecting
   a band to auto-populate band leader/musicians
-- When editing or manually creating scheduled events, allow them to be
-  part of a series
 - Add default photos for event contacts
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)

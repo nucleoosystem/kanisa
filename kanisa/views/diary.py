@@ -10,6 +10,7 @@ from kanisa.forms.diary import (
     RegularEventForm,
     ScheduledEventEditForm,
     ScheduledEventCreationForm,
+    ScheduledEventSeriesForm,
     EventContactForm,
     EventCategoryForm
 )
@@ -421,3 +422,39 @@ class EventCategoryUpdateView(EventCategoryBaseView,
     model = EventCategory
     success_url = reverse_lazy('kanisa_manage_diary_categories')
 diary_event_category_update = EventCategoryUpdateView.as_view()
+
+
+class EventSeriesBaseView(DiaryBaseView):
+    kanisa_lead = ('Event series help people find links between events')
+
+    def get_kanisa_intermediate_crumbs(self):
+        return [{'url': reverse('kanisa_manage_diary_series'),
+                 'title': 'Event Series'},
+                ]
+
+
+class ScheduledEventSeriesView(EventSeriesBaseView,
+                               KanisaListView):
+    model = ScheduledEventSeries
+    template_name = 'kanisa/management/diary/series.html'
+    kanisa_title = 'Series'
+
+    def get_kanisa_intermediate_crumbs(self):
+        return []
+diary_event_series = ScheduledEventSeriesView.as_view()
+
+
+class ScheduledEventSeriesCreateView(EventSeriesBaseView,
+                                     KanisaCreateView):
+    form_class = ScheduledEventSeriesForm
+    kanisa_title = 'Add an Event Series'
+    success_url = reverse_lazy('kanisa_manage_diary_series')
+diary_event_series_create = ScheduledEventSeriesCreateView.as_view()
+
+
+class ScheduledEventSeriesUpdateView(EventSeriesBaseView,
+                                     KanisaUpdateView):
+    form_class = ScheduledEventSeriesForm
+    model = ScheduledEventSeries
+    success_url = reverse_lazy('kanisa_manage_diary_series')
+diary_event_series_update = ScheduledEventSeriesUpdateView.as_view()

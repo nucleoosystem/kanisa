@@ -1,0 +1,39 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+{% include "kanisa/management/diary/_nav.html" with current="series" %}
+
+<p>
+  <a href="{% url 'kanisa_manage_diary_series_create' %}" class="btn btn-large btn-success">
+    <i class="icon-white icon-plus"></i>
+    Create a new event series
+  </a>
+</p>
+
+{% if scheduledeventseries_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Series</th>
+      <th>Starts</th>
+      <th>Ends</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for series in scheduledeventseries_list %}
+    <tr>
+      <td><a href="{% url 'kanisa_manage_diary_series_update' series.pk %}">{{ series.name }}</a></td>
+      <td>{{ series.start_date|date:"jS F Y" }}</td>
+      <td>{{ series.end_date|date:"jS F Y" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<hr />
+<p class="alert alert-info">
+  No event series have been created yet - why don't you <a href="{% url 'kanisa_manage_diary_series_create' %}">create one</a>?
+</p>
+{% endif %}
+
+{% endblock %}
