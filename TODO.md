@@ -5,6 +5,7 @@ Version 0.9
   a band to auto-populate band leader/musicians
 - When editing or manually creating scheduled events, allow them to be
   part of a series
+- Add default photos for event contacts
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)
 - Rest of support for importing from Kaleo (#62)
