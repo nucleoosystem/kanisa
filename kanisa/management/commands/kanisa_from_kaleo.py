@@ -21,6 +21,8 @@ from kanisa.models import (
     Page,
     RegisteredUser,
     RegularEvent,
+    ScheduledEvent,
+    ScheduledEventSeries,
     Sermon,
     SermonSeries,
     SermonSpeaker,
@@ -79,6 +81,8 @@ class Command(BaseCommand):
     seen_navigation_link_pks = {}
     seen_event_categories = {}
     seen_event_contacts = {}
+    seen_event_series = {}
+    seen_event_types = {}
     seen_sermon_speakers = {}
     seen_sermon_series = {}
     seen_content_types = {}
@@ -87,10 +91,10 @@ class Command(BaseCommand):
     seen_users = {}
 
     ordering = [
-        'contenttypes_contenttype',
-        'auth_permission',
-        'auth_group',
-        'auth_user',
+        # 'contenttypes_contenttype',
+        # 'auth_permission',
+        # 'auth_group',
+        # 'auth_user',
         # 'serviceplans_composer',
         # 'serviceplans_song',
         # 'serviceplans_band',
@@ -100,13 +104,13 @@ class Command(BaseCommand):
         # 'attachments_inlineimage',
         # 'kaleo_page',
         # 'kaleo_legacypathmapping',
-        # 'people_person',
+        'people_person',
         # 'sermons_sermonseries',
         # 'sermons_sermon',
-        # 'diary_diaryeventcategory',
-        # 'diary_diaryeventtype',
-        # 'diary_diaryeventseries',
-        # 'diary_diaryevent',
+        'diary_diaryeventcategory',
+        'diary_diaryeventtype',
+        'diary_diaryeventseries',
+        'diary_diaryevent',
         # 'banners_datelessbanner',
         # 'banners_banner',
         # 'navigation_link',
@@ -440,13 +444,65 @@ class Command(BaseCommand):
                                             intro=intro,
                                             details=details)
         event.categories.add(self.seen_event_categories[category_pk])
+
+        self.seen_event_types[pk] = event
+
         print "Created event %s." % title
 
     def handle_diary_diaryeventseries(self, item):
-        pass
+        pk = item['pk']
+        title = item['fields']['title']
+
+        series = ScheduledEventSeries.objects.create(name=title)
+        self.seen_event_series[pk] = series
 
     def handle_diary_diaryevent(self, item):
-        pass
+        contact = item['fields']['contact_override']
+        details = item['fields']['details']
+        event_end = datetime_from_str(item['fields']['event_end'])
+        event_start = datetime_from_str(item['fields']['event_start'])
+        event_type = item['fields']['event_type']
+        intro = item['fields']['intro']
+        series = item['fields']['series']
+        title = item['fields']['title']
+
+        start_time = event_start.time()
+
+        if event_end.date() == event_start.date():
+            end_date = None
+            duration = event_end - event_start
+            duration = int(duration.total_seconds() / 60)
+        else:
+            end_date = event_end.date()
+            duration = None
+
+        if contact:
+            contact = self.seen_event_contacts[contact]
+
+        if event_type:
+            event_type = self.seen_event_types[event_type]
+
+            if not intro:
+                intro = event_type.intro
+
+            if not contact:
+                contact = event_type.contact
+
+        if series:
+            series = self.seen_event_series[series]
+
+        event = ScheduledEvent.objects.create(event=event_type,
+                                              title=title,
+                                              date=event_start.date(),
+                                              start_time=start_time,
+                                              duration=duration,
+                                              end_date=end_date,
+                                              contact=contact,
+                                              intro=intro,
+                                              details=details,
+                                              series=series)
+
+        print "Created event %s." % event
 
     def handle_banners_datelessbanner(self, item):
         self.handle_banners_banner(item)
@@ -523,6 +579,9 @@ class Command(BaseCommand):
     def cleanup_people_person(self):
         for contact in self.seen_event_contacts.values():
             if contact.regularevent_set.all().count() != 0:
+                continue
+
+            if contact.scheduledevent_set.all().count() != 0:
                 continue
 
             print "Removing unused contact %s." % contact.name
