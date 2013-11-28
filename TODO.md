@@ -3,7 +3,7 @@ Version 0.9
 
 - When creating (but not when editing) service plans, allow selecting
   a band to auto-populate band leader/musicians
-- Allow creating/editings bands
+- Allow creating/editing bands
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)
 - Rest of support for importing from Kaleo (#62)
