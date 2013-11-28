@@ -6,21 +6,33 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
-from kanisa.forms.diary import (RegularEventForm,
-                                ScheduledEventEditForm,
-                                ScheduledEventCreationForm,
-                                EventContactForm,
-                                EventCategoryForm)
-from kanisa.models import (EventContact,
-                           RegularEvent,
-                           ScheduledEvent,
-                           EventCategory)
-from kanisa.utils.diary import (get_schedule, get_week_bounds,
-                                datetime_to_string)
-from kanisa.views.generic import (KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaTemplateView,
-                                  KanisaDeleteView,
-                                  KanisaAuthorizationMixin)
+from kanisa.forms.diary import (
+    RegularEventForm,
+    ScheduledEventEditForm,
+    ScheduledEventCreationForm,
+    EventContactForm,
+    EventCategoryForm
+)
+from kanisa.models import (
+    EventContact,
+    RegularEvent,
+    ScheduledEvent,
+    ScheduledEventSeries,
+    EventCategory
+)
+from kanisa.utils.diary import (
+    get_schedule,
+    get_week_bounds,
+    datetime_to_string
+)
+from kanisa.views.generic import (
+    KanisaCreateView,
+    KanisaUpdateView,
+    KanisaListView,
+    KanisaTemplateView,
+    KanisaDeleteView,
+    KanisaAuthorizationMixin
+)
 
 
 class DiaryBaseView(KanisaAuthorizationMixin):
