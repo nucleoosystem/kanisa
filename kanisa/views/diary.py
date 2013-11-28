@@ -90,7 +90,6 @@ class DiaryRegularEventsView(DiaryBaseView,
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
-
 diary_regular_events = DiaryRegularEventsView.as_view()
 
 
@@ -115,7 +114,6 @@ class DiaryRegularEventUpdateView(DiaryRegularEventsBaseView,
     kanisa_form_warning = ('Changes made here will not affect events '
                            'already in the diary (whether they\'ve '
                            'happened already or not).')
-
 diary_regular_event_update = DiaryRegularEventUpdateView.as_view()
 
 
@@ -355,7 +353,6 @@ class EventContactIndexView(EventContactBaseView,
 
     def get_kanisa_intermediate_crumbs(self):
         return []
-
 diary_event_contact_management = EventContactIndexView.as_view()
 
 
@@ -395,7 +392,6 @@ class EventCategoryIndexView(EventCategoryBaseView,
 
     def get_kanisa_intermediate_crumbs(self):
         return []
-
 diary_event_category_management = EventCategoryIndexView.as_view()
 
 
