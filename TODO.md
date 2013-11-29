@@ -1,6 +1,8 @@
 Version 0.9
 ===========
 
+- Fix O(n)ness of creating service plans (there's a SQL query for
+  every event, in order to grab its title)
 - When creating (but not when editing) service plans, allow selecting
   a band to auto-populate band leader/musicians
 - Allow creating/editing bands
