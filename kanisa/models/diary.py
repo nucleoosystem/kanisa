@@ -211,6 +211,12 @@ class ScheduledEventSeries(models.Model):
         ordering = ('name', )
 
 
+class ScheduledEventManager(models.Manager):
+    def get_query_set(self):
+        qs = super(ScheduledEventManager, self).get_query_set()
+        return qs.select_related('event')
+
+
 class ScheduledEvent(models.Model):
     event = models.ForeignKey(RegularEvent, blank=True, null=True,
                               help_text=('You can leave this blank, but if '
@@ -244,6 +250,8 @@ class ScheduledEvent(models.Model):
         related_name='events'
     )
     modified = models.DateTimeField(auto_now=True)
+
+    objects = ScheduledEventManager()
 
     class Meta:
         # Need this because I've split up models.py into multiple

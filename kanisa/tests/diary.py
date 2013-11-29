@@ -43,12 +43,24 @@ class DiaryTest(TestCase):
         event.schedule(date(2012, 1, 1), date(2012, 1, 8))
 
         instance = ScheduledEvent.objects.get(pk=1)
-        self.assertEqual(unicode(instance), 'Breakfast Club')
+
+        with self.assertNumQueries(0):
+            self.assertEqual(unicode(instance), 'Breakfast Club')
+
         instance.title = 'Special Breakfast'
         instance.save()
 
         instance = ScheduledEvent.objects.get(pk=1)
-        self.assertEqual(unicode(instance), 'Special Breakfast')
+        with self.assertNumQueries(0):
+            self.assertEqual(unicode(instance), 'Special Breakfast')
+
+        instance.title = ''
+        instance.save()
+
+        instance = ScheduledEvent.objects.get(pk=1)
+
+        with self.assertNumQueries(0):
+            self.assertEqual(unicode(instance), 'Breakfast Club')
 
     def test_get_next_with_event_scheduled(self):
         tuesdays = "RRULE:FREQ=WEEKLY;BYDAY=TU"
