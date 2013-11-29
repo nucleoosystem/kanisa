@@ -7,8 +7,7 @@
   This is a service plan for <strong>{{ object.event.title }}</strong>
   on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
   about music should be directed to
-  <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>
-  <span class="muted">(<a href="{% url 'kanisa_members_services_update' object.pk %}" class="muted">change this</a>)</span>.
+  <strong>{{ object.band_leader.get_display_name }}</strong>.
 </p>
 
 {% with object.musicians.all as musicians %}
@@ -22,6 +21,12 @@
     </ul>
   {% endif %}
 {% endwith %}
+
+<a href="{% url 'kanisa_members_services_update' object.pk %}" class="btn">
+  <i class="icon-edit"></i>
+  Edit Service Plan
+</a>
+
 </div>
 
 <div class="span6">
