@@ -30,7 +30,7 @@
 {% endif %}
 
 {% kanisa_branding 'colours' as colours_information %}
-{% if colours_information %}
+{% if colours_information.url %}
 <link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}{{ colours_information.url }}" />
 {% endif %}
 
