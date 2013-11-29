@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.utils import formats
 from crispy_forms.layout import Layout, HTML
 from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
@@ -7,7 +8,8 @@ from kanisa.models import (
     Song,
     Service,
     ScheduledEvent,
-    Composer
+    Composer,
+    Band
 )
 
 
@@ -54,16 +56,29 @@ class MultipleAccountChoiceField(forms.ModelMultipleChoiceField):
 
 
 class ServiceForm(KanisaBaseModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ServiceForm, self).__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            del self.fields['band']
+        else:
+            url = reverse('kanisa_xhr_bandinformation')
+            self.helper.attrs["data-band-info-url"] = url
+
     event = EventChoiceField(ScheduledEvent.objects.all())
+    band = forms.ModelChoiceField(Band.objects.all(), required=False)
     band_leader = AccountChoiceField(get_user_model().objects.all())
     musicians = MultipleAccountChoiceField(
         get_user_model().objects.all(),
         required=False
     )
 
+    class Media:
+        js = ('kanisa/js/services.js', )
+
     class Meta:
+        fields = ('event', 'band', 'band_leader', 'musicians', )
         model = Service
-        exclude = ('songs', )
 
 
 class ComposerForm(KanisaBaseModelForm):
