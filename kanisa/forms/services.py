@@ -3,7 +3,12 @@ from django.contrib.auth import get_user_model
 from django.utils import formats
 from crispy_forms.layout import Layout, HTML
 from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
-from kanisa.models import Song, Service, ScheduledEvent, Composer
+from kanisa.models import (
+    Song,
+    Service,
+    ScheduledEvent,
+    Composer
+)
 
 
 class AddSongToServiceForm(KanisaBaseForm):
