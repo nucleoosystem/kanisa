@@ -178,7 +178,7 @@ class ServiceDetailView(ServiceBaseView, KanisaDetailView):
     def get_kanisa_title(self):
         formatted_date = formats.date_format(self.object.event.date,
                                              "DATE_FORMAT")
-        title = 'Plan for %s (%s)' % (self.object.event.title,
+        title = 'Plan for %s (%s)' % (unicode(self.object.event),
                                       formatted_date)
         return title
 service_detail = ServiceDetailView.as_view()
