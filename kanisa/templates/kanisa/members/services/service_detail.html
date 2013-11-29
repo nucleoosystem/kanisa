@@ -10,6 +10,18 @@
   <strong>{% firstof object.band_leader.get_full_name object.band_leader %}</strong>
   <span class="muted">(<a href="{% url 'kanisa_members_services_update' object.pk %}" class="muted">change this</a>)</span>.
 </p>
+
+{% with object.musicians.all as musicians %}
+  {% if musicians %}
+    <p>The band will be:</p>
+    <ul>
+      <li><strong>{{ object.band_leader.get_display_name }}</strong></li>
+      {% for musician in musicians %}
+        <li>{{ musician.get_display_name }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </div>
 
 <div class="span6">
