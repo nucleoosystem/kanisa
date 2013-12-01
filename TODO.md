@@ -2,6 +2,8 @@ Version 0.9
 ===========
 
 - Ensure the band information XHR view is locked down to members only
+- When creating service plans, don't show all events, allow picking a
+  date first, then show events on that date
 - Allow creating/editing bands
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)
