@@ -1,10 +1,17 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from django.forms import Textarea, TextInput
 from django.forms.util import flatatt
-from django.forms.widgets import ClearableFileInput
+from django.forms.widgets import (
+    ClearableFileInput,
+    TimeInput,
+    DateInput
+)
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from sorl.thumbnail.shortcuts import get_thumbnail
+
+
+TIMEPICKER_FORMAT = '%I:%M %p'
 
 
 class KanisaTinyInputWidget(TextInput):
@@ -66,3 +73,38 @@ class KanisaThumbnailFileWidget(ClearableFileInput):
 
 class KanisaInlineCheckboxes(InlineCheckboxes):
     template = "kanisa/management/_checkboxselectmultiple.html"
+
+
+class BootstrapTimeWidget(TimeInput):
+    def __init__(self, *args, **kwargs):
+        kwargs['format'] = TIMEPICKER_FORMAT
+        extra_attrs = {'data-provide': 'timepicker',
+                       'class': 'timepicker'}
+
+        if 'attrs' not in kwargs:
+            kwargs['attrs'] = {}
+
+        kwargs['attrs'].update(extra_attrs)
+
+        super(BootstrapTimeWidget, self).__init__(*args, **kwargs)
+
+    class Media:
+        css = {'all': ['kanisa/bootstrap/css/timepicker.css', ]}
+        js = ('kanisa/bootstrap/js/bootstrap-timepicker.js', )
+
+
+class BootstrapDateWidget(DateInput):
+    def __init__(self, *args, **kwargs):
+        extra_attrs = {'data-date-format': 'dd/mm/yyyy',
+                       'class': 'datepicker'}
+
+        if 'attrs' not in kwargs:
+            kwargs['attrs'] = {}
+
+        kwargs['attrs'].update(extra_attrs)
+
+        super(BootstrapDateWidget, self).__init__(*args, **kwargs)
+
+    class Media:
+        css = {'all': ['kanisa/bootstrap/css/datepicker.css', ]}
+        js = ('kanisa/bootstrap/js/bootstrap-datepicker.js', )
