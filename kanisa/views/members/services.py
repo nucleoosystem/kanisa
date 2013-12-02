@@ -15,7 +15,6 @@ from kanisa.forms.services import (AddSongToServiceForm,
 from kanisa.models import (Service,
                            Song,
                            SongInService,
-                           ScheduledEvent,
                            RegularEvent)
 from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (KanisaListView,
@@ -188,31 +187,6 @@ class ServiceCreateView(ServiceBaseView,
                         KanisaCreateView):
     form_class = ServiceForm
     kanisa_title = 'Create a Service Plan'
-
-    def get_events_queryset(self):
-        if not hasattr(self, 'events'):
-            self.events = ScheduledEvent.objects.filter(service__isnull=True)
-
-        return self.events
-
-    def get_form(self, form_class):
-        form = super(ServiceCreateView, self).get_form(form_class)
-        form.fields['event'].queryset = self.get_events_queryset()
-
-        return form
-
-    def get(self, request, *args, **kwargs):
-        events = self.get_events_queryset()
-
-        if not events:
-            messages.info(self.request,
-                          ("There are no events without a service plan, "
-                           "please create an event before adding a service "
-                           "plan."))
-            url = reverse('kanisa_members_services_index')
-            return HttpResponseRedirect(url)
-
-        return super(ServiceCreateView, self).get(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('kanisa_members_services_detail',

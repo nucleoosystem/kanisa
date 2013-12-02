@@ -6,6 +6,8 @@ urlpatterns = patterns(
     '',
     url(r'^passage/$', bible.CheckBiblePassageView.as_view(),
         {}, 'kanisa_xhr_biblepassage_check'),
-    url(r'^band/$', services.BandInformationView.as_view(),
+    url(r'^services/bands/$', services.BandInformationView.as_view(),
         {}, 'kanisa_xhr_bandinformation'),
+    url(r'^services/events/$', services.EventsView.as_view(),
+        {}, 'kanisa_xhr_eventinformation'),
 )

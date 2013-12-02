@@ -1,9 +1,12 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.utils import formats
 from crispy_forms.layout import Layout, HTML
-from kanisa.forms import KanisaBaseForm, KanisaBaseModelForm
+from kanisa.forms import (
+    BootstrapDateField,
+    KanisaBaseForm,
+    KanisaBaseModelForm
+)
 from kanisa.models import (
     Song,
     Service,
@@ -38,9 +41,10 @@ class CreateSongForm(KanisaBaseModelForm):
 
 
 class EventChoiceField(forms.ModelChoiceField):
+    # This is only used when the field is hidden, and is designed to
+    # make the view a bit faster to render.
     def label_from_instance(self, obj):
-        event_date = formats.date_format(obj.date, "DATE_FORMAT")
-        return '%s (%s)' % (unicode(obj), event_date)
+        return obj.pk
 
 
 class AccountChoiceField(forms.ModelChoiceField):
@@ -60,12 +64,22 @@ class ServiceForm(KanisaBaseModelForm):
         super(ServiceForm, self).__init__(*args, **kwargs)
 
         if self.instance.pk:
+            del self.fields['event']
+            del self.fields['date']
             del self.fields['band']
         else:
             url = reverse('kanisa_xhr_bandinformation')
             self.helper.attrs["data-band-info-url"] = url
+            url = reverse('kanisa_xhr_eventinformation')
+            self.helper.attrs["data-event-info-url"] = url
 
-    event = EventChoiceField(ScheduledEvent.objects.all())
+    date = BootstrapDateField()
+    # The list of events in the field events is largely ignored. We
+    # need to specify .all() to ensure that any event which is
+    # selected (after the user has selected a date) is accepted. With
+    # ScheduledEvent.objects.none(), the view renders more quickly,
+    # but no events are accepted when the user hits submit.
+    event = EventChoiceField(ScheduledEvent.bare_objects.all())
     band = forms.ModelChoiceField(Band.objects.all(), required=False)
     band_leader = AccountChoiceField(get_user_model().objects.all())
     musicians = MultipleAccountChoiceField(
@@ -77,7 +91,7 @@ class ServiceForm(KanisaBaseModelForm):
         js = ('kanisa/js/services.js', )
 
     class Meta:
-        fields = ('event', 'band', 'band_leader', 'musicians', )
+        fields = ('date', 'event', 'band', 'band_leader', 'musicians', )
         model = Service
 
 

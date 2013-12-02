@@ -252,6 +252,7 @@ class ScheduledEvent(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     objects = ScheduledEventManager()
+    bare_objects = models.Manager()
 
     class Meta:
         # Need this because I've split up models.py into multiple
