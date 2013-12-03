@@ -4,9 +4,6 @@
     <tr>
       <th>Title</th>
       <th>Composers</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,34 +11,6 @@
     <tr>
       <td>{{ song.song.title }}</td>
       <td>{{ song.song.composer_list|join:", " }}</td>
-      <td>
-        {% if not forloop.first %}
-        <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}" style="margin:0">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-mini">
-            <i class="icon-arrow-up"></i>
-          </button>
-        </form>
-        {% endif %}
-      </td>
-      <td>
-        {% if not forloop.last %}
-        <form method="post" action="{% url 'kanisa_members_services_move_song_down' object.pk song.pk %}" style="margin:0">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-mini">
-            <i class="icon-arrow-down"></i>
-          </button>
-        </form>
-        {% endif %}
-      </td>
-      <td>
-        <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}" style="margin:0">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-mini btn-danger">
-            <i class="icon-white icon-trash"></i>
-          </button>
-        </form>
-      </td>
     </tr>
     {% endfor %}
   </tbody>
@@ -50,7 +19,6 @@
 <p class="alert alert-warning">
   <strong>Sorry!</strong>
 
-  There are no songs associated with this service plan. Why not
-  <a href="{% url 'kanisa_members_services_add_song' object.pk %}">add one</a>?
+  There are currently no songs associated with this service plan.
 </p>
 {% endif %}

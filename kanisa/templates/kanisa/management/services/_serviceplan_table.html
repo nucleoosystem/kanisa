@@ -4,7 +4,7 @@
     {% for plan in service_list %}
     <tr>
       <td>
-        <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
+        <a href="{% url 'kanisa_manage_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>
       <td>
         {{ plan.event.date }}

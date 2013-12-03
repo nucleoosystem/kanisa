@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils import formats
 from kanisa.forms.services import BandForm, ComposerForm
 from kanisa.models import (
     Band,
@@ -17,6 +18,7 @@ from kanisa.views.generic import (
     KanisaAuthorizationMixin,
     KanisaCreateView,
     KanisaDeleteView,
+    KanisaDetailView,
     KanisaListView,
     KanisaTemplateView,
     KanisaUpdateView,
@@ -212,3 +214,22 @@ class ComposerCreateView(ServiceBaseView,
 
         return rval
 composer_create = ComposerCreateView.as_view()
+
+
+class ServiceDetailView(ServiceBaseView, KanisaDetailView):
+    model = Service
+    pk_url_kwarg = 'service_pk'
+    template_name = 'kanisa/management/services/service_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceDetailView, self).get_context_data(**kwargs)
+        context['all_songs'] = Song.objects.all()
+        return context
+
+    def get_kanisa_title(self):
+        formatted_date = formats.date_format(self.object.event.date,
+                                             "DATE_FORMAT")
+        title = 'Plan for %s (%s)' % (unicode(self.object.event),
+                                      formatted_date)
+        return title
+service_detail = ServiceDetailView.as_view()
