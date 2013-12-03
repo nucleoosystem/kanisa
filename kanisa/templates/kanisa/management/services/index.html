@@ -34,6 +34,12 @@
     <h3>Available Bands</h3>
     {% include 'kanisa/members/services/_band_table.html' %}
 
+    <p>
+      <a class="btn btn-success" href="{% url 'kanisa_manage_services_create_band' %}">
+        <i class="icon-white icon-plus"></i>
+        Create a Band
+      </a>
+    </p>
   </div>
   <div class="span5">
     {% include 'kanisa/management/services/_ccli_top5.html' %}
