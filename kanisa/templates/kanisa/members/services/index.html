@@ -14,17 +14,15 @@
       </a>
     </p>
 
-    <hr />
-
     {% if showing_all %}
-    <p class="muted">
+    <p class="muted" style="margin-top: 2em">
       These are all the service plans. Want to
       <a href="{% url 'kanisa_members_services_index' %}">just see
         plans for upcoming services</a>?
     </p>
 
     {% else %}
-    <p class="muted">
+    <p class="muted" style="margin-top: 2em">
       Not including past service plans. Want to
       <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
         too</a>?
