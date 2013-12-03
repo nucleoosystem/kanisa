@@ -15,10 +15,6 @@ class XHRBaseView(View):
     required_arguments = []
 
     def check_permissions(self, request):
-        if not request.is_ajax():
-            return HttpResponseForbidden("This page is not directly "
-                                         "accessible.")
-
         if self.permission:
             if not request.user.has_perm(self.permission):
                 return HttpResponseForbidden("You do not have permission "
@@ -29,8 +25,15 @@ class XHRBaseView(View):
             if arg not in self.arguments:
                 raise MissingArgument(arg)
 
+    def check_request(self, request):
+        if not request.is_ajax():
+            return HttpResponseForbidden("This page is not directly "
+                                         "accessible.")
+
+        return self.check_permissions(request)
+
     def handle(self, request, *args, **kwargs):
-        response = self.check_permissions(request)
+        response = self.check_request(request)
 
         if response:
             return response
