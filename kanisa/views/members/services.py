@@ -6,7 +6,6 @@ from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (
     AddSongToServiceForm,
-    ServiceForm,
     CreateSongForm,
 )
 from kanisa.models import (
@@ -20,7 +19,6 @@ from kanisa.views.generic import (
     KanisaDetailView,
     KanisaFormView,
     KanisaCreateView,
-    KanisaUpdateView,
     KanisaDeleteView,
 )
 
@@ -77,19 +75,6 @@ class BaseServiceManagementView(ServiceBaseView):
                                               pk=pk)
 
         return self.service_
-
-
-class ServiceUpdateView(BaseServiceManagementView,
-                        KanisaUpdateView):
-    form_class = ServiceForm
-    model = Service
-    template_name = 'kanisa/members/form.html'
-    pk_url_kwarg = 'service_pk'
-
-    def get_success_url(self):
-        return reverse('kanisa_members_services_detail',
-                       args=[self.service.pk, ])
-service_update = ServiceUpdateView.as_view()
 
 
 def add_song_to_service(song, service):

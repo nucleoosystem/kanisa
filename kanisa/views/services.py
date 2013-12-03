@@ -3,7 +3,7 @@ import collections
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Count
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils import formats
 from kanisa.forms.services import (
@@ -248,3 +248,25 @@ class ServiceCreateView(ServiceBaseView,
         return reverse('kanisa_manage_services_detail',
                        args=[self.object.pk, ])
 service_create = ServiceCreateView.as_view()
+
+
+class BaseServiceManagementView(ServiceBaseView):
+    @property
+    def service(self):
+        if not hasattr(self, "service_"):
+            pk = int(self.kwargs['service_pk'])
+            self.service_ = get_object_or_404(Service, pk=pk)
+
+        return self.service_
+
+
+class ServiceUpdateView(BaseServiceManagementView,
+                        KanisaUpdateView):
+    form_class = ServiceForm
+    model = Service
+    pk_url_kwarg = 'service_pk'
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_services_detail',
+                       args=[self.service.pk, ])
+service_update = ServiceUpdateView.as_view()
