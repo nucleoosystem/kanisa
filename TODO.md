@@ -1,7 +1,6 @@
 Version 0.9
 ===========
 
-- Ensure the band information XHR view is locked down to members only
 - Allow creating/editing bands
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)

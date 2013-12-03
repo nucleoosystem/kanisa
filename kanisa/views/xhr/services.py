@@ -2,15 +2,22 @@ from datetime import datetime
 from django.http import (
     HttpResponse,
     HttpResponseBadRequest,
+    HttpResponseForbidden,
 )
 import json
 from kanisa.models import Band, ScheduledEvent
 from kanisa.views.xhr.base import XHRBaseGetView
 
 
-class BandInformationView(XHRBaseGetView):
+class MembersXHRGetView(XHRBaseGetView):
+    def check_permissions(self, request):
+        if not request.user.is_authenticated():
+            return HttpResponseForbidden("You do not have permission "
+                                         "to view this page.")
+
+
+class BandInformationView(MembersXHRGetView):
     required_arguments = ['band_id', ]
-    permission = None
 
     def render(self, request, *args, **kwargs):
         try:
@@ -25,9 +32,8 @@ class BandInformationView(XHRBaseGetView):
             return HttpResponseBadRequest("Invalid band_id")
 
 
-class EventsView(XHRBaseGetView):
+class EventsView(MembersXHRGetView):
     required_arguments = ['date', ]
-    permission = None
 
     def render(self, request, *args, **kwargs):
         raw_date = self.request.GET['date']

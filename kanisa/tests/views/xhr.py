@@ -455,6 +455,14 @@ class XHRBandInformationViewTestCase(XHRBaseTestCase):
     method = 'get'
     view = BandInformationView
 
+    def test_non_member_access(self):
+        request = self.get_request()
+        request.user = AnonymousUser()
+        resp = self.fetch_from_factory(request)
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content,
+                         'You do not have permission to view this page.')
+
     def test_bad_band(self):
         request = self.get_request()
         request.user = self.fred
@@ -482,6 +490,14 @@ class XHREventInformationViewTestCase(XHRBaseTestCase):
     url = reverse_lazy('kanisa_xhr_eventinformation')
     method = 'get'
     view = EventsView
+
+    def test_non_member_access(self):
+        request = self.get_request()
+        request.user = AnonymousUser()
+        resp = self.fetch_from_factory(request)
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(resp.content,
+                         'You do not have permission to view this page.')
 
     def test_bad_date(self):
         request = self.get_request()
