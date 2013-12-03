@@ -356,5 +356,4 @@ class ComposerCreateView(ServiceBaseView,
         messages.success(self.request, self.get_message(form.instance))
 
         return rval
-
 composer_create = ComposerCreateView.as_view()
