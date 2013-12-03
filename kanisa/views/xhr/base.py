@@ -1,5 +1,7 @@
-from django.http import (HttpResponseBadRequest,
-                         HttpResponseForbidden)
+from django.http import (
+    HttpResponseBadRequest,
+    HttpResponseForbidden
+)
 from django.views.generic import View
 
 

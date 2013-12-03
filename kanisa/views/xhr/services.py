@@ -1,5 +1,8 @@
 from datetime import datetime
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import (
+    HttpResponse,
+    HttpResponseBadRequest,
+)
 import json
 from kanisa.models import Band, ScheduledEvent
 from kanisa.views.xhr.base import XHRBaseGetView
