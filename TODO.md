@@ -10,7 +10,14 @@ Version 0.9
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
 - Think through who can see Service Planning links (just those in a
-  band?)
+  band?), and who can see different parts of the service planning
+  stuff:
+  - CCLI information
+  - Band management
+  - Edit/create/delete service plans (including song selections and
+    order)
+- On the service management page, highlight service plans the logged
+  in user is participating in
 
 Version 1.0
 ===========
