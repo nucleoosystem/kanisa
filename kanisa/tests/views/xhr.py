@@ -1,18 +1,24 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import AnonymousUser
 from datetime import time
-from kanisa.models import (ScheduledEvent,
-                           Page,
-                           SermonSeries,
-                           RegularEvent,
-                           NavigationElement)
+from kanisa.models import (
+    NavigationElement,
+    Page,
+    RegularEvent,
+    ScheduledEvent,
+    SermonSeries,
+)
 from kanisa.tests.utils import KanisaViewTestCase
 from kanisa.views.xhr.bible import CheckBiblePassageView
-from kanisa.views.xhr.diary import (ScheduleRegularEventView,
-                                    DiaryGetSchedule)
-from kanisa.views.xhr.navigation import (ListNavigationView,
-                                         MoveNavigationElementUpView,
-                                         MoveNavigationElementDownView)
+from kanisa.views.xhr.diary import (
+    ScheduleRegularEventView,
+    DiaryGetSchedule
+)
+from kanisa.views.xhr.navigation import (
+    ListNavigationView,
+    MoveNavigationElementUpView,
+    MoveNavigationElementDownView
+)
 from kanisa.views.xhr.pages import CreatePageView, ListPagesView
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
 
