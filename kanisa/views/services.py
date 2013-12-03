@@ -2,6 +2,7 @@ from datetime import datetime
 import collections
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
+from kanisa.forms.services import BandForm
 from kanisa.models import (
     Band,
     RegularEvent,
@@ -11,8 +12,11 @@ from kanisa.models import (
 )
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
+    KanisaCreateView,
+    KanisaDeleteView,
     KanisaListView,
     KanisaTemplateView,
+    KanisaUpdateView,
 )
 
 
@@ -157,3 +161,29 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
 
         return context
 ccli_view = ServiceCCLIView.as_view()
+
+
+class BandCreateView(ServiceBaseView,
+                     KanisaCreateView):
+    form_class = BandForm
+    kanisa_title = 'Add a Band'
+    success_url = reverse_lazy('kanisa_manage_services')
+band_create = BandCreateView.as_view()
+
+
+class BandUpdateView(ServiceBaseView,
+                     KanisaUpdateView):
+    model = Band
+    form_class = BandForm
+    success_url = reverse_lazy('kanisa_manage_services')
+band_update = BandUpdateView.as_view()
+
+
+class RemoveBandView(ServiceBaseView,
+                     KanisaDeleteView):
+    model = Band
+    success_url = reverse_lazy('kanisa_manage_services')
+
+    def get_cancel_url(self):
+        return self.success_url
+remove_band = RemoveBandView.as_view()

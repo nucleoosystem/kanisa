@@ -4,12 +4,12 @@
     {% for band in bands %}
     <tr>
       <td>
-        <a href="{% url 'kanisa_members_services_update_band' band.pk %}">
+        <a href="{% url 'kanisa_manage_services_update_band' band.pk %}">
           {{ band }}
         </a>
       </td>
       <td>
-        <a href="{% url 'kanisa_members_services_remove_band' band.pk %}" class="btn btn-danger btn-mini">
+        <a href="{% url 'kanisa_manage_services_remove_band' band.pk %}" class="btn btn-danger btn-mini">
           <i class="icon-white icon-trash"></i>
           Delete
         </a>
@@ -22,6 +22,6 @@
 <p class="alert alert-warning">
   <strong>Sorry!</strong>
 
-  There aren't any bands set up yet. Why not <a href="{% url 'kanisa_members_services_create_band' %}">create one</a>?
+  There aren't any bands set up yet. Why not <a href="{% url 'kanisa_manage_services_create_band' %}">create one</a>?
 </p>
 {% endif %}
