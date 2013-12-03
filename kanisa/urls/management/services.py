@@ -17,4 +17,7 @@ urlpatterns = patterns(
         'kanisa_manage_services_update_band'),
     url(r'^bands/(?P<pk>\d+)/remove/$', views.remove_band, {},
         'kanisa_manage_services_remove_band'),
+
+    url(r'^composer/add/$', views.composer_create, {},
+        'kanisa_manage_services_create_composer'),
 )

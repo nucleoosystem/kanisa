@@ -1,8 +1,11 @@
 from datetime import datetime
 import collections
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.db.models import Count
-from kanisa.forms.services import BandForm
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from kanisa.forms.services import BandForm, ComposerForm
 from kanisa.models import (
     Band,
     RegularEvent,
@@ -187,3 +190,25 @@ class RemoveBandView(ServiceBaseView,
     def get_cancel_url(self):
         return self.success_url
 remove_band = RemoveBandView.as_view()
+
+
+class ComposerCreateView(ServiceBaseView,
+                         KanisaCreateView):
+    form_class = ComposerForm
+    kanisa_title = 'Add a Composer'
+
+    def form_valid(self, form):
+        if self.is_popup():
+            self.object = form.save()
+            req = self.request
+            tmpl = 'kanisa/management/services/composer_popup_close.html'
+            return render_to_response(tmpl,
+                                      {'object': self.object},
+                                      context_instance=RequestContext(req))
+
+        rval = super(KanisaCreateView, self).form_valid(form)
+
+        messages.success(self.request, self.get_message(form.instance))
+
+        return rval
+composer_create = ComposerCreateView.as_view()

@@ -1,16 +1,13 @@
-from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Max, Count
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (
     AddSongToServiceForm,
     ServiceForm,
     CreateSongForm,
-    ComposerForm,
 )
 from kanisa.models import (
     Band,
@@ -234,25 +231,3 @@ class CreateSongView(BaseServiceManagementView, KanisaCreateView):
         return reverse('kanisa_members_services_detail',
                        args=[self.service.pk, ])
 create_song = CreateSongView.as_view()
-
-
-class ComposerCreateView(ServiceBaseView,
-                         KanisaCreateView):
-    form_class = ComposerForm
-    kanisa_title = 'Add a Composer'
-
-    def form_valid(self, form):
-        if self.is_popup():
-            self.object = form.save()
-            req = self.request
-            tmpl = 'kanisa/members/services/composer_popup_close.html'
-            return render_to_response(tmpl,
-                                      {'object': self.object},
-                                      context_instance=RequestContext(req))
-
-        rval = super(KanisaCreateView, self).form_valid(form)
-
-        messages.success(self.request, self.get_message(form.instance))
-
-        return rval
-composer_create = ComposerCreateView.as_view()
