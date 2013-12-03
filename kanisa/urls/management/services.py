@@ -8,4 +8,6 @@ urlpatterns = patterns(
         'kanisa_manage_services'),
     url(r'^all/$', views.service_management, {'show_all': True},
         'kanisa_manage_services_all'),
+    url(r'^ccli/$', views.ccli_view, {},
+        'kanisa_manage_services_ccli'),
 )
