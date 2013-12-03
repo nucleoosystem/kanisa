@@ -59,5 +59,7 @@ from .views.xhr import (
     XHRFetchScheduleViewTest,
     XHRListNavigationViewTest,
     XHRMoveNavigationUpViewTest,
-    XHRMoveNavigationDownViewTest
+    XHRMoveNavigationDownViewTest,
+    XHRBandInformationViewTestCase,
+    XHREventInformationViewTestCase,
 )

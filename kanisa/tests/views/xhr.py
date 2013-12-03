@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import AnonymousUser
-from datetime import time
+from datetime import date, time
 from kanisa.models import (
+    Band,
     NavigationElement,
     Page,
     RegularEvent,
@@ -21,8 +22,9 @@ from kanisa.views.xhr.navigation import (
 )
 from kanisa.views.xhr.pages import CreatePageView, ListPagesView
 from kanisa.views.xhr.sermons import MarkSermonSeriesCompleteView
-
+from kanisa.views.xhr.services import BandInformationView, EventsView
 import factory
+import json
 
 
 class XHRBaseTestCase(KanisaViewTestCase):
@@ -446,3 +448,73 @@ class XHRMoveNavigationDownViewTest(XHRBaseTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual([n.pk for n in NavigationElement.objects.all()],
                          [second.pk, first.pk, ])
+
+
+class XHRBandInformationViewTestCase(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_xhr_bandinformation')
+    method = 'get'
+    view = BandInformationView
+
+    def test_bad_band(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
+                                       {'band_id': 400})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Invalid band_id')
+
+    def test_good_band(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        band = Band.objects.create(band_leader=self.fred)
+
+        resp = self.fetch_from_factory(request,
+                                       {'band_id': band.pk})
+        self.assertEqual(resp.status_code, 200)
+        data = json.loads(resp.content)
+        self.assertEqual(data['band_leader'], self.fred.pk)
+        self.assertEqual(data['musicians'], [])
+
+
+class XHREventInformationViewTestCase(XHRBaseTestCase):
+    url = reverse_lazy('kanisa_xhr_eventinformation')
+    method = 'get'
+    view = EventsView
+
+    def test_bad_date(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
+                                       {'date': '2013/12/31'})
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.content, 'Invalid date - should be dd/mm/yyyy')
+
+    def test_good_date_no_events(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        resp = self.fetch_from_factory(request,
+                                       {'date': '31/01/2013'})
+        self.assertEqual(resp.status_code, 200)
+        data = json.loads(resp.content)
+        self.assertEqual(data['events'], [])
+
+    def test_good_date_with_events(self):
+        request = self.get_request()
+        request.user = self.fred
+
+        event = ScheduledEvent.objects.create(
+            title='Foobar',
+            date=date(2013, 1, 31),
+            duration=30,
+            start_time=time(10, 0)
+        )
+
+        resp = self.fetch_from_factory(request,
+                                       {'date': '31/01/2013'})
+        self.assertEqual(resp.status_code, 200)
+        data = json.loads(resp.content)
+        self.assertEqual(data['events'], [[event.pk, event.title], ])
