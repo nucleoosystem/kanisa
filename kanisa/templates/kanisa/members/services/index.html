@@ -1,42 +1,22 @@
 {% extends 'kanisa/members/base.html' %}
 
 {% block content %}
+  {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
-<div class="row">
-  <div class="span5">
-    <h3>View Service Plans</h3>
-    {% include 'kanisa/members/services/_serviceplan_table.html' %}
+  <hr />
 
-    <p>
-      <a class="btn btn-success" href="{% url 'kanisa_members_services_create' %}">
-        <i class="icon-white icon-plus"></i>
-        Create a Service Plan
-      </a>
-    </p>
-
-    {% if showing_all %}
-    <p class="muted" style="margin-top: 2em">
+  {% if showing_all %}
+    <p class="muted">
       These are all the service plans. Want to
       <a href="{% url 'kanisa_members_services_index' %}">just see
-        plans for upcoming services</a>?
+      plans for upcoming services</a>?
     </p>
 
-    {% else %}
-    <p class="muted" style="margin-top: 2em">
+  {% else %}
+    <p class="muted">
       Not including past service plans. Want to
       <a href="{% url 'kanisa_members_services_index_all' %}">see old plans
-        too</a>?
+      too</a>?
     </p>
-    {% endif %}
-
-    <hr />
-
-    <h3>Available Bands</h3>
-    {% include 'kanisa/members/services/_band_table.html' %}
-
-  </div>
-  <div class="span5">
-    {% include 'kanisa/members/services/_ccli_top5.html' %}
-  </div>
-</div>
+  {% endif %}
 {% endblock %}

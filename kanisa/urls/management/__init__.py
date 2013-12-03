@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^navigation/', include('kanisa.urls.management.navigation')),
     url(r'^pages/', include('kanisa.urls.management.pages')),
     url(r'^sermons/', include('kanisa.urls.management.sermons')),
+    url(r'^services/', include('kanisa.urls.management.services')),
     url(r'^social/', include('kanisa.urls.management.social')),
     url(r'^users/', include('kanisa.urls.management.users')),
     url(r'^xhr/', include('kanisa.urls.management.xhr')),

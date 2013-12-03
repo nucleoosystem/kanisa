@@ -1,12 +1,5 @@
 {% if service_list %}
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Date</th>
-      <th>Band Leader</th>
-    </tr>
-  </thead>
   <tbody>
     {% for plan in service_list %}
     <tr>
@@ -15,9 +8,6 @@
       </td>
       <td>
         {{ plan.event.date }}
-      </td>
-      <td>
-        {{ plan.band_leader.get_display_name }}
       </td>
     </tr>
     {% endfor %}
