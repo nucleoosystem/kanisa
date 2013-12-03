@@ -1,12 +1,16 @@
 from datetime import datetime
 import collections
 from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Count
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import formats
-from kanisa.forms.services import BandForm, ComposerForm
+from kanisa.forms.services import (
+    BandForm,
+    ComposerForm,
+    ServiceForm,
+)
 from kanisa.models import (
     Band,
     RegularEvent,
@@ -233,3 +237,14 @@ class ServiceDetailView(ServiceBaseView, KanisaDetailView):
                                       formatted_date)
         return title
 service_detail = ServiceDetailView.as_view()
+
+
+class ServiceCreateView(ServiceBaseView,
+                        KanisaCreateView):
+    form_class = ServiceForm
+    kanisa_title = 'Create a Service Plan'
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_services_detail',
+                       args=[self.object.pk, ])
+service_create = ServiceCreateView.as_view()

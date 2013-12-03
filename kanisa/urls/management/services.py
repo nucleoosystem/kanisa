@@ -14,6 +14,8 @@ urlpatterns = patterns(
 
     url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
         'kanisa_manage_services_detail'),
+    url(r'^service/create/$', views.service_create, {},
+        'kanisa_manage_services_create'),
 
     url(r'^band/add/$', views.band_create, {},
         'kanisa_manage_services_create_band'),

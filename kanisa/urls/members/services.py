@@ -13,8 +13,6 @@ urlpatterns = patterns(
         'kanisa_members_services_detail'),
 
     # URLs for management - these need to be moved
-    url(r'^service/create/$', views.service_create, {},
-        'kanisa_members_services_create'),
     url(r'^service/(?P<service_pk>\d+)/edit/$', views.service_update, {},
         'kanisa_members_services_update'),
     url(r'^service/(?P<service_pk>\d+)/addsong/$', views.add_song, {},

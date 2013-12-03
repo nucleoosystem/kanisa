@@ -68,20 +68,6 @@ class ServiceDetailView(ServiceBaseView, KanisaDetailView):
 service_detail = ServiceDetailView.as_view()
 
 
-class ServiceCreateView(ServiceBaseView,
-                        KanisaCreateView):
-    form_class = ServiceForm
-    kanisa_title = 'Create a Service Plan'
-
-    def get_success_url(self):
-        return reverse('kanisa_members_services_detail',
-                       args=[self.object.pk, ])
-
-    def get_template_names(self):
-        return ['kanisa/members/form.html', ]
-service_create = ServiceCreateView.as_view()
-
-
 class BaseServiceManagementView(ServiceBaseView):
     @property
     def service(self):
