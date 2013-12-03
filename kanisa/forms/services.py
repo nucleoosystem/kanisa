@@ -98,3 +98,14 @@ class ServiceForm(KanisaBaseModelForm):
 class ComposerForm(KanisaBaseModelForm):
     class Meta:
         model = Composer
+
+
+class BandForm(KanisaBaseModelForm):
+    band_leader = AccountChoiceField(get_user_model().objects.all())
+    musicians = MultipleAccountChoiceField(
+        get_user_model().objects.all(),
+        required=False
+    )
+
+    class Meta:
+        model = Band

@@ -1,7 +1,6 @@
 Version 0.9
 ===========
 
-- Allow creating/editing/deleting bands
 - Add support for deleting service plans (ensure song choices are
   cleaned up etc)
 - Rest of support for importing from Kaleo (#62)

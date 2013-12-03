@@ -13,8 +13,10 @@ from kanisa.forms.services import (
     ServiceForm,
     CreateSongForm,
     ComposerForm,
+    BandForm,
 )
 from kanisa.models import (
+    Band,
     Service,
     Song,
     SongInService,
@@ -66,6 +68,7 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
             percents = [(s.usage * 100.0) / total_songs for s in songs]
 
         context['top_five_songs'] = zip(songs, percents)
+        context['bands'] = Band.objects.all()
 
         return context
 index = ServiceIndexView.as_view()
@@ -357,3 +360,29 @@ class ComposerCreateView(ServiceBaseView,
 
         return rval
 composer_create = ComposerCreateView.as_view()
+
+
+class BandCreateView(ServiceBaseView,
+                     KanisaCreateView):
+    form_class = BandForm
+    kanisa_title = 'Add a Band'
+    success_url = reverse_lazy('kanisa_members_services_index')
+band_create = BandCreateView.as_view()
+
+
+class BandUpdateView(ServiceBaseView,
+                     KanisaUpdateView):
+    model = Band
+    form_class = BandForm
+    success_url = reverse_lazy('kanisa_members_services_index')
+band_update = BandUpdateView.as_view()
+
+
+class RemoveBandView(ServiceBaseView,
+                     KanisaDeleteView):
+    model = Band
+    success_url = reverse_lazy('kanisa_members_services_index')
+
+    def get_cancel_url(self):
+        return self.success_url
+remove_band = RemoveBandView.as_view()

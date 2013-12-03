@@ -31,4 +31,10 @@ urlpatterns = patterns(
         'kanisa_members_services_create_composer'),
     url(r'^ccli/$', views.ccli_view, {},
         'kanisa_members_services_ccli'),
+    url(r'^band/add/$', views.band_create, {},
+        'kanisa_members_services_create_band'),
+    url(r'^bands/(?P<pk>\d+)/edit/$', views.band_update, {},
+        'kanisa_members_services_update_band'),
+    url(r'^bands/(?P<pk>\d+)/remove/$', views.remove_band, {},
+        'kanisa_members_services_remove_band'),
 )
