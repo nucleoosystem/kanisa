@@ -9,15 +9,17 @@ Version 0.9
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
-- Think through who can see Service Planning links (just those in a
-  band?), and who can see different parts of the service planning
-  stuff:
-  - CCLI information
+- Lock down service planning area to those involved in any service, or
+  those in a band.
+- In the members area, the service planning page should have:
+  - A list of upcoming services, with the ones the logged in user is
+    part of highlighted.
+  - Links to the service management stuff, if the user has
+    `manage_services` set.
+- In the management area, the service planning page should have:
   - Band management
-  - Edit/create/delete service plans (including song selections and
-    order)
-- On the service management page, highlight service plans the logged
-  in user is participating in
+  - Create/edit/delete services and songs
+  - CCLI information
 
 Version 1.0
 ===========
