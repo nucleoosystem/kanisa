@@ -8,22 +8,28 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils import formats
 from django.views.generic.base import View
-from kanisa.forms.services import (AddSongToServiceForm,
-                                   ServiceForm,
-                                   CreateSongForm,
-                                   ComposerForm)
-from kanisa.models import (Service,
-                           Song,
-                           SongInService,
-                           RegularEvent)
+from kanisa.forms.services import (
+    AddSongToServiceForm,
+    ServiceForm,
+    CreateSongForm,
+    ComposerForm,
+)
+from kanisa.models import (
+    Service,
+    Song,
+    SongInService,
+    RegularEvent,
+)
 from kanisa.views.members.auth import MembersBaseView
-from kanisa.views.generic import (KanisaListView,
-                                  KanisaDetailView,
-                                  KanisaFormView,
-                                  KanisaCreateView,
-                                  KanisaUpdateView,
-                                  KanisaDeleteView,
-                                  KanisaTemplateView)
+from kanisa.views.generic import (
+    KanisaListView,
+    KanisaDetailView,
+    KanisaFormView,
+    KanisaCreateView,
+    KanisaUpdateView,
+    KanisaDeleteView,
+    KanisaTemplateView,
+)
 
 
 class ServiceBaseView(MembersBaseView):
