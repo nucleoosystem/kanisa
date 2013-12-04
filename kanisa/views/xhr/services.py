@@ -2,7 +2,6 @@ from datetime import datetime
 from django.http import (
     HttpResponse,
     HttpResponseBadRequest,
-    HttpResponseForbidden,
 )
 import json
 from kanisa.models import Band, ScheduledEvent
@@ -10,10 +9,7 @@ from kanisa.views.xhr.base import XHRBaseGetView
 
 
 class MembersXHRGetView(XHRBaseGetView):
-    def check_permissions(self, request):
-        if not request.user.is_authenticated():
-            return HttpResponseForbidden("You do not have permission "
-                                         "to view this page.")
+    permission = 'kanisa.manage_services'
 
 
 class BandInformationView(MembersXHRGetView):
