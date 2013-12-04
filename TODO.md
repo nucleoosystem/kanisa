@@ -14,8 +14,6 @@ Version 0.9
 - In the members area, the service planning page should have:
   - A list of upcoming services, with the ones the logged in user is
     part of highlighted.
-  - Links to the service management stuff, if the user has
-    `manage_services` set.
 
 Version 1.0
 ===========
