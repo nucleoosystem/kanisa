@@ -17,9 +17,7 @@ Version 0.9
   - Links to the service management stuff, if the user has
     `manage_services` set.
 - In the management area, the service planning page should have:
-  - Band management
   - Create/edit/delete services and songs
-  - CCLI information
 
 Version 1.0
 ===========
