@@ -10,10 +10,12 @@ Version 0.9
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
 - Lock down service planning area to those involved in any service, or
-  those in a band.
+  those in a band
 - In the members area, the service planning page should have:
   - A list of upcoming services, with the ones the logged in user is
-    part of highlighted.
+    part of highlighted
+- Allow changing your profile picture in the members' 'Update Account'
+  view
 
 Version 1.0
 ===========
