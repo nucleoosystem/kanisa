@@ -36,7 +36,7 @@ from kanisa.views.generic import (
 
 class ServiceBaseView(KanisaAuthorizationMixin):
     kanisa_lead = ('Having service planning on your site helps your service '
-                   'leaders co-ordinate service plans.')
+                   'leaders co-ordinate.')
     kanisa_root_crumb = {'text': 'Services',
                          'url': reverse_lazy('kanisa_manage_services')}
     permission = 'kanisa.manage_services'
