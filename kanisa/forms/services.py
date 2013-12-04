@@ -29,7 +29,9 @@ class CreateSongForm(KanisaBaseModelForm):
         helper.layout = Layout(
             'title',
             'composers',
-            HTML('{% include "kanisa/members/services/_composer_add.html" %}'),
+            HTML('{% include '
+                 '"kanisa/management/services/_composer_add.html" '
+                 '%}'),
         )
         return helper
 
