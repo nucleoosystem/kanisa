@@ -16,8 +16,6 @@ Version 0.9
     part of highlighted.
   - Links to the service management stuff, if the user has
     `manage_services` set.
-- In the management area, the service planning page should have:
-  - Create/edit/delete services and songs
 
 Version 1.0
 ===========
