@@ -4,6 +4,7 @@ from django.forms.util import flatatt
 from django.forms.widgets import (
     ClearableFileInput,
     DateInput,
+    SelectMultiple,
     TimeInput,
 )
 from django.utils.safestring import mark_safe
@@ -108,3 +109,10 @@ class BootstrapDateWidget(DateInput):
     class Media:
         css = {'all': ['kanisa/bootstrap/css/datepicker.css', ]}
         js = ('kanisa/bootstrap/js/bootstrap-datepicker.js', )
+
+
+class KanisaAccountMultipleSelector(SelectMultiple):
+    class Media:
+        css = {'all': ['kanisa/chosen/chosen.min.css', ]}
+        js = ('kanisa/chosen/chosen.jquery.min.js',
+              'kanisa/js/account_selector.js')
