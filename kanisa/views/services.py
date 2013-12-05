@@ -277,6 +277,20 @@ class ServiceUpdateView(BaseServiceManagementView,
 service_update = ServiceUpdateView.as_view()
 
 
+class ServiceDeleteView(BaseServiceManagementView,
+                        KanisaDeleteView):
+    model = Service
+    pk_url_kwarg = 'service_pk'
+
+    def get_cancel_url(self):
+        return reverse('kanisa_manage_services_detail',
+                       args=[self.service.pk, ])
+
+    def get_success_url(self):
+        return reverse('kanisa_manage_services')
+service_delete = ServiceDeleteView.as_view()
+
+
 def add_song_to_service(song, service):
     # This code has a race condition that I just don't care about
     # very much.

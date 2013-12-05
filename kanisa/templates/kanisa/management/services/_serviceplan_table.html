@@ -12,6 +12,11 @@
       <td>
         {{ plan.band_leader.get_display_name }}
       </td>
+      <td>
+        <a href="{% url 'kanisa_manage_services_delete' plan.pk %}" class="btn btn-danger btn-mini">
+          <i class="icon-white icon-trash"></i>
+        </a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
