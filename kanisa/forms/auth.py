@@ -70,8 +70,12 @@ class KanisaPasswordResetForm(KanisaPrettyForm, PasswordResetForm):
 
 
 class KanisaAccountModificationForm(KanisaBaseModelForm):
-    submit_text = 'Save Changes'
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    email = forms.EmailField()
     image = forms.FileField(widget=KanisaThumbnailFileWidget(100, 100))
+
+    submit_text = 'Save Changes'
 
     class Meta:
         model = get_user_model()
