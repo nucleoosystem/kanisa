@@ -29,6 +29,13 @@
 {% include 'kanisa/members/services/_song_table.html' %}
 {% endwith %}
 
+{% if perms.kanisa.manage_services %}
+  <a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn">
+    <i class="icon-edit"></i>
+    Edit Service Plan
+  </a>
+{% endif %}
+
 </div>
 </div>
 <hr />
