@@ -31,6 +31,20 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
         context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
+
+        musician_services = self.request.user.service_musicians.all()
+        leader_services = self.request.user.service_set.all()
+
+        all_service_pks = set(
+            [s.pk for s in musician_services] +
+            [s.pk for s in leader_services]
+        )
+
+        for service in context['service_list']:
+            service.user_is_involved = service.pk in all_service_pks
+
+        context['active_in_some_services'] = len(all_service_pks) != 0
+
         return context
 index = ServiceIndexView.as_view()
 

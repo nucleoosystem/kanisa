@@ -1,4 +1,14 @@
 {% if service_list %}
+
+{% if active_in_some_services %}
+  <div class="alert alert-info">
+    <strong>You&rsquo;re involved in some services!</strong><br />
+
+    Services you&rsquo;re participating in are highlighted in
+    blue below.
+  </div>
+{% endif %}
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,7 +19,7 @@
   </thead>
   <tbody>
     {% for plan in service_list %}
-    <tr>
+    <tr{% if plan.user_is_involved %} class="info"{% endif %}>
       <td>
         <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>

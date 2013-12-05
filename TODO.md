@@ -11,9 +11,6 @@ Version 0.9
 - Add support for podcasts (#4), and track podcast downloads
 - Lock down service planning area to those involved in any service, or
   those in a band
-- In the members area, the service planning page should have:
-  - A list of upcoming services, with the ones the logged in user is
-    part of highlighted
 
 Version 1.0
 ===========
