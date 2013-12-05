@@ -3,8 +3,8 @@ from django.forms import Textarea, TextInput
 from django.forms.util import flatatt
 from django.forms.widgets import (
     ClearableFileInput,
+    DateInput,
     TimeInput,
-    DateInput
 )
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
