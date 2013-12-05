@@ -26,12 +26,14 @@
         Documents
       </a>
     </li>
+    {% if user.can_see_service_plans %}
     <li>
       <a href="{% url 'kanisa_members_services_index' %}">
         <i class="icon-bullhorn"></i>
         Service Planning
       </a>
     </li>
+    {% endif %}
   </ul>
 
   {% kanisa_is_permissioned_user as is_permissioned %}

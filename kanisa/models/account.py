@@ -58,3 +58,18 @@ class RegisteredUser(AbstractUser):
         for p in all_perms:
             if p.codename in perms:
                 self.user_permissions.add(p)
+
+    def can_see_service_plans(self):
+        # Is the user in any bands
+        if self.band_set.count() > 0:
+            return True
+
+        # Is the user leading the band in any services?
+        if self.service_set.count() > 0:
+            return True
+
+        # Is the user playing in any services?
+        if self.service_musicians.count() > 0:
+            return True
+
+        return self.has_perm('kanisa.manage_services')

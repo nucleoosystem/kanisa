@@ -48,6 +48,7 @@ from .views.sermons import (
     SermonManagementViewTest,
     SermonPublicViewTest
 )
+from .views.services import ServiceMembersViewTest
 from .views.social import SocialViewTest
 from .views.user import UserManagementViewTest
 from .views.xhr import (

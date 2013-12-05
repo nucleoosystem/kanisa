@@ -4,14 +4,20 @@ from kanisa.models import (
     Service,
     Song,
 )
-from kanisa.views.members.auth import MembersBaseView
 from kanisa.views.generic import (
+    KanisaAuthorizationMixin,
     KanisaListView,
     KanisaDetailView,
 )
 
 
-class ServiceBaseView(MembersBaseView):
+class ServiceBaseView(KanisaAuthorizationMixin):
+    def authorization_check(self, user):
+        if not user.is_active:
+            return False
+
+        return user.can_see_service_plans()
+
     kanisa_root_crumb = {'text': 'Services',
                          'url': reverse_lazy('kanisa_members_services_index')}
 

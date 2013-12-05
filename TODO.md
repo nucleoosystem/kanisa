@@ -9,8 +9,6 @@ Version 0.9
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
-- Lock down service planning area to those involved in any service, or
-  those in a band
 
 Version 1.0
 ===========
