@@ -12,11 +12,11 @@ urlpatterns = patterns(
     url(r'^ccli/$', views.ccli_view, {},
         'kanisa_manage_services_ccli'),
 
-    url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
-        'kanisa_manage_services_detail'),
     url(r'^service/create/$', views.service_create, {},
         'kanisa_manage_services_create'),
 
+    url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
+        'kanisa_manage_services_detail'),
     url(r'^service/(?P<service_pk>\d+)/edit/$', views.service_update, {},
         'kanisa_manage_services_update'),
     url(r'^service/(?P<service_pk>\d+)/addsong/$', views.add_song, {},
