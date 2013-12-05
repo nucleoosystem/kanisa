@@ -1,20 +1,17 @@
 {% if songs %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Composers</th>
-    </tr>
-  </thead>
-  <tbody>
+  <h3>Songs</h3>
+  <ol>
     {% for song in songs %}
-    <tr>
-      <td>{{ song.song.title }}</td>
-      <td>{{ song.song.composer_list|join:", " }}</td>
-    </tr>
+      {% with song.song.composer_list as composers %}
+      <li>
+        {{ song.song.title }}
+        {% if composers %}
+        &mdash; <em>{{ composers|join:", " }}</em>
+        {% endif %}
+      </li>
+      {% endwith %}
     {% endfor %}
-  </tbody>
-</table>
+  </ol>
 {% else %}
 <p class="alert alert-warning">
   <strong>Sorry!</strong>
