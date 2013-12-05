@@ -14,7 +14,7 @@
         <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>
       <td>
-        {{ plan.event.date }}
+        {{ plan.event.date|date:"jS M Y" }}
       </td>
       <td>
         {{ plan.band_leader.get_display_name }}
