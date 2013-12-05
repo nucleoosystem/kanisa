@@ -9,6 +9,7 @@ from kanisa.forms import (
     KanisaBaseModelForm,
     KanisaPrettyForm
 )
+from kanisa.forms.widgets import KanisaThumbnailFileWidget
 from password_reset.forms import PasswordRecoveryForm, PasswordResetForm
 
 
@@ -70,7 +71,8 @@ class KanisaPasswordResetForm(KanisaPrettyForm, PasswordResetForm):
 
 class KanisaAccountModificationForm(KanisaBaseModelForm):
     submit_text = 'Save Changes'
+    image = forms.FileField(widget=KanisaThumbnailFileWidget(100, 100))
 
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'email', ]
+        fields = ['first_name', 'last_name', 'email', 'image', ]

@@ -14,8 +14,6 @@ Version 0.9
 - In the members area, the service planning page should have:
   - A list of upcoming services, with the ones the logged in user is
     part of highlighted
-- Allow changing your profile picture in the members' 'Update Account'
-  view
 
 Version 1.0
 ===========
