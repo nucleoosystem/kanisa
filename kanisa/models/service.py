@@ -41,7 +41,14 @@ class Song(models.Model):
         ordering = ('title', )
 
 
-class FutureServicesManager(models.Manager):
+class ServicesManager(models.Manager):
+    def get_query_set(self):
+        qs = super(ServicesManager, self).get_query_set()
+        qs = qs.select_related('band_leader', 'event', 'event__event')
+        return qs
+
+
+class FutureServicesManager(ServicesManager):
     def get_query_set(self):
         qs = super(FutureServicesManager, self).get_query_set()
         qs = qs.filter(event__date__gte=date.today())
@@ -58,7 +65,7 @@ class Service(models.Model):
         blank=True,
     )
 
-    objects = models.Manager()
+    objects = ServicesManager()
     future_objects = FutureServicesManager()
 
     def __unicode__(self):
@@ -94,12 +101,21 @@ class SongInService(models.Model):
         verbose_name = 'Song'
 
 
+class BandManager(models.Manager):
+    def get_query_set(self):
+        qs = super(BandManager, self).get_query_set()
+        qs = qs.select_related('band_leader')
+        return qs
+
+
 class Band(models.Model):
     band_leader = models.ForeignKey(settings.AUTH_USER_MODEL)
     musicians = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='band_musicians',
     )
+
+    objects = BandManager()
 
     def __unicode__(self):
         band_leader_name = self.band_leader.get_display_name()
