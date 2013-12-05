@@ -7,7 +7,10 @@
         <a href="{% url 'kanisa_manage_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>
       <td>
-        {{ plan.event.date }}
+        {{ plan.event.date|date:"j M" }}
+      </td>
+      <td>
+        {{ plan.band_leader.get_display_name }}
       </td>
     </tr>
     {% endfor %}
