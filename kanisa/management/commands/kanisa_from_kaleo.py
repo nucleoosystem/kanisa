@@ -26,7 +26,9 @@ from kanisa.models import (
     Sermon,
     SermonSeries,
     SermonSpeaker,
+    Service,
     Song,
+    SongInService
 )
 
 
@@ -90,6 +92,7 @@ class Command(BaseCommand):
     seen_permissions = {}
     seen_groups = {}
     seen_users = {}
+    seen_services = {}
     seen_songs = {}
 
     ordering = [
@@ -97,26 +100,26 @@ class Command(BaseCommand):
         'auth_permission',
         'auth_group',
         'auth_user',
-        'serviceplans_composer',
-        'serviceplans_song',
-        'serviceplans_band',
-        # 'serviceplans_serviceplan',
-        # 'serviceplans_serviceplansongchoice',
-        # 'attachments_attachment',
-        # 'attachments_inlineimage',
-        'kaleo_page',
-        # 'kaleo_legacypathmapping',
         'people_person',
-        'sermons_sermonseries',
-        'sermons_sermon',
         'diary_diaryeventcategory',
         'diary_diaryeventtype',
         'diary_diaryeventseries',
         'diary_diaryevent',
-        'banners_datelessbanner',
-        'banners_banner',
-        'navigation_link',
-        'members_document',
+        'serviceplans_composer',
+        'serviceplans_song',
+        'serviceplans_band',
+        'serviceplans_serviceplan',
+        'serviceplans_serviceplansongchoice',
+        # 'attachments_attachment',
+        # 'attachments_inlineimage',
+        # 'kaleo_page',
+        # 'kaleo_legacypathmapping',
+        # 'sermons_sermonseries',
+        # 'sermons_sermon',
+        # 'banners_datelessbanner',
+        # 'banners_banner',
+        # 'navigation_link',
+        # 'members_document',
     ]
 
     def handle(self, *args, **options):
@@ -188,7 +191,25 @@ class Command(BaseCommand):
         return path_for_django
 
     def handle_serviceplans_serviceplan(self, item):
-        pass
+        pk = item['pk']
+        band_leader_user = item['fields']['band_leader_user']
+
+        if not band_leader_user:
+            # The only site that uses this stuff much has 5 as the pk
+            # of the likely user. This is awesome.
+            band_leader_user = 5
+
+        band_leader = self.seen_users[band_leader_user]
+        event = self.seen_events[item['fields']['event']]
+        musicians = item['fields']['band_member_users']
+
+        service = Service.objects.create(event=event,
+                                         band_leader=band_leader)
+
+        for m in musicians:
+            service.musicians.add(self.seen_users[m])
+
+        self.seen_services[pk] = service
 
     def handle_serviceplans_band(self, item):
         band_leader_user = item['fields']['band_leader_user']
@@ -227,7 +248,11 @@ class Command(BaseCommand):
         print "Created song %s." % title
 
     def handle_serviceplans_serviceplansongchoice(self, item):
-        pass
+        SongInService.objects.create(
+            song=self.seen_songs[item['fields']['song']],
+            service=self.seen_services[item['fields']['service']],
+            order=item['fields']['order']
+        )
 
     def handle_people_person(self, item):
         pk = item['pk']
