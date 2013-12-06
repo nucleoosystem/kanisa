@@ -83,12 +83,14 @@ class Command(BaseCommand):
     seen_event_contacts = {}
     seen_event_series = {}
     seen_event_types = {}
+    seen_events = {}
     seen_sermon_speakers = {}
     seen_sermon_series = {}
     seen_content_types = {}
     seen_permissions = {}
     seen_groups = {}
     seen_users = {}
+    seen_songs = {}
 
     ordering = [
         'contenttypes_contenttype',
@@ -212,6 +214,7 @@ class Command(BaseCommand):
         print "Created composer %s %s." % (forename, surname)
 
     def handle_serviceplans_song(self, item):
+        pk = item['pk']
         composers = item['fields']['composers']
         title = item['fields']['title']
 
@@ -220,6 +223,7 @@ class Command(BaseCommand):
         for c in composers:
             song.composers.add(self.seen_composer_pks[c])
 
+        self.seen_songs[pk] = song
         print "Created song %s." % title
 
     def handle_serviceplans_serviceplansongchoice(self, item):
@@ -457,6 +461,7 @@ class Command(BaseCommand):
         self.seen_event_series[pk] = series
 
     def handle_diary_diaryevent(self, item):
+        pk = item['pk']
         contact = item['fields']['contact_override']
         details = item['fields']['details']
         event_end = datetime_from_str(item['fields']['event_end'])
@@ -503,6 +508,7 @@ class Command(BaseCommand):
                                               series=series)
 
         print "Created event %s." % event
+        self.seen_events[pk] = event
 
     def handle_banners_datelessbanner(self, item):
         self.handle_banners_banner(item)
