@@ -14,10 +14,10 @@
     </tr>
   </thead>
   <tbody>
-    {% for song,usage in report.songs %}
+    {% for song,composers,usage in report.songs %}
     <tr>
       <td>{{ song.title }}</td>
-      <td>{{ song.composer_list|join:"; " }}</td>
+      <td>{{ composers|join:"; " }}</td>
       <td>{{ usage }}</td>
     </tr>
     {% endfor %}

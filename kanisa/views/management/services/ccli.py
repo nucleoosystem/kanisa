@@ -35,13 +35,19 @@ class CCLIReport(object):
             qs = qs.filter(service__event__date__lte=
                            self.end_date)
 
-        qs = qs.only('song')
+        qs = qs.only('song')[:50]
         qs = [s.song for s in qs]
 
-        self.songs = [i for i in collections.Counter(qs).viewitems()]
-        self.songs = sorted(self.songs,
-                            key=lambda s: s[1],
-                            reverse=True)
+        songs = [i for i in collections.Counter(qs).viewitems()]
+        songs = sorted(songs,
+                       key=lambda s: s[1],
+                       reverse=True)
+        songs = [(song, self.get_composers(song), usage)
+                 for (song, usage) in songs]
+        self.songs = songs
+
+    def get_composers(self, song):
+        return song.composer_list()
 
 
 class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
