@@ -14,8 +14,13 @@ class CCLIReport(object):
     selected_event = None
     start_date = None
     end_date = None
+    songs = None
 
-    def get_songs(self):
+    def __init__(self, **kwargs):
+        self.selected_event = kwargs.pop('selected_event')
+        self.start_date = kwargs.pop('start_date')
+        self.end_date = kwargs.pop('end_date')
+
         qs = SongInService.objects.all()
 
         if self.selected_event:
@@ -33,10 +38,10 @@ class CCLIReport(object):
         qs = qs.only('song')
         qs = [s.song for s in qs]
 
-        songs = [i for i in collections.Counter(qs).viewitems()]
-        songs = sorted(songs, key=lambda s: s[1], reverse=True)
-
-        return songs
+        self.songs = [i for i in collections.Counter(qs).viewitems()]
+        self.songs = sorted(self.songs,
+                            key=lambda s: s[1],
+                            reverse=True)
 
 
 class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
@@ -116,12 +121,13 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         context['filters'] = self.get_active_filters()
         context['events'] = set([s.event.event for s in services])
 
-        report = CCLIReport()
-        report.start_date = self.get_start_date()
-        report.end_date = self.get_end_date()
-        report.selected_event = self.get_selected_event()
+        report = CCLIReport(
+            selected_event=self.get_selected_event(),
+            start_date=self.get_start_date(),
+            end_date=self.get_end_date()
+        )
 
-        context['songs'] = report.get_songs()
+        context['report'] = report
 
         return context
 ccli_view = ServiceCCLIView.as_view()

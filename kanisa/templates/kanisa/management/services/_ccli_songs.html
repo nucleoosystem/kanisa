@@ -1,4 +1,4 @@
-{% if songs %}
+{% if report.songs %}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for song,usage in songs %}
+    {% for song,usage in report.songs %}
     <tr>
       <td>{{ song.title }}</td>
       <td>{{ song.composer_list|join:"; " }}</td>
