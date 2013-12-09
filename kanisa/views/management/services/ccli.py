@@ -10,6 +10,35 @@ from kanisa.views.generic import KanisaTemplateView
 from kanisa.views.management.services import ServiceBaseView
 
 
+class CCLIReport(object):
+    selected_event = None
+    start_date = None
+    end_date = None
+
+    def get_songs(self):
+        qs = SongInService.objects.all()
+
+        if self.selected_event:
+            qs = qs.filter(service__event__event=
+                           self.selected_event)
+
+        if self.start_date:
+            qs = qs.filter(service__event__date__gte=
+                           self.start_date)
+
+        if self.end_date:
+            qs = qs.filter(service__event__date__lte=
+                           self.end_date)
+
+        qs = qs.only('song')
+        qs = [s.song for s in qs]
+
+        songs = [i for i in collections.Counter(qs).viewitems()]
+        songs = sorted(songs, key=lambda s: s[1], reverse=True)
+
+        return songs
+
+
 class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
     template_name = 'kanisa/management/services/ccli.html'
     kanisa_title = 'Song Usage Reports'
@@ -63,29 +92,6 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
 
         return self.end_date
 
-    def get_songs(self):
-        qs = SongInService.objects.all()
-
-        if self.get_selected_event():
-            qs = qs.filter(service__event__event=
-                           self.get_selected_event())
-
-        if self.get_start_date():
-            qs = qs.filter(service__event__date__gte=
-                           self.get_start_date())
-
-        if self.get_end_date():
-            qs = qs.filter(service__event__date__lte=
-                           self.get_end_date())
-
-        qs = qs.only('song')
-        qs = [s.song for s in qs]
-
-        songs = [i for i in collections.Counter(qs).viewitems()]
-        songs = sorted(songs, key=lambda s: s[1], reverse=True)
-
-        return songs
-
     def get_active_filters(self):
         filters = {}
         if self.get_selected_event():
@@ -109,7 +115,13 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         )
         context['filters'] = self.get_active_filters()
         context['events'] = set([s.event.event for s in services])
-        context['songs'] = self.get_songs()
+
+        report = CCLIReport()
+        report.start_date = self.get_start_date()
+        report.end_date = self.get_end_date()
+        report.selected_event = self.get_selected_event()
+
+        context['songs'] = report.get_songs()
 
         return context
 ccli_view = ServiceCCLIView.as_view()
