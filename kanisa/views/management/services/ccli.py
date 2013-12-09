@@ -36,8 +36,10 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
             return None
 
         try:
-            self.start_date = datetime.strptime(self.request.GET['start_date'],
-                                                '%m/%d/%Y').date()
+            self.start_date = datetime.strptime(
+                self.request.GET['start_date'],
+                '%m/%d/%Y'
+            ).date()
         except ValueError:
             return None
 
@@ -51,8 +53,10 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
             return None
 
         try:
-            self.end_date = datetime.strptime(self.request.GET['end_date'],
-                                              '%m/%d/%Y').date()
+            self.end_date = datetime.strptime(
+                self.request.GET['end_date'],
+                '%m/%d/%Y'
+            ).date()
         except ValueError:
             return None
 
@@ -98,8 +102,10 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         context = super(ServiceCCLIView,
                         self).get_context_data(**kwargs)
 
-        services = Service.objects.all().select_related('event',
-                                                        'event__event')
+        services = Service.objects.all().select_related(
+            'event',
+            'event__event'
+        )
         context['filters'] = self.get_active_filters()
         context['events'] = set([s.event.event for s in services])
         context['songs'] = self.get_songs()
