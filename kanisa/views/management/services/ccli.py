@@ -1,5 +1,6 @@
 from datetime import datetime
 import collections
+from django.shortcuts import get_object_or_404
 from kanisa.models import (
     RegularEvent,
     Service,
@@ -25,7 +26,7 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         except ValueError:
             return None
 
-        self.selected_event = RegularEvent.objects.get(pk=pk)
+        self.selected_event = get_object_or_404(RegularEvent, pk=pk)
         return self.selected_event
 
     def get_start_date(self):
