@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 import kanisa.views.management.services as views
-
+import kanisa.views.management.services.ccli as ccli_views
 
 urlpatterns = patterns(
     '',
@@ -9,7 +9,7 @@ urlpatterns = patterns(
     url(r'^all/$', views.service_management, {'show_all': True},
         'kanisa_manage_services_all'),
 
-    url(r'^ccli/$', views.ccli_view, {},
+    url(r'^ccli/$', ccli_views.ccli_view, {},
         'kanisa_manage_services_ccli'),
 
     url(r'^service/create/$', views.service_create, {},
