@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-import kanisa.views.sermons as views
+import kanisa.views.management.sermons as views
 
 
 urlpatterns = patterns(

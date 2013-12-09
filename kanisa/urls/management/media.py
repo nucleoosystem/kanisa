@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-import kanisa.views.media as views
+import kanisa.views.management.media as views
 
 
 urlpatterns = patterns(

@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-import kanisa.views.documents as views
+import kanisa.views.management.documents as views
 
 
 urlpatterns = patterns(
