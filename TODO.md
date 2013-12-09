@@ -34,6 +34,7 @@ Version 1.0
 - Allow customisable home page templates (#56)
 - Stop distributing tests (otherwise we need to make all the tests
   settings-independent, which is more work)
+- Clean up mess of auth/account/user view/URL naming mismatches
 
 Version 1.1
 ===========
