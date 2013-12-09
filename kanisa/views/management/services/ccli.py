@@ -2,8 +2,10 @@ from datetime import datetime
 import collections
 from django.shortcuts import get_object_or_404
 from kanisa.models import (
+    Composer,
     RegularEvent,
     Service,
+    Song,
     SongInService,
 )
 from kanisa.views.generic import KanisaTemplateView
@@ -15,6 +17,7 @@ class CCLIReport(object):
     start_date = None
     end_date = None
     songs = None
+    composer_lists = {}
 
     def __init__(self, **kwargs):
         self.selected_event = kwargs.pop('selected_event')
@@ -35,19 +38,34 @@ class CCLIReport(object):
             qs = qs.filter(service__event__date__lte=
                            self.end_date)
 
-        qs = qs.only('song')[:50]
+        qs = qs.select_related('song')
         qs = [s.song for s in qs]
 
         songs = [i for i in collections.Counter(qs).viewitems()]
         songs = sorted(songs,
                        key=lambda s: s[1],
                        reverse=True)
+
+        self.init_composer_mappings()
+
         songs = [(song, self.get_composers(song), usage)
                  for (song, usage) in songs]
         self.songs = songs
 
+    def init_composer_mappings(self):
+        composers = {c.pk: c.full_name()
+                     for c in Composer.objects.all()}
+        composer_objects = Song.composers.through.objects.all()
+
+        for item in composer_objects:
+            if not item.song_id in self.composer_lists:
+                self.composer_lists[item.song_id] = []
+            self.composer_lists[item.song_id].append(
+                composers[item.composer_id]
+            )
+
     def get_composers(self, song):
-        return song.composer_list()
+        return self.composer_lists.get(song.pk, [])
 
 
 class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):

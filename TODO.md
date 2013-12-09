@@ -6,7 +6,6 @@ Version 0.9
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
-- Fix O(n)ness of CCLI views
 
 Version 1.0
 ===========
