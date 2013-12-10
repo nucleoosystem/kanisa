@@ -1,6 +1,8 @@
 Version 0.9
 ===========
 
+- Add slugs to documents, and ensure they're used when attaching
+  documents to content
 - Rest of support for importing from Kaleo (#62)
   - Import attachments (and ensure the Markdown parser finds them)
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
