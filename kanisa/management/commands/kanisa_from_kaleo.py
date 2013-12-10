@@ -7,29 +7,8 @@ from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.timezone import make_aware, get_current_timezone
+from kanisa import models
 import shutil
-
-from kanisa.models import (
-    Band,
-    Banner,
-    Composer,
-    Document,
-    EventCategory,
-    EventContact,
-    InlineImage,
-    NavigationElement,
-    Page,
-    RegisteredUser,
-    RegularEvent,
-    ScheduledEvent,
-    ScheduledEventSeries,
-    Sermon,
-    SermonSeries,
-    SermonSpeaker,
-    Service,
-    Song,
-    SongInService
-)
 
 
 def datetime_from_str(str):
@@ -203,8 +182,10 @@ class Command(BaseCommand):
         event = self.seen_events[item['fields']['event']]
         musicians = item['fields']['band_member_users']
 
-        service = Service.objects.create(event=event,
-                                         band_leader=band_leader)
+        service = models.Service.objects.create(
+            event=event,
+            band_leader=band_leader
+        )
 
         for m in musicians:
             service.musicians.add(self.seen_users[m])
@@ -215,7 +196,7 @@ class Command(BaseCommand):
         band_leader_user = item['fields']['band_leader_user']
         band_member_users = item['fields']['band_member_users']
 
-        band = Band.objects.create(
+        band = models.Band.objects.create(
             band_leader=self.seen_users[band_leader_user]
         )
 
@@ -229,8 +210,10 @@ class Command(BaseCommand):
         surname = item['fields']['last_name']
         forename = item['fields']['forenames']
 
-        composer = Composer.objects.create(forename=forename,
-                                           surname=surname)
+        composer = models.Composer.objects.create(
+            forename=forename,
+            surname=surname
+        )
         self.seen_composer_pks[pk] = composer
         print "Created composer %s %s." % (forename, surname)
 
@@ -239,7 +222,7 @@ class Command(BaseCommand):
         composers = item['fields']['composers']
         title = item['fields']['title']
 
-        song = Song.objects.create(title=title)
+        song = models.Song.objects.create(title=title)
 
         for c in composers:
             song.composers.add(self.seen_composer_pks[c])
@@ -248,7 +231,7 @@ class Command(BaseCommand):
         print "Created song %s." % title
 
     def handle_serviceplans_serviceplansongchoice(self, item):
-        SongInService.objects.create(
+        models.SongInService.objects.create(
             song=self.seen_songs[item['fields']['song']],
             service=self.seen_services[item['fields']['service']],
             order=item['fields']['order']
@@ -269,13 +252,17 @@ class Command(BaseCommand):
             path_event = None
             path_speaker = None
 
-        contact = EventContact.objects.create(name=name,
-                                              email=email,
-                                              image=path_event)
+        contact = models.EventContact.objects.create(
+            name=name,
+            email=email,
+            image=path_event
+        )
 
-        speaker = SermonSpeaker.objects.create(forename=first_name,
-                                               surname=last_name,
-                                               image=path_speaker)
+        speaker = models.SermonSpeaker.objects.create(
+            forename=first_name,
+            surname=last_name,
+            image=path_speaker
+        )
 
         self.seen_event_contacts[pk] = contact
         self.seen_sermon_speakers[pk] = speaker
@@ -315,7 +302,7 @@ class Command(BaseCommand):
 
             real_permissions.add(perm)
 
-        user = RegisteredUser.objects.create(
+        user = models.RegisteredUser.objects.create(
             username=username,
             first_name=first_name,
             last_name=last_name,
@@ -361,9 +348,11 @@ class Command(BaseCommand):
 
         path_for_django = self.copy_file(pk, image_path, 'media')
 
-        InlineImage.objects.create(title=title,
-                                   slug=slug,
-                                   image=path_for_django)
+        models.InlineImage.objects.create(
+            title=title,
+            slug=slug,
+            image=path_for_django
+        )
         print "Created image %s." % title
 
     def handle_kaleo_page(self, item):
@@ -386,11 +375,13 @@ class Command(BaseCommand):
 
         draft = not published
 
-        page = Page.objects.create(title=title,
-                                   slug=slug,
-                                   contents=contents,
-                                   draft=draft,
-                                   parent=real_parent)
+        page = models.Page.objects.create(
+            title=title,
+            slug=slug,
+            contents=contents,
+            draft=draft,
+            parent=real_parent
+        )
         print "Created page %s, with origin pk %d." % (page.title, pk)
         self.seen_page_pks[pk] = page
 
@@ -406,11 +397,13 @@ class Command(BaseCommand):
         image_path = item['fields']['image']
         path_for_django = self.copy_file(pk, image_path, 'sermons/series')
 
-        series = SermonSeries.objects.create(title=title,
-                                             image=path_for_django,
-                                             details=details,
-                                             active=active,
-                                             passage=passage)
+        series = models.SermonSeries.objects.create(
+            title=title,
+            image=path_for_django,
+            details=details,
+            active=active,
+            passage=passage
+        )
 
         self.seen_sermon_series[pk] = series
         print "Created sermon series %s." % title
@@ -434,22 +427,24 @@ class Command(BaseCommand):
         series = self.seen_sermon_series.get(series_pk)
         speaker = self.seen_sermon_speakers[speaker_pk]
 
-        Sermon.objects.create(title=title,
-                              date=delivered,
-                              series=series,
-                              speaker=speaker,
-                              passage=passage,
-                              mp3=path_for_django,
-                              details=details,
-                              transcript=transcript,
-                              downloads=downloads,
-                              podcast_downloads=podcast_downloads)
+        models.Sermon.objects.create(
+            title=title,
+            date=delivered,
+            series=series,
+            speaker=speaker,
+            passage=passage,
+            mp3=path_for_django,
+            details=details,
+            transcript=transcript,
+            downloads=downloads,
+            podcast_downloads=podcast_downloads
+        )
         print "Created sermon %s." % title
 
     def handle_diary_diaryeventcategory(self, item):
         pk = item['pk']
         title = item['fields']['title']
-        category = EventCategory.objects.create(title=title)
+        category = models.EventCategory.objects.create(title=title)
 
         self.seen_event_categories[pk] = category
         print "Created event category %s." % title
@@ -466,12 +461,14 @@ class Command(BaseCommand):
         path_for_django = self.copy_file(pk, image_path, 'diary/events')
 
         contact = self.seen_event_contacts[contact_pk]
-        event = RegularEvent.objects.create(title=title,
-                                            image=path_for_django,
-                                            contact=contact,
-                                            start_time='19:00',
-                                            intro=intro,
-                                            details=details)
+        event = models.RegularEvent.objects.create(
+            title=title,
+            image=path_for_django,
+            contact=contact,
+            start_time='19:00',
+            intro=intro,
+            details=details
+        )
         event.categories.add(self.seen_event_categories[category_pk])
 
         self.seen_event_types[pk] = event
@@ -482,7 +479,7 @@ class Command(BaseCommand):
         pk = item['pk']
         title = item['fields']['title']
 
-        series = ScheduledEventSeries.objects.create(name=title)
+        series = models.ScheduledEventSeries.objects.create(name=title)
         self.seen_event_series[pk] = series
 
     def handle_diary_diaryevent(self, item):
@@ -521,16 +518,18 @@ class Command(BaseCommand):
         if series:
             series = self.seen_event_series[series]
 
-        event = ScheduledEvent.objects.create(event=event_type,
-                                              title=title,
-                                              date=event_start.date(),
-                                              start_time=start_time,
-                                              duration=duration,
-                                              end_date=end_date,
-                                              contact=contact,
-                                              intro=intro,
-                                              details=details,
-                                              series=series)
+        event = models.ScheduledEvent.objects.create(
+            event=event_type,
+            title=title,
+            date=event_start.date(),
+            start_time=start_time,
+            duration=duration,
+            end_date=end_date,
+            contact=contact,
+            intro=intro,
+            details=details,
+            series=series
+        )
 
         print "Created event %s." % event
         self.seen_events[pk] = event
@@ -550,13 +549,15 @@ class Command(BaseCommand):
         publish_from = item['fields'].get('publish_from', None)
         publish_until = item['fields'].get('publish_until', None)
 
-        Banner.objects.create(headline=headline,
-                              contents=contents,
-                              image=path_for_django,
-                              link_text=link_text,
-                              url=url,
-                              publish_from=publish_from,
-                              publish_until=publish_until)
+        models.Banner.objects.create(
+            headline=headline,
+            contents=contents,
+            image=path_for_django,
+            link_text=link_text,
+            url=url,
+            publish_from=publish_from,
+            publish_until=publish_until
+        )
         print "Created banner %s." % headline
 
     def handle_navigation_link(self, item):
@@ -581,10 +582,12 @@ class Command(BaseCommand):
             if parent:
                 real_parent = self.seen_navigation_link_pks[parent]
 
-        link = NavigationElement.objects.create(title=title,
-                                                description=description,
-                                                url=url,
-                                                parent=real_parent)
+        link = models.NavigationElement.objects.create(
+            title=title,
+            description=description,
+            url=url,
+            parent=real_parent
+        )
         print "Created link with title %s, origin is %d." % (link.title, pk)
         self.seen_navigation_link_pks[pk] = link
 
@@ -598,11 +601,13 @@ class Command(BaseCommand):
                                          'documents')
 
         uploaded = datetime_from_str(uploaded)
-        document = Document.objects.create(title=title,
-                                           file=path_for_django,
-                                           details=description,
-                                           public=True,
-                                           downloads=downloads)
+        document = models.Document.objects.create(
+            title=title,
+            file=path_for_django,
+            details=description,
+            public=True,
+            downloads=downloads
+        )
         document.created = uploaded
         document.save()
         print "Created document with title %s." % document.title
