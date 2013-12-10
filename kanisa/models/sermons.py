@@ -183,6 +183,7 @@ class Sermon(models.Model):
                                     editable=False)
     podcast_downloads = models.IntegerField(default=0,
                                             editable=False)
+    created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     objects = SermonManager()
