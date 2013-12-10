@@ -31,6 +31,7 @@ Version 1.0
 Version 1.1
 ===========
 
+- Improve pagination of document attachment widget
 - Allow customisable home page templates (#56)
 - Version check requirements in setup.py
   - tweepy (upgrade to 2.1)
