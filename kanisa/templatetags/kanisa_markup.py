@@ -16,7 +16,7 @@ image_expression = re.compile(r'(!\[([A-Za-z0-9\-]+)'
                               '(\[(.+?)\])?)')
 
 
-document_expression = re.compile(r'({@document-([A-Za-z0-9\-]+)})')
+document_expression = re.compile(r'({@([A-Za-z0-9\-]+)})')
 
 
 class ImageMatch(object):

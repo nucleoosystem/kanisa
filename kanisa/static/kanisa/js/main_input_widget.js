@@ -196,7 +196,7 @@ function insert_attachment(event) {
     event.preventDefault();
     var document_link = $(this);
     var document_slug = document_link.attr("data-slug");
-    var code = "{@document-" + document_slug + "}";
+    var code = "{@" + document_slug + "}";
     get_matching_elements(document_link, "textarea").insertAtCaret(code);
     get_cancel(document_link).click();
 }
