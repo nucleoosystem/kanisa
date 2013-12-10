@@ -58,21 +58,21 @@ class Command(BaseCommand):
     help = 'Loads data from a dump of a Kaleo installation'
 
     seen_composer_pks = {}
-    seen_page_pks = {}
-    seen_navigation_link_pks = {}
+    seen_content_types = {}
     seen_event_categories = {}
     seen_event_contacts = {}
     seen_event_series = {}
     seen_event_types = {}
     seen_events = {}
-    seen_sermon_speakers = {}
-    seen_sermon_series = {}
-    seen_content_types = {}
-    seen_permissions = {}
     seen_groups = {}
-    seen_users = {}
+    seen_navigation_link_pks = {}
+    seen_page_pks = {}
+    seen_permissions = {}
+    seen_sermon_series = {}
+    seen_sermon_speakers = {}
     seen_services = {}
     seen_songs = {}
+    seen_users = {}
 
     ordering = [
         'contenttypes_contenttype',
