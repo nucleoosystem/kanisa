@@ -16,7 +16,7 @@ image_expression = re.compile(r'(!\[([A-Za-z0-9\-]+)'
                               '(\[(.+?)\])?)')
 
 
-document_expression = re.compile(r'({@document-([0-9]+)})')
+document_expression = re.compile(r'({@document-([A-Za-z0-9\-]+)})')
 
 
 class ImageMatch(object):
@@ -79,7 +79,7 @@ def get_images(markdown_text):
 class DocumentMatch(object):
     def __init__(self, match):
         self.full = match[0]
-        self.document = Document.objects.get(pk=match[1],
+        self.document = Document.objects.get(slug=match[1],
                                              public=True)
 
     def tag(self):

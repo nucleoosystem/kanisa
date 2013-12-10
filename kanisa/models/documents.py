@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.core.urlresolvers import reverse
 from django.db import models
 import os
@@ -13,6 +14,7 @@ KNOWN_EXTENSIONS = {
 class Document(models.Model):
     title = models.CharField(max_length=60,
                              help_text='The name of the document.')
+    slug = AutoSlugField(populate_from='title', unique=True)
     file = models.FileField(upload_to='kanisa/documents')
     details = models.TextField(blank=True,
                                null=True,

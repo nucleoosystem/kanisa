@@ -9,7 +9,7 @@
   {% for document in object_list %}
   <tr>
     <td>
-      <a href="#" data-pk="{{ document.pk }}">{{ document }}</a>
+      <a href="#" data-slug="{{ document.slug }}">{{ document }}</a>
     </td>
     <td>
       Modified
@@ -19,7 +19,7 @@
       ago
     </td>
     <td class="muted">
-      <tt>{% templatetag openbrace %}@document-{{ document.pk }}{% templatetag closebrace %}</tt>
+      <tt>{% templatetag openbrace %}@document-{{ document.slug }}{% templatetag closebrace %}</tt>
     </td>
   </tr>
   {% endfor %}
