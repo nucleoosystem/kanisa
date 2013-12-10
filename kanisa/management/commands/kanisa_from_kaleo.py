@@ -453,13 +453,14 @@ class Command(BaseCommand):
         podcast_downloads = item['fields']['podcast_downloads']
         transcript = item['fields']['transcript']
         details = item['fields']['details']
+        created = datetime_from_str(item['fields']['created'])
 
         path_for_django = self.copy_file(pk, mp3_path, 'sermons/mp3s/old/')
 
         series = self.seen_sermon_series.get(series_pk)
         speaker = self.seen_sermon_speakers[speaker_pk]
 
-        models.Sermon.objects.create(
+        sermon = models.Sermon.objects.create(
             title=title,
             date=delivered,
             series=series,
@@ -471,6 +472,11 @@ class Command(BaseCommand):
             downloads=downloads,
             podcast_downloads=podcast_downloads
         )
+
+        # Fake creation time
+        sermon.created = created
+        sermon.save()
+
         print "Created sermon %s." % title
 
     def handle_diary_diaryeventcategory(self, item):
