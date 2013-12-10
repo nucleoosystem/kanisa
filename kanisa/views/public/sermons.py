@@ -91,3 +91,7 @@ class SermonBaseDownloadView(RedirectView):
 
 class SermonDownloadView(SermonBaseDownloadView):
     count_field = 'downloads'
+
+
+class SermonPodcastDownloadView(SermonBaseDownloadView):
+    count_field = 'podcast_downloads'
