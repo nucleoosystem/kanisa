@@ -20,19 +20,12 @@ Version 1.0
   - Switch from django-compressor to django-pipeline, and ensure we're
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
-- Version check requirements in setup.py
-  - tweepy (upgrade to 2.1)
-    - Check Twitter integration still works
-    - Write tests against mock Twitter
-  - Whoosh (upgrade to 2.5.5)
-  - django-haystack to 2.x
 - Add South migrations
 - Add support for users with user management permissions to create
   accounts based on a first name, last name and email address, and
   have relevant instructions emailed (e.g. how to log in, what
   permissions the user has, and how to use them)
 - Figure out what should go on the management home page (#41)
-- Allow customisable home page templates (#56)
 - Stop distributing tests (otherwise we need to make all the tests
   settings-independent, which is more work)
 - Clean up mess of auth/account/user view/URL naming mismatches
@@ -40,6 +33,13 @@ Version 1.0
 Version 1.1
 ===========
 
+- Allow customisable home page templates (#56)
+- Version check requirements in setup.py
+  - tweepy (upgrade to 2.1)
+    - Check Twitter integration still works
+    - Write tests against mock Twitter
+  - Whoosh (upgrade to 2.5.5)
+  - django-haystack to 2.x
 - Make inline images responsive (don't send full versions to mobiles)
   (#47)
 - Check layout on mobile
