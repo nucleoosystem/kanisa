@@ -53,10 +53,18 @@ def model_to_permission(model_str):
     return Permission.objects.get(codename='manage_%s' % area)
 
 
+def add_attachments(contents, attachments, seen_attachments):
+    for attachment_pk in attachments:
+        contents = contents + '\n\n{@%s}' % seen_attachments[attachment_pk]
+
+    return contents
+
+
 class Command(BaseCommand):
     args = '<path_to_json> <path_to_media>'
     help = 'Loads data from a dump of a Kaleo installation'
 
+    seen_attachments = {}
     seen_composer_pks = {}
     seen_content_types = {}
     seen_event_categories = {}
@@ -338,7 +346,27 @@ class Command(BaseCommand):
         self.seen_content_types[pk] = model
 
     def handle_attachments_attachment(self, item):
-        pass
+        pk = item['pk']
+        name = item['fields']['name']
+        slug = item['fields']['slug']
+        uploaded = datetime_from_str(item['fields']['uploaded'])
+        path_for_django = self.copy_file(
+            pk,
+            item['fields']['file'],
+            'documents'
+        )
+
+        document = models.Document.objects.create(
+            title=name,
+            slug=slug,
+            file=path_for_django,
+            public=True
+        )
+
+        document.created = uploaded
+        document.save()
+        self.seen_attachments[pk] = document.slug
+        print "Document %s saved." % name
 
     def handle_attachments_inlineimage(self, item):
         pk = item['pk']
@@ -363,6 +391,10 @@ class Command(BaseCommand):
         title = item['fields']['title']
         contents = item['fields']['contents']
         published = item['fields']['published']
+
+        contents = add_attachments(contents,
+                                   item['fields']['attachments'],
+                                   self.seen_attachments)
 
         if parent and parent not in self.seen_page_pks:
             print ("Haven't processed parent of page '%s', parent has pk %d."
@@ -460,6 +492,10 @@ class Command(BaseCommand):
 
         path_for_django = self.copy_file(pk, image_path, 'diary/events')
 
+        details = add_attachments(details,
+                                  item['fields']['attachments'],
+                                  self.seen_attachments)
+
         contact = self.seen_event_contacts[contact_pk]
         event = models.RegularEvent.objects.create(
             title=title,
@@ -492,6 +528,10 @@ class Command(BaseCommand):
         intro = item['fields']['intro']
         series = item['fields']['series']
         title = item['fields']['title']
+
+        details = add_attachments(details,
+                                  item['fields']['attachments'],
+                                  self.seen_attachments)
 
         start_time = event_start.time()
 

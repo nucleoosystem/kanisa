@@ -2,7 +2,6 @@ Version 0.9
 ===========
 
 - Rest of support for importing from Kaleo (#62)
-  - Import attachments (and ensure the Markdown parser finds them)
   - Import legacy paths (not just LegacyPathMapping, but common Kaleo
     paths that will have moved, such as podcasts)
 - Add support for podcasts (#4), and track podcast downloads
