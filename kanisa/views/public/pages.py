@@ -2,9 +2,11 @@ from django.conf import settings
 from django.http import Http404, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from kanisa.models.pages import (Page,
-                                 get_page_from_path,
-                                 get_page_from_path_including_drafts)
+from kanisa.models.pages import (
+    Page,
+    get_page_from_path,
+    get_page_from_path_including_drafts
+)
 
 
 def public_page_view(request):
@@ -16,10 +18,11 @@ def public_page_view(request):
     try:
         page = func(request.path)
 
-        return render_to_response('kanisa/public/pages/page.html',
-                                  {'page': page,
-                                   'kanisa_title': unicode(page)},
-                                  context_instance=RequestContext(request))
+        return render_to_response(
+            'kanisa/public/pages/page.html',
+            {'page': page,
+             'kanisa_title': unicode(page)},
+            context_instance=RequestContext(request))
     except Page.DoesNotExist:
         if not request.path.endswith('/') and settings.APPEND_SLASH:
             try:
