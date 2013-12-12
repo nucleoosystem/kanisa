@@ -22,6 +22,8 @@ Version 1.0
 Version 1.1
 ===========
 
+- Figure out if submitting podcasts to iTunes automatically is
+  possible
 - Improve pagination of document attachment widget
 - Allow customisable home page templates (#56)
 - Version check requirements in setup.py
@@ -51,3 +53,4 @@ Version 1.1
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
+- Add support for multiple podcasts (perhaps grouped by service?)
