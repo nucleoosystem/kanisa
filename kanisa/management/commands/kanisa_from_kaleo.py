@@ -417,9 +417,6 @@ class Command(BaseCommand):
         print "Created page %s, with origin pk %d." % (page.title, pk)
         self.seen_page_pks[pk] = page
 
-    def handle_kaleo_legacypathmapping(self, item):
-        pass
-
     def handle_sermons_sermonseries(self, item):
         pk = item['pk']
         active = not item['fields']['complete']
