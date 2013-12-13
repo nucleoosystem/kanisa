@@ -31,7 +31,6 @@ class RegisteredUserCreationForm(UserCreationForm):
 class RegisteredUserChangeForm(UserChangeForm):
     class Meta:
         model = RegisteredUser
-        fields = '__all__'
 
 
 class RegisteredUserAdmin(UserAdmin):
