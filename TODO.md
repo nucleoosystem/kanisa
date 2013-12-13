@@ -17,6 +17,8 @@ Version 1.0
 - Stop distributing tests (otherwise we need to make all the tests
   settings-independent, which is more work)
 - Clean up mess of auth/account/user view/URL naming mismatches
+- Improve deployment process (can we deploy without the site 500ing
+  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
 
 Version 1.1
 ===========
