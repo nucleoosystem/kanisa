@@ -17,7 +17,6 @@ Version 1.0
 - Stop distributing tests (otherwise we need to make all the tests
   settings-independent, which is more work)
 - Clean up mess of auth/account/user view/URL naming mismatches
-- Fill out proper link to django-users in kanisa/admin/account.py
 
 Version 1.1
 ===========

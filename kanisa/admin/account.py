@@ -17,7 +17,9 @@ class RegisteredUserCreationForm(UserCreationForm):
         fields = ("username",)
 
     def clean_username(self):
-        # See django-users/kOVEy9znYn5c
+        # This shouldn't be necessary, but currently (as of Django
+        # 1.6) is. See bit.ly/1dxSdib, and
+        # https://code.djangoproject.com/ticket/19353
         username = self.cleaned_data['username']
         try:
             self._meta.model._default_manager.get(username=username)
