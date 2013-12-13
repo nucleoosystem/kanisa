@@ -1,6 +1,8 @@
 from kanisa.forms import KanisaBaseModelForm
-from kanisa.forms.widgets import (KanisaIntroInputWidget,
-                                  KanisaMainInputWidget)
+from kanisa.forms.widgets import (
+    KanisaIntroInputWidget,
+    KanisaMainInputWidget
+)
 from kanisa.models import Page
 
 
