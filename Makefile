@@ -1,4 +1,16 @@
-wheel:
+check:
+	git diff-files --quiet
+
+test:
+	tox
+
+flake8:
+	tox -e flake8
+
+push: check test
+	git push -u origin master
+
+wheel: push
 	rm -rf build/
 	rm -rf dist/
 	python setup.py bdist_wheel
