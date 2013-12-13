@@ -21,6 +21,9 @@ Version 1.0
 Version 1.1
 ===========
 
+- Figure out how to have "Save & Continue" for model creation forms
+  (this probably involves being more consistent about model editing
+  URLs, and having better tests).
 - Figure out if submitting podcasts to iTunes automatically is
   possible
 - Improve pagination of document attachment widget
