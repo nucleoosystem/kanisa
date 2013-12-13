@@ -160,8 +160,17 @@ class KanisaUpdateView(UpdateView):
         return u'%s "%s" saved.' % (model_name,
                                     unicode(form.instance))
 
+    def get_form(self, form_class):
+        form = super(KanisaUpdateView, self).get_form(form_class)
+        form.add_save_and_continue()
+        return form
+
     def form_valid(self, form):
         messages.success(self.request, self.get_message(form))
+
+        if 'continue' in self.request.POST:
+            return HttpResponseRedirect(self.request.get_full_path())
+
         return super(KanisaUpdateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):

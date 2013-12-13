@@ -1,7 +1,6 @@
 Version 1.0
 ===========
 
-- Add "Save and Continue Editing" option to all model forms
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see

@@ -49,6 +49,15 @@ class KanisaBaseModelForm(KanisaPrettyForm, ModelForm):
         self.helper = self.get_form_helper()
         super(KanisaBaseModelForm, self).__init__(*args, **kwargs)
 
+    def add_save_and_continue(self):
+        self.helper.add_input(
+            Submit(
+                "continue",
+                "Save & Continue Editing",
+                css_class="btn-large btn-primary"
+            )
+        )
+
     def get_submit_text(self):
         if hasattr(self, 'submit_text'):
             return self.submit_text
