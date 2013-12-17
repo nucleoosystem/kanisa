@@ -1,3 +1,9 @@
+cleandist:
+	rm -rf kanisa.egg-info/
+	rm -rf build/
+	rm -rf dist/
+	python setup.py bdist_wheel
+
 git-check:
 	git diff-files --quiet
 
@@ -10,10 +16,7 @@ flake8:
 push: git-check test
 	git push -u origin master
 
-wheel: push
-	rm -rf build/
-	rm -rf dist/
-	python setup.py bdist_wheel
+wheel: push cleandist
 
 # We probably want the hostname (kanisa, which is an SSH alias I have
 # locally) to be in a config file somewhere.
