@@ -23,5 +23,5 @@ urlpatterns = patterns(
     url(r'^registration/thanks/$', KanisaRegistrationThanksView.as_view(), {},
         'kanisa_members_registration_thanks'),
 
-    url(r'^password/', include('kanisa.urls.members.account.password')),
+    url(r'^auth/', include('kanisa.urls.members.account.auth')),
 )
