@@ -1,4 +1,4 @@
-check:
+git-check:
 	git diff-files --quiet
 
 test:
@@ -7,7 +7,7 @@ test:
 flake8:
 	tox -e flake8
 
-push: check test
+push: git-check test
 	git push -u origin master
 
 wheel: push
