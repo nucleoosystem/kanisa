@@ -16,12 +16,12 @@ urlpatterns = patterns(
         'kanisa_members_logout'),
 
     url(r'^modify/$', KanisaAccountModificationView.as_view(), {},
-        'kanisa_public_account_modify'),
+        'kanisa_members_account_modify'),
 
     url(r'^registration/$', KanisaRegistrationView.as_view(), {},
-        'kanisa_public_registration'),
+        'kanisa_members_registration'),
     url(r'^registration/thanks/$', KanisaRegistrationThanksView.as_view(), {},
-        'kanisa_public_registration_thanks'),
+        'kanisa_members_registration_thanks'),
 
     url(r'^password/', include('kanisa.urls.public.password')),
 )
