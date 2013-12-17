@@ -1,6 +1,13 @@
 Version 1.0
 ===========
 
+- Remove "Save & Continue" on "Update account" form
+- Add support for users with user management permissions to create
+  accounts based on a first name, last name and email address, and
+  have relevant instructions emailed (e.g. how to log in, what
+  permissions the user has, and how to use them)
+- Figure out what should go on the management home page (#41)
+- Figure out what should go on the members' home page
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see
@@ -9,18 +16,11 @@ Version 1.0
     serving compressed assets (also, should we be including unminified
     assets in the distributed wheel?)
 - Add South migrations
-- Add support for users with user management permissions to create
-  accounts based on a first name, last name and email address, and
-  have relevant instructions emailed (e.g. how to log in, what
-  permissions the user has, and how to use them)
-- Figure out what should go on the management home page (#41)
-- Figure out what should go on the members' home page
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
   time-limited)
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
-- Remove "Save & Continue" on "Update account" form
 
 Version 1.1
 ===========
