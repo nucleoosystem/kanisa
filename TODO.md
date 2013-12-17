@@ -14,12 +14,19 @@ Version 1.0
   have relevant instructions emailed (e.g. how to log in, what
   permissions the user has, and how to use them)
 - Figure out what should go on the management home page (#41)
+- Figure out what should go on the members' home page
 - Clean up mess of auth/account/user view/URL naming mismatches
   - User registrations and personal account management all belong in
     members/account.py.
   - User login/logout, and password reset belongs in members/auth.py.
   - User management (i.e. managing someone else's account, account
     creation by a third party etc) belongs in manage/account.py.
+- Replace banners with fixed call-out content, perhaps defaulting to
+  diary if no content is available (call-outs can still be
+  time-limited)
+- Ensure *some* links show in the nav on smaller screens - perhaps
+  just home and account bar?
+- Remove "Save & Continue" on "Update account" form
 
 Version 1.1
 ===========
@@ -59,3 +66,4 @@ Version 1.1
 - Add support for multiple podcasts (perhaps grouped by service?)
 - Improve deployment process (can we deploy without the site 500ing
   whilst the virtualenv is in flux? perhaps enter maintenance mode?)
+- Add logs of actions taken in the management console
