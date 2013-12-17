@@ -39,11 +39,11 @@ class KanisaViewTestCase(TestCase):
 
         self.factory = RequestFactory()
 
-    @override_settings(LOGIN_URL=reverse_lazy('kanisa_public_login'))
+    @override_settings(LOGIN_URL=reverse_lazy('kanisa_members_login'))
     def view_is_restricted(self, url):
         # Not logged in
         resp = self.client.get(url)
-        login_url = reverse('kanisa_public_login')
+        login_url = reverse('kanisa_members_login')
         self.assertRedirects(resp, '%s?next=%s' % (login_url, url),
                              302, 200)
 

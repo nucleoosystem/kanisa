@@ -10,10 +10,10 @@ from kanisa.views.public.auth import (
 urlpatterns = patterns(
     '',
     url(r'^login/$', KanisaLoginView.as_view(), {},
-        'kanisa_public_login'),
+        'kanisa_members_login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
         {'template_name': 'kanisa/auth/logout.html', },
-        'kanisa_public_logout'),
+        'kanisa_members_logout'),
 
     url(r'^modify/$', KanisaAccountModificationView.as_view(), {},
         'kanisa_public_account_modify'),

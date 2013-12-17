@@ -28,11 +28,11 @@
               <i class="icon-white icon-cog"></i>
             </a>
           {% endif %}
-          (<a href="{% url 'kanisa_public_logout' %}">Logout</a>)
+          (<a href="{% url 'kanisa_members_logout' %}">Logout</a>)
         </p>
         {% else %}
         <p class="navbar-text pull-right">
-          <a href="{% url 'kanisa_public_login' %}">Login</a>
+          <a href="{% url 'kanisa_members_login' %}">Login</a>
           {% if KANISA_ALLOW_REGISTRATION %}
           /
           <a href="{% url 'kanisa_public_registration' %}">Register</a>
