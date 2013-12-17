@@ -1,5 +1,5 @@
 from django.conf.urls import include, patterns, url
-from kanisa.views.members.account.auth import (
+from kanisa.views.members.account import (
     KanisaAccountModificationView,
     KanisaLoginView,
     KanisaRegistrationView,
