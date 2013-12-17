@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from kanisa.views.members.account.auth import (
+from kanisa.views.members.account.password import (
     KanisaRecoverPasswordView,
     KanisaResetPasswordView,
     KanisaResetPasswordDoneView,
