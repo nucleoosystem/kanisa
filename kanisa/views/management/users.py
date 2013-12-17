@@ -1,10 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import RequestSite
 from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
-from kanisa.forms.user import UserUpdateForm
+from kanisa.forms.user import (
+    UserCreateForm,
+    UserUpdateForm,
+)
 from kanisa.models import RegisteredUser
 from kanisa.utils.auth import users_with_perm
 from kanisa.utils.mail import (
@@ -129,3 +133,61 @@ class UserUpdateView(UserBaseView,
 
         return super(UserUpdateView, self).form_valid(form)
 user_update = UserUpdateView.as_view()
+
+
+class UserCreateView(UserBaseView,
+                     KanisaFormView):
+    form_class = UserCreateForm
+    success_url = reverse_lazy('kanisa_manage_users')
+    template_name = 'kanisa/management/create.html'
+    kanisa_title = 'Create User'
+
+    def get_form_kwargs(self):
+        kwargs = super(UserCreateView, self).get_form_kwargs()
+        kwargs['request_user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        email = form.cleaned_data['email']
+
+        if not form.cleaned_data['image']:
+            # Comes in as False, need to set to None
+            image = None
+        else:
+            image = form.cleaned_data['image']
+
+        if self.request.user.is_superuser:
+            is_superuser = form.cleaned_data['administrator']
+            is_staff = form.cleaned_data['administrator']
+
+        object = RegisteredUser.objects.create(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            image=image,
+            is_superuser=is_superuser,
+            is_staff=is_staff
+        )
+
+        object.set_kanisa_permissions(form.cleaned_data['permissions'])
+
+        password = RegisteredUser.objects.make_random_password()
+        object.set_password(password)
+
+        object.save()
+
+        send_single_mail(object,
+                         'on_account_creation',
+                         {'password': password,
+                          'site': RequestSite(self.request), })
+
+        message = ('Registered User "%s" saved.'
+                   % object.get_familiar_name())
+        messages.success(self.request, message)
+
+        return super(UserCreateView, self).form_valid(form)
+user_create = UserCreateView.as_view()

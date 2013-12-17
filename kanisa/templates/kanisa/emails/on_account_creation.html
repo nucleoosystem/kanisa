@@ -1,0 +1,16 @@
+<p>Dear {{ addressee.get_familiar_name }},</p>
+
+<p>An account has been created for you at {{ KANISA_CHURCH_NAME }}.</p>
+
+<p>Your username is <em>{{ addressee.username }}</em>.</p>
+
+<p>Your password is currently <em>{{ password }}</em>, but you'll
+probably want to reset it. To reset your password, first login at
+<a href="http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_login" %}">http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_login" %}</a>.</p>
+
+<p>Then use the password reset process at
+<a href="http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_password_change" %}">http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_password_change" %}</a>.</p>
+
+<p>Thanks,</p>
+
+<p><em>The {{ KANISA_CHURCH_NAME }} web team</em></p>

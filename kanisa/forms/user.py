@@ -5,6 +5,7 @@ from crispy_forms.layout import (
 from django import forms
 from django.contrib.auth.models import Permission
 from kanisa.forms import KanisaBaseForm
+from kanisa.models import RegisteredUser
 from .widgets import (
     KanisaInlineCheckboxes,
     KanisaThumbnailFileWidget
@@ -53,4 +54,34 @@ class UserUpdateForm(KanisaBaseForm):
                 'image',
             ),
             permissions_fieldset
+        )
+
+
+class UserCreateForm(UserUpdateForm):
+    username = forms.RegexField(
+        max_length=30,
+        regex=r'^[\w.@+-]+$',
+        help_text=("Required. 30 characters or fewer. Letters, digits and "
+                   "@/./+/-/_ only."),
+        error_messages={
+            'invalid': ("This value may contain only letters, numbers and "
+                        "@/./+/-/_ characters.")}
+    )
+
+    def __init__(self, request_user, *args, **kwargs):
+        super(UserCreateForm, self).__init__(request_user, *args, **kwargs)
+
+        # Add our username field to the layout
+        self.helper.layout.fields[0].fields.insert(0, 'username')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+
+        try:
+            RegisteredUser.objects.get(username=username)
+        except RegisteredUser.DoesNotExist:
+            return username
+
+        raise forms.ValidationError(
+            "A user with that username already exists."
         )

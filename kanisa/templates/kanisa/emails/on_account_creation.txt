@@ -1,0 +1,18 @@
+Dear {{ addressee.get_familiar_name }},
+
+An account has been created for you at {{ KANISA_CHURCH_NAME }}.
+
+Your username is {{ addressee.username }}.
+
+Your password is currently {{ password }}, but you'll probably want to
+reset it. To reset your password, first login at:
+
+http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_login" %}
+
+Then use the password reset process at:
+
+http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_members_password_change" %}
+
+Thanks,
+
+The {{ KANISA_CHURCH_NAME }} web team

@@ -1,13 +1,6 @@
 Version 1.0
 ===========
 
-- Add support for users with user management permissions to create
-  accounts based on a first name, last name and email address, and
-  have relevant instructions emailed (e.g. how to log in, what
-  permissions the user has, and how to use them)
-  - Requires username, first name, last name and email
-  - Doesn't require image
-  - Allow permission setting
 - Figure out what should go on the management home page (#41)
 - Figure out what should go on the members' home page
 - Change external requirements to better equivalents
