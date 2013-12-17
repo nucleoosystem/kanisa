@@ -5,7 +5,6 @@ from kanisa.views import KanisaIndexView
 urlpatterns = patterns(
     '',
     url(r'^$', KanisaIndexView.as_view(), {}, 'kanisa_public_index'),
-    url(r'^account/', include('kanisa.urls.members.account')),
     url(r'^banners/', include('kanisa.urls.public.banners')),
     url(r'^diary/', include('kanisa.urls.public.diary')),
     url(r'^manage/', include('kanisa.urls.management')),

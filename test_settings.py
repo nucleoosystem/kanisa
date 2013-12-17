@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'kanisa',
 )
 
-LOGIN_URL = '/account/login/'
+LOGIN_URL = '/members/account/login/'
 
 ROOT_URLCONF = 'kanisa.tests.tox.urls'
 
