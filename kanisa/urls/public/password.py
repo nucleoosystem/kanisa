@@ -4,13 +4,13 @@ from kanisa.views.public.auth import (
     KanisaResetPasswordView,
     KanisaResetPasswordDoneView,
     KanisaResetPasswordSentView,
-    kanisa_password_change
+    kanisa_members_password_change
 )
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', kanisa_password_change, {},
+    url(r'^$', kanisa_members_password_change, {},
         'kanisa_members_password_change'),
     url(r'^recover/$', KanisaRecoverPasswordView.as_view(), {},
         'kanisa_public_recover_password'),

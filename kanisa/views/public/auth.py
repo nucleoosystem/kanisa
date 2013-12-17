@@ -30,7 +30,7 @@ from kanisa.views.members.auth import MembersBaseView
 from password_reset.views import Recover, RecoverDone, Reset
 
 
-def kanisa_password_change(request):
+def kanisa_members_password_change(request):
     return password_change(
         request,
         template_name='kanisa/management/password_reset.html',
