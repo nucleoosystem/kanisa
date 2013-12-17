@@ -12,19 +12,19 @@ class PasswordResetViewTest(KanisaViewTestCase):
         self.fred.save()
 
     def test_password_change_view_requires_login(self):
-        resp = self.client.get(reverse('kanisa_password_change'))
+        resp = self.client.get(reverse('kanisa_members_password_change'))
         self.assertEqual(resp.status_code, 302)
 
     def test_password_change_view_loads(self):
         self.client.login(username='fred', password='secret')
-        resp = self.client.get(reverse('kanisa_password_change'))
+        resp = self.client.get(reverse('kanisa_members_password_change'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/password_reset.html')
         self.client.logout()
 
     def test_password_change_view_success(self):
         self.client.login(username='fred', password='secret')
-        resp = self.client.post(reverse('kanisa_password_change'),
+        resp = self.client.post(reverse('kanisa_members_password_change'),
                                 {'old_password': 'secret',
                                  'new_password1': 'abcdef',
                                  'new_password2': 'abcdef'})

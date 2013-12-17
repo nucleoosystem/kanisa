@@ -11,7 +11,7 @@ from kanisa.views.public.auth import (
 urlpatterns = patterns(
     '',
     url(r'^$', kanisa_password_change, {},
-        'kanisa_password_change'),
+        'kanisa_members_password_change'),
     url(r'^recover/$', KanisaRecoverPasswordView.as_view(), {},
         'kanisa_public_recover_password'),
     url(r'^reset/(?P<token>[\w:-]+)/$',
