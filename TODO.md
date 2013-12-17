@@ -15,8 +15,6 @@ Version 1.0
   permissions the user has, and how to use them)
 - Figure out what should go on the management home page (#41)
 - Clean up mess of auth/account/user view/URL naming mismatches
-- Improve deployment process (can we deploy without the site 500ing
-  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
 
 Version 1.1
 ===========
@@ -54,3 +52,5 @@ Version 1.1
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
 - Add support for multiple podcasts (perhaps grouped by service?)
+- Improve deployment process (can we deploy without the site 500ing
+  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
