@@ -32,15 +32,15 @@ class PasswordResetViewTest(KanisaViewTestCase):
         self.client.logout()
 
     def test_password_recovery_does_not_require_password(self):
-        resp = self.client.get(reverse('kanisa_public_recover_password'))
+        resp = self.client.get(reverse('kanisa_members_recover_password'))
         self.assertEqual(resp.status_code, 200)
 
     def test_password_recovery_reset_done_view(self):
-        resp = self.client.get(reverse('kanisa_public_password_reset_done'))
+        resp = self.client.get(reverse('kanisa_members_reset_password_done'))
         self.assertEqual(resp.status_code, 200)
 
     def test_password_recovery_by_email(self):
-        resp = self.client.post(reverse('kanisa_public_recover_password'),
+        resp = self.client.post(reverse('kanisa_members_recover_password'),
                                 {'username_or_email': 'fred@example.com'},
                                 follow=True)
         self.assertEqual(resp.status_code, 200)
@@ -81,7 +81,7 @@ class PasswordResetViewTest(KanisaViewTestCase):
     def test_password_recovery_by_username(self):
         # Only test up to the email being sent, everything else is the
         # same.
-        resp = self.client.post(reverse('kanisa_public_recover_password'),
+        resp = self.client.post(reverse('kanisa_members_recover_password'),
                                 {'username_or_email': 'fred'},
                                 follow=True)
         self.assertEqual(resp.status_code, 200)
@@ -100,7 +100,7 @@ class PasswordResetViewTest(KanisaViewTestCase):
         self.assertEqual(len(likely_urls), 1)
 
     def test_password_recovery_by_mistake(self):
-        resp = self.client.post(reverse('kanisa_public_recover_password'),
+        resp = self.client.post(reverse('kanisa_members_recover_password'),
                                 {'username_or_email': 'fredsdjkhfs'})
         self.assertEqual(resp.status_code, 200)
         self.assertFormError(resp, 'form', 'username_or_email',

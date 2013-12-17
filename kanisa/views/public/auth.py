@@ -105,7 +105,7 @@ class KanisaRecoverPasswordView(Recover):
     form_class = KanisaPasswordRecoveryForm
 
     def get_success_url(self):
-        return reverse('kanisa_public_password_reset_sent',
+        return reverse('kanisa_members_reset_password_sent',
                        args=[self.mail_signature, ])
 
     def send_notification(self):
@@ -123,7 +123,7 @@ class KanisaRecoverPasswordView(Recover):
 class KanisaResetPasswordView(Reset):
     template_name = 'kanisa/auth/passwordreset/reset_form.html'
     form_class = KanisaPasswordResetForm
-    success_url = reverse_lazy('kanisa_public_password_reset_done')
+    success_url = reverse_lazy('kanisa_members_reset_password_done')
 
 
 class KanisaResetPasswordSentView(KanisaTemplateView, RecoverDone):
