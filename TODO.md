@@ -1,7 +1,6 @@
 Version 1.0
 ===========
 
-- Remove "Save & Continue" on "Update account" form
 - Add support for users with user management permissions to create
   accounts based on a first name, last name and email address, and
   have relevant instructions emailed (e.g. how to log in, what

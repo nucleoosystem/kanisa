@@ -77,6 +77,9 @@ class KanisaAccountModificationForm(KanisaBaseModelForm):
 
     submit_text = 'Save Changes'
 
+    def add_save_and_continue(self):
+        pass
+
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email', 'image', ]
