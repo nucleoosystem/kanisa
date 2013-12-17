@@ -11,7 +11,7 @@ setup(
     author_email='internet@dominicrodger.com',
     url='http://github.com/dominicrodger/kanisa',
     license='BSD',
-    packages=find_packages(exclude=['tests', ]),
+    packages=find_packages(exclude=["kanisa.tests", "kanisa.tests.*"]),
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
