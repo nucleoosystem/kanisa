@@ -60,16 +60,22 @@ class RegisteredUser(AbstractUser):
                 self.user_permissions.add(p)
 
     def can_see_service_plans(self):
-        # Is the user in any bands
-        if self.band_set.count() > 0:
-            return True
+        if hasattr(self, '_can_see_service_plans'):
+            return self._can_see_service_plans
 
+        self._can_see_service_plans = False
+
+        # Does the user have permission to manage services?
+        if self.has_perm('kanisa.manage_services'):
+            self._can_see_service_plans = True
+        # Is the user in any bands?
+        elif self.band_set.count() > 0:
+            self._can_see_service_plans = True
         # Is the user leading the band in any services?
-        if self.service_set.count() > 0:
-            return True
-
+        elif self.service_set.count() > 0:
+            self._can_see_service_plans = True
         # Is the user playing in any services?
-        if self.service_musicians.count() > 0:
-            return True
+        elif self.service_musicians.count() > 0:
+            self._can_see_service_plans = True
 
-        return self.has_perm('kanisa.manage_services')
+        return self._can_see_service_plans
