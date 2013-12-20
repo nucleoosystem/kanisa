@@ -3,6 +3,9 @@ Version 1.0
 
 - Figure out what should go on the management home page (#41)
 - Figure out what should go on the members' home page
+  - Recently uploaded documents
+  - Upcoming services
+  - Basic profile information
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see
@@ -20,6 +23,9 @@ Version 1.0
 Version 1.1
 ===========
 
+- Members' directory?
+  - Add a setting for allowing email addresses to be shared with other
+    members (off by default)
 - Figure out how to have "Save & Continue" for model creation forms
   (this probably involves being more consistent about model editing
   URLs, and having better tests).
