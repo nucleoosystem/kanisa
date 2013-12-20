@@ -1,7 +1,6 @@
 Version 1.0
 ===========
 
-- Fix bug with composers showing up multiple times in the CCLI view
 - Figure out what should go on the management home page (#41)
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,

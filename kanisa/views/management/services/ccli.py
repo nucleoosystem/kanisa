@@ -13,16 +13,11 @@ from kanisa.views.management.services import ServiceBaseView
 
 
 class CCLIReport(object):
-    selected_event = None
-    start_date = None
-    end_date = None
-    songs = None
-    composer_lists = {}
-
     def __init__(self, **kwargs):
         self.selected_event = kwargs.pop('selected_event')
         self.start_date = kwargs.pop('start_date')
         self.end_date = kwargs.pop('end_date')
+        self.composer_lists = {}
 
         qs = SongInService.objects.all()
 
