@@ -4,7 +4,6 @@ import kanisa.views.members.services as views
 
 urlpatterns = patterns(
     '',
-    # URLs for members
     url(r'^$', views.index, {'show_all': False},
         'kanisa_members_services_index'),
     url(r'^all/$', views.index, {'show_all': True},
