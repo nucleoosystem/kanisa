@@ -22,6 +22,42 @@
   {% endif %}
 </p>
 
+<hr />
+
+<div class="row">
+  <div class="span5">
+    <h3>Recent Documents</h3>
+    <table class="table table-striped kanisa_diary">
+      <tbody>
+        {% for document in documents %}
+        <tr>
+          <td>
+            <strong>
+              <a href="{{ document.download_url }}">{{ document.title }}</a>
+            </strong>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p>Looking for <a href="{% url 'kanisa_members_documents' %}">other documents</a>?</p>
+  </div>
+  {% if user.can_see_service_plans %}
+  <div class="span5">
+    <h3>Upcoming Services</h3>
+    {% if services %}
+    {% else %}
+    <p class="alert alert-info">
+      There are no services in the diary at present.
+    </p>
+    {% endif %}
+
+    <p>View <a href="{% url 'kanisa_members_services_index' %}">more service plans</a>.</p>
+  </div>
+  {% endif %}
+</div>
+
 {% kanisa_is_permissioned_user as is_permissioned %}
 {% if is_permissioned %}
 <hr />

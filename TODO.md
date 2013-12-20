@@ -2,10 +2,6 @@ Version 1.0
 ===========
 
 - Figure out what should go on the management home page (#41)
-- Figure out what should go on the members' home page
-  - Recently uploaded documents
-  - Upcoming services
-  - Basic profile information
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see
