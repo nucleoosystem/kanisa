@@ -54,11 +54,11 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
     end_date = BootstrapDateField(required=False)
-    is_multi_day = forms.BooleanField(label='Multi-day event',
-                                      required=False,
-                                      help_text=('Check this box if this '
-                                                 'event spans multiple '
-                                                 'days.'))
+    is_multi_day = forms.BooleanField(
+        label='Multi-day event',
+        required=False,
+        help_text=('Check this box if this event spans multiple days.')
+    )
 
     def __init__(self, *args, **kwargs):
         super(ScheduledEventBaseForm, self).__init__(*args, **kwargs)
