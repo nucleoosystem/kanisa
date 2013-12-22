@@ -1,6 +1,6 @@
 function on_event_type_selection_change() {
     // This function sets the event title to the name of the selected
-    // event type, every time the event type has changed, unless the
+    // event type, every time the event type is changed, unless the
     // event title has been manually edited.
 
     var selection = $(this).find(":selected").text();
