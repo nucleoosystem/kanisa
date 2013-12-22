@@ -55,5 +55,3 @@ function bind_delete_handlers() {
 $(function() {
     bind_move_handlers();
 });
-
-
