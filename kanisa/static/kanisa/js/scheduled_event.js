@@ -17,7 +17,7 @@ function on_event_type_selection_change() {
     // Don't overwrite things the user has manually changed.
     var last_automatic_value = title_input.attr("data-last-automatic-value");
 
-    if (typeof last_automatic_value != "undefined" &&  title_input.val() != last_automatic_value) {
+    if (typeof last_automatic_value != "undefined" && title_input.val() != last_automatic_value) {
         return;
     }
 
