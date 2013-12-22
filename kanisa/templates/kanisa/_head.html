@@ -6,7 +6,10 @@
 
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/bootstrap/css/bootstrap-responsive.min.css" />
+
+{% if KANISA_DEBUG_STATIC %}
 <link href="{{ STATIC_URL }}kanisa/css/kanisa.css" rel="stylesheet">
+{% endif %}
 
 {% include 'kanisa/_icons.html' %}
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -16,7 +19,10 @@
 
 <script src="{{ STATIC_URL }}kanisa/bootstrap/js/jquery-1.7.2.min.js"></script>
 <script src="{{ STATIC_URL }}kanisa/bootstrap/js/bootstrap.min.js"></script>
+
+{% if KANISA_DEBUG_STATIC %}
 <script src="{{ STATIC_URL }}kanisa/js/kanisa.js"></script>
+{% endif %}
 
 {% if form %}
 {{ form.media }}

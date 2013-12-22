@@ -14,3 +14,7 @@ KANISA_REGISTRATION_ALLOWED = getattr(settings,
 KANISA_FROM_EMAIL = getattr(settings,
                             'KANISA_FROM_EMAIL',
                             'noreply@noreply.com')
+
+KANISA_DEBUG_STATIC = getattr(settings,
+                              'KANISA_DEBUG_STATIC',
+                              settings.DEBUG)

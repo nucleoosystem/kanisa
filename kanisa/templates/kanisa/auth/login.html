@@ -3,7 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block extrajs %}
+{% if KANISA_DEBUG_STATIC %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/login.js"></script>
+{% endif %}
 {% endblock %}
 
 {% block content %}

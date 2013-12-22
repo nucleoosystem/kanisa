@@ -1,7 +1,9 @@
 {% extends 'kanisa/members/base.html' %}
 
 {% block extrajs %}
+{% if KANISA_DEBUG_STATIC %}
   <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/members_documents.js"></script>
+{% endif %}
 {% endblock %}
 
 

@@ -15,4 +15,5 @@ def kanisa_settings(context):
         'KANISA_ALLOW_REGISTRATION': conf.KANISA_REGISTRATION_ALLOWED,
         'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
         'KANISA_NAVIGATION': elements,
+        'KANISA_DEBUG_STATIC': conf.KANISA_DEBUG_STATIC,
     }

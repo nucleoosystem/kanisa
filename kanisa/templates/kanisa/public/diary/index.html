@@ -4,7 +4,9 @@
 <script type="text/javascript">
 var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
 </script>
+{% if KANISA_DEBUG_STATIC %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/regular_events.js"></script>
+{% endif %}
 {% endblock %}
 
 {% block precontent %}

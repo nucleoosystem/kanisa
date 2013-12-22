@@ -6,7 +6,11 @@ var list_navigation_url = "{% url 'kanisa_manage_xhr_list_navigation' %}";
 var navigation_up_url = "{% url 'kanisa_manage_xhr_navigation_up' %}";
 var navigation_down_url = "{% url 'kanisa_manage_xhr_navigation_down' %}";
 </script>
+
+{% if KANISA_DEBUG_STATIC %}
 <script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/kanisa_navigation.js"></script>
+{% endif %}
+
 {% endblock %}
 
 
