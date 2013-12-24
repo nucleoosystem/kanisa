@@ -9,6 +9,7 @@ from django.forms.widgets import (
 )
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
+from kanisa.forms.utils import KanisaMediaWidget
 from sorl.thumbnail.shortcuts import get_thumbnail
 
 
@@ -28,8 +29,8 @@ class KanisaIntroInputWidget(Textarea):
         super(KanisaIntroInputWidget, self).__init__(default_attrs)
 
 
-class KanisaMainInputWidget(Textarea):
-    class Media:
+class KanisaMainInputWidget(Textarea, KanisaMediaWidget):
+    class KanisaMedia:
         js = ('kanisa/js/main_input_widget.js', )
 
     def render(self, name, value, attrs=None):
@@ -44,7 +45,7 @@ class KanisaMainInputWidget(Textarea):
                                  'value': value})
 
 
-class KanisaThumbnailFileWidget(ClearableFileInput):
+class KanisaThumbnailFileWidget(ClearableFileInput, KanisaMediaWidget):
     template_with_initial = ('%(initial)s %(clear_template)s<br />'
                              '%(input_text)s: %(input)s')
 
@@ -68,7 +69,7 @@ class KanisaThumbnailFileWidget(ClearableFileInput):
         return super(KanisaThumbnailFileWidget,
                      self).render(name, value, attrs)
 
-    class Media:
+    class KanisaMedia:
         js = ('kanisa/js/thumbnail_widget.js', )
 
 
@@ -111,8 +112,8 @@ class BootstrapDateWidget(DateInput):
         js = ('kanisa/bootstrap/js/bootstrap-datepicker.js', )
 
 
-class KanisaAccountMultipleSelector(SelectMultiple):
-    class Media:
+class KanisaAccountMultipleSelector(SelectMultiple, KanisaMediaWidget):
+    class KanisaMedia:
         css = {'all': ['kanisa/chosen/chosen.min.css', ]}
         js = ('kanisa/chosen/chosen.jquery.min.js',
               'kanisa/js/account_selector.js')

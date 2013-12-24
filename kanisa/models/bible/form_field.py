@@ -3,11 +3,12 @@ from django import forms
 from django.core.urlresolvers import reverse_lazy
 from django.forms import util
 from django.forms.widgets import TextInput
+from kanisa.forms.utils import KanisaMediaWidget
 from .bible import to_passage, InvalidPassage
 
 
-class BiblePassageWidget(TextInput):
-    class Media:
+class BiblePassageWidget(TextInput, KanisaMediaWidget):
+    class KanisaMedia:
         js = ('kanisa/js/biblefield.js', )
 
 

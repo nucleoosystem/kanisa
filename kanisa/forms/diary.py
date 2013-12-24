@@ -5,6 +5,7 @@ from kanisa.forms import (
     BootstrapTimeField,
     BootstrapDateField
 )
+from kanisa.forms.utils import KanisaMediaWidget
 from kanisa.forms.widgets import (
     KanisaMainInputWidget,
     KanisaTinyInputWidget,
@@ -50,7 +51,7 @@ class RegularEventForm(KanisaBaseModelForm):
                    'image': KanisaThumbnailFileWidget(100, 100), }
 
 
-class ScheduledEventBaseForm(KanisaBaseModelForm):
+class ScheduledEventBaseForm(KanisaBaseModelForm, KanisaMediaWidget):
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
     end_date = BootstrapDateField(required=False)
@@ -99,7 +100,7 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
 
         return cleaned_data
 
-    class Media:
+    class KanisaMedia:
         js = ('kanisa/js/scheduled_event.js', )
 
 
