@@ -52,6 +52,6 @@ function bind_delete_handlers() {
     $("a.navigation_delete").click(quick_navigation_delete);
 }
 
-$(function() {
+$(document).ready(function() {
     bind_move_handlers();
 });

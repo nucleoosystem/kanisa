@@ -58,7 +58,7 @@ function bind_delete_handlers() {
     $("a.page_delete").click(quick_page_delete);
 }
 
-$(function() {
+$(document).ready(function() {
     $("#page_quick_create").submit(quick_page_create);
     bind_delete_handlers();
 });

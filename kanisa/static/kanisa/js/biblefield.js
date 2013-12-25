@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
     $(".biblepassagewidget").focusout(function() {
         var el = $(this);
         var input = el.val();

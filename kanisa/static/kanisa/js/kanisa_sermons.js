@@ -19,6 +19,6 @@ function quick_series_complete(event) {
            });
 }
 
-$(function() {
+$(document).ready(function() {
     $("a.series_complete").click(quick_series_complete);
 });

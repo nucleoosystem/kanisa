@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
     var controls_element = $(".thumbnailfileinput").parent();
     var checkbox = controls_element.find("input[type=checkbox]");
     var label = controls_element.find("label");

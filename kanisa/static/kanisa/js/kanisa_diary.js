@@ -42,6 +42,6 @@ function bind_diary_handlers() {
     $("a.scheduled_event_cancel").click(quick_event_delete);
 }
 
-$(function() {
+$(document).ready(function() {
     bind_diary_handlers();
 });

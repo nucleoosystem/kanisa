@@ -15,7 +15,7 @@ function toggle_document_details(event) {
 
 }
 
-$(function() {
+$(document).ready(function() {
     $(".document_details_short").click(toggle_document_details);
     $(".document_details_full").click(toggle_document_details);
 });

@@ -235,7 +235,7 @@ function insert_break(event) {
     get_matching_elements(thelink, "textarea").insertAtCaret("\n\n####\n\n");
 }
 
-$(function() {
+$(document).ready(function() {
     $(".main_input_widget_insert_image").click(get_images);
     $(".main_input_widget_add_attachment").click(get_attachments);
     $(".main_input_widget_insert_break").click(insert_break);

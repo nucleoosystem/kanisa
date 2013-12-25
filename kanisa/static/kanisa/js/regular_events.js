@@ -17,6 +17,6 @@ function update_list_of_regular_events(event) {
     link.parent().addClass("active");
 }
 
-$(function() {
+$(document).ready(function() {
     $(".event_category_filter").click(update_list_of_regular_events);
 });

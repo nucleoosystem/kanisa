@@ -57,7 +57,7 @@ function alert_failure(msg) {
     _alert_impl(msg, "alert-error");
 }
 
-$(function() {
+$(document).ready(function() {
     $("#schedule-weeks-events").mouseover(function() {
         $(".noautoschedule").fadeTo('fast', 0.3);
       }).mouseout(function(){
