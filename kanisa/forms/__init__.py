@@ -31,6 +31,14 @@ class KanisaPrettyForm(object):
                                 self.get_submit_text(),
                                 css_class=self.get_submit_css()))
         helper.form_class = 'form-horizontal'
+
+        if hasattr(self, 'kanisa_form_class'):
+            klass = self.kanisa_form_class
+        else:
+            klass = self.__class__.__name__.lower()
+
+        helper.form_class += ' ' + klass
+
         return helper
 
     def get_submit_css(self):
