@@ -7,9 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Needs fixes to:
-      - kanisa.js (probably just delete it, and move functionality
-        elsewhere)
     - Stop distributing unminified assets in the wheel
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
