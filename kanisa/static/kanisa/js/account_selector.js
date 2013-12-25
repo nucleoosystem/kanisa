@@ -1,6 +1,8 @@
 $(function() {
-    $("#id_musicians").chosen({
-        placeholder_text_multiple: "Select some musicians"
+    $(".kanisaaccountmultipleselector").chosen({
+        placeholder_text_multiple: "Select some users"
     });
-    $("#id_musicians_chosen").width("100%");
+    $(".kanisaaccountmultipleselector")
+        .siblings(".chosen-container")
+        .width("100%");
 });
