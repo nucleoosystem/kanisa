@@ -1,3 +1,3 @@
 $(function() {
-    $("#id_username").focus();
+    $(".kanisaloginform").find("#id_username").focus();
 });
