@@ -8,19 +8,8 @@ Version 1.0
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
     - Needs fixes to:
-      - biblefield.js
-      - kanisa_diary.js
-      - kanisa.js
-      - kanisa_navigation.js
-      - kanisa_pages.js
-      - kanisa_sermons.js
-      - main_input_widget.js
-      - members_documents.js
-      - regular_events.js
-      - scheduled_event.js
-      - services_add_song.js
-      - services.js
-      - thumbnail_widget.js
+      - kanisa.js (probably just delete it, and move functionality
+        elsewhere)
     - Stop distributing unminified assets in the wheel
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
