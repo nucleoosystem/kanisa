@@ -9,6 +9,8 @@
 
 {% if KANISA_DEBUG_STATIC %}
 <link href="{{ STATIC_URL }}kanisa/css/kanisa.css" rel="stylesheet">
+{% else %}
+<link href="{{ STATIC_URL }}kanisa/css/kanisa.min.css" rel="stylesheet">
 {% endif %}
 
 {% include 'kanisa/_icons.html' %}
@@ -24,6 +26,9 @@
 <script src="{{ STATIC_URL }}kanisa/js/kanisa_alerts.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/kanisa_csrf.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/kanisa_popups.js"></script>
+<script src="{{ STATIC_URL }}kanisa/js/kanisa_songs.js"></script>
+{% else %}
+<script src="{{ STATIC_URL }}kanisa/js/kanisa.min.js"></script>
 {% endif %}
 
 {% if form %}
