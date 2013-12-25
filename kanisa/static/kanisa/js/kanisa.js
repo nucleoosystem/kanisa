@@ -49,10 +49,6 @@ function _alert_impl(msg, alert_class) {
     $(".js-alert").slideDown('fast');
 }
 
-function alert_success(msg) {
-    _alert_impl(msg, "alert-success");
-}
-
 function alert_failure(msg) {
     _alert_impl(msg, "alert-error");
 }
