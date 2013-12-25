@@ -38,7 +38,7 @@ function update_navigation_list() {
 
 function quick_navigation_delete(event) {
     event.preventDefault();
-    title = $(this).attr("data-navigation-title");
+    var title = $(this).attr("data-navigation-title");
     if (confirm("Are you sure you want to delete the navigation element \"" + title + "\"?")) {
         $.post($(this).attr("href"),
                function(data) {
