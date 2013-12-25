@@ -60,7 +60,7 @@ function alert_failure(msg) {
 $(document).ready(function() {
     $("#schedule-weeks-events").mouseover(function() {
         $(".noautoschedule").fadeTo('fast', 0.3);
-      }).mouseout(function(){
+      }).mouseout(function() {
         $(".noautoschedule").fadeTo('fast', 1.0);
     });
 
