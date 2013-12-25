@@ -7,6 +7,10 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
+    - Fix overly general jQuery in services.js (see the
+      $(document).ready stuff)
+    - Rename KanisaMediaWidget to something more generic, if we're
+      going to use it for forms too
     - Stop distributing unminified assets in the wheel
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
