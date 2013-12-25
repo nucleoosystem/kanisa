@@ -26,7 +26,6 @@ function navigation_move_down(event) {
 function bind_move_handlers() {
     $("a.move_up").click(navigation_move_up);
     $("a.move_down").click(navigation_move_down);
-    bind_delete_handlers();
 }
 
 function update_navigation_list() {
@@ -54,4 +53,5 @@ function bind_delete_handlers() {
 
 $(document).ready(function() {
     bind_move_handlers();
+    bind_delete_handlers();
 });
