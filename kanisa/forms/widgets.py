@@ -91,8 +91,8 @@ class BootstrapTimeWidget(TimeInput):
         super(BootstrapTimeWidget, self).__init__(*args, **kwargs)
 
     class Media:
-        css = {'all': ['kanisa/bootstrap/css/timepicker.css', ]}
-        js = ('kanisa/bootstrap/js/bootstrap-timepicker.js', )
+        css = {'all': ['kanisa/vendor/bootstrap/css/timepicker.css', ]}
+        js = ('kanisa/vendor/bootstrap/js/bootstrap-timepicker.js', )
 
 
 class BootstrapDateWidget(DateInput):
@@ -108,8 +108,8 @@ class BootstrapDateWidget(DateInput):
         super(BootstrapDateWidget, self).__init__(*args, **kwargs)
 
     class Media:
-        css = {'all': ['kanisa/bootstrap/css/datepicker.css', ]}
-        js = ('kanisa/bootstrap/js/bootstrap-datepicker.js', )
+        css = {'all': ['kanisa/vendor/bootstrap/css/datepicker.css', ]}
+        js = ('kanisa/vendor/bootstrap/js/bootstrap-datepicker.js', )
 
 
 class KanisaAccountMultipleSelector(SelectMultiple, KanisaMediaWidget):
