@@ -22,6 +22,7 @@ Version 1.0
 Version 1.1
 ===========
 
+- Figure out how to run jslint as part of the minification process
 - Members' directory?
   - Add a setting for allowing email addresses to be shared with other
     members (off by default)
