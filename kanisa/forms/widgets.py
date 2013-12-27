@@ -114,6 +114,6 @@ class BootstrapDateWidget(DateInput):
 
 class KanisaAccountMultipleSelector(SelectMultiple, KanisaMediaWidget):
     class KanisaMedia:
-        css = {'all': ['kanisa/chosen/chosen.min.css', ]}
-        js = ('kanisa/chosen/chosen.jquery.min.js',
+        css = {'all': ['kanisa/vendor/chosen/chosen.min.css', ]}
+        js = ('kanisa/vendor/chosen/chosen.jquery.min.js',
               'kanisa/js/account_selector.js')
