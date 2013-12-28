@@ -26,6 +26,7 @@ setup(
         "django-recurrence==1.0.1",
         "lxml==3.2.4",
         "markdown==2.3.1",
+        "minify==0.1.4",
         "mutagen==1.22",
         "sorl-thumbnail==11.12",
         "tweepy==1.11",

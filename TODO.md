@@ -7,7 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Start serving minified assets if `KANISA_DEBUG_STATIC` is false
     - Change minification script to generate names containing a hash
       of the contents, add template tags for generating the right file
       name somehow (and probably caching)

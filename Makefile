@@ -4,7 +4,16 @@ cleandist:
 	rm -rf dist/
 	python setup.py bdist_wheel
 
-git-check:
+reminify:
+	rm -f kanisa/static/kanisa/js/minified/*.js
+	rm -f kanisa/static/kanisa/css/minified/*.css
+	python setup.py minify_management_js
+	python setup.py minify_public_js
+	python setup.py minify_css
+
+# We reminify the JavaScript to ensure that no changes have been made
+# which haven't been propagated to the minified JavaScript.
+git-check: reminify
 	git diff-files --quiet
 
 test:

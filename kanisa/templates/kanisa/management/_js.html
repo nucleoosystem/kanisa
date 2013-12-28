@@ -1,3 +1,4 @@
+{% if KANISA_DEBUG_STATIC %}
 <script src="{{ STATIC_URL }}kanisa/js/management/account_selector.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/management/biblefield.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/management/kanisa_diary.js"></script>
@@ -8,3 +9,6 @@
 <script src="{{ STATIC_URL }}kanisa/js/management/scheduled_event.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/management/services.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/management/thumbnail_widget.js"></script>
+{% else %}
+<script src="{{ STATIC_URL }}kanisa/js/minified/kanisa-management.min.js"></script>
+{% endif %}
