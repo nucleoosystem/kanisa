@@ -7,8 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Fix overly general jQuery in services.js (see the
-      $(document).ready stuff)
     - Distinguish between staff JS and public/members JS, so we can
       have two minified files
     - Add a public/_js.html which includes all public/members

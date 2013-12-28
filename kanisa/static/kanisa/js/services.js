@@ -76,7 +76,7 @@ function on_date_change_evt(event) {
 }
 
 $(document).ready(function() {
-    $("#id_band").change(on_band_change);
-    $("#id_date").change(on_date_change_evt);
-    $("#div_id_event").hide();
+    $(".serviceform #id_band").change(on_band_change);
+    $(".serviceform #id_date").change(on_date_change_evt);
+    $(".serviceform #div_id_event").hide();
 });
