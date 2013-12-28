@@ -8,9 +8,9 @@
 <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.0.3/css/bootstrap-theme.min.css" />
 
 {% if KANISA_DEBUG_STATIC %}
-<link href="{{ STATIC_URL }}kanisa/css/kanisa.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/kanisa.css" />
 {% else %}
-<link href="{{ STATIC_URL }}kanisa/css/minified/kanisa.{{ KANISA_CSS_HASH }}.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/minified/kanisa.{{ KANISA_CSS_HASH }}.css" />
 {% endif %}
 
 {% include 'kanisa/_icons.html' %}
