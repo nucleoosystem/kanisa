@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'haystack',
     'mptt',
     'recurrence',
+    'south',
     'kanisa',
 )
 
