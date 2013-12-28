@@ -5,6 +5,15 @@ Version 1.0
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
 - Upgrade to latest Twitter Bootstrap
+  - Fix weird styling of sidebar for pages with children
+  - Fix weird styling of sidebar for pages without parents
+  - Fix carousel styling
+  - Fix breadcrumb padding?
+  - Fix header - logo should be flush left
+  - Fix default-styled buttons (e.g. on viewing page)
+  - Fix inline form for page creation
+  - Fix CCLI view JS, and form layout
+  - Ensure service planning management view uses full width
 
 Version 1.1
 ===========
