@@ -10,5 +10,5 @@
 <script src="{{ STATIC_URL }}kanisa/js/management/services.js"></script>
 <script src="{{ STATIC_URL }}kanisa/js/management/thumbnail_widget.js"></script>
 {% else %}
-<script src="{{ STATIC_URL }}kanisa/js/minified/kanisa-management.min.js"></script>
+<script src="{{ STATIC_URL }}kanisa/js/minified/kanisa-management.{{ KANISA_MANAGEMENT_JS_HASH }}.js"></script>
 {% endif %}

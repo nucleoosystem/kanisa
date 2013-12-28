@@ -1,5 +1,6 @@
 from django.core.cache import cache
 from kanisa import conf
+from kanisa import static_conf
 from kanisa.models import NavigationElement
 
 
@@ -16,4 +17,7 @@ def kanisa_settings(context):
         'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
         'KANISA_NAVIGATION': elements,
         'KANISA_DEBUG_STATIC': conf.KANISA_DEBUG_STATIC,
+        'KANISA_MANAGEMENT_JS_HASH': static_conf.KANISA_MANAGEMENT_JS_HASH,
+        'KANISA_PUBLIC_JS_HASH': static_conf.KANISA_PUBLIC_JS_HASH,
+        'KANISA_CSS_HASH': static_conf.KANISA_CSS_HASH,
     }
