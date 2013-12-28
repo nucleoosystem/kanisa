@@ -30,6 +30,8 @@
 {% else %}
 <script src="{{ STATIC_URL }}kanisa/js/kanisa.min.js"></script>
 {% endif %}
+{% block extrajs %}
+{% endblock %}
 
 {% if form %}
 {{ form.media }}
