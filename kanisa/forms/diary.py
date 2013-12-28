@@ -52,6 +52,8 @@ class RegularEventForm(KanisaBaseModelForm):
 
 
 class ScheduledEventBaseForm(KanisaBaseModelForm, KanisaMediaWidget):
+    kanisa_form_class = 'scheduledevent'
+
     start_time = BootstrapTimeField()
     date = BootstrapDateField()
     end_date = BootstrapDateField(required=False)

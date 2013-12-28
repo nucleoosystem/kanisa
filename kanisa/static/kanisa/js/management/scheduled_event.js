@@ -54,8 +54,8 @@ function set_initial_multiday_state() {
 }
 
 $(document).ready(function() {
-    $("#id_event").change(on_event_type_selection_change);
-    $("#id_is_multi_day").change(on_event_multi_day_change);
+    $(".scheduledevent #id_event").change(on_event_type_selection_change);
+    $(".scheduledevent #id_is_multi_day").change(on_event_multi_day_change);
 
     set_initial_multiday_state();
 });
