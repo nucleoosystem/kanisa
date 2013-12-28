@@ -5,6 +5,8 @@ cleandist:
 	python setup.py bdist_wheel
 
 reminify:
+	rm -f kanisa/static/kanisa/js/minified/*.js
+	rm -f kanisa/static/kanisa/css/minified/*.css
 	python setup.py minify_management_js
 	python setup.py minify_public_js
 	python setup.py minify_css
