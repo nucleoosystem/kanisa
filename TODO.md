@@ -13,6 +13,7 @@ Version 1.0
       JS/minified public JS file
     - Add a management/_js.html which includes all staff JS/minified
       staff JS file
+    - Remove all media references in forms/widgets Python
     - Remove KanisaMediaWidget code
     - Stop distributing unminified assets in the wheel
 - Add South migrations
