@@ -7,7 +7,6 @@ from kanisa.forms import (
     KanisaBaseForm,
     KanisaBaseModelForm
 )
-from kanisa.forms.utils import KanisaMediaWidget
 from kanisa.models import (
     Song,
     Service,
@@ -23,7 +22,7 @@ class AddSongToServiceForm(KanisaBaseForm):
     submit_text = 'Add Song'
 
 
-class CreateSongForm(KanisaBaseModelForm, KanisaMediaWidget):
+class CreateSongForm(KanisaBaseModelForm):
     submit_text = 'Create Song'
 
     def get_form_helper(self):
@@ -40,7 +39,7 @@ class CreateSongForm(KanisaBaseModelForm, KanisaMediaWidget):
     class Meta:
         model = Song
 
-    class KanisaMedia:
+    class Media:
         js = ('kanisa/js/kanisa_songs.js', )
 
 
@@ -65,7 +64,7 @@ class MultipleAccountChoiceField(forms.ModelMultipleChoiceField):
         return full_name or obj.username
 
 
-class ServiceForm(KanisaBaseModelForm, KanisaMediaWidget):
+class ServiceForm(KanisaBaseModelForm):
     def __init__(self, *args, **kwargs):
         super(ServiceForm, self).__init__(*args, **kwargs)
 
@@ -93,7 +92,7 @@ class ServiceForm(KanisaBaseModelForm, KanisaMediaWidget):
         required=False
     )
 
-    class KanisaMedia:
+    class Media:
         js = ('kanisa/js/services.js', )
 
     class Meta:
