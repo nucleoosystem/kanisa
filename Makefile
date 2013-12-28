@@ -12,6 +12,7 @@ reminify:
 # We reminify the JavaScript to ensure that no changes have been made
 # which haven't been propagated to the minified JavaScript.
 git-check: reminify
+	git status
 	git diff-files --quiet
 
 test:
