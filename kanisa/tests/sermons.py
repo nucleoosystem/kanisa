@@ -134,28 +134,28 @@ class SermonTest(TestCase):
                              date=date(2012, 5, 13))
 
         self.assertEqual(render(series1),
-                         ('<span class="subtitle">\n(A series on '
+                         ('<small>\n(A series on '
                           '<em>Psalms</em>: 29th April 2012 &ndash; '
-                          ')\n</span>'))
+                          ')\n</small>'))
 
         series1.active = False
         self.assertEqual(render(series1),
-                         ('<span class="subtitle">\n(A series on '
+                         ('<small>\n(A series on '
                           '<em>Psalms</em>: 29th April 2012 &ndash; '
-                          '13th May 2012)\n</span>'))
+                          '13th May 2012)\n</small>'))
 
         series1.passage = None
         self.assertEqual(render(series1),
-                         ('<span class="subtitle">\n(29th April 2012 '
-                          '&ndash; 13th May 2012)\n</span>'))
+                         ('<small>\n(29th April 2012 '
+                          '&ndash; 13th May 2012)\n</small>'))
 
         series1.active = True
         self.assertEqual(render(series1),
-                         ('<span class="subtitle">\n(29th April 2012 '
-                          '&ndash; )\n</span>'))
+                         ('<small>\n(29th April 2012 '
+                          '&ndash; )\n</small>'))
 
         # Series 2 has no sermons
         series2 = SermonSeriesFactory.create(passage='John 21')
         self.assertEqual(render(series2),
-                         ('<span class="subtitle">\n(A series on '
-                          '<em>John 21</em>)\n</span>'))
+                         ('<small>\n(A series on '
+                          '<em>John 21</em>)\n</small>'))
