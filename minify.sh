@@ -26,6 +26,6 @@ popd
 rm -f kanisa/static_conf.py
 touch kanisa/static_conf.py
 
-echo "KANISA_MANAGEMENT_JS_HASH='${management_js_hash}'" >> kanisa/static_conf.py
-echo "KANISA_PUBLIC_JS_HASH='${public_js_hash}'" >> kanisa/static_conf.py
-echo "KANISA_CSS_HASH='${css_hash}'" >> kanisa/static_conf.py
+echo "KANISA_MANAGEMENT_JS_HASH = '${management_js_hash}'" >> kanisa/static_conf.py
+echo "KANISA_PUBLIC_JS_HASH = '${public_js_hash}'" >> kanisa/static_conf.py
+echo "KANISA_CSS_HASH = '${css_hash}'" >> kanisa/static_conf.py
