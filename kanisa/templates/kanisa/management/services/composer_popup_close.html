@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     {% include "kanisa/_head.html" %}
+    {% block extrajs %}
+    {% endblock %}
     <script type="text/javascript">
       window.opener.update_with_composer({{ object.pk }}, "{{ object }}");
       window.close();
