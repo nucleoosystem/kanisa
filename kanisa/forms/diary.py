@@ -100,7 +100,7 @@ class ScheduledEventBaseForm(KanisaBaseModelForm, KanisaMediaWidget):
 
         return cleaned_data
 
-    class KanisaMedia:
+    class Media:
         js = ('kanisa/js/management/scheduled_event.js', )
 
 
