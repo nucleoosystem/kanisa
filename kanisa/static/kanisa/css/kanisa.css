@@ -32,17 +32,6 @@ h1.primary {
     margin-bottom: 0.7em;
 }
 
-h1 .subtitle,
-h2 .subtitle {
-    font-weight: normal;
-    font-size: 60%;
-    color: #555;
-}
-
-h4 .subtitle {
-    font-weight: normal;
-}
-
 label.requiredField {
     font-weight: bold;
 }
