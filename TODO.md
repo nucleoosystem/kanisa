@@ -7,13 +7,21 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
+    - Remove overly generic JS in document.ready for
+      management/scheduled_event.js
     - Add a public/_js.html which includes all public/members
       JS/minified public JS file
     - Add a management/_js.html which includes all staff JS/minified
       staff JS file
-    - Remove all media references in forms/widgets Python
+    - Remove all JS references in forms/widgets Python
+    - Remove all CSS references in forms/widgets Python
+    - Remove all JS/CSS references in non-base templates
     - Remove KanisaMediaWidget code
+    - Change minification script to generate names containing a hash
+      of the contents, add template tags for generating the right file
+      name somehow (and probably caching)
     - Stop distributing unminified assets in the wheel
+    - Figure out if all the files in public need to be public
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
