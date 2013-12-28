@@ -78,5 +78,5 @@ function on_date_change_evt(event) {
 $(document).ready(function() {
     $("#id_band").change(on_band_change);
     $("#id_date").change(on_date_change_evt);
-    $("#id_event").parent().parent().hide();
+    $("#div_id_event").hide();
 });
