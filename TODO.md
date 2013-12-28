@@ -11,6 +11,9 @@ Version 1.0
       JS/minified public JS file
     - Add a management/_js.html which includes all staff JS/minified
       staff JS file
+    - Ensure the above templates are always included in the relevant
+      _head.html files (management template gets public and management
+      JS)
     - Remove all JS references in forms/widgets Python
     - Remove all CSS references in forms/widgets Python
     - Remove all JS/CSS references in non-base templates
