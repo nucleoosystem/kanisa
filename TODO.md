@@ -7,10 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Add a public/_js.html which includes all public/members
-      JS/minified public JS file
-    - Add a management/_js.html which includes all staff JS/minified
-      staff JS file
     - Ensure the above templates are always included in the relevant
       _head.html files (management template gets public and management
       JS)
