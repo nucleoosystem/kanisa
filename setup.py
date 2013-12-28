@@ -29,6 +29,7 @@ setup(
         "minify==0.1.4",
         "mutagen==1.22",
         "sorl-thumbnail==11.12",
+        "south==0.8.4",
         "tweepy==1.11",
         "Whoosh==2.4.1",
         "wsgiref==0.1.2",
