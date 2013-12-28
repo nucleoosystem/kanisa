@@ -31,7 +31,7 @@ class KanisaIntroInputWidget(Textarea):
 
 class KanisaMainInputWidget(Textarea, KanisaMediaWidget):
     class KanisaMedia:
-        js = ('kanisa/js/main_input_widget.js', )
+        js = ('kanisa/js/management/main_input_widget.js', )
 
     def render(self, name, value, attrs=None):
         if value is None:
@@ -70,7 +70,7 @@ class KanisaThumbnailFileWidget(ClearableFileInput, KanisaMediaWidget):
                      self).render(name, value, attrs)
 
     class KanisaMedia:
-        js = ('kanisa/js/thumbnail_widget.js', )
+        js = ('kanisa/js/management/thumbnail_widget.js', )
 
 
 class KanisaInlineCheckboxes(InlineCheckboxes):
@@ -116,4 +116,4 @@ class KanisaAccountMultipleSelector(SelectMultiple, KanisaMediaWidget):
     class KanisaMedia:
         css = {'all': ['kanisa/vendor/chosen/chosen.min.css', ]}
         js = ('kanisa/vendor/chosen/chosen.jquery.min.js',
-              'kanisa/js/account_selector.js')
+              'kanisa/js/management/account_selector.js')

@@ -9,7 +9,7 @@ from .bible import to_passage, InvalidPassage
 
 class BiblePassageWidget(TextInput, KanisaMediaWidget):
     class KanisaMedia:
-        js = ('kanisa/js/biblefield.js', )
+        js = ('kanisa/js/management/biblefield.js', )
 
 
 class BiblePassageFormField(forms.CharField):

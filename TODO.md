@@ -7,8 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Distinguish between staff JS and public/members JS, so we can
-      have two minified files
     - Add a public/_js.html which includes all public/members
       JS/minified public JS file
     - Add a management/_js.html which includes all staff JS/minified

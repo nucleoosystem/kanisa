@@ -40,7 +40,7 @@ class CreateSongForm(KanisaBaseModelForm):
         model = Song
 
     class Media:
-        js = ('kanisa/js/kanisa_songs.js', )
+        js = ('kanisa/js/public/kanisa_songs.js', )
 
 
 class EventChoiceField(forms.ModelChoiceField):
@@ -93,7 +93,7 @@ class ServiceForm(KanisaBaseModelForm):
     )
 
     class Media:
-        js = ('kanisa/js/services.js', )
+        js = ('kanisa/js/management/services.js', )
 
     class Meta:
         fields = ('date', 'event', 'band', 'band_leader', 'musicians', )
