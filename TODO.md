@@ -14,6 +14,10 @@ Version 1.0
   - Fix inline form for page creation
   - Fix CCLI view JS, and form layout
   - Ensure service planning management view uses full width
+  - Check datepicker works
+  - Check timepicker works
+  - Upgrade to latest 1.x series jQuery (required, according to the
+    docs)
 
 Version 1.1
 ===========
@@ -25,7 +29,6 @@ Version 1.1
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
   time-limited)
-- Upgrade to latest 1.x series jQuery
 - Figure out how to run jslint as part of the minification process
 - Members' directory?
   - Add a setting for allowing email addresses to be shared with other
