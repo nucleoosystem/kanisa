@@ -3,6 +3,9 @@
 <html lang="en">
   <head>
   {% include "kanisa/_head.html" %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/chosen/chosen.min.css" />
+  <script src="{{ STATIC_URL }}kanisa/vendor/chosen/chosen.jquery.min.js"></script>
+
   {% include "kanisa/management/_js.html" %}
   {% block extrajs %}
   {% endblock %}
