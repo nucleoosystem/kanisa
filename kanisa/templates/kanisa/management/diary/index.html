@@ -5,9 +5,6 @@
 var schedule_event_url = "{% url 'kanisa_manage_xhr_diary_schedule_regular' %}";
 var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|date:"Ymd" %}";
 </script>
-{% if KANISA_DEBUG_STATIC %}
-<script type="text/javascript" src="{{ STATIC_URL }}kanisa/js/management/kanisa_diary.js"></script>
-{% endif %}
 {% endblock %}
 
 {% block content %}

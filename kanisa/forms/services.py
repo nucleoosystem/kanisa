@@ -39,9 +39,6 @@ class CreateSongForm(KanisaBaseModelForm):
     class Meta:
         model = Song
 
-    class Media:
-        js = ('kanisa/js/public/kanisa_songs.js', )
-
 
 class EventChoiceField(forms.ModelChoiceField):
     # This is only used when the field is hidden, and is designed to
@@ -91,9 +88,6 @@ class ServiceForm(KanisaBaseModelForm):
         get_user_model().objects.all(),
         required=False
     )
-
-    class Media:
-        js = ('kanisa/js/management/services.js', )
 
     class Meta:
         fields = ('date', 'event', 'band', 'band_leader', 'musicians', )

@@ -22,15 +22,8 @@
 
 <script src="{{ STATIC_URL }}kanisa/vendor/bootstrap/js/jquery-1.7.2.min.js"></script>
 <script src="{{ STATIC_URL }}kanisa/vendor/bootstrap/js/bootstrap.min.js"></script>
+{% include "kanisa/public/_js.html" %}
 
-{% if KANISA_DEBUG_STATIC %}
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_alerts.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_csrf.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_popups.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_songs.js"></script>
-{% else %}
-<script src="{{ STATIC_URL }}kanisa/js/kanisa.min.js"></script>
-{% endif %}
 {% block extrajs %}
 {% endblock %}
 

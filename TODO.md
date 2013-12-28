@@ -7,12 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Ensure the above templates are always included in the relevant
-      _head.html files (management template gets public and management
-      JS)
-    - Remove all JS references in forms/widgets Python
-    - Remove all CSS references in forms/widgets Python
-    - Remove all JS/CSS references in non-base templates
     - Remove KanisaMediaWidget code
     - Change minification script to generate names containing a hash
       of the contents, add template tags for generating the right file
