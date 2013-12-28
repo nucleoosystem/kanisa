@@ -7,7 +7,6 @@ Version 1.0
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
   - Ensure we're serving compressed assets
-    - Stop distributing unminified assets in the wheel
     - Figure out if all the files in public need to be public
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
