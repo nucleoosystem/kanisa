@@ -2,6 +2,13 @@ Version 1.0
 ===========
 
 - Figure out what should go on the management home page (#41)
+- Ensure *some* links show in the nav on smaller screens - perhaps
+  just home and account bar?
+- Upgrade to latest Twitter Bootstrap
+
+Version 1.1
+===========
+
 - Change external requirements to better equivalents
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see
@@ -9,14 +16,7 @@ Version 1.0
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
   time-limited)
-- Ensure *some* links show in the nav on smaller screens - perhaps
-  just home and account bar?
-
-Version 1.1
-===========
-
 - Upgrade to latest 1.x series jQuery
-- Upgrade to latest Twitter Bootstrap
 - Figure out how to run jslint as part of the minification process
 - Members' directory?
   - Add a setting for allowing email addresses to be shared with other
