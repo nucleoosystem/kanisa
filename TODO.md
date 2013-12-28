@@ -6,13 +6,6 @@ Version 1.0
   - Switch to Pillow (might need newer version of sorl-thumbnail,
     which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
-  - Ensure we're serving compressed assets
-    - Figure out if all the files in public need to be public (make
-      sure to adjust `public/_js.html` and `management/_js.html`
-      accordingly)
-      - kanisa_alerts.js
-      - kanisa_popups.js
-      - kanisa_songs.js
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
