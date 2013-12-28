@@ -33,6 +33,8 @@ Version 1.0
 Version 1.1
 ===========
 
+- Upgrade to latest 1.x series jQuery
+- Upgrade to latest Twitter Bootstrap
 - Figure out how to run jslint as part of the minification process
 - Members' directory?
   - Add a setting for allowing email addresses to be shared with other
