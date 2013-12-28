@@ -9,8 +9,13 @@ Version 1.0
   - Ensure we're serving compressed assets
     - Fix overly general jQuery in services.js (see the
       $(document).ready stuff)
-    - Rename KanisaMediaWidget to something more generic, if we're
-      going to use it for forms too
+    - Distinguish between staff JS and public/members JS, so we can
+      have two minified files
+    - Add a public/_js.html which includes all public/members
+      JS/minified public JS file
+    - Add a management/_js.html which includes all staff JS/minified
+      staff JS file
+    - Remove KanisaMediaWidget code
     - Stop distributing unminified assets in the wheel
 - Add South migrations
 - Replace banners with fixed call-out content, perhaps defaulting to
