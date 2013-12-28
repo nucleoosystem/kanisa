@@ -22,23 +22,23 @@
   </td>
   <td>
     {% if not theuser.is_active %}
-      <i class="icon icon-exclamation-sign" title="{{ theuser.get_familiar_name }}'s account is pending approval"></i>
+      <i class="glyphicon glyphicon-exclamation-sign" title="{{ theuser.get_familiar_name }}'s account is pending approval"></i>
     {% else %}
       {% if theuser.is_superuser %}
-        <i class="icon icon-star" title="{{ theuser.get_familiar_name }} is an administrator"></i>
+        <i class="glyphicon glyphicon-star" title="{{ theuser.get_familiar_name }} is an administrator"></i>
       {% endif %}
     {% endif %}
 
     <a href="{% url 'kanisa_manage_users_update' theuser.pk %}">{% firstof theuser.username "(empty)" %}</a>
 
     {% if user.pk = theuser.pk %}
-    <span class="muted">
+    <span class="text-muted">
       (this is you)
     </span>
     {% endif %}
 
     {% if not theuser.is_active %}
-    <a class="btn btn-mini btn-info" style="float: right" href="{% url 'kanisa_manage_users_activate' theuser.pk %}">
+    <a class="btn btn-xs btn-info" style="float: right" href="{% url 'kanisa_manage_users_activate' theuser.pk %}">
       Activate
     </a>
     {% endif %}

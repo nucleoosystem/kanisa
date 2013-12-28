@@ -19,7 +19,7 @@
         {% if document.details %}
         <div class="document_details_short">
           {{ document.details|kanisa_markdown|striptags|truncatewords_html:20 }}
-          <span class="muted">(Click to expand)</span>
+          <span class="text-muted">(Click to expand)</span>
         </div>
         <div class="document_details_full" style="display:none">
           {{ document.details|kanisa_markdown }}

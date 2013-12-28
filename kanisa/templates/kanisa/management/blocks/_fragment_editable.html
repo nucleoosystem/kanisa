@@ -1,8 +1,8 @@
 {% load kanisa_markup %}
 
 <div class="editable_block_wrapper">
-<a class="btn btn-mini editable_block_btn" href="{% url 'kanisa_manage_blocks_update' slug %}">
-  <i class="icon icon-edit"></i>
+<a class="btn btn-xs editable_block_btn" href="{% url 'kanisa_manage_blocks_update' slug %}">
+  <i class="glyphicon glyphicon-edit"></i>
 </a>
 {{ block.contents|kanisa_markdown }}
 </div>

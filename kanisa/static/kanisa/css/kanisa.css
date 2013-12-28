@@ -139,8 +139,8 @@ td h5 {
     width: 40px;
 }
 
-.sidebar-nav {
-    padding: 8px 0;
+ul.sidebar > li >a {
+    padding: 7px;
 }
 
 textarea.kanisamaininputwidget {
@@ -162,6 +162,13 @@ textarea.kanisamaininputwidget {
 
 .navbar-text a {
     color: inherit;
+}
+
+.navbar-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
 }
 
 .editable_block_wrapper {

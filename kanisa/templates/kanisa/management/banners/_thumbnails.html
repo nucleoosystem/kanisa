@@ -3,7 +3,7 @@
 {% if banner_list %}
 <ul class="thumbnails">
   {% for banner in banner_list %}
-  <li class="span3">
+  <li class="col-md-3">
     <div class="thumbnail">
       <div class="thumbnail-caption">
         {% thumbnail banner.image "260x180" crop="center" as im %}
@@ -40,12 +40,12 @@
 
         <p>
           <a class="btn" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
-            <i class="icon-edit"></i>
+            <i class="glyphicon glyphicon-edit"></i>
             Edit
           </a>
           {% if banner.active %}
           <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}" title="Retiring a banner just stops it showing up to your site's users, it does not delete it permanently">
-            <i class="icon-trash icon-white"></i>
+            <i class="glyphicon glyphicon-trash "glyphicon glyphicon-white"></i>
             Retire
           </a>
           {% endif %}

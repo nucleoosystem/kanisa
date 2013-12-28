@@ -1,17 +1,16 @@
 {% load kanisa_sidebar %}
 
-<div class="sidebar-nav well">
-  <ul class="nav nav-list">
+  <ul class="nav nav-stacked sidebar">
     <li>
       <a href="{% url 'kanisa_manage_index' %}">
-        <i class="icon-home"></i>
+        <i class="glyphicon glyphicon-home"></i>
         Home
       </a>
     </li>
     {% if perms.kanisa.manage_pages %}
     <li{% if kanisa_nav_component = "pages" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_pages' %}">
-        <i class="icon-font"></i>
+        <i class="glyphicon glyphicon-font"></i>
         Pages
       </a>
     </li>
@@ -19,7 +18,7 @@
     {% if perms.kanisa.manage_diary %}
     <li{% if kanisa_nav_component = "diary" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_diary' %}">
-        <i class="icon-calendar"></i>
+        <i class="glyphicon glyphicon-calendar"></i>
         Diary
       </a>
     </li>
@@ -27,7 +26,7 @@
     {% if perms.kanisa.manage_sermons %}
     <li{% if kanisa_nav_component = "sermons" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_sermons' %}">
-        <i class="icon-headphones"></i>
+        <i class="glyphicon glyphicon-headphones"></i>
         Sermons
       </a>
     </li>
@@ -35,7 +34,7 @@
     {% if perms.kanisa.manage_banners %}
     <li{% if kanisa_nav_component = "banners" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_banners' %}">
-        <i class="icon-picture"></i>
+        <i class="glyphicon glyphicon-picture"></i>
         Banners
       </a>
     </li>
@@ -44,7 +43,7 @@
     {% if perms.kanisa.manage_documents %}
     <li{% if kanisa_nav_component = "documents" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_documents' %}">
-        <i class="icon-file"></i>
+        <i class="glyphicon glyphicon-file"></i>
         Documents
       </a>
     </li>
@@ -52,7 +51,7 @@
     {% if perms.kanisa.manage_social %}
     <li{% if kanisa_nav_component = "social" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_social' %}">
-        <i class="icon-fire"></i>
+        <i class="glyphicon glyphicon-fire"></i>
         Social
       </a>
     </li>
@@ -60,7 +59,7 @@
     {% if perms.kanisa.manage_users %}
     <li{% if kanisa_nav_component = "users" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_users' %}">
-        <i class="icon-user"></i>
+        <i class="glyphicon glyphicon-user"></i>
         Users
 
         {% kanisa_inactive_users as inactive_users %}
@@ -75,7 +74,7 @@
     {% if perms.kanisa.manage_navigation %}
     <li{% if kanisa_nav_component = "navigation" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_navigation' %}">
-        <i class="icon-road"></i>
+        <i class="glyphicon glyphicon-road"></i>
         Navigation
       </a>
     </li>
@@ -83,7 +82,7 @@
     {% if perms.kanisa.manage_media %}
     <li{% if kanisa_nav_component = "media" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_media' %}">
-        <i class="icon-camera"></i>
+        <i class="glyphicon glyphicon-camera"></i>
         Media
       </a>
     </li>
@@ -91,7 +90,7 @@
     {% if perms.kanisa.manage_blocks %}
     <li{% if kanisa_nav_component = "blocks" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_blocks' %}">
-        <i class="icon-th-large"></i>
+        <i class="glyphicon glyphicon-th-large"></i>
         Content Blocks
       </a>
     </li>
@@ -99,7 +98,7 @@
     {% if perms.kanisa.manage_services %}
     <li{% if kanisa_nav_component = "services" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_services' %}">
-        <i class="icon-bullhorn"></i>
+        <i class="glyphicon glyphicon-bullhorn"></i>
         Service Planning
       </a>
     </li>
@@ -107,7 +106,7 @@
     {% if user.is_superuser %}
     <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
       <a href="{% url 'kanisa_manage_branding' %}">
-        <i class="icon-tag"></i>
+        <i class="glyphicon glyphicon-tag"></i>
         Branding
       </a>
     </li>
@@ -115,13 +114,11 @@
   </ul>
   <hr />
 
-  <ul class="nav nav-list">
+  <ul class="nav nav-stacked sidebar">
     <li>
       <a href="{% url 'kanisa_members_index' %}">
-        <i class="icon-lock"></i>
+        <i class="glyphicon glyphicon-lock"></i>
         Your Account
       </a>
     </li>
   </ul>
-
-</div>

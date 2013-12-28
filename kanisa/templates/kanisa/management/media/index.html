@@ -5,8 +5,8 @@
 {% block content %}
 
 <p>
-  <a href="{% url 'kanisa_manage_media_inlineimage_create' %}" class="btn btn-large btn-success">
-    <i class="icon-white icon-plus"></i>
+  <a href="{% url 'kanisa_manage_media_inlineimage_create' %}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Upload a new inline image
   </a>
 </p>
@@ -16,7 +16,7 @@
 {% if object_list %}
 <ul class="thumbnails">
   {% for image in object_list %}
-  <li class="span2">
+  <li class="col-md-2">
     <div class="thumbnail">
       <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}">
         {% thumbnail image.image "160x120" crop="center" as im %}

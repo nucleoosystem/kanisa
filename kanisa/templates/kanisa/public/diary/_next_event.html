@@ -35,8 +35,8 @@
 {% endif %}
 
 {% if perms.kanisa.manage_diary %}
-<a class="btn btn-mini" href="{% url 'kanisa_manage_diary_scheduled_update' next_event.pk %}">
-  <i class="icon-edit"></i>
+<a class="btn btn-xs" href="{% url 'kanisa_manage_diary_scheduled_update' next_event.pk %}">
+  <i class="glyphicon glyphicon-edit"></i>
   Edit this scheduled event
 </a>
 {% endif %}

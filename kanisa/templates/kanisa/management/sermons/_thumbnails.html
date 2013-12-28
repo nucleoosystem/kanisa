@@ -3,7 +3,7 @@
 {% if sermonseries_list %}
 <ul class="thumbnails">
   {% for sermonseries in sermonseries_list %}
-  <li class="span3">
+  <li class="col-md-3">
     <div class="thumbnail">
       <div class="thumbnail-caption">
         {% thumbnail sermonseries.image_or_default "260x260" crop="center" as im %}
@@ -29,13 +29,13 @@
 
       <p>
         <a class="btn" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
-          <i class="icon-edit"></i>
+          <i class="glyphicon glyphicon-edit"></i>
           Edit
         </a>
         {% if sermonseries.active %}
         <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
 
-          <i class="icon-ok"></i>
+          <i class="glyphicon glyphicon-ok"></i>
           Mark Complete
         </a>
         <span class="inline-status"></span>

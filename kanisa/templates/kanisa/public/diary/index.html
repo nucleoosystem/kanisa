@@ -10,7 +10,6 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
 <ul class="breadcrumb">
   <li>
     <a href="{% url 'kanisa_public_index' %}">Home</a>
-    <span class="divider">/</span>
   </li>
   <li class="active">
     Diary
@@ -20,10 +19,10 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
 
 {% block content %}
 <div class="row">
-  <div class="span4">
+  <div class="col-md-4">
     {% include 'kanisa/public/diary/_this_week_table.html' %}
   </div>
-  <div class="span8">
+  <div class="col-md-8">
     <h1 class="primary">Regular Events</h1>
 
     {% if event_categories %}

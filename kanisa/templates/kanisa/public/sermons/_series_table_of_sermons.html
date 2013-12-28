@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     {% for sermon in sermons %}
-    <tr{% if sermon.in_the_future %} class="muted"{% endif %}>
+    <tr{% if sermon.in_the_future %} class="text-muted"{% endif %}>
       <td>
         {% if sermon.pk != current.pk and not sermon.in_the_future %}
         <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a>

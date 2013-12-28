@@ -3,26 +3,26 @@
 {% block content %}
 
 <div class="row">
-  <div class="span5">
+  <div class="col-md-5">
     <h3>View Service Plans</h3>
     {% include 'kanisa/management/services/_serviceplan_table.html' %}
 
     <p>
       <a class="btn btn-success" href="{% url 'kanisa_manage_services_create' %}">
-        <i class="icon-white icon-plus"></i>
+        <i class="glyphicon glyphicon-white glyphicon-plus"></i>
         Create a Service Plan
       </a>
     </p>
 
     {% if showing_all %}
-    <p class="muted" style="margin-top: 2em">
+    <p class="text-muted" style="margin-top: 2em">
       These are all the service plans. Want to
       <a href="{% url 'kanisa_manage_services' %}">just see
         plans for upcoming services</a>?
     </p>
 
     {% else %}
-    <p class="muted" style="margin-top: 2em">
+    <p class="text-muted" style="margin-top: 2em">
       Not including past service plans. Want to
       <a href="{% url 'kanisa_manage_services_all' %}">see old plans
         too</a>?
@@ -36,12 +36,12 @@
 
     <p>
       <a class="btn btn-success" href="{% url 'kanisa_manage_services_create_band' %}">
-        <i class="icon-white icon-plus"></i>
+        <i class="glyphicon glyphicon-white glyphicon-plus"></i>
         Create a Band
       </a>
     </p>
   </div>
-  <div class="span5">
+  <div class="col-md-5">
     {% include 'kanisa/management/services/_ccli_top5.html' %}
   </div>
 </div>

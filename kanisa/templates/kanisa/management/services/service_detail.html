@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-<div class="span4">
+<div class="col-md-4">
 <p>
   This is a service plan for <strong>{{ object.event.title }}</strong>
   on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
@@ -23,13 +23,13 @@
 {% endwith %}
 
 <a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn">
-  <i class="icon-edit"></i>
+  <i class="glyphicon glyphicon-edit"></i>
   Edit Service Plan
 </a>
 
 </div>
 
-<div class="span6">
+<div class="col-md-6">
 {% with songs=object.songinservice_set.all %}
 {% include 'kanisa/management/services/_song_table.html' %}
 {% endwith %}
@@ -42,11 +42,11 @@
     {% endfor %}
   </select>
   <button class="btn btn-success">
-    <i class="icon-white icon-plus"></i>
+    <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Add this song
   </button>
   <a class="btn" href="{% url 'kanisa_members_services_create_song' object.pk %}">
-    <i class="icon-bullhorn"></i>
+    <i class="glyphicon glyphicon-bullhorn"></i>
     Add a new song
   </a>
 </form>

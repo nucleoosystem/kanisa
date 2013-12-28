@@ -1,45 +1,45 @@
 {% load kanisa_tags %}
-
-<div class="navbar navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          {% for element, children in KANISA_NAVIGATION %}
-          {% if not element.require_login or user.is_authenticated %}
-          {% include 'kanisa/_nav_element.html' %}
-          {% endif %}
-          {% endfor %}
-        </ul>
-        {% if user.is_authenticated %}
-        <p class="navbar-text pull-right">Welcome,
-          <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
-          {% kanisa_is_permissioned_user as is_permissioned %}
-          {% if is_permissioned %}
-            <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" style="text-decoration: none">
-              <i class="icon-white icon-cog"></i>
-            </a>
-          {% endif %}
-          (<a href="{% url 'kanisa_members_logout' %}">Logout</a>)
-        </p>
-        {% else %}
-        <p class="navbar-text pull-right">
-          <a href="{% url 'kanisa_members_login' %}">Login</a>
-          {% if KANISA_ALLOW_REGISTRATION %}
-          /
-          <a href="{% url 'kanisa_members_registration' %}">Register</a>
-          {% endif %}
-        </p>
-        {% endif %}
-      </div><!--/.nav-collapse -->
-    </div>
+<div class="row">
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kanisa-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
   </div>
+  <div class="collapse navbar-collapse" id="kanisa-navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      {% for element, children in KANISA_NAVIGATION %}
+      {% if not element.require_login or user.is_authenticated %}
+      {% include 'kanisa/_nav_element.html' %}
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+    <p class="navbar-text pull-right">Welcome,
+      <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
+      {% kanisa_is_permissioned_user as is_permissioned %}
+      {% if is_permissioned %}
+      <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" style="text-decoration: none">
+        <i class="glyphicon glyphicon-white glyphicon-cog"></i>
+      </a>
+      {% endif %}
+      (<a href="{% url 'kanisa_members_logout' %}">Logout</a>)
+    </p>
+    {% else %}
+    <p class="navbar-text pull-right">
+      <a href="{% url 'kanisa_members_login' %}">Login</a>
+      {% if KANISA_ALLOW_REGISTRATION %}
+      /
+      <a href="{% url 'kanisa_members_registration' %}">Register</a>
+      {% endif %}
+    </p>
+    {% endif %}
+  </div>
+</nav>
 </div>

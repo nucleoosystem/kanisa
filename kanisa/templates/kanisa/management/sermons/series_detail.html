@@ -5,14 +5,14 @@
 {% block content %}
 {% include "kanisa/management/sermons/_nav.html" with current="sermons" %}
 <p>
-  <a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-large btn-success">
-    <i class="icon-white icon-plus"></i>
+  <a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Add a sermon to this series
   </a>
 </p>
 <hr />
 <div class="row">
-  <div class="span7">
+  <div class="col-md-7">
   {% if object.details %}
   <blockquote>
   <p>{{ object.details }}</p>
@@ -20,17 +20,17 @@
   {% endif %}
 
   <a class="btn" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
-    <i class="icon-edit"></i>
+    <i class="glyphicon glyphicon-edit"></i>
     Edit this series
   </a>
   <a class="btn" href="{% url 'kanisa_public_sermon_series_detail' sermonseries.slug %}">
-    <i class="icon-eye-open"></i>
+    <i class="glyphicon glyphicon-eye-open"></i>
     View on site
   </a>
 
   {% if object.active %}
   <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
-    <i class="icon-ok"></i>
+    <i class="glyphicon glyphicon-ok"></i>
     Mark Complete
   </a>
   <span class="inline-status"></span>
@@ -50,7 +50,7 @@
   {% endif %}
   {% endwith %}
   </div>
-  <div class="span3">
+  <div class="col-md-3">
     <div class="thumbnail">
     {% thumbnail object.image_or_default "260x260" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />

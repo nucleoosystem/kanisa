@@ -5,7 +5,6 @@
   </li>
   {% if kanisa_root_crumb %}
   <li>
-    <span class="divider">/</span>
     {% if not kanisa_is_root_view %}
     <a href="{{ kanisa_root_crumb.url }}">{{ kanisa_root_crumb.text }}</a>
     {% else %}
@@ -16,7 +15,6 @@
 
   {% for crumb in kanisa_intermediate_crumbs %}
   <li>
-    <span class="divider">/</span>
     <a href="{{ crumb.url }}">
     {{ crumb.title }}
     </a>
@@ -25,7 +23,7 @@
 
   {% if kanisa_title and not kanisa_is_root_view %}
   <li>
-    <span class="divider">/</span> {{ kanisa_title }}
+     {{ kanisa_title }}
   </li>
 {% endif %}
 {% endblock %}

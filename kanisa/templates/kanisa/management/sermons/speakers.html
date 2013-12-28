@@ -5,8 +5,8 @@
 {% block content %}
 {% include "kanisa/management/sermons/_nav.html" with current="speakers" %}
 <p>
-  <a href="{% url 'kanisa_manage_sermons_speaker_create' %}" class="btn btn-large btn-success">
-    <i class="icon-white icon-plus"></i>
+  <a href="{% url 'kanisa_manage_sermons_speaker_create' %}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Add a speaker
   </a>
 </p>
@@ -14,7 +14,7 @@
 
 <ul class="thumbnails">
   {% for speaker in sermonspeaker_list %}
-  <li class="span2">
+  <li class="col-md-2">
     <div class="thumbnail">
       <div style="position: relative;">
         <a href="{% url 'kanisa_manage_sermons_speaker_update' speaker.pk %}" title="Edit this speaker's profile">

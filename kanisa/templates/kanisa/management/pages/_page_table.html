@@ -22,14 +22,14 @@
       </td>
       <td class="iconcell">
         <a href="{% url 'kanisa_manage_pages_create' %}?parent={{ page.pk }}" title="Create a page with &ldquo;{{ page.title }}&rdquo; as its parent">
-          <i class="icon-plus-sign"></i>
+          <i class="glyphicon glyphicon-plus-sign"></i>
         </a>
       </td>
       <td class="iconcell">
         {% if not page.draft %}
-        <i class="icon icon-ok" title="This page is published"></i>
+        <i class="glyphicon glyphicon-ok" title="This page is published"></i>
         {% else %}
-        <i class="icon icon-remove" title="This page is not published"></i>
+        <i class="glyphicon glyphicon-remove" title="This page is not published"></i>
         {% endif %}
       </td>
       <td>
@@ -39,14 +39,14 @@
       </td>
       <td>
         {% if page.is_leaf_node %}
-        <a class="btn btn-danger btn-mini page_delete" href="{% url 'kanisa_manage_pages_delete' page.pk %}" data-page-title="{{ page.title }}">
+        <a class="btn btn-danger btn-xs page_delete" href="{% url 'kanisa_manage_pages_delete' page.pk %}" data-page-title="{{ page.title }}">
           Delete
         </a>
         {% endif %}
       </td>
       <td class="iconcell">
         {% if not page.draft %}
-        <a href="/{{ page.get_path }}" title="View on site"><i class="icon-eye-open"></i></a>
+        <a href="/{{ page.get_path }}" title="View on site"><i class="glyphicon glyphicon-eye-open"></i></a>
         {% endif %}
       </td>
     </tr>

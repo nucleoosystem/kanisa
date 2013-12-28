@@ -19,9 +19,9 @@
       </td>
       <td class="iconcell">
         {% if document.public %}
-        <i class="icon icon-ok" title="This document is public"></i>
+        <i class="glyphicon glyphicon-ok" title="This document is public"></i>
         {% else %}
-        <i class="icon icon-remove" title="This document is not public"></i>
+        <i class="glyphicon glyphicon-remove" title="This document is not public"></i>
         {% endif %}
       </td>
       <td>
@@ -38,7 +38,7 @@
         {{ document.downloads }}
       </td>
       <td>
-        <a class="btn btn-danger btn-mini" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
+        <a class="btn btn-danger btn-xs" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
       </td>
     </tr>
     {% endfor %}

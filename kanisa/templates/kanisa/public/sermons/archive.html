@@ -5,10 +5,10 @@
 {% block precontent %}
 <ul class="breadcrumb">
   <li>
-    <a href="{% url 'kanisa_public_index' %}">Home</a> <span class="divider">/</span>
+    <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
   <li>
-    <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a> <span class="divider">/</span>
+    <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a>
   </li>
   <li class="active">
     The Archives
@@ -57,8 +57,8 @@
 </table>
 
 {% if is_paginated %}
-<div class="pagination pagination-centered">
-  <ul>
+<div class="text-center">
+  <ul class="pagination">
     {% if page_obj.has_previous %}
     <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
     {% else %}

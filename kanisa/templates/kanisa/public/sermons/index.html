@@ -3,7 +3,7 @@
 {% block precontent %}
 <ul class="breadcrumb">
   <li>
-    <a href="{% url 'kanisa_public_index' %}">Home</a> <span class="divider">/</span>
+    <a href="{% url 'kanisa_public_index' %}">Home</a> 
   </li>
   <li class="active">
     Sermons
@@ -17,7 +17,7 @@
 </h1>
 
 <div class="row">
-  <div class="span7">
+  <div class="col-md-7">
     {% if active_series %}
     {% include "kanisa/public/sermons/_series_list.html" %}
     {% else %}
@@ -30,7 +30,7 @@
 
     {% endif %}
   </div>
-  <div class="span5">
+  <div class="col-md-5">
     <h2>Latest Sermons</h2>
 
     {% if latest_sermons %}
@@ -58,7 +58,7 @@
       </tbody>
     </table>
 
-    <p class="muted">
+    <p class="text-muted">
       If you're looking for older sermons, you might want to look at
       our
       <a href="{% url 'kanisa_public_sermon_archive' %}">archives</a>.
@@ -71,7 +71,7 @@
     {% if perms.kanisa.manage_sermons %}
     <hr />
     <a class="btn btn-primary" href="{% url 'kanisa_manage_sermons' %}">
-      <i class="icon-white icon-headphones"></i>
+      <i class="glyphicon glyphicon-white glyphicon-headphones"></i>
       Manage Sermons
     </a>
     {% endif %}

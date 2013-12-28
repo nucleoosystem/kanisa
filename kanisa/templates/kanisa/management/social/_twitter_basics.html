@@ -1,7 +1,7 @@
 {% if twitter_username %}
 <div class="row">
 
-    <div class="span5">
+    <div class="col-md-5">
         <p>
           You are logged in to Twitter as
           <strong><a href="http://twitter.com/{{ twitter_username }}">@{{ twitter_username }}</a></strong>.
@@ -27,7 +27,7 @@
 
     </div>
 
-    <div class="span5">
+    <div class="col-md-5">
         <form method="post" action="{% url 'kanisa_manage_social_twitter_post' %}">
           {% csrf_token %}
           <fieldset>

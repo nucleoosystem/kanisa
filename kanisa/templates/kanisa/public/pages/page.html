@@ -13,7 +13,7 @@
 {% if parent or children or perms.kanisa.manage_pages %}
 <div class="row">
 
-  <div class="span2">
+  <div class="col-md-2">
     {% if parent or children %}
     <div class="well" style="padding: 8px 0;">
       {% include 'kanisa/public/pages/_nav.html' %}
@@ -22,13 +22,13 @@
 
     {% if perms.kanisa.manage_pages %}
     <a class="btn" href="{% url 'kanisa_manage_pages_update' page.pk %}">
-      <i class="icon-edit"></i>
+      <i class="glyphicon glyphicon-edit"></i>
       Edit this Page
     </a>
     {% endif %}
   </div>
 
-  <div class="span10">
+  <div class="col-md-10">
     {% if page.draft %}
     <p class="alert alert-warning">
       <strong>Warning!</strong> This page is marked as draft - it will

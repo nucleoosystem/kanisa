@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="row">
-  <div class="span6 offset3">
+  <div class="col-md-6 col-md-offset-3">
     <h1>Welcome to Kanisa</h1>
     <p class="lead">
       Please enter your username and password to continue.<br />
-      <span class="muted" style="font-size:70%">If you've forgotten your username or password, you can <a href="{% url 'kanisa_members_recover_password' %}">reset them</a>.</span>
+      <span class="text-muted" style="font-size:70%">If you've forgotten your username or password, you can <a href="{% url 'kanisa_members_recover_password' %}">reset them</a>.</span>
     </p>
 
     {% crispy form %}

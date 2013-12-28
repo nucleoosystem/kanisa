@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-<div class="span4">
+<div class="col-md-4">
 <p>
   This is a service plan for <strong>{{ object.event.title }}</strong>
   on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
@@ -24,14 +24,14 @@
 
 </div>
 
-<div class="span6">
+<div class="col-md-6">
 {% with songs=object.songinservice_set.all %}
 {% include 'kanisa/members/services/_song_table.html' %}
 {% endwith %}
 
 {% if perms.kanisa.manage_services %}
   <a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn">
-    <i class="icon-edit"></i>
+    <i class="glyphicon glyphicon-edit"></i>
     Edit Service Plan
   </a>
 {% endif %}

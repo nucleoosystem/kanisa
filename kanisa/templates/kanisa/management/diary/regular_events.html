@@ -4,8 +4,8 @@
 {% include "kanisa/management/diary/_nav.html" with current="regular_events" %}
 
 <p>
-  <a href="{% url 'kanisa_manage_diary_regular_create' %}" class="btn btn-large btn-success">
-    <i class="icon-white icon-plus"></i>
+  <a href="{% url 'kanisa_manage_diary_regular_create' %}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Create a new regular event
   </a>
 </p>
@@ -28,13 +28,13 @@
       <td>{{ event.pattern_description }}</td>
       <td>{{ event.start_time }}</td>
       <td>
-        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-mini">
+        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-xs">
           Edit Upcoming
         </a>
       </td>
       <td class="iconcell">
         <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site">
-          <i class="icon-eye-open"></i>
+          <i class="glyphicon glyphicon-eye-open"></i>
         </a>
       </td>
     </tr>

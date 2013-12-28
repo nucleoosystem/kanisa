@@ -17,7 +17,7 @@
         {% endif %}
       </span>
 
-      <a href="{{ item.url }}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="muted"{% endif %}>
+      <a href="{{ item.url }}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="text-muted"{% endif %}>
         {{ item }}
         {% if item.date != date %}
         <em>(contd.)</em>
@@ -36,7 +36,7 @@
 
 {% if perms.kanisa.manage_diary %}
 <a class="btn btn-primary" href="{% url 'kanisa_manage_diary' %}" title="Manage the diary">
-  <i class="icon-white icon-calendar"></i>
+  <i class="glyphicon glyphicon-white glyphicon-calendar"></i>
   Manage the diary
 </a>
 {% endif %}
