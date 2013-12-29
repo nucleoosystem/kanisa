@@ -3,11 +3,13 @@
 </h3>
 
 <form class="form-inline" method="post" action="{% url 'kanisa_manage_pages_create' %}" id="page_quick_create">
+  <div class="form-group">
   {% csrf_token %}
-  <input type="text" name="title" id="id_title" placeholder="Title" />
-  <select name="parent" id="id_parent">
+  <input type="text" name="title" id="id_title" placeholder="Title" class="form-control" />
+  <select name="parent" id="id_parent" class="form-control">
     {% include 'kanisa/management/pages/_parent_select_options.html' %}
   </select>
   <button type="submit" class="btn btn-success">Submit</button>
   <div class="inline-status"></div>
+  </div>
 </form>

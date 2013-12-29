@@ -236,3 +236,11 @@ ul.nav-tabs {
 ul.nav-pills li.nav-header {
     font-weight: bold;
 }
+
+#page_quick_create input {
+    width: 300px;
+}
+
+#page_quick_create select {
+    width: 200px;
+}

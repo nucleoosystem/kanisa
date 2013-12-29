@@ -6,7 +6,6 @@ Version 1.0
   just home and account bar?
 - Upgrade to latest Bootstrap
   - Fix carousel styling
-  - Fix inline form for page creation
   - Check datepicker works
   - Check timepicker works
   - Fix thumbnail displays in the management interface

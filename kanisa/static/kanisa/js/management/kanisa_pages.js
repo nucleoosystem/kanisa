@@ -25,7 +25,7 @@ function quick_page_create(event) {
     var title_element = form.find("#id_title");
     var parent_element = form.find("#id_parent");
     var title = title_element.val();
-    var status_block = form.find("div");
+    var status_block = form.find("div.inline-status");
 
     status_block.html("<i class=\"spinner\"></i>");
 
@@ -33,11 +33,11 @@ function quick_page_create(event) {
            { 'title': title,
              'parent': parent_element.val() },
            function(data) {
-               status_block.html("<i class=\"icon-ok\"></i> " + data);
+               status_block.html("<i class=\"glyphicon glyphicon-ok\"></i> " + data);
                title_element.val("");
                update_page_list();
            }).error(function(data) {
-               status_block.html("<i class=\"icon-exclamation-sign\"></i> " + data.responseText);
+               status_block.html("<i class=\"glyphicon glyphicon-exclamation-sign\"></i> " + data.responseText);
            }).complete(function() {
                form.data('submitting', false);
            });
