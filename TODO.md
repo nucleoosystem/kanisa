@@ -8,7 +8,6 @@ Version 1.0
   - Fix carousel styling
   - Fix inline form for page creation
   - Fix CCLI view JS, and form layout
-  - Ensure service planning management view uses full width
   - Check datepicker works
   - Check timepicker works
   - Fix thumbnail displays in the management interface
