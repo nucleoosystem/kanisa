@@ -15,6 +15,12 @@ Version 1.0
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
   - Remove old versions of Bootstrap
+  - Check for usage of img-polaroid
+- Remove all inline styles
+- Improve scheduled event sidebar (it shows *all* regular events, with
+  contact information below - it should probably just show related
+  events, like the regular event pages do, though this won't work for
+  one-offs)
 
 Version 1.1
 ===========
