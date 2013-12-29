@@ -9,8 +9,6 @@ Version 1.0
   - Fix weird styling of sidebar for pages without parents
   - Fix weird styling of sidebar for events
   - Fix carousel styling
-  - Fix breadcrumb padding?
-  - Fix header - logo should be flush left
   - Fix inline form for page creation
   - Fix CCLI view JS, and form layout
   - Ensure service planning management view uses full width

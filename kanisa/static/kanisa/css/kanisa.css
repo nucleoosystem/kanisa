@@ -153,6 +153,11 @@ textarea.kanisamaininputwidget {
     color: inherit;
 }
 
+#logo {
+    position: relative;
+    margin-bottom: 4px;
+}
+
 .navbar-form {
     position: absolute;
     top: 0;
