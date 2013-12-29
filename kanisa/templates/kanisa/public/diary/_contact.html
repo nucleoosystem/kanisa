@@ -2,15 +2,14 @@
 
 <p>
   {% if object.contact.image %}
-  {% thumbnail object.contact.image "50x50" crop="center" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid" style="float: left; margin: 0 5px 5px 0" />
+  {% thumbnail object.contact.image "90x90" crop="center" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" style="float: left; margin: 0 5px 5px 0" />
   {% endthumbnail %}
   {% endif %}
   You can find out more by e-mailing
-  <strong>{{ object.contact }}</strong>
   {% if object.contact.email %}
-    at <a href="mailto:{{ object.contact.email }}">{{ object.contact.email }}</a>.
+    <strong><a href="mailto:{{ object.contact.email }}">{{ object.contact }}</a></strong>.
   {% else %}
-    via the Church office.
+    <strong>{{ object.contact }}</strong> via the Church office.
   {% endif %}
 </p>

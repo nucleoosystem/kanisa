@@ -5,7 +5,6 @@ Version 1.0
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
 - Upgrade to latest Bootstrap
-  - Fix image/contact email overflow issues for event pages
   - Fix carousel styling
   - Fix inline form for page creation
   - Fix CCLI view JS, and form layout

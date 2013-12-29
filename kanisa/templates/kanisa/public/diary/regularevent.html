@@ -25,7 +25,7 @@
     </h1>
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         {% thumbnail object.image "260x260" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid" />
         {% endthumbnail %}
@@ -37,7 +37,7 @@
         {% include 'kanisa/public/diary/_contact.html' %}
         {% endif %}
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <p class="lead">
           {{ object.intro }}
         </p>
