@@ -5,8 +5,6 @@ Version 1.0
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
 - Upgrade to latest Bootstrap
-  - Fix weird styling of sidebar for pages with children
-  - Fix weird styling of sidebar for pages without parents
   - Fix weird styling of sidebar for events
   - Fix carousel styling
   - Fix inline form for page creation

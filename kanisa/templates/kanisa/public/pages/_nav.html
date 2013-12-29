@@ -1,14 +1,12 @@
-<ul class="nav nav-list">
-  {% if parent %}
+{% if parent %}
   {% include 'kanisa/public/pages/_nav_siblings.html' %}
 
   {% if children %}
-  <li class="divider"></li>
+    <hr />
   {% endif %}
 
-  {% endif %}
+{% endif %}
 
-  {% if children %}
+{% if children %}
   {% include 'kanisa/public/pages/_nav_children.html' %}
-  {% endif %}
-</ul>
+{% endif %}

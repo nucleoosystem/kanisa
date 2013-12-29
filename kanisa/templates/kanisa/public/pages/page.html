@@ -15,12 +15,11 @@
 
   <div class="col-md-2">
     {% if parent or children %}
-    <div class="well" style="padding: 8px 0;">
       {% include 'kanisa/public/pages/_nav.html' %}
-    </div>
     {% endif %}
 
     {% if perms.kanisa.manage_pages %}
+    <hr />
     <a class="btn btn-default" href="{% url 'kanisa_manage_pages_update' page.pk %}">
       <i class="glyphicon glyphicon-edit"></i>
       Edit this Page
