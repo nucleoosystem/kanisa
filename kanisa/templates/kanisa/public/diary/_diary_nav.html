@@ -1,5 +1,5 @@
-<ul class="nav nav-list">
-  <li class="nav-header">Events</li>
+<ul class="nav nav-pills nav-stacked">
+  <li class="nav-header disabled"><a href="#">Events</a></li>
   {% for event in events %}
   <li{% if object == event %} class="active"{% endif %}><a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">{{ event }}</a></li>
   {% endfor %}
