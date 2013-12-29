@@ -4,7 +4,7 @@ Version 1.0
 - Figure out what should go on the management home page (#41)
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
-- Upgrade to latest Twitter Bootstrap
+- Upgrade to latest Bootstrap
   - Fix weird styling of sidebar for pages with children
   - Fix weird styling of sidebar for pages without parents
   - Fix carousel styling
@@ -16,8 +16,10 @@ Version 1.0
   - Ensure service planning management view uses full width
   - Check datepicker works
   - Check timepicker works
+  - Fix thumbnail displays in the management interface
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
+  - Remove old versions of Bootstrap
 
 Version 1.1
 ===========
