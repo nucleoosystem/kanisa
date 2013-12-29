@@ -62,7 +62,7 @@
       {% for e in entry.scheduled_events %}
         <div class="{% if not forloop.last %} notlast{% endif %}">
           {% if e.date == entry.date %}
-          <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-xs">Clone</a>
+          <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-default btn-xs">Clone</a>
           {% else %}
           &nbsp;
           {% endif %}

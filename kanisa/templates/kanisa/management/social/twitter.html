@@ -27,7 +27,7 @@
       <td>{{ tweet.date|naturalday:"jS F Y"|title }} at {{ tweet.time|date:"H:i" }}</td>
       <td>
         {% if not tweet.posted %}
-        <a class="btn btn-xs" href="{% url 'kanisa_manage_social_twitter_update' tweet.pk %}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+        <a class="btn btn-default btn-xs" href="{% url 'kanisa_manage_social_twitter_update' tweet.pk %}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
         <a class="btn btn-xs btn-danger" href="{% url 'kanisa_manage_social_twitter_delete' tweet.pk %}"><i class="glyphicon glyphicon-trash "glyphicon glyphicon-white"></i> Delete</a>
         {% endif %}
       </td>
