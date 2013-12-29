@@ -223,3 +223,7 @@ body.popup form {
 table.userpermtable td {
     vertical-align: middle;
 }
+
+ul.nav-tabs {
+    margin-bottom: 1em;
+}
