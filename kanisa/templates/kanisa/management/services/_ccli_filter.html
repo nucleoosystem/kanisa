@@ -7,23 +7,26 @@
     <hr />
     {% endif %}
 
-    <div class="control-group">
-      <label for="filter_start_date" class="control-label">From:</label>
-      <input type="text" id="filter_start_date" name="start_date" class="datepicker"{% if filters.start_date %} value="{{ filters.start_date|date:"m/d/Y" }}"{% endif %}/>
-
-      <label for="filter_end_date" class="control-label">To:</label>
-      <input type="text" id="filter_end_date" name="end_date" class="datepicker"{% if filters.end_date %} value="{{ filters.end_date|date:"m/d/Y" }}"{% endif %}/>
-
+    <div class="form-group">
+      <label for="filter_start_date">From:</label>
+      <input type="text" id="filter_start_date" name="start_date" class="form-control datepicker"{% if filters.start_date %} value="{{ filters.start_date|date:"m/d/Y" }}"{% endif %}/>
+    </div>
+    <div class="form-group">
+      <label for="filter_end_date">To:</label>
+      <input type="text" id="filter_end_date" name="end_date" class="form-control datepicker"{% if filters.end_date %} value="{{ filters.end_date|date:"m/d/Y" }}"{% endif %}/>
+    </div>
+    <div class="form-group">
       <label for="filter_event" class="control-label">Limit by Event:</label>
-      <div class="controls">
-        <select id="filter_event" name="event">
-          <option value="">All events</option>
-          {% for event in events %}
-          <option value="{{ event.pk }}"{% if filters.event.pk == event.pk %} selected="selected"{% endif %}>{{ event.title }}</option>
-          {% endfor %}
-        </select>
-      </div>
+      <select id="filter_event" name="event">
+        <option value="">All events</option>
+        {% for event in events %}
+        <option value="{{ event.pk }}"{% if filters.event.pk == event.pk %} selected="selected"{% endif %}>{{ event.title }}</option>
+        {% endfor %}
+      </select>
     </div>
   </fieldset>
-  <input type="submit" value="Filter" class="btn btn-primary" />
+  <button type="submit" class="btn btn-primary">
+    <i class="glyphicon glyphicon-filter"></i>
+    Filter
+  </button>
 </form>

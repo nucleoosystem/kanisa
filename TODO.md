@@ -7,7 +7,6 @@ Version 1.0
 - Upgrade to latest Bootstrap
   - Fix carousel styling
   - Fix inline form for page creation
-  - Fix CCLI view JS, and form layout
   - Check datepicker works
   - Check timepicker works
   - Fix thumbnail displays in the management interface
