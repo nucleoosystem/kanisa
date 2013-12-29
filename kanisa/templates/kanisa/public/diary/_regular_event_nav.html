@@ -1,10 +1,18 @@
-<ul class="nav nav-list">
-{% for category in object.categories.all %}
-  <li class="nav-header">{{ category }}</li>
-  {% for event in category.regularevent_set.all %}
-  <li{% if object == event %} class="disabled"{% endif %}><a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">{{ event }}</a></li>
+<ul class="nav nav-pills nav-stacked">
+  {% for category in object.categories.all %}
+    <li class="nav-header disabled"><a href="#">{{ category }}</a></li>
+    {% for event in category.regularevent_set.all %}
+      <li{% if object == event %} class="active disabled"{% endif %}>
+        <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">{{ event }}</a>
+      </li>
+    {% endfor %}
   {% endfor %}
-{% endfor %}
-<li class="nav-header">Elsewhere</li>
-<li><a href="{% url 'kanisa_public_diary_index' %}">Other events</a></li>
+
+  <li class="nav-header disabled">
+    <a href="#">Elsewhere</a>
+  </li>
+
+  <li>
+    <a href="{% url 'kanisa_public_diary_index' %}">Other events</a>
+  </li>
 </ul>
