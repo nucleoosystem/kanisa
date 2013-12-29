@@ -7,6 +7,7 @@ Version 1.0
 - Upgrade to latest Bootstrap
   - Fix weird styling of sidebar for pages with children
   - Fix weird styling of sidebar for pages without parents
+  - Fix weird styling of sidebar for events
   - Fix carousel styling
   - Fix breadcrumb padding?
   - Fix header - logo should be flush left
