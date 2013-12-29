@@ -10,8 +10,6 @@ Version 1.0
   - Fix carousel styling
   - Fix breadcrumb padding?
   - Fix header - logo should be flush left
-  - Fix default-styled buttons (e.g. on management home pages for
-    each area, and on viewing pages)
   - Fix inline form for page creation
   - Fix CCLI view JS, and form layout
   - Ensure service planning management view uses full width

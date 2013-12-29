@@ -22,7 +22,7 @@
   {% endif %}
 {% endwith %}
 
-<a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn">
+<a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn btn-default">
   <i class="glyphicon glyphicon-edit"></i>
   Edit Service Plan
 </a>
@@ -45,7 +45,7 @@
     <i class="glyphicon glyphicon-white glyphicon-plus"></i>
     Add this song
   </button>
-  <a class="btn" href="{% url 'kanisa_members_services_create_song' object.pk %}">
+  <a class="btn btn-default" href="{% url 'kanisa_members_services_create_song' object.pk %}">
     <i class="glyphicon glyphicon-bullhorn"></i>
     Add a new song
   </a>

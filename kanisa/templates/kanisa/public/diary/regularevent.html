@@ -53,7 +53,7 @@
       {% include "kanisa/public/diary/_regular_event_nav.html" %}
     </div>
     {% if perms.kanisa.manage_diary %}
-    <a class="btn" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
+    <a class="btn btn-default" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
       <i class="glyphicon glyphicon-edit"></i>
       Edit this regular event
     </a>
