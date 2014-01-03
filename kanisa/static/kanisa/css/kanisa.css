@@ -288,3 +288,7 @@ div.carousel p.link-text {
     text-align: right;
     margin: 0 10px 0 0;
 }
+
+.kanisa_thumbnails h4 {
+    min-height: 4em;
+}

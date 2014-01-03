@@ -1,51 +1,43 @@
 {% load thumbnail %}
 
 {% if sermonseries_list %}
-<ul class="thumbnails">
+<div class="row kanisa_thumbnails">
   {% for sermonseries in sermonseries_list %}
-  <li class="col-md-3">
+  <div class="col-md-4">
     <div class="thumbnail">
-      <div class="thumbnail-caption">
-        {% thumbnail sermonseries.image_or_default "260x260" crop="center" as im %}
+      {% thumbnail sermonseries.image_or_default "260x140" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-        {% endthumbnail %}
-
-        <div class="carousel-caption">
-          <p>
-            <strong>
-              <a href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}" title="Edit this series">
-                {{ sermonseries.title }}
-                <span class="subtitle">
-                  ({{ sermonseries.num_sermons }} sermon{{ sermonseries.num_sermons|pluralize }})
-                </span>
-              </a>
-            </strong>
-          </p>
-          {% if sermonseries.passage %}<p>A series on {{ sermonseries.passage }}.</p>{% endif %}
-        </div>
-      </div>
+      {% endthumbnail %}
 
       <div class="caption">
+        <h4>
+          <a href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}" title="Edit this series">
+            {{ sermonseries.title }}
+            <small>
+              ({{ sermonseries.num_sermons }} sermon{{ sermonseries.num_sermons|pluralize }})
+            </small>
+          </a>
+        </h4>
 
-      <p>
-        <a class="btn btn-default" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
-          <i class="glyphicon glyphicon-edit"></i>
-          Edit
-        </a>
-        {% if sermonseries.active %}
-        <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
+        <p>
+          <a class="btn btn-default" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
+            <i class="glyphicon glyphicon-edit"></i>
+            Edit
+          </a>
+          {% if sermonseries.active %}
+          <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
 
-          <i class="glyphicon glyphicon-ok"></i>
-          Mark Complete
-        </a>
-        <span class="inline-status"></span>
-        {% endif %}
-      </p>
+            <i class="glyphicon glyphicon-ok"></i>
+            Mark Complete
+          </a>
+          <span class="inline-status"></span>
+          {% endif %}
+        </p>
       </div>
     </div>
-  </li>
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% else %}
 <div class="alert alert-warning">
 There are no sermon series to display.
