@@ -83,9 +83,6 @@ class BootstrapTimeWidget(TimeInput):
 
         super(BootstrapTimeWidget, self).__init__(*args, **kwargs)
 
-    class Media:
-        css = {'all': ['kanisa/vendor/bootstrap/css/timepicker.css', ]}
-
 
 class BootstrapDateWidget(DateInput):
     def __init__(self, *args, **kwargs):
@@ -98,9 +95,6 @@ class BootstrapDateWidget(DateInput):
         kwargs['attrs'].update(extra_attrs)
 
         super(BootstrapDateWidget, self).__init__(*args, **kwargs)
-
-    class Media:
-        css = {'all': ['kanisa/vendor/bootstrap/css/datepicker.css', ]}
 
 
 class KanisaAccountMultipleSelector(SelectMultiple):

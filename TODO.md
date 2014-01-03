@@ -6,7 +6,6 @@ Version 1.0
   just home and account bar?
 - Upgrade to latest Bootstrap
   - Fix carousel styling
-  - Remove date/time picker CSS from Bootstrap folder
   - Fix django-recurrence
   - Fix thumbnail displays in the management interface
   - Upgrade to latest 1.x series jQuery (required, according to the
