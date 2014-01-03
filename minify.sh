@@ -1,5 +1,7 @@
 set -e
 
+mkdir -p kanisa/static/kanisa/js/minified
+mkdir -p kanisa/static/kanisa/css/minified
 rm -f kanisa/static/kanisa/js/minified/*.js
 rm -f kanisa/static/kanisa/css/minified/*.css
 
