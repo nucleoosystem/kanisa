@@ -85,7 +85,6 @@ class BootstrapTimeWidget(TimeInput):
 
     class Media:
         css = {'all': ['kanisa/vendor/bootstrap/css/timepicker.css', ]}
-        js = ('kanisa/vendor/bootstrap/js/bootstrap-timepicker.js', )
 
 
 class BootstrapDateWidget(DateInput):
