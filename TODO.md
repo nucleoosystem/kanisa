@@ -22,10 +22,6 @@ Version 1.0
 Version 1.1
 ===========
 
-- Change external requirements to better equivalents
-  - Upgrade to newer version of Pillow (might need newer version of
-    sorl-thumbnail, which is back in active development - see
-    https://github.com/mariocesar/sorl-thumbnail/).
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
   time-limited)
@@ -39,6 +35,9 @@ Version 1.1
 - Improve pagination of document attachment widget
 - Allow customisable home page templates (#56)
 - Version check requirements in setup.py
+  - Pillow (upgrade to 2.3.0 - might need newer version of
+    sorl-thumbnail, which is back in active development - see
+    https://github.com/mariocesar/sorl-thumbnail/)
   - tweepy (upgrade to 2.1)
     - Check Twitter integration still works
     - Write tests against mock Twitter
