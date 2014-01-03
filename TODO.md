@@ -6,8 +6,8 @@ Version 1.0
   just home and account bar?
 - Upgrade to latest Bootstrap
   - Fix carousel styling
-  - Check datepicker works
-  - Check timepicker works
+  - Check datepicker works (and remove from Bootstrap folder)
+  - Check timepicker works (and remove from Bootstrap folder)
   - Fix thumbnail displays in the management interface
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
