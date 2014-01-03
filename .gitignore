@@ -27,3 +27,7 @@ pep8.txt
 *.mo
 
 docs/_build
+
+# Skip minified JS/CSS
+kanisa/static/kanisa/css/minified/
+kanisa/static/kanisa/js/minified/
