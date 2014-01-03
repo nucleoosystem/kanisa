@@ -252,3 +252,8 @@ input.bootstraptimewidget.timepicker {
 input.bootstrapdatewidget.datepicker {
     width: 7em;
 }
+
+div.recurrence-widget.recurrencewidget.form-control {
+    width: inherit;
+    height: inherit;
+}
