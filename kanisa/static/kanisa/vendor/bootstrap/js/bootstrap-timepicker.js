@@ -55,9 +55,9 @@
                 .on('click', $.proxy(this.show, this))
                 .on('keyup', $.proxy(this.updateFromElementVal, this))
             ;
-            
+
             this.$widget = $(this.getTemplate()).appendTo('body');
-            
+
             this.$widget.on('click', $.proxy(this.click, this));
 
             this.setDefaultTime(this.defaultTime);
@@ -100,7 +100,7 @@
 
         , hide: function(){
             this.$element.trigger('hide');
-            
+
             $('html').off('click.timepicker.data-api', $.proxy(this.hide, this));
 
             if (this.options.template === 'modal') {
@@ -235,7 +235,7 @@
                 if (this.hour === 1) {
                     this.hour = 12;
                     return this.toggleMeridian();
-                } 
+                }
             }
             if (this.hour === 0) {
                 return this.hour = 23;
@@ -268,7 +268,7 @@
 
             this.update();
         }
-        
+
         , getTemplate: function() {
             if (this.options.templates[this.options.template]) {
                 return this.options.templates[this.options.template];
@@ -307,7 +307,7 @@
                                        '<a href="#" class="btn btn-primary" data-action="hide">Ok</a>'+
                                    '</div>'+
                                '</div>';
-                    
+
                 break;
                 case 'dropdown':
                     template = '<div class="bootstrap-timepicker dropdown-menu">'+
@@ -333,7 +333,7 @@
                                    '</table>'+
                                '</div>';
                 break;
-                
+
             }
             return template;
         }
