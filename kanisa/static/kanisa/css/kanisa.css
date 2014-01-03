@@ -244,3 +244,7 @@ ul.nav-pills li.nav-header {
 #page_quick_create select {
     width: 200px;
 }
+
+input.bootstraptimewidget.timepicker {
+    width: 7em;
+}
