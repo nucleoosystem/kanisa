@@ -6,24 +6,24 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
     {% for banner in banners %}
-    <div class="item{% if forloop.first %} active{% endif %}">
-      {% thumbnail banner.image "570x296" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-      {% endthumbnail %}
-      <div class="carousel-caption">
-        <h4>{{ banner.headline }}</h4>
-        {% if banner.contents %}
-        <p>{{ banner.contents }}</p>
-        {% endif %}
-        {% if banner.url %}
-        <p class="link-text">
-          <a href="{% url 'kanisa_public_banners_visit' banner.pk %}" title="{{ banner.link_text|default:"Find out more" }}">
-            {{ banner.link_text|default:"Find out more" }} &raquo;
-          </a>
-        </p>
-        {% endif %}
+      <div class="item{% if forloop.first %} active{% endif %}">
+        {% thumbnail banner.image "570x296" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+        {% endthumbnail %}
+        <div class="carousel-caption">
+          <h4>{{ banner.headline }}</h4>
+          {% if banner.contents %}
+            <p>{{ banner.contents }}</p>
+          {% endif %}
+          {% if banner.url %}
+          <p class="link-text">
+            <a href="{% url 'kanisa_public_banners_visit' banner.pk %}" title="{{ banner.link_text|default:"Find out more" }}">
+              {{ banner.link_text|default:"Find out more" }} &raquo;
+            </a>
+          </p>
+          {% endif %}
+        </div>
       </div>
-    </div>
     {% endfor %}
   </div>
 
