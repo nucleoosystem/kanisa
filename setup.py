@@ -16,7 +16,7 @@ setup(
     install_requires=[
         "BeautifulSoup==3.2.1",
         "Django>=1.4",
-        "PIL==1.1.7",
+        "Pillow==1.7.8",
         "django-autoslug==1.7.1",
         "django-compressor==1.1.2",
         "django-crispy-forms==1.4.0",

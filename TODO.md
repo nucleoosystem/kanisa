@@ -24,8 +24,8 @@ Version 1.1
 ===========
 
 - Change external requirements to better equivalents
-  - Switch to Pillow (might need newer version of sorl-thumbnail,
-    which is back in active development - see
+  - Upgrade to newer version of Pillow (might need newer version of
+    sorl-thumbnail, which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/).
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
