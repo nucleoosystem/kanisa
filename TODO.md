@@ -6,6 +6,10 @@ Version 1.0
   just home and account bar?
 - Upgrade to latest Bootstrap
   - Fix thumbnail displays in the management interface
+    - Event contacts
+    - Sermon speakers
+    - Inline images
+    - Banners
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
   - Check for usage of img-polaroid
