@@ -10,7 +10,6 @@ Version 1.0
   - Fix thumbnail displays in the management interface
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
-  - Remove old versions of Bootstrap
   - Check for usage of img-polaroid
 - Remove all inline styles
 - Improve scheduled event sidebar (it shows *all* regular events, with
