@@ -5,7 +5,6 @@ Version 1.0
 - Ensure *some* links show in the nav on smaller screens - perhaps
   just home and account bar?
 - Upgrade to latest Bootstrap
-  - Fix carousel styling
   - Fix thumbnail displays in the management interface
   - Upgrade to latest 1.x series jQuery (required, according to the
     docs)
