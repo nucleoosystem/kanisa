@@ -101,7 +101,6 @@ class BootstrapDateWidget(DateInput):
 
     class Media:
         css = {'all': ['kanisa/vendor/bootstrap/css/datepicker.css', ]}
-        js = ('kanisa/vendor/bootstrap/js/bootstrap-datepicker.js', )
 
 
 class KanisaAccountMultipleSelector(SelectMultiple):
