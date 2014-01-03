@@ -257,3 +257,7 @@ div.recurrence-widget.recurrencewidget.form-control {
     width: inherit;
     height: inherit;
 }
+
+div.form-actions {
+    margin-bottom: 1em;
+}
