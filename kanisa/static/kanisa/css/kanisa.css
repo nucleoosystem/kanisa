@@ -248,3 +248,7 @@ ul.nav-pills li.nav-header {
 input.bootstraptimewidget.timepicker {
     width: 7em;
 }
+
+input.bootstrapdatewidget.datepicker {
+    width: 7em;
+}
