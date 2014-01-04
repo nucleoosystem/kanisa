@@ -5,7 +5,7 @@
   {% for sermonseries in sermonseries_list %}
   <div class="col-md-4">
     <div class="thumbnail">
-      {% thumbnail sermonseries.image_or_default "260x140" crop="center" as im %}
+      {% thumbnail sermonseries.image_or_default "285x140" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
       {% endthumbnail %}
 
