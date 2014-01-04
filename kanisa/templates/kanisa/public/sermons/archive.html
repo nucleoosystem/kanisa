@@ -34,7 +34,9 @@
 
         {% if sermon.series.image %}
           {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+            <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">
+              <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+            </a>
           {% endthumbnail %}
         {% endif %}
 
