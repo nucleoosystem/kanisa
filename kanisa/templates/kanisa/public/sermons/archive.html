@@ -32,9 +32,12 @@
       <td style="width: 90px; height: 80px">
         {% if sermon.series %}
 
-        {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
-        {% endthumbnail %}
+        {% if sermon.series.image %}
+          {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+          {% endthumbnail %}
+        {% endif %}
+
 
         {% endif %}
       </td>
