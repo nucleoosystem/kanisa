@@ -33,7 +33,7 @@
         {% if sermon.series %}
 
         {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid" />
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
         {% endthumbnail %}
 
         {% endif %}

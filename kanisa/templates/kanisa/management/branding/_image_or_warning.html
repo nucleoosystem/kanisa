@@ -9,7 +9,7 @@
 <p>
   {% for size in logo_information.sizes %}
     {% thumbnail logo_information.url size as im %}
-      <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-polaroid"/>
+      <img src="{{ im.url }}?{% now 'c' %}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail"/>
     {% endthumbnail %}
   {% endfor %}
 </p>

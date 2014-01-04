@@ -56,7 +56,7 @@ class ImageMatch(object):
             elif self.size == 'small':
                 thumbnail = get_thumbnail(self.image.image.file, '174x174')
 
-        return ('<img src="%s" alt="%s" class="img-polaroid" '
+        return ('<img src="%s" alt="%s" class="img-thumbnail" '
                 'height="%spx" width="%spx" style="%s"/>' % (thumbnail.url,
                                                              self.alt,
                                                              thumbnail.height,
