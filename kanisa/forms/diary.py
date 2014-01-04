@@ -22,6 +22,8 @@ from kanisa.models import (
 class EventContactForm(KanisaBaseModelForm):
     class Meta:
         model = EventContact
+        widgets = {'image': KanisaThumbnailFileWidget(100, 100), }
+
 
 
 class EventCategoryForm(KanisaBaseModelForm):
