@@ -57,11 +57,11 @@ class ImageMatch(object):
                 thumbnail = get_thumbnail(self.image.image.file, '174x174')
 
         return ('<img src="%s" alt="%s" class="img-thumbnail" '
-                'height="%spx" width="%spx" style="%s"/>' % (thumbnail.url,
-                                                             self.alt,
-                                                             thumbnail.height,
-                                                             thumbnail.width,
-                                                             style))
+                'height="%spx" width="%spx" style="%s" />' % (thumbnail.url,
+                                                              self.alt,
+                                                              thumbnail.height,
+                                                              thumbnail.width,
+                                                              style))
 
 
 def get_images(markdown_text):
