@@ -22,6 +22,7 @@ Version 1.0
 - Improve flow of editing scheduled instances of regular events - at
   present it may prompt you for an event title, if one is not set. It
   should just fill that in automatically
+- Split up kanisa.css somehow
 
 Version 1.1
 ===========
