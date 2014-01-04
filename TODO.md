@@ -12,8 +12,6 @@ Version 1.0
     - Sermon speakers
     - Inline images
     - Banners
-  - Upgrade to latest 1.x series jQuery (required, according to the
-    docs)
   - Check for usage of img-polaroid
 - Remove all inline styles
 - Improve scheduled event sidebar (it shows *all* regular events, with
