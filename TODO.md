@@ -11,7 +11,8 @@ Version 1.0
   - Fix thumbnail displays in the management interface
     - Sermon speakers
     - Inline images
-    - Banners
+    - Banners (once the banners page has been ported we can probably
+      remove the thumbnail-caption styles in kanisa.css)
   - Check for usage of img-polaroid
 - Remove all inline styles
 - Improve scheduled event sidebar (it shows *all* regular events, with
