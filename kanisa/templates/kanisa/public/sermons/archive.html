@@ -31,16 +31,13 @@
     <tr>
       <td style="width: 90px; height: 80px">
         {% if sermon.series %}
-
-        {% if sermon.series.image %}
-          {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
-            <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">
-              <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
-            </a>
-          {% endthumbnail %}
-        {% endif %}
-
-
+          {% if sermon.series.image %}
+            {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
+              <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">
+                <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+              </a>
+            {% endthumbnail %}
+          {% endif %}
         {% endif %}
       </td>
       <td style="vertical-align: middle">
