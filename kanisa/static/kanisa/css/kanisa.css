@@ -314,3 +314,7 @@ div.form-actions {
 #sermon_archive_table > tbody > tr > td {
     vertical-align: middle;
 }
+
+.text-muted.login-notes {
+    font-size: 70%;
+}
