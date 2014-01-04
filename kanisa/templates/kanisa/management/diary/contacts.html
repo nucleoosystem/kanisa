@@ -13,28 +13,24 @@
 </p>
 <hr />
 
-<ul class="thumbnails">
+<div class="row kanisa_event_contacts">
   {% for contact in eventcontact_list %}
-  <li class="col-md-2">
+  <div class="col-md-2">
     <div class="thumbnail">
-      <div style="position: relative;">
-        <a href="{% url 'kanisa_manage_diary_contacts_update' contact.pk %}" title="Edit this contact's profile">
-          {% thumbnail contact.image_or_default "160x135" crop="center" as im %}
+      <a href="{% url 'kanisa_manage_diary_contacts_update' contact.pk %}" title="Edit this contact's profile">
+        {% thumbnail contact.image_or_default "122x81" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-          {% endthumbnail %}
+        {% endthumbnail %}
 
-          <div class="carousel-caption" style="padding: 7px;">
-            <p>
-              <strong>
-                {{ contact }}
-              </strong>
-            </p>
-          </div>
-        </a>
-      </div>
+        <div class="caption">
+          <h5>
+            {{ contact }}
+          </h5>
+        </div>
+      </a>
     </div>
-  </li>
+  </div>
   {% endfor %}
-</ul>
+</div>
 
 {% endblock %}

@@ -292,3 +292,15 @@ div.carousel p.link-text {
 .kanisa_thumbnails h4 {
     min-height: 4em;
 }
+
+.kanisa_event_contacts .thumbnail .caption {
+    padding: 4px;
+}
+
+.kanisa_event_contacts .thumbnail .caption h5 {
+    margin-bottom: 3px;
+    margin-top: 3px;
+    min-height: 2.2em;
+    font-weight: bold;
+    vertical-align: middle;
+}

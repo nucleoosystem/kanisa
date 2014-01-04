@@ -9,7 +9,6 @@ Version 1.0
     the moment they just expand the nav submenu
 - Upgrade to latest Bootstrap
   - Fix thumbnail displays in the management interface
-    - Event contacts
     - Sermon speakers
     - Inline images
     - Banners
