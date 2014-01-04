@@ -304,3 +304,13 @@ div.form-actions {
     font-weight: bold;
     vertical-align: middle;
 }
+
+#sermon_archive_table > tbody > tr > td:first-child {
+    width: 90px;
+    height: 80px;
+    vertical-align: top;
+}
+
+#sermon_archive_table > tbody > tr > td {
+    vertical-align: middle;
+}

@@ -25,11 +25,11 @@
   Take a look through a complete list of all the sermons currently available from {{ KANISA_CHURCH_NAME }}.</p>
 </p>
 
-<table class="table table-striped">
+<table class="table table-striped" id="sermon_archive_table">
   <tbody>
     {% for sermon in object_list %}
     <tr>
-      <td style="width: 90px; height: 80px">
+      <td>
         {% if sermon.series %}
           {% if sermon.series.image %}
             {% thumbnail sermon.series.image_or_default "80x80" crop="center" as im %}
@@ -40,7 +40,7 @@
           {% endif %}
         {% endif %}
       </td>
-      <td style="vertical-align: middle">
+      <td>
         {% if sermon.series %}
         <h5><a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">{{ sermon.title }}</a></h5>
         Part of the series <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">
