@@ -318,3 +318,7 @@ div.form-actions {
 .text-muted.login-notes {
     font-size: 70%;
 }
+
+.numberinput {
+    width: 7em;
+}
