@@ -13,7 +13,6 @@ Version 1.0
     - Inline images
     - Banners (once the banners page has been ported we can probably
       remove the thumbnail-caption styles in kanisa.css)
-- Remove all inline styles
 - Improve scheduled event sidebar (it shows *all* regular events, with
   contact information below - it should probably just show related
   events, like the regular event pages do, though this won't work for
@@ -21,11 +20,12 @@ Version 1.0
 - Improve flow of editing scheduled instances of regular events - at
   present it may prompt you for an event title, if one is not set. It
   should just fill that in automatically
-- Split up kanisa.css somehow
 
 Version 1.1
 ===========
 
+- Remove all inline styles
+- Split up kanisa.css somehow
 - Replace banners with fixed call-out content, perhaps defaulting to
   diary if no content is available (call-outs can still be
   time-limited)
