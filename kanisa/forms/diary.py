@@ -25,7 +25,6 @@ class EventContactForm(KanisaBaseModelForm):
         widgets = {'image': KanisaThumbnailFileWidget(100, 100), }
 
 
-
 class EventCategoryForm(KanisaBaseModelForm):
     class Meta:
         model = EventCategory
