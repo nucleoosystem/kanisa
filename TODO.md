@@ -17,9 +17,6 @@ Version 1.0
   contact information below - it should probably just show related
   events, like the regular event pages do, though this won't work for
   one-offs)
-- Improve flow of editing scheduled instances of regular events - at
-  present it may prompt you for an event title, if one is not set. It
-  should just fill that in automatically
 
 Version 1.1
 ===========

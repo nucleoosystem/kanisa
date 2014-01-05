@@ -224,6 +224,14 @@ class DiaryScheduledEventUpdateView(DiaryScheduledEventBaseView,
     form_class = ScheduledEventEditForm
     model = ScheduledEvent
 
+    def get_initial(self):
+        initial = super(DiaryScheduledEventUpdateView, self).get_initial()
+
+        if not self.object.title and self.object.event:
+            initial['title'] = self.object.event.title
+
+        return initial
+
     def get_success_url(self):
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 diary_scheduled_event_update = DiaryScheduledEventUpdateView.as_view()
