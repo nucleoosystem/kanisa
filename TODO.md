@@ -21,6 +21,7 @@ Version 1.0
 Version 1.1
 ===========
 
+- Ensure search form is visible even if no logo is set up
 - Remove all inline styles
 - Split up kanisa.css somehow
 - Replace banners with fixed call-out content, perhaps defaulting to
