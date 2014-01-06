@@ -9,13 +9,6 @@
     <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
     {% endthumbnail %}
 
-    <form class="navbar-form" role="search" action="{% url 'kanisa_public_search' %}">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="query">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
-      </div>
-    </form>
+    {% include "kanisa/_search_form.html" %}
   </div>
 {% endif %}
