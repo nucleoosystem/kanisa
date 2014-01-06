@@ -19,6 +19,10 @@
       {% endif %}
       {% endfor %}
     </ul>
+    <div class="visible-xs">
+      {% include "kanisa/_search_form.html" %}
+    </div>
+
     {% if user.is_authenticated %}
     <p class="navbar-text pull-right">Welcome,
       <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>

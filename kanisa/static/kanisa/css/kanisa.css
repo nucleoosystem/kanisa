@@ -185,7 +185,7 @@ textarea.kanisamaininputwidget {
     margin-bottom: 4px;
 }
 
-.navbar-form {
+#logo .navbar-form {
     position: absolute;
     top: 0;
     right: 0;

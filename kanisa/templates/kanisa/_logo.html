@@ -9,6 +9,8 @@
     <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
     {% endthumbnail %}
 
-    {% include "kanisa/_search_form.html" %}
+    <div class="hidden-xs">
+      {% include "kanisa/_search_form.html" %}
+    </div>
   </div>
 {% endif %}
