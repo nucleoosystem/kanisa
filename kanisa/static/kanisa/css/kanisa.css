@@ -330,3 +330,9 @@ div.form-actions {
 .navbar a.kanisa_manage {
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .navbar-header ul.navbar-nav {
+        margin-left: 0;
+    }
+}

@@ -3,8 +3,6 @@ Version 1.0
 
 - Figure out what should go on the management home page (#41)
 - Improve navbar
-  - Ensure *some* links show in the nav on smaller screens - perhaps
-    just home and account bar?
   - Ensure the root links (e.g. About Us), can be navigated to - at
     the moment they just expand the nav submenu
 - Upgrade to latest Bootstrap
@@ -21,6 +19,8 @@ Version 1.0
 Version 1.1
 ===========
 
+- Fix navbar breakpoint - currently at certain screen sizes the navbar
+  flows over two rows
 - Ensure search form is visible even if no logo is set up
 - Remove all inline styles
 - Split up kanisa.css somehow
