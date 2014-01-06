@@ -28,7 +28,7 @@
       <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
       {% kanisa_is_permissioned_user as is_permissioned %}
       {% if is_permissioned %}
-      <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" style="text-decoration: none">
+      <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" class="kanisa_manage">
         <i class="glyphicon glyphicon-white glyphicon-cog"></i>
       </a>
       {% endif %}

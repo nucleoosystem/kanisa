@@ -326,3 +326,7 @@ div.form-actions {
 .numberinput {
     width: 7em;
 }
+
+.navbar a.kanisa_manage {
+    text-decoration: none;
+}
