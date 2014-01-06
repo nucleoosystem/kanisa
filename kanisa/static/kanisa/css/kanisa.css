@@ -192,6 +192,10 @@ textarea.kanisamaininputwidget {
     width: 300px;
 }
 
+#logo img.main_logo {
+    max-width: 100%;
+}
+
 .editable_block_wrapper {
     position: relative;
 }

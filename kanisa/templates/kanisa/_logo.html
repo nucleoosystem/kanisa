@@ -6,7 +6,7 @@
 {% if logo_information.url %}
   <div id="logo">
     {% thumbnail logo_information.url "460x140" as im %}
-    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+    <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="main_logo" />
     {% endthumbnail %}
 
     <div class="hidden-xs">
