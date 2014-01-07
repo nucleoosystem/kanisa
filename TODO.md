@@ -4,7 +4,6 @@ Version 1.0
 - Figure out what should go on the management home page (#41)
 - Upgrade to latest Bootstrap
   - Fix thumbnail displays in the management interface
-    - Sermon speakers
     - Banners (once the banners page has been ported we can probably
       remove the thumbnail-caption styles in kanisa.css)
 - Improve scheduled event sidebar (it shows *all* regular events, with

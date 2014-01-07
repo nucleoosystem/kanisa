@@ -309,6 +309,18 @@ div.form-actions {
     vertical-align: middle;
 }
 
+.kanisa_sermon_speakers a.thumbnail {
+    text-decoration: none;
+}
+
+.kanisa_sermon_speakers .thumbnail .caption h5 {
+    margin-bottom: 3px;
+    margin-top: 3px;
+    min-height: 3.5em;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
 #sermon_archive_table > tbody > tr > td:first-child {
     width: 90px;
     height: 80px;

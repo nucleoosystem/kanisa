@@ -12,33 +12,27 @@
 </p>
 <hr />
 
-<ul class="thumbnails">
+<div class="row kanisa_sermon_speakers">
   {% for speaker in sermonspeaker_list %}
-  <li class="col-md-2">
-    <div class="thumbnail">
-      <div style="position: relative;">
-        <a href="{% url 'kanisa_manage_sermons_speaker_update' speaker.pk %}" title="Edit this speaker's profile">
-          {% if speaker.image_or_default %}
-          {% thumbnail speaker.image_or_default "160x160" crop="center" as im %}
+  <div class="col-xs-4 col-md-2">
+    <a href="{% url 'kanisa_manage_sermons_speaker_update' speaker.pk %}" title="Edit this speaker's profile" class="thumbnail">
+      {% if speaker.image_or_default %}
+        {% thumbnail speaker.image_or_default "160x160" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-          {% endthumbnail %}
-          {% endif %}
+        {% endthumbnail %}
+      {% endif %}
 
-          <div class="carousel-caption tiny-carousel">
-            <p>
-              <strong>
-                {{ speaker }}
-              </strong><br />
-              <small>
-                ({{ speaker.num_sermons }} sermon{{ speaker.num_sermons|pluralize }})
-              </small>
-            </p>
-          </div>
-        </a>
+      <div class="caption">
+        <h5>
+          {{ speaker }}
+          <small>
+            ({{ speaker.num_sermons }} sermon{{ speaker.num_sermons|pluralize }})
+          </small>
+        </h5>
       </div>
-    </div>
-  </li>
+    </a>
+  </div>
   {% endfor %}
-</ul>
+</div>
 
 {% endblock %}
