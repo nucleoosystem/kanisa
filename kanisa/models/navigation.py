@@ -10,8 +10,16 @@ NAVIGATION_TITLE_MAX_LENGTH = 20
 
 class NavigationElement(MPTTModel):
     title = models.CharField(max_length=NAVIGATION_TITLE_MAX_LENGTH)
+    alternate_title = models.CharField(
+        max_length=NAVIGATION_TITLE_MAX_LENGTH,
+        null=True,
+        blank=True,
+        help_text=('This will be used where the link is the root link, as the '
+                   'text for the link itself (as opposed to the dropdown menu '
+                   'title).')
+    )
     description = models.CharField(
-        max_length=30,
+        max_length=50,
         help_text=('This will be displayed on mouseover, so should describe '
                    'the linked to page in a few words.')
     )
@@ -47,6 +55,12 @@ class NavigationElement(MPTTModel):
         )
 
     def __unicode__(self):
+        return self.title
+
+    def get_alternate_title(self):
+        if self.alternate_title:
+            return self.alternate_title
+
         return self.title
 
     def move_down(self):

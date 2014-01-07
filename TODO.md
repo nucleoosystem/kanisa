@@ -2,9 +2,6 @@ Version 1.0
 ===========
 
 - Figure out what should go on the management home page (#41)
-- Improve navbar
-  - Ensure the root links (e.g. About Us), can be navigated to - at
-    the moment they just expand the nav submenu
 - Upgrade to latest Bootstrap
   - Fix thumbnail displays in the management interface
     - Sermon speakers
