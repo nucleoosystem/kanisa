@@ -1,4 +1,5 @@
 from django import template
+from django.template.loader import render_to_string
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from kanisa.models import InlineImage, Document
@@ -83,8 +84,8 @@ class DocumentMatch(object):
                                              public=True)
 
     def tag(self):
-        return '<a href="%s">Download %s</a>' % (self.document.file.url,
-                                                 self.document.title)
+        return render_to_string("kanisa/_download.html",
+                                {'document': self.document})
 
 
 def get_documents(markdown_text):
