@@ -1,0 +1,21 @@
+{% load thumbnail %}
+
+<hr />
+{% if user.image %}
+  <div class="row">
+    <div class="col-md-4">
+      {% thumbnail user.image "50x50" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-rounded profile-picture" />
+      {% endthumbnail %}
+    </div>
+    <div class="col-md-8">
+      <p>
+        You are logged in as <strong>{{ user }}</strong>.
+      </p>
+    </div>
+  </div>
+{% else %}
+  <p>
+    You are logged in as <strong>{{ user }}</strong>.
+  </p>
+{% endif %}
