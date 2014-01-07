@@ -10,23 +10,12 @@ Version 1.0
 Version 1.1
 ===========
 
-- Fix navbar breakpoint - currently at certain screen sizes the navbar
-  flows over two rows
-- Add facility for more full-fledged service planning (i.e. not just
-  songs), with updated plans emailed to service leaders (perhaps as
-  printable PDFs)
-- Ensure search form is visible even if no logo is set up
+Deployment
+----------
+
 - Remove all inline styles
 - Split up kanisa.css somehow
-- Replace banners with fixed call-out content, perhaps defaulting to
-  diary if no content is available (call-outs can still be
-  time-limited)
 - Figure out how to run jslint as part of the minification process
-- Members' directory?
-  - Add a setting for allowing email addresses to be shared with other
-    members (off by default)
-- Improve pagination of document attachment widget
-- Allow customisable home page templates (#56)
 - Version check requirements in setup.py
   - Pillow (upgrade to 2.3.0 - might need newer version of
     sorl-thumbnail, which is back in active development - see
@@ -36,28 +25,54 @@ Version 1.1
     - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
+- Python 3 support
+- Improve deployment process (can we deploy without the site 500ing
+  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
+- Improve test coverage (#33)
+
+Mobile
+------
+
+- Fix navbar breakpoint - currently at certain screen sizes the navbar
+  flows over two rows
+- Replace banners with fixed call-out content, perhaps defaulting to
+  diary if no content is available (call-outs can still be
+  time-limited)
 - Make inline images responsive (don't send full versions to mobiles)
   (#47)
 - Check layout on mobile
-- Improve test coverage (#33)
 - Improve usability of management views on mobile
+
+Features
+--------
+
+- Add facility for more full-fledged service planning (i.e. not just
+  songs), with updated plans emailed to service leaders (perhaps as
+  printable PDFs)
+- Members' directory?
+  - Add a setting for allowing email addresses to be shared with other
+    members (off by default)
+- Allow customisable home page templates (#56)
 - Find references to media, and ensure media can't be deleted if there
   are existing references to them (#54)
 - Add a navigation checker (#44)
 - Detect references to dates in text (#37)
 - Allow pages to use multiple templates (#20)
-- Fix bug in rendering of event table when scheduling multiple events
-  (#13)
-- Python 3 support
+- Add support for rota management (#28)
 - Support for multiple schedules in a single RegularEvent (for events
   which are logically connected but have different components) (#15)
 - Consider adding Twilio integration
-- Add support for rota management (#28)
 - Add Facebook integration
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
 - Add support for multiple podcasts (perhaps grouped by service?)
-- Improve deployment process (can we deploy without the site 500ing
-  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
 - Add logs of actions taken in the management console
+
+Bug fixes
+---------
+
+- Ensure search form is visible even if no logo is set up
+- Improve pagination of document attachment widget
+- Fix bug in rendering of event table when scheduling multiple events
+  (#13)
