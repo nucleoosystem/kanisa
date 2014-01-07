@@ -5,8 +5,11 @@ from kanisa.models.pages import Page, get_page_from_path
 from mptt.models import MPTTModel, TreeForeignKey
 
 
+NAVIGATION_TITLE_MAX_LENGTH = 20
+
+
 class NavigationElement(MPTTModel):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=NAVIGATION_TITLE_MAX_LENGTH)
     description = models.CharField(
         max_length=30,
         help_text=('This will be displayed on mouseover, so should describe '
