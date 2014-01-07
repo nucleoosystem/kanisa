@@ -25,9 +25,6 @@ Version 1.1
 - Members' directory?
   - Add a setting for allowing email addresses to be shared with other
     members (off by default)
-- Figure out how to have "Save & Continue" for model creation forms
-  (this probably involves being more consistent about model editing
-  URLs, and having better tests).
 - Improve pagination of document attachment widget
 - Allow customisable home page templates (#56)
 - Version check requirements in setup.py
