@@ -341,3 +341,11 @@ div.form-actions {
         margin-left: 0;
     }
 }
+
+.sermon_series_list {
+    margin-bottom: 1em;
+}
+
+.sermon_series_list h2 {
+    margin-top: 0;
+}

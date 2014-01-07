@@ -2,16 +2,16 @@
 {% load thumbnail %}
 
 {% for series in active_series %}
-<div class="row" style="margin-bottom: 1em;">
-  <div class="col-md-2">
+<div class="row sermon_series_list">
+  <div class="col-md-3">
     <div class="thumbnail">
-      {% thumbnail series.image "160x135" crop="center" as im %}
+      {% thumbnail series.image "131x110" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
       {% endthumbnail %}
     </div>
   </div>
-  <div class="col-md-5">
-    <h2 style="margin-top: 0">
+  <div class="col-md-9">
+    <h2>
       <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
       <small>
         ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
