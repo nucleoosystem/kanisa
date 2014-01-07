@@ -14,19 +14,17 @@
 <hr />
 
 {% if object_list %}
-<ul class="thumbnails">
+<div class="row">
   {% for image in object_list %}
-  <li class="col-md-2">
-    <div class="thumbnail">
-      <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}">
-        {% thumbnail image.image "160x120" crop="center" as im %}
+    <div class="col-xs-6 col-md-2">
+      <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}" class="thumbnail">
+        {% thumbnail image.image "122x92" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
         {% endthumbnail %}
       </a>
     </div>
-  </li>
   {% endfor %}
-</ul>
+</div>
 
 {% else %}
 <p class="alert alert-warning">

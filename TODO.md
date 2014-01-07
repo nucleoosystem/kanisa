@@ -5,7 +5,6 @@ Version 1.0
 - Upgrade to latest Bootstrap
   - Fix thumbnail displays in the management interface
     - Sermon speakers
-    - Inline images
     - Banners (once the banners page has been ported we can probably
       remove the thumbnail-caption styles in kanisa.css)
 - Improve scheduled event sidebar (it shows *all* regular events, with
