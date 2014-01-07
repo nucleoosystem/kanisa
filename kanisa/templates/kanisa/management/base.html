@@ -18,7 +18,9 @@
           {% include 'kanisa/management/_sidebar.html' %}
         </div>
         <div class="col-md-10">
+          {% block breadcrumbs %}
           {% include 'kanisa/management/_breadcrumbs.html' %}
+          {% endblock %}
           {% include 'kanisa/management/_alerts.html' %}
 
           <h1>{% block pagetitle %}{% if kanisa_title %}{{ kanisa_title }}{% else %} for {{ KANISA_CHURCH_NAME }}{% endif %}{% endblock %}</h1>
