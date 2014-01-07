@@ -609,6 +609,12 @@ class Command(BaseCommand):
         parent = item['fields']['parent']
         pk = item['pk']
 
+        if len(description) > 50:
+            print ("Trimming description to 50 characters (leaves '%s')..."
+                   % description[:50])
+
+        description = description[:50]
+
         if parent == 1:
             # Kaleo used to have a magic top-level element which
             # everything was the child of for reasons I forget.
