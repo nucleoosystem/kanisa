@@ -6,6 +6,8 @@ Version 1.0
   contact information below - it should probably just show related
   events, like the regular event pages do, though this won't work for
   one-offs)
+- Fix layout of sermons home page (bad grid issues from Bootstrap 3
+  switch)
 
 Version 1.1
 ===========
