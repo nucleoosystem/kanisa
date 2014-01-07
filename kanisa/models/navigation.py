@@ -7,25 +7,28 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class NavigationElement(MPTTModel):
     title = models.CharField(max_length=20)
-    description = models.CharField(max_length=30,
-                                   help_text=('This will be displayed on '
-                                              'mouseover, so should describe '
-                                              'the linked to page in a few '
-                                              'words.'))
-    url = models.CharField(max_length=200,
-                           verbose_name='URL',
-                           help_text=('Should be specified relative to the '
-                                      'domain (e.g. /sermons/, not '
-                                      'http://www.example.com/sermons/).'))
-    parent = TreeForeignKey('self',
-                            null=True,
-                            blank=True,
-                            related_name='children')
-    require_login = models.BooleanField(default=False,
-                                        help_text=('If checked, this '
-                                                   'navigation element will '
-                                                   'only be shown to users '
-                                                   'who are logged in.'))
+    description = models.CharField(
+        max_length=30,
+        help_text=('This will be displayed on mouseover, so should describe '
+                   'the linked to page in a few words.')
+    )
+    url = models.CharField(
+        max_length=200,
+        verbose_name='URL',
+        help_text=('Should be specified relative to the domain (e.g. '
+                   '/sermons/, not http://www.example.com/sermons/).')
+    )
+    parent = TreeForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='children'
+    )
+    require_login = models.BooleanField(
+        default=False,
+        help_text=('If checked, this navigation element will only be shown to '
+                   'users who are logged in.')
+    )
     modified = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
