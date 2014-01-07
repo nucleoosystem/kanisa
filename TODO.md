@@ -51,6 +51,7 @@ Features
 Bug fixes
 ---------
 
+- What happens if no series are active on the sermons home page?
 - Ensure search form is visible even if no logo is set up
 - Improve pagination of document attachment widget
 - Fix bug in rendering of event table when scheduling multiple events
