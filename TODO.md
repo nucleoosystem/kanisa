@@ -15,7 +15,6 @@ Deployment
 
 - Remove all inline styles
 - Split up kanisa.css somehow
-- Figure out how to run jslint as part of the minification process
 - Version check requirements in setup.py
   - Pillow (upgrade to 2.3.0 - might need newer version of
     sorl-thumbnail, which is back in active development - see
@@ -25,10 +24,6 @@ Deployment
     - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
-- Python 3 support
-- Improve deployment process (can we deploy without the site 500ing
-  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
-- Improve test coverage (#33)
 
 Mobile
 ------
@@ -46,26 +41,11 @@ Mobile
 Features
 --------
 
-- Add facility for more full-fledged service planning (i.e. not just
-  songs), with updated plans emailed to service leaders (perhaps as
-  printable PDFs)
-- Members' directory?
-  - Add a setting for allowing email addresses to be shared with other
-    members (off by default)
 - Allow customisable home page templates (#56)
-- Find references to media, and ensure media can't be deleted if there
-  are existing references to them (#54)
-- Add a navigation checker (#44)
-- Detect references to dates in text (#37)
-- Allow pages to use multiple templates (#20)
-- Add support for rota management (#28)
-- Support for multiple schedules in a single RegularEvent (for events
-  which are logically connected but have different components) (#15)
 - Add Facebook integration
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
-- Add support for multiple podcasts (perhaps grouped by service?)
 - Add logs of actions taken in the management console
 
 Bug fixes
@@ -75,3 +55,34 @@ Bug fixes
 - Improve pagination of document attachment widget
 - Fix bug in rendering of event table when scheduling multiple events
   (#13)
+
+Version 1.2
+===========
+
+Deployment
+----------
+
+- Python 3 support
+- Figure out how to run jslint as part of the minification process
+- Improve deployment process (can we deploy without the site 500ing
+  whilst the virtualenv is in flux? perhaps enter maintenance mode?)
+- Improve test coverage (#33)
+
+Features
+--------
+
+- Add facility for more full-fledged service planning (i.e. not just
+  songs), with updated plans emailed to service leaders (perhaps as
+  printable PDFs)
+- Members' directory?
+  - Add a setting for allowing email addresses to be shared with other
+    members (off by default)
+- Find references to media, and ensure media can't be deleted if there
+  are existing references to them (#54)
+- Add a navigation checker (#44)
+- Detect references to dates in text (#37)
+- Allow pages to use multiple templates (#20)
+- Add support for rota management (#28)
+- Add support for multiple podcasts (perhaps grouped by service?)
+- Support for multiple schedules in a single RegularEvent (for events
+  which are logically connected but have different components) (#15)
