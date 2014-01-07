@@ -16,6 +16,9 @@ Version 1.1
 
 - Fix navbar breakpoint - currently at certain screen sizes the navbar
   flows over two rows
+- Add facility for more full-fledged service planning (i.e. not just
+  songs), with updated plans emailed to service leaders (perhaps as
+  printable PDFs)
 - Ensure search form is visible even if no logo is set up
 - Remove all inline styles
 - Split up kanisa.css somehow
