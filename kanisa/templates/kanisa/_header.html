@@ -31,7 +31,7 @@
       {% kanisa_is_permissioned_user as is_permissioned %}
       {% if is_permissioned %}
       <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" class="kanisa_manage">
-        <i class="glyphicon glyphicon-white glyphicon-cog"></i>
+        <i class="glyphicon glyphicon-cog"></i>
       </a>
       {% endif %}
       (<a href="{% url 'kanisa_members_logout' %}">Logout</a>)
