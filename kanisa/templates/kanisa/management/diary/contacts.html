@@ -21,13 +21,15 @@
         {% thumbnail contact.image_or_default "122x81" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
         {% endthumbnail %}
-
-        <div class="caption">
-          <h5>
-            {{ contact }}
-          </h5>
-        </div>
       </a>
+
+      <div class="caption">
+        <h5>
+          <a href="{% url 'kanisa_manage_diary_contacts_update' contact.pk %}" title="Edit this contact's profile">
+            {{ contact }}
+          </a>
+        </h5>
+      </div>
     </div>
   </div>
   {% endfor %}

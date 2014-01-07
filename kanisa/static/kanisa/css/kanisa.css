@@ -1,16 +1,3 @@
-.thumbnail-caption {
-    position: relative;
-    margin-bottom: 8px;
-}
-
-.thumbnail-caption a {
-    color: inherit;
-}
-
-.thumbnail-caption a:hover {
-    text-decoration: inherit;
-}
-
 div.carousel-caption {
     background-color: #000;
     background-color:rgba(0,0,0,0.5);
@@ -48,11 +35,6 @@ div.carousel p.link-text {
 
 .kanisa_diary td div.notlast {
     padding-bottom: 3px;
-}
-
-.thumbnail .caption p.details {
-    min-height: 4.5em;
-    line-height: 1.5em;
 }
 
 h1.primary {
@@ -306,7 +288,10 @@ div.form-actions {
     margin-top: 3px;
     min-height: 2.2em;
     font-weight: bold;
-    vertical-align: middle;
+}
+
+.kanisa_event_contacts .thumbnail .caption a {
+    text-decoration: none;
 }
 
 .kanisa_sermon_speakers a.thumbnail {
@@ -318,7 +303,15 @@ div.form-actions {
     margin-top: 3px;
     min-height: 3.5em;
     font-weight: bold;
-    vertical-align: middle;
+}
+
+.kanisa_banners .thumbnail h5 {
+    min-height: 2.5em;
+}
+
+.kanisa_banners .thumbnail h5 a {
+    text-decoration: none;
+    font-weight: bold;
 }
 
 #sermon_archive_table > tbody > tr > td:first-child {

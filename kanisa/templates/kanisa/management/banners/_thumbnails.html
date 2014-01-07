@@ -1,62 +1,54 @@
 {% load thumbnail %}
 
 {% if banner_list %}
-<ul class="thumbnails">
+<div class="row kanisa_banners">
   {% for banner in banner_list %}
-  <li class="col-md-3">
-    <div class="thumbnail">
-      <div class="thumbnail-caption">
-        {% thumbnail banner.image "260x180" crop="center" as im %}
-        <a data-toggle="modal" href="#banner-full-{{ banner.pk }}" ><img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" /></a>
-        {% endthumbnail %}
+    <div class="col-xs-6 col-md-3">
+      <div class="thumbnail">
+        <a href="{% url 'kanisa_manage_banners_update' banner.pk %}">
+          {% thumbnail banner.image "204x141" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+          {% endthumbnail %}
+        </a>
 
-        <div class="carousel-caption">
+        <div class="caption">
+          <h5><a href="{% url 'kanisa_manage_banners_update' banner.pk %}">{{ banner.headline }}</a></h5>
+
           <p>
-            <strong>
-              <a href="{% url 'kanisa_manage_banners_update' banner.pk %}">
-                {{ banner.headline }}
-              </a>
-            </strong>
-        </div>
-      </div>
-
-      <div class="caption">
-        <p class="details">
-        {% if banner.active %}
-        {% if banner.publish_until %}
-        This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.
-        {% else %}
-        This banner will remain active <strong>forever</strong>.
-        {% endif %}
-        {% else %}
+            {% if banner.active %}
+            {% if banner.publish_until %}
+            This banner will remain active for <strong>{{ banner.publish_until|timeuntil }}</strong>.
+            {% else %}
+            This banner will remain active <strong>forever</strong>.
+            {% endif %}
+            {% else %}
             {% if banner.expired %}
             This banner is <strong>retired</strong>.
             {% else %}
             This banner is <strong>not yet active</strong> (it will become active on <strong>{{ banner.publish_from }}</strong>).
             {% endif %}
-        {% endif %}
+            {% endif %}
 
-        This banner has been visited <strong>{{ banner.visits }} time{{ banner.visits|pluralize }}</strong>.</p>
+            This banner has been visited <strong>{{ banner.visits }} time{{ banner.visits|pluralize }}</strong>.
+          </p>
 
-        <p>
-          <a class="btn btn-default" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
-            <i class="glyphicon glyphicon-edit"></i>
-            Edit
-          </a>
-          {% if banner.active %}
-          <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}" title="Retiring a banner just stops it showing up to your site's users, it does not delete it permanently">
-            <i class="glyphicon glyphicon-trash "glyphicon glyphicon-white"></i>
-            Retire
-          </a>
-          {% endif %}
-        </p>
+          <p>
+            <a class="btn btn-default" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
+              <i class="glyphicon glyphicon-edit"></i>
+              Edit
+            </a>
+            {% if banner.active %}
+            <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}" title="Retiring a banner just stops it showing up to your site's users, it does not delete it permanently">
+              <i class="glyphicon glyphicon-trash"></i>
+              Retire
+            </a>
+            {% endif %}
+          </p>
+        </div>
       </div>
-
-      {% include 'kanisa/management/banners/_modal.html' %}
     </div>
-  </li>
   {% endfor %}
-</ul>
+</div>
 {% else %}
 <div class="alert alert-warning">
 There are no banners to display.

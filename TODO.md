@@ -2,10 +2,6 @@ Version 1.0
 ===========
 
 - Figure out what should go on the management home page (#41)
-- Upgrade to latest Bootstrap
-  - Fix thumbnail displays in the management interface
-    - Banners (once the banners page has been ported we can probably
-      remove the thumbnail-caption styles in kanisa.css)
 - Improve scheduled event sidebar (it shows *all* regular events, with
   contact information below - it should probably just show related
   events, like the regular event pages do, though this won't work for
