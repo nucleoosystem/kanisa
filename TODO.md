@@ -61,7 +61,6 @@ Features
 - Add support for rota management (#28)
 - Support for multiple schedules in a single RegularEvent (for events
   which are logically connected but have different components) (#15)
-- Consider adding Twilio integration
 - Add Facebook integration
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
