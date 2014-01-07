@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-4">
+<div class="col-md-5">
 <p>
   This is a service plan for <strong>{{ object.event.title }}</strong>
   on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
@@ -24,7 +24,7 @@
 
 </div>
 
-<div class="col-md-6">
+<div class="col-md-7">
 {% with songs=object.songinservice_set.all %}
 {% include 'kanisa/members/services/_song_table.html' %}
 {% endwith %}
