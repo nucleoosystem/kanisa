@@ -28,10 +28,10 @@ class SocialBaseView(KanisaAuthorizationMixin):
     kanisa_nav_component = 'social'
 
     def get_twitter_context(self):
-        twitter = get_cached_twitter_handle()
         context = {}
 
         try:
+            twitter = get_cached_twitter_handle()
             context['twitter_username'] = twitter.screen_name
             context['followers'] = twitter.followers_count
             context['statuses'] = twitter.statuses_count
