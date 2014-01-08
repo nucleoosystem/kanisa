@@ -1,6 +1,24 @@
 <ul class="nav nav-pills nav-stacked">
-  <li class="nav-header disabled"><a href="#">Events</a></li>
-  {% for event in events %}
-  <li{% if object == event %} class="active"{% endif %}><a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">{{ event }}</a></li>
-  {% endfor %}
+  {% if object.event %}
+    {% for category in object.event.categories.all %}
+      <li class="nav-header disabled"><a href="#">{{ category }}</a></li>
+      {% for event in category.regularevent_set.all %}
+        <li{% if object.event == event %} class="active"{% endif %}>
+          <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">{{ event }}</a>
+        </li>
+      {% endfor %}
+    {% endfor %}
+
+    <li class="nav-header disabled">
+      <a href="#">Elsewhere</a>
+    </li>
+  {% else %}
+    <li class="nav-header disabled">
+      <a href="#">More in the Diary</a>
+    </li>
+  {% endif %}
+
+  <li>
+    <a href="{% url 'kanisa_public_diary_index' %}">Other events</a>
+  </li>
 </ul>

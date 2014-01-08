@@ -22,31 +22,50 @@
   <div class="col-md-9">
     <h1 class="primary">
       {{ object.title }}
+      <small>({{ object.date|date:"l, jS F Y" }})</small>
     </h1>
 
-    <p class="lead">
-      {% if object.date == object.end_date %}
-      {{ object.title }} is on {{ object.date|date:"jS F Y" }}
-      at {{ object.start_time }}
-      {% else %}
-      {{ object.title }} begins on {{ object.date|date:"jS F Y" }}
-      at {{ object.start_time }}
-      and finishes on {{ object.end_date|date:"jS F" }}.
-      {% endif %}
-    </p>
+    <div class="row">
+      {% if object.event or object.contact %}
+      <div class="col-md-4">
+        {% if object.event.image %}
+        {% thumbnail object.event.image "260x260" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+        {% endthumbnail %}
+        <hr />
 
-    {% if object.details %}
-    {{ object.details|kanisa_markdown }}
-    {% endif %}
+        {% endif %}
+
+        {% if object.contact %}
+        {% include 'kanisa/public/diary/_contact.html' %}
+        {% endif %}
+
+      </div>
+      <div class="col-md-8">
+      {% else %}
+      <div class="col-md-12">
+        {{ object.contact }}
+doh
+      {% endif %}
+        <p class="lead">
+          {% if object.date == object.end_date %}
+          {{ object.title }} is on {{ object.date|date:"l, jS F Y" }}
+          at {{ object.start_time }}
+          {% else %}
+          {{ object.title }} begins on {{ object.date|date:"l, jS F Y" }}
+          at {{ object.start_time }}
+          and finishes on {{ object.end_date|date:"l, jS F" }}.
+          {% endif %}
+        </p>
+
+        {% if object.details %}
+        {{ object.details|kanisa_markdown }}
+        {% endif %}
+      </div>
+    </div>
   </div>
   <div class="col-md-3">
     {% include "kanisa/public/diary/_diary_nav.html" %}
-
-    {% if object.contact %}
-    <hr />
-    {% include 'kanisa/public/diary/_contact.html' %}
-    {% endif %}
-
 
     {% if perms.kanisa.manage_diary %}
     <hr />
