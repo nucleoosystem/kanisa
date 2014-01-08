@@ -122,28 +122,7 @@
 		},
 
 		_hide: function(e){
-			// When going from the input to the picker, IE handles the blur/click
-			// events differently than other browsers, in such a way that the blur
-			// event triggers a hide before the click event can stop propagation.
-			if ($.browser.msie) {
-				var t = this, args = arguments;
-
-				function cancel_hide(){
-					clearTimeout(hide_timeout);
-					e.target.focus();
-					t.picker.off('click', cancel_hide);
-				}
-
-				function do_hide(){
-					t.hide.apply(t, args);
-					t.picker.off('click', cancel_hide);
-				}
-
-				this.picker.on('click', cancel_hide);
-				var hide_timeout = setTimeout(do_hide, 100);
-			} else {
-				return this.hide.apply(this, arguments);
-			}
+		    return this.hide.apply(this, arguments);
 		},
 
 		hide: function(e){
