@@ -4,15 +4,19 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.base import RedirectView
 from kanisa.forms.social import ScheduledTweetForm
 from kanisa.models import ScheduledTweet
-from kanisa.utils.social import (TwitterException,
-                                 post_to_twitter,
-                                 get_cached_twitter_handle)
-from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaTemplateView,
-                                  KanisaCreateView,
-                                  KanisaUpdateView,
-                                  KanisaDeleteView,
-                                  KanisaListView)
+from kanisa.utils.social import (
+    TwitterException,
+    post_to_twitter,
+    get_cached_twitter_handle
+)
+from kanisa.views.generic import (
+    KanisaAuthorizationMixin,
+    KanisaTemplateView,
+    KanisaCreateView,
+    KanisaUpdateView,
+    KanisaDeleteView,
+    KanisaListView
+)
 
 
 class SocialBaseView(KanisaAuthorizationMixin):

@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
-from kanisa.views.generic import (KanisaAnyAuthorizationMixin,
-                                  KanisaTemplateView)
+from kanisa.views.generic import (
+    KanisaAnyAuthorizationMixin,
+    KanisaTemplateView
+)
 
 
 class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
