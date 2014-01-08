@@ -1,6 +1,8 @@
 Version 1.0
 ===========
 
+- Ensure social pages work even if Twitter isn't set up. Perhaps even
+  make it possible to set up Twitter integration from the social page
 - Improve scheduled event sidebar (it shows *all* regular events, with
   contact information below - it should probably just show related
   events, like the regular event pages do, though this won't work for
@@ -55,6 +57,7 @@ Bug fixes
 - Improve pagination of document attachment widget
 - Fix bug in rendering of event table when scheduling multiple events
   (#13)
+- Fix weird layout of user editing page
 
 Version 1.2
 ===========
