@@ -1,5 +1,7 @@
 {% extends 'kanisa/management/base.html' %}
 
+{% load thumbnail %}
+
 {% block pagetitle %}Manage {{ KANISA_CHURCH_NAME }}{% endblock %}
 
 {% block breadcrumbs %}
@@ -9,12 +11,49 @@
 
 <p class="lead">Welcome to the Kanisa management interface, you are currently logged in as <strong>{{ user }}</strong>.</p>
 
-<h4>Your Account</h4>
+<hr />
 
-<ul>
-  <li><a href="{% url 'kanisa_members_password_change' %}">Change your password</a></li>
-</ul>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Quick Links</h3>
 
+    {% if perms.kanisa.manage_pages %}
+    <a href="{% url 'kanisa_manage_pages_create' %}" class="btn btn-default">
+      <span class="glyphicon glyphicon-font"></span>
+      Create a Page
+    </a>
+    {% endif %}
+
+    {% if perms.kanisa.manage_sermons %}
+    <a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-default">
+      <span class="glyphicon glyphicon-headphones"></span>
+      Create a Sermon
+    </a>
+    {% endif %}
+
+    {% if perms.kanisa.manage_users %}
+    <a href="{% url 'kanisa_manage_users' %}" class="btn btn-default">
+      <span class="glyphicon glyphicon-user"></span>
+      Manage Users
+    </a>
+    {% endif %}
+  </div>
+  <div class="col-md-4 kanisa_recent_logins">
+    <h3>Recent Logins</h3>
+
+    {% for theuser in user_list %}
+    <div>
+      {% thumbnail theuser.image_or_default "50x50" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" style="float: left" class="img-circle" />
+      {% endthumbnail %}
+      <div>
+        {{ theuser.get_full_name }}<br />
+        <abbr title="{{ theuser.last_login|date:"r"}}">{{ theuser.last_login|timesince }}</abbr> ago
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% if user.is_staff %}
   <hr />

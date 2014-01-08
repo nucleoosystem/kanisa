@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 from django.utils.timezone import now
+from kanisa.utils.branding import BrandingInformation
 from sorl.thumbnail import ImageField
 
 
@@ -79,3 +80,10 @@ class RegisteredUser(AbstractUser):
             self._can_see_service_plans = True
 
         return self._can_see_service_plans
+
+    def image_or_default(self):
+        if self.image:
+            return self.image
+
+        branding = BrandingInformation('apple')
+        return branding.url

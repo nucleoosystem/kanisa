@@ -349,3 +349,13 @@ div.form-actions {
 .sermon_series_list h2 {
     margin-top: 0;
 }
+
+.kanisa_recent_logins > div {
+    clear: left;
+    min-height: 60px;
+}
+
+.kanisa_recent_logins div div {
+    padding-left: 60px;
+    padding-top: 5px;
+}
