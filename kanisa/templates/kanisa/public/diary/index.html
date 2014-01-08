@@ -26,10 +26,10 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
     <h1 class="primary">Regular Events</h1>
 
     {% if event_categories %}
-    <strong style="float: left; margin-right: 1em; padding-top: 8px;">
+    <strong>
       Show events for:
-    </strong>
-    <ul class="nav nav-pills">
+    </strong><br />
+    <ul class="nav nav-pills eventcategoryfilter">
       <li{% if not category %} class="active"{% endif %}>
         <a href="?" class="event_category_filter" data-cat-id="0">
           All
@@ -43,6 +43,7 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
       </li>
       {% endfor %}
     </ul>
+    <hr />
     {% endif %}
 
     <div id="regular_event_list">

@@ -3,7 +3,7 @@
 
 {% for event in events_to_display %}
 {% cycle '<div class="row">' '' %}
-  <div class="col-md-4" style="margin-bottom: 1em">
+  <div class="col-md-6" style="margin-bottom: 1em">
     {% if event.image %}
     <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" style="float: left; margin: 0 10px 10px 0">
       {% thumbnail event.image "80x80" crop="center" as im %}

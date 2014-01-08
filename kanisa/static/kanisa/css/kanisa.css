@@ -359,3 +359,8 @@ div.form-actions {
     padding-left: 60px;
     padding-top: 5px;
 }
+
+.eventcategoryfilter li {
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
