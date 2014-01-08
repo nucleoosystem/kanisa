@@ -9,6 +9,9 @@ KNOWN_BLOCKS = {
                 'Appears on the homepage under the contact us section.'),
     'members_welcome': ('Members\' Welcome',
                         'Appears after login by non-staff members.'),
+    'footer': ('Footer Contact',
+               ('Appears in the right-hand side of the footer on every public '
+                'page.')),
 }
 
 

@@ -1,1 +1,21 @@
 {% extends 'kanisa/base.html' %}
+
+{% load kanisa_homepage %}
+
+{% block footer %}
+<div id="footer">
+  <div class="container text-muted">
+    <div class="row">
+      <div class="col-md-7">
+        <p>
+          &copy {% now "Y" %} {{ KANISA_CHURCH_NAME }}<br />
+          All rights reserved.
+        </p>
+      </div>
+      <div class="col-md-5">
+        {% kanisa_content_block 'footer' %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
