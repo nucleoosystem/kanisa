@@ -169,6 +169,7 @@ class KanisaUpdateView(UpdateView):
         messages.success(self.request, self.get_message(form))
 
         if 'continue' in self.request.POST:
+            self.object = form.save()
             return HttpResponseRedirect(self.request.get_full_path())
 
         return super(KanisaUpdateView, self).form_valid(form)
