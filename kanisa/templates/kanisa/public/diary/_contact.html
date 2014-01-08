@@ -6,7 +6,7 @@
   <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" style="float: left; margin: 0 5px 5px 0" />
   {% endthumbnail %}
   {% endif %}
-  You can find out more by e-mailing
+  You can find out more about <em>{{ object }}</em> by e-mailing
   {% if object.contact.email %}
     <strong><a href="mailto:{{ object.contact.email }}">{{ object.contact }}</a></strong>.
   {% else %}
