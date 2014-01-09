@@ -21,6 +21,10 @@
 {% if object.passage %}
 <p><strong>Passage:</strong> {{ object.passage }}</p>
 {% endif %}
+{% if object.intro %}
 {{ object.intro|kanisa_markdown|striptags|truncatewords:75 }}
+{% else %}
+{{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
+{% endif %}
 </blockquote>
 {% endblock %}
