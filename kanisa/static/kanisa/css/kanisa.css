@@ -360,3 +360,8 @@ div.form-actions {
     padding: 1em;
     margin: 0;
 }
+
+.main_input_widget_image_choice {
+    cursor: pointer;
+    margin-bottom: 5px;
+}

@@ -9,7 +9,7 @@
 <p style="text-align: center">
 {% for image in page_obj.object_list %}
 {% thumbnail image.image "80x60" crop="center" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-thumbnail main_input_widget_image_choice" style="cursor: pointer; margin-bottom: 5px" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="img-thumbnail main_input_widget_image_choice" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
 {% endthumbnail %}
 {% endfor %}
 </p>
