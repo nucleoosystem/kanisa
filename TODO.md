@@ -79,3 +79,5 @@ Features
 - Add support for multiple podcasts (perhaps grouped by service?)
 - Support for multiple schedules in a single RegularEvent (for events
   which are logically connected but have different components) (#15)
+- Add weekly notice sheet feature - ability to add notices far in
+  advance
