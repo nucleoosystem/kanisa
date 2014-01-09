@@ -18,3 +18,7 @@ KANISA_FROM_EMAIL = getattr(settings,
 KANISA_DEBUG_STATIC = getattr(settings,
                               'KANISA_DEBUG_STATIC',
                               settings.DEBUG)
+
+KANISA_GOOGLE_ANALYTICS_KEY = getattr(settings,
+                                      'KANISA_GOOGLE_ANALYTICS_KEY',
+                                      None)
