@@ -630,20 +630,25 @@ class Command(BaseCommand):
             if parent:
                 real_parent = self.seen_navigation_link_pks[parent]
 
-        try:
-            models.NavigationElement.objects.get(parent=real_parent,
-                                                 url=url)
-            print "Skipping creating link '%s' - link already exists." % title
-        except models.NavigationElement.DoesNotExist:
-            link = models.NavigationElement.objects.create(
-                title=title,
-                description=description,
-                url=url,
-                parent=real_parent
-            )
-            print "Created link with title %s, origin is %d." % (link.title,
-                                                                 pk)
-            self.seen_navigation_link_pks[pk] = link
+        if real_parent:
+            try:
+                models.NavigationElement.objects.get(parent=real_parent,
+                                                     url=url)
+                print ("Skipping creating non-root link '%s' - link already "
+                       "exists." % title)
+                return
+            except models.NavigationElement.DoesNotExist:
+                pass
+
+        link = models.NavigationElement.objects.create(
+            title=title,
+            description=description,
+            url=url,
+            parent=real_parent
+        )
+        print "Created link with title %s, origin is %d." % (link.title,
+                                                             pk)
+        self.seen_navigation_link_pks[pk] = link
 
     def handle_members_document(self, item):
         pk = item['pk']
