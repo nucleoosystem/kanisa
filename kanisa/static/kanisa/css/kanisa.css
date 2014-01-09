@@ -14,12 +14,20 @@ div.carousel-caption p {
     margin-left: 20px;
     margin-right: 20px;
     text-align: left;
+}
+
+div.carousel-caption p {
     font-size: 90%;
 }
 
-div.carousel p.link-text {
+div.carousel-caption p.link-text {
     text-align: right;
     margin: 0 10px 0 0;
+}
+
+div.carousel-caption p.link-text a {
+    color: #fff;
+    font-size: 120%;
 }
 
 .kanisa_diary td {
