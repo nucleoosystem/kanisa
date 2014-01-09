@@ -1,4 +1,5 @@
 {% load kanisa_homepage %}
+{% load thumbnail %}
 
 <h3>Listen Online</h3>
 
@@ -9,15 +10,27 @@
   {% for sermon in sermons %}
   <tr>
     <td>
+      {% if sermon.speaker.image %}
+        {% thumbnail sermon.speaker.image "60x60" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-circle" />
+        {% endthumbnail %}
+      {% endif %}
+    </td>
+    <td>
       <strong>
         <a href="{{ sermon.url }}">
           {{ sermon.title }}
         </a>
       </strong>
       <br />
+      {% if sermon.series %}
+      Part of the series
+      <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}"><em>{{ sermon.series }}</em></a>
+      <br />
+      {% endif %}
       {{ sermon.speaker }}
+      <span class="text-muted">({{ sermon.date }})</span>
     </td>
-    <td>{{ sermon.date }}</td>
   </tr>
   {% endfor %}
 </table>
