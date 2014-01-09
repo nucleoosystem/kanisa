@@ -373,3 +373,13 @@ div.form-actions {
     cursor: pointer;
     margin-bottom: 5px;
 }
+
+#kanisa_homepage_intro {
+    font-size: 120%;
+}
+
+#kanisa_homepage_intro h1 {
+    font-size: 32px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
+}
