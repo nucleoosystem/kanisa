@@ -15,6 +15,7 @@ cd /var/www/centralbaptistchelmsford.org
 
 # Actually do the upgrade
 python manage.py syncdb
+python manage.py migrate
 python manage.py collectstatic --noinput
 touch proj/wsgi.py
 
