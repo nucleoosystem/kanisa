@@ -494,7 +494,7 @@ class Command(BaseCommand):
 
     def handle_diary_diaryeventtype(self, item):
         pk = item['pk']
-        title = item['fields']['title']
+        title = item['fields']['title'][:60]
         category_pk = item['fields']['category']
         contact_pk = item['fields']['contact']
         details = item['fields']['details']
@@ -538,7 +538,7 @@ class Command(BaseCommand):
         event_type = item['fields']['event_type']
         intro = item['fields']['intro']
         series = item['fields']['series']
-        title = item['fields']['title']
+        title = item['fields']['title'][:60]
 
         details = add_attachments(details,
                                   item['fields']['attachments'],
