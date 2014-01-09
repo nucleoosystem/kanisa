@@ -10,15 +10,9 @@
   <tr>
     <td>
       <strong>
-        {% if sermon.series %}
-        <a href="{% url 'kanisa_public_sermon_detail' sermon.series.slug sermon.slug %}">
+        <a href="{{ sermon.url }}">
           {{ sermon.title }}
         </a>
-        {% else %}
-        <a href="{% url 'kanisa_public_standalone_sermon_detail' sermon.slug %}">
-          {{ sermon.title }}
-        </a>
-        {% endif %}
       </strong>
       <br />
       {{ sermon.speaker }}
