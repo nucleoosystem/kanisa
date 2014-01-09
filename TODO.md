@@ -1,3 +1,9 @@
+Version 1.0
+===========
+
+- Make sure footer is always at or below the bottom of the viewpane
+- Fix overflow of branding colour swatches
+
 Version 1.1
 ===========
 
