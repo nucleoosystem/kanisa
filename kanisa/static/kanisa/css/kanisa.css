@@ -369,6 +369,10 @@ div.form-actions {
     margin: 0;
 }
 
+#footer div.github {
+    text-align: right;
+}
+
 .main_input_widget_image_choice {
     cursor: pointer;
     margin-bottom: 5px;
