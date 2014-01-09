@@ -27,7 +27,7 @@ class KanisaPrettyForm(object):
     def get_form_helper(self):
         helper = FormHelper()
         helper.label_class = 'col-lg-2'
-        helper.field_class = 'col-lg-8'
+        helper.field_class = 'col-lg-10'
 
         helper.add_input(Submit('submit',
                                 self.get_submit_text(),
