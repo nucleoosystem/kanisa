@@ -5,6 +5,8 @@ import os.path
 from os.path import basename
 from django.conf import settings
 from django.contrib.auth.models import Permission
+from django.contrib.redirects.models import Redirect
+from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.timezone import make_aware, get_current_timezone
 from kanisa import models
@@ -478,7 +480,14 @@ class Command(BaseCommand):
     def handle_diary_diaryeventcategory(self, item):
         pk = item['pk']
         title = item['fields']['title']
+        slug = item['fields']['slug']
+
+        # Redirect the old category pages
         category = models.EventCategory.objects.create(title=title)
+        site = Site.objects.get_current()
+        Redirect.objects.create(site=site,
+                                old_path='/diary/%s/' % slug,
+                                new_path='/diary/')
 
         self.seen_event_categories[pk] = category
         print "Created event category %s." % title
