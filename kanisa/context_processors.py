@@ -15,9 +15,9 @@ def kanisa_settings(context):
     return {
         'KANISA_ALLOW_REGISTRATION': conf.KANISA_REGISTRATION_ALLOWED,
         'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
-        'KANISA_NAVIGATION': elements,
+        'KANISA_CSS_HASH': static_conf.KANISA_CSS_HASH,
         'KANISA_DEBUG_STATIC': conf.KANISA_DEBUG_STATIC,
         'KANISA_MANAGEMENT_JS_HASH': static_conf.KANISA_MANAGEMENT_JS_HASH,
+        'KANISA_NAVIGATION': elements,
         'KANISA_PUBLIC_JS_HASH': static_conf.KANISA_PUBLIC_JS_HASH,
-        'KANISA_CSS_HASH': static_conf.KANISA_CSS_HASH,
     }
