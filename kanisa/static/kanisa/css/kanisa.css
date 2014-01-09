@@ -383,3 +383,8 @@ div.form-actions {
     padding-bottom: 3px;
     border-bottom: 1px solid #ccc;
 }
+
+.recurrencewidget input.checkbox,
+.recurrencewidget input.radio {
+    display: inline;
+}
