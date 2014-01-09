@@ -6,24 +6,12 @@
 {% if top_five_songs %}
 <hr />
 <h4>Top 5 Songs</h4>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>All-time Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for song,percent in top_five_songs %}
-    <tr>
-      <td>{{ song.title }}</td>
-      <td>
-        <div class="progress" style="margin: 0">
-          <div class="bar" style="width: {{ percent }}%;"></div>
-        </div>
-      </td>
-    </tr>
+<ol>
+    {% for song in top_five_songs %}
+    <li>
+      {{ song.title }}
+      <span class="text-muted">(sung {{ song.usage }} time{{ song.usage|pluralize }})</span>
+    </li>
     {% endfor %}
-  </tbody>
-</table>
+</ol>
 {% endif %}
