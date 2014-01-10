@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from kanisa.models import RegularEvent
-from kanisa.utils.diary import get_schedule
+from kanisa.utils.diary import get_schedule, get_this_week
 from kanisa.views.xhr.base import XHRBasePostView, XHRBaseGetView, BadArgument
 
 
@@ -61,3 +61,25 @@ class DiaryGetSchedule(XHRBaseGetView):
                                   {'calendar': schedule.calendar_entries},
                                   context_instance=RequestContext(request))
 get_schedule_view = DiaryGetSchedule.as_view()
+
+
+class DiaryGetWeekPublic(XHRBaseGetView):
+    required_arguments = ['start_date', ]
+    permission = None
+
+    def get_date(self, request, *args, **kwargs):
+        date = request.GET['start_date']
+        try:
+            return datetime.strptime(date, '%Y%m%d').date()
+        except ValueError:
+            raise BadArgument("Invalid date '%s' provided."
+                              % date)
+
+    def render(self, request, *args, **kwargs):
+        thedate = self.get_date(request, *args, **kwargs)
+
+        tmpl = 'kanisa/public/diary/_this_week_table.html'
+        return render_to_response(tmpl,
+                                  {'thisweek': get_this_week(thedate)},
+                                  context_instance=RequestContext(request))
+get_week_public_view = DiaryGetWeekPublic.as_view()

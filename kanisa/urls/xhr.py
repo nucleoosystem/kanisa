@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url
 from kanisa.views.xhr import bible
+from kanisa.views.xhr import diary
 from kanisa.views.xhr import services
+
 
 urlpatterns = patterns(
     '',
@@ -10,4 +12,6 @@ urlpatterns = patterns(
         {}, 'kanisa_xhr_bandinformation'),
     url(r'^services/events/$', services.EventsView.as_view(),
         {}, 'kanisa_xhr_eventinformation'),
+    url(r'^diary/thisweek/$', diary.get_week_public_view,
+        {}, 'kanisa_xhr_diary_thisweek'),
 )
