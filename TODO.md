@@ -44,8 +44,6 @@ Features
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts?
 - Add logs of actions taken in the management console
-- Remove `kanisa_from_kaleo` and `kanisa_guess_schedule`, both of
-  which were created to facilitate the move from Kaleo to Kanisa
 - Add a way to permanently remove inactive users (e.g. spam
   registrations)
 
@@ -91,3 +89,5 @@ Features
   which are logically connected but have different components) (#15)
 - Add weekly notice sheet feature - ability to add notices far in
   advance
+- Remove `kanisa_from_kaleo` and `kanisa_guess_schedule`, both of
+  which were created to facilitate the move from Kaleo to Kanisa
