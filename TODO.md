@@ -1,8 +1,25 @@
-Version 1.0
-===========
+Version 0.9.2
+=============
 
 - Make sure footer is always at or below the bottom of the viewpane
 - Fix overflow of branding colour swatches
+- Ensure branding changes don't require a server restart
+- Line up homepage heading with top of banner
+- Remove Markdown from rendered search results
+- Ability to look forward a bit in the diary
+
+Version 1.0
+===========
+
+Deployment
+----------
+
+- Add a way to set up cron jobs
+
+Other
+-----
+
+Unknown - I'll fill this out based on feedback from pilot users.
 
 Version 1.1
 ===========
@@ -10,6 +27,7 @@ Version 1.1
 Deployment
 ----------
 
+- Add a way to set up cron jobs
 - Remove all inline styles
 - Split up kanisa.css somehow
 - Version check requirements in setup.py
