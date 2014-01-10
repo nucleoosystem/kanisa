@@ -16,7 +16,7 @@ class SermonSeriesManager(models.Manager):
 
 
 class SermonSeries(models.Model):
-    title = models.CharField(max_length=60,
+    title = models.CharField(max_length=120,
                              help_text='The name of the series.')
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ImageField(
@@ -148,7 +148,7 @@ class PreachedSermonManager(SermonManager):
 
 
 class Sermon(models.Model):
-    title = models.CharField(max_length=60,
+    title = models.CharField(max_length=120,
                              help_text='The title of the sermon.')
     slug = AutoSlugField(populate_from='title', unique=True)
     date = models.DateField(help_text='The date the sermon was preached.')
