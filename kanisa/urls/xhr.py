@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
-from kanisa.views.xhr import services
 from kanisa.views.xhr import bible
+from kanisa.views.xhr import services
 
 urlpatterns = patterns(
     '',
