@@ -20,7 +20,17 @@ var update_regular_events_list = "{% url 'kanisa_public_diary_index' %}";
 {% block content %}
 <div class="row">
   <div class="col-md-4">
-    {% include 'kanisa/public/diary/_this_week_table.html' %}
+    <div id="this_week_table">
+      {% include 'kanisa/public/diary/_this_week_table.html' %}
+    </div>
+
+    {% if perms.kanisa.manage_diary %}
+    <a class="btn btn-primary" href="{% url 'kanisa_manage_diary' %}" title="Manage the diary">
+      <i class="glyphicon glyphicon-calendar"></i>
+      Manage the diary
+    </a>
+    {% endif %}
+
   </div>
   <div class="col-md-8">
     <h1 class="primary">Regular Events</h1>
