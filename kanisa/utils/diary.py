@@ -49,7 +49,9 @@ def get_this_week(containing=None):
                          if event_covers_date(e, thedate)]))
 
     return {
-        'events': thisweek
+        'previous_week': monday - timedelta(days=1),
+        'events': thisweek,
+        'next_week': sunday + timedelta(days=1)
     }
 
 
