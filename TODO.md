@@ -2,6 +2,7 @@ Version 0.9.2
 =============
 
 - Ability to look forward a bit in the diary
+- Include the jQuery map file?
 
 Version 1.0
 ===========
