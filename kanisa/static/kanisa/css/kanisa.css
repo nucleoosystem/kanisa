@@ -386,6 +386,7 @@ div.form-actions {
     font-size: 32px;
     padding-bottom: 3px;
     border-bottom: 1px solid #ccc;
+    margin-top: 0;
 }
 
 .recurrencewidget input.checkbox,

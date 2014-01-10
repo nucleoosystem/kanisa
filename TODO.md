@@ -4,7 +4,6 @@ Version 0.9.2
 - Make sure footer is always at or below the bottom of the viewpane
 - Fix overflow of branding colour swatches
 - Ensure branding changes don't require a server restart
-- Line up homepage heading with top of banner
 - Remove Markdown from rendered search results
 - Ability to look forward a bit in the diary
 
