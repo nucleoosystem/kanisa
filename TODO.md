@@ -1,7 +1,6 @@
 Version 0.9.2
 =============
 
-- Remove Markdown from rendered search results
 - Ability to look forward a bit in the diary
 
 Version 1.0
