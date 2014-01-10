@@ -6,7 +6,7 @@
 
 <h3 style="margin-top: 0">Coming Up</h3>
 <p>
-  The next <em>{{ next_event.title }}</em>
+  The next <em>{{ next_event }}</em>
   {% if next_event.date == next_event.end_date %}
   is on
   {% else %}
@@ -30,7 +30,7 @@
 <p>
   Find out more about
   <a href="{{ next_event.url }}" title="Find out more">
-    the next {{ next_event.title }}</a>.
+    the next {{ next_event }}</a>.
 </p>
 {% endif %}
 
