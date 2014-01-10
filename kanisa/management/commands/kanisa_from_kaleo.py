@@ -421,7 +421,7 @@ class Command(BaseCommand):
     def handle_sermons_sermonseries(self, item):
         pk = item['pk']
         active = not item['fields']['complete']
-        title = item['fields']['title']
+        title = item['fields']['title'][:60]
         details = item['fields']['details']
         passage = item['fields']['passage']
         image_path = item['fields']['image']
@@ -444,7 +444,7 @@ class Command(BaseCommand):
         delivered = date_from_str(item['fields']['delivered'])
         series_pk = item['fields']['series']
         downloads = item['fields']['downloads']
-        title = item['fields']['title']
+        title = item['fields']['title'][:60]
         passage = item['fields']['passage']
         speaker_pk = item['fields']['speaker']
         mp3_path = item['fields']['mp3']
