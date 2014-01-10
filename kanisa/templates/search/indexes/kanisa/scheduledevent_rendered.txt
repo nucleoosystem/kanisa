@@ -4,7 +4,7 @@
 
 {% block title %}
 
-<a href="{{ object.url }}">{{ object.title }}</a>
+<a href="{{ object.url }}">{{ object }}</a>
 
 <small>
   {{ object.date|date:"l, jS F Y" }} at
@@ -13,9 +13,9 @@
 {% endblock %}
 
 {% block contents %}
+{% if object.details %}
 <blockquote>
-  {% if object.details %}
   {{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
-  {% endif %}
 </blockquote>
+{% endif %}
 {% endblock %}
