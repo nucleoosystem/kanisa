@@ -123,6 +123,7 @@ td h5 {
     border: 1px solid #ccc;
     width: 40px;
     height: 40px;
+    box-sizing: content-box;
 }
 
 .colour-swatch div {
