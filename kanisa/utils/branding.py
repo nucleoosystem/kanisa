@@ -3,7 +3,10 @@ import os
 from django.conf import settings
 from django.core.cache import cache
 from django.template import TemplateDoesNotExist
-from django.template.loader import get_template
+from django.template.loader import (
+    get_template,
+    render_to_string
+)
 
 
 BRANDING_COMPONENTS = {
@@ -53,9 +56,23 @@ def get_brand_colours():
         return {}
 
 
+def get_cache_key(file):
+    return 'kanisa_branding_component:%s' % file
+
+
 def flush_brand_colours(colours):
     with open(get_brand_colours_filename(), 'w') as destination:
         destination.write(json.dumps(colours))
+
+    rendered = render_to_string('kanisa/_branding.html',
+                                get_brand_colours())
+
+    destination_name = get_branding_disk_file('colours.css')
+
+    with open(destination_name, 'w') as destination:
+        destination.write(rendered)
+
+    cache.delete(get_cache_key('colours.css'))
 
 
 def ensure_branding_directory_exists():
@@ -92,8 +109,7 @@ class BrandingInformation(object):
     def get_cached_url(self):
         file = BRANDING_COMPONENTS[self.component]['filename']
 
-        cache_key = 'kanisa_branding_component:%s' % file
-        url = cache.get(cache_key)
+        url = cache.get(get_cache_key(file))
 
         if url is not None:
             return url
@@ -106,7 +122,7 @@ class BrandingInformation(object):
         # Cache these URLs for 10 minutes - chances are they won't
         # disappear, but on the off-chance they do, let's not keep
         # serving non-existent files forever.
-        cache.set(cache_key, url, 600)
+        cache.set(get_cache_key(file), url, 600)
         return url
 
     def __exists(self, branding_component):

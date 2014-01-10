@@ -2,7 +2,6 @@ Version 0.9.2
 =============
 
 - Make sure footer is always at or below the bottom of the viewpane
-- Ensure branding changes don't require a server restart
 - Remove Markdown from rendered search results
 - Ability to look forward a bit in the diary
 
@@ -37,6 +36,8 @@ Deployment
     - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
+- Ensure branding changes create images with cache-busting URLs
+  (i.e. include a hash of the file contents in the name)
 
 Mobile
 ------
