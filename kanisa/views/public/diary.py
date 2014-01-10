@@ -1,11 +1,10 @@
-from datetime import timedelta
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
-from kanisa.utils.diary import get_week_bounds, event_covers_date
+from kanisa.utils.diary import get_this_week
 
 
 class DiaryBaseView(object):
@@ -15,21 +14,6 @@ class DiaryBaseView(object):
 
 class DiaryIndexView(DiaryBaseView, TemplateView):
     template_name = 'kanisa/public/diary/index.html'
-
-    def get_this_week(self):
-        monday, sunday = get_week_bounds()
-        events = ScheduledEvent.events_between(monday,
-                                               sunday)
-
-        thisweek = []
-
-        for i in range(0, 7):
-            thedate = monday + timedelta(days=i)
-            thisweek.append((thedate,
-                            [e for e in events
-                             if event_covers_date(e, thedate)]))
-
-        return thisweek
 
     def get_category(self, request):
         category_key = request.GET.get('category', 0)
@@ -72,7 +56,7 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
                         self).get_context_data(**kwargs)
 
         context.update(self.get_diary_context_data())
-        context['thisweek'] = self.get_this_week()
+        context['thisweek'] = get_this_week()
         context['kanisa_title'] = 'What\'s On'
         categories = EventCategory.objects.filter(num_events__gt=0)
         context['event_categories'] = categories

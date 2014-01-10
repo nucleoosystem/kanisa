@@ -36,6 +36,21 @@ def event_covers_date(event, thedate):
     return event.date == thedate
 
 
+def get_this_week():
+    monday, sunday = get_week_bounds()
+    events = ScheduledEvent.events_between(monday, sunday)
+
+    thisweek = []
+
+    for i in range(0, 7):
+        thedate = monday + timedelta(days=i)
+        thisweek.append((thedate,
+                        [e for e in events
+                         if event_covers_date(e, thedate)]))
+
+    return thisweek
+
+
 class DaySchedule(object):
     def __init__(self, day, thedate, regular_events, scheduled_events):
         self.date = thedate
