@@ -36,8 +36,8 @@ def event_covers_date(event, thedate):
     return event.date == thedate
 
 
-def get_this_week():
-    monday, sunday = get_week_bounds()
+def get_this_week(containing=None):
+    monday, sunday = get_week_bounds(containing)
     events = ScheduledEvent.events_between(monday, sunday)
 
     thisweek = []
