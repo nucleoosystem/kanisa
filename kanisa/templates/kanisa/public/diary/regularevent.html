@@ -31,10 +31,11 @@
         {% endthumbnail %}
 
         {% include 'kanisa/public/diary/_next_event.html' %}
+        <hr />
 
         {% if object.contact %}
-        <hr />
         {% include 'kanisa/public/diary/_contact.html' %}
+        <hr style="clear: left;" />
         {% endif %}
       </div>
       <div class="col-md-8">
