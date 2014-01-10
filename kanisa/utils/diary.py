@@ -48,7 +48,9 @@ def get_this_week(containing=None):
                         [e for e in events
                          if event_covers_date(e, thedate)]))
 
-    return thisweek
+    return {
+        'events': thisweek
+    }
 
 
 class DaySchedule(object):
