@@ -33,3 +33,8 @@
   </tr>
   {% endfor %}
 </table>
+
+<ul class="pager">
+  <li class="previous"><a href="#" class="week_pager" data-date="{{ thisweek.previous_week|date:"Ymd" }}">&larr; Previous Week</a></li>
+  <li class="next"><a href="#" class="week_pager" data-date="{{ thisweek.next_week|date:"Ymd" }}">Next Week &rarr;</a></li>
+</ul>
