@@ -4,7 +4,11 @@ Version 1.0
 Deployment
 ----------
 
+- Simplify 500.html, since we can't rely on any context other than
+  `STATIC_URL`.
 - Add a way to set up cron jobs
+- Ensure media, whoosh_index are chowned appropriately with every
+  deploy
 
 Features
 --------
