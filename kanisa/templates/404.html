@@ -1,3 +1,37 @@
-<h1>File not Found</h1>
+{% extends "kanisa/public/base.html" %}
 
-<p>Sorry, I can't find what you're looking for.</p>
+{% block content %}
+<h1>
+  Sorry, we can&rsquo;t find that!
+  <small>(Error 404)</small>
+</h1>
+
+<p class="lead">
+  Sorry, something&rsquo;s gone a bit wrong, we can&rsquo;t find the
+  page you&rsquo;re looking for. Perhaps you could try searching for
+  what you&rsquo;re looking for below:
+</p>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <form role="search" action="{% url 'kanisa_public_search' %}">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Type what you&rsquo;re looking for here..." name="query">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<hr />
+
+<p class="error-page-btn">
+  <a href="{% url 'kanisa_public_index' %}" title="Return to the home page" class="btn btn-lg btn-primary">
+    <span class="glyphicon glyphicon-home"></span>
+    Go Home
+  </a>
+</p>
+
+{% endblock %}

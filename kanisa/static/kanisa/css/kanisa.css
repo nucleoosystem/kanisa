@@ -409,3 +409,7 @@ div.form-actions {
 .recurrencewidget input.radio {
     display: inline;
 }
+
+p.error-page-btn {
+    text-align: center;
+}

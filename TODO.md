@@ -1,8 +1,3 @@
-Version 0.9.2
-=============
-
-- Add 404 and 500 files
-
 Version 1.0
 ===========
 
