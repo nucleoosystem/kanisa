@@ -1,0 +1,16 @@
+{% extends "kanisa/public/base.html" %}
+
+{% block content %}
+{% block error_information %}
+{% endblock %}
+
+<hr />
+
+<p class="error-page-btn">
+  <a href="{% url 'kanisa_public_index' %}" title="Return to the home page" class="btn btn-lg btn-primary">
+    <span class="glyphicon glyphicon-home"></span>
+    Go Home
+  </a>
+</p>
+
+{% endblock %}

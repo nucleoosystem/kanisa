@@ -1,6 +1,6 @@
-{% extends "kanisa/public/base.html" %}
+{% extends "kanisa/public/error_base.html" %}
 
-{% block content %}
+{% block error_information %}
 <h1>
   Oops, you&rsquo;re not allowed to see that!
   <small>(Error 403)</small>
@@ -10,14 +10,4 @@
   Sorry, something&rsquo;s gone a bit wrong, you&rsquo;ve stumbled
   across a page you&rsquo;re not meant to see.
 </p>
-
-<hr />
-
-<p class="error-page-btn">
-  <a href="{% url 'kanisa_public_index' %}" title="Return to the home page" class="btn btn-lg btn-primary">
-    <span class="glyphicon glyphicon-home"></span>
-    Go Home
-  </a>
-</p>
-
 {% endblock %}
