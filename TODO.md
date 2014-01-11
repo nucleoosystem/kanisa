@@ -1,7 +1,6 @@
 Version 0.9.2
 =============
 
-- Include the jQuery map file?
 - Add 404 and 500 files
 - Add support for djohno and Sentry
 
