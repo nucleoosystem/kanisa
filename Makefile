@@ -25,8 +25,12 @@ push: git-check test
 wheel: push cleandist
 
 # We probably want the hostname (kanisa, which is an SSH alias I have
-# locally) to be in a config file somewhere.
-deploy: wheel
+# locally), and the directories to be in a config file somewhere. This
+# task just deploys the wheel that's already built, use "make deploy"
+# to ensure you're deploying the latest version.
+redeploy:
 	scp dist/kanisa-*.whl kanisa:/home/deploy/
 	scp deploy.sh kanisa:/home/deploy/
 	ssh kanisa bash /home/deploy/deploy.sh
+
+deploy: wheel redeploy
