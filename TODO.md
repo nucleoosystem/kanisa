@@ -11,6 +11,11 @@ Deployment
 
 - Add a way to set up cron jobs
 
+Features
+--------
+
+- Add a contact form, which sends emails to `KANISA_PUBLIC_EMAIL`.
+
 Other
 -----
 
