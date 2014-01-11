@@ -2,7 +2,6 @@ Version 0.9.2
 =============
 
 - Add 404 and 500 files
-- Add support for djohno and Sentry
 
 Version 1.0
 ===========
