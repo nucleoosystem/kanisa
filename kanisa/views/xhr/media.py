@@ -7,8 +7,7 @@ from kanisa.models import InlineImage, Document
 from kanisa.views.xhr.base import XHRBaseGetView
 
 
-class InlineImagesListView(XHRBaseGetView):
-    permission = 'kanisa.manage_media'
+class PaginatedListView(object):
     results_per_page = 8
 
     def slice_results(self, request, results):
@@ -29,10 +28,15 @@ class InlineImagesListView(XHRBaseGetView):
 
         return (paginator, page)
 
+
+class InlineImagesListView(PaginatedListView, XHRBaseGetView):
+    permission = 'kanisa.manage_media'
+
     def render(self, request, *args, **kwargs):
         images = InlineImage.objects.all()
         paginator, page = self.slice_results(request, images)
         tmpl = 'kanisa/management/media/_inline_image_list.html'
+
         return render_to_response(tmpl,
                                   {'page_obj': page},
                                   context_instance=RequestContext(request))
