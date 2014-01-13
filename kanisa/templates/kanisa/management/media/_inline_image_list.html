@@ -2,8 +2,12 @@
 
 {% if page_obj.object_list %}
 <p>
+  {% if perms.kanisa.manage_media %}
   <strong>Select an image</strong> from the list below, or
   <strong><a href="#" onclick="return open_popup('{% url 'kanisa_manage_media_inlineimage_create' %}?_popup=1')">upload a new image</a></strong>.
+  {% else %}
+  <strong>Select an image</strong> from the list below:
+  {% endif %}
 </p>
 
 <p style="text-align: center">
@@ -36,8 +40,12 @@
 
 {% else %}
 <p class="alert alert-info">
+  {% if perms.kanisa.manage_media %}
   There are no images uploaded yet, please
   <a href="#" onclick="return open_popup('{% url 'kanisa_manage_media_inlineimage_create' %}?_popup=1')">upload an image</a>
   to get started.
+  {% else %}
+  There are no images uploaded yet.
+  {% endif %}
 </p>
 {% endif %}
