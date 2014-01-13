@@ -26,7 +26,6 @@ Version 1.1
 Deployment
 ----------
 
-- Add a way to set up cron jobs
 - Remove all inline styles
 - Split up kanisa.css somehow
 - Version check requirements in setup.py
