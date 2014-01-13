@@ -11,13 +11,6 @@
     <td>
       <a href="#" data-slug="{{ document.slug }}">{{ document }}</a>
     </td>
-    <td>
-      Modified
-      <abbr title="{{ document.modified|date:"r"}}">
-        {{ document.modified|timesince }}
-      </abbr>
-      ago
-    </td>
     <td class="text-muted">
       <tt>{% templatetag openbrace %}@{{ document.slug }}{% templatetag closebrace %}</tt>
     </td>
