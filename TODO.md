@@ -13,6 +13,12 @@ Features
 
 - Add a contact form, which sends emails to `KANISA_PUBLIC_EMAIL`.
 
+Bugs
+----
+
+- Should `kanisa.manage_media` be needed to use `AttachmentsListView`
+  and `InlineImagesListView`?
+
 Other
 -----
 
