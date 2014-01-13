@@ -18,7 +18,6 @@ class PaginatedMediaListView(object):
         return HttpResponseForbidden("You do not have permission to "
                                      "view this page.")
 
-
     def slice_results(self, request, results):
         try:
             page_no = int(request.GET.get('page', 1))

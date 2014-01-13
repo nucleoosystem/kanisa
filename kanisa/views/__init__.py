@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.http import HttpResponseServerError
+from django.template import Context, loader
 from django.views.generic.base import TemplateView
 
 from kanisa.static_conf import KANISA_PUBLIC_JS_HASH, KANISA_CSS_HASH
