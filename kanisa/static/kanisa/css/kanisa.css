@@ -235,21 +235,22 @@ span.amp {
 
 body.popup {
     margin: 0;
-    padding-right: 0;
-    padding-left: 0;
-    padding-bottom: 0;
+    padding: 10px;
+}
+
+body.popup h2 {
+    margin: 0 0 10px 0;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
 }
 
 body.popup .form-actions {
     margin: 0;
 }
 
-body.popup h2 {
-    margin: 10px;
-}
-
 body.popup form {
     margin: 0;
+    width: 90%;
 }
 
 table.userpermtable td {
