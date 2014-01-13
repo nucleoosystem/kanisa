@@ -1,14 +1,23 @@
 from django.core.paginator import Paginator, InvalidPage
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 from kanisa.models import InlineImage, Document
+from kanisa.utils.auth import has_any_kanisa_permission
 from kanisa.views.xhr.base import XHRBaseGetView
 
 
-class PaginatedListView(object):
+class PaginatedMediaListView(object):
     results_per_page = 8
+
+    def check_permissions(self, request):
+        if has_any_kanisa_permission(request.user):
+            return
+
+        return HttpResponseForbidden("You do not have permission to "
+                                     "view this page.")
+
 
     def slice_results(self, request, results):
         try:
@@ -29,9 +38,7 @@ class PaginatedListView(object):
         return (paginator, page)
 
 
-class InlineImagesListView(PaginatedListView, XHRBaseGetView):
-    permission = 'kanisa.manage_media'
-
+class InlineImagesListView(PaginatedMediaListView, XHRBaseGetView):
     def render(self, request, *args, **kwargs):
         images = InlineImage.objects.all()
         paginator, page = self.slice_results(request, images)
@@ -44,8 +51,6 @@ list_inline_images = InlineImagesListView.as_view()
 
 
 class InlineImagesDetailView(XHRBaseGetView):
-    permission = 'kanisa.manage_media'
-
     def render(self, request, *args, **kwargs):
         pk = self.kwargs['pk']
         image = get_object_or_404(InlineImage, pk=pk)
@@ -57,9 +62,7 @@ class InlineImagesDetailView(XHRBaseGetView):
 inline_image_detail = InlineImagesDetailView.as_view()
 
 
-class AttachmentsListView(PaginatedListView, XHRBaseGetView):
-    permission = 'kanisa.manage_media'
-
+class AttachmentsListView(PaginatedMediaListView, XHRBaseGetView):
     def render(self, request, *args, **kwargs):
         documents = Document.objects.filter(public=True)
         paginator, page = self.slice_results(request, documents)
