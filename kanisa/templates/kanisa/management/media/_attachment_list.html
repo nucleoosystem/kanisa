@@ -1,4 +1,4 @@
-{% if object_list %}
+{% if page_obj.object_list %}
 
 <p>
   <strong>Select a document</strong> from the list below, or
@@ -6,7 +6,7 @@
 </p>
 
 <table class="table table-striped table-condensed media-documents">
-  {% for document in object_list %}
+  {% for document in page_obj.object_list %}
   <tr>
     <td>
       <a href="#" data-slug="{{ document.slug }}">{{ document }}</a>
@@ -17,6 +17,27 @@
   </tr>
   {% endfor %}
 </table>
+
+{% if page_obj.has_other_pages %}
+<ul class="pager">
+  {% if page_obj.has_previous %}
+  <li class="previous">
+    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_attachment_paginate">&larr; Older</a>
+  </li>
+  {% else %}
+  <li class="disabled previous"><a href="#">&larr; Older</a></li>
+  {% endif %}
+
+  {% if page_obj.has_next %}
+  <li class="next">
+    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_attachment_paginate">Newer &rarr;</a>
+  </li>
+  {% else %}
+  <li class="disabled next"><a href="#">Newer &rarr;</a></li>
+  {% endif %}
+</ul>
+{% endif %}
+
 
 {% else %}
 <p class="alert alert-info">

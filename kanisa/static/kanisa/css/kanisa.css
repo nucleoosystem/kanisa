@@ -413,3 +413,7 @@ div.form-actions {
 p.error-page-btn {
     text-align: center;
 }
+
+.main_input_widget_container ul.pager {
+    margin: 0 0 1em 0;
+}

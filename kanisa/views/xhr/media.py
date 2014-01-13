@@ -57,13 +57,15 @@ class InlineImagesDetailView(XHRBaseGetView):
 inline_image_detail = InlineImagesDetailView.as_view()
 
 
-class AttachmentsListView(XHRBaseGetView):
+class AttachmentsListView(PaginatedListView, XHRBaseGetView):
     permission = 'kanisa.manage_media'
 
     def render(self, request, *args, **kwargs):
         documents = Document.objects.filter(public=True)
+        paginator, page = self.slice_results(request, documents)
         tmpl = 'kanisa/management/media/_attachment_list.html'
+
         return render_to_response(tmpl,
-                                  {'object_list': documents},
+                                  {'page_obj': page},
                                   context_instance=RequestContext(request))
 list_attachments = AttachmentsListView.as_view()

@@ -15,7 +15,7 @@
 </p>
 
 {% if page_obj.has_other_pages %}
-<ul class="pager" style="margin:0 0 1em 0;">
+<ul class="pager">
   {% if page_obj.has_previous %}
   <li class="previous">
     <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_image_paginate">&larr; Older</a>

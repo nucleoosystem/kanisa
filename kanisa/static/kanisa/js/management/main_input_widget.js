@@ -201,6 +201,15 @@ function insert_attachment(event) {
     get_cancel(document_link).click();
 }
 
+function paginate_attachments(event) {
+    event.preventDefault();
+
+    var thelink = $(this);
+    var url = thelink.attr("href");
+    var placeholder = get_placeholder(thelink);
+    refresh_attachments(placeholder, url);
+}
+
 function refresh_attachments(placeholder, url) {
    show_spinner(placeholder);
 
@@ -210,6 +219,7 @@ function refresh_attachments(placeholder, url) {
               placeholder.html(data);
               get_matching_elements(placeholder, ".media-documents a").click(insert_attachment);
               hide_spinner(placeholder);
+              get_matching_elements(placeholder, ".main_input_widget_attachment_paginate").click(paginate_attachments);
           });
 }
 
