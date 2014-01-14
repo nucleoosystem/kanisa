@@ -90,6 +90,9 @@ class NavigationElement(MPTTModel):
         if self.parent:
             return
 
+        if not self.url:
+            return
+
         try:
             page = get_page_from_path(self.url)
         except Page.DoesNotExist:
