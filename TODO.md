@@ -32,6 +32,8 @@ Deployment
   - django-haystack to 2.x
 - Ensure branding changes create images with cache-busting URLs
   (i.e. include a hash of the file contents in the name)
+- Add `unicode_literals` and `print_function` imports from
+  `__future__`
 
 Mobile
 ------
