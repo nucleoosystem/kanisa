@@ -8,11 +8,6 @@ Deployment
 - Ensure media, whoosh_index are chowned appropriately with every
   deploy
 
-Features
---------
-
-- Add a contact form, which sends emails to `KANISA_PUBLIC_EMAIL`.
-
 Other
 -----
 
