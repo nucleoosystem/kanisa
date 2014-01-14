@@ -25,6 +25,8 @@ class NavigationElement(MPTTModel):
     )
     url = models.CharField(
         max_length=200,
+        null=True,
+        blank=True,
         verbose_name='URL',
         help_text=('Should be specified relative to the domain (e.g. '
                    '/sermons/, not http://www.example.com/sermons/).')
@@ -139,3 +141,10 @@ class NavigationElement(MPTTModel):
 
     def clean_fields(self, exclude=None):
         self.check_parent_status()
+
+        if self.parent and not self.url:
+            raise ValidationError(
+                {'url': [
+                    'Navigation elements without a parent must specify a URL.',
+                ]}
+            )
