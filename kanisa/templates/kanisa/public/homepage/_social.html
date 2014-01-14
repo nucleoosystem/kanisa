@@ -1,12 +1,17 @@
+{% load kanisa_facebook %}
 {% load kanisa_homepage %}
 {% load kanisa_tags %}
 
 {% kanisa_twitter_status as twitter_status %}
 {% kanisa_twitter_username as twitter_username %}
 
-{% if twitter_username and twitter_status %}
 <h3>Connect with Us</h3>
 
+<div class="facebook_sidebar_widget">
+  {% kanisa_facebook_like_widget %}
+</div>
+
+{% if twitter_username and twitter_status %}
 <p class="lead">
   {{ twitter_status.text|urlize }}<br />
 
@@ -25,7 +30,6 @@
 
   {% kanisa_is_permissioned_user as is_permissioned %}
   {% if is_permissioned %}
-    <h3>Connect with Us</h3>
     <p class="alert alert-info">
       Set up Twitter integration to see recent Tweets here.
     </p>
