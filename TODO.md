@@ -8,6 +8,12 @@ Deployment
 - Ensure media, whoosh_index are chowned appropriately with every
   deploy
 
+Bugs
+----
+
+- Fix footer layout for smaller screens (probably just remove the
+  styling of `#wrap` and remove the fixed height of `#footer`)
+
 Other
 -----
 
