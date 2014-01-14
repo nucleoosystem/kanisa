@@ -8,15 +8,17 @@ from kanisa.utils.auth import has_any_kanisa_permission
 from kanisa.views.xhr.base import XHRBaseGetView
 
 
-class PaginatedMediaListView(object):
-    results_per_page = 8
-
+class MediaBaseView(object):
     def check_permissions(self, request):
         if has_any_kanisa_permission(request.user):
             return
 
         return HttpResponseForbidden("You do not have permission to "
                                      "view this page.")
+
+
+class PaginatedMediaListView(MediaBaseView):
+    results_per_page = 8
 
     def slice_results(self, request, results):
         try:
@@ -49,7 +51,7 @@ class InlineImagesListView(PaginatedMediaListView, XHRBaseGetView):
 list_inline_images = InlineImagesListView.as_view()
 
 
-class InlineImagesDetailView(XHRBaseGetView):
+class InlineImagesDetailView(MediaBaseView, XHRBaseGetView):
     def render(self, request, *args, **kwargs):
         pk = self.kwargs['pk']
         image = get_object_or_404(InlineImage, pk=pk)
