@@ -1,5 +1,6 @@
 {% extends 'kanisa/public/base.html' %}
 
+{% load kanisa_facebook %}
 {% load kanisa_markup %}
 {% load thumbnail %}
 
@@ -29,6 +30,10 @@
         {% thumbnail object.image "260x260" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
         {% endthumbnail %}
+
+        <div class="facebook_sidebar_widget">
+        {% kanisa_facebook_like_widget %}
+        </div>
 
         {% include 'kanisa/public/diary/_next_event.html' %}
         <hr />
