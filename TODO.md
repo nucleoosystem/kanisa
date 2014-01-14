@@ -51,6 +51,7 @@ Mobile
 Features
 --------
 
+- Add support for a simple blog.
 - Allow customisable home page templates (#56)
 - Add Facebook integration
   - Support for delayed posting
