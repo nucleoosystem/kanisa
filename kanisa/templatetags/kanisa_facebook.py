@@ -7,9 +7,6 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def kanisa_facebook_like_widget(context):
-    if 'request' not in context:
-        return ''
-
     return render_to_string(
         'kanisa/public/_facebook_like.html',
         {'url': context['request'].build_absolute_uri()}
