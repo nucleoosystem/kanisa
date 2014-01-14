@@ -1,5 +1,6 @@
 {% extends 'kanisa/public/base.html' %}
 
+{% load kanisa_facebook %}
 {% load kanisa_markup %}
 {% load thumbnail %}
 
@@ -30,6 +31,10 @@
       <small>({{ object.date|date:"jS F Y" }}
         &ndash; {{ object.speaker }})</small>
     </h1>
+
+    <div class="facebook_sidebar_widget">
+      {% kanisa_facebook_like_widget %}
+    </div>
 
     {% if object.details %}
     {{ object.details|kanisa_markdown }}
