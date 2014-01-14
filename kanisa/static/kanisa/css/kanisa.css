@@ -3,14 +3,34 @@ body {
   height: 100%;
 }
 
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+@media (min-width: 992px) {
+    /* Wrapper for page content to push down footer */
+    #wrap {
+        min-height: 100%;
+        height: auto;
+        /* Negative indent footer by its height */
+        margin: 0 auto -60px;
+        /* Pad bottom by footer height */
+        padding: 0 0 60px;
+    }
+
+    #footer {
+        height: 60px;
+    }
+}
+
+#footer {
+    background-color: #111;
+    font-size: 90%;
+}
+
+#footer p {
+    padding: 1em;
+    margin: 0;
+}
+
+#footer div.github {
+    text-align: right;
 }
 
 div.carousel-caption {
@@ -373,21 +393,6 @@ div.form-actions {
 .eventcategoryfilter li {
     margin-bottom: 5px;
     margin-right: 5px;
-}
-
-#footer {
-    height: 60px;
-    background-color: #111;
-    font-size: 90%;
-}
-
-#footer p {
-    padding: 1em;
-    margin: 0;
-}
-
-#footer div.github {
-    text-align: right;
 }
 
 .main_input_widget_image_choice {
