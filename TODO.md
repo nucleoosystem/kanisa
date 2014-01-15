@@ -4,8 +4,13 @@ Version 1.0
 Bug Fixes
 ---------
 
-- Fix squished logo in mobile layouts
-- Fix squished Google maps in mobile layouts
+- Mobile
+  - Fix squished logo
+  - Fix Google maps overflowing viewport
+  - Collapse page menu by default?
+  - Collapse management menu by default (and hide some of the less
+    important stuff, like who you're logged in as)
+- Add Markdown support for lead paragraphs of pages?
 
 Features
 --------
