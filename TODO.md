@@ -47,6 +47,9 @@ Deployment
 - Add `unicode_literals`, `print_function`, `absolute_import` and
   `division` imports from `__future__` to all files (plus a way of
   checking they're everywhere)
+- Fix proliferation of `kanisa.*.css` and `kanisa.*.js` (since the
+  filenames are modified with each CSS/JS change, and old files don't
+  get cleaned up)
 
 Mobile
 ------
