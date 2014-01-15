@@ -19,8 +19,6 @@ def kanisa_settings(context):
         'KANISA_CSS_HASH': static_conf.KANISA_CSS_HASH,
         'KANISA_DEBUG_STATIC': conf.KANISA_DEBUG_STATIC,
         'KANISA_GOOGLE_ANALYTICS_KEY': conf.KANISA_GOOGLE_ANALYTICS_KEY,
-        'KANISA_MANAGEMENT_JS_HASH': static_conf.KANISA_MANAGEMENT_JS_HASH,
         'KANISA_NAVIGATION': elements,
-        'KANISA_PUBLIC_JS_HASH': static_conf.KANISA_PUBLIC_JS_HASH,
         'KANISA_VERSION': kanisa.__version__
     }

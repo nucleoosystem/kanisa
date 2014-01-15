@@ -28,6 +28,28 @@ popd
 rm -f kanisa/static_conf.py
 touch kanisa/static_conf.py
 
-echo "KANISA_MANAGEMENT_JS_HASH = '${management_js_hash}'" >> kanisa/static_conf.py
-echo "KANISA_PUBLIC_JS_HASH = '${public_js_hash}'" >> kanisa/static_conf.py
 echo "KANISA_CSS_HASH = '${css_hash}'" >> kanisa/static_conf.py
+
+public_js_template="kanisa/templates/kanisa/public/_js.html"
+rm -f ${public_js_template}
+touch ${public_js_template}
+echo "{% if KANISA_DEBUG_STATIC %}" >> ${public_js_template}
+for i in $(find kanisa/static/kanisa/js/public/ -type f | sort); do
+    localpath=${i:14}
+    echo "<script src=\"{{ STATIC_URL }}${localpath}\"></script>" >> ${public_js_template}
+done
+echo "{% else %}" >> ${public_js_template}
+echo "<script src=\"{{ STATIC_URL }}kanisa/js/minified/kanisa-public.${public_js_hash}.js\"></script>" >> ${public_js_template}
+echo "{% endif %}" >> ${public_js_template}
+
+management_js_template="kanisa/templates/kanisa/management/_js.html"
+rm -f ${management_js_template}
+touch ${management_js_template}
+echo "{% if KANISA_DEBUG_STATIC %}" >> ${management_js_template}
+for i in $(find kanisa/static/kanisa/js/management/ -type f | sort); do
+    localpath=${i:14}
+    echo "<script src=\"{{ STATIC_URL }}${localpath}\"></script>" >> ${management_js_template}
+done
+echo "{% else %}" >> ${management_js_template}
+echo "<script src=\"{{ STATIC_URL }}kanisa/js/minified/kanisa-management.${management_js_hash}.js\"></script>" >> ${management_js_template}
+echo "{% endif %}" >> ${management_js_template}
