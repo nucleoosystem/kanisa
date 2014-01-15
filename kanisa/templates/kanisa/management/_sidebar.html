@@ -1,5 +1,17 @@
-<ul class="nav nav-stacked sidebar">
-{% include "kanisa/management/_sidebar_items.html" %}
+<div class="visible-xs" id="xs-management-menu">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-cog"></span>
+      Management Menu <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      {% include "kanisa/management/_sidebar_items.html" %}
+    </ul>
+  </div>
+</div>
+
+<ul class="nav nav-stacked sidebar hidden-xs">
+  {% include "kanisa/management/_sidebar_items.html" %}
 </ul>
 
 {% include "kanisa/_profile_sidebar.html" %}
