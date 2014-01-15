@@ -18,6 +18,7 @@ image_expression = re.compile(r'(!\[([A-Za-z0-9\-]+)'
 
 
 document_expression = re.compile(r'({@([A-Za-z0-9\-]+)})')
+gmap_expression = re.compile(r'({gmap:([a-z0-9\.]+)})')
 
 
 class ImageMatch(object):
@@ -87,6 +88,15 @@ class DocumentMatch(object):
         return render_to_string("kanisa/_download.html",
                                 {'document': self.document})
 
+class MapMatch(object):
+    def __init__(self, match):
+        self.full = match[0]
+        self.msid = match[1]
+
+    def tag(self):
+        return render_to_string("kanisa/public/_google_map.html",
+                                {'msid': self.msid})
+
 
 def get_documents(markdown_text):
     documents = []
@@ -100,6 +110,15 @@ def get_documents(markdown_text):
     return documents
 
 
+def get_maps(markdown_text):
+    maps = []
+
+    for match in gmap_expression.findall(markdown_text):
+        maps.append(MapMatch(match))
+
+    return maps
+
+
 @register.filter(is_safe=True)
 def kanisa_markdown(value):
     value = force_unicode(value)
@@ -109,6 +128,9 @@ def kanisa_markdown(value):
 
     for document_match in get_documents(value):
         value = value.replace(document_match.full, document_match.tag())
+
+    for map_match in get_maps(value):
+        value = value.replace(map_match.full, map_match.tag())
 
     value = value.replace("####", "<br style=\"clear: both\" />")
 

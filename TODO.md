@@ -5,7 +5,6 @@ Bug Fixes
 ---------
 
 - Mobile
-  - Fix Google maps overflowing viewport
   - Collapse page menu by default?
 
 Features
