@@ -5,7 +5,6 @@ Bug Fixes
 ---------
 
 - Mobile
-  - Fix squished logo
   - Fix Google maps overflowing viewport
   - Collapse page menu by default?
   - Collapse management menu by default (and hide some of the less
