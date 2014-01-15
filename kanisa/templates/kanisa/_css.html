@@ -1,0 +1,7 @@
+{% if KANISA_DEBUG_STATIC %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/kanisa.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/timepicker.css" />
+{% else %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/minified/kanisa.{{ KANISA_CSS_HASH }}.css" />
+{% endif %}
