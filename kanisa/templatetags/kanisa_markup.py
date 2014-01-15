@@ -88,6 +88,7 @@ class DocumentMatch(object):
         return render_to_string("kanisa/_download.html",
                                 {'document': self.document})
 
+
 class MapMatch(object):
     def __init__(self, match):
         self.full = match[0]
