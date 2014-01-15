@@ -7,15 +7,16 @@ from mptt.models import MPTTModel, TreeForeignKey
 class Page(MPTTModel):
     title = models.CharField(max_length=60)
     slug = AutoSlugField(populate_from='title', unique=True)
-    lead = models.TextField(null=True, blank=True,
-                            help_text=('This should be the introductory '
-                                       'sentence or two to the page you\'re '
-                                       'writing.'))
-    contents = models.TextField(null=True, blank=True,
-                                help_text=('This will follow the lead '
-                                           'paragraph, so don\'t repeat '
-                                           'information already entered '
-                                           'there.'))
+    lead = models.TextField(
+        null=True, blank=True,
+        help_text=('This should be the introductory sentence or two to the '
+                   'page you\'re writing.')
+    )
+    contents = models.TextField(
+        null=True, blank=True,
+        help_text=('This will follow the lead paragraph, so don\'t repeat '
+                   'information already entered there.')
+    )
     draft = models.BooleanField(default=False)
     parent = TreeForeignKey('self',
                             null=True,
