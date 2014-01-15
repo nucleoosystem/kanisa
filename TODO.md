@@ -6,6 +6,8 @@ Bug Fixes
 
 - Mobile
   - Collapse page menu by default?
+  - Improve layout of diary table
+  - CCLI filter to top
 
 Features
 --------
