@@ -3,7 +3,6 @@
   <head>
     <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.0.3/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.0.3/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/css/minified/kanisa.{{ KANISA_CSS_HASH }}.css" />
     <script src="{{ STATIC_URL }}kanisa/vendor/jquery-1.10.2.min.js"></script>
     <script src="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.0.3/js/bootstrap.min.js"></script>
   </head>
@@ -25,7 +24,7 @@
 
             <hr />
 
-            <p class="error-page-btn">
+            <p style="text-align: center">
               <a href="{% url 'kanisa_public_index' %}" title="Return to the home page" class="btn btn-lg btn-primary">
                 <span class="glyphicon glyphicon-home"></span>
                 Go Home
