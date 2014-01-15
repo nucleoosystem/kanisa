@@ -1,1 +1,0 @@
-KANISA_CSS_HASH = 'f4e5548b'

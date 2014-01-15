@@ -25,11 +25,6 @@ mv js/minified/kanisa-public.js js/minified/kanisa-public.${public_js_hash}.js
 mv css/minified/kanisa.css css/minified/kanisa.${css_hash}.css
 popd
 
-rm -f kanisa/static_conf.py
-touch kanisa/static_conf.py
-
-echo "KANISA_CSS_HASH = '${css_hash}'" >> kanisa/static_conf.py
-
 public_js_template="kanisa/templates/kanisa/public/_js.html"
 rm -f ${public_js_template}
 touch ${public_js_template}
@@ -53,3 +48,15 @@ done
 echo "{% else %}" >> ${management_js_template}
 echo "<script src=\"{{ STATIC_URL }}kanisa/js/minified/kanisa-management.${management_js_hash}.js\"></script>" >> ${management_js_template}
 echo "{% endif %}" >> ${management_js_template}
+
+css_template="kanisa/templates/kanisa/_css.html"
+rm -f ${css_template}
+touch ${css_template}
+echo "{% if KANISA_DEBUG_STATIC %}" >> ${css_template}
+for i in $(find kanisa/static/kanisa/css/*.css | sort); do
+    localpath=${i:14}
+    echo "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"{{ STATIC_URL }}${localpath}\" />" >> ${css_template}
+done
+echo "{% else %}" >> ${css_template}
+echo "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"{{ STATIC_URL }}kanisa/css/minified/kanisa.${css_hash}.css\">" >> ${css_template}
+echo "{% endif %}" >> ${css_template}
