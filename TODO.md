@@ -7,8 +7,7 @@ Bug Fixes
 - Mobile
   - Fix Google maps overflowing viewport
   - Collapse page menu by default?
-  - Collapse management menu by default (and hide some of the less
-    important stuff, like who you're logged in as)
+  - Collapse management menu by default
 - Add Markdown support for lead paragraphs of pages?
 
 Features
