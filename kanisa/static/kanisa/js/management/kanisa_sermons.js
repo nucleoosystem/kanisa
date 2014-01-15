@@ -21,4 +21,10 @@ function quick_series_complete(event) {
 
 $(document).ready(function() {
     $("a.series_complete").click(quick_series_complete);
+    $(".sermonform #id_series").chosen({
+        placeholder_text: "Select a sermon series, if any"
+    });
+    $(".sermonform #id_speaker").chosen({
+        placeholder_text: "Select a speaker"
+    });
 });
