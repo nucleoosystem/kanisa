@@ -1,6 +1,18 @@
 Version 1.0
 ===========
 
+Bug Fixes
+---------
+
+- Fix squished logo in mobile layouts
+- Fix squished Google maps in mobile layouts
+
+Features
+--------
+
+- Add a handler for Google maps in `main_input_widget`
+- Add handlers for links, bold and italics in `main_input_widget`
+
 Deployment
 ----------
 
@@ -32,8 +44,9 @@ Deployment
   - django-haystack to 2.x
 - Ensure branding changes create images with cache-busting URLs
   (i.e. include a hash of the file contents in the name)
-- Add `unicode_literals` and `print_function` imports from
-  `__future__`
+- Add `unicode_literals`, `print_function`, `absolute_import` and
+  `division` imports from `__future__` to all files (plus a way of
+  checking they're everywhere)
 
 Mobile
 ------
