@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from django.template import Context, loader
 from django.views.generic.base import TemplateView
 
-from kanisa.static_conf import KANISA_PUBLIC_JS_HASH, KANISA_CSS_HASH
+from kanisa.static_conf import KANISA_CSS_HASH
 from kanisa.models.banners import Banner
 
 
@@ -20,7 +20,6 @@ def server_error(request, template_name='500.html'):
     context = Context(
         {
             'KANISA_CSS_HASH': KANISA_CSS_HASH,
-            'KANISA_PUBLIC_JS_HASH': KANISA_PUBLIC_JS_HASH,
             'STATIC_URL': settings.STATIC_URL,
         }
     )
