@@ -310,6 +310,10 @@ div.form-actions {
     min-height: 4em;
 }
 
+.kanisa_thumbnails .caption h4 a {
+    text-decoration: none;
+}
+
 .kanisa_event_contacts .thumbnail .caption {
     padding: 4px;
 }
