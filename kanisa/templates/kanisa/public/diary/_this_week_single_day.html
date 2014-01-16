@@ -1,0 +1,21 @@
+{% for item in items %}
+<span style="width: 5em; display:inline-block">
+  {% if item.date == date %}
+  {{ item.start_time|date:"P" }}
+  {% else %}
+  &nbsp;
+  {% endif %}
+</span>
+
+<a href="{{ item.url }}"{% if item.intro %} title="{{ item.intro }}"{% endif %}{% if item.date != date %} class="text-muted"{% endif %}>
+  {{ item }}
+  {% if item.date != date %}
+  <em>(contd.)</em>
+  {% endif %}
+</a>
+
+{% if not forloop.last %}<br />{% endif %}
+
+{% empty %}
+<em>Nothing scheduled</em>
+{% endfor %}
