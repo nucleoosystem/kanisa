@@ -1,12 +1,6 @@
 Version 1.0
 ===========
 
-Bug Fixes
----------
-
-- Mobile
-  - CCLI filter to top
-
 Features
 --------
 

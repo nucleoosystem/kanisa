@@ -3,10 +3,15 @@
 {% block content %}
 <div class="row">
   <div class="col-md-9">
+    <div class="visible-xs">
+      {% include 'kanisa/management/services/_ccli_filter.html' %}
+    </div>
     {% include 'kanisa/management/services/_ccli_songs.html' %}
   </div>
   <div class="col-md-3">
-    {% include 'kanisa/management/services/_ccli_filter.html' %}
+    <div class="hidden-xs">
+      {% include 'kanisa/management/services/_ccli_filter.html' %}
+    </div>
   </div>
 </div>
 {% endblock %}
