@@ -134,6 +134,12 @@ class Page(MPTTModel):
     def get_published_children(self):
         return self.get_children().filter(draft=False)
 
+    def get_published_siblings(self):
+        if not self.parent:
+            return []
+
+        return self.parent.get_published_children()
+
     def get_breadcrumb_trail(self):
         class Breadcrumb(object):
             def __init__(self, title, path):

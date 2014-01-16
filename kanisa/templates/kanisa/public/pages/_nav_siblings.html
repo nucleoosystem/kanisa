@@ -1,9 +1,8 @@
-{% with parent.get_path as parent_path %}
   <li class="nav-header">
     <a href="/{{ parent_path }}">{{ parent }}</a>
   </li>
 
-  {% for p in parent.get_published_children %}
+  {% for p in siblings %}
     {% if p.pk == page.pk %}
       <li class="disabled visible-xs">
         <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
@@ -17,4 +16,3 @@
       </li>
     {% endif %}
   {% endfor %}
-{% endwith %}

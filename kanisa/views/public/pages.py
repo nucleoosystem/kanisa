@@ -18,9 +18,17 @@ def public_page_view(request):
     try:
         page = func(request.path)
 
+        parent_path = None
+        if page.parent:
+            parent_path = page.parent.get_path()
+
         return render_to_response(
             'kanisa/public/pages/page.html',
             {'page': page,
+             'parent': page.parent,
+             'parent_path': parent_path,
+             'siblings': page.get_published_siblings(),
+             'children': page.get_published_children(),
              'kanisa_title': unicode(page)},
             context_instance=RequestContext(request))
     except Page.DoesNotExist:

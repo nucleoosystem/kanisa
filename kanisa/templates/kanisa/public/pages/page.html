@@ -6,9 +6,6 @@
 
 {% block content %}
 
-{% with page.parent as parent %}
-{% with page.get_published_children as children %}
-
 {% if parent or children or perms.kanisa.manage_pages %}
 <div class="row">
 
@@ -40,8 +37,5 @@
 {% else %}
     {% include 'kanisa/public/pages/_page_contents.html' with page=page only %}
 {% endif %}
-
-{% endwith %}
-{% endwith %}
 
 {% endblock %}
