@@ -5,7 +5,10 @@
 
   {% for p in parent.get_published_children %}
     {% if p.pk == page.pk %}
-      <li class="active disabled">
+      <li class="disabled visible-xs">
+        <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
+      </li>
+      <li class="active disabled hidden-xs">
         <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
       </li>
     {% else %}

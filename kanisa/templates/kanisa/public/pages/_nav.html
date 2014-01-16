@@ -1,16 +1,46 @@
-{% if parent %}
-  <ul class="nav nav-pills nav-stacked">
-    {% include 'kanisa/public/pages/_nav_siblings.html' %}
-  </ul>
+{% if parent or children %}
+  <div class="visible-xs">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        {% if parent %}
+          {{ parent }}
+        {% else %}
+          In this section
+        {% endif %}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        {% if parent %}
+          {% include 'kanisa/public/pages/_nav_siblings.html' %}
+        {% endif %}
+        {% if children %}
+          {% if parent %}
+            <li class="divider"></li>
+          {% endif %}
+          {% include 'kanisa/public/pages/_nav_children.html' %}
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
 
-  {% if children %}
-    <hr />
+<div class="hidden-xs">
+  {% if parent %}
+    <ul class="nav nav-pills nav-stacked">
+      {% include 'kanisa/public/pages/_nav_siblings.html' %}
+    </ul>
+
+    {% if children %}
+      <hr />
+    {% endif %}
   {% endif %}
 
-{% endif %}
-
-{% if children %}
-  <ul class="nav nav-pills nav-stacked">
-    {% include 'kanisa/public/pages/_nav_children.html' %}
-  </ul>
-{% endif %}
+  {% if children %}
+    <ul class="nav nav-pills nav-stacked">
+      <li class="nav-header disabled">
+        <a href="#">In this section</a>
+      </li>
+      {% include 'kanisa/public/pages/_nav_children.html' %}
+    </ul>
+  {% endif %}
+</div>
