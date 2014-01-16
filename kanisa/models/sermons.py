@@ -1,3 +1,4 @@
+import os
 from autoslug import AutoSlugField
 from datetime import date
 from django.core.urlresolvers import reverse
@@ -213,6 +214,12 @@ class Sermon(models.Model):
 
     def in_the_future(self):
         return self.date > date.today()
+
+    def delete(self, using=None):
+        if self.mp3:
+            os.remove(self.mp3.file.name)
+
+        return super(Sermon, self).delete(using)
 
     class Meta:
         # Need this because I've split up models.py into multiple
