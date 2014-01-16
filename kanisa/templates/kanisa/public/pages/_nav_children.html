@@ -1,14 +1,14 @@
 <ul class="nav nav-pills nav-stacked">
-<li class="nav-header disabled">
-  <a href="#">In this section</a>
-</li>
+  <li class="nav-header disabled">
+    <a href="#">In this section</a>
+  </li>
 
-{% with page.get_path as parent_path %}
+  {% with page.get_path as parent_path %}
 
-{% for p in children %}
-<li>
-  <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
-</li>
-{% endfor %}
+  {% for p in children %}
+  <li>
+    <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
+  </li>
+  {% endfor %}
+  {% endwith %}
 </ul>
-{% endwith %}
