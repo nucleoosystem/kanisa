@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 from kanisa.forms.sermons import (
@@ -13,6 +13,7 @@ from kanisa.views.generic import (
     KanisaAuthorizationMixin,
     KanisaCreateView,
     KanisaDetailView,
+    KanisaDeleteView,
     KanisaListView,
     KanisaUpdateView,
 )
@@ -127,6 +128,31 @@ class SermonUpdateView(SermonBaseView,
                            args=[self.object.series.pk, ])
         return reverse('kanisa_manage_sermons')
 sermon_update = SermonUpdateView.as_view()
+
+
+class SermonDeleteView(SermonBaseView,
+                       KanisaDeleteView):
+    model = Sermon
+
+    def get_back_url(self):
+        object = self.get_object()
+
+        if object.series:
+            return reverse('kanisa_manage_sermons_series_detail',
+                           args=[object.series.pk, ])
+
+        return reverse('kanisa_manager_sermons')
+
+    def get_cancel_url(self):
+        return self.get_back_url()
+
+    def delete(self, request, *args, **kwargs):
+        url = self.get_back_url()
+        self.get_object().delete()
+
+        messages.success(self.request, 'Sermon deleted')
+        return HttpResponseRedirect(url)
+sermon_delete = SermonDeleteView.as_view()
 
 
 class SermonSpeakerIndexView(SermonBaseView,

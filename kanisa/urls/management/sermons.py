@@ -17,6 +17,8 @@ urlpatterns = patterns(
         'kanisa_manage_sermons_individual_create'),
     url(r'^sermon/edit/(?P<pk>\d+)$', views.sermon_update, {},
         'kanisa_manage_sermons_individual_update'),
+    url(r'^sermon/delete/(?P<pk>\d+)$', views.sermon_delete, {},
+        'kanisa_manage_sermons_individual_delete'),
     url(r'^speaker/$', views.sermon_speaker_management, {},
         'kanisa_manage_sermons_speaker'),
     url(r'^speaker/create/$', views.sermon_speaker_create, {},
