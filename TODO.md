@@ -5,7 +5,6 @@ Bug Fixes
 ---------
 
 - Mobile
-  - Improve layout of diary table
   - CCLI filter to top
 
 Features

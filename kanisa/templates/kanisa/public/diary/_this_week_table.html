@@ -1,5 +1,5 @@
 <h2>This Week</h2>
-<table class="table">
+<table class="table hidden-xs">
   {% for date, items in thisweek.events %}
   <tr>
     <td>
@@ -13,6 +13,17 @@
   </tr>
   {% endfor %}
 </table>
+
+<div class="visible-xs">
+  {% for date, items in thisweek.events %}
+  <p>
+    <strong>{{ date|date:"l" }}</strong>
+    {{ date|date:"jS F" }}<br />
+
+    {% include "kanisa/public/diary/_this_week_single_day.html" %}
+  </p>
+  {% endfor %}
+</div>
 
 <ul class="pager">
   <li class="previous"><a href="#" class="week_pager" data-date="{{ thisweek.previous_week|date:"Ymd" }}">&larr; Previous Week</a></li>
