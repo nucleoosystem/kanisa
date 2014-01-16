@@ -1,3 +1,5 @@
+{% load thumbnail %}
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -22,8 +24,10 @@
                 {{ sermon.passage }}
             </td>
             <td>
-                <a href="{% url 'kanisa_manage_sermons_speaker_update' sermon.speaker.pk %}" title="Update this speaker's details">
-                {{ sermon.speaker }}
+                <a href="{% url 'kanisa_manage_sermons_speaker_update' sermon.speaker.pk %}" title="Update {{ sermon.speaker }}'s details">
+                  {% thumbnail sermon.speaker.image_or_default "60x60" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-circle" />
+                  {% endthumbnail %}
                 </a>
             </td>
         </tr>
