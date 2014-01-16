@@ -1,5 +1,7 @@
 {% if parent %}
-  {% include 'kanisa/public/pages/_nav_siblings.html' %}
+  <ul class="nav nav-pills nav-stacked">
+    {% include 'kanisa/public/pages/_nav_siblings.html' %}
+  </ul>
 
   {% if children %}
     <hr />
@@ -8,5 +10,7 @@
 {% endif %}
 
 {% if children %}
-  {% include 'kanisa/public/pages/_nav_children.html' %}
+  <ul class="nav nav-pills nav-stacked">
+    {% include 'kanisa/public/pages/_nav_children.html' %}
+  </ul>
 {% endif %}
