@@ -1,11 +1,13 @@
 Version 1.0
 ===========
 
-Features
---------
+Bugs
+----
 
-- Add a handler for Google maps in `main_input_widget`
-- Add handlers for links, bold and italics in `main_input_widget`
+- Stop text wrapping around images in the list of regular events
+- Shrink the size of h4? Perhaps make 110% and bold?
+- Look at whether we've changed the aspect ratio of banners since
+  Kaleo
 
 Deployment
 ----------
@@ -13,11 +15,6 @@ Deployment
 - Add a way to set up cron jobs
 - Ensure media, whoosh_index are chowned appropriately with every
   deploy
-
-Other
------
-
-Unknown - I'll fill this out based on feedback from pilot users.
 
 Version 1.1
 ===========
@@ -61,6 +58,11 @@ Mobile
 Features
 --------
 
+Features
+--------
+
+- Add a handler for Google maps in `main_input_widget`
+- Add handlers for links, bold and italics in `main_input_widget`
 - Add support for a simple blog.
 - Allow customisable home page templates (#56)
 - Add Facebook integration
