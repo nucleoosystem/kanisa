@@ -284,17 +284,23 @@ class PageTemplatesTest(TestCase):
                     'siblings': list(page.get_published_siblings()),
                     'children': list(page.get_published_children())}
 
-        context = _get_context(root)
+        with self.assertNumQueries(1):
+            context = _get_context(root)
+
         with self.assertNumQueries(0):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)
 
-        context = _get_context(child)
+        with self.assertNumQueries(2):
+            context = _get_context(child)
+
         with self.assertNumQueries(0):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)
 
-        context = _get_context(grandchild)
+        with self.assertNumQueries(3):
+            context = _get_context(grandchild)
+
         with self.assertNumQueries(0):
             render_to_string('kanisa/public/pages/_nav.html',
                              context)
