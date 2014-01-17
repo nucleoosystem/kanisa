@@ -62,12 +62,14 @@ Features
 
 - Add a handler for Google maps in `main_input_widget`
 - Add handlers for links, bold and italics in `main_input_widget`
-- Add support for a simple blog.
+- Add support for a simple blog
+- Add support for multiple Bible passages in the sermon/sermon series
+  models
 - Allow customisable home page templates (#56)
 - Add Facebook integration
   - Support for delayed posting
   - Facility for adding Like/Share buttons on individual pages
-  - Showing recent posts?
+  - Showing recent posts on the home page
 - Add logs of actions taken in the management console
 - Add a way to permanently remove inactive users (e.g. spam
   registrations)
