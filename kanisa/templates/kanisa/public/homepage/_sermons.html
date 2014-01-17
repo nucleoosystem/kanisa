@@ -12,7 +12,7 @@
     <td>
       {% if sermon.speaker.image %}
         {% thumbnail sermon.speaker.image "60x60" crop="center" as im %}
-          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-circle" />
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
         {% endthumbnail %}
       {% endif %}
     </td>
