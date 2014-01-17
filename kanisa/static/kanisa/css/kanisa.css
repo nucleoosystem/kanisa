@@ -459,3 +459,17 @@ From http://themeloom.com/2013/02/tips-embed-google-maps-and-calendars-in-a-resp
 .inline-delete-btn {
     margin-top: 4px;
 }
+
+#regular_event_list .regular-event-img-link {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+#regular_event_list h3 {
+    margin-top: 0;
+}
+
+#regular_event_list h3,
+#regular_event_list p {
+    margin-left: 90px;
+}

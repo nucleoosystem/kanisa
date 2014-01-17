@@ -4,7 +4,6 @@ Version 1.0
 Bugs
 ----
 
-- Stop text wrapping around images in the list of regular events
 - Shrink the size of h4? Perhaps make 110% and bold?
 - Look at whether we've changed the aspect ratio of banners since
   Kaleo

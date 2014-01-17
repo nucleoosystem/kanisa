@@ -5,13 +5,13 @@
 {% cycle '<div class="row">' '' %}
   <div class="col-md-6" style="margin-bottom: 1em">
     {% if event.image %}
-    <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" style="float: left; margin: 0 10px 10px 0">
+    <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" class="regular-event-img-link">
       {% thumbnail event.image "80x80" crop="center" as im %}
       <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
       {% endthumbnail %}
     </a>
     {% endif %}
-    <h3 style="margin-top: 0">
+    <h3>
       <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}">
         {{ event.title }}
       </a>
