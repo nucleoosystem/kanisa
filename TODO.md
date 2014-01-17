@@ -5,10 +5,13 @@ Bugs
 ----
 
 - Shrink the size of h4? Perhaps make 110% and bold?
+- Fix footer layout at certain medium widths
+- Add support for subtitles a la Kaleo
 
 Deployment
 ----------
 
+- Fix deployment always leaving a "deploy" file around
 - Add a way to set up cron jobs
 - Ensure media, whoosh_index are chowned appropriately with every
   deploy
