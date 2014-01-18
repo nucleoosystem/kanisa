@@ -8,13 +8,18 @@ Bugs
 - Fix footer layout at certain medium widths
 - Add support for subtitles a la Kaleo
 
+Features
+--------
+
+- Add link colour to the list of configurable things in `branding.css`
+
 Deployment
 ----------
 
 - Fix deployment always leaving a "deploy" file around
 - Add a way to set up cron jobs
-- Ensure media, whoosh_index are chowned appropriately with every
-  deploy
+- Ensure branding changes create images with cache-busting URLs
+  (i.e. include a hash of the file contents in the name)
 
 Version 1.1
 ===========
@@ -33,8 +38,6 @@ Deployment
     - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
-- Ensure branding changes create images with cache-busting URLs
-  (i.e. include a hash of the file contents in the name)
 - Add `unicode_literals`, `print_function`, `absolute_import` and
   `division` imports from `__future__` to all files (plus a way of
   checking they're everywhere)
