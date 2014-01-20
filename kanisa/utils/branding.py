@@ -15,11 +15,6 @@ BRANDING_COMPONENTS = {
         'verbose_name': 'Site Logo',
         'sizes': ['480x140', ],
     },
-    'square_logo': {
-        'filename': 'square_logo.jpg',
-        'verbose_name': 'Square Logo',
-        'sizes': ['114x114', ],
-    },
     'apple': {
         'filename': 'apple.jpg',
         'verbose_name': 'Apple Icons',
