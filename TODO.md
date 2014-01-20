@@ -7,11 +7,14 @@ Bugs
 - Shrink the size of h4? Perhaps make 110% and bold?
 - Fix footer layout at certain medium widths
 - Add support for subtitles a la Kaleo
+- Add year to service plan listings if the year is not the current
+  year
 
 Features
 --------
 
 - Add link colour to the list of configurable things in `branding.css`
+- Paginate the service plans page
 
 Deployment
 ----------
