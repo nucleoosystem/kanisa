@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     {% for plan in service_list %}
-    <tr{% if plan.user_is_involved %} class="info"{% endif %}>
+    <tr{% if plan.user_is_involved %} class="involved-in-serviceplan"{% endif %}>
       <td>
         <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
       </td>
