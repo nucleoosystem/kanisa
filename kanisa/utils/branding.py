@@ -51,8 +51,8 @@ def get_brand_colours():
         return {}
 
 
-def get_cache_key(file):
-    return 'kanisa_branding_component:%s' % file
+def get_cache_key(component_name):
+    return 'kanisa_branding_component:%s' % component_name
 
 
 def flush_brand_colours(colours):
@@ -67,7 +67,7 @@ def flush_brand_colours(colours):
     with open(destination_name, 'w') as destination:
         destination.write(rendered)
 
-    cache.delete(get_cache_key('colours.css'))
+    cache.delete(get_cache_key('colours'))
 
 
 def ensure_branding_directory_exists():
@@ -104,7 +104,7 @@ class BrandingInformation(object):
     def get_cached_url(self):
         file = BRANDING_COMPONENTS[self.component]['filename']
 
-        url = cache.get(get_cache_key(file))
+        url = cache.get(get_cache_key(self.component))
 
         if url is not None:
             return url
@@ -117,7 +117,7 @@ class BrandingInformation(object):
         # Cache these URLs for 10 minutes - chances are they won't
         # disappear, but on the off-chance they do, let's not keep
         # serving non-existent files forever.
-        cache.set(get_cache_key(file), url, 600)
+        cache.set(get_cache_key(self.component), url, 600)
         return url
 
     def __exists(self, branding_component):
