@@ -46,9 +46,11 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
 
     def get_queryset(self):
         if self.kwargs['show_all']:
-            return Service.objects.all()
+            qs = Service.objects.all()
         else:
-            return Service.future_objects.all()
+            qs = Service.future_objects.all()
+
+        return qs.order_by('-event__date')
 
     def get_context_data(self, **kwargs):
         context = super(ServiceIndexView,
