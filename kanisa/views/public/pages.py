@@ -27,6 +27,7 @@ def public_page_view(request):
             {'page': page,
              'parent': page.parent,
              'parent_path': parent_path,
+             'page_path': page.get_path(),
              'siblings': page.get_published_siblings(),
              'children': page.get_published_children(),
              'kanisa_title': unicode(page)},
