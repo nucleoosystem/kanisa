@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from django.conf import settings
@@ -89,27 +90,28 @@ class BrandingInformation(object):
             raise ValueError("Bad branding key: %s." % component)
 
         self.component = component
-        self.url = self.get_cached_url()
         self.sizes = BRANDING_COMPONENTS[self.component].get('sizes', [])
-        try:
-            template_prefix = 'kanisa/management/branding/notes/'
-            template_name = '%s/_%s.html' % (template_prefix, component)
-            get_template(template_name)
-            self.template_name = template_name
-        except TemplateDoesNotExist:
-            self.template_name = None
-
         self.verbose_name = BRANDING_COMPONENTS[self.component]['verbose_name']
 
-    def get_cached_url(self):
-        file = BRANDING_COMPONENTS[self.component]['filename']
+    @property
+    def template_name(self):
+        template_prefix = 'kanisa/management/branding/notes/'
+        template_name = '%s/_%s.html' % (template_prefix, self.component)
 
+        try:
+            get_template(template_name)
+            return template_name
+        except TemplateDoesNotExist:
+            return None
+
+    @property
+    def url(self):
         url = cache.get(get_cache_key(self.component))
 
         if url is not None:
             return url
 
-        url = self.__fetch(file)
+        url = self.__fetch()
 
         if url is None:
             return url
@@ -120,16 +122,36 @@ class BrandingInformation(object):
         cache.set(get_cache_key(self.component), url, 600)
         return url
 
-    def __exists(self, branding_component):
-        path = get_branding_disk_file(branding_component)
+    def __file_exists(self):
+        path = get_branding_disk_file(
+            BRANDING_COMPONENTS[self.component]['filename']
+        )
 
         return os.path.exists(path)
 
-    def __url(self, branding_component):
-        return 'kanisa/branding/%s' % branding_component
+    def __url(self, filehash):
+        filename = BRANDING_COMPONENTS[self.component]['filename']
 
-    def __fetch(self, filename):
-        if self.__exists(filename):
-            return self.__url(filename)
+        if filehash:
+            return 'kanisa/branding/%s?%s' % (filename, filehash)
+        else:
+            return 'kanisa/branding/%s' % filename
 
-        return None
+    def __filehash(self):
+        content = open(get_branding_disk_file(
+            BRANDING_COMPONENTS[self.component]['filename']
+        ), 'rb').read()
+        md5 = hashlib.md5(content)
+        return md5.hexdigest()[:12]
+
+
+    def __fetch(self):
+        if not self.__file_exists():
+            return None
+
+        filehash = None
+
+        if self.component == 'colours':
+            filehash = self.__filehash()
+
+        return self.__url(filehash)

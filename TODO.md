@@ -18,12 +18,6 @@ Deployment
 
 - Fix deployment always leaving a "deploy" file around
 - Add a way to set up cron jobs
-- Ensure branding changes create images with cache-busting URLs
-  (i.e. include a hash of the file contents in the name). This needs
-  doing for:
-  - the image files (the favicon, the header image and the square
-    logo);
-  - the CSS file
 
 Version 1.1
 ===========
