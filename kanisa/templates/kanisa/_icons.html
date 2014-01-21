@@ -2,7 +2,6 @@
 {% load kanisa_branding %}
 {% load thumbnail %}
 
-{% cache 60 kanisa_branding_icons %}
 {% kanisa_branding 'favicon' as favicon_information %}
 {% if favicon %}
 <link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon_information.url }}">
@@ -33,5 +32,3 @@
 {% if colours_information.url %}
 <link rel="stylesheet" type="text/css" media="all" href="{{ MEDIA_URL }}{{ colours_information.url }}" />
 {% endif %}
-
-{% endcache %}
