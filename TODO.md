@@ -6,6 +6,10 @@ Bugs
 
 - Shrink the size of h4? Perhaps make 110% and bold?
 - Add support for subtitles a la Kaleo
+- Adjust banner display:
+  - at widths less than the size of the banner remove them
+  - at widths larger than the size of the banner - include them and
+    make the size fixed
 
 Features
 --------
@@ -62,9 +66,6 @@ Mobile
 Features
 --------
 
-Features
---------
-
 - Add a handler for Google maps in `main_input_widget`
 - Add handlers for links, bold and italics in `main_input_widget`
 - Add support for a simple blog
@@ -78,6 +79,7 @@ Features
 - Add logs of actions taken in the management console
 - Add a way to permanently remove inactive users (e.g. spam
   registrations)
+- Add a permission for branding management
 
 Bug fixes
 ---------
