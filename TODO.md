@@ -48,6 +48,10 @@ Deployment
 - Fix proliferation of `kanisa.*.css` and `kanisa.*.js` (since the
   filenames are modified with each CSS/JS change, and old files don't
   get cleaned up)
+- Investigate
+  `django.contrib.staticfiles.storage.CachedStaticFilesStorage` (which
+  seems to do most of what our custom deployment stuff does, but
+  better.
 
 Mobile
 ------
