@@ -81,6 +81,7 @@ def ensure_branding_directory_exists():
 def get_available_colours():
     return {
         'logo_background': 'Used in the header bar alongside your logo.',
+        'link_colour': 'Used as the colour for links.',
     }
 
 

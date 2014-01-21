@@ -10,7 +10,6 @@ Bugs
 Features
 --------
 
-- Add link colour to the list of configurable things in `branding.css`
 - Paginate the service plans page
 
 Deployment

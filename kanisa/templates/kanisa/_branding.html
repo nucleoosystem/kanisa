@@ -3,3 +3,9 @@
   background-color: {{ logo_background }};
 {% templatetag closebrace %}
 {% endif %}
+
+{% if link_colour %}
+a {% templatetag openbrace %}
+  color: {{ link_colour }};
+{% templatetag closebrace %}
+{% endif %}
