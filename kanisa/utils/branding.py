@@ -145,7 +145,6 @@ class BrandingInformation(object):
         md5 = hashlib.md5(content)
         return md5.hexdigest()[:12]
 
-
     def __fetch(self):
         if not self.__file_exists():
             return None
