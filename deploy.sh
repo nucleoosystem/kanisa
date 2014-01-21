@@ -23,4 +23,3 @@ python manage.py collectstatic --noinput
 touch proj/wsgi.py
 
 deactivate
-echo "Done deploying."

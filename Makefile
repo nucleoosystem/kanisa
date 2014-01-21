@@ -34,3 +34,4 @@ redeploy:
 	ssh kanisa bash /home/deploy/deploy.sh
 
 deploy: wheel redeploy
+	echo "Deployment complete."
