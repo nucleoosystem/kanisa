@@ -19,12 +19,6 @@ Features
 Deployment
 ----------
 
-- Fix deployment always leaving a "deploy" file around
-  - Deployment log has this at the end:
-
-    cat deploy.sh >deploy
-    chmod a+x deploy
-
 - Add a way to set up cron jobs
 
 Version 1.1
