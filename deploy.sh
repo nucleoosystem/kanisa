@@ -1,3 +1,6 @@
+set -e
+set -x
+
 # Note that this is not atomic - the site is broken for the duration
 # of this script. Probably just want to take each site into
 # maintenance mode for the duration, since upgrades should only take
@@ -20,3 +23,4 @@ python manage.py collectstatic --noinput
 touch proj/wsgi.py
 
 deactivate
+echo "Done deploying."
