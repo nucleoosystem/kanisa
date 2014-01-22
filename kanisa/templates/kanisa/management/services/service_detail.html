@@ -34,7 +34,9 @@
 {% include 'kanisa/management/services/_song_table.html' %}
 {% endwith %}
 
-<form class="form-inline" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
+<hr />
+
+<form class="service-songs-edit" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
   {% csrf_token %}
   <select name="song" id="id_song">
     {% for song in all_songs %}

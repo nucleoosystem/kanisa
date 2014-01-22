@@ -79,4 +79,8 @@ $(document).ready(function() {
     $(".serviceform #id_band").change(on_band_change);
     $(".serviceform #id_date").change(on_date_change_evt);
     $(".serviceform #div_id_event").hide();
+
+    $(".service-songs-edit #id_song").chosen({
+        placeholder_text: "Select a song"
+    });
 });

@@ -468,3 +468,8 @@ From http://themeloom.com/2013/02/tips-embed-google-maps-and-calendars-in-a-resp
     color: #31708f;
     background-color: #d9edf7;
 }
+
+.service-songs-edit select,
+.service-songs-edit .chosen-container {
+    margin-bottom: 1em;
+}

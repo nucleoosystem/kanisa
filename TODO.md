@@ -23,7 +23,6 @@ Features
   - The documents list in the management area
   - The users list in the management area
   - The inline images list in the management area
-- Make the song selection dropdown use chosen
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 - Separate off sermons to their own tab in the sermon management page
