@@ -473,3 +473,7 @@ From http://themeloom.com/2013/02/tips-embed-google-maps-and-calendars-in-a-resp
 .service-songs-edit .chosen-container {
     margin-bottom: 1em;
 }
+
+table.song-table form {
+    margin: 0;
+}

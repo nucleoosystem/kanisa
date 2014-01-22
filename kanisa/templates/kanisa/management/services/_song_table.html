@@ -1,5 +1,5 @@
 {% if songs %}
-<table class="table table-striped">
+<table class="table table-striped song-table">
   <thead>
     <tr>
       <th>Title</th>
@@ -16,7 +16,7 @@
       <td>{{ song.song.composer_list|join:", " }}</td>
       <td>
         {% if not forloop.first %}
-        <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}" style="margin:0">
+        <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-default btn-xs">
             <i class="glyphicon glyphicon-arrow-up"></i>
@@ -26,7 +26,7 @@
       </td>
       <td>
         {% if not forloop.last %}
-        <form method="post" action="{% url 'kanisa_members_services_move_song_down' object.pk song.pk %}" style="margin:0">
+        <form method="post" action="{% url 'kanisa_members_services_move_song_down' object.pk song.pk %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-default btn-xs">
             <i class="glyphicon glyphicon-arrow-down"></i>
@@ -35,7 +35,7 @@
         {% endif %}
       </td>
       <td>
-        <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}" style="margin:0">
+        <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}">
           {% csrf_token %}
           <button type="submit" class="btn btn-xs btn-danger">
             <i class="glyphicon glyphicon-trash"></i>
