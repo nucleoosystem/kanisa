@@ -1,6 +1,8 @@
 {% load thumbnail %}
 
 {% for series in active_series %}
+<div class="sermon_series_list">
+
 <h2>
   <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
   <small>
@@ -8,7 +10,8 @@
   </small>
 </h2>
 
-<div class="row sermon_series_list">
+{% if series.image %}
+<div class="row">
   <div class="col-md-3">
     <div class="thumbnail">
       {% thumbnail series.image "131x110" crop="center" as im %}
@@ -19,6 +22,10 @@
   <div class="col-md-9">
     {% include "kanisa/public/sermons/_series_list_detail.html" %}
   </div>
+</div>
+{% else %}
+    {% include "kanisa/public/sermons/_series_list_detail.html" %}
+{% endif %}
 </div>
 <hr />
 {% endfor %}
