@@ -37,6 +37,7 @@ class UserManagementView(UserBaseView,
     kanisa_title = 'Manage Users'
     kanisa_is_root_view = True
     context_object_name = 'user_list'
+    paginate_by = 20
 
     def get_queryset(self):
         return get_user_model().objects.all().order_by('username')
