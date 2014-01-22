@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if link_colour %}
-a {% templatetag openbrace %}
+a, a:hover {% templatetag openbrace %}
   color: {{ link_colour }};
 {% templatetag closebrace %}
 {% endif %}

@@ -171,8 +171,13 @@ textarea.kanisamaininputwidget {
     text-decoration: underline;
 }
 
-.navbar-text a {
+.navbar-text a,
+.navbar-text a:hover {
     color: inherit;
+}
+
+.navbar-text a.kanisa_manage {
+    text-decoration: none;
 }
 
 #logo {
@@ -349,10 +354,6 @@ div.form-actions {
 
 .numberinput {
     width: 7em;
-}
-
-.navbar a.kanisa_manage {
-    text-decoration: none;
 }
 
 @media (max-width: 768px) {
