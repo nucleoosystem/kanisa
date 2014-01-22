@@ -1,0 +1,17 @@
+<form class="service-songs-edit" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
+  {% csrf_token %}
+  <select name="song" id="id_song">
+    <option value=""></option>
+    {% for song in all_songs %}
+    <option value="{{ song.pk }}">{{ song.title }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-success">
+    <i class="glyphicon glyphicon-plus"></i>
+    Add this song
+  </button>
+  <a class="btn btn-default" href="{% url 'kanisa_members_services_create_song' object.pk %}">
+    <i class="glyphicon glyphicon-bullhorn"></i>
+    Add a new song
+  </a>
+</form>

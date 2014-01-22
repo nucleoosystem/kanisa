@@ -1,0 +1,23 @@
+<p>
+  This is a service plan for <strong>{{ object.event.title }}</strong>
+  on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
+  about music should be directed to
+  <strong>{{ object.band_leader.get_display_name }}</strong>.
+</p>
+
+{% with object.musicians.all as musicians %}
+{% if musicians %}
+<p>The band will be:</p>
+<ul>
+  <li><strong>{{ object.band_leader.get_display_name }}</strong></li>
+  {% for musician in musicians %}
+  <li>{{ musician.get_display_name }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn btn-default">
+  <i class="glyphicon glyphicon-edit"></i>
+  Edit Service Plan
+</a>
