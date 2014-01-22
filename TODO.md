@@ -21,7 +21,6 @@ Features
     - In the members' section
     - In the management interface
   - The sermon series list on the sermon management page
-  - The documents list in the management area
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 - Separate off sermons to their own tab in the sermon management page
@@ -94,6 +93,9 @@ Features
 - Add a permission for branding management
 - Add a good way of finding a particular user in the user management
   interface (which doesn't involve paging through all the pages)
+- Add a good way of finding a particular document in the document
+  management interface (which doesn't involve paging through all the
+  pages)
 
 Bug fixes
 ---------

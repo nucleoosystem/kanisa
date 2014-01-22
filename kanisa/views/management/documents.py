@@ -24,6 +24,7 @@ class DocumentIndexView(DocumentBaseView,
     template_name = 'kanisa/management/documents/index.html'
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
+    paginate_by = 20
 document_management = DocumentIndexView.as_view()
 
 
