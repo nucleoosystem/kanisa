@@ -1,4 +1,3 @@
-{% load kanisa_markup %}
 {% load thumbnail %}
 
 {% for series in active_series %}
@@ -17,23 +16,7 @@
         ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
       </small>
     </h2>
-
-    {% if series.intro %}
-    <div class="lead">
-    {{ series.intro|kanisa_markdown }}
-    </div>
-    {% else %}
-    {% with series.sermons as sermons %}
-    {% include "kanisa/public/sermons/_series_table_of_sermons.html" %}
-    {% endwith %}
-    {% endif %}
-    {% with series.date_range as date_range %}
-    {% if date_range %}
-    <p>
-      This series began on {{ date_range|first|date:"jS F Y" }}.
-    </p>
-    {% endif %}
-    {% endwith %}
+    {% include "kanisa/public/sermons/_series_list_detail.html" %}
   </div>
 </div>
 <hr />
