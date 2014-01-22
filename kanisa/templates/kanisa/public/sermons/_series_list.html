@@ -1,6 +1,13 @@
 {% load thumbnail %}
 
 {% for series in active_series %}
+<h2>
+  <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
+  <small>
+    ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
+  </small>
+</h2>
+
 <div class="row sermon_series_list">
   <div class="col-md-3">
     <div class="thumbnail">
@@ -10,12 +17,6 @@
     </div>
   </div>
   <div class="col-md-9">
-    <h2>
-      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
-      <small>
-        ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
-      </small>
-    </h2>
     {% include "kanisa/public/sermons/_series_list_detail.html" %}
   </div>
 </div>
