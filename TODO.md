@@ -20,7 +20,6 @@ Features
   - In the service plans page
     - In the members' section
     - In the management interface
-  - The documents list in the members' section
   - The sermon series list on the sermon management page
   - The documents list in the management area
   - The users list in the management area

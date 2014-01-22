@@ -14,6 +14,7 @@ class MembersDocumentView(MembersBaseView, KanisaListView):
     kanisa_root_crumb = {'text': 'Documents',
                          'url': reverse_lazy('kanisa_members_documents')}
     kanisa_is_root_view = True
+    paginate_by = 10
 index = MembersDocumentView.as_view()
 
 
