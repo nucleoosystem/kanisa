@@ -16,7 +16,7 @@
 {% if object_list %}
 <div class="row">
   {% for image in object_list %}
-    <div class="col-xs-6 col-md-2">
+    <div class="col-xs-3 col-md-2">
       <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}" class="thumbnail">
         {% thumbnail image.image "122x92" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
