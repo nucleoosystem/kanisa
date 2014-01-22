@@ -19,7 +19,7 @@ test:
 flake8:
 	tox -e flake8
 
-push: git-check test
+push: git-check flake8 test
 	git push -u origin master
 
 wheel: push cleandist
