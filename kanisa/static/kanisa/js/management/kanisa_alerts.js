@@ -8,5 +8,5 @@ function _alert_impl(msg, alert_class) {
 }
 
 function alert_failure(msg) {
-    _alert_impl(msg, "alert-error");
+    _alert_impl(msg, "alert-danger");
 }

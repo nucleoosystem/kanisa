@@ -75,6 +75,13 @@ function on_date_change_evt(event) {
     );
 }
 
+function validate_song_choice(evt) {
+    if ($("#id_song").val() == "") {
+        alert_failure("Please select a song to add.");
+        evt.preventDefault();
+    }
+}
+
 $(document).ready(function() {
     $(".serviceform #id_band").change(on_band_change);
     $(".serviceform #id_date").change(on_date_change_evt);
@@ -83,4 +90,5 @@ $(document).ready(function() {
     $(".service-songs-edit #id_song").chosen({
         placeholder_text: "Select a song"
     });
+    $(".service-songs-edit").submit(validate_song_choice);
 });
