@@ -43,6 +43,7 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
     template_name = 'kanisa/management/services/index.html'
     kanisa_title = 'Service Planning'
     kanisa_is_root_view = True
+    paginate_by = 20
 
     def get_queryset(self):
         if self.kwargs['show_all']:

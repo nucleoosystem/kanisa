@@ -16,11 +16,7 @@ Bugs
 Features
 --------
 
-- Pagination
-  - In the service plans page
-    - In the members' section
-    - In the management interface
-  - The sermon series list on the sermon management page
+- Paginate the sermon series list on the sermon management page
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 - Separate off sermons to their own tab in the sermon management page
