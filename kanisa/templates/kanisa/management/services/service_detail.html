@@ -2,67 +2,67 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-4">
-<p>
-  This is a service plan for <strong>{{ object.event.title }}</strong>
-  on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
-  about music should be directed to
-  <strong>{{ object.band_leader.get_display_name }}</strong>.
-</p>
+  <div class="col-md-4">
+    <p>
+      This is a service plan for <strong>{{ object.event.title }}</strong>
+      on <strong>{{ object.event.date|date:"jS F Y" }}</strong>. Queries
+      about music should be directed to
+      <strong>{{ object.band_leader.get_display_name }}</strong>.
+    </p>
 
-{% with object.musicians.all as musicians %}
-  {% if musicians %}
+    {% with object.musicians.all as musicians %}
+    {% if musicians %}
     <p>The band will be:</p>
     <ul>
       <li><strong>{{ object.band_leader.get_display_name }}</strong></li>
       {% for musician in musicians %}
-        <li>{{ musician.get_display_name }}</li>
+      <li>{{ musician.get_display_name }}</li>
       {% endfor %}
     </ul>
-  {% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
 
-<a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn btn-default">
-  <i class="glyphicon glyphicon-edit"></i>
-  Edit Service Plan
-</a>
+    <a href="{% url 'kanisa_manage_services_update' object.pk %}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Edit Service Plan
+    </a>
 
-</div>
+  </div>
 
-<div class="col-md-6">
-{% with songs=object.songinservice_set.all %}
-{% include 'kanisa/management/services/_song_table.html' %}
-{% endwith %}
+  <div class="col-md-6">
+    {% with songs=object.songinservice_set.all %}
+    {% include 'kanisa/management/services/_song_table.html' %}
+    {% endwith %}
 
-<hr />
+    <hr />
 
-<form class="service-songs-edit" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
-  {% csrf_token %}
-  <select name="song" id="id_song">
-    <option value=""></option>
-    {% for song in all_songs %}
-    <option value="{{ song.pk }}">{{ song.title }}</option>
-    {% endfor %}
-  </select>
-  <button class="btn btn-success">
-    <i class="glyphicon glyphicon-plus"></i>
-    Add this song
-  </button>
-  <a class="btn btn-default" href="{% url 'kanisa_members_services_create_song' object.pk %}">
-    <i class="glyphicon glyphicon-bullhorn"></i>
-    Add a new song
-  </a>
-</form>
+    <form class="service-songs-edit" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
+      {% csrf_token %}
+      <select name="song" id="id_song">
+        <option value=""></option>
+        {% for song in all_songs %}
+        <option value="{{ song.pk }}">{{ song.title }}</option>
+        {% endfor %}
+      </select>
+      <button class="btn btn-success">
+        <i class="glyphicon glyphicon-plus"></i>
+        Add this song
+      </button>
+      <a class="btn btn-default" href="{% url 'kanisa_members_services_create_song' object.pk %}">
+        <i class="glyphicon glyphicon-bullhorn"></i>
+        Add a new song
+      </a>
+    </form>
 
-</div>
+  </div>
 </div>
 <hr />
 
 <ul class="pager">
-<li class="previous">
-<a href="{% url 'kanisa_members_services_index' %}">
-&larr; Back to the list of Service Plans
-</a>
-</li>
+  <li class="previous">
+    <a href="{% url 'kanisa_members_services_index' %}">
+      &larr; Back to the list of Service Plans
+    </a>
+  </li>
 </ul>
 {% endblock %}
