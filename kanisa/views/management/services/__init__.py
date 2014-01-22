@@ -201,6 +201,7 @@ def add_song_to_service(song, service):
 
 
 class AddSongView(BaseServiceManagementView, KanisaFormView):
+    template_name = 'kanisa/management/create.html'
     form_class = AddSongToServiceForm
 
     def form_valid(self, form):
@@ -214,8 +215,10 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
     def get_kanisa_title(self):
         formatted_date = formats.date_format(self.service.event.date,
                                              "DATE_FORMAT")
-        return 'Add a song to %s (%s)' % (self.service.event.title,
-                                          formatted_date)
+        return 'Add a song to %s (%s)' % (
+            unicode(self.service.event),
+            formatted_date
+        )
 add_song = AddSongView.as_view()
 
 
