@@ -14,6 +14,10 @@ Bugs
 Features
 --------
 
+- Make it clearer how to get to the members' area/the management pages
+  in the navbar
+- Add support for heading shifts in `kanisa_markdown` - `h1` -> `h4`;
+  `h2` -> `h5` etc.
 - Paginate the sermon series list on the sermon management page
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
