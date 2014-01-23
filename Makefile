@@ -31,6 +31,7 @@ wheel: push cleandist
 redeploy:
 	scp dist/kanisa-*.whl kanisa:/home/deploy/
 	scp deploy.sh kanisa:/home/deploy/
+	scp single_deploy.sh kanisa:/home/deploy/
 	ssh kanisa bash /home/deploy/deploy.sh
 
 deploy: wheel redeploy

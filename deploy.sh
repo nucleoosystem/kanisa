@@ -11,16 +11,8 @@ pip uninstall kanisa -y
 wheel=`ls kanisa*.whl`
 pip install $wheel
 rm $wheel
+deactivate
 
 # In future the folders will be in a config file somewhere, and we'll
 # cd to every folder in the config file, and update every site.
-cd /var/www/centralbaptistchelmsford.org
-
-# Actually do the upgrade
-python manage.py syncdb
-python manage.py migrate
-python manage.py collectstatic --noinput
-python manage.py rebuild_index --noinput
-touch proj/wsgi.py
-
-deactivate
+sudo -u www-data bash /home/deploy/single_deploy.sh centralbaptistchelmsford.org
