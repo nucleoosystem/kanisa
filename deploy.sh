@@ -20,6 +20,7 @@ cd /var/www/centralbaptistchelmsford.org
 python manage.py syncdb
 python manage.py migrate
 python manage.py collectstatic --noinput
+python manage.py rebuild_index --noinput
 touch proj/wsgi.py
 
 deactivate

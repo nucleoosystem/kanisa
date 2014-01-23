@@ -25,7 +25,6 @@ Deployment
 ----------
 
 - Add a way to set up cron jobs
-- Ensure search indexes are rebuilt on deployment
 
 Version 1.1
 ===========
