@@ -56,6 +56,8 @@ Mobile
 Features
 --------
 
+- Make the sermon archive more sensible - instead of just a giant list
+  of all sermons - split it up by year/passage etc
 - Make adding/moving songs in services happen via XHR
 - Add a handler for Google maps in `main_input_widget`
 - Add handlers for links, bold and italics in `main_input_widget`
