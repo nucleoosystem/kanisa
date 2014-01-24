@@ -1,40 +1,40 @@
 {% load thumbnail %}
 
 <table class="table table-striped">
-    <thead>
+  <thead>
     <tr>
-        <th>Title</th>
-        <th>Date</th>
-        <th>Passage</th>
-        <th>Speaker</th>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Passage</th>
+      <th>Speaker</th>
     </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
     {% for sermon in sermons %}
-        <tr>
-            <td>
-                <a href="{% url 'kanisa_manage_sermons_individual_update' sermon.pk %}">
-                {{ sermon.title }}
-                </a><br />
-                <a href="{% url 'kanisa_manage_sermons_individual_delete' sermon.pk %}" title="Delete this sermon" class="btn btn-xs btn-danger inline-delete-btn">
-                  <span class="glyphicon glyphicon-trash"></span>
-                  Delete
-                </a>
-            </td>
-            <td>
-                {{ sermon.date|date:"jS F Y"}}
-            </td>
-            <td>
-                {{ sermon.passage }}
-            </td>
-            <td>
-                <a href="{% url 'kanisa_manage_sermons_speaker_update' sermon.speaker.pk %}" title="Update {{ sermon.speaker }}'s details">
-                  {% thumbnail sermon.speaker.image_or_default "60x60" crop="center" as im %}
-                  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
-                  {% endthumbnail %}
-                </a>
-            </td>
-        </tr>
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_manage_sermons_individual_update' sermon.pk %}">
+          {{ sermon.title }}
+        </a><br />
+        <a href="{% url 'kanisa_manage_sermons_individual_delete' sermon.pk %}" title="Delete this sermon" class="btn btn-xs btn-danger inline-delete-btn">
+          <span class="glyphicon glyphicon-trash"></span>
+          Delete
+        </a>
+      </td>
+      <td>
+        {{ sermon.date|date:"jS F Y"}}
+      </td>
+      <td>
+        {{ sermon.passage }}
+      </td>
+      <td>
+        <a href="{% url 'kanisa_manage_sermons_speaker_update' sermon.speaker.pk %}" title="Update {{ sermon.speaker }}'s details">
+          {% thumbnail sermon.speaker.image_or_default "60x60" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+          {% endthumbnail %}
+        </a>
+      </td>
+    </tr>
     {% endfor %}
-    </tbody>
+  </tbody>
 </table>
