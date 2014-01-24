@@ -40,7 +40,7 @@ class UserManagementView(UserBaseView,
     paginate_by = 20
 
     def get_queryset(self):
-        return get_user_model().objects.all().order_by('username')
+        return get_user_model().objects.all().order_by('is_active', 'username')
 user_management = UserManagementView.as_view()
 
 
