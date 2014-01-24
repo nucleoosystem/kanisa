@@ -1,11 +1,6 @@
 Version 1.0
 ===========
 
-Bugs
-----
-
-- Shrink the size of h4? Perhaps make 110% and bold?
-
 Features
 --------
 
