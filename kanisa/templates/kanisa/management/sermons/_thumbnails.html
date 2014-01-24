@@ -1,16 +1,16 @@
 {% load thumbnail %}
 
 {% if sermonseries_list %}
-<div class="row kanisa_thumbnails">
+<table class="table table-striped sermonseries-table">
   {% for sermonseries in sermonseries_list %}
-  {% cycle '<br style="clear:left" />' '' '' %}
-  <div class="col-md-4">
-    <div class="thumbnail">
-      {% thumbnail sermonseries.image_or_default "285x140" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+  <tr>
+    <th>
+      {% thumbnail sermonseries.image_or_default "100x100" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="thumbnail" />
       {% endthumbnail %}
-
-      <div class="caption">
+    </th>
+    <td>
+      <p>
         <h4>
           <a href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}" title="Edit this series">
             {{ sermonseries.title }}
@@ -19,26 +19,25 @@
             </small>
           </a>
         </h4>
+      </p>
+      <p>
+        <a class="btn btn-default" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
+          <i class="glyphicon glyphicon-edit"></i>
+          Edit
+        </a>
 
-        <p>
-          <a class="btn btn-default" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
-            <i class="glyphicon glyphicon-edit"></i>
-            Edit
-          </a>
-          {% if sermonseries.active %}
-          <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
-
-            <i class="glyphicon glyphicon-ok"></i>
-            Mark Complete
-          </a>
-          <span class="inline-status"></span>
-          {% endif %}
-        </p>
-      </div>
-    </div>
-  </div>
+        {% if sermonseries.active %}
+        <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
+          <i class="glyphicon glyphicon-ok"></i>
+          Mark Complete
+        </a>
+        <span class="inline-status"></span>
+        {% endif %}
+      </p>
+    </td>
+  </tr>
   {% endfor %}
-</div>
+</table>
 {% else %}
 <div class="alert alert-warning">
 There are no sermon series to display.
