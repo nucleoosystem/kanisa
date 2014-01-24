@@ -32,8 +32,8 @@ class SermonIndexView(SermonBaseView,
                       KanisaListView):
     model = SermonSeries
     queryset = SermonSeries.objects.all()
-
     template_name = 'kanisa/management/sermons/index.html'
+    paginate_by = 10
     kanisa_title = 'Manage Sermons'
     kanisa_is_root_view = True
 sermon_management = SermonIndexView.as_view()
