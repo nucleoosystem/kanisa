@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from kanisa.models import InlineImage, Document
+from kanisa.utils.text import demote_headings
 from sorl.thumbnail import get_thumbnail
 import markdown
 import re
@@ -121,7 +122,7 @@ def get_maps(markdown_text):
 
 
 @register.filter(is_safe=True)
-def kanisa_markdown(value):
+def kanisa_markdown(value, demote_heading_levels=None):
     value = force_unicode(value)
 
     for image_match in get_images(value):
@@ -135,5 +136,10 @@ def kanisa_markdown(value):
 
     value = value.replace("####", "<br style=\"clear: both\" />")
 
-    return mark_safe(markdown.markdown(value,
-                                       extensions=['nl2br', ]))
+    marked_down = markdown.markdown(value,
+                                    extensions=['nl2br', ])
+
+    if demote_heading_levels:
+        marked_down = demote_headings(marked_down, demote_heading_levels)
+
+    return mark_safe(marked_down)
