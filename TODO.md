@@ -5,7 +5,6 @@ Bugs
 ----
 
 - Shrink the size of h4? Perhaps make 110% and bold?
-- Add support for subtitles a la Kaleo
 - Adjust banner display:
   - at widths less than the size of the banner remove them
   - at widths larger than the size of the banner - include them and

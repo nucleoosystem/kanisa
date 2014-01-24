@@ -477,3 +477,21 @@ From http://themeloom.com/2013/02/tips-embed-google-maps-and-calendars-in-a-resp
 table.song-table form {
     margin: 0;
 }
+
+.bs-callout {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border-left: 5px solid #eee;
+  background-color: #f0f7fd;
+  border-color: #d0e3f0;
+  margin-left: -15px;
+}
+
+.bs-callout h4 {
+  color: #34789a;
+  margin-top: 0;
+}
+
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
