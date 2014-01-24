@@ -1,6 +1,9 @@
 <ul class="nav nav-tabs">
+  <li{% if current = "series" %} class="active"{% endif %}>
+    <a href="{% url 'kanisa_manage_sermons' %}">Manage Series</a>
+  </li>
   <li{% if current = "sermons" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_sermons' %}">Manage Sermons</a>
+    <a href="{% url 'kanisa_manage_sermons_list' %}">Manage Sermons</a>
   </li>
   <li{% if current = "speakers" %} class="active"{% endif %}>
     <a href="{% url 'kanisa_manage_sermons_speaker' %}">

@@ -54,7 +54,6 @@ class SermonManagementViewTest(KanisaViewTestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'kanisa/management/sermons/index.html')
 
-        self.assertEqual(len(resp.context['standalone']), 1)
         self.assertEqual(len(resp.context['object_list']), 2)
         self.client.logout()
 

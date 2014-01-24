@@ -1,7 +1,7 @@
 {% extends 'kanisa/management/sermons/base.html' %}
 
 {% block content %}
-{% include "kanisa/management/sermons/_nav.html" with current="series" %}
+{% include "kanisa/management/sermons/_nav.html" with current="sermons" %}
 <p>
     <a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-lg btn-success">
       <i class="glyphicon glyphicon-plus"></i>
@@ -12,6 +12,6 @@
 
 <hr />
 
-{% include 'kanisa/management/sermons/_thumbnails.html' %}
+{% include 'kanisa/management/sermons/_sermon_table.html' with sermons=sermon_list %}
 
 {% endblock %}

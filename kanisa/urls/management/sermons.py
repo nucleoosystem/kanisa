@@ -13,6 +13,8 @@ urlpatterns = patterns(
         'kanisa_manage_sermons_series_update'),
     url(r'^complete/(?P<sermon_id>\d+)$', views.sermon_series_mark_complete,
         {}, 'kanisa_manage_sermons_series_complete'),
+    url(r'^sermon/$', views.sermon_list, {},
+        'kanisa_manage_sermons_list'),
     url(r'^sermon/create/$', views.sermon_create, {},
         'kanisa_manage_sermons_individual_create'),
     url(r'^sermon/edit/(?P<pk>\d+)$', views.sermon_update, {},
