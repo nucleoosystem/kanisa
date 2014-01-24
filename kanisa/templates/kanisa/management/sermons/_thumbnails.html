@@ -3,6 +3,7 @@
 {% if sermonseries_list %}
 <div class="row kanisa_thumbnails">
   {% for sermonseries in sermonseries_list %}
+  {% cycle '<br style="clear:left" />' '' '' %}
   <div class="col-md-4">
     <div class="thumbnail">
       {% thumbnail sermonseries.image_or_default "285x140" crop="center" as im %}
