@@ -4,7 +4,6 @@ Version 1.0
 Features
 --------
 
-- Paginate the sermon series list on the sermon management page
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 

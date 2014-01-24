@@ -44,6 +44,7 @@ class SermonListView(SermonBaseView,
     model = Sermon
     template_name = 'kanisa/management/sermons/sermons.html'
     kanisa_title = 'Manage Sermons'
+    paginate_by = 20
 sermon_list = SermonListView.as_view()
 
 
