@@ -485,13 +485,26 @@ table.song-table form {
   background-color: #f0f7fd;
   border-color: #d0e3f0;
   margin-left: -15px;
+  font-size: 120%;
 }
 
 .bs-callout h4 {
   color: #34789a;
   margin-top: 0;
+  font-size: 150%;
+}
+
+.bs-callout h5 {
+  margin-top: 0;
+  font-size: inherit;
+  font-weight: bold;
 }
 
 .bs-callout p:last-child {
   margin-bottom: 0;
+}
+
+.bs-callout.bs-callout-subtle {
+    font-size: inherit;
+    margin-top: 0;
 }

@@ -1,8 +1,8 @@
 {% load kanisa_markup %}
 
 {% if series.intro %}
-  <div class="lead">
-    {{ series.intro|kanisa_markdown }}
+  <div class="bs-callout bs-callout-subtle">
+    {{ series.intro|kanisa_markdown:3 }}
   </div>
 {% else %}
   {% with series.sermons as sermons %}

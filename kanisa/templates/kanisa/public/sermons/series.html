@@ -25,14 +25,14 @@
 
 <div class="row">
   <div class="col-md-7">
-    <div class="lead">
+    <div class="bs-callout">
       <div class="thumbnail" style="width:260px; float: left; margin: 0 1em 1em 0">
         {% thumbnail sermonseries.image_or_default "260x260" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
         {% endthumbnail %}
       </div>
       {% if object.intro %}
-      {{ object.intro|kanisa_markdown }}
+      {{ object.intro|kanisa_markdown:3 }}
       {% endif %}
     </div>
     {% if object.details %}
