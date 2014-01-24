@@ -1,4 +1,3 @@
-{% load kanisa_tags %}
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kanisa-navbar-collapse">
@@ -26,16 +25,7 @@
     </div>
 
     {% if user.is_authenticated %}
-    <p class="navbar-text pull-right">Welcome,
-      <a href="{% url 'kanisa_members_index' %}">{{ user }}</a>
-      {% kanisa_is_permissioned_user as is_permissioned %}
-      {% if is_permissioned %}
-      <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" class="kanisa_manage">
-        <i class="glyphicon glyphicon-cog"></i>
-      </a>
-      {% endif %}
-      (<a href="{% url 'kanisa_members_logout' %}">Logout</a>)
-    </p>
+      {% include "kanisa/_header_logged_in.html" %}
     {% else %}
     <p class="navbar-text pull-right">
       <a href="{% url 'kanisa_members_login' %}">Login</a>
