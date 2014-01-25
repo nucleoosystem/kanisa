@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.contrib.sites.models import Site
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import Rss201rev2Feed
@@ -98,7 +98,7 @@ class iTunesPodcastsFeed(Feed):
         if not branding_information.url:
             return None
 
-        return staticfiles_storage.url(branding_information.url)
+        return settings.MEDIA_URL + branding_information.url
 
     def items(self):
         """
