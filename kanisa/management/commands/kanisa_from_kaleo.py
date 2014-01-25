@@ -70,6 +70,7 @@ class Command(BaseCommand):
     seen_composer_pks = {}
     seen_content_types = {}
     seen_event_categories = {}
+    seen_event_category_slugs = {}
     seen_event_contacts = {}
     seen_event_series = {}
     seen_event_types = {}
@@ -490,6 +491,7 @@ class Command(BaseCommand):
                                 new_path='/diary/')
 
         self.seen_event_categories[pk] = category
+        self.seen_event_category_slugs[pk] = slug
         print "Created event category %s." % title
 
     def handle_diary_diaryeventtype(self, item):
@@ -516,7 +518,20 @@ class Command(BaseCommand):
             intro=intro,
             details=details
         )
+
         event.categories.add(self.seen_event_categories[category_pk])
+
+        # Redirect the old event URLs
+        site = Site.objects.get_current()
+        old_path = ('/diary/%s/%s/' %
+                    (self.seen_event_category_slugs[category_pk],
+                     event.slug))
+
+        Redirect.objects.create(
+            site=site,
+            old_path=old_path,
+            new_path='/diary/%s/' % event.slug
+        )
 
         self.seen_event_types[pk] = event
 
