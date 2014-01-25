@@ -1,3 +1,8 @@
+Version 0.9.5
+=============
+
+- Link podcast from sermons page
+
 Version 1.0
 ===========
 
