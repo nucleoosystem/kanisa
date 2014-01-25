@@ -6,8 +6,8 @@
   <div class="col-md-6" style="margin-bottom: 1em">
     {% if event.image %}
     <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" class="regular-event-img-link">
-      {% thumbnail event.image "80x80" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+      {% thumbnail event.image "80x80" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" style="clear:left" />
       {% endthumbnail %}
     </a>
     {% endif %}
