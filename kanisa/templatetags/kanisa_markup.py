@@ -12,13 +12,13 @@ import re
 register = template.Library()
 
 
-image_expression = re.compile(r'(!\[([A-Za-z0-9\-]+)'
+image_expression = re.compile(r'(!\[([A-Za-z0-9\-_]+)'
                               '( (headline|medium|small))?'
                               '( (left|right))?\]'
                               '(\[(.+?)\])?)')
 
 
-document_expression = re.compile(r'({@([A-Za-z0-9\-]+)})')
+document_expression = re.compile(r'({@([A-Za-z0-9\-_]+)})')
 gmap_expression = re.compile(r'({gmap:([a-z0-9\.]+)})')
 
 
