@@ -1,6 +1,10 @@
+import logging
 from django.conf import settings
 from django.core.cache import cache
 import tweepy
+
+
+logger = logging.getLogger(__name__)
 
 
 class TwitterException(Exception):
@@ -38,7 +42,8 @@ def get_tweepy_handle():
             return api
         raise TwitterException('Your Twitter authentication credentials are '
                                'invalid.')
-    except tweepy.TweepError:
+    except tweepy.TweepError as e:
+        logger.error(e, exc_info=True)
         raise TwitterException('Twitter appears to be unreachable.')
 
 
