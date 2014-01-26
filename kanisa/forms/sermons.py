@@ -61,7 +61,8 @@ class SermonForm(KanisaBaseModelForm):
 
         # Not sure if this date format is right - the MP3 players I've
         # got to test with don't show anything more than the year.
-        audio['date'] = cleaned_data['date'].strftime('%Y%m%d')
+        if 'date' in cleaned_data:
+            audio['date'] = cleaned_data['date'].strftime('%Y%m%d')
 
         audio.save()
 
