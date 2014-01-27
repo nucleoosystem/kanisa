@@ -1,7 +1,6 @@
 Version 0.9.5
 =============
 
-- Link podcast from sermons page
 - Remove `kanisa_guess_schedule`, which was created to facilitate the
   move from Kaleo to Kanisa
 - Improve README.md, to note that Kanisa is now in production use

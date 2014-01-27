@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db.models import F
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -22,6 +23,10 @@ class SermonIndexView(TemplateView):
         latest_sermons = Sermon.preached_objects.all()
         context['latest_sermons'] = latest_sermons[:5]
         context['kanisa_title'] = 'Sermons'
+
+        url = reverse('sermon_podcast_itunes')
+        absolute_url = self.request.build_absolute_uri(url)
+        context['podcast_url'] = absolute_url
 
         return context
 
