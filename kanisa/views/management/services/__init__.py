@@ -206,6 +206,15 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
 
     def form_valid(self, form):
         add_song_to_service(form.cleaned_data['song'], self.service)
+
+        if self.request.is_ajax():
+            return render_to_response(
+                'kanisa/management/services/_song_table.html',
+                {'object': self.service,
+                 'songs': self.service.songinservice_set.all()},
+                context_instance=RequestContext(self.request)
+            )
+
         return super(AddSongView, self).form_valid(form)
 
     def get_success_url(self):

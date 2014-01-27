@@ -75,11 +75,21 @@ function on_date_change_evt(event) {
     );
 }
 
-function validate_song_choice(evt) {
+function add_song_to_plan(event) {
     if ($("#id_song").val() == "") {
         alert_failure("Please select a song to add.");
-        evt.preventDefault();
+        event.preventDefault();
+        return;
     }
+
+    $.post($(this).attr("action"),
+           $(this).serialize(),
+           function(data) {
+               $(this).show();
+               render_service_table(data);
+           });
+
+    event.preventDefault();
 }
 
 function attach_service_songs_handlers() {
@@ -111,6 +121,6 @@ $(document).ready(function() {
     $(".service-songs-edit #id_song").chosen({
         placeholder_text: "Select a song"
     });
-    $(".service-songs-edit").submit(validate_song_choice);
+    $(".service-songs-edit").submit(add_song_to_plan);
     attach_service_songs_handlers();
 });

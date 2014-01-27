@@ -1,7 +1,6 @@
 Version 0.9.5
 =============
 
-- Make adding songs in services happen via XHR
 - Fix JavaScript bug which makes deleting multiple things via XHR not
   work (only seems to happen in deployed version, can't remember what
   model this is a problem for)
