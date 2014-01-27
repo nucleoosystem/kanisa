@@ -1,8 +1,6 @@
 Version 0.9.5
 =============
 
-- Remove `kanisa_guess_schedule`, which was created to facilitate the
-  move from Kaleo to Kanisa
 - Improve README.md, to note that Kanisa is now in production use
 - Make adding/moving/removing songs in services happen via XHR
 - Fix JavaScript bug which makes deleting multiple things via XHR not
