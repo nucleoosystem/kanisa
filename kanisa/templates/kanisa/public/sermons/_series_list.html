@@ -5,9 +5,11 @@
 
 <h2>
   <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}" title="View this series">{{ series.title }}</a>
+  {% if series.passage %}
   <small>
-    ({{ series.num_sermons }} sermon{{ series.num_sermons|pluralize }}{% if series.passage %} in a series on {{ series.passage }}{% endif %})
+    (a series on {{ series.passage }})
   </small>
+  {% endif %}
 </h2>
 
 {% if series.image %}
