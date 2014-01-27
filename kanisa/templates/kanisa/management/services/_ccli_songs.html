@@ -4,12 +4,16 @@
     <tr>
       <th>
         Song
+        <a href="{% url 'kanisa_manage_services_ccli_by_title' %}?event={{ filters.event.pk }}&start_date={{ filters.start_date|date:"m/d/Y" }}&end_date={{ filters.end_date|date:"m/d/Y" }}">
+        <i class="glyphicon glyphicon-chevron-down"></i></a>
       </th>
       <th>
         Composers
       </th>
-      <th>
+      <th width="100px" style="text-align: right">
         Usage
+        <a href="{% url 'kanisa_manage_services_ccli_by_usage' %}?event={{ filters.event.pk }}&start_date={{ filters.start_date|date:"m/d/Y" }}&end_date={{ filters.end_date|date:"m/d/Y" }}">
+        <i class="glyphicon glyphicon-chevron-down"></i></a>
       </th>
     </tr>
   </thead>
@@ -18,7 +22,7 @@
     <tr>
       <td>{{ song.title }}</td>
       <td>{{ composers|join:"; " }}</td>
-      <td>{{ usage }}</td>
+      <td style="text-align: right">{{ usage }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -27,6 +31,6 @@
 <p class="alert alert-warning">
   <strong>Sorry!</strong>
 
-  There aren't any songs recorded yet.
+  No song matchs that query.
 </p>
 {% endif %}

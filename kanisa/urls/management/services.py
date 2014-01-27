@@ -12,6 +12,12 @@ urlpatterns = patterns(
     url(r'^ccli/$', ccli_views.ccli_view, {},
         'kanisa_manage_services_ccli'),
 
+    url(r'^ccli/byusage/$', ccli_views.ccli_view, {'sort': 'usage'},
+        'kanisa_manage_services_ccli_by_usage'),
+
+    url(r'^ccli/bytitle/$', ccli_views.ccli_view, {'sort': 'title'},
+        'kanisa_manage_services_ccli_by_title'),
+
     url(r'^service/create/$', views.service_create, {},
         'kanisa_manage_services_create'),
 

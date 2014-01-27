@@ -18,6 +18,7 @@ class CCLIReport(object):
         self.start_date = kwargs.pop('start_date')
         self.end_date = kwargs.pop('end_date')
         self.composer_lists = {}
+        self.sort = kwargs.pop('sort')
 
         qs = SongInService.objects.all()
 
@@ -37,9 +38,15 @@ class CCLIReport(object):
         qs = [s.song for s in qs]
 
         songs = [i for i in collections.Counter(qs).viewitems()]
-        songs = sorted(songs,
-                       key=lambda s: s[1],
-                       reverse=True)
+
+        if self.sort == 'title':
+            songs = sorted(songs,
+                           key=lambda s: s[0].title,
+                           reverse=False)
+        else:
+            songs = sorted(songs,
+                           key=lambda s: s[1],
+                           reverse=True)
 
         self.init_composer_mappings()
 
@@ -129,6 +136,9 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
 
         return filters
 
+    def get_sort(self):
+        return self.kwargs.get('sort', 'usage')
+
     def get_context_data(self, **kwargs):
         context = super(ServiceCCLIView,
                         self).get_context_data(**kwargs)
@@ -143,7 +153,8 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         report = CCLIReport(
             selected_event=self.get_selected_event(),
             start_date=self.get_start_date(),
-            end_date=self.get_end_date()
+            end_date=self.get_end_date(),
+            sort=self.get_sort(),
         )
 
         context['report'] = report
