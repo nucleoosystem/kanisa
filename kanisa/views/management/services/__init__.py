@@ -257,6 +257,7 @@ class BaseMoveSongView(BaseServiceManagementView, View):
         song.order, target_song.order = target_song.order, song.order
         song.save()
         target_song.save()
+        delattr(self, 'songs_')
 
     def post(self, request, *args, **kwargs):
         self.swap()
