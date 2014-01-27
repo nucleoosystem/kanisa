@@ -5,6 +5,12 @@ Version 0.9.5
 - Remove `kanisa_guess_schedule`, which was created to facilitate the
   move from Kaleo to Kanisa
 - Improve README.md, to note that Kanisa is now in production use
+- Make adding/moving/removing songs in services happen via XHR
+- Fix JavaScript bug which makes deleting multiple things via XHR not
+  work (only seems to happen in deployed version, can't remember what
+  model this is a problem for)
+- Limit Facebook like iframe to 100% somehow (to prevent pointless
+  horizontal scrolling on mobile)
 
 Version 1.0
 ===========
@@ -66,7 +72,6 @@ Features
 
 - Make the sermon archive more sensible - instead of just a giant list
   of all sermons - split it up by year/passage etc
-- Make adding/moving songs in services happen via XHR
 - Add a handler for Google maps in `main_input_widget`
 - Add handlers for links, bold and italics in `main_input_widget`
 - Add support for a simple blog
