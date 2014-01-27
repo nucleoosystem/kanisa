@@ -225,6 +225,18 @@ add_song = AddSongView.as_view()
 class RemoveSongView(BaseServiceManagementView, KanisaDeleteView):
     model = SongInService
 
+    def delete(self, request, *args, **kwargs):
+        if request.is_ajax():
+            self.get_object().delete()
+            return render_to_response(
+                'kanisa/management/services/_song_table.html',
+                {'object': self.service,
+                 'songs': self.service.songinservice_set.all()},
+                context_instance=RequestContext(request)
+            )
+
+        return super(RemoveSongView, self).delete(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('kanisa_manage_services_detail',
                        args=[self.service.pk, ])
@@ -261,6 +273,14 @@ class BaseMoveSongView(BaseServiceManagementView, View):
 
     def post(self, request, *args, **kwargs):
         self.swap()
+
+        if request.is_ajax():
+            return render_to_response(
+                'kanisa/management/services/_song_table.html',
+                {'object': self.service,
+                 'songs': self.songs},
+                context_instance=RequestContext(request)
+            )
 
         return HttpResponseRedirect(reverse('kanisa_manage_services_detail',
                                             args=[self.service.pk, ]))

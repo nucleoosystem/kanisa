@@ -1,5 +1,5 @@
 {% if songs %}
-<table class="table table-striped song-table">
+<table class="table table-striped song-table" id="serviceplan_songtable">
   <thead>
     <tr>
       <th>Title</th>
@@ -18,7 +18,8 @@
         {% if not forloop.first %}
         <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}">
           {% csrf_token %}
-          <button type="submit" class="btn btn-default btn-xs">
+          <span class="status-block"></span>
+          <button type="submit" class="btn btn-default btn-xs change-song">
             <i class="glyphicon glyphicon-arrow-up"></i>
           </button>
         </form>
@@ -28,7 +29,8 @@
         {% if not forloop.last %}
         <form method="post" action="{% url 'kanisa_members_services_move_song_down' object.pk song.pk %}">
           {% csrf_token %}
-          <button type="submit" class="btn btn-default btn-xs">
+          <span class="status-block"></span>
+          <button type="submit" class="btn btn-default btn-xs change-song">
             <i class="glyphicon glyphicon-arrow-down"></i>
           </button>
         </form>
@@ -37,7 +39,8 @@
       <td>
         <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}">
           {% csrf_token %}
-          <button type="submit" class="btn btn-xs btn-danger">
+          <span class="status-block"></span>
+          <button type="submit" class="btn btn-xs btn-danger change-song">
             <i class="glyphicon glyphicon-trash"></i>
           </button>
         </form>

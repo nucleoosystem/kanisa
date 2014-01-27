@@ -82,6 +82,27 @@ function validate_song_choice(evt) {
     }
 }
 
+function attach_service_songs_handlers() {
+    $("#serviceplan_songtable .change-song").click(change_song);
+}
+
+function render_service_table(data) {
+    $("#serviceplan_songtable").html(data);
+    attach_service_songs_handlers();
+}
+
+function change_song(event) {
+    event.preventDefault();
+    $(this).hide();
+    var status_block = $(this).parent().find(".status-block");
+    status_block.html("<i class=\"spinner\"></i>");
+    $.post($(this).parent("form").attr("action"),
+           function(data) {
+               $(this).show();
+               render_service_table(data);
+           });
+}
+
 $(document).ready(function() {
     $(".serviceform #id_band").change(on_band_change);
     $(".serviceform #id_date").change(on_date_change_evt);
@@ -91,4 +112,5 @@ $(document).ready(function() {
         placeholder_text: "Select a song"
     });
     $(".service-songs-edit").submit(validate_song_choice);
+    attach_service_songs_handlers();
 });
