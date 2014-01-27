@@ -2,6 +2,9 @@ Version 0.9.5
 =============
 
 - Link podcast from sermons page
+- Remove `kanisa_guess_schedule`, which was created to facilitate the
+  move from Kaleo to Kanisa
+- Improve README.md, to note that Kanisa is now in production use
 
 Version 1.0
 ===========
@@ -16,6 +19,8 @@ Deployment
 ----------
 
 - Add a way to set up cron jobs
+  - For posting scheduled tweets
+  - For rebuilding the search index
 
 Version 1.1
 ===========
@@ -37,13 +42,13 @@ Deployment
 - Add `unicode_literals`, `print_function`, `absolute_import` and
   `division` imports from `__future__` to all files (plus a way of
   checking they're everywhere)
-- Fix proliferation of `kanisa.*.css` and `kanisa.*.js` (since the
-  filenames are modified with each CSS/JS change, and old files don't
-  get cleaned up)
+- Fix proliferation of `kanisa.*.css` and `kanisa.*.js` in deployed
+  `STATIC_ROOT`s (since the filenames are modified with each CSS/JS
+  change, and old files don't get cleaned up)
 - Investigate
   `django.contrib.staticfiles.storage.CachedStaticFilesStorage` (which
   seems to do most of what our custom deployment stuff does, but
-  better.
+  better)
 
 Mobile
 ------
@@ -55,8 +60,6 @@ Mobile
   time-limited)
 - Make inline images responsive (don't send full versions to mobiles)
   (#47)
-- Check layout on mobile
-- Improve usability of management views on mobile
 
 Features
 --------
@@ -75,8 +78,6 @@ Features
   - Facility for adding Like/Share buttons on individual pages
   - Showing recent posts on the home page
 - Add logs of actions taken in the management console
-- Add a way to permanently remove inactive users (e.g. spam
-  registrations)
 - Add a permission for branding management
 - Add a good way of finding a particular user in the user management
   interface (which doesn't involve paging through all the pages)
@@ -119,11 +120,12 @@ Features
 - Add a navigation checker (#44)
 - Detect references to dates in text (#37)
 - Allow pages to use multiple templates (#20)
+  - Mostly for adding support for two-column pages
 - Add support for rota management (#28)
 - Add support for multiple podcasts (perhaps grouped by service?)
 - Support for multiple schedules in a single RegularEvent (for events
   which are logically connected but have different components) (#15)
 - Add weekly notice sheet feature - ability to add notices far in
   advance
-- Remove `kanisa_from_kaleo` and `kanisa_guess_schedule`, both of
-  which were created to facilitate the move from Kaleo to Kanisa
+- Remove `kanisa_from_kaleo` which was created to facilitate the move
+  from Kaleo to Kanisa
