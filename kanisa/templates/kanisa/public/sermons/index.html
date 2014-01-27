@@ -34,36 +34,7 @@
     <h2>Latest Sermons</h2>
 
     {% if latest_sermons %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Sermon</th>
-          <th>Series</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for sermon in latest_sermons %}
-        <tr>
-          <td>
-            <a href="{{ sermon.url }}">{{ sermon.title }}</a>
-            <span class="extra_details">&ndash; {{ sermon.date|date:"jS F Y"}}</span>
-          </td>
-          <td>
-            {% if sermon.series %}
-            <a href="{% url 'kanisa_public_sermon_series_detail' sermon.series.slug %}">{{ sermon.series }}</a>
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <p class="text-muted">
-      If you're looking for older sermons, you might want to look at
-      our
-      <a href="{% url 'kanisa_public_sermon_archive' %}">archives</a>.
-    </p>
-
+    {% include "kanisa/public/sermons/_latest_sermons.html" %}
     {% else %}
     <p class="alert alert-info">There are no sermons available yet.</p>
     {% endif %}
