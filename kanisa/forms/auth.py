@@ -46,6 +46,20 @@ class KanisaAccountCreationForm(KanisaPrettyForm, UserCreationForm):
         self.helper = self.get_form_helper()
         super(KanisaAccountCreationForm, self).__init__(*args, **kwargs)
 
+    def clean_username(self):
+        # This shouldn't be necessary, but currently (as of Django
+        # 1.6) is. See bit.ly/1dxSdib, and
+        # https://code.djangoproject.com/ticket/19353
+        username = self.cleaned_data['username']
+        try:
+            self._meta.model._default_manager.get(username=username)
+        except self._meta.model.DoesNotExist:
+            return username
+
+        raise forms.ValidationError(
+            self.error_messages['duplicate_username']
+        )
+
     def save(self, commit=True):
         user = super(KanisaAccountCreationForm, self).save(commit)
         user.is_active = False
