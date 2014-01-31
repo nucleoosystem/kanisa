@@ -1,6 +1,10 @@
 <div id="kanisa_alerts">
   {% for message in messages %}
+  {% if message.tags == 'error' %}
+  <div class="alert alert-danger">
+  {% else %}
   <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+  {% endif %}
     <button class="close" data-dismiss="alert">&times;</button>
     {{ message }}
   </div>
