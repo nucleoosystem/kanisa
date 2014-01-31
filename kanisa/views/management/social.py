@@ -1,13 +1,18 @@
+from constance import config
 from datetime import time
+from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic.base import RedirectView
+import tweepy
 from kanisa.forms.social import ScheduledTweetForm
 from kanisa.models import ScheduledTweet
 from kanisa.utils.social import (
     TwitterException,
     post_to_twitter,
-    get_cached_twitter_handle
+    get_cached_twitter_handle,
+    delete_cached_twitter_handle,
+    get_authorisation_url
 )
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
@@ -29,6 +34,13 @@ class SocialBaseView(KanisaAuthorizationMixin):
 
     def get_twitter_context(self):
         context = {}
+
+        if not config.TWITTER_ACCESS_TOKEN or not config.TWITTER_ACCESS_SECRET:
+            try:
+                context['redirect_url'] = get_authorisation_url(self.request)
+            except tweepy.TweepError as e:
+                context['error'] = e
+            return context
 
         try:
             twitter = get_cached_twitter_handle()
@@ -54,6 +66,56 @@ class SocialIndexView(SocialBaseView, KanisaTemplateView):
         context.update(self.get_twitter_context())
         return context
 social_management = SocialIndexView.as_view()
+
+
+class TwitterAuthVerifyView(SocialBaseView, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        if 'denied' in self.request.GET:
+            messages.error(
+                self.request,
+                ("You denied Kanisa permission to post to Twitter, please try "
+                 "again.")
+            )
+            return reverse('kanisa_manage_social_twitter')
+
+        if 'oauth_verifier' in self.request.GET:
+            verifier = self.request.GET['oauth_verifier']
+            auth = tweepy.OAuthHandler(
+                settings.TWITTER_CONSUMER_KEY,
+                settings.TWITTER_CONSUMER_SECRET
+            )
+            token = self.request.session['request_token']
+            del self.request.session['request_token']
+            auth.set_request_token(token[0], token[1])
+
+            try:
+                auth.get_access_token(verifier)
+            except tweepy.TweepError:
+                messages.error(
+                    self.request,
+                    "Failed to get an authentication token from Twitter."
+                )
+                return reverse('kanisa_manage_social_twitter')
+
+            config.TWITTER_ACCESS_TOKEN = auth.access_token.key
+            config.TWITTER_ACCESS_SECRET = auth.access_token.secret
+
+            messages.success(
+                self.request,
+                "Kanisa can now post to Twitter for you."
+            )
+            return reverse('kanisa_manage_social_twitter')
+
+        messages.error(
+            self.request,
+            ("Error authorising Kanisa - an unexpected response was received "
+             "from Twitter.")
+        )
+
+        return reverse('kanisa_manage_social_twitter')
+twitter_auth_verify = TwitterAuthVerifyView.as_view()
 
 
 class SocialTwitterIndexView(SocialBaseView, KanisaListView):

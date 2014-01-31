@@ -19,6 +19,7 @@ setup(
         "Pillow==1.7.8",
         "django-autoslug==1.7.1",
         "django-compressor==1.1.2",
+        "django-constance==0.6",
         "django-crispy-forms==1.4.0",
         "django-haystack==1.2.7",
         "django-mptt==0.6.0",

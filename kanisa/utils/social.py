@@ -1,6 +1,8 @@
-import logging
+from constance import config
 from django.conf import settings
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
+import logging
 import tweepy
 
 
@@ -17,9 +19,7 @@ class TwitterException(Exception):
 
 def get_tweepy_handle():
     required_attrs = ['TWITTER_CONSUMER_KEY',
-                      'TWITTER_CONSUMER_SECRET',
-                      'TWITTER_ACCESS_TOKEN',
-                      'TWITTER_ACCESS_TOKEN_SECRET', ]
+                      'TWITTER_CONSUMER_SECRET']
 
     for attr in required_attrs:
         if not hasattr(settings, attr):
@@ -29,10 +29,16 @@ def get_tweepy_handle():
                    'the following settings: %s.') % required_bits
             raise TwitterException(msg)
 
+        if not config.TWITTER_ACCESS_TOKEN or not config.TWITTER_ACCESS_SECRET:
+            msg = ('Cannot connect to Twitter. '
+                   'You need to authorise Kanisa to post on your behalf.')
+            raise TwitterException(msg)
+
     auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY,
                                settings.TWITTER_CONSUMER_SECRET)
-    auth.set_access_token(settings.TWITTER_ACCESS_TOKEN,
-                          settings.TWITTER_ACCESS_TOKEN_SECRET)
+
+    auth.set_access_token(config.TWITTER_ACCESS_TOKEN,
+                          config.TWITTER_ACCESS_SECRET)
     api = tweepy.API(auth)
 
     try:
@@ -58,7 +64,27 @@ def get_cached_twitter_handle():
     return twitter
 
 
+def delete_cached_twitter_handle():
+    cache.delete('twitter_handle')
+
+
 def post_to_twitter(status):
     twitter = get_tweepy_handle()
     twitter.update_status(status)
-    cache.delete('twitter_handle')
+    delete_cached_twitter_handle()
+
+
+def get_authorisation_url(request):
+    callback_url = reverse('kanisa_manage_social_twitter_auth_verify')
+    callback_url = request.build_absolute_uri(callback_url)
+
+    auth = tweepy.OAuthHandler(
+        settings.TWITTER_CONSUMER_KEY,
+        settings.TWITTER_CONSUMER_SECRET,
+        callback_url
+    )
+
+    url = auth.get_authorization_url()
+    request.session['request_token'] = (auth.request_token.key,
+                                        auth.request_token.secret)
+    return url
