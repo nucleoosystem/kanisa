@@ -118,6 +118,17 @@ class TwitterAuthVerifyView(SocialBaseView, RedirectView):
 twitter_auth_verify = TwitterAuthVerifyView.as_view()
 
 
+class TwitterDeauthoriseView(SocialBaseView, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        config.TWITTER_ACCESS_TOKEN = ''
+        config.TWITTER_ACCESS_SECRET = ''
+        delete_cached_twitter_handle()
+        return reverse('kanisa_manage_social_twitter')
+twitter_deauth = TwitterDeauthoriseView.as_view()
+
+
 class SocialTwitterIndexView(SocialBaseView, KanisaListView):
     kanisa_title = 'Manage Twitter'
     queryset = ScheduledTweet.future_objects.all
