@@ -24,6 +24,7 @@ setup(
         "django-haystack==1.2.7",
         "django-mptt==0.6.0",
         "django-password-reset==0.5.1",
+        "django-picklefield==0.3.0",
         "django-recurrence==1.0.1",
         "lxml==3.2.4",
         "markdown==2.3.1",
