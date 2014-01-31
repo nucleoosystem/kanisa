@@ -1,6 +1,7 @@
 Version 0.9.5
 =============
 
+- Why does bulk editing events move them to the morning?
 - Fix JavaScript bug which makes deleting multiple things via XHR not
   work (only seems to happen in deployed version, can't remember what
   model this is a problem for)
