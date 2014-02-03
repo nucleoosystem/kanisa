@@ -73,8 +73,11 @@ class BannerPublicViewTest(TestCase):
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 302)
         items = resp.items()
-        self.assertEqual(items[-1],
-                         ('Location', 'http://www.google.com'))
+
+        self.assertEqual(
+            [(key, value) for (key, value) in items if key == 'Location'],
+            [('Location', 'http://www.google.com')]
+        )
 
         banner = Banner.objects.get(pk=banner.pk)
         self.assertEqual(banner.visits, 1)
