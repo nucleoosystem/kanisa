@@ -43,8 +43,10 @@ class SermonSeriesDetailView(DetailView):
 
 
 class SermonDetailView(DetailView):
-    queryset = Sermon.preached_objects.all()
     template_name = 'kanisa/public/sermons/sermon.html'
+
+    def get_queryset(self):
+        return Sermon.preached_objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(SermonDetailView, self).get_context_data(**kwargs)
