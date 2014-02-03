@@ -1,7 +1,6 @@
 Version 0.9.5
 =============
 
-- Why does bulk editing events move them to the morning?
 - Fix JavaScript bug which makes deleting multiple things via XHR not
   work (only seems to happen in deployed version, can't remember what
   model this is a problem for)
@@ -94,6 +93,8 @@ Bug fixes
 - Fix bug in rendering of event table when scheduling multiple events
   (#13)
 - Fix weird layout of user editing page
+- Fix bulk-editing events handling invalid dates (currently we don't
+  save the date if it's invalid, but we don't notify the user)
 
 Version 1.2
 ===========

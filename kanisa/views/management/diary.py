@@ -1,4 +1,5 @@
 from datetime import date, datetime, time, timedelta
+from time import strptime
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -154,7 +155,10 @@ class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
     def save_event(self, pk, intro, start_time):
         event = ScheduledEvent.objects.get(pk=pk)
         event.intro = intro
-        event.start_time = start_time
+
+        if start_time:
+            event.start_time = start_time
+
         event.save()
 
     def get_event_pks(self, items):
@@ -168,9 +172,24 @@ class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
     def post(self, request, *args, **kwargs):
         pks = self.get_event_pks(self.request.POST.items())
         for pk in pks:
-            self.save_event(pk,
-                            self.request.POST['intro_%d' % pk],
-                            self.request.POST['start_time_%d' % pk])
+            try:
+                event_time = strptime(
+                    self.request.POST['start_time_%d' % pk],
+                    "%I:%M %p"
+                )
+                event_time = time(event_time.tm_hour,
+                                  event_time.tm_min)
+            except ValueError:
+                # TODO - this is a horrible hack that needs stripping
+                # out, we should really re-display the form if this
+                # happens.
+                event_time = None
+
+            self.save_event(
+                pk,
+                self.request.POST['intro_%d' % pk],
+                event_time
+            )
 
         messages.success(request, "Events saved.")
 
