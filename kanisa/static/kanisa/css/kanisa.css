@@ -180,6 +180,10 @@ textarea.kanisamaininputwidget {
     text-decoration: none;
 }
 
+.navbar-inverse .navbar-nav > li > a {
+    color: #eee;
+}
+
 #logo {
     position: relative;
     margin-bottom: 4px;
