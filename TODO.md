@@ -62,7 +62,7 @@ Mobile
   diary if no content is available (call-outs can still be
   time-limited)
 - Make inline images responsive (don't send full versions to mobiles)
-  (#47)
+  (#47) - see https://github.com/scottjehl/picturefill
 
 Features
 --------
