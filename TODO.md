@@ -6,6 +6,8 @@ Version 0.9.5
   model this is a problem for)
 - Limit Facebook like iframe to 100% somehow (to prevent pointless
   horizontal scrolling on mobile)
+- Make duration actually optional for single-day events (currently the
+  help text says it is, but it's not)
 
 Version 1.0
 ===========
