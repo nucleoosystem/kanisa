@@ -44,8 +44,9 @@
       <div class="col-md-8">
       {% else %}
       <div class="col-md-12">
+        {% if object.contact %}
         {{ object.contact }}
-doh
+        {% endif %}
       {% endif %}
         <p class="lead">
           {% if object.date == object.end_date %}
