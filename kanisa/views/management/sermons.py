@@ -143,7 +143,7 @@ class SermonDeleteView(SermonBaseView,
             return reverse('kanisa_manage_sermons_series_detail',
                            args=[object.series.pk, ])
 
-        return reverse('kanisa_manager_sermons')
+        return reverse('kanisa_manage_sermons')
 
     def get_cancel_url(self):
         return self.get_back_url()
