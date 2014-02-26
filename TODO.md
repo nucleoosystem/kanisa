@@ -8,6 +8,7 @@ Version 0.9.5
   horizontal scrolling on mobile)
 - Make duration actually optional for single-day events (currently the
   help text says it is, but it's not)
+- Add a warning for sermons being saved without an MP3 file
 
 Version 1.0
 ===========
@@ -17,6 +18,7 @@ Features
 
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
+- Add handlers for links, bold and italics in `main_input_widget`
 
 Deployment
 ----------
@@ -70,7 +72,6 @@ Features
 - Make the sermon archive more sensible - instead of just a giant list
   of all sermons - split it up by year/passage etc
 - Add a handler for Google maps in `main_input_widget`
-- Add handlers for links, bold and italics in `main_input_widget`
 - Add support for a simple blog
 - Add support for multiple Bible passages in the sermon/sermon series
   models
