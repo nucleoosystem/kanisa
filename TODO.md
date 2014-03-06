@@ -9,6 +9,8 @@ Version 0.9.5
 - Make duration actually optional for single-day events (currently the
   help text says it is, but it's not)
 - Add a warning for sermons being saved without an MP3 file
+- Ensure registration emails explain what to do next (i.e. include
+  links to approve/reject prospective members).
 
 Version 1.0
 ===========
