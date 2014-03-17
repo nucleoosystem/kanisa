@@ -97,7 +97,7 @@ function attach_service_songs_handlers() {
 }
 
 function render_service_table(data) {
-    $("#serviceplan_songtable").html(data);
+    $("#serviceplan_songinfo").html(data);
     attach_service_songs_handlers();
 }
 

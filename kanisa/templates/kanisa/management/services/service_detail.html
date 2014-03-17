@@ -7,9 +7,11 @@
   </div>
 
   <div class="col-md-8">
-    {% with songs=object.songinservice_set.all %}
-    {% include 'kanisa/management/services/_song_table.html' %}
-    {% endwith %}
+    <div id="serviceplan_songinfo">
+      {% with songs=object.songinservice_set.all %}
+      {% include 'kanisa/management/services/_song_table.html' %}
+      {% endwith %}
+    </div>
 
     <hr />
 
