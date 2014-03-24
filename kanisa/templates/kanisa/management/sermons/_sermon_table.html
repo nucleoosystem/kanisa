@@ -22,7 +22,7 @@
         </a>
       </td>
       <td>
-        {{ sermon.date|date:"jS F Y"}}
+        <a href="{{ sermon.url }}" title="View this sermon on the site">{{ sermon.date|date:"jS F Y"}}</a>
       </td>
       <td>
         {{ sermon.passage }}
