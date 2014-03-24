@@ -1,4 +1,5 @@
 from django.forms.util import ErrorList
+from django import forms
 
 from kanisa import conf
 from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
@@ -29,6 +30,11 @@ class SermonSpeakerForm(KanisaBaseModelForm):
 
 class SermonForm(KanisaBaseModelForm):
     date = BootstrapDateField()
+    no_mp3 = forms.BooleanField(
+        initial=False,
+        required=False,
+        widget=forms.HiddenInput
+    )
 
     class Meta:
         model = Sermon
@@ -84,5 +90,14 @@ class SermonForm(KanisaBaseModelForm):
                 del cleaned_data["mp3"]
             else:
                 self.apply_id3(cleaned_data)
+        else:
+            show_mp3_warning = not self.cleaned_data.get("no_mp3", False)
+            if not self.instance.pk and show_mp3_warning:
+                # We've got no MP3 file, and we've not seen this error
+                # before - let's check that was intentional.
+                self.data["no_mp3"] = True
+                raise forms.ValidationError(
+                    'No MP3 was uploaded - if that was intentional, please '
+                    'click \'Save Sermon\' again.')
 
         return cleaned_data
