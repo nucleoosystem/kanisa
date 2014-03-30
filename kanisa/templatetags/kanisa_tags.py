@@ -25,7 +25,7 @@ def __get_help_text(perm_text):
 
 @register.assignment_tag(takes_context=True)
 def kanisa_is_permissioned_user(context):
-    if not 'user' in context:
+    if 'user' not in context:
         return False
 
     return has_any_kanisa_permission(context['user'])

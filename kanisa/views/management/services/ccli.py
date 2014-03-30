@@ -60,7 +60,7 @@ class CCLIReport(object):
         composer_objects = Song.composers.through.objects.all()
 
         for item in composer_objects:
-            if not item.song_id in self.composer_lists:
+            if item.song_id not in self.composer_lists:
                 self.composer_lists[item.song_id] = []
             self.composer_lists[item.song_id].append(
                 composers[item.composer_id]
