@@ -119,7 +119,8 @@ $(document).ready(function() {
     $(".serviceform #div_id_event").hide();
 
     $(".service-songs-edit #id_song").chosen({
-        placeholder_text: "Select a song"
+        placeholder_text: "Select a song",
+        width: "100%"
     });
     $(".service-songs-edit").submit(add_song_to_plan);
     attach_service_songs_handlers();

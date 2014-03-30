@@ -16,7 +16,6 @@ Version 0.9.5
 - Make the top 5 songs display based on a rolling count (e.g. last
   year only)
 - Cloning an event doesn't copy the event contact or the event intro
-- Stop the service plan song selector overflowing on mobile
 
 Version 1.0
 ===========
