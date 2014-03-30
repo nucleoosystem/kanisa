@@ -1,7 +1,7 @@
 <form class="service-songs-edit" method="post" action="{% url 'kanisa_members_services_add_song' object.pk %}">
   {% csrf_token %}
   <select name="song" id="id_song">
-    <option value=""></option>
+    <option value="">Select a Song</option>
     {% for song in all_songs %}
     <option value="{{ song.pk }}">{{ song.title }}</option>
     {% endfor %}
