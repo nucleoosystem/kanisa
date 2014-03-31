@@ -1,6 +1,11 @@
 from datetime import date, time
 from django.core.urlresolvers import reverse
-from kanisa.models import RegularEvent, ScheduledEvent
+from kanisa.models import (
+    EventContact,
+    RegularEvent,
+    ScheduledEvent,
+    ScheduledEventSeries
+)
 from kanisa.tests.utils import KanisaViewTestCase
 import factory
 
@@ -172,6 +177,46 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual([m.message for m in resp.context['messages']],
                          [('No events to schedule.'), ])
         self.assertEqual(len(ScheduledEvent.objects.all()), 3)
+
+    def test_diary_event_cloning(self):
+        someone = EventContact.objects.create(
+            name='Bugs Bunny',
+            email='bugs@example.com'
+        )
+        series = ScheduledEventSeries.objects.create(
+            name='My Series'
+        )
+        original = ScheduledEvent.objects.create(
+            title='Foobar',
+            date=date(2014, 03, 31),
+            start_time=time(9, 0),
+            duration=60,
+            contact=someone,
+            intro='Test event',
+            details='All my details',
+            series=series
+        )
+
+        self.client.login(username='fred', password='secret')
+        url = reverse('kanisa_manage_diary_clone_scheduled_event')
+        resp = self.client.get(url, {'event': original.pk})
+        self.assertEqual(resp.status_code, 200)
+
+        self.assertTrue('form' in resp.context)
+
+        # Make sure all the data is copied across
+        form_data = resp.context['form'].initial
+        self.assertEqual(form_data.get('title', None), 'Foobar')
+        self.assertEqual(form_data.get('start_time', None), time(9, 0))
+        self.assertEqual(form_data.get('duration', None), 60)
+        self.assertEqual(form_data.get('contact', None), None)
+        self.assertEqual(form_data.get('details', None), 'All my details')
+        self.assertEqual(form_data.get('intro', None), None)
+        self.assertEqual(form_data.get('series', None), None)
+
+        # Cloned events should have no pre-filled date (that's the
+        # point of them).
+        self.assertEqual(form_data.get('date', None), None)
 
 
 class DiaryPublicViewTest(KanisaViewTestCase):
