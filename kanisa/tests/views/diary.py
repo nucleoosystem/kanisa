@@ -209,10 +209,10 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(form_data.get('title', None), 'Foobar')
         self.assertEqual(form_data.get('start_time', None), time(9, 0))
         self.assertEqual(form_data.get('duration', None), 60)
-        self.assertEqual(form_data.get('contact', None), None)
+        self.assertEqual(form_data.get('contact', None), someone)
         self.assertEqual(form_data.get('details', None), 'All my details')
-        self.assertEqual(form_data.get('intro', None), None)
-        self.assertEqual(form_data.get('series', None), None)
+        self.assertEqual(form_data.get('intro', None), 'Test event')
+        self.assertEqual(form_data.get('series', None), series)
 
         # Cloned events should have no pre-filled date (that's the
         # point of them).
