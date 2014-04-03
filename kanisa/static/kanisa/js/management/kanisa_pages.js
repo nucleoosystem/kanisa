@@ -2,7 +2,7 @@ function update_page_list() {
     $.get(pages_list_url,
           function(data) {
               $("#page_details_container").html(data.page_table);
-              bind_delete_handlers();
+              bind_page_delete_handlers();
 
               var parent = $("#id_parent");
               var previous_val = parent.val();
@@ -54,11 +54,11 @@ function quick_page_delete(event) {
     }
 }
 
-function bind_delete_handlers() {
+function bind_page_delete_handlers() {
     $("a.page_delete").click(quick_page_delete);
 }
 
 $(document).ready(function() {
     $("#page_quick_create").submit(quick_page_create);
-    bind_delete_handlers();
+    bind_page_delete_handlers();
 });
