@@ -433,6 +433,7 @@ p.error-page-btn {
 
 .facebook_like_widget {
     margin: 1em 0;
+    overflow: hidden;
 }
 
 #xs-management-menu {

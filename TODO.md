@@ -1,8 +1,6 @@
 Version 0.9.5
 =============
 
-- Limit Facebook like iframe to 100% somehow (to prevent pointless
-  horizontal scrolling on mobile)
 - Ensure registration emails explain what to do next (i.e. include
   links to approve/reject prospective members)
 - Add a way of figuring out when a given song was last sung
