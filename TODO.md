@@ -1,9 +1,6 @@
 Version 0.9.5
 =============
 
-- Fix JavaScript bug which makes deleting multiple things via XHR not
-  work (only seems to happen in deployed version, can't remember what
-  model this is a problem for)
 - Limit Facebook like iframe to 100% somehow (to prevent pointless
   horizontal scrolling on mobile)
 - Make duration actually optional for single-day events (currently the

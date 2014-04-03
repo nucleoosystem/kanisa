@@ -33,6 +33,7 @@ function update_navigation_list() {
           function(data) {
               $("#navigation_details_container").html(data);
               bind_navigation_move_handlers();
+              bind_navigation_delete_handlers();
           });
 }
 
