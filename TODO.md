@@ -1,6 +1,7 @@
 Version 0.9.5
 =============
 
+- Add support for a simple blog
 - Ensure registration emails explain what to do next (i.e. include
   links to approve/reject prospective members)
 - Add a way of figuring out when a given song was last sung
@@ -71,7 +72,6 @@ Features
 - Make the sermon archive more sensible - instead of just a giant list
   of all sermons - split it up by year/passage etc
 - Add a handler for Google maps in `main_input_widget`
-- Add support for a simple blog
 - Add support for multiple Bible passages in the sermon/sermon series
   models
 - Allow customisable home page templates (#56)
