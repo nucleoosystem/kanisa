@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import date, time, datetime
 from django.test import TestCase
 from kanisa.models import diary
 from kanisa.models import (
@@ -64,8 +64,10 @@ class DiaryTest(TestCase):
 
     def test_get_next_with_event_scheduled(self):
         tuesdays = "RRULE:FREQ=WEEKLY;BYDAY=TU"
-        event = RegularEventFactory.create(title='Breakfast Club',
-                                           pattern=tuesdays)
+        event = RegularEventFactory.create(
+            title='Breakfast Club',
+            pattern=tuesdays
+        )
 
         # I should probably mock out datetime.now() here, so I don't
         # have to use such a far-future date.
@@ -78,6 +80,36 @@ class DiaryTest(TestCase):
         event = RegularEventFactory.create(title='Breakfast Club')
         next = event.get_next()
         self.assertEqual(next, None)
+
+    def test_get_next_with_event_earlier_today(self):
+        regular_event = RegularEventFactory.create(title='Breakfast Club')
+        ScheduledEvent.objects.create(
+            event=regular_event,
+            title=regular_event.title,
+            date=date.today(),
+            start_time=time(8, 59),
+            intro='Something interesting'
+        )
+
+        next = regular_event.get_next(
+            datetime.combine(date.today(), time(9, 0))
+        )
+        self.assertEqual(next, None)
+
+    def test_get_next_with_event_later_today(self):
+        regular_event = RegularEventFactory.create(title='Breakfast Club')
+        event = ScheduledEvent.objects.create(
+            event=regular_event,
+            title=regular_event.title,
+            date=date.today(),
+            start_time=time(9, 1),
+            intro='Something interesting'
+        )
+
+        next = regular_event.get_next(
+            datetime.combine(date.today(), time(9, 0))
+        )
+        self.assertEqual(next, event)
 
 
 class DiaryGetWeekBoundsTest(TestCase):

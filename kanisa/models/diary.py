@@ -1,5 +1,5 @@
 from autoslug import AutoSlugField
-from datetime import datetime, timedelta, time
+from datetime import date, datetime, timedelta, time
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
@@ -155,9 +155,19 @@ class RegularEvent(models.Model):
 
         self.schedule(date, date + timedelta(days=1))
 
-    def get_next(self):
-        events = ScheduledEvent.objects.filter(event=self,
-                                               date__gte=datetime.now())[:1]
+    def get_next(self, now=None):
+        if not now:
+            now = datetime.now()
+
+        events = ScheduledEvent.objects.filter(
+            event=self,
+            date__gte=now,
+        )
+        events = events.exclude(
+            date=date.today(),
+            start_time__lt=now
+        )
+        events = events[:1]
 
         if not events:
             return None
