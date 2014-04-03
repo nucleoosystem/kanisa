@@ -78,7 +78,6 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
         if cleaned_data['date']:
             sd = cleaned_data['date']
             ed = cleaned_data['end_date']
-            duration = cleaned_data['duration']
             multiday = cleaned_data['is_multi_day']
 
             if multiday:
@@ -93,12 +92,6 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
                                         'starts.'])
                     self._errors["end_date"] = errors
                     del cleaned_data["end_date"]
-
-            if not multiday and not duration:
-                errors = ErrorList(['Single-day events must have a '
-                                    'duration.'])
-                self._errors["duration"] = errors
-                del cleaned_data["duration"]
 
         return cleaned_data
 
