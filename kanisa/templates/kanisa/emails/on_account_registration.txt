@@ -1,5 +1,7 @@
 {{ user.get_display_name }} registered for a web account at {{ KANISA_CHURCH_NAME }}.
 
-Please activate their account at your convenience.
+Please activate their account at your convenience at:
+
+http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_manage_users_activate" user.pk %}
 
 The {{ KANISA_CHURCH_NAME }} web team

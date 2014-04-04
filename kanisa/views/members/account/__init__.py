@@ -4,6 +4,7 @@ from django.contrib.auth import (
     login,
     REDIRECT_FIELD_NAME
 )
+from django.contrib.sites.models import RequestSite
 from django.core.cache import cache
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, Http404
@@ -88,7 +89,8 @@ class KanisaRegistrationView(KanisaRegistrationMixin, CreateView):
 
         send_bulk_mail(users_with_perm('manage_users'),
                        'on_account_registration',
-                       {'user': form.instance})
+                       {'user': form.instance,
+                        'site': RequestSite(self.request), })
 
         return rval
 

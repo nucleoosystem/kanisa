@@ -1,6 +1,6 @@
 <p>{{ user.get_display_name }} registered for a web account at
 {{ KANISA_CHURCH_NAME }}.</p>
 
-<p>Please activate their account at your convenience.</p>
+<p>Please <a href="http{% if secure %}s{% endif %}://{{ site.domain }}{% url "kanisa_manage_users_activate" user.pk %}">activate their account</a> at your convenience.</p>
 
 <p><em>The {{ KANISA_CHURCH_NAME }} web team</em></p>

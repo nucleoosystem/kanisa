@@ -2,8 +2,6 @@ Version 0.9.5
 =============
 
 - Add support for a simple blog
-- Ensure registration emails explain what to do next (i.e. include
-  links to approve/reject prospective members)
 - Add a way of figuring out when a given song was last sung
 - Add a way of seeing popular recent songs from the service X, not
   sung recently in service Y
