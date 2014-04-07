@@ -20,7 +20,11 @@
   <tbody>
     {% for song,composers,usage in report.songs %}
     <tr>
-      <td>{{ song.title }}</td>
+      <td>
+        <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
+          {{ song.title }}
+        </a>
+      </td>
       <td>{{ composers|join:"; " }}</td>
       <td style="text-align: right">{{ usage }}</td>
     </tr>
