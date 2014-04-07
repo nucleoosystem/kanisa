@@ -10,4 +10,6 @@ urlpatterns = patterns(
         'kanisa_members_services_index_all'),
     url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
         'kanisa_members_services_detail'),
+    url(r'^songs/$', views.song_list, {},
+        'kanisa_members_services_songs'),
 )

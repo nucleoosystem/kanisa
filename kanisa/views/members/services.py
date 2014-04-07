@@ -75,3 +75,14 @@ class ServiceDetailView(ServiceBaseView, KanisaDetailView):
                                       formatted_date)
         return title
 service_detail = ServiceDetailView.as_view()
+
+
+class SongListView(ServiceBaseView, KanisaListView):
+    model = Song
+    template_name = 'kanisa/members/services/song_list.html'
+    kanisa_title = 'Song Finder'
+    paginate_by = 20
+
+    def get_queryset(self):
+        return Song.objects.all().prefetch_related('composers')
+song_list = SongListView.as_view()

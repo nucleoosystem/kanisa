@@ -1,0 +1,24 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% block content %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Composers</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in song_list %}
+    <tr>
+      <td>{{ song.title }}</td>
+      <td>{{ song.composer_list|join:"; " }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% include "kanisa/_simple_pagination.html" %}
+
+{% endblock %}
