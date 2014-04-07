@@ -12,7 +12,11 @@
   <tbody>
     {% for song in song_list %}
     <tr>
-      <td>{{ song.title }}</td>
+      <td>
+        <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
+          {{ song.title }}
+        </a>
+      </td>
       <td>{{ song.composer_list|join:"; " }}</td>
     </tr>
     {% endfor %}

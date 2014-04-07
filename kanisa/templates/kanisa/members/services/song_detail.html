@@ -1,0 +1,44 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% block content %}
+
+<p class="lead">
+  {% if song.composer_list %}
+  <strong>{{ song }}</strong> is by
+  <strong>{{ song.composer_list|join:"; " }}</strong>.
+  It has been sung in
+  {% else %}
+  <strong>{{ song }}</strong> has been sung in
+  {% endif %}
+  <strong>{{ services|length }}</strong> service{{ services|pluralize }}.
+</p>
+
+{% if services %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Service</th>
+      <th>Band Leader</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for service in services %}
+    <tr>
+      <td>
+        {{ service.service.event_date|date:"jS F Y" }}
+      </td>
+      <td>
+        {{ service.service.event }}
+      </td>
+      <td>
+        {{ service.service.band_leader.get_full_name }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}
