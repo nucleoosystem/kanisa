@@ -52,7 +52,8 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
         for service in context['service_list']:
             service.user_is_involved = service.pk in all_service_pks
 
-        context['active_in_some_services'] = len(all_service_pks) != 0
+        active = [s.user_is_involved for s in context['service_list']]
+        context['active_in_some_services'] = any(active)
 
         return context
 index = ServiceIndexView.as_view()
