@@ -1,8 +1,14 @@
 Version 0.9.5
 =============
 
+- Add "Song Finder"
+  - Include when a song was last sung
+  - Include lookup by composer
+  - Add a song details page which includes
+    - When the song was last sung, and in which services
+    - We'll extend this later to include adding other things
+      (e.g. lyrics)
 - Add support for a simple blog
-- Add a way of figuring out when a given song was last sung
 - Add a way of seeing popular recent songs from the service X, not
   sung recently in service Y
 - Make the top 5 songs display based on a rolling count (e.g. last
