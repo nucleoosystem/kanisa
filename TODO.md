@@ -5,7 +5,6 @@ Version 0.9.5
   - Link song finder up from the service planning pages
   - Add a way of searching for an individual song
   - Include lookup by composer
-  - Link song tables for service plans to the song details page
   - Add a way of seeing popular recent songs from the service X, not
     sung recently in service Y
 - Add support for a simple blog

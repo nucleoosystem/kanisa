@@ -4,7 +4,9 @@
     {% for song in songs %}
       {% with song.song.composer_list as composers %}
       <li>
-        {{ song.song.title }}
+        <a href="{% url 'kanisa_members_services_song_detail' song.song.pk %}" title="View song information">
+          {{ song.song.title }}
+        </a>
         {% if composers %}
         &mdash; <em>{{ composers|join:", " }}</em>
         {% endif %}
