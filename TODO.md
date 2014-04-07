@@ -2,7 +2,6 @@ Version 0.9.5
 =============
 
 - Add "Song Finder"
-  - Link song finder up from the service planning pages
   - Add a way of searching for an individual song
   - Include lookup by composer
   - Add a way of seeing popular recent songs from the service X, not
