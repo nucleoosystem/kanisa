@@ -2,7 +2,7 @@ Version 0.9.5
 =============
 
 - Add "Song Finder"
-  - Add a way of searching for an individual song
+  - Add a way of searching for an individual song/composer
   - Include lookup by composer
   - Add a way of seeing popular recent songs from the service X, not
     sung recently in service Y
