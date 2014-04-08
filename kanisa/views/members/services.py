@@ -90,16 +90,18 @@ class SongListView(ServiceBaseView, KanisaListView):
 song_list = SongListView.as_view()
 
 
-class SongDetailView(ServiceBaseView, KanisaDetailView):
-    model = Song
-    template_name = 'kanisa/members/services/song_detail.html'
-    pk_url_kwarg = 'song_pk'
-
+class SongFinderBaseView(ServiceBaseView):
     def get_kanisa_intermediate_crumbs(self):
         return [
             {'url': reverse('kanisa_members_services_songs'),
              'title': 'Song Finder'},
         ]
+
+
+class SongDetailView(SongFinderBaseView, KanisaDetailView):
+    model = Song
+    template_name = 'kanisa/members/services/song_detail.html'
+    pk_url_kwarg = 'song_pk'
 
     def get_context_data(self, **kwargs):
         context = super(SongDetailView,
@@ -116,16 +118,10 @@ class SongDetailView(ServiceBaseView, KanisaDetailView):
 song_detail = SongDetailView.as_view()
 
 
-class ComposerDetailView(ServiceBaseView, KanisaDetailView):
+class ComposerDetailView(SongFinderBaseView, KanisaDetailView):
     model = Composer
     template_name = 'kanisa/members/services/composer_detail.html'
     pk_url_kwarg = 'composer_pk'
-
-    def get_kanisa_intermediate_crumbs(self):
-        return [
-            {'url': reverse('kanisa_members_services_songs'),
-             'title': 'Song Finder'},
-        ]
 
     def get_context_data(self, **kwargs):
         context = super(ComposerDetailView,
