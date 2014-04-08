@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.utils import formats
 from kanisa.models import (
+    Composer,
     Service,
     Song,
 )
@@ -113,3 +114,27 @@ class SongDetailView(ServiceBaseView, KanisaDetailView):
 
         return context
 song_detail = SongDetailView.as_view()
+
+
+class ComposerDetailView(ServiceBaseView, KanisaDetailView):
+    model = Composer
+    template_name = 'kanisa/members/services/composer_detail.html'
+    pk_url_kwarg = 'composer_pk'
+
+    def get_kanisa_intermediate_crumbs(self):
+        return [
+            {'url': reverse('kanisa_members_services_songs'),
+             'title': 'Song Finder'},
+        ]
+
+    def get_context_data(self, **kwargs):
+        context = super(ComposerDetailView,
+                        self).get_context_data(**kwargs)
+
+        context['song_list'] = self.get_songs()
+        return context
+
+    def get_songs(self):
+        qs = self.object.song_set.prefetch_related('composers')
+        return qs.all()
+composer_detail = ComposerDetailView.as_view()

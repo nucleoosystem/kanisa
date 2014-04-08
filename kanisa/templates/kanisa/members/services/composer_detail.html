@@ -1,0 +1,13 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% block content %}
+
+<p class="lead">
+  <strong>{{ composer }}</strong> has written
+  <strong>{{ song_list|length }} song{{ song_list|length|pluralize }}
+  </strong> that we have on record.
+</p>
+
+{% include "kanisa/members/services/_song_detail_table.html" %}
+
+{% endblock %}

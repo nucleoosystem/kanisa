@@ -2,27 +2,7 @@
 
 {% block content %}
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Composers</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for song in song_list %}
-    <tr>
-      <td>
-        <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
-          {{ song.title }}
-        </a>
-      </td>
-      <td>{{ song.composer_list|join:"; " }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
+{% include "kanisa/members/services/_song_detail_table.html" %}
 {% include "kanisa/_simple_pagination.html" %}
 
 {% endblock %}

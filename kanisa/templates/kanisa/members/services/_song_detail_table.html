@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Composers</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for song in song_list %}
+    <tr>
+      <td>
+        <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
+          {{ song.title }}
+        </a>
+      </td>
+      <td>
+        {% for composer in song.composer_list %}
+          <a href="{% url 'kanisa_members_services_composer_detail' composer.pk %}" title="View other songs by {{ composer }}">{{ composer }}</a>{% if not forloop.last %}; {% endif %}
+        {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

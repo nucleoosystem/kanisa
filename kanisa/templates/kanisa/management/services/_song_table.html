@@ -17,7 +17,11 @@
           {{ song.song.title }}
         </a>
       </td>
-      <td>{{ song.song.composer_list|join:", " }}</td>
+      <td>
+        {% for composer in song.song.composer_list %}
+          <a href="{% url 'kanisa_members_services_composer_detail' composer.pk %}" title="View other songs by {{ composer }}">{{ composer }}</a>{% if not forloop.last %}; {% endif %}
+        {% endfor %}
+      </td>
       <td>
         {% if not forloop.first %}
         <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}">
