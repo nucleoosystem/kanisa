@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import Count, Max
+from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -19,6 +19,7 @@ from kanisa.models import (
     Song,
     SongInService,
 )
+from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
     KanisaCreateView,
@@ -57,12 +58,7 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
         context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
-
-        songs = Song.objects.all()
-        songs = songs.annotate(usage=Count('songinservice'))
-        songs = songs.order_by('-usage')
-
-        context['top_five_songs'] = songs[:5]
+        context['top_five_songs'] = most_popular_songs()[:5]
         context['bands'] = Band.objects.all()
 
         return context

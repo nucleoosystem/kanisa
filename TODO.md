@@ -7,8 +7,6 @@ Version 0.9.5
   - Add a way of seeing popular recent songs from the service X, not
     sung recently in service Y
 - Add support for a simple blog
-- Make the top 5 songs display based on a rolling count (e.g. last
-  year only)
 
 Version 1.0
 ===========

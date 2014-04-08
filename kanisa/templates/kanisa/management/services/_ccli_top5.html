@@ -5,7 +5,7 @@
 
 {% if top_five_songs %}
 <hr />
-<h4>Top 5 Songs</h4>
+<h4>Top 5 Songs*</h4>
 <ol>
     {% for song in top_five_songs %}
     <li>
@@ -14,4 +14,5 @@
     </li>
     {% endfor %}
 </ol>
+<p class="text-muted">* Song usage taken from the past year.</p>
 {% endif %}
