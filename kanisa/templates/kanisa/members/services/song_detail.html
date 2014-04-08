@@ -5,7 +5,9 @@
 <p class="lead">
   {% if song.composer_list %}
   <strong>{{ song }}</strong> is by
-  <strong>{{ song.composer_list|join:"; " }}</strong>.
+  <strong>
+    {% for composer in song.composer_list %}
+    <a href="{% url 'kanisa_members_services_composer_detail' composer.pk %}" title="View other songs by {{ composer }}">{{ composer }}</a>{% if not forloop.last %}; {% endif %}{% endfor %}</strong>.
   It has been sung in
   {% else %}
   <strong>{{ song }}</strong> has been sung in
