@@ -83,6 +83,7 @@ Features
 - Add a good way of finding a particular document in the document
   management interface (which doesn't involve paging through all the
   pages)
+- Add support for merging duplicate songs/composers
 
 Bug fixes
 ---------
