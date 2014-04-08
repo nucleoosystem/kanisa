@@ -2,7 +2,19 @@
 
 {% block content %}
 
-{% include "kanisa/members/services/_song_detail_table.html" %}
-{% include "kanisa/_simple_pagination.html" %}
+<div class="row">
+  <div class="col-md-5">
+    <h2>Missing Songs</h2>
+    <p>
+      Find songs which are sung frequently in one service, but not
+      another.
 
+      Find <a href="{% url 'kanisa_members_services_song_discovery' %}" title="Look for missing songs">Missing Songs</a>.
+    </p>
+  </div>
+  <div class="col-md-7">
+    <h2>All Songs</h2>
+    {% include "kanisa/members/services/_song_detail_table.html" %}
+    {% include "kanisa/_simple_pagination.html" %}
+  </div>
 {% endblock %}

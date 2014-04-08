@@ -2,13 +2,16 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.utils import formats
 from kanisa.models import (
     Composer,
+    RegularEvent,
     Service,
     Song,
 )
+from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
     KanisaListView,
     KanisaDetailView,
+    KanisaTemplateView
 )
 
 
@@ -116,6 +119,43 @@ class SongDetailView(SongFinderBaseView, KanisaDetailView):
 
         return context
 song_detail = SongDetailView.as_view()
+
+
+class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
+    template_name = 'kanisa/members/services/song_discovery.html'
+    kanisa_title = 'Song Discovery'
+
+    def get_context_data(self, **kwargs):
+        context = super(SongDisoveryView,
+                        self).get_context_data(**kwargs)
+
+        event_type_pks = set(
+            item['event__event']
+            for item in Service.objects.values('event__event')
+        )
+
+        events = RegularEvent.objects.filter(
+            pk__in=list(event_type_pks)
+        )
+
+        all_most_popular = most_popular_songs()[:40]
+
+        missing = {}
+
+        for event in events:
+            missing[event] = []
+            this_event = most_popular_songs(
+                service_filter=event
+            ).filter(usage__gt=1)
+
+            for song in all_most_popular:
+                if song not in this_event:
+                    missing[event].append(song)
+
+        context['missing'] = missing
+
+        return context
+song_discovery = SongDisoveryView.as_view()
 
 
 class ComposerDetailView(SongFinderBaseView, KanisaDetailView):
