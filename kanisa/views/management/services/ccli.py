@@ -23,16 +23,19 @@ class CCLIReport(object):
         qs = SongInService.objects.all()
 
         if self.selected_event:
-            qs = qs.filter(service__event__event=
-                           self.selected_event)
+            qs = qs.filter(
+                service__event__event=self.selected_event
+            )
 
         if self.start_date:
-            qs = qs.filter(service__event__date__gte=
-                           self.start_date)
+            qs = qs.filter(
+                service__event__date__gte=self.start_date
+            )
 
         if self.end_date:
-            qs = qs.filter(service__event__date__lte=
-                           self.end_date)
+            qs = qs.filter(
+                service__event__date__lte=self.end_date
+            )
 
         qs = qs.select_related('song')
         qs = [s.song for s in qs]
