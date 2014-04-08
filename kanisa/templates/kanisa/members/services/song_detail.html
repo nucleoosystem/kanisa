@@ -26,7 +26,7 @@
     {% for service in services %}
     <tr>
       <td>
-        {{ service.service.event_date|date:"jS F Y" }}
+        <a href="{% url 'kanisa_members_services_detail' service.service.pk %}">{{ service.service.event_date|date:"jS F Y" }}</a>
       </td>
       <td>
         {{ service.service.event }}
