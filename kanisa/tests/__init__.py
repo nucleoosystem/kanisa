@@ -25,33 +25,33 @@ from .test_pages import (
 )
 from .test_sermons import SermonTest
 
-from .views.auth import (
+from .views.test_auth import (
     PasswordResetViewTest
 )
-from .views.banners import (
+from .views.test_banners import (
     BannerManagementViewTest,
     BannerPublicViewTest
 )
-from .views.diary import (
+from .views.test_diary import (
     DiaryManagementViewTest,
     DiaryPublicViewTest
 )
-from .views.documents import DocumentManagementViewTest
-from .views.management import ManagementViewTest
-from .views.navigation import NavigationManagementViewTest
-from .views.pages import (
+from .views.test_documents import DocumentManagementViewTest
+from .views.test_management import ManagementViewTest
+from .views.test_navigation import NavigationManagementViewTest
+from .views.test_pages import (
     PageManagementViewTest,
     PagePublicViewTest
 )
-from .views.public import PublicViewTest
-from .views.sermons import (
+from .views.test_public import PublicViewTest
+from .views.test_sermons import (
     SermonManagementViewTest,
     SermonPublicViewTest
 )
-from .views.services import ServiceMembersViewTest
-from .views.social import SocialViewTest
-from .views.user import UserManagementViewTest
-from .views.xhr import (
+from .views.test_services import ServiceMembersViewTest
+from .views.test_social import SocialViewTest
+from .views.test_user import UserManagementViewTest
+from .views.test_xhr import (
     XHRBiblePassageViewTest,
     XHRCreatePageViewTest,
     XHRListPagesViewTest,

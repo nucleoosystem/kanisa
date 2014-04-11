@@ -86,3 +86,5 @@ CONSTANCE_CONFIG = {
     'TWITTER_ACCESS_TOKEN': ('', 'Configured by using Kanisa.'),
     'TWITTER_ACCESS_SECRET': ('', 'Configured by using Kanisa.'),
 }
+
+SECRET_KEY = 'thisbagismadefromrecycledmaterial'

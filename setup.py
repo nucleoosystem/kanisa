@@ -37,7 +37,8 @@ setup(
         "wsgiref==0.1.2",
     ],
     tests_require=(
-        "django-setuptest==0.1.4",
+        "pytest==2.5.2",
+        "pytest-django==2.6",
         "factory-boy==2.2.1",
         "mock==1.0.1",
     ),
