@@ -1,29 +1,29 @@
 # flake8: noqa
 
 from __future__ import absolute_import
-from .banners import BannerTest
-from .bible_passages import (
+from .test_banners import BannerTest
+from .test_bible_passages import (
     BiblePassageBadInput,
     BiblePassage,
     ToPassageBadInput,
     ToPassageGoodInput,
     BiblePassageModelField
 )
-from .diary import (
+from .test_diary import (
     DiaryTest,
     DiaryGetWeekBoundsTest,
     DiaryGetScheduleTest,
     DiaryScheduledEventTest
 )
-from .kanisa_markup import KanisaMarkupTest
-from .media import InlineImageTest
-from .navigation import NavigationElementTest
-from .pages import (
+from .test_kanisa_markup import KanisaMarkupTest
+from .test_media import InlineImageTest
+from .test_navigation import NavigationElementTest
+from .test_pages import (
     PageTest,
     GetPageFromPathTest,
     PageTemplatesTest
 )
-from .sermons import SermonTest
+from .test_sermons import SermonTest
 
 from .views.auth import (
     PasswordResetViewTest
