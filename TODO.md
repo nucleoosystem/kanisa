@@ -7,6 +7,13 @@ Version 0.9.5
 - Add "Song Finder"
   - Add a way of searching for an individual song/composer
 - Add support for a simple blog
+  - Ability to post from the admin
+  - Ability to post from the management interface (needs a separate
+    permission)
+  - Ability to post on someone else's behalf
+  - RSS feeds
+  - Delayed posting
+  - Public display - URL structure as <year>/<slug>
 
 Version 1.0
 ===========
