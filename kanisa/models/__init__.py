@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from .account import RegisteredUser
 from .banners import Banner
 from .blocks import Block
+from .blog import BlogPost
 from .diary import (
     EventCategory,
     RegularEvent,
