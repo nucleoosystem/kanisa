@@ -11,6 +11,7 @@ Version 0.9.5
   - Ability to post on someone else's behalf
   - RSS feeds
   - Public display - URL structure as <year>/<slug>
+- Add speaker profiles
 
 Version 1.0
 ===========
