@@ -4,11 +4,19 @@ Version 0.9.5
 - Add "Song Finder"
   - Add a way of searching for an individual song/composer
 - Add support for a simple blog
+  - Public display - URL structure as <year>/<slug>
+    - Add a blog post template
+    - Make sure we add an anchor ``#more`` to the non-intro bit of
+      the blog post
+    - Add user profile images to blog post template and index
+      template
+    - Add per-month archives to blog posts
+  - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)
-  - Ability to post on someone else's behalf
   - RSS feeds
-  - Public display - URL structure as <year>/<slug>
+  - Update edit post links to go to the management interface, rather
+    than the admin
 - Add speaker profiles
 
 Version 1.0
