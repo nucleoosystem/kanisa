@@ -3,6 +3,7 @@ Version 0.9.5
 
 - Switch to py.test
   - Ensure tox still passes from scratch
+  - Add test coverage options
 - Add "Song Finder"
   - Add a way of searching for an individual song/composer
 - Add support for a simple blog
