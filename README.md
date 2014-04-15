@@ -13,4 +13,4 @@ Kanisa handles:
 * Search;
 * Banners - for advertising upcoming events etc.
 
-You can see it in action at http://www.centralbaptistchelmsford.org.
+You can see it in action at https://www.centralbaptistchelmsford.org.
