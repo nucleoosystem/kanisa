@@ -4,13 +4,15 @@ Version 0.9.5
 - Add "Song Finder"
   - Add a way of searching for an individual song/composer
 - Add support for a simple blog
-  - Public display - URL structure as <year>/<slug>
-    - Add a blog post template
+  - Public display
     - Make sure we add an anchor ``#more`` to the non-intro bit of
       the blog post
-    - Add user profile images to blog post template and index
+    - Add navigation to the blog homepage to the ``base.html``
       template
-    - Add per-month archives to blog posts
+    - Add ability to view unpublished posts for users with privs
+      (including clear links to where the posts will be published)
+    - Add per-year archives to blog posts
+    - Add breadcrumbs for going to the per-year archive
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)
