@@ -1,0 +1,22 @@
+{% load thumbnail %}
+
+<p class="text-muted author-byline">
+  {% if perms.kanisa.manage_blog %}
+  <a class="btn btn-info btn-xs" href="{% url 'admin:kanisa_blogpost_change' object.pk %}" style="float: right">
+    <i class="glyphicon glyphicon-edit"></i>
+    Edit
+  </a>
+  {% endif %}
+  {% if object.author.image %}
+    {% thumbnail object.author.image "60x60" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-circle" />
+    {% endthumbnail %}
+  {% endif %}
+
+  You&rsquo;re reading a post by <strong>{{ object.author.get_full_name }}</strong>.<br />
+  Published on <strong>{{ object.publish_date|date:"jS F Y" }}</strong>.
+  <a href="{{ object.get_absolute_url }}" title="Permalink to {{ object.title }}" class="badge">
+    <span class="glyphicon glyphicon-link"></span>
+  </a>
+</p>
+<hr class="clearfix" />

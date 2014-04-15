@@ -1,6 +1,7 @@
 from autoslug import AutoSlugField
 from datetime import date
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -30,6 +31,12 @@ class BlogPost(models.Model):
 
     def published(self):
         return self.publish_date <= date.today()
+
+    def get_absolute_url(self):
+        return reverse(
+            'kanisa_public_diary_blog_detail',
+            args=[self.slug, ]
+        )
 
     class Meta:
         # Need this because I've split up models.py into multiple
