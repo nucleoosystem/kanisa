@@ -53,6 +53,7 @@ setup(
     ],
     tests_require=(
         "pytest==2.5.2",
+        "pytest-cov==1.6",
         "pytest-django==2.6",
         "factory-boy==2.2.1",
         "mock==1.0.1",

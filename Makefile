@@ -16,6 +16,9 @@ git-check: reminify
 test:
 	tox
 
+coverage:
+	py.test --cov-report term-missing --cov kanisa
+
 flake8:
 	tox -e flake8
 

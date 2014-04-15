@@ -22,6 +22,7 @@ coverage.xml
 .tox
 pep8.txt
 .test_whoosh/
+.coverage
 
 # Translations
 *.mo
