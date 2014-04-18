@@ -19,6 +19,20 @@
           All Blog Posts
         </a>
       </li>
+      {% if years %}
+      <li class="nav-header disabled">
+        <a href="#">
+          The Archives
+        </a>
+      </li>
+      {% for year in years %}
+      <li>
+        <a href="{% url 'kanisa_public_blog_year' year %}">
+          {{ year }}
+        </a>
+      </li>
+      {% endfor %}
+      {% endif %}
     </ul>
 
     {% if perms.kanisa.manage_blog %}

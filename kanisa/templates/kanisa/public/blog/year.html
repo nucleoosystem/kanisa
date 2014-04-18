@@ -1,0 +1,25 @@
+{% extends 'kanisa/public/blog/base.html' %}
+
+{% block blogcontent %}
+
+<h1 class="page-header">Posts from {{ year|date:"Y" }}</h1>
+
+{% for object in object_list %}
+  <h2>
+    <a href="{{ object.get_absolute_url }}">
+      {{ object.title }}
+    </a>
+  </h2>
+  <hr />
+
+  {% include "kanisa/public/blog/_post_preview.html" %}
+  {% if not forloop.last %}
+    <hr />
+  {% endif %}
+  {% empty %}
+  <p class="alert alert-warning lead">
+    There are no blog posts for {{ year|date:"Y" }}.
+  </p>
+{% endfor %}
+
+{% endblock %}
