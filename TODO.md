@@ -10,11 +10,13 @@ Version 0.9.5
   - http://whitenoise.evans.io/en/latest/django.html
 - Add support for a simple blog
   - Public display
+    - Add tests
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Add breadcrumbs for going to the per-year archive
     - Add links to next/previous blog posts
     - Ensure having an author is optional
+    - Paginate the blog home page
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)
