@@ -10,8 +10,6 @@ Version 0.9.5
   - http://whitenoise.evans.io/en/latest/django.html
 - Add support for a simple blog
   - Public display
-    - Make sure we add an anchor ``#more`` to the non-intro bit of
-      the blog post
     - Add navigation to the blog homepage to the ``base.html``
       template
     - Add ability to view unpublished posts for users with privs
