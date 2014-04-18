@@ -22,6 +22,10 @@ KNOWN_BLOCKS = {
             'page.'
         )
     ),
+    'blog_intro': (
+        'Blog Introduction',
+        'Appears in the sidebar on event page of the blog.'
+    ),
 }
 
 

@@ -1,5 +1,7 @@
 {% extends 'kanisa/public/base.html' %}
 
+{% load kanisa_homepage %}
+
 {% block content %}
 <div class="row">
   <div class="col-md-9">
@@ -7,6 +9,8 @@
     {% endblock %}
   </div>
   <div class="col-md-3">
+    {% kanisa_content_block 'blog_intro' %}
+
     {% if perms.kanisa.manage_blog %}
     <hr />
     <a class="btn btn-default" href="{% url 'admin:kanisa_blogpost_changelist' %}">
