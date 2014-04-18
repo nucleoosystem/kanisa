@@ -1,18 +1,14 @@
 from django.conf.urls import patterns, url
-from kanisa.views.public.blog import (
-    BlogIndexView,
-    BlogPostDetailView,
-    BlogYearView,
-)
+import kanisa.views.public.blog as views
 
 
 urlpatterns = patterns(
     '',
-    url(r'^$', BlogIndexView.as_view(), {}, 'kanisa_public_blog_index'),
+    url(r'^$', views.blog_index, {}, 'kanisa_public_blog_index'),
     url(r'^(?P<year>\d{4})/$',
-        BlogYearView.as_view(), {},
+        views.blog_year, {},
         'kanisa_public_blog_year'),
     url(r'^(?P<year>\d{4})/(?P<slug>[a-z0-9-]+)/$',
-        BlogPostDetailView.as_view(), {},
+        views.blog_detail, {},
         'kanisa_public_blog_detail'),
 )

@@ -20,6 +20,7 @@ class BlogMixin(object):
 class BlogIndexView(BlogMixin, ListView):
     template_name = 'kanisa/public/blog/index.html'
     queryset = BlogPost.published_objects.all()
+blog_index = BlogIndexView.as_view()
 
 
 class BlogYearView(BlogMixin, YearArchiveView):
@@ -27,6 +28,7 @@ class BlogYearView(BlogMixin, YearArchiveView):
     template_name = 'kanisa/public/blog/year.html'
     date_field = 'publish_date'
     make_object_list = True
+blog_year = BlogYearView.as_view()
 
 
 class BlogPostDetailView(BlogMixin, DetailView):
@@ -55,3 +57,4 @@ class BlogPostDetailView(BlogMixin, DetailView):
         context['previous'] = previous_post
 
         return context
+blog_detail = BlogPostDetailView.as_view()
