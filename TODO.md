@@ -14,6 +14,7 @@ Version 0.9.5
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Add breadcrumbs for going to the per-year archive
+    - Add links to next/previous blog posts
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)
