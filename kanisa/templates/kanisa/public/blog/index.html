@@ -1,36 +1,24 @@
 {% extends 'kanisa/public/blog/base.html' %}
-{% load kanisa_markup %}
 
 {% block blogcontent %}
 
 {% for object in object_list %}
-<div class="page-header">
-  <h1>
-    <a href="{{ object.get_absolute_url }}">
-      {{ object.title }}
-    </a>
-  </h1>
-</div>
+  <div class="page-header">
+    <h1>
+      <a href="{{ object.get_absolute_url }}">
+        {{ object.title }}
+      </a>
+    </h1>
+  </div>
 
-{% include "kanisa/public/blog/_author_byline.html" %}
-
-<div class="lead">
-  {{ object.teaser_text|kanisa_markdown }}
-</div>
-
-<p class="text-right">
-  <a href="{{ object.get_absolute_url }}#post_more" title="Read the rest of {{ object.title }}" class="btn btn-default btn-sm">
-    <span class="glyphicon glyphicon-zoom-in"></span>
-    Read the rest of {{ object.title }}
-  </a>
-</p>
-
-{% if not forloop.last %}
-<hr />
-{% endif %}
-{% empty %}
-<p class="alert alert-warning lead">
-  There are no blog posts.
-</p>
+  {% include "kanisa/public/blog/_post_preview.html" %}
+  {% if not forloop.last %}
+    <hr />
+  {% endif %}
+  {% empty %}
+  <p class="alert alert-warning lead">
+    There are no blog posts.
+  </p>
 {% endfor %}
+
 {% endblock %}

@@ -1,0 +1,14 @@
+{% load kanisa_markup %}
+
+{% include "kanisa/public/blog/_author_byline.html" %}
+
+<div class="lead">
+  {{ object.teaser_text|kanisa_markdown }}
+</div>
+
+<p class="text-right">
+  <a href="{{ object.get_absolute_url }}#post_more" title="Read the rest of {{ object.title }}" class="btn btn-default btn-sm">
+    <span class="glyphicon glyphicon-zoom-in"></span>
+    Read the rest of {{ object.title }}
+  </a>
+</p>
