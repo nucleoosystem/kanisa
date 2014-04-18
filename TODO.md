@@ -10,6 +10,7 @@ Version 0.9.5
   - http://whitenoise.evans.io/en/latest/django.html
 - Add support for a simple blog
   - Public display
+    - Ensure the year of the post is in the URL structure
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Add per-year archives to blog posts
