@@ -205,6 +205,22 @@ textarea.kanisamaininputwidget {
     height: auto;
 }
 
+/*
+#logo .speedbar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    font-size: 80%;
+    padding: 5px;
+    background-color: #000;
+    opacity: 0.6;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+}
+*/
+
 .editable_block_wrapper {
     position: relative;
 }
