@@ -11,6 +11,7 @@ Version 0.9.5
 - Add support for a simple blog
   - Public display
     - Ensure the year of the post is in the URL structure
+    - Fix weirdness of URL names containing ``diary_blog``
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Add per-year archives to blog posts
