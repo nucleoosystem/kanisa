@@ -1,15 +1,11 @@
 Version 0.9.5
 =============
 
-- Add "Song Finder"
-  - Add a way of searching for an individual song/composer
-- Add speedbar (https://pypi.python.org/pypi/django-speedbar)
-  - Probably warrants a way of importing required settings or
-    something
-  - Waiting for https://github.com/theospears/django-speedbar/pull/9
-    to be merged to add Django 1.6 support
- - Look at using Whitenoise for serving static assets
-  - http://whitenoise.evans.io/en/latest/django.html
+The changes in this version should be sufficient to move all sites
+using Kaleo to Kanisa (though until we've got support for automating
+adding cron jobs, and started using Whitenoise for static assets, we
+probably don't want to deploy this too widely).
+
 - Add support for a simple blog
   - Public display
     - Add tests
@@ -22,7 +18,28 @@ Version 0.9.5
   - RSS feeds
   - Update edit post links to go to the management interface, rather
     than the admin
+  - Add support for importing posts from tinyblog, which is what
+    sites running Kaleo use for blogging
 - Add speaker profiles
+
+Version 0.9.6
+=============
+
+The changes in this version are intended to make deployment easier,
+and to find performance problems earlier.
+
+- Add speedbar (https://pypi.python.org/pypi/django-speedbar)
+  - Probably warrants a way of importing required settings or
+    something
+  - Waiting for https://github.com/theospears/django-speedbar/pull/9
+    to be merged to add Django 1.6 support
+- Look at using Whitenoise for serving static assets
+  - http://whitenoise.evans.io/en/latest/django.html
+- Add a way of searching for an individual song/composer to the Song
+  Finder
+- Add a way to set up cron jobs
+  - For posting scheduled tweets
+  - For rebuilding the search index
 
 Version 1.0
 ===========
@@ -33,13 +50,8 @@ Features
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 - Add handlers for links, bold and italics in `main_input_widget`
-
-Deployment
-----------
-
-- Add a way to set up cron jobs
-  - For posting scheduled tweets
-  - For rebuilding the search index
+- Remove `kanisa_from_kaleo` which was created to facilitate the move
+  from Kaleo to Kanisa
 
 Version 1.1
 ===========
@@ -61,13 +73,6 @@ Deployment
 - Add `unicode_literals`, `print_function`, `absolute_import` and
   `division` imports from `__future__` to all files (plus a way of
   checking they're everywhere)
-- Fix proliferation of `kanisa.*.css` and `kanisa.*.js` in deployed
-  `STATIC_ROOT`s (since the filenames are modified with each CSS/JS
-  change, and old files don't get cleaned up)
-- Investigate
-  `django.contrib.staticfiles.storage.CachedStaticFilesStorage` (which
-  seems to do most of what our custom deployment stuff does, but
-  better)
 
 Mobile
 ------
@@ -146,5 +151,3 @@ Features
   which are logically connected but have different components) (#15)
 - Add weekly notice sheet feature - ability to add notices far in
   advance
-- Remove `kanisa_from_kaleo` which was created to facilitate the move
-  from Kaleo to Kanisa
