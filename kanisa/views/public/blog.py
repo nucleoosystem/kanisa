@@ -1,3 +1,4 @@
+from datetime import date
 from django.views.generic import (
     DetailView,
     ListView,
@@ -45,6 +46,8 @@ class BlogPostDetailView(BlogMixin, DetailView):
 
         try:
             next_post = self.object.get_next_by_publish_date()
+            if next_post.publish_date > date.today():
+                next_post = None
         except BlogPost.DoesNotExist:
             next_post = None
 
