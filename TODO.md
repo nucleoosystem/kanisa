@@ -13,7 +13,6 @@ Version 0.9.5
     - Add tests
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
-    - Ensure having an author is optional
     - Paginate the blog home page
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate

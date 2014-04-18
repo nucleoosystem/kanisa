@@ -17,7 +17,7 @@ class PublishedPostManager(models.Manager):
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
     publish_date = models.DateField()
     updated_date = models.DateTimeField(auto_now=True)
     teaser_text = models.TextField(verbose_name='Teaser')

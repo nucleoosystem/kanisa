@@ -31,6 +31,7 @@ class BlogPostAdmin(admin.ModelAdmin):
                 is_active=True
             )
             return AccountChoiceField(
+                required=False,
                 queryset=queryset,
                 initial=self.current_user.id
             )

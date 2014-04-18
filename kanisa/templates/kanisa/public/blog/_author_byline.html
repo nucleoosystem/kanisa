@@ -13,7 +13,10 @@
     {% endthumbnail %}
   {% endif %}
 
+  {% if object.author %}
   You&rsquo;re reading a post by <strong>{{ object.author.get_full_name }}</strong>.<br />
+  {% endif %}
+
   Published on <strong>{{ object.publish_date|date:"jS F Y" }}</strong>.
   <a href="{{ object.get_absolute_url }}" title="Permalink to {{ object.title }}" class="badge">
     <span class="glyphicon glyphicon-link"></span>
