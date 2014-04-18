@@ -3,6 +3,11 @@ Version 0.9.5
 
 - Add "Song Finder"
   - Add a way of searching for an individual song/composer
+- Add speedbar (https://pypi.python.org/pypi/django-speedbar)
+  - Probably warrants a way of importing required settings or
+    something
+ - Look at using Whitenoise for serving static assets
+  - http://whitenoise.evans.io/en/latest/django.html
 - Add support for a simple blog
   - Public display
     - Make sure we add an anchor ``#more`` to the non-intro bit of
