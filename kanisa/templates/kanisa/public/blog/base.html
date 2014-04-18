@@ -11,6 +11,16 @@
   <div class="col-md-3">
     {% kanisa_content_block 'blog_intro' %}
 
+    <hr />
+
+    <ul class="nav nav-pills nav-stacked">
+      <li>
+        <a href="{% url 'kanisa_public_blog_index' %}">
+          All Blog Posts
+        </a>
+      </li>
+    </ul>
+
     {% if perms.kanisa.manage_blog %}
     <hr />
     <a class="btn btn-default" href="{% url 'admin:kanisa_blogpost_changelist' %}">
