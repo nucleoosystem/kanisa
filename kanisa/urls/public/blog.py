@@ -14,5 +14,5 @@ urlpatterns = patterns(
         'kanisa_public_blog_year'),
     url(r'^(?P<year>\d{4})/(?P<slug>[a-z0-9-]+)/$',
         BlogPostDetailView.as_view(), {},
-        'kanisa_public_diary_blog_detail'),
+        'kanisa_public_blog_detail'),
 )

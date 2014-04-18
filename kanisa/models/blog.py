@@ -34,7 +34,7 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            'kanisa_public_diary_blog_detail',
+            'kanisa_public_blog_detail',
             args=[self.publish_date.year, self.slug, ]
         )
 

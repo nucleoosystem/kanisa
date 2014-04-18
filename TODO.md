@@ -10,7 +10,6 @@ Version 0.9.5
   - http://whitenoise.evans.io/en/latest/django.html
 - Add support for a simple blog
   - Public display
-    - Fix weirdness of URL names containing ``diary_blog``
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Add breadcrumbs for going to the per-year archive
