@@ -3,6 +3,21 @@
 
 {% block blogcontent %}
 
+<ol class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa_public_index' %}">Home</a>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_blog_index' %}">Blog</a>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_blog_year' object.publish_date.year %}">{{ object.publish_date.year }}</a>
+  </li>
+  <li class="active">
+    {{ object.title }}
+  </li>
+</ol>
+
 <div class="page-header">
   <h1>
     <a href="{{ object.get_absolute_url }}">

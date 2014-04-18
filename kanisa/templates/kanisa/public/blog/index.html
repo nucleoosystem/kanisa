@@ -2,6 +2,15 @@
 
 {% block blogcontent %}
 
+<ol class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa_public_index' %}">Home</a>
+  </li>
+  <li class="active">
+    Blog
+  </li>
+</ol>
+
 {% for object in object_list %}
   <div class="page-header">
     <h1>

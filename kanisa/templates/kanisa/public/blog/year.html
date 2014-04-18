@@ -2,6 +2,18 @@
 
 {% block blogcontent %}
 
+<ol class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa_public_index' %}">Home</a>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_blog_index' %}">Blog</a>
+  </li>
+  <li class="active">
+    {{ year.year }}
+  </li>
+</ol>
+
 <h1 class="page-header">Posts from {{ year|date:"Y" }}</h1>
 
 {% for object in object_list %}
