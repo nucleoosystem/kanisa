@@ -37,3 +37,21 @@ class BlogPostDetailView(BlogMixin, DetailView):
         qs = super(BlogPostDetailView, self).get_queryset()
         qs = qs.filter(publish_date__year=self.kwargs['year'])
         return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogPostDetailView, self).get_context_data(**kwargs)
+
+        try:
+            next_post = self.object.get_next_by_publish_date()
+        except BlogPost.DoesNotExist:
+            next_post = None
+
+        try:
+            previous_post = self.object.get_previous_by_publish_date()
+        except BlogPost.DoesNotExist:
+            previous_post = None
+
+        context['next'] = next_post
+        context['previous'] = previous_post
+
+        return context

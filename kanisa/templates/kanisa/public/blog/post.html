@@ -20,4 +20,15 @@
 <span id="post_more"></span>
 {{ object.main_text|kanisa_markdown }}
 
+{% if next or previous %}
+<ul class="pager">
+{% if previous %}
+  <li class="previous"><a href="{{ previous.get_absolute_url }}">&larr; Previously: <em>{{ previous.title }}</em></a></li>
+{% endif %}
+{% if next %}
+  <li class="next"><a href="{{ next.get_absolute_url }}">Next up: <em>{{ next.title }}</em> &rarr;</a></li>
+{% endif %}
+</ul>
+{% endif %}
+
 {% endblock %}

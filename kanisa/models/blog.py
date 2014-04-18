@@ -42,7 +42,7 @@ class BlogPost(models.Model):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
-        ordering = ['-publish_date']
+        ordering = ['-publish_date', '-pk']
         permissions = (
             ('manage_blog',
              'Can manage your blog posts'),
