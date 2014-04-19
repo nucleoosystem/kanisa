@@ -8,7 +8,6 @@ probably don't want to deploy this too widely).
 
 - Add support for a simple blog
   - Public display
-    - Add tests
     - Add ability to view unpublished posts for users with privs
       (including clear links to where the posts will be published)
     - Paginate the blog home page
