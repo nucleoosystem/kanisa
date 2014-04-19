@@ -6,16 +6,22 @@ import kanisa.views.public.blog as views
 import pytest
 
 
-@pytest.mark.django_db
-def test_blog_index(rf):
+@pytest.fixture()
+def posts():
     post1 = BlogPostFactory.create()
     post2 = BlogPostFactory.create(
         publish_date=date(2012, 1, 1)
     )
-    BlogPostFactory.create(
-        publish_date=date(date.today().year + 1, 1, 1)
+    post3 = BlogPostFactory.create(
+        publish_date=date(date.today().year + 1, 1, 1),
+        title="Future post"
     )
+    return post1, post2, post3
 
+
+@pytest.mark.django_db
+def test_blog_index(rf, posts):
+    post1, post2, post3 = posts
     request = rf.get(reverse('kanisa_public_blog_index'))
     response = views.blog_index(request)
     content = response.rendered_content
@@ -30,7 +36,7 @@ def test_blog_index(rf):
 
 
 @pytest.mark.django_db
-def test_blog_year_archive(rf):
+def test_blog_year_archive(rf, posts):
     def get(rf, year):
         request = rf.get(
             reverse(
@@ -44,13 +50,7 @@ def test_blog_year_archive(rf):
             year='%d' % year
         )
 
-    post1 = BlogPostFactory.create()
-    post2 = BlogPostFactory.create(
-        publish_date=date(2012, 1, 1)
-    )
-    post3 = BlogPostFactory.create(
-        publish_date=date(date.today().year + 1, 1, 1)
-    )
+    post1, post2, post3 = posts
 
     response = get(rf, post1.publish_date.year)
     content = response.rendered_content
@@ -79,7 +79,7 @@ def test_blog_year_archive(rf):
 
 
 @pytest.mark.django_db
-def test_blog_detail(rf):
+def test_blog_detail(rf, posts):
     def get(rf, post):
         request = rf.get(post.get_absolute_url())
 
@@ -89,14 +89,7 @@ def test_blog_detail(rf):
             slug=post.slug
         )
 
-    post1 = BlogPostFactory.create()
-    post2 = BlogPostFactory.create(
-        publish_date=date(2012, 1, 1)
-    )
-    post3 = BlogPostFactory.create(
-        publish_date=date(date.today().year + 1, 1, 1),
-        title='Future post'
-    )
+    post1, post2, post3 = posts
 
     response = get(rf, post1)
     assert response.status_code == 200
