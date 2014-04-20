@@ -7,7 +7,9 @@
     {% endblock %}
 
     <p class="footnote">
+        {% if object.modified %}
         <strong>Last Modified:</strong> {{ object.modified }}
+        {% endif %}
         {% block extradetails %}{% endblock %}
     </p>
 
