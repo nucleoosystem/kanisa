@@ -16,8 +16,12 @@
   {% if object.author %}
   You&rsquo;re reading a post by <strong>{{ object.author.get_full_name }}</strong>.<br />
   {% endif %}
-
+  {% if object.published %}
   Published on <strong>{{ object.publish_date|date:"jS F Y" }}</strong>.
+  {% else %}
+  <span class="text-danger">This post is not yet published</span>.
+  It is scheduled to be published on <strong>{{ object.publish_date|date:"jS F Y" }}</strong>.
+  {% endif %}
   <a href="{{ object.get_absolute_url }}" title="Permalink to {{ object.title }}" class="badge">
     <span class="glyphicon glyphicon-link"></span>
   </a>
