@@ -7,7 +7,6 @@ adding cron jobs, and started using Whitenoise for static assets, we
 probably don't want to deploy this too widely).
 
 - Add support for a simple blog
-  - Paginate the blog home page
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)

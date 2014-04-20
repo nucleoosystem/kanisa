@@ -29,6 +29,7 @@ class BlogMixin(object):
 
 class BlogIndexView(BlogMixin, ListView):
     template_name = 'kanisa/public/blog/index.html'
+    paginate_by = 10
 blog_index = BlogIndexView.as_view()
 
 
