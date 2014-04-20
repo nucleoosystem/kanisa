@@ -1,0 +1,12 @@
+{% extends 'search/indexes/kanisa/base_text.txt' %}
+
+{% block details %}
+{% autoescape off %}
+
+{{ object.title }}
+{{ object.slug }}
+{{ object.teaser_text }}
+{{ object.main_text }}
+
+{% endautoescape %}
+{% endblock %}

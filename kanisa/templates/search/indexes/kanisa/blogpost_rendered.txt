@@ -1,0 +1,29 @@
+{% extends 'search/indexes/kanisa/base_rendered.txt' %}
+
+{% load kanisa_markup %}
+{% load url from future %}
+
+{% block title %}
+<a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+{% endblock %}
+
+{% block contents %}
+<p class="footnote">
+  <a href="{% url 'kanisa_public_blog_index' %}">
+    Blog
+  </a>
+  &raquo;
+  <a href="{% url 'kanisa_public_blog_year' object.publish_date.year %}">
+    {{ object.publish_date.year }}
+  </a>
+  &raquo;
+  <strong>
+    {{ object.title }}
+  </strong>
+</p>
+
+<blockquote>
+<p>{{ object.teaser_text|kanisa_markdown }}</p>
+</blockquote>
+
+{% endblock %}

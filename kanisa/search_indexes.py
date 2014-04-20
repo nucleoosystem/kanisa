@@ -2,6 +2,7 @@ from datetime import date
 from haystack import indexes
 from haystack import site
 from kanisa.models import (
+    BlogPost,
     Page,
     RegularEvent,
     ScheduledEvent,
@@ -31,8 +32,17 @@ class SermonIndex(KanisaBaseSearchIndex):
         return Sermon.preached_objects.all()
 
 
-site.register(SermonSeries, KanisaBaseSearchIndex)
-site.register(Sermon, SermonIndex)
+class BlogPostIndex(KanisaBaseSearchIndex):
+    def index_queryset(self):
+        return BlogPost.published_objects.all()
+
+    def get_updated_field(self):
+        return 'updated_date'
+
+
+site.register(BlogPost, BlogPostIndex)
+site.register(Page, KanisaBaseSearchIndex)
 site.register(RegularEvent, KanisaBaseSearchIndex)
 site.register(ScheduledEvent, ScheduledEventIndex)
-site.register(Page, KanisaBaseSearchIndex)
+site.register(Sermon, SermonIndex)
+site.register(SermonSeries, KanisaBaseSearchIndex)
