@@ -1,9 +1,13 @@
 from datetime import date
 from haystack import indexes
 from haystack import site
-from kanisa.models import (Sermon, SermonSeries,
-                           RegularEvent, ScheduledEvent,
-                           Page)
+from kanisa.models import (
+    Page,
+    RegularEvent,
+    ScheduledEvent,
+    Sermon,
+    SermonSeries,
+)
 
 
 class KanisaBaseSearchIndex(indexes.RealTimeSearchIndex):
