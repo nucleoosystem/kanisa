@@ -8,12 +8,18 @@ from kanisa.models import BlogPost
 
 
 class BlogMixin(object):
-    def get_queryset(self):
+    def get_base_queryset(self):
+        if self.request.user.has_perm('kanisa.manage_blog'):
+            return BlogPost.objects.all()
+
         return BlogPost.published_objects.all()
+
+    def get_queryset(self):
+        return self.get_base_queryset()
 
     def get_context_data(self, **kwargs):
         context = super(BlogMixin, self).get_context_data(**kwargs)
-        dates = self.get_queryset().dates(
+        dates = self.get_base_queryset().dates(
             'publish_date',
             'year'
         )
@@ -30,6 +36,7 @@ class BlogYearView(BlogMixin, YearArchiveView):
     template_name = 'kanisa/public/blog/year.html'
     date_field = 'publish_date'
     make_object_list = True
+    allow_future = True
 blog_year = BlogYearView.as_view()
 
 

@@ -7,10 +7,7 @@ adding cron jobs, and started using Whitenoise for static assets, we
 probably don't want to deploy this too widely).
 
 - Add support for a simple blog
-  - Public display
-    - Add ability to view unpublished posts for users with privs
-      (including clear links to where the posts will be published)
-    - Paginate the blog home page
+  - Paginate the blog home page
   - Make blog posts searchable
   - Ability to post from the management interface (needs a separate
     permission)
