@@ -10,7 +10,6 @@ probably don't want to deploy this too widely).
   - Show blog posts on the home page
   - Ability to post from the management interface (needs a separate
     permission)
-  - RSS feeds
   - Update edit post links to go to the management interface, rather
     than the admin
   - Add support for importing posts from tinyblog, which is what

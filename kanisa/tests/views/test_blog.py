@@ -3,8 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser, Permission
 from django.core.urlresolvers import reverse
 from django.http import Http404
+from django.utils.html import escape
 from kanisa.tests.test_blog import BlogPostFactory
 import kanisa.views.public.blog as views
+from kanisa.views.public.blog.feed import LatestEntriesFeed
 import pytest
 
 
@@ -12,7 +14,9 @@ import pytest
 def posts():
     post1 = BlogPostFactory.create()
     post2 = BlogPostFactory.create(
-        publish_date=date(2012, 1, 1)
+        publish_date=date(2012, 1, 1),
+        teaser_text='*Hello*',
+        main_text='I am the **cat**',
     )
     post3 = BlogPostFactory.create(
         publish_date=date(date.today().year + 1, 1, 1),
@@ -207,3 +211,27 @@ def test_blog_detail_future(rf, posts, staff_user):
         post1.publish_date.year,
         post3.publish_date.year
     ]
+
+
+@pytest.mark.django_db
+def test_blog_feed(rf, posts):
+    post1, post2, post3 = posts
+
+    request = rf.get(reverse('kanisa_public_blog_rss'))
+    feed = LatestEntriesFeed()
+    response = feed(request)
+
+    assert response.status_code == 200
+
+    assert response.has_header('Content-Type')
+    content_type = dict(response.items())['Content-Type']
+    assert content_type == 'application/rss+xml; charset=utf-8'
+
+    assert response.content.find('Future post') == -1
+    assert response.content.find(escape('<strong>cat</strong>')) != -1
+    assert response.content.find(escape('<em>Hello</em>')) != -1
+
+    items = feed.items()
+    assert len(items) == 2
+    assert items[0] == post1
+    assert items[1] == post2

@@ -36,3 +36,14 @@ KANISA_GOOGLE_ANALYTICS_KEY = getattr(
     None
 )
 
+KANISA_BLOG_TITLE = getattr(
+    settings,
+    'KANISA_BLOG_TITLE',
+    'Updates from %s' % KANISA_CHURCH_NAME
+)
+
+KANISA_BLOG_DESCRIPTION = getattr(
+    settings,
+    'KANISA_BLOG_DESCRIPTION',
+    'The latest news and updates from %s.' % KANISA_CHURCH_NAME
+)

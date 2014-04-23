@@ -32,6 +32,9 @@ class BlogPost(models.Model):
     def published(self):
         return self.publish_date <= date.today()
 
+    def full_text(self):
+        return self.teaser_text + '\n\n' + self.main_text
+
     def get_absolute_url(self):
         return reverse(
             'kanisa_public_blog_detail',
