@@ -1,13 +1,3 @@
-Version 0.9.5
-=============
-
-The changes in this version should be sufficient to move all sites
-using Kaleo to Kanisa (though until we've got support for automating
-adding cron jobs, and started using Whitenoise for static assets, we
-probably don't want to deploy this too widely).
-
-- Add speaker profiles
-
 Version 0.9.6
 =============
 

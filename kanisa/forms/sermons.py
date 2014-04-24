@@ -26,6 +26,7 @@ class SermonSeriesForm(KanisaBaseModelForm):
 class SermonSpeakerForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSpeaker
+        widgets = {'biography': KanisaMainInputWidget(), }
 
 
 class SermonForm(KanisaBaseModelForm):

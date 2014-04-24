@@ -115,6 +115,11 @@ class SermonSpeaker(models.Model):
         upload_to='kanisa/sermons/speakers/',
         help_text='Must be at least 400px by 300px.'
     )
+    biography = models.TextField(
+        blank=True,
+        help_text='Give a brief biography of the speaker.'
+    )
+
     modified = models.DateTimeField(auto_now=True)
 
     objects = SpeakerManager()

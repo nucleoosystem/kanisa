@@ -1,0 +1,25 @@
+{% load kanisa_markup %}
+{% load thumbnail %}
+
+<h3>About the Speaker</h3>
+
+{% if object.speaker.image %}
+  {% thumbnail object.speaker.image "90x90" crop="center" as im %}
+  <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" style="float: right; margin: 0 0 5px 5px" />
+  {% endthumbnail %}
+{% endif %}
+
+<p>This sermon was given by <strong>{{ object.speaker }}</strong>.</p>
+
+{% if object.speaker.biography %}
+{{ object.speaker.biography|kanisa_markdown }}
+{% endif %}
+
+{% if perms.kanisa.manage_sermons %}
+    <a href="{% url 'kanisa_manage_sermons_speaker_update' object.speaker.pk %}" class="btn btn-default btn-xs">
+      <i class="glyphicon glyphicon-edit"></i>
+      Edit this speaker's profile
+    </a>
+{% endif %}
+
+<hr style="clear: both" />

@@ -70,6 +70,7 @@
   </div>
   <div class="col-md-5">
     {% include "kanisa/public/sermons/_sermon_series_intro.html" %}
+    {% include "kanisa/public/sermons/_sermon_author_intro.html" %}
 
     {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn btn-default">
