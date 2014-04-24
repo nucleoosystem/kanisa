@@ -7,7 +7,6 @@ adding cron jobs, and started using Whitenoise for static assets, we
 probably don't want to deploy this too widely).
 
 - Add speaker profiles
-- Figure out why sidebar link items are no longer active
 
 Version 0.9.6
 =============
