@@ -109,6 +109,7 @@ class Command(BaseCommand):
         'banners_banner',
         'navigation_link',
         'members_document',
+        'tinyblog_post',
     ]
 
     def handle(self, *args, **options):
@@ -694,6 +695,24 @@ class Command(BaseCommand):
         document.created = uploaded
         document.save()
         print "Created document with title %s." % document.title
+
+    def handle_tinyblog_post(self, item):
+        text_html = item['fields']['text_html']
+        teaser_html = item['fields']['teaser_html']
+        title = item['fields']['title']
+        created = item['fields']['created']
+        slug = item['fields']['slug']
+        thedate = datetime_from_str(created).date()
+
+        models.BlogPost.objects.create(
+            title=title,
+            slug=slug,
+            publish_date=thedate,
+            teaser_text=teaser_html,
+            main_text=text_html
+        )
+
+        print "Created blog post with title '%s'." % title
 
     def cleanup_people_person(self):
         for contact in self.seen_event_contacts.values():

@@ -11,8 +11,6 @@ probably don't want to deploy this too widely).
     permission)
   - Update edit post links to go to the management interface, rather
     than the admin
-  - Add support for importing posts from tinyblog, which is what
-    sites running Kaleo use for blogging
 - Add speaker profiles
 
 Version 0.9.6
