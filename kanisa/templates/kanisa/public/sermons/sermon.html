@@ -2,7 +2,6 @@
 
 {% load kanisa_facebook %}
 {% load kanisa_markup %}
-{% load thumbnail %}
 
 {% block precontent %}
 <ul class="breadcrumb">
@@ -70,28 +69,7 @@
 
   </div>
   <div class="col-md-5">
-    {% with object.series as series %}
-    {% if series %}
-    <h2 style="line-height: 1em">
-      <a href="{% url 'kanisa_public_sermon_series_detail' series.slug %}">{{ series.title }}</a><br />
-      {% include "kanisa/public/sermons/_subtitle.html" with object=series %}
-    </h2>
-    <div class="thumbnail" style="width:130; float: left; margin: 0 1em 1em 0">
-      {% thumbnail series.image_or_default "130x130" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-      {% endthumbnail %}
-    </div>
-
-    {% if series.intro %}
-    {{ series.intro|kanisa_markdown }}
-    {% endif %}
-
-    {% with series.sermons as sermons %}
-    {% include "kanisa/public/sermons/_series_table_of_sermons.html" with current=object%}
-    {% endwith %}
-
-    {% endif %}
-    {% endwith %}
+    {% include "kanisa/public/sermons/_sermon_series_intro.html" %}
 
     {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn btn-default">
