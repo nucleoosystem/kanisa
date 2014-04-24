@@ -106,11 +106,15 @@ def sermon_speaker_slug(speaker):
 class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from=sermon_speaker_slug, unique=True)
+    slug = AutoSlugField(
+        populate_from=sermon_speaker_slug,
+        unique=True
+    )
     image = ImageField(
         null=True, blank=True,
         upload_to='kanisa/sermons/speakers/',
-        help_text='Must be at least 400px by 300px.')
+        help_text='Must be at least 400px by 300px.'
+    )
     modified = models.DateTimeField(auto_now=True)
 
     objects = SpeakerManager()
