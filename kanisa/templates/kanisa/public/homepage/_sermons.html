@@ -9,7 +9,7 @@
 <table class="table">
   {% for sermon in sermons %}
   <tr>
-    <td>
+    <td width="80px">
       {% if sermon.speaker.image %}
         {% thumbnail sermon.speaker.image "60x60" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
@@ -29,7 +29,7 @@
       <br />
       {% endif %}
       {{ sermon.speaker }}
-      <span class="text-muted">({{ sermon.date }})</span>
+      <span class="text-muted">({{ sermon.date|date:"jS F Y" }})</span>
     </td>
   </tr>
   {% endfor %}
