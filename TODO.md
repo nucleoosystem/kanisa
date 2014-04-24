@@ -12,6 +12,7 @@ probably don't want to deploy this too widely).
   - Update edit post links to go to the management interface, rather
     than the admin
 - Add speaker profiles
+- Figure out why sidebar link items are no longer active
 
 Version 0.9.6
 =============
