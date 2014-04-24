@@ -3,14 +3,17 @@ from django.http import HttpResponseServerError
 from django.template import Context, loader
 from django.views.generic.base import TemplateView
 
-from kanisa.models.banners import Banner
+from kanisa.models import Banner, BlogPost
 
 
 class KanisaIndexView(TemplateView):
     template_name = 'kanisa/public/homepage/index.html'
 
     def get_context_data(self, **kwargs):
-        return {'banners': Banner.active_objects.all()}
+        return {
+            'banners': Banner.active_objects.all(),
+            'blogposts': BlogPost.published_objects.all()[:2],
+        }
 
 
 def server_error(request, template_name='500.html'):

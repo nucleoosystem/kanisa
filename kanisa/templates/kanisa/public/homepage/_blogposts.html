@@ -1,0 +1,31 @@
+{% load kanisa_markup %}
+{% load thumbnail %}
+
+<h3>Latest News</h3>
+
+<table class="table">
+{% for post in blogposts %}
+  <tr>
+    <td width="80px">
+      {% if post.author.image %}
+        {% thumbnail post.author.image "60x60" crop="center" as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
+        {% endthumbnail %}
+      {% endif %}
+    </td>
+    <td>
+      <strong>
+        <a href="{{ post.get_absolute_url }}">
+          {{ post.title }}
+        </a>
+      </strong>
+      {% if post.author %}
+      &ndash;
+      {{ post.author.get_full_name }}
+      {% endif %}
+      <span class="text-muted">({{ post.publish_date|date:"jS F Y" }})</span><br />
+      <p>{{ post.teaser_text|kanisa_markdown|striptags|truncatewords:30 }}</p>
+    </td>
+  </tr>
+{% endfor %}
+</table>
