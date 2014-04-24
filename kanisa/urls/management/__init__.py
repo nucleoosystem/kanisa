@@ -7,6 +7,7 @@ urlpatterns = patterns(
     url(r'^$', KanisaManagementIndexView.as_view(), {}, 'kanisa_manage_index'),
     url(r'^banners/', include('kanisa.urls.management.banners')),
     url(r'^blocks/', include('kanisa.urls.management.blocks')),
+    url(r'^blog/', include('kanisa.urls.management.blog')),
     url(r'^branding/', include('kanisa.urls.management.branding')),
     url(r'^diary/', include('kanisa.urls.management.diary')),
     url(r'^documents/', include('kanisa.urls.management.documents')),

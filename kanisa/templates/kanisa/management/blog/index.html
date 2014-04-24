@@ -1,0 +1,56 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+<p>
+  <a href="{% url 'kanisa_manage_blog_create' %}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-plus"></i>
+    Write a Blog Post
+  </a>
+</p>
+
+<hr />
+
+{% if object_list %}
+
+<table class="table table-striped">
+<tr>
+  <th></th>
+  <th></th>
+  <th>Title</th>
+  <th>Published</th>
+  <th>Author</th>
+</tr>
+{% for object in object_list %}
+<tr>
+  <td>
+    {% if object.published %}
+    <span class="text-success glyphicon glyphicon-ok-circle" title="This blog post is published"></span>
+    {% else %}
+    <span class="text-danger glyphicon glyphicon-remove-circle" title="This blog post is not yet published"></span>
+    {% endif %}
+  </td>
+  <td>
+    <a href="{{ object.get_absolute_url }}" title="View on site"><i class="glyphicon glyphicon-eye-open"></i></a>
+  </td>
+  <td>
+    <a href="{% url 'kanisa_manage_blog_update' object.pk %}" title="Edit this blog post">
+      {{ object.title }}
+    </a>
+  </td>
+  <td>
+    {{ object.publish_date|date:"jS F Y" }}
+  </td>
+  <td>
+    {{ object.author.get_full_name }}
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+{% else %}
+<div class="alert alert-warning">
+There are no posts to display.
+</div>
+{% endif %}
+
+{% endblock %}
