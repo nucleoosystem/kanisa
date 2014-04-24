@@ -42,9 +42,9 @@
 
     {% if perms.kanisa.manage_blog %}
     <hr />
-    <a class="btn btn-default" href="{% url 'admin:kanisa_blogpost_changelist' %}">
-      <i class="glyphicon glyphicon-edit"></i>
-      Edit blog posts
+    <a class="btn btn-primary" href="{% url 'kanisa_manage_blog' %}">
+      <i class="glyphicon glyphicon-leaf"></i>
+      Manage blog posts
     </a>
     {% endif %}
   </div>

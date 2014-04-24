@@ -6,9 +6,6 @@ using Kaleo to Kanisa (though until we've got support for automating
 adding cron jobs, and started using Whitenoise for static assets, we
 probably don't want to deploy this too widely).
 
-- Add support for a simple blog
-  - Update edit post links to go to the management interface, rather
-    than the admin
 - Add speaker profiles
 - Figure out why sidebar link items are no longer active
 

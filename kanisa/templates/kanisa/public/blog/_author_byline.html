@@ -2,7 +2,7 @@
 
 <p class="text-muted author-byline">
   {% if perms.kanisa.manage_blog %}
-  <a class="btn btn-info btn-xs" href="{% url 'admin:kanisa_blogpost_change' object.pk %}" style="float: right">
+  <a class="btn btn-primary btn-xs" href="{% url 'kanisa_manage_blog_update' object.pk %}" style="float: right">
     <i class="glyphicon glyphicon-edit"></i>
     Edit
   </a>
