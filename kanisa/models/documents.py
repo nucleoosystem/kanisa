@@ -6,8 +6,10 @@ import os
 
 KNOWN_EXTENSIONS = {
     '.doc': 'Word Document',
+    '.docx': 'Word Document',
     '.pdf': 'PDF',
     '.xls': 'Excel Document',
+    '.xlxs': 'Excel Document',
 }
 
 
