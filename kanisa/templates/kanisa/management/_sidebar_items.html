@@ -2,14 +2,14 @@
 
 <li>
   <a href="{% url 'kanisa_manage_index' %}">
-    <i class="glyphicon glyphicon-home"></i>
+    <span class="glyphicon glyphicon-home"></span>
     Home
   </a>
 </li>
 {% if perms.kanisa.manage_pages %}
 <li{% if kanisa_nav_component = "pages" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_pages' %}">
-    <i class="glyphicon glyphicon-font"></i>
+    <span class="glyphicon glyphicon-font"></span>
     Pages
   </a>
 </li>
@@ -17,7 +17,7 @@
 {% if perms.kanisa.manage_diary %}
 <li{% if kanisa_nav_component = "diary" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_diary' %}">
-    <i class="glyphicon glyphicon-calendar"></i>
+    <span class="glyphicon glyphicon-calendar"></span>
     Diary
   </a>
 </li>
@@ -25,7 +25,7 @@
 {% if perms.kanisa.manage_sermons %}
 <li{% if kanisa_nav_component = "sermons" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_sermons' %}">
-    <i class="glyphicon glyphicon-headphones"></i>
+    <span class="glyphicon glyphicon-headphones"></span>
     Sermons
   </a>
 </li>
@@ -33,7 +33,7 @@
 {% if perms.kanisa.manage_banners %}
 <li{% if kanisa_nav_component = "banners" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_banners' %}">
-    <i class="glyphicon glyphicon-picture"></i>
+    <span class="glyphicon glyphicon-picture"></span>
     Banners
   </a>
 </li>
@@ -42,7 +42,7 @@
   {% if perms.kanisa.manage_documents %}
 <li{% if kanisa_nav_component = "documents" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_documents' %}">
-    <i class="glyphicon glyphicon-file"></i>
+    <span class="glyphicon glyphicon-file"></span>
     Documents
   </a>
 </li>
@@ -50,7 +50,7 @@
 {% if perms.kanisa.manage_social %}
 <li{% if kanisa_nav_component = "social" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_social' %}">
-    <i class="glyphicon glyphicon-fire"></i>
+    <span class="glyphicon glyphicon-fire"></span>
     Social
   </a>
 </li>
@@ -58,7 +58,7 @@
 {% if perms.kanisa.manage_users %}
 <li{% if kanisa_nav_component = "users" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_users' %}">
-    <i class="glyphicon glyphicon-user"></i>
+    <span class="glyphicon glyphicon-user"></span>
     Users
 
     {% kanisa_inactive_users as inactive_users %}
@@ -73,7 +73,7 @@
 {% if perms.kanisa.manage_navigation %}
 <li{% if kanisa_nav_component = "navigation" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_navigation' %}">
-    <i class="glyphicon glyphicon-road"></i>
+    <span class="glyphicon glyphicon-road"></span>
     Navigation
   </a>
 </li>
@@ -81,7 +81,7 @@
 {% if perms.kanisa.manage_media %}
 <li{% if kanisa_nav_component = "media" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_media' %}">
-    <i class="glyphicon glyphicon-camera"></i>
+    <span class="glyphicon glyphicon-camera"></span>
     Media
   </a>
 </li>
@@ -89,7 +89,7 @@
 {% if perms.kanisa.manage_blocks %}
 <li{% if kanisa_nav_component = "blocks" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_blocks' %}">
-    <i class="glyphicon glyphicon-th-large"></i>
+    <span class="glyphicon glyphicon-th-large"></span>
     Content Blocks
   </a>
 </li>
@@ -97,7 +97,7 @@
 {% if perms.kanisa.manage_services %}
 <li{% if kanisa_nav_component = "services" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_services' %}">
-    <i class="glyphicon glyphicon-bullhorn"></i>
+    <span class="glyphicon glyphicon-bullhorn"></span>
     Service Planning
   </a>
 </li>
@@ -105,7 +105,7 @@
 {% if user.is_superuser %}
 <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_branding' %}">
-    <i class="glyphicon glyphicon-tag"></i>
+    <span class="glyphicon glyphicon-tag"></span>
     Branding
   </a>
 </li>
@@ -113,7 +113,7 @@
 
 <li>
   <a href="{% url 'kanisa_members_index' %}">
-    <i class="glyphicon glyphicon-lock"></i>
+    <span class="glyphicon glyphicon-lock"></span>
     Your Account
   </a>
 </li>
