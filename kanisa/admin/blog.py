@@ -17,6 +17,9 @@ class BlogPostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'teaser_text', 'main_text', )
 
     def author_full(self, obj):
+        if not obj.author:
+            return 'None'
+
         return obj.author.get_full_name()
     author_full.short_description = 'Author'
 
