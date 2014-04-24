@@ -157,6 +157,13 @@ class SermonDeleteView(SermonBaseView,
 sermon_delete = SermonDeleteView.as_view()
 
 
+class SpeakerBaseView(SermonBaseView):
+    def get_kanisa_intermediate_crumbs(self):
+        return [{'url': reverse('kanisa_manage_sermons_speaker'),
+                 'title': 'Manage Speakers'},
+                ]
+
+
 class SermonSpeakerIndexView(SermonBaseView,
                              KanisaListView):
     model = SermonSpeaker
@@ -167,7 +174,7 @@ class SermonSpeakerIndexView(SermonBaseView,
 sermon_speaker_management = SermonSpeakerIndexView.as_view()
 
 
-class SermonSpeakerCreateView(SermonBaseView,
+class SermonSpeakerCreateView(SpeakerBaseView,
                               KanisaCreateView):
     form_class = SermonSpeakerForm
     kanisa_title = 'Add a Speaker'
@@ -175,7 +182,7 @@ class SermonSpeakerCreateView(SermonBaseView,
 sermon_speaker_create = SermonSpeakerCreateView.as_view()
 
 
-class SermonSpeakerUpdateView(SermonBaseView,
+class SermonSpeakerUpdateView(SpeakerBaseView,
                               KanisaUpdateView):
     form_class = SermonSpeakerForm
     model = SermonSpeaker
