@@ -18,10 +18,21 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
-    publish_date = models.DateField()
+    publish_date = models.DateField(
+        help_text=('Blog posts are published on the site at 00:00 on the '
+                   'publish date.')
+    )
     updated_date = models.DateTimeField(auto_now=True)
-    teaser_text = models.TextField(verbose_name='Teaser')
-    main_text = models.TextField(verbose_name='Main text')
+    teaser_text = models.TextField(
+        verbose_name='Teaser',
+        help_text=('This should normally be the first few sentences of your '
+                   'post.')
+    )
+    main_text = models.TextField(
+        verbose_name='Main text',
+        help_text=('This should be the bulk of your post, and will follow on '
+                   'from what\'s in the teaser.')
+    )
 
     objects = models.Manager()
     published_objects = PublishedPostManager()

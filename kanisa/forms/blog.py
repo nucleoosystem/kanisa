@@ -10,7 +10,10 @@ class BlogPostForm(KanisaBaseModelForm):
         get_user_model().objects.all(),
         required=False
     )
-    publish_date = BootstrapDateField()
+    publish_date = BootstrapDateField(
+        help_text=('Blog posts are published on the site at 00:00 on the '
+                   'publish date.')
+    )
 
     class Meta:
         model = BlogPost
