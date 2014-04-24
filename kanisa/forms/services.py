@@ -7,6 +7,10 @@ from kanisa.forms import (
     KanisaBaseForm,
     KanisaBaseModelForm
 )
+from kanisa.forms.fields import (
+    AccountChoiceField,
+    MultipleAccountChoiceField
+)
 from kanisa.models import (
     Song,
     Service,
@@ -14,7 +18,6 @@ from kanisa.models import (
     Composer,
     Band
 )
-from kanisa.forms.widgets import KanisaAccountMultipleSelector
 
 
 class AddSongToServiceForm(KanisaBaseForm):
@@ -45,20 +48,6 @@ class EventChoiceField(forms.ModelChoiceField):
     # make the view a bit faster to render.
     def label_from_instance(self, obj):
         return obj.pk
-
-
-class AccountChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        full_name = obj.get_full_name()
-        return full_name or obj.username
-
-
-class MultipleAccountChoiceField(forms.ModelMultipleChoiceField):
-    widget = KanisaAccountMultipleSelector
-
-    def label_from_instance(self, obj):
-        full_name = obj.get_full_name()
-        return full_name or obj.username
 
 
 class ServiceForm(KanisaBaseModelForm):

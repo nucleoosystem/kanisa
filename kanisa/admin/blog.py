@@ -1,14 +1,8 @@
 from datetime import date
-from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from kanisa.forms.fields import AccountChoiceField
 from kanisa.models import BlogPost
-
-
-class AccountChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        full_name = obj.get_full_name()
-        return full_name or obj.username
 
 
 class BlogPostAdmin(admin.ModelAdmin):
