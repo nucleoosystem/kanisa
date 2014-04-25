@@ -24,6 +24,13 @@
       {{ object.title }}
       <small>({{ object.date|date:"l, jS F Y" }})</small>
     </h1>
+    {% if object.series %}
+    <p class="alert alert-info">
+      This is part of a series of events running
+      {% for event in object.series.get_cached_events %}
+      {% if event.pk != object.pk %}<a href="{{ event.url }}">{% endif %}{{ event.date|date:"jS F" }}{% ifchanged %} {{ event.date|date:"Y" }}{% endifchanged %}{% if event.pk != object.pk %}</a>{% endif %}{% if not forloop.last %};{% endif %}{% endfor %}.
+    </p>
+    {% endif %}
     <div class="row">
       {% if object.event or object.contact %}
       <div class="col-md-4">
