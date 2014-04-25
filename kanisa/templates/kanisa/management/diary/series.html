@@ -27,8 +27,7 @@
         <small>
         {% for event in series.get_cached_events %}
         <a href="{{ event.url }}">
-          {{ event.date|date:"j M" }}
-          {% ifchanged %} {{ event.date|date:"Y" }}{% endifchanged %}</a>{% if not forloop.last %};{% endif %}
+          {{ event.date|date:"j M" }}{% ifchanged %} {{ event.date|date:"Y" }}{% endifchanged %}</a>{% if not forloop.last %};{% endif %}
         {% endfor %}
         </small>
       </td>
