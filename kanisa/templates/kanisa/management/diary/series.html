@@ -15,16 +15,23 @@
   <thead>
     <tr>
       <th>Series</th>
-      <th>Starts</th>
-      <th>Ends</th>
     </tr>
   </thead>
   <tbody>
     {% for series in scheduledeventseries_list %}
     <tr>
-      <td><a href="{% url 'kanisa_manage_diary_series_update' series.pk %}">{{ series.name }}</a></td>
-      <td>{{ series.start_date|date:"jS F Y" }}</td>
-      <td>{{ series.end_date|date:"jS F Y" }}</td>
+      <td>
+        <a href="{% url 'kanisa_manage_diary_series_update' series.pk %}">
+          {{ series.name }}
+        </a><br />
+        <small>
+        {% for event in series.get_cached_events %}
+        <a href="{{ event.url }}">
+          {{ event.date|date:"j M" }}
+          {% ifchanged %} {{ event.date|date:"Y" }}{% endifchanged %}</a>{% if not forloop.last %};{% endif %}
+        {% endfor %}
+        </small>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

@@ -470,6 +470,17 @@ class ScheduledEventSeriesView(EventSeriesBaseView,
 
     def get_kanisa_intermediate_crumbs(self):
         return []
+
+    def get_context_data(self, **kwargs):
+        context = super(ScheduledEventSeriesView,
+                        self).get_context_data(**kwargs)
+        relevant_events = ScheduledEvent.objects.filter(
+            series__isnull=False
+        )
+        for series in context['object_list']:
+            series.cached_events = [e for e in relevant_events
+                                    if e.series == series]
+        return context
 diary_event_series = ScheduledEventSeriesView.as_view()
 
 
