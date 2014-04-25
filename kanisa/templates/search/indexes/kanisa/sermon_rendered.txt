@@ -11,6 +11,22 @@
 {% endblock %}
 
 {% block contents %}
+<p class="footnote">
+  <a href="{% url 'kanisa_public_sermon_index' %}">
+    Sermons
+  </a>
+  {% if object.series %}
+  &raquo;
+  <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">
+    {{ object.series }}
+  </a>
+  {% endif %}
+  &raquo;
+  <strong>
+    {{ object.title }} ({{ object.date|date:"jS F Y" }})
+  </strong>
+</p>
+
 {% if object.series and object.series.image %}
 <blockquote class="withthumbnail">
     {% thumbnail object.series.image "100x100" crop="center" as im %}
@@ -20,15 +36,11 @@
 <blockquote>
 {% endif %}
 <p>
-{% if object.series %}
-<strong>Series:</strong>
-<a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series }}</a><br />
-{% endif %}
 <strong>Speaker:</strong> {{ object.speaker }}<br />
 {% if object.passage %}
 <strong>Passage:</strong> {{ object.passage }}<br />
 {% endif %}
-A sermon preached on <strong>{{ object.date|date:"jS F Y" }}</strong>.</p>
+</p>
 
 {% if object.details %}
 {{ object.details|kanisa_markdown|striptags|truncatewords:75 }}
