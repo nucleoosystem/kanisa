@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import RequestSite
 from django.core.cache import cache
+from django.db.models import Q
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
@@ -40,7 +41,20 @@ class UserManagementView(UserBaseView,
     paginate_by = 20
 
     def get_queryset(self):
-        return get_user_model().objects.all().order_by('is_active', 'username')
+        query = self.request.GET.get('query', None)
+
+        qs = get_user_model().objects.all().order_by('is_active', 'username')
+
+        if not query:
+            return qs
+
+        params = (Q(username__contains=query) |
+                  Q(email__contains=query) |
+                  Q(first_name__contains=query) |
+                  Q(last_name__contains=query))
+
+        qs = qs.filter(params)
+        return qs
 user_management = UserManagementView.as_view()
 
 

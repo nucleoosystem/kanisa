@@ -76,8 +76,6 @@ Features
   - Showing recent posts on the home page
 - Add logs of actions taken in the management console
 - Add a permission for branding management
-- Add a good way of finding a particular user in the user management
-  interface (which doesn't involve paging through all the pages)
 - Add a good way of finding a particular document in the document
   management interface (which doesn't involve paging through all the
   pages)
