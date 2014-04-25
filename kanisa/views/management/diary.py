@@ -74,11 +74,10 @@ class DiaryEventIndexView(DiaryBaseView,
     kanisa_is_root_view = True
 
     def get_context_data(self, **kwargs):
-        thedate = self.date_from_yyymmdd()
-
         context = super(DiaryEventIndexView,
                         self).get_context_data(**kwargs)
 
+        thedate = self.date_from_yyymmdd()
         schedule = get_schedule(thedate)
         context['previousdate'] = (schedule.monday -
                                    timedelta(days=7)).strftime("%Y%m%d")
@@ -455,7 +454,7 @@ diary_event_category_update = EventCategoryUpdateView.as_view()
 
 
 class EventSeriesBaseView(DiaryBaseView):
-    kanisa_lead = ('Event series help people find links between events')
+    kanisa_lead = 'Event series help people find links between events.'
 
     def get_kanisa_intermediate_crumbs(self):
         return [{'url': reverse('kanisa_manage_diary_series'),
