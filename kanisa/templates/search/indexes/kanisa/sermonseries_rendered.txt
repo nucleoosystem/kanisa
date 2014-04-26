@@ -21,10 +21,14 @@
 {% endif %}
 
 {% with object.date_range as date_range %}
-{% if date_range|last %}
-<p>A series of {{ object.num_sermons }} sermon{{ object.num_sermons|pluralize }} preached between {{ date_range|first|date:"jS F Y" }} and {{ date_range|last|date:"jS F Y" }}.</p>
+{% if date_range %}
+  {% if date_range|last %}
+    <p>A series of {{ object.num_sermons }} sermon{{ object.num_sermons|pluralize }} preached between {{ date_range|first|date:"jS F Y" }} and {{ date_range|last|date:"jS F Y" }}.</p>
+  {% else %}
+    <p>A series of {{ object.num_sermons }} sermon{{ object.num_sermons|pluralize }} which began on {{ date_range|first|date:"jS F Y" }}.</p>
+  {% endif %}
 {% else %}
-<p>A series of {{ object.num_sermons }} sermon{{ object.num_sermons|pluralize }} which began on {{ date_range|first|date:"jS F Y" }}.</p>
+   <p>A series of sermons.</p>
 {% endif %}
 {% endwith %}
 
