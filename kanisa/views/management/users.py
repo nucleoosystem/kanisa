@@ -40,8 +40,11 @@ class UserManagementView(UserBaseView,
     context_object_name = 'user_list'
     paginate_by = 20
 
+    def get_filter_query(self):
+        return self.request.GET.get('query', None)
+
     def get_queryset(self):
-        query = self.request.GET.get('query', None)
+        query = self.get_filter_query()
 
         qs = get_user_model().objects.all().order_by('is_active', 'username')
 
@@ -55,6 +58,12 @@ class UserManagementView(UserBaseView,
 
         qs = qs.filter(params)
         return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(UserManagementView,
+                        self).get_context_data(**kwargs)
+        context['query'] = self.get_filter_query()
+        return context
 user_management = UserManagementView.as_view()
 
 

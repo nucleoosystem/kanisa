@@ -21,6 +21,11 @@
       </div>
     </form>
   </div>
+  <div class="col-xs-8">
+    {% if query %}
+    <p class="help-block">Currently showing results for <em>{{ query }}</em>. <a href="{% url 'kanisa_manage_users' %}" class="btn btn-primary btn-xs">Show all users</a></p>
+    {% endif %}
+  </div>
 </div>
 
 <hr />
