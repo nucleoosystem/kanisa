@@ -38,7 +38,7 @@
     {% endif %}
 
     {% if not theuser.is_active %}
-    <a class="btn btn-xs btn-info" style="float: right" href="{% url 'kanisa_manage_users_activate' theuser.pk %}">
+    <a class="btn btn-xs btn-success" style="float: right" href="{% url 'kanisa_manage_users_activate' theuser.pk %}">
       Activate
     </a>
     {% endif %}
