@@ -1,7 +1,10 @@
 from django.contrib.auth import get_user_model
 from kanisa.forms import KanisaBaseModelForm, BootstrapDateField
 from kanisa.forms.fields import AccountChoiceField
-from kanisa.forms.widgets import KanisaMainInputWidget
+from kanisa.forms.widgets import (
+    KanisaBlogTeaserInputWidget,
+    KanisaMainInputWidget,
+)
 from kanisa.models import BlogPost
 
 
@@ -19,5 +22,5 @@ class BlogPostForm(KanisaBaseModelForm):
         model = BlogPost
         widgets = {
             'main_text': KanisaMainInputWidget(),
-            'teaser_text': KanisaMainInputWidget(),
+            'teaser_text': KanisaBlogTeaserInputWidget(),
         }

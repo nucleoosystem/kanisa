@@ -99,3 +99,7 @@ class BootstrapDateWidget(DateInput):
 
 class KanisaAccountMultipleSelector(SelectMultiple):
     pass
+
+
+class KanisaBlogTeaserInputWidget(KanisaMainInputWidget):
+    pass
