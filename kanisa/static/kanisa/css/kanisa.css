@@ -22,6 +22,14 @@ body {
     text-align: right;
 }
 
+p a {
+    text-decoration: underline;
+}
+
+p a.btn {
+    text-decoration: none;
+}
+
 div.carousel-caption {
     background-color: #000;
     background-color:rgba(0,0,0,0.5);
