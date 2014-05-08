@@ -576,3 +576,9 @@ p.author-byline img {
     margin-right: 10px;
     margin-top: -10px;
 }
+
+@media (min-width: 768px) {
+    .blogpostfull .lead {
+        font-size: 18px;
+    }
+}

@@ -28,12 +28,14 @@
 
 {% include "kanisa/public/blog/_author_byline.html" %}
 
-<div class="lead">
-  {{ object.teaser_text|kanisa_markdown }}
-</div>
+<div class="blogpostfull">
+  <div class="lead">
+    {{ object.teaser_text|kanisa_markdown }}
+  </div>
 
-<span id="post_more"></span>
-{{ object.main_text|kanisa_markdown }}
+  <span id="post_more"></span>
+  {{ object.main_text|kanisa_markdown }}
+</div>
 
 {% if next or previous %}
 <ul class="pager">
