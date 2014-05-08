@@ -48,7 +48,7 @@ for i in $(find kanisa/static/kanisa/js/management/ -type f | sort); do
     echo "<script src=\"{% static '${localpath}' %}\"></script>" >> ${management_js_template}
 done
 echo "{% else %}" >> ${management_js_template}
-echo "<script src=\"{{ STATIC_URL 'kanisa/js/minified/kanisa-management.${management_js_hash}.js' %}\"></script>" >> ${management_js_template}
+echo "<script src=\"{% static 'kanisa/js/minified/kanisa-management.${management_js_hash}.js' %}\"></script>" >> ${management_js_template}
 echo "{% endif %}" >> ${management_js_template}
 
 css_template="kanisa/templates/kanisa/_css.html"
