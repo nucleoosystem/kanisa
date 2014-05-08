@@ -69,6 +69,8 @@ DATE_FORMAT = 'N j, Y'
 TIME_FORMAT = 'P'
 SHORT_DATE_FORMAT = 'm/d/Y'
 
+STATIC_URL = '/fakestatictrees/'
+
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
 SITE_ID = 1
