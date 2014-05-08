@@ -1,8 +1,6 @@
 {% load kanisa_branding %}
 
-{% comment %}
 {% load speedbar %}
-{% endcomment %}
 
 {% load thumbnail %}
 
@@ -14,14 +12,12 @@
     <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="main_logo" />
     {% endthumbnail %}
 
-    {% comment %}
     {% if request.user.is_superuser %}
     <div class="speedbar">
       <span>Overall: {% metric "overall" "time" %}ms</span>
       <span>SQL: {% metric "sql" "count" %} ({% metric "sql" "time" %} ms)</span>
     </div>
     {% endif %}
-    {% endcomment %}
 
     <div class="hidden-xs">
       {% include "kanisa/_search_form.html" %}

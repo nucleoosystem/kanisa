@@ -218,7 +218,6 @@ textarea.kanisamaininputwidget {
     height: auto;
 }
 
-/*
 #logo .speedbar {
     position: absolute;
     bottom: 0;
@@ -232,7 +231,6 @@ textarea.kanisamaininputwidget {
     -moz-border-radius-topleft: 5px;
     border-top-left-radius: 5px;
 }
-*/
 
 .editable_block_wrapper {
     position: relative;

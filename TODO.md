@@ -17,11 +17,6 @@ Version 0.9.7
 The changes in this version are intended to make deployment easier,
 and to find performance problems earlier.
 
-- Add speedbar (https://pypi.python.org/pypi/django-speedbar)
-  - Probably warrants a way of importing required settings or
-    something
-  - Waiting for https://github.com/theospears/django-speedbar/pull/9
-    to be merged to add Django 1.6 support
 - Look at using Whitenoise for serving static assets
   - http://whitenoise.evans.io/en/latest/django.html
 - Add a way of searching for an individual song/composer to the Song
