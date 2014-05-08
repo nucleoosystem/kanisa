@@ -1,10 +1,11 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.1.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css" />
-    <script src="{{ STATIC_URL }}kanisa/vendor/jquery-1.10.2.min.js"></script>
-    <script src="{{ STATIC_URL }}kanisa/vendor/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/bootstrap-3.1.1/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css' %}" />
+    <script src="{% static 'kanisa/vendor/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'kanisa/vendor/bootstrap-3.1.1/js/bootstrap.min.js' %}"></script>
   </head>
   <body>
     <div id="wrap">
