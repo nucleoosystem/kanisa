@@ -1,10 +1,11 @@
+{% load static from staticfiles %}
 {% if KANISA_DEBUG_STATIC %}
-<script src="{{ STATIC_URL }}kanisa/js/public/diary.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_carousel.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/kanisa_csrf.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/login.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/members_documents.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/public/regular_events.js"></script>
+<script src="{% static 'kanisa/js/public/diary.js' %}"></script>
+<script src="{% static 'kanisa/js/public/kanisa_carousel.js' %}"></script>
+<script src="{% static 'kanisa/js/public/kanisa_csrf.js' %}"></script>
+<script src="{% static 'kanisa/js/public/login.js' %}"></script>
+<script src="{% static 'kanisa/js/public/members_documents.js' %}"></script>
+<script src="{% static 'kanisa/js/public/regular_events.js' %}"></script>
 {% else %}
-<script src="{{ STATIC_URL }}kanisa/js/minified/kanisa-public.b5191641.js"></script>
+<script src="{% static }}kanisa/js/minified/kanisa-public.b5191641.js"></script>
 {% endif %}

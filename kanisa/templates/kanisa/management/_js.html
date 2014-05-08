@@ -1,22 +1,23 @@
+{% load static from staticfiles %}
 {% if KANISA_DEBUG_STATIC %}
-<script src="{{ STATIC_URL }}kanisa/js/management/account_selector.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/biblefield.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/blog.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/bootstrap_datepicker.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/bootstrap_timepicker.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_alerts.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_blog.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_diary.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_navigation.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_pages.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_popups.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_sermons.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/kanisa_songs.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/main_input_widget.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/regular_event.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/scheduled_event.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/services.js"></script>
-<script src="{{ STATIC_URL }}kanisa/js/management/thumbnail_widget.js"></script>
+<script src="{% static 'kanisa/js/management/account_selector.js' %}"></script>
+<script src="{% static 'kanisa/js/management/biblefield.js' %}"></script>
+<script src="{% static 'kanisa/js/management/blog.js' %}"></script>
+<script src="{% static 'kanisa/js/management/bootstrap_datepicker.js' %}"></script>
+<script src="{% static 'kanisa/js/management/bootstrap_timepicker.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_alerts.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_blog.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_diary.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_navigation.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_pages.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_popups.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_sermons.js' %}"></script>
+<script src="{% static 'kanisa/js/management/kanisa_songs.js' %}"></script>
+<script src="{% static 'kanisa/js/management/main_input_widget.js' %}"></script>
+<script src="{% static 'kanisa/js/management/regular_event.js' %}"></script>
+<script src="{% static 'kanisa/js/management/scheduled_event.js' %}"></script>
+<script src="{% static 'kanisa/js/management/services.js' %}"></script>
+<script src="{% static 'kanisa/js/management/thumbnail_widget.js' %}"></script>
 {% else %}
-<script src="{{ STATIC_URL }}kanisa/js/minified/kanisa-management.49a1bb53.js"></script>
+<script src="{{ STATIC_URL 'kanisa/js/minified/kanisa-management.49a1bb53.js' %}"></script>
 {% endif %}
