@@ -13,7 +13,6 @@ from kanisa.forms.services import (
     ServiceForm,
 )
 from kanisa.models import (
-    Band,
     Service,
     Song,
     SongInService,
