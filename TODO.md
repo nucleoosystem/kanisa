@@ -10,6 +10,8 @@ Improvements to the service management stuff:
   spaces);
 - Add support for merging duplicate songs/composers;
 - Add a way to edit songs.
+- Remove horrible hack of including chosen/bootstrap_datepicker on
+  the members pages (just add everywhere)
 
 Version 0.9.7
 =============
