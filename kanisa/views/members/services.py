@@ -16,14 +16,16 @@ from kanisa.views.generic import (
 
 
 class ServiceBaseView(KanisaAuthorizationMixin):
+    kanisa_root_crumb = {
+        'text': 'Services',
+        'url': reverse_lazy('kanisa_members_services_index')
+    }
+
     def authorization_check(self, user):
         if not user.is_active:
             return False
 
         return user.can_see_service_plans()
-
-    kanisa_root_crumb = {'text': 'Services',
-                         'url': reverse_lazy('kanisa_members_services_index')}
 
 
 class ServiceIndexView(ServiceBaseView, KanisaListView):
