@@ -1,6 +1,10 @@
 {% extends 'kanisa/members/base.html' %}
 
 {% block content %}
+<div class="row">
+  <div class="col-md-7">
+    <h3>View Service Plans</h3>
+
   {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
   {% if perms.kanisa.manage_services %}
@@ -28,11 +32,19 @@
       too</a>?
     </p>
   {% endif %}
+  </div>
+  <div class="col-md-5">
+    {% include 'kanisa/members/services/_ccli_top5.html' %}
 
-  <h2>Song Finder</h2>
+    <hr />
 
-  <p>Find songs based on title, composer, or usage. Take a look at
-  the <a href="{% url 'kanisa_members_services_songs' %}" title="Use the Song Finder">Song
-  Finder</a>.</p>
+    <h3>Song Finder</h3>
 
+    <p>
+      Find songs based on title, composer, or usage. Take a look at
+      the <a href="{% url 'kanisa_members_services_songs' %}"
+      title="Use the Song Finder">Song Finder</a>.
+    </p>
+  </div>
+</div>
 {% endblock %}

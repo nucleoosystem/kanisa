@@ -9,7 +9,7 @@ from kanisa.models import (
     SongInService,
 )
 from kanisa.views.generic import KanisaTemplateView
-from kanisa.views.management.services import ServiceBaseView
+from kanisa.views.members.services import ServiceBaseView
 
 
 class CCLIReport(object):
@@ -74,7 +74,7 @@ class CCLIReport(object):
 
 
 class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
-    template_name = 'kanisa/management/services/ccli.html'
+    template_name = 'kanisa/members/services/ccli.html'
     kanisa_title = 'Song Usage Reports'
 
     def get_selected_event(self):

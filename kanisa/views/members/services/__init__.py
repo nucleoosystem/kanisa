@@ -46,6 +46,7 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
         context = super(ServiceIndexView,
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
+        context['top_five_songs'] = most_popular_songs()[:5]
 
         musician_services = self.request.user.service_musicians.all()
         leader_services = self.request.user.service_set.all()

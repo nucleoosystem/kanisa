@@ -1,0 +1,17 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-9">
+    <div class="visible-xs">
+      {% include 'kanisa/members/services/_ccli_filter.html' %}
+    </div>
+    {% include 'kanisa/members/services/_ccli_songs.html' %}
+  </div>
+  <div class="col-md-3">
+    <div class="hidden-xs">
+      {% include 'kanisa/members/services/_ccli_filter.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}
