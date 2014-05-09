@@ -1,8 +1,12 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     {% include "kanisa/_head.html" %}
     {% block extrajs %}
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/chosen-1.0.0/chosen.min.css' %}" />
+    <script src="{% static 'kanisa/vendor/chosen-1.0.0/chosen.jquery.min.js' %}"></script>
+    {% include "kanisa/management/_js.html" %}
     {% endblock %}
   </head>
   <body>

@@ -27,15 +27,4 @@
     </p>
     {% endif %}
 
-    <hr />
-
-    <h3>Available Bands</h3>
-    {% include 'kanisa/management/services/_band_table.html' %}
-
-    <p>
-      <a class="btn btn-success" href="{% url 'kanisa_manage_services_create_band' %}">
-        <i class="glyphicon glyphicon-plus"></i>
-        Create a Band
-      </a>
-    </p>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
 import kanisa.views.members.services as views
+import kanisa.views.members.services.bands as band_views
 import kanisa.views.members.services.ccli as ccli_views
 import kanisa.views.members.services.songs as song_views
 
@@ -13,6 +14,13 @@ urlpatterns = patterns(
 
     url(r'^services/(?P<service_pk>\d+)/$', views.service_detail, {},
         'kanisa_members_services_detail'),
+
+    url(r'^band/add/$', band_views.band_create, {},
+        'kanisa_members_services_create_band'),
+    url(r'^bands/(?P<pk>\d+)/edit/$', band_views.band_update, {},
+        'kanisa_members_services_update_band'),
+    url(r'^bands/(?P<pk>\d+)/remove/$', band_views.remove_band, {},
+        'kanisa_members_services_remove_band'),
 
     url(r'^songs/$', song_views.song_list, {},
         'kanisa_members_services_songs'),

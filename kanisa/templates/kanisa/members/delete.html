@@ -1,0 +1,17 @@
+{% extends 'kanisa/members/base.html' %}
+
+{% block content %}
+
+<p class="lead">{{ kanisa_delete_confirm }}</p>
+
+{% if kanisa_delete_extra %}
+  <p class="lead text-muted">{{ kanisa_delete_extra }}</p>
+{% endif %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="{{ kanisa_delete_button }}" />
+    <a class="btn btn-default" href="{{ kanisa_cancel_url }}">No, go back</a>
+</form>
+
+{% endblock %}

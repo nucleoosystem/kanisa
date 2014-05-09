@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.utils import formats
 from kanisa.models import (
+    Band,
     Service,
     Song,
 )
@@ -25,6 +26,12 @@ class ServiceBaseView(KanisaAuthorizationMixin):
         return user.can_see_service_plans()
 
 
+class ServiceRestrictedBaseView(KanisaAuthorizationMixin):
+    kanisa_root_crumb = {'text': 'Services',
+                         'url': reverse_lazy('kanisa_members_services_index')}
+    permission = 'kanisa.manage_services'
+
+
 class ServiceIndexView(ServiceBaseView, KanisaListView):
     template_name = 'kanisa/members/services/index.html'
     kanisa_title = 'Service Planning'
@@ -44,6 +51,7 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
         context['top_five_songs'] = most_popular_songs()[:5]
+        context['bands'] = Band.objects.all()
 
         musician_services = self.request.user.service_musicians.all()
         leader_services = self.request.user.service_set.all()

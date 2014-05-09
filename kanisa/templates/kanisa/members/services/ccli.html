@@ -1,14 +1,5 @@
 {% extends 'kanisa/members/base.html' %}
 
-{% load static from staticfiles %}
-
-{% block extrajs %}
-  <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/chosen-1.0.0/chosen.min.css' %}" />
-  <script src="{% static 'kanisa/vendor/chosen-1.0.0/chosen.jquery.min.js' %}"></script>
-  {% include "kanisa/management/_js.html" %}
-{% endblock %}
-
-
 {% block content %}
 <div class="row">
   <div class="col-md-9">

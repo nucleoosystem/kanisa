@@ -8,7 +8,6 @@ from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (
     AddSongToServiceForm,
-    BandForm,
     ComposerForm,
     CreateSongForm,
     ServiceForm,
@@ -59,36 +58,9 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
                         self).get_context_data(**kwargs)
         context['showing_all'] = self.kwargs['show_all']
         context['top_five_songs'] = most_popular_songs()[:5]
-        context['bands'] = Band.objects.all()
 
         return context
 service_management = ServiceIndexView.as_view()
-
-
-class BandCreateView(ServiceBaseView,
-                     KanisaCreateView):
-    form_class = BandForm
-    kanisa_title = 'Add a Band'
-    success_url = reverse_lazy('kanisa_manage_services')
-band_create = BandCreateView.as_view()
-
-
-class BandUpdateView(ServiceBaseView,
-                     KanisaUpdateView):
-    model = Band
-    form_class = BandForm
-    success_url = reverse_lazy('kanisa_manage_services')
-band_update = BandUpdateView.as_view()
-
-
-class RemoveBandView(ServiceBaseView,
-                     KanisaDeleteView):
-    model = Band
-    success_url = reverse_lazy('kanisa_manage_services')
-
-    def get_cancel_url(self):
-        return self.success_url
-remove_band = RemoveBandView.as_view()
 
 
 class ComposerCreateView(ServiceBaseView,

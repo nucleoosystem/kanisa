@@ -32,6 +32,18 @@
       too</a>?
     </p>
   {% endif %}
+
+  {% if perms.kanisa.manage_services %}
+  <h3>Available Bands</h3>
+  {% include 'kanisa/members/services/_band_table.html' %}
+
+  <p>
+    <a class="btn btn-success" href="{% url 'kanisa_members_services_create_band' %}">
+      <i class="glyphicon glyphicon-plus"></i>
+      Create a Band
+    </a>
+  </p>
+  {% endif %}
   </div>
   <div class="col-md-5">
     {% include 'kanisa/members/services/_ccli_top5.html' %}
