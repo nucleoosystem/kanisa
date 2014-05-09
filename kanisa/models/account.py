@@ -69,8 +69,11 @@ class RegisteredUser(AbstractUser):
         # Does the user have permission to manage services?
         if self.has_perm('kanisa.manage_services'):
             self._can_see_service_plans = True
-        # Is the user in any bands?
+        # Is the user the band leader of any bands?
         elif self.band_set.count() > 0:
+            self._can_see_service_plans = True
+        # Is the user a band member in any bands?
+        elif self.band_musicians.count() > 0:
             self._can_see_service_plans = True
         # Is the user leading the band in any services?
         elif self.service_set.count() > 0:
