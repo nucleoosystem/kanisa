@@ -25,9 +25,6 @@ urlpatterns = patterns(
 
     url(r'^songs/$', song_views.song_list, {},
         'kanisa_members_services_songs'),
-    url(r'^songs/composers/(?P<composer_pk>\d+)/$',
-        song_views.composer_detail, {},
-        'kanisa_members_services_composer_detail'),
     url(r'^songs/discover/$', song_views.song_discovery, {},
         'kanisa_members_services_song_discovery'),
     url(r'^songs/(?P<song_pk>\d+)/$', song_views.song_detail, {},
@@ -40,6 +37,9 @@ urlpatterns = patterns(
     url(r'^ccli/bytitle/$', ccli_views.ccli_view, {'sort': 'title'},
         'kanisa_members_services_ccli_by_title'),
 
-    url(r'^composer/add/$', composer_views.composer_create, {},
+    url(r'^composers/add/$', composer_views.composer_create, {},
         'kanisa_members_services_create_composer'),
+    url(r'^composers/(?P<composer_pk>\d+)/$',
+        composer_views.composer_detail, {},
+        'kanisa_members_services_composer_detail'),
 )

@@ -1,6 +1,5 @@
 from django.core.urlresolvers import reverse
 from kanisa.models import (
-    Composer,
     RegularEvent,
     Service,
     Song,
@@ -88,21 +87,3 @@ class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
 
         return context
 song_discovery = SongDisoveryView.as_view()
-
-
-class ComposerDetailView(SongFinderBaseView, KanisaDetailView):
-    model = Composer
-    template_name = 'kanisa/members/services/composer_detail.html'
-    pk_url_kwarg = 'composer_pk'
-
-    def get_context_data(self, **kwargs):
-        context = super(ComposerDetailView,
-                        self).get_context_data(**kwargs)
-
-        context['song_list'] = self.get_songs()
-        return context
-
-    def get_songs(self):
-        qs = self.object.song_set.prefetch_related('composers')
-        return qs.all()
-composer_detail = ComposerDetailView.as_view()
