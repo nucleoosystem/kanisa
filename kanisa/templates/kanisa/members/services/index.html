@@ -7,15 +7,6 @@
 
   {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
-  {% if perms.kanisa.manage_services %}
-  <p>
-    <a href="{% url 'kanisa_manage_services' %}" class="btn btn-success">
-      <i class="glyphicon glyphicon-cog"></i>
-      Manage Service Plans
-    </a>
-  </p>
-  {% endif %}
-
   <hr />
 
   {% if showing_all %}
