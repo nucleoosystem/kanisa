@@ -8,7 +8,6 @@ Improvements to the service management stuff:
 - Add support for merging duplicate songs/composers;
 - Add a way to edit songs.
 - Rename management JS to members JS
-- Is `all_songs` a useful context variable?
 
 Version 0.9.7
 =============
