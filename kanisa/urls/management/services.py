@@ -30,7 +30,4 @@ urlpatterns = patterns(
     url((r'^service/(?P<service_pk>\d+)/move/(?P<song_pk>\d+)/up/$'),
         views.move_up, {},
         'kanisa_manage_services_move_song_up'),
-
-    url(r'^composer/add/$', views.composer_create, {},
-        'kanisa_manage_services_create_composer'),
 )

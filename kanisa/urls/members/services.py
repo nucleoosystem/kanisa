@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 import kanisa.views.members.services as views
 import kanisa.views.members.services.bands as band_views
 import kanisa.views.members.services.ccli as ccli_views
+import kanisa.views.members.services.composers as composer_views
 import kanisa.views.members.services.songs as song_views
 
 
@@ -38,4 +39,7 @@ urlpatterns = patterns(
         'kanisa_members_services_ccli_by_usage'),
     url(r'^ccli/bytitle/$', ccli_views.ccli_view, {'sort': 'title'},
         'kanisa_members_services_ccli_by_title'),
+
+    url(r'^composer/add/$', composer_views.composer_create, {},
+        'kanisa_members_services_create_composer'),
 )

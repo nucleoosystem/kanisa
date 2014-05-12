@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
@@ -8,7 +7,6 @@ from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (
     AddSongToServiceForm,
-    ComposerForm,
     CreateSongForm,
     ServiceForm,
 )
@@ -60,28 +58,6 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
 
         return context
 service_management = ServiceIndexView.as_view()
-
-
-class ComposerCreateView(ServiceBaseView,
-                         KanisaCreateView):
-    form_class = ComposerForm
-    kanisa_title = 'Add a Composer'
-
-    def form_valid(self, form):
-        if self.is_popup():
-            self.object = form.save()
-            req = self.request
-            tmpl = 'kanisa/management/services/composer_popup_close.html'
-            return render_to_response(tmpl,
-                                      {'object': self.object},
-                                      context_instance=RequestContext(req))
-
-        rval = super(KanisaCreateView, self).form_valid(form)
-
-        messages.success(self.request, self.get_message(form.instance))
-
-        return rval
-composer_create = ComposerCreateView.as_view()
 
 
 class ServiceDetailView(ServiceBaseView, KanisaDetailView):
