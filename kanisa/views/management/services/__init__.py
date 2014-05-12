@@ -1,13 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
-from django.utils import formats
-from kanisa.models import (
-    Service,
-    Song,
-)
+from kanisa.models import Service
 from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
-    KanisaDetailView,
     KanisaListView,
 )
 
@@ -43,22 +38,3 @@ class ServiceIndexView(ServiceBaseView, KanisaListView):
 
         return context
 service_management = ServiceIndexView.as_view()
-
-
-class ServiceDetailView(ServiceBaseView, KanisaDetailView):
-    model = Service
-    pk_url_kwarg = 'service_pk'
-    template_name = 'kanisa/management/services/service_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ServiceDetailView, self).get_context_data(**kwargs)
-        context['all_songs'] = Song.objects.all()
-        return context
-
-    def get_kanisa_title(self):
-        formatted_date = formats.date_format(self.object.event.date,
-                                             "DATE_FORMAT")
-        title = 'Plan for %s (%s)' % (unicode(self.object.event),
-                                      formatted_date)
-        return title
-service_detail = ServiceDetailView.as_view()

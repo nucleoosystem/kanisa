@@ -7,7 +7,4 @@ urlpatterns = patterns(
         'kanisa_manage_services'),
     url(r'^all/$', views.service_management, {'show_all': True},
         'kanisa_manage_services_all'),
-
-    url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
-        'kanisa_manage_services_detail'),
 )
