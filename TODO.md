@@ -3,9 +3,6 @@ Version 0.9.6
 
 Improvements to the service management stuff:
 
-- Figure out a way to make the members/management services stuff less
-  confusing (e.g. redirect members page to management page if user
-  has privs);
 - Change alphabetic sort to ignore case (and potentially ignore
   spaces);
 - Add support for merging duplicate songs/composers;

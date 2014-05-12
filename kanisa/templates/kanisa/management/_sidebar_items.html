@@ -94,14 +94,6 @@
   </a>
 </li>
 {% endif %}
-{% if perms.kanisa.manage_services %}
-<li{% if kanisa_nav_component = "services" %} class="active"{% endif %}>
-  <a href="{% url 'kanisa_manage_services' %}">
-    <span class="glyphicon glyphicon-bullhorn"></span>
-    Service Planning
-  </a>
-</li>
-{% endif %}
 {% if perms.kanisa.manage_blog %}
 <li{% if kanisa_nav_component = "blog" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_blog' %}">
