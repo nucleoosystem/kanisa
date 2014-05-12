@@ -7,6 +7,16 @@
 
   {% include 'kanisa/members/services/_serviceplan_table.html' %}
 
+  {% if perms.kanisa.manage_services %}
+    <p>
+      <a class="btn btn-success" href="{% url 'kanisa_manage_services_create' %}">
+        <i class="glyphicon glyphicon-plus"></i>
+        Create a Service Plan
+      </a>
+    </p>
+  {% endif %}
+
+
   <hr />
 
   {% if showing_all %}

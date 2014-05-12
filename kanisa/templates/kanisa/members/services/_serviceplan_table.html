@@ -1,39 +1,27 @@
 {% if service_list %}
-
-{% if active_in_some_services %}
-  <div class="alert alert-info">
-    <strong>You&rsquo;re involved in some services!</strong><br />
-
-    Services you&rsquo;re participating in are highlighted in
-    blue below.
-  </div>
-{% endif %}
-
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Date</th>
-      <th>Band Leader</th>
-    </tr>
-  </thead>
   <tbody>
     {% for plan in service_list %}
-    <tr{% if plan.user_is_involved %} class="involved-in-serviceplan"{% endif %}>
+    <tr>
       <td>
         <a href="{% url 'kanisa_members_services_detail' plan.pk %}">{{ plan.event }}</a>
-      </td>
-      <td>
-        {{ plan.event.date|date:"jS M Y" }}
+        <br />
+        <small class="text-muted">{{ plan.event.date|date:"jS F Y" }}</small>
       </td>
       <td>
         {{ plan.band_leader.get_display_name }}
       </td>
+      {% if perms.kanisa.manage_services %}
+      <td>
+        <a href="{% url 'kanisa_manage_services_delete' plan.pk %}" class="btn btn-danger btn-xs">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
+      </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
 </table>
-
 {% include "kanisa/_simple_pagination.html" %}
 
 {% else %}
@@ -41,5 +29,8 @@
   <strong>Sorry!</strong>
 
   There aren't any service plans set up yet.
+  {% if perms.kanisa.manage_services %}
+  Why not <a href="{% url 'kanisa_manage_services_create' %}">create one</a>?
+  {% endif %}
 </p>
 {% endif %}
