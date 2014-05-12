@@ -19,7 +19,7 @@
     {% include 'kanisa/members/services/_service_songs_form.html' %}
     {% else %}
       {% with songs=object.songinservice_set.all %}
-      {% include 'kanisa/members/services/_song_table.html' %}
+      {% include 'kanisa/members/services/_song_list.html' %}
       {% endwith %}
     {% endif %}
   </div>
