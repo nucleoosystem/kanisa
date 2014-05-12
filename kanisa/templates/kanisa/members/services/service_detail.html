@@ -2,14 +2,26 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     {% include 'kanisa/members/services/_service_detail_intro.html' %}
   </div>
 
-  <div class="col-md-7">
-    {% with songs=object.songinservice_set.all %}
-    {% include 'kanisa/members/services/_song_table.html' %}
-    {% endwith %}
+  <div class="col-md-8">
+    {% if perms.kanisa.manage_services %}
+    <div id="serviceplan_songinfo">
+      {% with songs=object.songinservice_set.all %}
+      {% include 'kanisa/management/services/_song_table.html' %}
+      {% endwith %}
+    </div>
+
+    <hr />
+
+    {% include 'kanisa/management/services/_service_songs_form.html' %}
+    {% else %}
+      {% with songs=object.songinservice_set.all %}
+      {% include 'kanisa/members/services/_song_table.html' %}
+      {% endwith %}
+    {% endif %}
   </div>
 </div>
 <hr />
