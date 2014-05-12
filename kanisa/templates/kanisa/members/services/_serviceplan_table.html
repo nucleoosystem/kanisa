@@ -13,7 +13,7 @@
       </td>
       {% if perms.kanisa.manage_services %}
       <td>
-        <a href="{% url 'kanisa_manage_services_delete' plan.pk %}" class="btn btn-danger btn-xs">
+        <a href="{% url 'kanisa_members_services_delete' plan.pk %}" class="btn btn-danger btn-xs">
           <i class="glyphicon glyphicon-trash"></i>
         </a>
       </td>
@@ -30,7 +30,7 @@
 
   There aren't any service plans set up yet.
   {% if perms.kanisa.manage_services %}
-  Why not <a href="{% url 'kanisa_manage_services_create' %}">create one</a>?
+  Why not <a href="{% url 'kanisa_members_services_create' %}">create one</a>?
   {% endif %}
 </p>
 {% endif %}

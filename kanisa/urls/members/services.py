@@ -44,11 +44,11 @@ urlpatterns = patterns(
         'kanisa_members_services_detail'),
 
     url(r'^service/create/$', views.service_create, {},
-        'kanisa_manage_services_create'),
+        'kanisa_members_services_create'),
     url(r'^service/(?P<service_pk>\d+)/edit/$', views.service_update, {},
-        'kanisa_manage_services_update'),
+        'kanisa_members_services_update'),
     url(r'^service/(?P<service_pk>\d+)/delete/$', views.service_delete, {},
-        'kanisa_manage_services_delete'),
+        'kanisa_members_services_delete'),
 
     url(r'^service/(?P<service_pk>\d+)/addsong/$', song_views.add_song, {},
         'kanisa_members_services_add_song'),
