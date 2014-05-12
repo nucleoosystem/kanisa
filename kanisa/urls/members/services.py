@@ -13,9 +13,6 @@ urlpatterns = patterns(
     url(r'^all/$', views.index, {'show_all': True},
         'kanisa_members_services_index_all'),
 
-    url(r'^services/(?P<service_pk>\d+)/$', views.service_detail, {},
-        'kanisa_members_services_detail'),
-
     url(r'^band/add/$', band_views.band_create, {},
         'kanisa_members_services_create_band'),
     url(r'^bands/(?P<pk>\d+)/edit/$', band_views.band_update, {},
@@ -42,6 +39,16 @@ urlpatterns = patterns(
     url(r'^composers/(?P<composer_pk>\d+)/$',
         composer_views.composer_detail, {},
         'kanisa_members_services_composer_detail'),
+
+    url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
+        'kanisa_members_services_detail'),
+
+    url(r'^service/create/$', views.service_create, {},
+        'kanisa_manage_services_create'),
+    url(r'^service/(?P<service_pk>\d+)/edit/$', views.service_update, {},
+        'kanisa_manage_services_update'),
+    url(r'^service/(?P<service_pk>\d+)/delete/$', views.service_delete, {},
+        'kanisa_manage_services_delete'),
 
     url(r'^service/(?P<service_pk>\d+)/addsong/$', song_views.add_song, {},
         'kanisa_members_services_add_song'),

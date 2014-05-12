@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import formats
 from django.views.generic.base import View
@@ -26,7 +26,7 @@ from kanisa.views.generic import (
 )
 from kanisa.views.members.services import (
     ServiceBaseView,
-    ServiceRestrictedBaseView
+    BaseServiceManagementView
 )
 
 
@@ -106,16 +106,6 @@ class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
 song_discovery = SongDisoveryView.as_view()
 
 
-class BaseServiceManagementView(ServiceRestrictedBaseView):
-    @property
-    def service(self):
-        if not hasattr(self, "service_"):
-            pk = int(self.kwargs['service_pk'])
-            self.service_ = get_object_or_404(Service, pk=pk)
-
-        return self.service_
-
-
 def add_song_to_service(song, service):
     # This code has a race condition that I just don't care about
     # very much.
@@ -151,7 +141,7 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
         return super(AddSongView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('kanisa_manage_services_detail',
+        return reverse('kanisa_members_services_detail',
                        args=[self.service.pk, ])
 
     def get_kanisa_title(self):
@@ -180,7 +170,7 @@ class RemoveSongView(BaseServiceManagementView, KanisaDeleteView):
         return super(RemoveSongView, self).delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('kanisa_manage_services_detail',
+        return reverse('kanisa_members_services_detail',
                        args=[self.service.pk, ])
 remove_song = RemoveSongView.as_view()
 
@@ -224,7 +214,7 @@ class BaseMoveSongView(BaseServiceManagementView, View):
                 context_instance=RequestContext(request)
             )
 
-        return HttpResponseRedirect(reverse('kanisa_manage_services_detail',
+        return HttpResponseRedirect(reverse('kanisa_members_services_detail',
                                             args=[self.service.pk, ]))
 
 
@@ -250,6 +240,6 @@ class CreateSongView(BaseServiceManagementView, KanisaCreateView):
         return rval
 
     def get_success_url(self):
-        return reverse('kanisa_manage_services_detail',
+        return reverse('kanisa_members_services_detail',
                        args=[self.service.pk, ])
 create_song = CreateSongView.as_view()

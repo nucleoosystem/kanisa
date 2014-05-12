@@ -1,5 +1,7 @@
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.utils import formats
+from kanisa.forms.services import ServiceForm
 from kanisa.models import (
     Band,
     Service,
@@ -8,8 +10,11 @@ from kanisa.models import (
 from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
+    KanisaCreateView,
+    KanisaDeleteView,
+    KanisaDetailView,
     KanisaListView,
-    KanisaDetailView
+    KanisaUpdateView,
 )
 
 
@@ -88,3 +93,59 @@ class ServiceDetailView(ServiceBaseView, KanisaDetailView):
                                       formatted_date)
         return title
 service_detail = ServiceDetailView.as_view()
+
+
+class BaseServiceManagementView(ServiceRestrictedBaseView):
+    @property
+    def service(self):
+        if not hasattr(self, "service_"):
+            pk = int(self.kwargs['service_pk'])
+            self.service_ = get_object_or_404(Service, pk=pk)
+
+        return self.service_
+
+
+class ServiceCreateView(ServiceRestrictedBaseView,
+                        KanisaCreateView):
+    form_class = ServiceForm
+    kanisa_title = 'Create a Service Plan'
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.object.pk, ])
+service_create = ServiceCreateView.as_view()
+
+
+class ServiceUpdateView(BaseServiceManagementView,
+                        KanisaUpdateView):
+    form_class = ServiceForm
+    model = Service
+    pk_url_kwarg = 'service_pk'
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
+service_update = ServiceUpdateView.as_view()
+
+
+class ServiceDeleteView(BaseServiceManagementView,
+                        KanisaDeleteView):
+    model = Service
+    pk_url_kwarg = 'service_pk'
+
+    def get_cancel_url(self):
+        return reverse('kanisa_members_services_detail',
+                       args=[self.service.pk, ])
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_index')
+
+    def get_template_names(self):
+        return ['kanisa/members/delete.html', ]
+service_delete = ServiceDeleteView.as_view()
