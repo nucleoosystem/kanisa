@@ -34,7 +34,7 @@ class CreateSongForm(KanisaBaseModelForm):
             'title',
             'composers',
             HTML('{% include '
-                 '"kanisa/management/services/_composer_add.html" '
+                 '"kanisa/members/services/_composer_add.html" '
                  '%}'),
         )
         return helper
