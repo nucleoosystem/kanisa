@@ -5,9 +5,10 @@ Improvements to the service management stuff:
 
 - Change alphabetic sort to ignore case (and potentially ignore
   spaces);
-- Add support for merging duplicate songs/composers;
-- Add a way to edit songs.
-- Rename management JS to members JS
+- Add support for merging duplicate songs;
+- Add support for merging duplicate composers;
+- Add a way to edit composers;
+- Rename management JS to members JS.
 
 Version 0.9.7
 =============
