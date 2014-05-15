@@ -3,6 +3,7 @@ import kanisa.views.members.services as views
 import kanisa.views.members.services.bands as band_views
 import kanisa.views.members.services.ccli as ccli_views
 import kanisa.views.members.services.composers as composer_views
+import kanisa.views.members.services.services as service_views
 import kanisa.views.members.services.songs as song_views
 
 
@@ -40,14 +41,17 @@ urlpatterns = patterns(
         composer_views.composer_detail, {},
         'kanisa_members_services_composer_detail'),
 
-    url(r'^service/(?P<service_pk>\d+)/$', views.service_detail, {},
+    url(r'^service/(?P<service_pk>\d+)/$',
+        service_views.service_detail, {},
         'kanisa_members_services_detail'),
 
-    url(r'^service/create/$', views.service_create, {},
+    url(r'^service/create/$', service_views.service_create, {},
         'kanisa_members_services_create'),
-    url(r'^service/(?P<service_pk>\d+)/edit/$', views.service_update, {},
+    url(r'^service/(?P<service_pk>\d+)/edit/$',
+        service_views.service_update, {},
         'kanisa_members_services_update'),
-    url(r'^service/(?P<service_pk>\d+)/delete/$', views.service_delete, {},
+    url(r'^service/(?P<service_pk>\d+)/delete/$',
+        service_views.service_delete, {},
         'kanisa_members_services_delete'),
     url(r'^service/(?P<service_pk>\d+)/addsong/$', song_views.add_song, {},
         'kanisa_members_services_add_song'),
