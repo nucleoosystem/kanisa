@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from kanisa.forms.services import UpdateSongForm
 from kanisa.models import (
     RegularEvent,
     Service,
@@ -7,10 +8,14 @@ from kanisa.models import (
 from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaDetailView,
+    KanisaUpdateView,
     KanisaListView,
     KanisaTemplateView
 )
-from kanisa.views.members.services import ServiceBaseView
+from kanisa.views.members.services import (
+    ServiceBaseView,
+    ServiceRestrictedBaseView
+)
 
 
 class SongListView(ServiceBaseView, KanisaListView):
@@ -50,6 +55,20 @@ class SongDetailView(SongFinderBaseView, KanisaDetailView):
 
         return context
 song_detail = SongDetailView.as_view()
+
+
+class SongUpdateView(ServiceRestrictedBaseView,
+                     KanisaUpdateView):
+    model = Song
+    form_class = UpdateSongForm
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_song_detail',
+                       args=[self.object.pk, ])
+song_update = SongUpdateView.as_view()
 
 
 class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):

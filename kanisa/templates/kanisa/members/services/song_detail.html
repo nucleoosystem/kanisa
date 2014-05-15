@@ -15,7 +15,17 @@
   <strong>{{ services|length }}</strong> service{{ services|pluralize }}.
 </p>
 
+{% if perms.kanisa.manage_services %}
+<a href="{% url 'kanisa_members_services_song_update' song.pk %}" class="btn btn-default" style="margin-bottom: 1em">
+  <i class="glyphicon glyphicon-edit"></i>
+  Edit this Song
+</a>
+{% endif %}
+
+
 {% if services %}
+<hr />
+
 <table class="table table-striped">
   <thead>
     <tr>

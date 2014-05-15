@@ -124,4 +124,13 @@ $(document).ready(function() {
     });
     $(".service-songs-edit").submit(add_song_to_plan);
     attach_service_songs_handlers();
+
+    $(".createsongform #id_composers").chosen({
+        placeholder_text: "Select composers",
+        width: "100%"
+    });
+    $(".updatesongform #id_composers").chosen({
+        placeholder_text: "Select composers",
+        width: "100%"
+    });
 });

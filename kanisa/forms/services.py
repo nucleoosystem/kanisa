@@ -25,11 +25,9 @@ class AddSongToServiceForm(KanisaBaseForm):
     submit_text = 'Add Song'
 
 
-class CreateSongForm(KanisaBaseModelForm):
-    submit_text = 'Create Song'
-
+class SongForm(KanisaBaseModelForm):
     def get_form_helper(self):
-        helper = super(CreateSongForm, self).get_form_helper()
+        helper = super(SongForm, self).get_form_helper()
         helper.layout = Layout(
             'title',
             'composers',
@@ -41,6 +39,14 @@ class CreateSongForm(KanisaBaseModelForm):
 
     class Meta:
         model = Song
+
+
+class CreateSongForm(SongForm):
+    submit_text = 'Create Song'
+
+
+class UpdateSongForm(SongForm):
+    submit_text = 'Save Song'
 
 
 class EventChoiceField(forms.ModelChoiceField):
