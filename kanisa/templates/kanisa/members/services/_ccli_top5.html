@@ -9,7 +9,9 @@
 <ol>
     {% for song in top_five_songs %}
     <li>
-      {{ song.title }}
+      <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
+        {{ song.title }}
+      </a>
       <span class="text-muted">(sung {{ song.usage }} time{{ song.usage|pluralize }})</span>
     </li>
     {% endfor %}
