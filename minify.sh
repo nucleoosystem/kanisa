@@ -35,7 +35,7 @@ for i in $(find kanisa/static/kanisa/js/public/ -type f | sort); do
     echo "<script src=\"{% static '${localpath}' %}\"></script>" >> ${public_js_template}
 done
 echo "{% else %}" >> ${public_js_template}
-echo "<script src=\"{% static }}kanisa/js/minified/kanisa-public.${public_js_hash}.js\"></script>" >> ${public_js_template}
+echo "<script src=\"{% static 'kanisa/js/minified/kanisa-public.${public_js_hash}.js' %}\"></script>" >> ${public_js_template}
 echo "{% endif %}" >> ${public_js_template}
 
 management_js_template="kanisa/templates/kanisa/management/_js.html"
