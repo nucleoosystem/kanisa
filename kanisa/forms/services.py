@@ -49,7 +49,10 @@ class MergeSongForm(KanisaBaseForm):
 
     def __init__(self, target_song, *args, **kwargs):
         super(MergeSongForm, self).__init__(*args, **kwargs)
-        self.fields['other_songs'].queryset = self.fields['other_songs'].queryset.exclude(pk=target_song.pk)
+        qs = self.fields['other_songs'].queryset.exclude(
+            pk=target_song.pk
+        )
+        self.fields['other_songs'].queryset = qs
 
 
 class CreateSongForm(SongForm):

@@ -81,14 +81,6 @@ class SongMergeView(ServiceRestrictedBaseView,
     model = Song
     form_class = MergeSongForm
 
-    def form_valid(self, form):
-        import pdb; pdb.set_trace()
-        return super(SongMergeView, self).form_valid(form)
-
-    def form_invalid(self, form):
-        import pdb; pdb.set_trace()
-        return super(SongMergeView, self).form_invalid(form)
-
     @property
     def song(self):
         if not hasattr(self, 'song_'):
