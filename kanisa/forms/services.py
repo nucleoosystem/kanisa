@@ -41,6 +41,17 @@ class SongForm(KanisaBaseModelForm):
         model = Song
 
 
+class MergeSongForm(KanisaBaseForm):
+    other_songs = forms.ModelMultipleChoiceField(
+        queryset=Song.objects.all(),
+    )
+    submit_text = 'Merge songs'
+
+    def __init__(self, target_song, *args, **kwargs):
+        super(MergeSongForm, self).__init__(*args, **kwargs)
+        self.fields['other_songs'].queryset = self.fields['other_songs'].queryset.exclude(pk=target_song.pk)
+
+
 class CreateSongForm(SongForm):
     submit_text = 'Create Song'
 

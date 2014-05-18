@@ -12,4 +12,6 @@ urlpatterns = patterns(
         'kanisa_members_services_song_detail'),
     url(r'^(?P<pk>\d+)/edit/$', views.song_update, {},
         'kanisa_members_services_song_update'),
+    # url(r'^(?P<pk>\d+)/merge/$', views.song_merge, {},
+    #     'kanisa_members_services_song_merge'),
 )

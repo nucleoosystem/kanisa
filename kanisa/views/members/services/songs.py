@@ -1,5 +1,9 @@
 from django.core.urlresolvers import reverse
-from kanisa.forms.services import UpdateSongForm
+from django.shortcuts import get_object_or_404
+from kanisa.forms.services import (
+    MergeSongForm,
+    UpdateSongForm,
+)
 from kanisa.models import (
     RegularEvent,
     Service,
@@ -8,6 +12,7 @@ from kanisa.models import (
 from kanisa.utils.services import most_popular_songs
 from kanisa.views.generic import (
     KanisaDetailView,
+    KanisaFormView,
     KanisaUpdateView,
     KanisaListView,
     KanisaTemplateView
@@ -69,6 +74,46 @@ class SongUpdateView(ServiceRestrictedBaseView,
         return reverse('kanisa_members_services_song_detail',
                        args=[self.object.pk, ])
 song_update = SongUpdateView.as_view()
+
+
+class SongMergeView(ServiceRestrictedBaseView,
+                    KanisaFormView):
+    model = Song
+    form_class = MergeSongForm
+
+    def form_valid(self, form):
+        import pdb; pdb.set_trace()
+        return super(SongMergeView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        import pdb; pdb.set_trace()
+        return super(SongMergeView, self).form_invalid(form)
+
+    @property
+    def song(self):
+        if not hasattr(self, 'song_'):
+            self.song_ = get_object_or_404(
+                Song,
+                pk=self.kwargs['pk']
+            )
+
+        return self.song_
+
+    def get_form_kwargs(self):
+        return {
+            'target_song': self.song
+        }
+
+    def get_kanisa_title(self):
+        return "Merge song: %s" % self.song.title
+
+    def get_template_names(self):
+        return ['kanisa/members/form.html', ]
+
+    def get_success_url(self):
+        return reverse('kanisa_members_services_song_detail',
+                       args=[self.song.pk, ])
+song_merge = SongMergeView.as_view()
 
 
 class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):

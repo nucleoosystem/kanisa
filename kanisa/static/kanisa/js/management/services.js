@@ -133,4 +133,8 @@ $(document).ready(function() {
         placeholder_text: "Select composers",
         width: "100%"
     });
+    // $(".mergesongform #id_other_songs").chosen({
+    //     placeholder_text: "Select duplicate songs",
+    //     width: "100%"
+    // });
 });
