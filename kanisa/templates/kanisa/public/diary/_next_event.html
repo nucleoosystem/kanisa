@@ -6,7 +6,7 @@
 
 <h3 style="margin-top: 0">Coming Up</h3>
 {% if next_event.series %}
-  The next <em>{{ next_event }}</em> series is from <strong>{{ next_event.date|date:"l, jS F Y" }}</strong> to <strong>{{ next_event.series.end_date|date:"l, jS F Y" }}</strong>.
+  <p>The next <em>{{ next_event }}</em> series is from <strong>{{ next_event.date|date:"l, jS F Y" }}</strong> to <strong>{{ next_event.series.end_date|date:"l, jS F Y" }}</strong>.</p>
 {% else %}
 <p>
   The next <em>{{ next_event }}</em>
