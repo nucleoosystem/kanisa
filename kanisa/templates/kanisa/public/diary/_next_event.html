@@ -5,6 +5,9 @@
 <hr />
 
 <h3 style="margin-top: 0">Coming Up</h3>
+{% if next_event.series %}
+  The next <em>{{ next_event }}</em> series is from <strong>{{ next_event.date|date:"l, jS F Y" }}</strong> to <strong>{{ next_event.series.end_date|date:"l, jS F Y" }}</strong>.
+{% else %}
 <p>
   The next <em>{{ next_event }}</em>
   {% if next_event.date == next_event.end_date %}
@@ -19,6 +22,7 @@
   and ends on <strong>{{ next_event.end_date|date:"l, jS F" }}</strong>.
   {% endif %}
 </p>
+{% endif %}
 
 {% if next_event.intro != object.intro %}
 <p>
