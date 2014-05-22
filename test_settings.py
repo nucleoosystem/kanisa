@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'south',
     'constance',
     'constance.backends.database',
+    'speedbar',
     'kanisa',
 )
 
