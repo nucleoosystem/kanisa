@@ -6,7 +6,7 @@ function update_page_list() {
 
               var parent = $("#id_parent");
               var previous_val = parent.val();
-              parent.html(data.options)
+              parent.html(data.options);
               parent.val(previous_val);
           }, "json");
 }

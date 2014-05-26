@@ -18,7 +18,7 @@ function update_word_count_impl(element) {
     }
 
     var word_count = get_rough_word_count(element.val());
-    var help_block = element.parent().parent().children(".help-block")
+    var help_block = element.parent().parent().children(".help-block");
 
     if (word_count < 25) {
         hide_word_count_warning(help_block);

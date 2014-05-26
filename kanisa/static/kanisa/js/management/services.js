@@ -9,7 +9,7 @@ function on_band_change(event) {
         return;
     }
 
-    var url = $(this).parents("form").attr("data-band-info-url")
+    var url = $(this).parents("form").attr("data-band-info-url");
 
     $.get(
         url,
@@ -32,7 +32,7 @@ function on_date_change_evt(event) {
         $(this).after("<div id=\"id_date_warning\" class=\"help-inline\"></div>");
     }
 
-    var url = $(this).parents("form").attr("data-event-info-url")
+    var url = $(this).parents("form").attr("data-event-info-url");
 
     $.get(
         url,
@@ -41,7 +41,7 @@ function on_date_change_evt(event) {
             var events_input = $("#id_event");
             var warning_div = $("#id_date_warning");
             warning_div.parents(".control-group").addClass("error");
-            var options_html = ''
+            var options_html = '';
 
             if (data.events.length == 0) {
                 // Add warning about bad date selection
@@ -58,18 +58,18 @@ function on_date_change_evt(event) {
             // Remove any error from the events dropdown (which would
             // have been added if we'd posted without filling in an
             // event).
-            events_input.parents(".control-group").removeClass("error")
+            events_input.parents(".control-group").removeClass("error");
             // Remove help text from the events dropdown (which would
             // have been added if we'd posted without filling in an
             // event).
             events_input.siblings("span").remove();
 
             for (var i = 0; i < data.events.length; i++) {
-                options_html += '<option value="' + data.events[i][0] + '">' + data.events[i][1] + '</option>'
+                options_html += '<option value="' + data.events[i][0] + '">' + data.events[i][1] + '</option>';
             }
 
             events_input.html(options_html);
-            events_input.parent().parent().show()
+            events_input.parent().parent().show();
         },
         "json"
     );

@@ -3,7 +3,7 @@ function navigation_move(event, el, url) {
 
     var element_pk = el.attr("data-navigation-id");
     var parent = el.parent();
-    var old_html = parent.html()
+    var old_html = parent.html();
     el.parent().html("<i class=\"spinner\"></i>");
 
     $.post(url, {'navigation_element': element_pk},

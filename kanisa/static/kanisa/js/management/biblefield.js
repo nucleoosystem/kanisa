@@ -7,7 +7,7 @@ $(document).ready(function() {
             el.after("<span class=\"biblepassageresponse\"></span>");
         }
 
-        var status_element = el.siblings(".biblepassageresponse")
+        var status_element = el.siblings(".biblepassageresponse");
 
         if (input.length == 0) {
             status_element.html('');

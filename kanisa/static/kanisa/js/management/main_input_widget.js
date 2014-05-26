@@ -21,7 +21,7 @@ jQuery.fn.extend({
                 this.value += myValue;
                 this.focus();
             }
-        })
+        });
     }
 });
 
@@ -231,7 +231,7 @@ function get_attachments(event) {
 
     var placeholder = get_placeholder(thelink);
 
-    var url = thelink.attr("data-url")
+    var url = thelink.attr("data-url");
     refresh_attachments(placeholder, url);
 
     on_popup_close = function() {
