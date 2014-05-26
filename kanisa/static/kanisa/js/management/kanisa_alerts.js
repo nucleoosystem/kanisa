@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function _alert_impl(msg, alert_class) {
     alert_box = $("#kanisa_alerts");
     $(".js-alert").remove();

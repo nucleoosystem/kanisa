@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function quick_series_complete(event) {
     event.preventDefault();
     var el = $(this);

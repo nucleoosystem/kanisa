@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function update_with_composer(pk, full_name) {
     var the_select = $("#id_composers");
     var selected_values = the_select.val();

@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 var on_popup_close = function() {};
 
 function popup_closed() {

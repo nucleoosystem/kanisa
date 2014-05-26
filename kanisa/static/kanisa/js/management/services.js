@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function on_band_change(event) {
     var selection = $(this).val();
 

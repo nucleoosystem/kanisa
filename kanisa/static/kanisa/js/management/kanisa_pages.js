@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function update_page_list() {
     $.get(pages_list_url,
           function(data) {

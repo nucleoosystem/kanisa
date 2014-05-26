@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 $(document).ready(function() {
     $(".biblepassagewidget").focusout(function() {
         var el = $(this);

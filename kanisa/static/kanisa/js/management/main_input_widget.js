@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 jQuery.fn.extend({
     insertAtCaret: function(myValue){
         return this.each(function(i) {

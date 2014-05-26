@@ -1,3 +1,5 @@
+/* jshint jquery: true, browser: true */
+
 function get_rough_word_count(str) {
     return str.split(/\s+/).length;
 }
