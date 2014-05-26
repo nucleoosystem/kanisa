@@ -38,4 +38,7 @@ function update_word_counter(evt) {
 $(document).ready(function() {
     update_word_count_impl($(".kanisablogteaserinputwidget"));
     $(".kanisablogteaserinputwidget").bind('input propertychange', update_word_counter);
+    $(".blogpostform #id_author").chosen({
+        placeholder_text: "Select an author"
+    });
 });
