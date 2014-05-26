@@ -16,6 +16,10 @@ git-check: reminify
 test:
 	tox
 
+jshint:
+	jshint kanisa/static/kanisa/js/management/* --show-non-errors
+	jshint kanisa/static/kanisa/js/public/* --show-non-errors
+
 coverage:
 	py.test --cov-report term-missing --cov kanisa
 
