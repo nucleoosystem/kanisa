@@ -23,6 +23,9 @@ and to find performance problems earlier.
 - Add a way to set up cron jobs
   - For posting scheduled tweets
   - For rebuilding the search index
+- Figure out how to run jslint as part of the minification process
+- Fix errors reported by jshint
+- Remove duplicate CSRF files (kanisa_csrf.js/csrf.js)
 
 Version 1.0
 ===========
@@ -105,7 +108,6 @@ Deployment
 ----------
 
 - Python 3 support
-- Figure out how to run jslint as part of the minification process
 - Improve deployment process (can we deploy without the site 500ing
   whilst the virtualenv is in flux? perhaps enter maintenance mode?)
 - Improve test coverage (#33)
