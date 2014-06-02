@@ -25,6 +25,11 @@
       {% endif %}
       <span class="text-muted">({{ post.publish_date|date:"jS F Y" }})</span><br />
       <p>{{ post.teaser_text|kanisa_markdown|striptags|truncatewords:30 }}</p>
+      <ul class="pager pager-tiny">
+        <li class="next">
+          <a href="{{ post.get_absolute_url }}#post_more" title="Read the rest of {{ object.title }}">Read more &rarr;</a>
+        </li>
+      </ul>
     </td>
   </tr>
 {% endfor %}

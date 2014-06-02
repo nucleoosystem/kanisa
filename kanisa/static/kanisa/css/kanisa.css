@@ -591,3 +591,9 @@ p.author-byline img {
         font-size: 18px;
     }
 }
+
+ul.pager-tiny {
+    font-size: 90%;
+    margin: 0;
+    padding: 0;
+}
