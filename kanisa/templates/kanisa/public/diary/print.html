@@ -43,6 +43,9 @@
           <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
             Back to the main diary
           </a>
+          <a href="{{ nexturl }}" class="btn btn-default">
+            View the diary for {{ nextmonth|date:"F Y" }}
+          </a>
         </div>
     </div>
   </body>

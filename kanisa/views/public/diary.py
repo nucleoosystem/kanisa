@@ -1,10 +1,14 @@
 import calendar
-from datetime import date
+from datetime import date, timedelta
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic.base import TemplateView
-from django.views.generic.detail import DetailView
+from django.views.generic import (
+    DetailView,
+    RedirectView,
+    TemplateView
+)
 from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
 from kanisa.utils.diary import get_this_week
 
@@ -115,13 +119,31 @@ class ScheduledEventDetailView(DiaryBaseView, DetailView):
 scheduled_event_detail = ScheduledEventDetailView.as_view()
 
 
+class DiaryPrintableRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        current = date.today()
+        year = '%d' % current.year
+        month = '%02d' % current.month
+        return reverse(
+            'kanisa_public_diary_printable',
+            args=[year, month]
+        )
+diary_printable_redirect = DiaryPrintableRedirectView.as_view()
+
+
 class DiaryPrintableView(TemplateView):
     template_name = 'kanisa/public/diary/print.html'
 
     def get_date_bounds(self):
-        current = date.today()
+        current = date(
+            int(self.kwargs['year']),
+            int(self.kwargs['month']),
+            1
+        )
         day_range = calendar.monthrange(current.year, current.month)
-        first = current.replace(day=day_range[0])
+        first = current
         last = current.replace(day=day_range[1])
         return first, last
 
@@ -131,9 +153,18 @@ class DiaryPrintableView(TemplateView):
         )
 
         bounds = self.get_date_bounds()
+        nextmonth = bounds[1] + timedelta(days=1)
 
         ctx['startdate'] = bounds[0]
         ctx['events'] = ScheduledEvent.events_between(*bounds)
+        ctx['nextmonth'] = nextmonth
+        ctx['nexturl'] = reverse(
+            'kanisa_public_diary_printable',
+            args=[
+                '%d' % nextmonth.year,
+                '%02d' % nextmonth.month
+            ]
+        )
 
         return ctx
 diary_printable = DiaryPrintableView.as_view()
