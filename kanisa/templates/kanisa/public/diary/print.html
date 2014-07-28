@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {% include "kanisa/_head.html" %}
+  {% block extrajs %}
+  {% endblock %}
+  </head>
+  <body>
+    {% block bodyopen %}
+    {% endblock %}
+      {% include "kanisa/_logo.html" %}
+
+    <div class="diary-printable">
+        <h1>Diary for {{ startdate|date:"F Y" }}</h1>
+
+        <hr />
+
+        <table>
+        {% for event in events %}
+          {% ifchanged event.date %}
+            {% if not forloop.first %}
+                </td>
+              </tr>
+            {% endif %}
+            <tr>
+              <th>
+                {{ event.date|date:"l jS F" }}
+              </th>
+              <td>
+            {% endifchanged %}
+          {% if event.start_time %}
+          <span class="event-time">{{ event.start_time|date:"h:i A" }}</span>
+          {% endif %}
+          {{ event }}<br />
+
+        {% endfor %}
+        </td>
+        </tr>
+        </table>
+
+        <hr />
+        <div class="web-only-links">
+          <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
+            Back to the main diary
+          </a>
+        </div>
+    </div>
+  </body>
+</html>

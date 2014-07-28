@@ -25,7 +25,13 @@ var update_this_week = "{% url 'kanisa_xhr_diary_thisweek' %}";
       {% include 'kanisa/public/diary/_this_week_table.html' %}
     </div>
 
+    <a href="{% url 'kanisa_public_diary_printable' %}" title="View a printable diary" class="btn btn-default">
+      <span class="glyphicon glyphicon-print"></span>
+      View a printable diary
+    </a>
+
     {% if perms.kanisa.manage_diary %}
+    <hr />
     <a class="btn btn-primary" href="{% url 'kanisa_manage_diary' %}" title="Manage the diary">
       <i class="glyphicon glyphicon-calendar"></i>
       Manage the diary

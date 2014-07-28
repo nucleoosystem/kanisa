@@ -1,3 +1,5 @@
+import calendar
+from datetime import date
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -111,3 +113,27 @@ class ScheduledEventDetailView(DiaryBaseView, DetailView):
 
         return context
 scheduled_event_detail = ScheduledEventDetailView.as_view()
+
+
+class DiaryPrintableView(TemplateView):
+    template_name = 'kanisa/public/diary/print.html'
+
+    def get_date_bounds(self):
+        current = date.today()
+        day_range = calendar.monthrange(current.year, current.month)
+        first = current.replace(day=day_range[0])
+        last = current.replace(day=day_range[1])
+        return first, last
+
+    def get_context_data(self, **kwargs):
+        ctx = super(DiaryPrintableView, self).get_context_data(
+            **kwargs
+        )
+
+        bounds = self.get_date_bounds()
+
+        ctx['startdate'] = bounds[0]
+        ctx['events'] = ScheduledEvent.events_between(*bounds)
+
+        return ctx
+diary_printable = DiaryPrintableView.as_view()
