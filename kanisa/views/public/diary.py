@@ -69,6 +69,7 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
             context['events_to_display'] = events
 
         return context
+diary_index = DiaryIndexView.as_view()
 
 
 class RegularEventDetailView(DiaryBaseView, DetailView):
@@ -84,6 +85,7 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
         context['kanisa_title'] = unicode(self.object)
 
         return context
+regular_event_detail = RegularEventDetailView.as_view()
 
 
 class ScheduledEventDetailView(DiaryBaseView, DetailView):
@@ -108,3 +110,4 @@ class ScheduledEventDetailView(DiaryBaseView, DetailView):
         context['kanisa_title'] = unicode(self.object)
 
         return context
+scheduled_event_detail = ScheduledEventDetailView.as_view()
