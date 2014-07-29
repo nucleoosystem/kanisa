@@ -1,5 +1,4 @@
 from datetime import date
-from django.contrib import messages
 from django.http import (
     HttpResponseForbidden,
     HttpResponseRedirect
@@ -65,7 +64,6 @@ class BlogPostDetailView(BlogMixin, DetailView):
                 author=self.request.user,
                 body=form.cleaned_data['body']
             )
-            messages.success(request, "Comment created - thanks!")
 
             return HttpResponseRedirect(
                 self.get_object().get_absolute_url()
