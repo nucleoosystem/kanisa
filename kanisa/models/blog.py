@@ -90,7 +90,7 @@ class BlogComment(models.Model):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
-        ordering = ['-publish_date', '-pk']
+        ordering = ['publish_date', 'pk']
 
     def __unicode__(self):
         return 'Comment on %s' % self.post
