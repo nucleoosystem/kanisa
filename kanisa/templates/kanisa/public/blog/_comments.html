@@ -20,15 +20,19 @@
     {% if not user.is_authenticated %}
       <p>Please <a href="{% url 'kanisa_members_login' %}?next={{ object.get_absolute_url }}">log in</a> to post a comment.</p>
     {% else %}
-      <p>
-        You&rsquo;re posting this comment as
-        <strong>{{ user.get_display_name }}</strong>.
+      {% if not object.comments_allowed %}
+        <p>Comments are now <strong>closed</strong> on this post.</p>
+      {% else %}
+        <p>
+          You&rsquo;re posting this comment as
+          <strong>{{ user.get_display_name }}</strong>.
 
-        If that&rsquo;s not you - you probably want to
-        <a href="{% url 'kanisa_members_logout' %}">log out</a>.
-      </p>
+          If that&rsquo;s not you - you probably want to
+          <a href="{% url 'kanisa_members_logout' %}">log out</a>.
+        </p>
 
-      {% crispy comment_form %}
+        {% crispy comment_form %}
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endif %}
