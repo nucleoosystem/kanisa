@@ -1,4 +1,5 @@
 {% extends 'kanisa/public/blog/base.html' %}
+
 {% load kanisa_markup %}
 
 {% block blogcontent %}
@@ -35,6 +36,10 @@
 
   <span id="post_more"></span>
   {{ object.main_text|kanisa_markdown }}
+
+  <hr />
+
+  {% include "kanisa/public/blog/_comments.html" %}
 </div>
 
 {% if next or previous %}

@@ -1,10 +1,16 @@
 from datetime import date
+from django.contrib import messages
+from django.http import (
+    HttpResponseForbidden,
+    HttpResponseRedirect
+)
 from django.views.generic import (
     DetailView,
     ListView,
     YearArchiveView,
 )
-from kanisa.models import BlogPost
+from kanisa.forms.blog import BlogCommentForm
+from kanisa.models import BlogComment, BlogPost
 
 
 class BlogMixin(object):
@@ -45,10 +51,43 @@ class BlogPostDetailView(BlogMixin, DetailView):
     queryset = BlogPost.published_objects.all()
     template_name = 'kanisa/public/blog/post.html'
 
+    def post(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated():
+            return HttpResponseForbidden(
+                "You must be logged in to post blog comments."
+            )
+
+        form = self.get_form()
+
+        if form.is_valid():
+            BlogComment.objects.create(
+                post=self.get_object(),
+                author=self.request.user,
+                body=form.cleaned_data['body']
+            )
+            messages.success(request, "Comment created - thanks!")
+
+            return HttpResponseRedirect(
+                self.get_object().get_absolute_url()
+            )
+        else:
+            return self.get(request, *args, **kwargs)
+
     def get_queryset(self):
         qs = super(BlogPostDetailView, self).get_queryset()
         qs = qs.filter(publish_date__year=self.kwargs['year'])
         return qs
+
+    def get_form(self):
+        if self.request.method in ('POST', 'PUT'):
+            kwargs = {
+                'data': self.request.POST,
+                'files': self.request.FILES,
+            }
+        else:
+            kwargs = {}
+
+        return BlogCommentForm(**kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BlogPostDetailView, self).get_context_data(**kwargs)
@@ -67,6 +106,8 @@ class BlogPostDetailView(BlogMixin, DetailView):
 
         context['next'] = next_post
         context['previous'] = previous_post
+        context['comment_form'] = self.get_form()
+        context['comments'] = self.object.blogcomment_set.all()
 
         return context
 blog_detail = BlogPostDetailView.as_view()
