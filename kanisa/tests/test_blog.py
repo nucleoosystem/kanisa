@@ -30,3 +30,26 @@ def test_unicode():
         title='This parrot is dead'
     )
     assert unicode(post) == 'This parrot is dead'
+
+
+@pytest.mark.django_db
+def test_comments_enabled():
+    post = BlogPostFactory.build(
+        title='This parrot is dead'
+    )
+    assert post.comments_allowed()
+
+    post.enable_comments = False
+    assert not post.comments_allowed()
+
+    post.enable_comments = True
+    assert post.comments_allowed()
+
+    post.publish_date = date.today() + timedelta(days=1)
+    assert not post.comments_allowed()
+
+    post.publish_date = date.today() + timedelta(days=-15)
+    assert post.comments_allowed()
+
+    post.publish_date = date.today() + timedelta(days=-31)
+    assert not post.comments_allowed()

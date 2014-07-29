@@ -1,5 +1,5 @@
 from autoslug import AutoSlugField
-from datetime import date
+from datetime import date, timedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -33,6 +33,11 @@ class BlogPost(models.Model):
         help_text=('This should be the bulk of your post, and will follow on '
                    'from what\'s in the teaser.')
     )
+    enable_comments = models.BooleanField(
+        default=True,
+        help_text=('Comments are automatically closed 30 days after the blog '
+                   'post is published.')
+    )
 
     objects = models.Manager()
     published_objects = PublishedPostManager()
@@ -52,6 +57,18 @@ class BlogPost(models.Model):
             args=[self.publish_date.year, self.slug, ]
         )
 
+    def comments_allowed(self):
+        if not self.enable_comments:
+            return False
+
+        if not self.published():
+            return False
+
+        if self.publish_date + timedelta(days=30) < date.today():
+            return False
+
+        return True
+
     class Meta:
         # Need this because I've split up models.py into multiple
         # files.
@@ -61,3 +78,19 @@ class BlogPost(models.Model):
             ('manage_blog',
              'Can manage your blog posts'),
         )
+
+
+class BlogComment(models.Model):
+    post = models.ForeignKey(BlogPost)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    body = models.TextField(verbose_name='Comment')
+    publish_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # Need this because I've split up models.py into multiple
+        # files.
+        app_label = 'kanisa'
+        ordering = ['-publish_date', '-pk']
+
+    def __unicode__(self):
+        return 'Comment on %s' % self.post
