@@ -6,7 +6,7 @@
   <h3>Comments</h3>
 
   {% for comment in comments %}
-  <div>
+  <div class="comments">
     <blockquote>
       {{ comment.body|linebreaks }}
       <small><strong>{{ comment.author.get_full_name }}</strong> ({{ comment.publish_date|timesince }} ago)</small>
