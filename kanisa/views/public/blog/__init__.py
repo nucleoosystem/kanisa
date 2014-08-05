@@ -106,6 +106,7 @@ class BlogPostDetailView(BlogMixin, DetailView):
         context['previous'] = previous_post
         context['comment_form'] = self.get_form()
         context['comments'] = self.object.blogcomment_set.all()
+        context['kanisa_title'] = self.object.title
 
         return context
 blog_detail = BlogPostDetailView.as_view()
