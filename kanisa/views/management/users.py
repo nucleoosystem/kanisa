@@ -186,6 +186,9 @@ class UserCreateView(UserBaseView,
         if self.request.user.is_superuser:
             is_superuser = form.cleaned_data['administrator']
             is_staff = form.cleaned_data['administrator']
+        else:
+            is_superuser = False
+            is_staff = False
 
         object = RegisteredUser.objects.create(
             username=username,
