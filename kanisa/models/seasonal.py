@@ -1,3 +1,4 @@
+from datetime import date, datetime, timedelta
 from django.db import models
 
 
@@ -34,6 +35,11 @@ class SeasonalEvent(models.Model):
         # Need this because I've split up models.py into multiple
         # files.
         app_label = 'kanisa'
+        ordering = ('date', 'start_time', )
 
     def __unicode__(self):
         return self.title
+
+    def end_time(self):
+        dummy = datetime.combine(date(2014, 1, 1), self.start_time)
+        return (dummy + timedelta(minutes=self.duration)).time()
