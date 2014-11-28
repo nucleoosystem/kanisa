@@ -49,6 +49,24 @@ class LogoBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
+class SeasonalBrandingForm(BrandingForm):
+    expected_format = 'JPEG'
+
+    def __init__(self, *args, **kwargs):
+        super(SeasonalBrandingForm, self).__init__(*args, **kwargs)
+        self.fields['image'].help_text = (
+            'The seasonal header is used at the top of Christmas and Easter '
+            'pages.'
+        )
+
+    def check_size(self, width, height):
+        if height < 140:
+            raise forms.ValidationError(
+                'The uploaded image must be at least 140px high (the uploaded '
+                'image was %s%s).' % (height, 'px')
+            )
+
+
 class AppleBrandingForm(BrandingForm):
     expected_format = 'JPEG'
 

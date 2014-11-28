@@ -6,7 +6,8 @@ from kanisa.forms.branding import (
     AppleBrandingForm,
     BrandingColoursForm,
     FaviconBrandingForm,
-    LogoBrandingForm
+    LogoBrandingForm,
+    SeasonalBrandingForm
 )
 from kanisa.utils.branding import (
     ensure_branding_directory_exists,
@@ -78,6 +79,9 @@ class BrandingManagementUpdateView(BrandingBaseView,
 
         if self.kwargs['resource'] == 'favicon':
             return FaviconBrandingForm
+
+        if self.kwargs['resource'] == 'seasonal':
+            return SeasonalBrandingForm
 
         raise Http404
 

@@ -26,6 +26,11 @@ BRANDING_COMPONENTS = {
         'verbose_name': 'Site Favicon',
         'sizes': ['32x32', ],
     },
+    'seasonal': {
+        'filename': 'seasonal.jpg',
+        'verbose_name': 'Seasonal Header',
+        'sizes': ['960x140', ],
+    },
     'colours':  {
         'filename': 'colours.css',
         'verbose_name': 'Colour settings'
