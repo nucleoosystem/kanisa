@@ -26,6 +26,10 @@ KNOWN_BLOCKS = {
         'Blog Introduction',
         'Appears in the sidebar on event page of the blog.'
     ),
+    'seasonal': (
+        'Seasonal Footer',
+        'Appears at the bottom of seasonal (Christmas/Easter) pages.'
+    ),
 }
 
 

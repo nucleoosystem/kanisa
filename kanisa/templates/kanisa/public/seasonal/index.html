@@ -1,0 +1,108 @@
+{% load kanisa_branding %}
+{% load kanisa_homepage %}
+{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "kanisa/_head.html" %}
+    <style type="text/css">
+      body {
+        background-color: #111;
+      }
+
+      @media (min-width: 768px) {
+        .container {
+          max-width: 730px;
+        }
+      }
+
+      .content {
+        background-color: #fff;
+      }
+
+      .content h1,
+      .content h3,
+      .content p {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .content p.lead {
+        padding-top: 10px;
+        font-style: italic;
+        font-family: Georgia;
+      }
+
+      .backtowebsite {
+          margin-top: 10px;
+          background-color: #333;
+          height: 40px;
+          color: #fff;
+      }
+
+      .backtowebsite p {
+          font-size: 15px;
+          line-height: 40px;
+          margin-left: 10px;
+      }
+
+      .backtowebsite a {
+          color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    {% block bodyopen %}
+    {% endblock %}
+    <div class="container">
+      <div class="backtowebsite">
+        <p>Find out more about {{ KANISA_CHURCH_NAME }} at <a href="/">our website</a>.</p>
+      </div>
+      {% kanisa_branding 'seasonal' as logo_information %}
+
+      {% if logo_information.url %}
+      <div id="logo">
+        {% thumbnail logo_information.url "730" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="main_logo" />
+        {% endthumbnail %}
+      </div>
+      {% endif %}
+
+      <div class="content">
+        <p class="lead">
+          Come join us as we celebrate Christmas at
+          {{ KANISA_CHURCH_NAME }}. There&rsquo;s a service for
+          everyone - whatever your taste!
+        </p>
+
+        <h1>Services</h1>
+
+        {% for event in events %}
+        <h3>
+          <span class="text-muted">{{ event.date|date:"l jS" }}</span>
+          {{ event.title }}
+          {% if event.duration %}
+          <small>({{ event.start_time }} - {{ event.end_time }})</small>
+          {% else %}
+          <small>({{ event.start_time }})</small>
+          {% endif %}
+        </h3>
+        <p>{{ event.intro }}</p>
+        {% endfor %}
+
+        {% kanisa_content_block 'seasonal' %}
+        <br />
+      </div>
+      <div class="row text-muted" id="footer">
+        <div class="col-md-4">
+          <p>
+            &copy {% now "Y" %} {{ KANISA_CHURCH_NAME }}<br />
+            All rights reserved.
+          </p>
+        </div>
+        <div class="col-md-8">
+          {% kanisa_content_block 'footer' %}
+        </div>
+      </div>
+  </body>
+</html>
