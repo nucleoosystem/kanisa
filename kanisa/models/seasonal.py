@@ -24,6 +24,7 @@ class SeasonalEvent(models.Model):
         )
     )
     intro = models.CharField(
+        blank=True,
         max_length=200,
         help_text=(
             'Brief description (no Markdown here) of what the event is '
