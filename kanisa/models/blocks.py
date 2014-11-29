@@ -30,6 +30,14 @@ KNOWN_BLOCKS = {
         'Seasonal Footer',
         'Appears at the bottom of seasonal (Christmas/Easter) pages.'
     ),
+    'seasonal_intro_christmas': (
+        'Christmas Intro',
+        'Appears at the bottom of the seasonal Christmas page.'
+    ),
+    'seasonal_intro_easter': (
+        'Easter Intro',
+        'Appears at the bottom of the seasonal Easter page.'
+    ),
 }
 
 

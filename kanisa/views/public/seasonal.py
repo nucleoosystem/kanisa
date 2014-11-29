@@ -28,6 +28,9 @@ class SeasonalView(TemplateView):
                         self).get_context_data(**kwargs)
 
         context['season'] = self.get_season()
+        context['content_block_intro'] = (
+            'seasonal_intro_%s' % self.get_season()
+        )
         context['events'] = self.get_events()
 
         return context

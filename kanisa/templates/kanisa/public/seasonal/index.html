@@ -27,7 +27,7 @@
           margin-right: 10px;
       }
 
-      .content p.lead {
+      .content div.lead {
           padding-top: 10px;
           font-style: italic;
           font-family: Georgia;
@@ -68,11 +68,9 @@
       {% endif %}
 
       <div class="content">
-        <p class="lead">
-          Come join us as we celebrate Christmas at
-          {{ KANISA_CHURCH_NAME }}. There&rsquo;s a service for
-          everyone - whatever your taste!
-        </p>
+        <div class="lead">
+          {% kanisa_content_block content_block_intro %}
+        </div>
 
         <h1>Services</h1>
 
