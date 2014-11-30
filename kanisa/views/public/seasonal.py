@@ -32,6 +32,7 @@ class SeasonalView(TemplateView):
             'seasonal_intro_%s' % self.get_season()
         )
         context['events'] = self.get_events()
+        context['kanisa_title'] = self.get_season().title()
 
         return context
 seasonal_view = SeasonalView.as_view()
