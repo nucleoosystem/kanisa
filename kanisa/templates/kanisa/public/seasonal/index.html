@@ -21,6 +21,7 @@
       }
 
       .content h1,
+      .content h2,
       .content h3,
       .content p {
           margin-left: 10px;
@@ -75,17 +76,19 @@
         <h1>Services</h1>
 
         {% for event in events %}
+        {% ifchanged %}<h2>{{ event.date|date:"l, jS F" }}</h2>{% endifchanged %}
         <h3>
-          <span class="text-muted">{{ event.date|date:"l jS" }}</span>
-          {{ event.title }}
           {% if event.duration %}
-          <small>({{ event.start_time }} - {{ event.end_time }})</small>
+          <small>{{ event.start_time }} - {{ event.end_time }}</small>
           {% else %}
-          <small>({{ event.start_time }})</small>
+          <small>{{ event.start_time }}</small>
           {% endif %}
+          {{ event.title }}
         </h3>
         <p>{{ event.intro }}</p>
         {% endfor %}
+
+        <hr />
 
         {% kanisa_content_block 'seasonal' %}
         <br />
