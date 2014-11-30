@@ -62,6 +62,13 @@
 
       {% if logo_information.url %}
       <div id="logo">
+      {% if perms.kanisa.manage_branding %}
+      <a class="btn btn-default btn-sm" style="position: absolute; top: 10px; right: 10px" href="{% url 'kanisa_manage_branding_logo' 'seasonal' %}">
+      <i class="glyphicon glyphicon-cog"></i>
+        Change the header image
+      </a>
+      {% endif %}
+
         {% thumbnail logo_information.url "730" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="main_logo" />
         {% endthumbnail %}
