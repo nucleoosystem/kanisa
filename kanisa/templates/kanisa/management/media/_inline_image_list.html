@@ -22,18 +22,18 @@
 <ul class="pager">
   {% if page_obj.has_previous %}
   <li class="previous">
-    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_image_paginate">&larr; Older</a>
+    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_image_paginate">&larr; Newer</a>
   </li>
   {% else %}
-  <li class="disabled previous"><a href="#">&larr; Older</a></li>
+  <li class="disabled previous"><a href="#">&larr; Newer</a></li>
   {% endif %}
 
   {% if page_obj.has_next %}
   <li class="next">
-    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_image_paginate">Newer &rarr;</a>
+    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_image_paginate">Older &rarr;</a>
   </li>
   {% else %}
-  <li class="disabled next"><a href="#">Newer &rarr;</a></li>
+  <li class="disabled next"><a href="#">Older &rarr;</a></li>
   {% endif %}
 </ul>
 {% endif %}

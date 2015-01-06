@@ -41,7 +41,7 @@ class PaginatedMediaListView(MediaBaseView):
 
 class InlineImagesListView(PaginatedMediaListView, XHRBaseGetView):
     def render(self, request, *args, **kwargs):
-        images = InlineImage.objects.all()
+        images = InlineImage.objects.all().order_by('-modified')
         paginator, page = self.slice_results(request, images)
         tmpl = 'kanisa/management/media/_inline_image_list.html'
 
