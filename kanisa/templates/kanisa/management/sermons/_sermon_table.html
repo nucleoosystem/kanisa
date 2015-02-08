@@ -7,6 +7,7 @@
       <th>Date</th>
       <th>Passage</th>
       <th>Speaker</th>
+      <th>Downloads</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,11 @@
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
           {% endthumbnail %}
         </a>
+      </td>
+      <td>
+        <abbr title="{{ sermon.downloads }} direct downloads">{{ sermon.downloads }}</abbr>
+        /
+        <abbr title="{{ sermon.podcast_downloads }} podcast downloads">{{ sermon.podcast_downloads }}</abbr>
       </td>
     </tr>
     {% endfor %}
