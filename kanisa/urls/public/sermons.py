@@ -3,6 +3,7 @@ from kanisa.views.public.sermons import (
     SermonArchiveView,
     SermonDetailView,
     SermonDownloadView,
+    SermonPodcastDownloadView,
     SermonIndexView,
     SermonSeriesDetailView,
 )
@@ -17,7 +18,7 @@ urlpatterns = patterns(
     url(r'^download/(?P<sermon_id>[0-9]+).mp3$',
         SermonDownloadView.as_view(), {}, 'kanisa_public_sermon_download'),
     url(r'^podcasts/enclosures/(?P<sermon_id>[0-9]+).mp3$',
-        SermonDownloadView.as_view(), {},
+        SermonPodcastDownloadView.as_view(), {},
         'kanisa_public_podcast_sermon_download'),
     url(r'^(?P<slug>[a-z0-9-]+)/$', SermonSeriesDetailView.as_view(), {},
         'kanisa_public_sermon_series_detail'),
