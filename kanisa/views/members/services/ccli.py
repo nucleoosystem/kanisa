@@ -137,7 +137,7 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
         return self.end_date
 
     def get_show_unsung(self):
-        return self.request.GET['unsung'] == '1'
+        return self.request.GET.get('unsung', '0') == '1'
 
     def get_active_filters(self):
         filters = {}
