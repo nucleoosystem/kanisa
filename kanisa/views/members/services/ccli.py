@@ -19,6 +19,7 @@ class CCLIReport(object):
         self.end_date = kwargs.pop('end_date')
         self.composer_lists = {}
         self.sort = kwargs.pop('sort')
+        show_unsung = kwargs.pop('show_unsung')
 
         qs = SongInService.objects.all()
 
@@ -40,7 +41,16 @@ class CCLIReport(object):
         qs = qs.select_related('song')
         qs = [s.song for s in qs]
 
-        songs = [i for i in collections.Counter(qs).viewitems()]
+        if show_unsung:
+            songs_sung = set(qs)
+            songs = Song.objects.all()
+
+            songs = [
+                (s, 0) for s in songs
+                if s not in songs_sung
+            ]
+        else:
+            songs = [i for i in collections.Counter(qs).viewitems()]
 
         if self.sort == 'title':
             songs = sorted(songs,
@@ -126,6 +136,9 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
 
         return self.end_date
 
+    def get_show_unsung(self):
+        return self.request.GET['unsung'] == '1'
+
     def get_active_filters(self):
         filters = {}
         if self.get_selected_event():
@@ -136,6 +149,9 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
 
         if self.get_end_date():
             filters['end_date'] = self.get_end_date()
+
+        if self.get_show_unsung():
+            filters['show_unsung'] = self.get_show_unsung()
 
         return filters
 
@@ -162,6 +178,7 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
             start_date=self.get_start_date(),
             end_date=self.get_end_date(),
             sort=self.get_sort(),
+            show_unsung=self.get_show_unsung()
         )
 
         context['report'] = report

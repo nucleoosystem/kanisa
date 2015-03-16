@@ -24,6 +24,16 @@
         {% endfor %}
       </select>
     </div>
+    <div class="form-group">
+      <label>
+        <input type="radio" value="0" name="unsung" id="hide_unsung"{% if not filters.show_unsung %} checked{% endif %} />
+        Hide unsung songs
+      </label><br />
+      <label>
+        <input type="radio" value="1" name="unsung" id="show_unsung"{% if filters.show_unsung %} checked{% endif %} />
+        Show unsung songs
+      </label>
+    </div>
   </fieldset>
   <button type="submit" class="btn btn-primary">
     <i class="glyphicon glyphicon-filter"></i>

@@ -1,4 +1,9 @@
-<p>Showing counts only for songs used:
+<p>
+{% if filters.show_unsung %}
+  Showing counts only for songs not used:
+{% else %}
+  Showing counts only for songs used:
+{% endif %}
   <ul>
     {% if filters.event %}
     <li>

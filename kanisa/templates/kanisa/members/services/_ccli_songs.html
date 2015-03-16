@@ -10,11 +10,13 @@
       <th>
         Composers
       </th>
+      {% if not filters.show_unsung %}
       <th width="100px" style="text-align: right">
         Usage
         <a href="{% url 'kanisa_members_services_ccli_by_usage' %}?event={{ filters.event.pk }}&start_date={{ filters.start_date|date:"m/d/Y" }}&end_date={{ filters.end_date|date:"m/d/Y" }}">
         <i class="glyphicon glyphicon-chevron-down"></i></a>
       </th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -26,7 +28,9 @@
         </a>
       </td>
       <td>{{ composers|join:"; " }}</td>
+      {% if not filters.show_unsung %}
       <td style="text-align: right">{{ usage }}</td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
