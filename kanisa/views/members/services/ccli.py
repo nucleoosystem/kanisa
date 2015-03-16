@@ -151,7 +151,11 @@ class ServiceCCLIView(ServiceBaseView, KanisaTemplateView):
             'event__event'
         )
         context['filters'] = self.get_active_filters()
-        context['events'] = set([s.event.event for s in services])
+        context['events'] = set([
+            s.event.event
+            for s in services
+            if s.event.event
+        ])
 
         report = CCLIReport(
             selected_event=self.get_selected_event(),
