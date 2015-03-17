@@ -1,4 +1,9 @@
 {% if report.songs %}
+
+<p>Showing <strong>{{ report.songs|length }} song{{ report.songs|length|pluralize }}</strong>.</p>
+
+<hr />
+
 <table class="table table-striped">
   <thead>
     <tr>
