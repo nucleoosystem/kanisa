@@ -43,10 +43,19 @@ class CCLIReport(object):
 
         if show_unsung:
             songs_sung = set(qs)
-            songs = Song.objects.all()
 
+            all_songs = SongInService.objects.all()
+
+            if self.selected_event:
+                all_songs = all_songs.filter(
+                    service__event__event=self.selected_event
+                )
+
+            all_songs = all_songs.select_related('song')
+            all_songs = set([s.song for s in all_songs])
             songs = [
-                (s, 0) for s in songs
+                (s, 0)
+                for s in all_songs
                 if s not in songs_sung
             ]
         else:
