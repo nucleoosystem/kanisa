@@ -52,7 +52,7 @@ class CCLIReport(object):
         else:
             songs = [i for i in collections.Counter(qs).viewitems()]
 
-        if self.sort == 'title':
+        if self.sort == 'title' or show_unsung:
             songs = sorted(songs,
                            key=lambda s: s[0].title,
                            reverse=False)
