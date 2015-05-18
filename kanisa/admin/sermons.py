@@ -30,5 +30,6 @@ class SermonAdmin(admin.ModelAdmin):
         'downloads',
     )
     readonly_fields = ('downloads', 'podcast_downloads', )
+    date_hierarchy = 'date'
 
 admin.site.register(Sermon, SermonAdmin)
