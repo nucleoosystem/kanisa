@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'haystack',
     'mptt',
     'recurrence',
-    'south',
     'constance',
     'constance.backends.database',
     'kanisa',
@@ -50,7 +49,7 @@ INSTALLED_APPS = (
 
 LOGIN_URL = '/members/account/login/'
 
-ROOT_URLCONF = 'kanisa.tests.tox.urls'
+ROOT_URLCONF = 'tests.tox.urls'
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
@@ -61,7 +60,7 @@ import os
 PROJECT_DIR = os.path.dirname(__file__)
 j = lambda filename: os.path.join(PROJECT_DIR, filename)
 
-HAYSTACK_SITECONF = 'kanisa.tests.tox.search_sites'
+HAYSTACK_SITECONF = 'tests.tox.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = j('.test_whoosh')
 

@@ -6,7 +6,7 @@ from kanisa.models import (
     ScheduledEvent,
     ScheduledEventSeries
 )
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 import factory
 
 

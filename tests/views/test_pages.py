@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.utils import override_settings
 from kanisa.models import Page
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 import factory
 
 

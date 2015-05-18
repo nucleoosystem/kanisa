@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AnonymousUser
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 
 
 class XHRBaseTestCase(KanisaViewTestCase):

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core import mail
 from django.core.urlresolvers import reverse
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 
 
 class PasswordResetViewTest(KanisaViewTestCase):

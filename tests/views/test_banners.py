@@ -1,7 +1,7 @@
 from datetime import date
 from django.core.urlresolvers import reverse
 from kanisa.models import Banner
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 from django.test import TestCase
 import factory
 

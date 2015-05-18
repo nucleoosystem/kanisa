@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 
 
 class SocialViewTest(KanisaViewTestCase):

@@ -5,7 +5,7 @@ from django.contrib.auth.context_processors import PermWrapper
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 from mock import Mock
 
 

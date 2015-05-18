@@ -9,7 +9,7 @@ from kanisa.models import (
     ScheduledEvent,
     SermonSeries,
 )
-from kanisa.tests.views.utils import XHRBaseTestCase
+from tests.views.utils import XHRBaseTestCase
 from kanisa.views.xhr.bible import CheckBiblePassageView
 from kanisa.views.xhr.diary import (
     ScheduleRegularEventView,

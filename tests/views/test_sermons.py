@@ -1,7 +1,7 @@
 from datetime import date
 from django.core.urlresolvers import reverse
 from kanisa.models import Sermon, SermonSeries, SermonSpeaker
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 import factory
 
 

@@ -4,7 +4,7 @@ from django.contrib.auth.models import AnonymousUser, Permission
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.html import escape
-from kanisa.tests.test_blog import BlogPostFactory
+from tests.test_blog import BlogPostFactory
 import kanisa.views.public.blog as views
 from kanisa.views.public.blog.feed import LatestEntriesFeed
 import pytest

@@ -26,7 +26,7 @@ setup(
     author_email='internet@dominicrodger.com',
     url='http://github.com/dominicrodger/kanisa',
     license='BSD',
-    packages=find_packages(exclude=["kanisa.tests", "kanisa.tests.*"]),
+    packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
@@ -52,9 +52,9 @@ setup(
         "wsgiref==0.1.2",
     ],
     tests_require=(
-        "pytest==2.5.2",
-        "pytest-cov==1.6",
-        "pytest-django==2.6.1",
+        "pytest==2.6.4",
+        "pytest-cov==1.7.0",
+        "pytest-django==2.8.0",
         "factory-boy==2.2.1",
         "mock==1.0.1",
     ),

@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from kanisa.models import NavigationElement
-from kanisa.tests.utils import KanisaViewTestCase
+from tests.utils import KanisaViewTestCase
 import factory
 
 
