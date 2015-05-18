@@ -218,29 +218,6 @@ textarea.kanisamaininputwidget {
     height: auto;
 }
 
-.speedbar {
-    font-size: 80%;
-    padding: 5px;
-}
-
-#logo .speedbar {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    color: #fff;
-    background-color: #000;
-    opacity: 0.6;
-    -webkit-border-top-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    border-top-left-radius: 5px;
-}
-
-.speedbar-management {
-    position: absolute;
-    right: 15px;
-    top: -22px;
-}
-
 .editable_block_wrapper {
     position: relative;
 }

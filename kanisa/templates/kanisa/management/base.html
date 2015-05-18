@@ -1,5 +1,4 @@
 {% load kanisa_tags %}
-{% load speedbar %}
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -21,13 +20,6 @@
           {% include 'kanisa/management/_sidebar.html' %}
         </div>
         <div class="col-sm-10">
-          {% if request.user.is_superuser %}
-          <div class="speedbar speedbar-management">
-            <span>Overall: {% metric "overall" "time" %}ms</span>
-            <span>SQL: {% metric "sql" "count" %} ({% metric "sql" "time" %} ms)</span>
-          </div>
-          {% endif %}
-
           {% block breadcrumbs %}
           {% include 'kanisa/management/_breadcrumbs.html' %}
           {% endblock %}
