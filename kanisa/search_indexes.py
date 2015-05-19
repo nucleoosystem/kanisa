@@ -1,3 +1,9 @@
+# The import from models causes problems for Django 1.8 - the app
+# registry isn't loaded when haystack.autodiscover is called, so we
+# end up getting an AppRegistryNotReady exception. We can probably get
+# around this by creating an AppConfig class which does the
+# autodiscover in the ready method.
+
 from datetime import date
 from haystack import indexes
 from haystack import site
