@@ -1,3 +1,6 @@
+from collections import OrderedDict
+from distutils.version import StrictVersion
+import django
 from django import forms
 from django.forms.util import ErrorList
 from kanisa.forms import (
@@ -66,10 +69,23 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
     def __init__(self, *args, **kwargs):
         super(ScheduledEventBaseForm, self).__init__(*args, **kwargs)
 
-        index_of_date = [i for i, x in enumerate(self.fields.keyOrder)
-                         if x == 'start_time'][0]
-        self.fields.keyOrder.pop()
-        self.fields.keyOrder.insert(index_of_date + 1, 'is_multi_day')
+        django_version = StrictVersion(django.get_version())
+        ordered_version = StrictVersion('1.7.0')
+
+        if django_version >= ordered_version:
+            fields = OrderedDict()
+            multi_day = self.fields.pop('is_multi_day')
+            for key, value in self.fields.items():
+                fields[key] = value
+                if key == 'start_time':
+                    fields['is_multi_day'] = multi_day
+
+                    self.fields = fields
+        else:
+            index_of_date = [i for i, x in enumerate(self.fields.keyOrder)
+                             if x == 'start_time'][0]
+            self.fields.keyOrder.pop()
+            self.fields.keyOrder.insert(index_of_date + 1, 'is_multi_day')
 
     def clean(self):
         super(ScheduledEventBaseForm, self).clean()
