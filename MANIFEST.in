@@ -1,5 +1,3 @@
 include README.md
 recursive-include kanisa/templates *
 recursive-include kanisa/static *
-recursive-exclude kanisa/static/kanisa/js/management *
-recursive-exclude kanisa/static/kanisa/js/public *
