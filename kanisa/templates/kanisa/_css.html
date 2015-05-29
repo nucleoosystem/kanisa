@@ -1,8 +1,4 @@
 {% load static from staticfiles %}
-{% if KANISA_DEBUG_STATIC %}
 <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/css/datepicker.css' %}" />
 <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/css/kanisa.css' %}" />
 <link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/css/timepicker.css' %}" />
-{% else %}
-<link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/css/minified/kanisa.b856cd9a.css' %}">
-{% endif %}

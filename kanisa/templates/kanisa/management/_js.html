@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% if KANISA_DEBUG_STATIC %}
 <script src="{% static 'kanisa/js/management/account_selector.js' %}"></script>
 <script src="{% static 'kanisa/js/management/biblefield.js' %}"></script>
 <script src="{% static 'kanisa/js/management/bootstrap_datepicker.js' %}"></script>
@@ -18,6 +17,3 @@
 <script src="{% static 'kanisa/js/management/scheduled_event.js' %}"></script>
 <script src="{% static 'kanisa/js/management/services.js' %}"></script>
 <script src="{% static 'kanisa/js/management/thumbnail_widget.js' %}"></script>
-{% else %}
-<script src="{% static 'kanisa/js/minified/kanisa-management.c1d6d392.js' %}"></script>
-{% endif %}
