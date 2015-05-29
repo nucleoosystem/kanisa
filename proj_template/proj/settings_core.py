@@ -45,7 +45,6 @@ TEMPLATE_DIRS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'speedbar.middleware.SpeedbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -86,14 +85,12 @@ INSTALLED_APPS = (
     'crispy_forms',
     'haystack',
     'mptt',
-    'south',
-    'recurrence', 
+    'recurrence',
     'constance',
     'constance.backends.database',
     'kanisa',
     'djohno',
     'raven.contrib.django.raven_compat',
-    'speedbar',
 )
 
 HAYSTACK_SITECONF = 'proj.search_sites'
@@ -117,11 +114,3 @@ CONSTANCE_CONFIG = {
     'TWITTER_ACCESS_SECRET': ('', 'Configured by using Kanisa.'),
 }
 CONSTANCE_DATABASE_CACHE_BACKEND = 'default'
-
-SPEEDBAR_ENABLE = True
-SPEEDBAR_PANEL = True
-SPEEDBAR_MODULES = [
-    'speedbar.modules.stacktracer',
-    'speedbar.modules.pagetimer',
-    'speedbar.modules.sql',
-]
