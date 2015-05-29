@@ -7,16 +7,16 @@ from kanisa.utils.banners import date_has_passed, today_in_range
 
 
 class ActiveBannerManager(models.Manager):
-    def get_query_set(self):
-        qs = super(ActiveBannerManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(ActiveBannerManager, self).get_queryset()
         qs = qs.exclude(publish_from__gt=date.today())
         qs = qs.exclude(publish_until__lt=date.today())
         return qs
 
 
 class InactiveBannerManager(models.Manager):
-    def get_query_set(self):
-        qs = super(InactiveBannerManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(InactiveBannerManager, self).get_queryset()
         not_yet_active = Q(publish_from__gt=date.today())
         expired = Q(publish_until__lt=date.today())
         return qs.filter(not_yet_active | expired)

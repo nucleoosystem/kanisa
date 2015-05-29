@@ -42,15 +42,15 @@ class Song(models.Model):
 
 
 class ServicesManager(models.Manager):
-    def get_query_set(self):
-        qs = super(ServicesManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(ServicesManager, self).get_queryset()
         qs = qs.select_related('band_leader', 'event', 'event__event')
         return qs
 
 
 class FutureServicesManager(ServicesManager):
-    def get_query_set(self):
-        qs = super(FutureServicesManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(FutureServicesManager, self).get_queryset()
         qs = qs.filter(event__date__gte=date.today())
         return qs
 
@@ -102,8 +102,8 @@ class SongInService(models.Model):
 
 
 class BandManager(models.Manager):
-    def get_query_set(self):
-        qs = super(BandManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(BandManager, self).get_queryset()
         qs = qs.select_related('band_leader')
         return qs
 

@@ -2,8 +2,8 @@ from django.db import models
 
 
 class FutureScheduledTweetsManager(models.Manager):
-    def get_query_set(self):
-        qs = super(FutureScheduledTweetsManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(FutureScheduledTweetsManager, self).get_queryset()
         qs = qs.exclude(posted=True)
         return qs
 

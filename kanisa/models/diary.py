@@ -46,8 +46,8 @@ class EventContact(models.Model):
 
 
 class EventCategoryManager(models.Manager):
-    def get_query_set(self):
-        qs = super(EventCategoryManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(EventCategoryManager, self).get_queryset()
         return qs.annotate(num_events=Count('regularevent'))
 
 
@@ -183,8 +183,8 @@ class RegularEvent(models.Model):
 
 
 class ScheduledEventSeriesManager(models.Manager):
-    def get_query_set(self):
-        qs = super(ScheduledEventSeriesManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(ScheduledEventSeriesManager, self).get_queryset()
         return qs.prefetch_related('events')
 
 
@@ -222,8 +222,8 @@ class ScheduledEventSeries(models.Model):
 
 
 class ScheduledEventManager(models.Manager):
-    def get_query_set(self):
-        qs = super(ScheduledEventManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(ScheduledEventManager, self).get_queryset()
         return qs.select_related('event')
 
 

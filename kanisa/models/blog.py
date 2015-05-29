@@ -6,10 +6,10 @@ from django.db import models
 
 
 class PublishedPostManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return super(
             PublishedPostManager,
-            self).get_query_set().filter(
+            self).get_queryset().filter(
                 publish_date__lte=date.today()
             )
 

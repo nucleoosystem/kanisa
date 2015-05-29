@@ -11,8 +11,8 @@ from kanisa.models.bible.db_field import BiblePassageField
 
 
 class SermonSeriesManager(models.Manager):
-    def get_query_set(self):
-        qs = super(SermonSeriesManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(SermonSeriesManager, self).get_queryset()
         return qs.annotate(the_num_sermons=Count('sermon'))
 
 
@@ -94,8 +94,8 @@ class SermonSeries(models.Model):
 
 
 class SpeakerManager(models.Manager):
-    def get_query_set(self):
-        qs = super(SpeakerManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(SpeakerManager, self).get_queryset()
         return qs.annotate(num_sermons=Count('sermon'))
 
 
@@ -146,14 +146,14 @@ class SermonSpeaker(models.Model):
 
 
 class SermonManager(models.Manager):
-    def get_query_set(self):
-        qs = super(SermonManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(SermonManager, self).get_queryset()
         return qs.select_related('series', 'speaker')
 
 
 class PreachedSermonManager(SermonManager):
-    def get_query_set(self):
-        qs = super(PreachedSermonManager, self).get_query_set()
+    def get_queryset(self):
+        qs = super(PreachedSermonManager, self).get_queryset()
         return qs.filter(date__lte=date.today())
 
 
