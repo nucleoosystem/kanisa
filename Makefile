@@ -4,12 +4,7 @@ cleandist:
 	rm -rf dist/
 	python setup.py bdist_wheel
 
-reminify:
-	bash minify.sh
-
-# We reminify the JavaScript to ensure that no changes have been made
-# which haven't been propagated to the minified JavaScript.
-git-check: reminify
+git-check:
 	git status
 	git diff-files --quiet
 
