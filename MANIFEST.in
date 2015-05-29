@@ -3,4 +3,3 @@ recursive-include kanisa/templates *
 recursive-include kanisa/static *
 recursive-exclude kanisa/static/kanisa/js/management *
 recursive-exclude kanisa/static/kanisa/js/public *
-exclude kanisa/static/kanisa/css/kanisa.css
