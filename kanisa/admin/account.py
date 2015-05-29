@@ -34,6 +34,21 @@ class RegisteredUserCreationForm(UserCreationForm):
 class RegisteredUserChangeForm(UserChangeForm):
     class Meta:
         model = RegisteredUser
+        fields = (
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+            'image',
+            'is_active',
+            'is_staff',
+            'is_superuser',
+            'groups',
+            'user_permissions',
+            'last_login',
+            'date_joined'
+        )
 
 
 class RegisteredUserAdmin(UserAdmin):
