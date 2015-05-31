@@ -8,7 +8,9 @@
   {% endif %}
   You can find out more about <em>{{ object }}</em> by e-mailing
   {% if object.contact.email %}
-    <strong><a href="mailto:{{ object.contact.email }}">{{ object.contact }}</a></strong>.
+    <strong><a href="mailto:{{ object.contact.email }}">{{ object.contact }}</a></strong> at {{ object.contact.email }}.
+  {% elif KANISA_CHURCH_EMAIL %}
+    <strong>{{ object.contact }}</strong> via the <a href="mailto:{{ KANISA_CHURCH_EMAIL }}">Church office</a> at {{ KANISA_CHURCH_EMAIL }}.
   {% else %}
     <strong>{{ object.contact }}</strong> via the Church office.
   {% endif %}

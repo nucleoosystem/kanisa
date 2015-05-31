@@ -6,6 +6,12 @@ KANISA_ADMIN_THUMBS_SIZE = getattr(
     '60x60'
 )
 
+KANISA_CHURCH_EMAIL = getattr(
+    settings,
+    'KANISA_CHURCH_EMAIL',
+    None
+)
+
 KANISA_CHURCH_NAME = getattr(
     settings,
     'KANISA_CHURCH_NAME',
