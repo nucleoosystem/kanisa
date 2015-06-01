@@ -19,7 +19,7 @@ Requirements
 ------------
 
 Kanisa expects to essentially be the only app you're running, and
-requires Python 2.7. It is tested with Django 1.5 and 1.6.
+requires Python 2.7 and Django 1.7.
 
 Installation
 ------------
