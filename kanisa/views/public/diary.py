@@ -194,7 +194,7 @@ class DiaryContactView(DiaryBaseView, KanisaFormView):
         )
 
         message = (
-            "We've sent an email to %s - they'll be in touch soon."
+            "Thanks for your interest - we'll be in touch soon!"
             % unicode(event.contact)
         )
 
