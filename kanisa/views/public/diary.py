@@ -9,6 +9,7 @@ from django.views.generic import (
     RedirectView,
     TemplateView
 )
+from kanisa import conf
 from kanisa.forms.diary import RegularEventQueryForm
 from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
 from kanisa.utils.diary import get_this_week
@@ -183,6 +184,7 @@ class DiaryContactView(DiaryBaseView, KanisaFormView):
 
     def form_valid(self, form):
         context = form.cleaned_data
+        context.update({'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
         event = form.cleaned_data['event']
         send_mail_with_context(
             event.contact.email,
