@@ -1,0 +1,16 @@
+Hi,
+
+{{ name }} ({{ email }}) is looking for information about
+{{ event }}.
+
+{% if phone_number %}
+They provided the phone number {{ phone_number }}.
+{% endif %}
+
+{% if query %}
+They included these details: "{{ query }}"
+{% endif %}
+
+Thanks,
+
+The {{ KANISA_CHURCH_NAME }} web team

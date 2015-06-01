@@ -1,5 +1,8 @@
 from collections import OrderedDict
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django import forms
+from django.core.urlresolvers import reverse
 from django.forms.util import ErrorList
 from kanisa.forms import (
     KanisaBaseModelForm,
@@ -116,3 +119,31 @@ class ScheduledEventCreationForm(ScheduledEventBaseForm):
     class Meta:
         model = ScheduledEvent
         widgets = {'details': KanisaMainInputWidget(), }
+
+
+class RegularEventQueryForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    phone_number = forms.CharField(required=False)
+    query = forms.CharField(required=False, widget=forms.Textarea)
+    event = forms.ModelChoiceField(
+        queryset=RegularEvent.objects,
+        widget=forms.HiddenInput()
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(RegularEventQueryForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_action = reverse(
+            'kanisa_public_diary_contact'
+        )
+        self.helper.add_input(
+            Submit(
+                'submit',
+                'Send Query',
+                css_class='btn-success'
+            )
+        )
+
+    def set_event(self, event):
+        self.initial['event'] = event

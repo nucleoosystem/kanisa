@@ -17,6 +17,17 @@ function update_this_week_table(event) {
           });
 }
 
+function display_contact_form(event) {
+    event.preventDefault();
+
+    $("#regular_event_contact").slideDown();
+}
+
+function bind_contact_us_online_control() {
+    $("#display_contact_form").click(display_contact_form);
+}
+
 $(document).ready(function() {
     bind_previous_week_and_next_week_controls();
+    bind_contact_us_online_control();
 });

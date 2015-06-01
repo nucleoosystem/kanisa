@@ -109,6 +109,10 @@ class RegularEvent(models.Model):
     def __unicode__(self):
         return self.title
 
+    def url(self):
+        return reverse('kanisa_public_diary_regularevent_detail',
+                       args=[self.slug, ])
+
     def get_matching_dates(self, start_date, end_date):
         """Get a list of dates which match our recurrence pattern from
         start_date and before end_date.

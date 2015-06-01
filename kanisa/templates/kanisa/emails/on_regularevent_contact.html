@@ -1,0 +1,16 @@
+<p>Hi,</p>
+
+<p>{{ name }} ({{ email }}) is looking for information about
+{{ event }}.</p>
+
+{% if phone_number %}
+<p>They provided the phone number {{ phone_number }}.</p>
+{% endif %}
+
+{% if query %}
+<p>They included these details: "{{ query }}"</p>
+{% endif %}
+
+<p>Thanks,</p>
+
+<p><em>The {{ KANISA_CHURCH_NAME }} web team</em></p>

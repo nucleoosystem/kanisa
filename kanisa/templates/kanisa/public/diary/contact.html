@@ -1,0 +1,26 @@
+{% extends 'kanisa/public/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block precontent %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{% url 'kanisa_public_index' %}">Home</a>
+  </li>
+  <li>
+    <a href="{% url 'kanisa_public_diary_index' %}">Diary</a>
+  </li>
+  <li class="active">
+    Contact Us
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<h1 class="primary">
+  Contact Us
+</h1>
+
+{% crispy form %}
+
+{% endblock %}

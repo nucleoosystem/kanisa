@@ -1,7 +1,7 @@
 import calendar
 from datetime import date, timedelta
 from django.core.urlresolvers import reverse
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import (
@@ -9,8 +9,11 @@ from django.views.generic import (
     RedirectView,
     TemplateView
 )
+from kanisa.forms.diary import RegularEventQueryForm
 from kanisa.models import RegularEvent, ScheduledEvent, EventCategory
 from kanisa.utils.diary import get_this_week
+from kanisa.utils.mail import send_mail_with_context
+from kanisa.views.generic import KanisaFormView
 
 
 class DiaryBaseView(object):
@@ -90,6 +93,10 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
 
         context['kanisa_title'] = unicode(self.object)
 
+        if self.object.contact:
+            context['contact_form'] = RegularEventQueryForm()
+            context['contact_form'].set_event(self.object)
+
         return context
 regular_event_detail = RegularEventDetailView.as_view()
 
@@ -168,3 +175,20 @@ class DiaryPrintableView(TemplateView):
 
         return ctx
 diary_printable = DiaryPrintableView.as_view()
+
+
+class DiaryContactView(DiaryBaseView, KanisaFormView):
+    form_class = RegularEventQueryForm
+    template_name = 'kanisa/public/diary/contact.html'
+
+    def form_valid(self, form):
+        context = form.cleaned_data
+        event = form.cleaned_data['event']
+        send_mail_with_context(
+            event.contact.email,
+            context,
+            'on_regularevent_contact'
+        )
+
+        return HttpResponseRedirect(event.url())
+diary_contact = DiaryContactView.as_view()
