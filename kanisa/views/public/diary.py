@@ -1,5 +1,6 @@
 import calendar
 from datetime import date, timedelta
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -191,6 +192,13 @@ class DiaryContactView(DiaryBaseView, KanisaFormView):
             context,
             'on_regularevent_contact'
         )
+
+        message = (
+            "We've sent an email to %s - they'll be in touch soon."
+            % unicode(event.contact)
+        )
+
+        messages.success(self.request, message)
 
         return HttpResponseRedirect(event.url())
 diary_contact = DiaryContactView.as_view()
