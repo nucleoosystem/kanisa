@@ -5,8 +5,10 @@ import factory
 
 
 class NavigationElementFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = NavigationElement
     title = 'NavigationElement Title'
+
+    class Meta:
+        model = NavigationElement
 
 
 class NavigationManagementViewTest(KanisaViewTestCase):

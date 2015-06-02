@@ -52,7 +52,7 @@ setup(
         "pytest==2.7.1",
         "pytest-cov==1.8.1",
         "pytest-django==2.8.0",
-        "factory-boy==2.2.1",
+        "factory-boy==2.5.2",
         "mock==1.0.1",
     ),
     cmdclass = {'test': PyTest},

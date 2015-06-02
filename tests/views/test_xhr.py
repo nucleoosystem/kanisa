@@ -68,8 +68,10 @@ class XHRBiblePassageViewTest(XHRBaseTestCase):
 
 
 class PageFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Page
     title = 'Page Title'
+
+    class Meta:
+        model = Page
 
 
 class XHRCreatePageViewTest(XHRBaseTestCase):
@@ -156,8 +158,10 @@ class XHRListPagesViewTest(XHRBaseTestCase):
 
 
 class SermonSeriesFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = SermonSeries
     title = factory.Sequence(lambda n: 'Series #%d' % n)
+
+    class Meta:
+        model = SermonSeries
 
 
 class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
@@ -204,11 +208,13 @@ class XHRMarkSermonSeriesComplete(XHRBaseTestCase):
 
 
 class RegularEventFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = RegularEvent
     title = factory.Sequence(lambda n: 'Regular Event #%d' % n)
     start_time = time(14, 0)
     duration = 60
     pattern = "RRULE:FREQ=WEEKLY;BYDAY=TU"
+
+    class Meta:
+        model = RegularEvent
 
 
 class XHRScheduleRegularEventViewTest(XHRBaseTestCase):
@@ -307,8 +313,10 @@ class XHRFetchScheduleViewTest(XHRBaseTestCase):
 
 
 class NavigationElementFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = NavigationElement
     title = 'Navigation Title'
+
+    class Meta:
+        model = NavigationElement
 
 
 class XHRListNavigationViewTest(XHRBaseTestCase):

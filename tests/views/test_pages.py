@@ -7,8 +7,10 @@ import factory
 
 
 class PageFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Page
     title = 'Page Title'
+
+    class Meta:
+        model = Page
 
 
 class PageManagementViewTest(KanisaViewTestCase):

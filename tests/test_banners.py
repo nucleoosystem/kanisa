@@ -6,10 +6,12 @@ import factory
 
 
 class BannerFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Banner
     headline = factory.Sequence(lambda n: 'Banner Title #%d' % n)
     contents = 'Banner contents'
     image = 'non_existent_image.jpg'
+
+    class Meta:
+        model = Banner
 
 
 class BannerTest(TestCase):

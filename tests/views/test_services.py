@@ -10,25 +10,31 @@ import factory
 
 
 class ScheduledEventFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = ScheduledEvent
     title = 'Test Event'
     date = datetime.date(2013, 1, 1)
     start_time = datetime.time(10, 0, 0)
     intro = 'An event for testing with'
 
+    class Meta:
+        model = ScheduledEvent
+
 
 class RegisteredUserFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = RegisteredUser
     username = 'phil'
     first_name = 'Phil'
     last_name = 'Smith'
     email = 'phil@example.com'
 
+    class Meta:
+        model = RegisteredUser
+
 
 class ServiceFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = Service
     event = factory.SubFactory(ScheduledEventFactory)
     band_leader = factory.SubFactory(RegisteredUserFactory)
+
+    class Meta:
+        model = Service
 
 
 class ServiceMembersViewTest(KanisaViewTestCase):

@@ -5,11 +5,13 @@ import pytest
 
 
 class BlogPostFactory(factory.DjangoModelFactory):
-    FACTORY_FOR = BlogPost
     title = factory.Sequence(lambda n: 'Title #%d' % n)
     teaser_text = 'Teaser contents'
     main_text = 'Main post contents'
     publish_date = date.today() - timedelta(days=1)
+
+    class Meta:
+        model = BlogPost
 
 
 @pytest.mark.django_db
