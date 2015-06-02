@@ -95,7 +95,7 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
 
         context['kanisa_title'] = unicode(self.object)
 
-        if self.object.contact:
+        if self.object.contact and self.object.contact.email:
             context['contact_form'] = RegularEventQueryForm()
             context['contact_form'].set_event(self.object)
 
