@@ -125,7 +125,15 @@ class RegularEventQueryForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
     phone_number = forms.CharField(required=False)
-    query = forms.CharField(required=False, widget=forms.Textarea)
+    query = forms.CharField(
+        required=False,
+        widget=forms.Textarea,
+        help_text=(
+            'Any extra details you\'d like to give, or questions you\'d '
+            'like answered.'
+        ),
+        label='Message',
+    )
     event = forms.ModelChoiceField(
         queryset=RegularEvent.objects,
         widget=forms.HiddenInput()

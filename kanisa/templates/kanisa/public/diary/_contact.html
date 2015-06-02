@@ -7,22 +7,28 @@
   <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" style="float: left; margin: 0 5px 5px 0" />
   {% endthumbnail %}
   {% endif %}
-  You can find out more about <em>{{ object }}</em> by e-mailing
-  {% if object.contact.email %}
-    <strong><a href="mailto:{{ object.contact.email }}">{{ object.contact }}</a></strong>.
-  {% elif KANISA_CHURCH_EMAIL %}
-    <strong>{{ object.contact }}</strong> via the <a href="mailto:{{ KANISA_CHURCH_EMAIL }}">Church office</a> at {{ KANISA_CHURCH_EMAIL }}.
-  {% else %}
-    <strong>{{ object.contact }}</strong> via the Church office.
-  {% endif %}
+  You can find out more about <em>{{ object }}</em> by
   {% if contact_form %}
-  Alternatively, you can <a href="#" id="display_contact_form">contact us online</a>.
+    <a href="#" data-toggle="modal" data-target="#contact_form_modal">contacting <strong>{{ object.contact }}</strong></a>.
+  {% elif KANISA_CHURCH_EMAIL %}
+    e-mailing <strong>{{ object.contact }}</strong> via the <a href="mailto:{{ KANISA_CHURCH_EMAIL }}">Church office</a> at {{ KANISA_CHURCH_EMAIL }}.
+  {% else %}
+    e-mailing <strong>{{ object.contact }}</strong> via the Church office.
   {% endif %}
 </p>
 
 {% if contact_form %}
-<div id="regular_event_contact">
-  <hr />
-  {% crispy contact_form %}
+<div class="modal fade" id="contact_form_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Contact {{ object.contact }} about {{ object }}</h4>
+      </div>
+      <div class="modal-body">
+        {% crispy contact_form %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endif %}
