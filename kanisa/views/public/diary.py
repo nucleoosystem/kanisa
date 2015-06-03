@@ -193,10 +193,7 @@ class DiaryContactView(DiaryBaseView, KanisaFormView):
             'on_regularevent_contact'
         )
 
-        message = (
-            "Thanks for your interest - we'll be in touch soon!"
-            % unicode(event.contact)
-        )
+        message = "Thanks for your interest - we'll be in touch soon!"
 
         messages.success(self.request, message)
 
