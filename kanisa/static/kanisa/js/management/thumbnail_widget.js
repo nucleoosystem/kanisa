@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 $(document).ready(function() {
     var controls_element = $(".thumbnailfileinput").parent();
     var checkbox = controls_element.find("input[type=checkbox]");

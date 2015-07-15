@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function bind_previous_week_and_next_week_controls() {
     $(".week_pager").click(update_this_week_table);
 }

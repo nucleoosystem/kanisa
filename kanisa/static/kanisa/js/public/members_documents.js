@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function toggle_document_details(event) {
     event.preventDefault();
 

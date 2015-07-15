@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function on_event_type_selection_change() {
     // This function sets the event title to the name of the selected
     // event type, every time the event type is changed, unless the

@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function navigation_move(event, el, url) {
    event.preventDefault();
 

@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 var csrftoken = $.cookie('csrftoken');
 
 function csrfSafeMethod(method) {

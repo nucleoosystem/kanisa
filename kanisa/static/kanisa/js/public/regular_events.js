@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function update_list_of_regular_events(event) {
     event.preventDefault();
 

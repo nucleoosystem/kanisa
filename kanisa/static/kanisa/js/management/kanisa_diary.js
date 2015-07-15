@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 function update_event_list() {
     $.get(update_diary_url,
           function(data) {

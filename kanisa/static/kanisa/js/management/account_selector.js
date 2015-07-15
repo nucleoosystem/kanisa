@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 $(document).ready(function() {
     $(".kanisaaccountmultipleselector").chosen({
         placeholder_text_multiple: "Select some users"

@@ -24,8 +24,8 @@ flake8:
 	tox -e flake8
 
 jslint:
-	jshint kanisa/static/kanisa/js/management/* --show-non-errors
-	jshint kanisa/static/kanisa/js/public/* --show-non-errors
+	jshint kanisa/static/kanisa/js/management/*
+	jshint kanisa/static/kanisa/js/public/*
 
 lint: flake8 jslint
 

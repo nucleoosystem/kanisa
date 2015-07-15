@@ -1,5 +1,3 @@
-/* jshint jquery: true, browser: true */
-
 // This stuff gets us around Django's CSRF verification, in a good
 // way.
 
