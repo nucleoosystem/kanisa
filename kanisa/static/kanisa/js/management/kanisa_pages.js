@@ -47,7 +47,7 @@ function quick_page_create(event) {
 
 function quick_page_delete(event) {
     event.preventDefault();
-    page = $(this).attr("data-page-title");
+    var page = $(this).attr("data-page-title");
     if (confirm("Are you sure you want to delete the page \"" + page + "\"?")) {
         $.post($(this).attr("href"),
                function(data) {
