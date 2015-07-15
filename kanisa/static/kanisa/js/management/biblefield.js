@@ -5,13 +5,13 @@ $(document).ready(function() {
         var el = $(this);
         var input = el.val();
 
-        if (el.siblings(".biblepassageresponse").length == 0) {
+        if (el.siblings(".biblepassageresponse").length === 0) {
             el.after("<span class=\"biblepassageresponse\"></span>");
         }
 
         var status_element = el.siblings(".biblepassageresponse");
 
-        if (input.length == 0) {
+        if (input.length === 0) {
             status_element.html('');
             return;
         }

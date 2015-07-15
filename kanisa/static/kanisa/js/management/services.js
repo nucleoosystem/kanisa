@@ -3,7 +3,7 @@
 function on_band_change(event) {
     var selection = $(this).val();
 
-    if ($(this).val().length == 0) {
+    if ($(this).val().length === 0) {
         // Presumably we've selected the default (null) option,
         // let's reset things.
         $("#id_band_leader").val('');
@@ -30,7 +30,7 @@ function on_date_change_evt(event) {
 
     var warning_div = $("#id_date_warning");
 
-    if (warning_div.length == 0) {
+    if (warning_div.length === 0) {
         $(this).after("<div id=\"id_date_warning\" class=\"help-inline\"></div>");
     }
 
@@ -45,7 +45,7 @@ function on_date_change_evt(event) {
             warning_div.parents(".control-group").addClass("error");
             var options_html = '';
 
-            if (data.events.length == 0) {
+            if (data.events.length === 0) {
                 // Add warning about bad date selection
                 warning_div.html("<strong>There are no events on that date.</strong>");
                 events_input.html("");
@@ -78,7 +78,7 @@ function on_date_change_evt(event) {
 }
 
 function add_song_to_plan(event) {
-    if ($("#id_song").val() == "") {
+    if ($("#id_song").val() === "") {
         alert_failure("Please select a song to add.");
         event.preventDefault();
         return;

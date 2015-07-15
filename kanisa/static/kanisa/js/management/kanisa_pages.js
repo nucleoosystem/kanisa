@@ -18,7 +18,7 @@ function quick_page_create(event) {
 
     var form = $(this);
 
-    if (form.data('submitting') == true) {
+    if (form.data('submitting') === true) {
         return false;
     }
 

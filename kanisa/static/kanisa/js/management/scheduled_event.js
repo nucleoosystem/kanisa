@@ -7,7 +7,7 @@ function on_event_type_selection_change() {
 
     var selection = $(this).find(":selected").text();
 
-    if ($(this).val().length == 0) {
+    if ($(this).val().length === 0) {
         // Presumably we've selected the default (null) option,
         // let's reset to the empty string (don't want a title
         // full of dashes).
@@ -59,7 +59,7 @@ $(document).ready(function() {
     $(".scheduledevent #id_event").change(on_event_type_selection_change);
     $(".scheduledevent #id_is_multi_day").change(on_event_multi_day_change);
 
-    if ($('#id_is_multi_day').length != 0) {
+    if ($('#id_is_multi_day').length !== 0) {
         set_initial_multiday_state();
     }
 });

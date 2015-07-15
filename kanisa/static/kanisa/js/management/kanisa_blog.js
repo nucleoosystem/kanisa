@@ -15,7 +15,7 @@ function show_word_count_warning(words, element) {
 }
 
 function update_word_count_impl(element) {
-    if (element.length == 0) {
+    if (element.length === 0) {
         return;
     }
 
