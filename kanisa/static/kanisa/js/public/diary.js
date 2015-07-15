@@ -1,4 +1,4 @@
-/* global update_this_week:false */
+/* global update_this_week_url:false */
 
 function bind_previous_week_and_next_week_controls() {
     $(".week_pager").click(update_this_week_table);
@@ -9,7 +9,7 @@ function update_this_week_table(event) {
 
     var el=$(this);
 
-    $.get(update_this_week,
+    $.get(update_this_week_url,
           {'start_date': el.attr("data-date")},
           function(data) {
               $("#this_week_table").html(data);

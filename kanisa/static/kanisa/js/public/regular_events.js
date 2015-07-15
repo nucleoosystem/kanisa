@@ -1,4 +1,4 @@
-/* global update_regular_events_list:false */
+/* global update_regular_events_list_url:false */
 
 function update_list_of_regular_events(event) {
     event.preventDefault();
@@ -6,7 +6,7 @@ function update_list_of_regular_events(event) {
     var link = $(this);
     var category_pk = link.attr("data-cat-id");
 
-    $.get(update_regular_events_list,
+    $.get(update_regular_events_list_url,
           {'category': category_pk},
           function(data) {
               $("#regular_event_list").html(data);
