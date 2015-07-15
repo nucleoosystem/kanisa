@@ -1,3 +1,5 @@
+/* exported alert_failure */
+
 function _alert_impl(msg, alert_class) {
     var alert_box = $("#kanisa_alerts");
     $(".js-alert").remove();

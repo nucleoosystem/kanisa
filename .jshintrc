@@ -1,6 +1,10 @@
 {
-    "unused": "vars",
-    "undef": true,
+    "browser": true,
+    "globals": {
+        "confirm": false
+    },
+    "curly": true,
     "jquery": true,
-    "browser": true
+    "undef": true,
+    "unused": "vars"
 }

@@ -1,3 +1,5 @@
+/* global pages_list_url:false, page_create_url:false */
+
 function update_page_list() {
     $.get(pages_list_url,
           function(data) {

@@ -1,3 +1,5 @@
+/* global on_popup_close:true */
+
 jQuery.fn.extend({
     insertAtCaret: function(myValue){
         return this.each(function(i) {

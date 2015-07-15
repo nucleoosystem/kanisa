@@ -1,3 +1,5 @@
+/* global alert_failure:false, series_complete_url:false */
+
 function quick_series_complete(event) {
     event.preventDefault();
     var el = $(this);

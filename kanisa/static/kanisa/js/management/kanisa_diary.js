@@ -1,3 +1,5 @@
+/* global update_diary_url:false, schedule_event_url:false, alert_failure: false */
+
 function update_event_list() {
     $.get(update_diary_url,
           function(data) {

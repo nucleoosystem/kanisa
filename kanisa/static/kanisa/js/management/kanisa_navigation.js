@@ -1,3 +1,5 @@
+/* global alert_failure:false, navigation_down_url:false, navigation_up_url:false, list_navigation_url: false */
+
 function navigation_move(event, el, url) {
    event.preventDefault();
 

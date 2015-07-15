@@ -1,3 +1,5 @@
+/* global alert_failure:false */
+
 function on_band_change(event) {
     var selection = $(this).val();
 

@@ -32,7 +32,7 @@ lint: flake8 jslint
 coverage:
 	py.test --cov-report term-missing --cov kanisa
 
-push: git-check flake8 test
+push: git-check lint test
 	git push -u origin master
 
 wheel: push cleandist

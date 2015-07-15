@@ -1,3 +1,5 @@
+/* global update_regular_events_list:false */
+
 function update_list_of_regular_events(event) {
     event.preventDefault();
 

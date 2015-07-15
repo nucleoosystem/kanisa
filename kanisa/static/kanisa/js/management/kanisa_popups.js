@@ -1,3 +1,5 @@
+/* exported popup_closed,open_popup */
+
 var on_popup_close = function() {};
 
 function popup_closed() {
