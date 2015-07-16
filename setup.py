@@ -30,7 +30,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "BeautifulSoup==3.2.1",
-        "Django>=1.7",
+        "Django==1.7.9",
         "Pillow==2.8.1",
         "django-autoslug==1.7.1",
         "django-constance==1.0.1",
