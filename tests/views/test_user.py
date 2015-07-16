@@ -88,11 +88,11 @@ class UserManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, ['bob@example.com', ])
         self.assertEqual(mail.outbox[0].subject,
-                         'Your Church Account Activated')
+                         'Your Church account activated')
 
         self.assertEqual(mail.outbox[1].to, ['fred@example.com', ])
         self.assertEqual(mail.outbox[1].subject,
-                         'Your Church: bob\'s Account Activated')
+                         'Your Church: bob\'s account activated')
 
         self.client.logout()
 
