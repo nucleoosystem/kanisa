@@ -88,7 +88,7 @@ class UserManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, ['bob@example.com', ])
         self.assertEqual(mail.outbox[0].subject,
-                         'Your Church account activated')
+                         'Your Church Account Activated')
 
         self.assertEqual(mail.outbox[1].to, ['fred@example.com', ])
         self.assertEqual(mail.outbox[1].subject,
