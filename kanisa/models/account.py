@@ -9,6 +9,10 @@ class RegisteredUser(AbstractUser):
     created = models.DateTimeField(null=True, blank=True, editable=False)
     updated = models.DateTimeField(null=True, blank=True, editable=False)
     image = ImageField(upload_to='kanisa/users', blank=True, null=True)
+    is_spam = models.BooleanField(
+        default=False,
+        help_text='Hides this user from management screens',
+    )
 
     class Meta:
         app_label = 'kanisa'

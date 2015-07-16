@@ -1,0 +1,74 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+    {% if not object.is_active %}
+    <p class="alert alert-warning">
+      <strong>Warning:</strong>
+
+      This user is not marked as active, so they are not currently
+      allowed to log in.
+    </p>
+
+    <a class="btn btn-success" href="{% url 'kanisa_manage_users_activate' object.pk %}">
+      Activate {{ object.first_name }}&rsquo;s account
+    </a>
+    <a class="btn btn-danger" href="{% url 'kanisa_manage_users_spam' object.pk %}">
+      Mark {{ object.first_name }}&rsquo;s account as spam
+    </a>
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    <table class="table" style="width: auto">
+      <tr>
+        <th>Username</th>
+        <td>{{ object.username }}</td>
+      </tr>
+      <tr>
+        <th>First name</th>
+        <td>{{ object.first_name }}</td>
+      </tr>
+      <tr>
+        <th>Last name</th>
+        <td>{{ object.last_name }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><a href="mailto:{{ object.email }}">{{ object.email }}</a></td>
+      </tr>
+      <tr>
+        <th>Registered</th>
+        <td>
+          {{ object.date_joined }}
+          <span class="text-muted">({{ object.date_joined|timesince }} ago)</span>
+        </td>
+      </tr>
+      <tr>
+        <th>Last login</th>
+        <td>
+          {{ object.last_login }}
+          <span class="text-muted">({{ object.last_login|timesince }} ago)</span>
+        </td>
+      </tr>
+      <tr>
+        <th>Allowed to login</th>
+        <td>
+          {% if object.is_active %}Yes{% else %}No{% endif %}
+        </td>
+      </tr>
+      <tr>
+        <th>Spam</th>
+        <td>
+          {% if object.is_spam %}Yes{% else %}No{% endif %}
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <a class="btn btn-primary" href="{% url 'kanisa_manage_users_update' object.pk %}">
+      Update {{ object.first_name }}&rsquo;s account
+    </a>
+  </div>
+</div>
+{% endblock %}

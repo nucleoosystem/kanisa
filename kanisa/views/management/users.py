@@ -18,6 +18,7 @@ from kanisa.utils.mail import (
 )
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
+    KanisaDetailView,
     KanisaFormView,
     KanisaListView
 )
@@ -46,7 +47,8 @@ class UserManagementView(UserBaseView,
     def get_queryset(self):
         query = self.get_filter_query()
 
-        qs = get_user_model().objects.all().order_by('is_active', 'username')
+        qs = get_user_model().objects.exclude(is_spam=True)
+        qs = qs.order_by('is_active', 'username')
 
         if not query:
             return qs
@@ -65,6 +67,13 @@ class UserManagementView(UserBaseView,
         context['query'] = self.get_filter_query()
         return context
 user_management = UserManagementView.as_view()
+
+
+class UserDetailView(UserBaseView,
+                     KanisaDetailView):
+    model = RegisteredUser
+    template_name = 'kanisa/management/users/user_detail.html'
+user_details = UserDetailView.as_view()
 
 
 class UserActivateView(UserBaseView,
@@ -87,6 +96,7 @@ class UserActivateView(UserBaseView,
                        {'user': user})
 
         user.is_active = True
+        user.is_spam = False
         user.save()
 
         message = ('%s\'s account is now activated.'
@@ -97,6 +107,31 @@ class UserActivateView(UserBaseView,
 
         return reverse('kanisa_manage_users')
 user_activate = UserActivateView.as_view()
+
+
+class UserMarkSpamView(UserBaseView,
+                       RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, user_id):
+        user = get_object_or_404(get_user_model(), pk=user_id)
+
+        send_bulk_mail(users_with_perm('manage_users'),
+                       'on_account_spam_staff_notify',
+                       {'user': user})
+
+        user.is_active = False
+        user.is_spam = True
+        user.save()
+
+        message = ('%s\'s account has been marked as spam.'
+                   % user.get_familiar_name())
+        messages.success(self.request, message)
+
+        cache.delete('kanisa_inactive_users')
+
+        return reverse('kanisa_manage_users')
+user_spam = UserMarkSpamView.as_view()
 
 
 class UserUpdateView(UserBaseView,

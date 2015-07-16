@@ -1,0 +1,1 @@
+{{ KANISA_CHURCH_NAME }}: {{ user.get_display_name }}'s account marked as spam

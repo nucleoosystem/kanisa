@@ -1,3 +1,4 @@
+
 {% load thumbnail %}
 
 <table class="table table-striped table-bordered userpermtable">
@@ -29,7 +30,7 @@
       {% endif %}
     {% endif %}
 
-    <a href="{% url 'kanisa_manage_users_update' theuser.pk %}">{% firstof theuser.username "(empty)" %}</a>
+    <a href="{% url 'kanisa_manage_users_details' theuser.pk %}">{% firstof theuser.username "(empty)" %}</a>
 
     {% if user.pk = theuser.pk %}
     <span class="text-muted">

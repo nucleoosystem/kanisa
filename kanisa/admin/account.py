@@ -47,7 +47,8 @@ class RegisteredUserChangeForm(UserChangeForm):
             'groups',
             'user_permissions',
             'last_login',
-            'date_joined'
+            'date_joined',
+            'is_spam',
         )
 
 
@@ -75,7 +76,8 @@ class RegisteredUserAdmin(UserAdmin):
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email',
                                          'image')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+                                       'is_spam', 'groups',
+                                       'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
