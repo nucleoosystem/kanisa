@@ -19,12 +19,15 @@ admin.site.register(EventContact, EventContactAdmin)
 
 
 class RegularEventAdmin(admin.ModelAdmin):
-    search_fields = ('title', 'details', )
+    search_fields = ('title', 'intro', 'details', )
     list_display = ('title',
                     'pattern_description',
-                    'start_time',
+                    'contact',
                     'autoschedule', )
-    list_filter = ('autoschedule', )
+    list_filter = (
+        'autoschedule',
+        'contact',
+    )
 
 admin.site.register(RegularEvent, RegularEventAdmin)
 
