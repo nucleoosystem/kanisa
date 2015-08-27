@@ -18,9 +18,11 @@
           <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
             Back to the main diary
           </a>
+          {% if nextmonth %}
           <a href="{{ nexturl }}" class="btn btn-default">
             View the diary for {{ nextmonth|date:"F Y" }}
           </a>
+          {% endif %}
         </div>
 
         <hr />
@@ -53,9 +55,11 @@
           <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
             Back to the main diary
           </a>
+          {% if nextmonth %}
           <a href="{{ nexturl }}" class="btn btn-default">
             View the diary for {{ nextmonth|date:"F Y" }}
           </a>
+          {% endif %}
         </div>
     </div>
   </body>

@@ -157,23 +157,32 @@ class DiaryPrintableView(TemplateView):
         return first, last
 
     def get_context_data(self, **kwargs):
+        def is_too_far_in_the_future(year):
+            return year > date.today().year + 2
+
         ctx = super(DiaryPrintableView, self).get_context_data(
             **kwargs
         )
+
+        if is_too_far_in_the_future(int(self.kwargs['year'])):
+            raise Http404
 
         bounds = self.get_date_bounds()
         nextmonth = bounds[1] + timedelta(days=1)
 
         ctx['startdate'] = bounds[0]
         ctx['events'] = ScheduledEvent.events_between(*bounds)
-        ctx['nextmonth'] = nextmonth
-        ctx['nexturl'] = reverse(
-            'kanisa_public_diary_printable',
-            args=[
-                '%d' % nextmonth.year,
-                '%02d' % nextmonth.month
-            ]
-        )
+
+        if not is_too_far_in_the_future(nextmonth.year):
+            ctx['nextmonth'] = nextmonth
+
+            ctx['nexturl'] = reverse(
+                'kanisa_public_diary_printable',
+                args=[
+                    '%d' % nextmonth.year,
+                    '%02d' % nextmonth.month
+                ]
+            )
 
         return ctx
 diary_printable = DiaryPrintableView.as_view()
