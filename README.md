@@ -24,28 +24,9 @@ requires Python 2.7 and Django 1.7.
 Installation
 ------------
 
-You can install Kanisa and its dependencies using:
+Pain points for installation:
 
-    pip install -e git+git@github.com:dominicrodger/kanisa.git#egg=kanisa
-
-You'll need to set at least the following settings:
-
-    CRISPY_TEMPLATE_PACK = 'bootstrap3'
-    MIDDLEWARE_CLASSES += ['kanisa.middleware.KanisaPageFallbackMiddleware']
-    TEMPLATE_CONTEXT_PROCESSORS += ['kanisa.context_processors.kanisa_settings']
-    LOGIN_URL = '/members/account/login/'
-
-You'll also need to set up Haystack for search functionality.
-
-You'll need a root `urls.py` which looks a bit like this:
-
-    from django.conf import settings
-    from django.conf.urls import patterns, include, url
-
-    from django.contrib import admin
-    admin.autodiscover()
-
-    urlpatterns = patterns('',
-        url(r'^admin/', include(admin.site.urls)),
-        url(r'^', include('kanisa.urls')),
-    )
+1. Set up ``INSTALLED_APPS``;
+2. Set up template context processors;
+3. Make sure ``SITE_ID`` is set (do we even need the sites
+   framework?).
