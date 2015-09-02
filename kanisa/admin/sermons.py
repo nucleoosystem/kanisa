@@ -7,7 +7,13 @@ from kanisa.models import (SermonSeries,
 
 class SermonSeriesAdmin(KanisaBaseAdmin):
     search_fields = ('title', 'details', )
-    list_display = ('title', 'image_thumb', 'passage', )
+    list_display = (
+        'title',
+        'image_thumb',
+        'passage',
+        'active',
+        'num_sermons'
+    )
 
 admin.site.register(SermonSeries, SermonSeriesAdmin)
 
