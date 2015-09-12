@@ -10,8 +10,8 @@
   {% for sermon in sermons %}
   <tr>
     <td width="80px">
-      {% if sermon.speaker.image %}
-        {% thumbnail sermon.speaker.image "60x60" crop="center" as im %}
+      {% if sermon.speaker.image_or_default %}
+        {% thumbnail sermon.speaker.image_or_default "60x60" crop="center" as im %}
           <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" class="img-thumbnail" />
         {% endthumbnail %}
       {% endif %}
