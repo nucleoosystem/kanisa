@@ -5,7 +5,7 @@ from kanisa.models.pages import Page, get_page_from_path
 from mptt.models import MPTTModel, TreeForeignKey
 
 
-NAVIGATION_TITLE_MAX_LENGTH = 20
+NAVIGATION_TITLE_MAX_LENGTH = 40
 
 
 class NavigationElement(MPTTModel):
