@@ -49,8 +49,8 @@
 
     {% for theuser in user_list %}
     <div>
-      {% thumbnail theuser.image_or_default "50x50" crop="center" as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" style="float: left" class="img-circle" />
+      {% thumbnail theuser.image_or_default "60x60" crop="center" as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" style="float: left" class="img-thumbnail" />
       {% endthumbnail %}
       <div>
         {{ theuser.get_full_name }}<br />
