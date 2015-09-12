@@ -1,3 +1,5 @@
+from datetime import date
+from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.http import HttpResponseServerError
 from django.template import Context, loader
@@ -10,9 +12,14 @@ class KanisaIndexView(TemplateView):
     template_name = 'kanisa/public/homepage/index.html'
 
     def get_context_data(self, **kwargs):
+        cutoff = date.today() - relativedelta(months=2)
+        blogposts = BlogPost.published_objects.filter(
+            publish_date__gte=cutoff
+        )[:2]
+
         return {
             'banners': Banner.active_objects.all(),
-            'blogposts': BlogPost.published_objects.all()[:2],
+            'blogposts': blogposts,
         }
 
 
