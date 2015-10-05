@@ -32,8 +32,6 @@ Features
 - Add a hint on the management home page that series with no sermons
   in `x` weeks should be marked complete
 - Add handlers for links, bold and italics in `main_input_widget`
-- Remove `kanisa_from_kaleo` which was created to facilitate the move
-  from Kaleo to Kanisa
 
 Version 1.1
 ===========
