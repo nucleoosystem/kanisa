@@ -12,9 +12,12 @@ class InlineImage(models.Model):
         upload_to='kanisa/media/',
         help_text=(
             'Image will be: '
-            '<ul><li>960x200px for headline images (the image will be cropped to fit);</li>'
+            '<ul>'
+            '<li>960x200px for headline images (the image will be cropped to '
+            'fit);</li>'
             '<li>260x260px for medium images (resized without cropping);</li>'
-            '<li>174x174px for small images (resized without cropping).</li></ul>'
+            '<li>174x174px for small images (resized without cropping).</li>'
+            '</ul>'
         )
     )
     modified = models.DateTimeField(auto_now=True)
