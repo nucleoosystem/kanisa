@@ -16,15 +16,11 @@ Version 0.9.7
 The changes in this version are intended to make deployment easier,
 and to find performance problems earlier.
 
-- Look at using Whitenoise for serving static assets
-  - http://whitenoise.evans.io/en/latest/django.html
 - Add a way of searching for an individual song/composer to the Song
   Finder
 - Add a way to set up cron jobs
   - For posting scheduled tweets
   - For rebuilding the search index
-- Figure out how to run jslint as part of the minification process
-- Fix errors reported by jshint
 - Remove duplicate CSRF files (kanisa_csrf.js/csrf.js)
 
 Version 1.0
