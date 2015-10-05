@@ -148,6 +148,12 @@ h3 span.help_text {
     font-weight: normal;
 }
 
+/* Embedded HTML such as lists in field help text don't get given the
+  .help-block class. */
+.controls li {
+    color: #737373;
+}
+
 td h5 {
     margin-top: 0;
 }

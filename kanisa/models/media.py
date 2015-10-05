@@ -8,7 +8,15 @@ class InlineImage(models.Model):
                              help_text=('This will be used to help you find '
                                         'it later.'))
     slug = AutoSlugField(populate_from='title', unique=True)
-    image = ImageField(upload_to='kanisa/media/')
+    image = ImageField(
+        upload_to='kanisa/media/',
+        help_text=(
+            'Image will be: '
+            '<ul><li>960x200px for headline images (the image will be cropped to fit);</li>'
+            '<li>260x260px for medium images (resized without cropping);</li>'
+            '<li>174x174px for small images (resized without cropping).</li></ul>'
+        )
+    )
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
