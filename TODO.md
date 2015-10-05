@@ -21,7 +21,6 @@ and to find performance problems earlier.
 - Add a way to set up cron jobs
   - For posting scheduled tweets
   - For rebuilding the search index
-- Remove duplicate CSRF files (kanisa_csrf.js/csrf.js)
 
 Version 1.0
 ===========
