@@ -4,20 +4,20 @@ Version 0.9.6
 Improvements to the service management stuff:
 
 - Change alphabetic sort to ignore case (and potentially ignore
-  spaces);
+  spaces) - possible in Django 1.8 using
+  `django.db.models.functions.Lower`;
 - Add support for merging duplicate songs;
 - Add support for merging duplicate composers;
 - Add a way to edit composers;
 - Rename management JS to members JS.
+- Add a way of searching for an individual song/composer to the Song
+  Finder
 
 Version 0.9.7
 =============
 
-The changes in this version are intended to make deployment easier,
-and to find performance problems earlier.
+The changes in this version are intended to make deployment easier.
 
-- Add a way of searching for an individual song/composer to the Song
-  Finder
 - Add a way to set up cron jobs
   - For posting scheduled tweets
   - For rebuilding the search index
