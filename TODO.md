@@ -1,7 +1,8 @@
 Version 0.9.6
 =============
 
-Improvements to the service management stuff:
+Service Management
+------------------
 
 - Change alphabetic sort to ignore case (and potentially ignore
   spaces) - possible in Django 1.8 using
@@ -9,30 +10,27 @@ Improvements to the service management stuff:
 - Add support for merging duplicate songs;
 - Add support for merging duplicate composers;
 - Add a way to edit composers;
-- Rename management JS to members JS.
 - Add a way of searching for an individual song/composer to the Song
-  Finder
+  Finder.
 
-Version 0.9.7
-=============
+Sermon Archives
+---------------
 
-The changes in this version are intended to make deployment easier.
+- Make the sermon archive more sensible - instead of just a giant
+  list of all sermons - split it up by year/passage etc;
+- Remove the concept of sermon series being "complete";
+- What happens if no series are active on the sermons home page?
 
-- Add a way to set up cron jobs
-  - For posting scheduled tweets
-  - For rebuilding the search index
+Miscellaneous
+-------------
+
+- Allow including inline images without their size being modified
+  (capped to 100% of the available width);
+- Remove social integration (we'll re-add it later, in a state that
+  actually works) - don't forget to remove dependence on tweepy;
+- Rename management JS to members JS.
 
 Version 1.0
-===========
-
-Features
---------
-
-- Add a hint on the management home page that series with no sermons
-  in `x` weeks should be marked complete
-- Add handlers for links, bold and italics in `main_input_widget`
-
-Version 1.1
 ===========
 
 Deployment
@@ -44,9 +42,6 @@ Deployment
   - Pillow (upgrade to 2.3.0 - might need newer version of
     sorl-thumbnail, which is back in active development - see
     https://github.com/mariocesar/sorl-thumbnail/)
-  - tweepy (upgrade to 2.1)
-    - Check Twitter integration still works
-    - Write tests against mock Twitter
   - Whoosh (upgrade to 2.5.5)
   - django-haystack to 2.x
 - Add `unicode_literals`, `print_function`, `absolute_import` and
@@ -67,8 +62,7 @@ Mobile
 Features
 --------
 
-- Make the sermon archive more sensible - instead of just a giant list
-  of all sermons - split it up by year/passage etc
+- Add handlers for links, bold and italics in `main_input_widget`
 - Add a handler for Google maps in `main_input_widget`
 - Add support for multiple Bible passages in the sermon/sermon series
   models
@@ -86,7 +80,6 @@ Features
 Bug fixes
 ---------
 
-- What happens if no series are active on the sermons home page?
 - Ensure search form is visible even if no logo is set up
 - Fix bug in rendering of event table when scheduling multiple events
   (#13)
@@ -94,7 +87,7 @@ Bug fixes
 - Fix bulk-editing events handling invalid dates (currently we don't
   save the date if it's invalid, but we don't notify the user)
 
-Version 1.2
+Version 1.1
 ===========
 
 Deployment
