@@ -425,9 +425,28 @@ div.form-actions {
     margin-right: 5px;
 }
 
+.main_input_widget_image {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    float: left;
+    height: 90px;
+    width: 90px;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
 .main_input_widget_image_choice {
     cursor: pointer;
-    margin-bottom: 5px;
+}
+
+.main_input_widget_image_pager {
+    clear: left;
 }
 
 #kanisa_homepage_intro {
