@@ -3,6 +3,8 @@ Version 0.9.6
 
 Improvements to the service management stuff:
 
+- Display images in the media picker without cropping (makes it
+  easier to pick differently cropped images);
 - Change alphabetic sort to ignore case (and potentially ignore
   spaces) - possible in Django 1.8 using
   `django.db.models.functions.Lower`;
