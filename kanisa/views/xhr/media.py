@@ -18,7 +18,7 @@ class MediaBaseView(object):
 
 
 class PaginatedMediaListView(MediaBaseView):
-    results_per_page = 8
+    results_per_page = 24
 
     def slice_results(self, request, results):
         try:
