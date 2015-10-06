@@ -42,6 +42,7 @@ class ImageMatch(object):
 
         klasses = [
             'img-thumbnail',
+            'inline-image-base',
             'inline-image-%s' % self.size,
         ]
 

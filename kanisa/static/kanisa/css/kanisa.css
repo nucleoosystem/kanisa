@@ -635,6 +635,10 @@ ul.pager-tiny {
     display: none;
 }
 
+.inline-image-base {
+    margin-bottom: 10px;
+}
+
 .inline-image-align-left {
     float: left;
     margin-right: 10px;
@@ -643,12 +647,4 @@ ul.pager-tiny {
 .inline-image-align-right {
     float: right;
     margin-left: 10px;
-}
-
-.inline-image-small {
-    margin-bottom: 10px;
-}
-
-.inline-image-medium {
-    margin-bottom: 10px;
 }
