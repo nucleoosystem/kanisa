@@ -13,7 +13,7 @@ register = template.Library()
 
 
 image_expression = re.compile(r'(!\[([A-Za-z0-9\-_]+)'
-                              '( (headline|medium|small))?'
+                              '( (headline|medium|small|full))?'
                               '( (left|right))?\]'
                               '(\[(.+?)\])?)')
 
@@ -57,6 +57,8 @@ class ImageMatch(object):
                 thumbnail = get_thumbnail(self.image.image.file, '260x260')
             elif self.size == 'small':
                 thumbnail = get_thumbnail(self.image.image.file, '174x174')
+            elif self.size == 'full':
+                thumbnail = self.image.image
 
         return ('<img src="%s" alt="%s" class="%s" '
                 'height="%spx" width="%spx" />' % (

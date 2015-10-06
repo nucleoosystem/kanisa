@@ -92,7 +92,10 @@ function change_size(event) {
         get_matching_elements(radio, ".thumbnail-small").hide();
         get_matching_elements(radio, ".thumbnail-medium").hide();
         get_matching_elements(radio, ".thumbnail-headline").show();
-    } else if (size == "medium") {
+    } else if (size == "medium" || size == "full") {
+        // We show the medium image when "full" is selected, since
+        // it's a bit larger than "small", so gives a better idea of
+        // what it might look like.
         show_alignment(radio);
         get_matching_elements(radio, ".thumbnail-small").hide();
         get_matching_elements(radio, ".thumbnail-medium").show();
