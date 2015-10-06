@@ -7,7 +7,7 @@ function popup_closed() {
 }
 
 function open_popup(url) {
-    var newwindow = window.open(url,'name','height=269,width=524');
+    var newwindow = window.open(url,'name','height=400,width=524');
 
     if (window.focus) {
         newwindow.focus();
