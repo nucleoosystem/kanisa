@@ -392,6 +392,10 @@ div.form-actions {
     font-size: 70%;
 }
 
+label .text-muted {
+    font-weight: normal;
+}
+
 .numberinput {
     width: 7em;
 }
