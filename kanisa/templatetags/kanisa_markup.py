@@ -39,32 +39,32 @@ class ImageMatch(object):
         self.image = InlineImage.objects.get(slug=slug)
 
     def tag(self):
+
+        klasses = [
+            'img-thumbnail',
+            'inline-image-%s' % self.size,
+        ]
+
         if self.size == 'headline':
             thumbnail = get_thumbnail(self.image.image.file,
                                       '960x200',
                                       crop='center')
-            style = ""
         else:
-            style = "float: %s; margin-" % self.align
-
-            if self.align == "left":
-                style = style + "right"
-            else:
-                style = style + "left"
-
-            style = style + ": 10px; margin-bottom: 10px;"
+            klasses.append('inline-image-align-%s' % self.align)
 
             if self.size == 'medium':
                 thumbnail = get_thumbnail(self.image.image.file, '260x260')
             elif self.size == 'small':
                 thumbnail = get_thumbnail(self.image.image.file, '174x174')
 
-        return ('<img src="%s" alt="%s" class="img-thumbnail" '
-                'height="%spx" width="%spx" style="%s" />' % (thumbnail.url,
-                                                              self.alt,
-                                                              thumbnail.height,
-                                                              thumbnail.width,
-                                                              style))
+        return ('<img src="%s" alt="%s" class="%s" '
+                'height="%spx" width="%spx" />' % (
+                    thumbnail.url,
+                    self.alt,
+                    ' '.join(klasses),
+                    thumbnail.height,
+                    thumbnail.width,
+                ))
 
 
 def get_images(markdown_text):

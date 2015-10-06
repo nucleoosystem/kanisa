@@ -634,3 +634,21 @@ ul.pager-tiny {
 #regular_event_contact {
     display: none;
 }
+
+.inline-image-align-left {
+    float: left;
+    margin-right: 10px;
+}
+
+.inline-image-align-right {
+    float: right;
+    margin-left: 10px;
+}
+
+.inline-image-small {
+    margin-bottom: 10px;
+}
+
+.inline-image-medium {
+    margin-bottom: 10px;
+}
