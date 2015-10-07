@@ -24,8 +24,6 @@ Sermon Archives
 Miscellaneous
 -------------
 
-- Allow including inline images without their size being modified
-  (capped to 100% of the available width);
 - Remove social integration (we'll re-add it later, in a state that
   actually works) - don't forget to remove dependence on tweepy;
 - Rename management JS to members JS.
