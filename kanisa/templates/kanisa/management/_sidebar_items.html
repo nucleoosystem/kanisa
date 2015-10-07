@@ -47,14 +47,6 @@
   </a>
 </li>
 {% endif %}
-{% if perms.kanisa.manage_social %}
-<li{% if kanisa_nav_component = "social" %} class="active"{% endif %}>
-  <a href="{% url 'kanisa_manage_social' %}">
-    <span class="glyphicon glyphicon-fire"></span>
-    Social
-  </a>
-</li>
-{% endif %}
 {% if perms.kanisa.manage_users %}
 <li{% if kanisa_nav_component = "users" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_users' %}">

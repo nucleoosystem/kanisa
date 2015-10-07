@@ -10,4 +10,3 @@ import kanisa.admin.pages
 import kanisa.admin.seasonal
 import kanisa.admin.sermons
 import kanisa.admin.service
-import kanisa.admin.social

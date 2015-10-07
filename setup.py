@@ -44,7 +44,6 @@ setup(
         "markdown==2.6.2",
         "mutagen==1.29",
         "sorl-thumbnail==12.2",
-        "tweepy==1.11",
         "Whoosh==2.4.1",
         "wsgiref==0.1.2",
     ],

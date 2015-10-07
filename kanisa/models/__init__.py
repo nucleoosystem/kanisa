@@ -19,4 +19,3 @@ from .pages import Page
 from .seasonal import SeasonalEvent
 from .sermons import SermonSeries, Sermon, SermonSpeaker
 from .service import Band, Composer, Song, SongInService, Service
-from .social import ScheduledTweet
