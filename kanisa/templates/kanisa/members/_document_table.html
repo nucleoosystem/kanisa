@@ -15,7 +15,7 @@
         <strong>
           <a href="{{ document.download_url }}">{{ document.title }}</a>
         </strong>
-        ({{ document.extension_description }}, {{ document.file.size|filesizeformat }})
+        ({% if document.extension_description %}{{ document.extension_description }}, {% endif %}{{ document.file.size|filesizeformat }})
         {% if document.details %}
         <div class="document_details_short">
           {{ document.details|kanisa_markdown|striptags|truncatewords_html:20 }}
