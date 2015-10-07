@@ -33,7 +33,6 @@ setup(
         "Django==1.7.9",
         "Pillow==2.8.1",
         "django-autoslug==1.7.1",
-        "django-constance==1.0.1",
         "django-crispy-forms==1.4.0",
         "django-haystack==1.2.7",
         "django-mptt==0.7.4",

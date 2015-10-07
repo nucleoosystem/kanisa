@@ -42,8 +42,6 @@ INSTALLED_APPS = (
     'haystack',
     'mptt',
     'recurrence',
-    'constance',
-    'constance.backends.database',
     'kanisa',
 )
 
@@ -80,12 +78,5 @@ USE_TZ = True
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 AUTH_USER_MODEL = 'kanisa.RegisteredUser'
-
-CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
-
-CONSTANCE_CONFIG = {
-    'TWITTER_ACCESS_TOKEN': ('', 'Configured by using Kanisa.'),
-    'TWITTER_ACCESS_SECRET': ('', 'Configured by using Kanisa.'),
-}
 
 SECRET_KEY = 'thisbagismadefromrecycledmaterial'
