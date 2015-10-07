@@ -9,7 +9,6 @@ Kanisa handles:
 * Sermons;
 * A calendar;
 * A members' area for documents and service planning;
-* Social integration (primarily posting to Twitter currently);
 * Search;
 * Banners - for advertising upcoming events etc.
 
