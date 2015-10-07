@@ -29,7 +29,6 @@ setup(
     packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     install_requires=[
-        "BeautifulSoup==3.2.1",
         "Django==1.7.10",
         "Pillow==2.8.1",
         "django-autoslug==1.7.1",
@@ -37,14 +36,11 @@ setup(
         "django-haystack==1.2.7",
         "django-mptt==0.7.4",
         "django-password-reset==0.7",
-        "django-picklefield==0.3.1",
         "django-recurrence==1.1.0",
-        "lxml==3.4.4",
         "markdown==2.6.2",
         "mutagen==1.29",
         "sorl-thumbnail==12.2",
         "Whoosh==2.4.1",
-        "wsgiref==0.1.2",
     ],
     tests_require=(
         "pytest==2.7.1",
