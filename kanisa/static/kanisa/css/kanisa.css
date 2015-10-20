@@ -294,6 +294,19 @@ table.userpermtable td {
     vertical-align: middle;
 }
 
+table.diary-bulk-edit tr td {
+    vertical-align: middle;
+    line-height: 1.2em;
+}
+
+table.diary-bulk-edit .text-muted a {
+    color: inherit;
+}
+
+table.diary-bulk-edit input.event-intro {
+    width: 90%;
+}
+
 ul.nav-tabs {
     margin-bottom: 1em;
 }

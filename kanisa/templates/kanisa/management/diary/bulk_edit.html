@@ -5,11 +5,10 @@
 {% if events %}
 <form method="post" action=".">
 {% csrf_token %}
-<table class="table table-striped">
+<table class="table table-striped diary-bulk-edit">
   <thead>
     <tr>
       <th>Event</th>
-      <th>Date</th>
       <th>Time</th>
       <th>Intro</th>
     </tr>
@@ -17,16 +16,20 @@
   <tbody>
     {% for event in events %}
     <tr>
-      <td style="vertical-align: middle">{{ event }}</td>
-      <td style="vertical-align: middle">
-        <a href="{% url 'kanisa_manage_diary_scheduled_update' event.pk %}" title="Edit this event">
-        {{ event.date }}
-        </a>
+      <td>
+        {{ event }}
+        <br />
+        <small class="text-muted">
+          {{ event.date }} |
+          <a href="{% url 'kanisa_manage_diary_scheduled_update' event.pk %}" title="Edit this event">
+            Edit
+          </a>
+        </small>
       </td>
       <td>
         <input data-provide="timepicker" value="{{ event.start_time|date:"h:i A" }}" name="start_time_{{ event.pk }}" class="form-control timepicker bootstraptimewidget" type="text" />
       </td>
-      <td><input type="text" value="{{ event.intro }}" name="intro_{{ event.pk}}" class="form-control" style="width: 90%" maxlength="200" /></td>
+      <td><input type="text" value="{{ event.intro }}" name="intro_{{ event.pk}}" class="form-control event-intro" maxlength="200" /></td>
     </tr>
     {% endfor %}
   </tbody>
