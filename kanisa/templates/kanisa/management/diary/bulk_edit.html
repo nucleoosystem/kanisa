@@ -10,7 +10,8 @@
     <tr>
       <th>Event</th>
       <th>Time</th>
-      <th>Intro</th>
+      <th>Series</th>
+      <th style="width: 50%">Intro</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,14 @@
       </td>
       <td>
         <input data-provide="timepicker" value="{{ event.start_time|date:"h:i A" }}" name="start_time_{{ event.pk }}" class="form-control timepicker bootstraptimewidget" type="text" />
+      </td>
+      <td>
+        <select name="series_{{ event.pk }}" class="form-control">
+          <option value="" {% if not event.series %}selected{% endif %}>None</option>
+          {% for s in series %}
+          <option value="{{ s.pk }}" {% if s == event.series %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
       </td>
       <td><input type="text" value="{{ event.intro }}" name="intro_{{ event.pk}}" class="form-control event-intro" maxlength="200" /></td>
     </tr>

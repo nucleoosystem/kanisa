@@ -307,6 +307,10 @@ table.diary-bulk-edit input.event-intro {
     width: 90%;
 }
 
+table.diary-bulk-edit select {
+    width: 180px;
+}
+
 ul.nav-tabs {
     margin-bottom: 1em;
 }

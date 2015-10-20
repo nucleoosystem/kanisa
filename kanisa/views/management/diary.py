@@ -151,12 +151,15 @@ class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
         events = events.filter(date__gte=datetime.today())
         return events
 
-    def save_event(self, pk, intro, start_time):
+    def save_event(self, pk, intro, start_time, series):
         event = ScheduledEvent.objects.get(pk=pk)
         event.intro = intro
 
         if start_time:
             event.start_time = start_time
+
+        if series:
+            event.series = series
 
         event.save()
 
@@ -169,25 +172,44 @@ class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
         return pks
 
     def post(self, request, *args, **kwargs):
-        pks = self.get_event_pks(self.request.POST.items())
-        for pk in pks:
+        def get_event_time(value):
             try:
                 event_time = strptime(
-                    self.request.POST['start_time_%d' % pk],
+                    value,
                     "%I:%M %p"
                 )
-                event_time = time(event_time.tm_hour,
-                                  event_time.tm_min)
+                return time(
+                    event_time.tm_hour,
+                    event_time.tm_min
+                )
             except ValueError:
                 # TODO - this is a horrible hack that needs stripping
                 # out, we should really re-display the form if this
                 # happens.
-                event_time = None
+                return None
+
+        def get_event_series(value):
+            if not value:
+                return None
+
+            return ScheduledEventSeries.objects.get(pk=value)
+
+        pks = self.get_event_pks(self.request.POST.items())
+
+        for pk in pks:
+            event_time = get_event_time(
+                self.request.POST['start_time_%d' % pk]
+            )
+
+            event_series = get_event_series(
+                self.request.POST['series_%d' % pk]
+            )
 
             self.save_event(
                 pk,
                 self.request.POST['intro_%d' % pk],
-                event_time
+                event_time,
+                event_series
             )
 
         messages.success(request, "Events saved.")
@@ -202,6 +224,7 @@ class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
 
         context['events'] = self.get_events()
         context['object'] = self.get_object()
+        context['series'] = ScheduledEventSeries.objects.all()
 
         return context
 diary_regular_event_bulk_edit = DiaryRegularEventBulkEditView.as_view()
