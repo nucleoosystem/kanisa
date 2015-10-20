@@ -17,7 +17,7 @@
   <tbody>
     {% for event in events %}
     <tr>
-      <td style="vertical-align: middle">{{ event.title }}</td>
+      <td style="vertical-align: middle">{{ event }}</td>
       <td style="vertical-align: middle">{{ event.date }}</td>
       <td>
         <input data-provide="timepicker" value="{{ event.start_time|date:"h:i A" }}" name="start_time_{{ event.pk }}" class="form-control timepicker bootstraptimewidget" type="text" />
