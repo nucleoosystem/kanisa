@@ -18,7 +18,11 @@
     {% for event in events %}
     <tr>
       <td style="vertical-align: middle">{{ event }}</td>
-      <td style="vertical-align: middle">{{ event.date }}</td>
+      <td style="vertical-align: middle">
+        <a href="{% url 'kanisa_manage_diary_scheduled_update' event.pk %}" title="Edit this event">
+        {{ event.date }}
+        </a>
+      </td>
       <td>
         <input data-provide="timepicker" value="{{ event.start_time|date:"h:i A" }}" name="start_time_{{ event.pk }}" class="form-control timepicker bootstraptimewidget" type="text" />
       </td>
