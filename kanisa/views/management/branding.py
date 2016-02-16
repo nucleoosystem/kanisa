@@ -7,7 +7,8 @@ from kanisa.forms.branding import (
     BrandingColoursForm,
     FaviconBrandingForm,
     LogoBrandingForm,
-    SeasonalBrandingForm
+    SeasonalBrandingForm,
+    PodcastBrandingForm
 )
 from kanisa.utils.branding import (
     ensure_branding_directory_exists,
@@ -82,6 +83,9 @@ class BrandingManagementUpdateView(BrandingBaseView,
 
         if self.kwargs['resource'] == 'seasonal':
             return SeasonalBrandingForm
+
+        if self.kwargs['resource'] == 'podcast':
+            return PodcastBrandingForm
 
         raise Http404
 

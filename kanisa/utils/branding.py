@@ -21,6 +21,11 @@ BRANDING_COMPONENTS = {
         'verbose_name': 'Apple Icons',
         'sizes': ['144x144', '114x114', '72x72', '57x57', ],
     },
+    'podcast': {
+        'filename': 'podcast.jpg',
+        'verbose_name': 'Podcast Logo',
+        'sizes': ['1400x1400', ],
+    },
     'favicon':  {
         'filename': 'favicon.ico',
         'verbose_name': 'Site Favicon',

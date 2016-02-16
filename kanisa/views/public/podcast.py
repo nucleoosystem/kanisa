@@ -94,7 +94,11 @@ class iTunesPodcastsFeed(Feed):
         return 'The latest sermons from %s.' % conf.KANISA_CHURCH_NAME
 
     def image(self):
-        branding_information = BrandingInformation('apple')
+        branding_information = BrandingInformation('podcast')
+
+        if not branding_information.url:
+            branding_information = BrandingInformation('apple')
+
         if not branding_information.url:
             return None
 

@@ -89,6 +89,27 @@ class AppleBrandingForm(BrandingForm):
                                         '%s%s).' % (height, 'px'))
 
 
+class PodcastBrandingForm(BrandingForm):
+    expected_format = 'JPEG'
+
+    def __init__(self, *args, **kwargs):
+        super(PodcastBrandingForm, self).__init__(*args, **kwargs)
+        self.fields['image'].help_text = (
+            'The podcast logo needs to be exactly 1400px by 1400px.'
+        )
+
+    def check_size(self, width, height):
+        if height != width:
+            raise forms.ValidationError('The uploaded image must be exactly '
+                                        'square (the uploaded image was '
+                                        '%spx by %spx).' % (width, height))
+
+        if height != 1400:
+            raise forms.ValidationError('The uploaded image must be exactly '
+                                        '1400px high (the uploaded image was '
+                                        '%s%s).' % (height, 'px'))
+
+
 class FaviconBrandingForm(BrandingForm):
     expected_format = 'PNG'
 
