@@ -1,0 +1,24 @@
+{% load kanisa_markup %}
+
+<div class="modal show" id="sitewidenotice" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header alert-info">
+        <button type="button" class="close sitewidenotice_close" onclick="">&times;</button>
+        <h4 class="modal-title">
+          {{ notice.headline }}
+          <small>
+          </small>
+        </h4>
+      </div>
+      <div class="modal-body">
+        {{ notice.contents|kanisa_markdown }}
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-default sitewidenotice_close">
+          Close
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

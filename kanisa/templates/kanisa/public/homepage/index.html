@@ -1,6 +1,11 @@
 {% extends 'kanisa/public/base.html' %}
 
 {% block content %}
+
+{% if notice %}
+{% include 'kanisa/public/homepage/_notices.html' %}
+{% endif %}
+
 <div class="row">
   <div class="col-md-6">
     {% include 'kanisa/public/homepage/_intro.html' %}

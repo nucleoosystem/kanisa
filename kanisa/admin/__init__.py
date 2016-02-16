@@ -6,6 +6,7 @@ import kanisa.admin.diary
 import kanisa.admin.documents
 import kanisa.admin.media
 import kanisa.admin.navigation
+import kanisa.admin.notices
 import kanisa.admin.pages
 import kanisa.admin.seasonal
 import kanisa.admin.sermons

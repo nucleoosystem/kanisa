@@ -15,6 +15,7 @@ from .diary import (
 from .documents import Document
 from .media import InlineImage
 from .navigation import NavigationElement
+from .notices import SiteWideNotice
 from .pages import Page
 from .seasonal import SeasonalEvent
 from .sermons import SermonSeries, Sermon, SermonSpeaker

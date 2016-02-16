@@ -5,11 +5,27 @@ from django.http import HttpResponseServerError
 from django.template import Context, loader
 from django.views.generic.base import TemplateView
 
-from kanisa.models import Banner, BlogPost
+from kanisa.models import Banner, BlogPost, SiteWideNotice
 
 
 class KanisaIndexView(TemplateView):
     template_name = 'kanisa/public/homepage/index.html'
+
+    def get_notice(self):
+        if 'preview_notice' in self.request.GET:
+            try:
+                return SiteWideNotice.objects.get(
+                    pk=self.request.GET['preview_notice']
+                )
+            except SiteWideNotice.DoesNotExist:
+                pass
+
+        notices = SiteWideNotice.active_objects.all()[:1]
+
+        if not notices:
+            return None
+
+        return notices[0]
 
     def get_context_data(self, **kwargs):
         cutoff = date.today() - relativedelta(months=2)
@@ -20,6 +36,7 @@ class KanisaIndexView(TemplateView):
         return {
             'banners': Banner.active_objects.all(),
             'blogposts': blogposts,
+            'notice': self.get_notice()
         }
 
 
