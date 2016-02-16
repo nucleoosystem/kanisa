@@ -23,6 +23,9 @@ class iTunesPodcastsFeedGenerator(Rss201rev2Feed):
                                 self.feed['iTunes_explicit'])
         handler.startElement('itunes:owner', {})
         handler.addQuickElement('itunes:name', self.feed['iTunes_name'])
+        if 'iTunes_email' in self.feed:
+            handler.addQuickElement('itunes:email', self.feed['iTunes_email'])
+
         handler.endElement('itunes:owner')
 
         if self.feed.get('iTunes_image', None):
@@ -125,6 +128,10 @@ class iTunesPodcastsFeed(Feed):
     def feed_extra_kwargs(self, obj):
         extra = {}
         extra['iTunes_name'] = self.title()
+
+        if conf.KANISA_CHURCH_EMAIL:
+            extra['iTunes_email'] = conf.KANISA_CHURCH_EMAIL
+
         extra['iTunes_explicit'] = self.iTunes_explicit
         extra['iTunes_category'] = 'Religion & Spirituality'
         extra['iTunes_image'] = self.image()
