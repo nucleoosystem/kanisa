@@ -81,7 +81,7 @@ class AppleBrandingForm(BrandingForm):
         if height != width:
             raise forms.ValidationError('The uploaded image must be exactly '
                                         'square (the uploaded image was '
-                                        '%s by %s).' % (width, height))
+                                        '%spx by %spx).' % (width, height))
 
         if height < 144:
             raise forms.ValidationError('The uploaded image must be at least '
@@ -101,7 +101,7 @@ class FaviconBrandingForm(BrandingForm):
         if height != width:
             raise forms.ValidationError('The uploaded image must be exactly '
                                         'square (the uploaded image was '
-                                        '%s by %s).' % (width, height))
+                                        '%spx by %spx).' % (width, height))
 
         if height != 32:
             raise forms.ValidationError('The uploaded image must be exactly '
