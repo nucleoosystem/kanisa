@@ -98,7 +98,17 @@ class iTunesPodcastsFeed(Feed):
         if not branding_information.url:
             return None
 
-        return settings.MEDIA_URL + branding_information.url
+        media_url = settings.MEDIA_URL
+
+        if media_url.startswith('/'):
+            # We've got a relative MEDIA_URL, let's prepend the site
+            # URL.
+            media_url = 'http://%s%s' % (
+                Site.objects.get_current().domain,
+                media_url
+            )
+
+        return media_url + branding_information.url
 
     def items(self):
         """
