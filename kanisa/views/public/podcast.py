@@ -88,7 +88,7 @@ class iTunesPodcastsFeed(Feed):
         return 'Sermons from %s' % conf.KANISA_CHURCH_NAME
 
     def link(self):
-        return 'http://%s' % Site.objects.get_current().domain
+        return 'https://%s' % Site.objects.get_current().domain
 
     def author_name(self):
         return conf.KANISA_CHURCH_NAME
