@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'haystack',
     'mptt',
     'recurrence',
+    'captcha',
     'kanisa',
 )
 
@@ -80,3 +81,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap'
 AUTH_USER_MODEL = 'kanisa.RegisteredUser'
 
 SECRET_KEY = 'thisbagismadefromrecycledmaterial'
+
+RECAPTCHA_PUBLIC_KEY = 'MyRecaptchaKey123'
+RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'
+NOCAPTCHA = True
