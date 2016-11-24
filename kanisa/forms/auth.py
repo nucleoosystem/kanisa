@@ -1,3 +1,4 @@
+from captcha.fields import ReCaptchaField
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (
@@ -37,6 +38,9 @@ class KanisaAccountCreationForm(KanisaPrettyForm, UserCreationForm):
     email = forms.EmailField(help_text=('We\'ll need an email address to get '
                                         'in touch with you to verify your '
                                         'account.'))
+    captcha = ReCaptchaField(
+        label='',
+    )
 
     class Meta:
         model = get_user_model()

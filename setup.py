@@ -36,6 +36,7 @@ setup(
         "django-haystack==1.2.7",
         "django-mptt==0.7.4",
         "django-password-reset==0.7",
+        "django-recaptcha==1.1.0",
         "django-recurrence==1.1.0",
         "markdown==2.6.2",
         "mutagen==1.29",
