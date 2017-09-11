@@ -151,6 +151,7 @@ class DiaryRegularEventMothballView(DiaryRegularEventsBaseView,
     def form_valid(self, form):
         messages.success(self.request, self.get_message(form))
         self.object.mothballed = True
+        self.object.autoschedule = False
         return super(KanisaUpdateView, self).form_valid(form)
 
     def get_kanisa_default_title(self):
