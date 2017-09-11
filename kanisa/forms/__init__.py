@@ -44,7 +44,7 @@ class KanisaPrettyForm(object):
         return helper
 
     def get_submit_css(self):
-        return "btn-primary btn-large btn-success"
+        return "btn-primary btn-lg btn-success"
 
     def get_submit_text(self):
         if hasattr(self, 'submit_text'):
@@ -64,7 +64,7 @@ class KanisaBaseModelForm(KanisaPrettyForm, ModelForm):
             Submit(
                 "continue",
                 "Save & Continue Editing",
-                css_class="btn-large btn-primary"
+                css_class="btn-lg btn-primary"
             )
         )
 
