@@ -159,9 +159,9 @@ class DiaryRegularEventMothballView(DiaryRegularEventsBaseView,
 
     def get_kanisa_default_title(self):
         return 'Mothball %s: %s' % (self.object._meta.verbose_name.title(),
-                                unicode(self.object))
-
+                                    unicode(self.object))
 diary_regular_event_mothball = DiaryRegularEventMothballView.as_view()
+
 
 class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
                                     KanisaTemplateView):
