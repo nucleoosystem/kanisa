@@ -104,6 +104,9 @@ class DiaryRegularEventsView(DiaryBaseView,
     model = RegularEvent
     template_name = 'kanisa/management/diary/regular_events.html'
     kanisa_title = 'Regular Events'
+
+    def get_queryset(self, *args, **kwargs):
+        return RegularEvent.objects.filter(mothballed=False)
 diary_regular_events = DiaryRegularEventsView.as_view()
 
 
