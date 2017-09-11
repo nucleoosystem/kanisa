@@ -20,7 +20,9 @@ from kanisa.views.generic import KanisaFormView
 
 class DiaryBaseView(object):
     def get_diary_context_data(self, **kwargs):
-        return {'events': RegularEvent.objects.all()}
+        return {
+            'events': RegularEvent.objects.filter(mothballed=False)
+        }
 
 
 class DiaryIndexView(DiaryBaseView, TemplateView):
@@ -60,7 +62,9 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         if self.category is None:
             return None
         else:
-            return self.category.regularevent_set.all()
+            return self.category.regularevent_set.filter(
+                mothballed=False
+            )
 
     def get_context_data(self, **kwargs):
         context = super(DiaryIndexView,
