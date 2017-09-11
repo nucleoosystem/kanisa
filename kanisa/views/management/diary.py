@@ -9,6 +9,7 @@ from django.views.generic.base import RedirectView
 
 from kanisa.forms.diary import (
     RegularEventForm,
+    RegularEventMothballForm,
     ScheduledEventEditForm,
     ScheduledEventCreationForm,
     ScheduledEventSeriesForm,
@@ -129,6 +130,34 @@ class DiaryRegularEventUpdateView(DiaryRegularEventsBaseView,
                            'happened already or not).')
 diary_regular_event_update = DiaryRegularEventUpdateView.as_view()
 
+
+class DiaryRegularEventMothballView(DiaryRegularEventsBaseView,
+                                    KanisaUpdateView):
+    form_class = RegularEventMothballForm
+    model = RegularEvent
+    success_url = reverse_lazy('kanisa_manage_diary_regularevents')
+    kanisa_form_warning = ('Changes made here will not affect events '
+                           'already in the diary (whether they\'ve '
+                           'happened already or not).')
+
+    def get_form(self, form_class):
+        # Skipping the save-and-continue button added by
+        # KanisaUpdateView.
+        return super(KanisaUpdateView, self).get_form(form_class)
+
+    def get_message(self, form):
+        return u'"%s" has been mothballed.' % (unicode(form.instance))
+
+    def form_valid(self, form):
+        messages.success(self.request, self.get_message(form))
+        self.object.mothballed = True
+        return super(KanisaUpdateView, self).form_valid(form)
+
+    def get_kanisa_default_title(self):
+        return 'Mothball %s: %s' % (self.object._meta.verbose_name.title(),
+                                unicode(self.object))
+
+diary_regular_event_mothball = DiaryRegularEventMothballView.as_view()
 
 class DiaryRegularEventBulkEditView(DiaryRegularEventsBaseView,
                                     KanisaTemplateView):

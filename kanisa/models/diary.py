@@ -94,6 +94,7 @@ class RegularEvent(models.Model):
                                        help_text=('Uncheck this to not '
                                                   'auto-schedule this event '
                                                   'when bulk-scheduling.'))
+    mothballed = models.BooleanField(default=False)
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:

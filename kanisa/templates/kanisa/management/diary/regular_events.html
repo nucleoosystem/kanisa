@@ -19,6 +19,7 @@
       <th>Time</th>
       <th></th>
       <th class="iconcell"></th>
+      <th class="iconcell"></th>
     </tr>
   </thead>
   <tbody>
@@ -35,6 +36,11 @@
       <td class="iconcell">
         <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site">
           <i class="glyphicon glyphicon-eye-open"></i>
+        </a>
+      </td>
+      <td class="iconcell">
+        <a href="{% url 'kanisa_manage_diary_regular_mothball' event.pk %}" title="Mothball event" class="text-danger">
+          <i class="glyphicon glyphicon-trash"></i>
         </a>
       </td>
     </tr>

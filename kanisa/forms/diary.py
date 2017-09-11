@@ -50,9 +50,32 @@ class RegularEventForm(KanisaBaseModelForm):
 
     class Meta:
         model = RegularEvent
+        fields = [
+            'title',
+            'categories',
+            'image',
+            'pattern',
+            'start_time',
+            'duration',
+            'contact',
+            'intro',
+            'details',
+            'autoschedule',
+        ]
         widgets = {'intro': KanisaTinyInputWidget(),
                    'details': KanisaMainInputWidget(),
                    'image': KanisaThumbnailFileWidget(100, 100), }
+
+
+class RegularEventMothballForm(KanisaBaseModelForm):
+    submit_text = 'Mothball this event'
+
+    def get_submit_css(self):
+        return 'btn-lg btn-danger'
+
+    class Meta:
+        model = RegularEvent
+        fields = []
 
 
 class ScheduledEventBaseForm(KanisaBaseModelForm):
