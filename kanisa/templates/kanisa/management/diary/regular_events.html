@@ -11,47 +11,24 @@
 </p>
 
 {% if regularevent_list %}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Timetable</th>
-      <th>Time</th>
-      <th></th>
-      <th class="iconcell"></th>
-      <th class="iconcell"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for event in regularevent_list %}
-    <tr>
-      <td><a href="{% url 'kanisa_manage_diary_regular_update' event.pk %}">{{ event.title }}</a></td>
-      <td>{{ event.pattern_description }}</td>
-      <td>{{ event.start_time }}</td>
-      <td>
-        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-default btn-xs">
-          Edit Upcoming
-        </a>
-      </td>
-      <td class="iconcell">
-        <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site">
-          <i class="glyphicon glyphicon-eye-open"></i>
-        </a>
-      </td>
-      <td class="iconcell">
-        <a href="{% url 'kanisa_manage_diary_regular_mothball' event.pk %}" title="Mothball event" class="text-danger">
-          <i class="glyphicon glyphicon-trash"></i>
-        </a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% include "kanisa/management/diary/_regular_events_table.html" with events=regularevent_list %}
 {% else %}
 <hr />
 <p class="alert alert-info">
   No regular events have been created yet - why don't you <a href="{% url 'kanisa_manage_diary_regular_create' %}">create one</a>?
 </p>
+{% endif %}
+
+{% if mothballed %}
+<hr />
+<h3>Mothballed Events</h3>
+<p>
+  The following event{{ mothballed|pluralize }}
+  {{ mothballed|pluralize:"has,have" }} been mothballed
+  - mothballed events will not show up on the diary page,
+  though they&rsquo;re still accessible if you know the URL.
+</p>
+{% include "kanisa/management/diary/_regular_events_table.html" with events=mothballed %}
 {% endif %}
 
 {% endblock %}

@@ -78,6 +78,17 @@ class RegularEventMothballForm(KanisaBaseModelForm):
         fields = []
 
 
+class RegularEventRestoreForm(KanisaBaseModelForm):
+    submit_text = 'Restore this event'
+
+    def get_submit_css(self):
+        return 'btn-lg btn-success'
+
+    class Meta:
+        model = RegularEvent
+        fields = []
+
+
 class ScheduledEventBaseForm(KanisaBaseModelForm):
     kanisa_form_class = 'scheduledevent'
 
