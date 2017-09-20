@@ -4,6 +4,7 @@
 <script type="text/javascript">
 var schedule_event_url = "{% url 'kanisa_manage_xhr_diary_schedule_regular' %}";
 var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|date:"Ymd" %}";
+var find_events_in_diary_url = "{% url 'kanisa_manage_xhr_diary_find_events' %}";
 </script>
 {% endblock %}
 
@@ -22,6 +23,8 @@ var update_diary_url = "{% url 'kanisa_manage_xhr_diary_get_schedule' monday|dat
 <div id="diary_page">
 {% include "kanisa/management/diary/_diary_page.html" with calendar=calendar only %}
 </div>
+
+{% include "kanisa/management/diary/_diary_add_modal.html" %}
 
 <ul class="pager">
   <li class="previous">

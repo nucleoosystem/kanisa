@@ -117,7 +117,7 @@ class ScheduledEventBaseForm(KanisaBaseModelForm):
         super(ScheduledEventBaseForm, self).clean()
         cleaned_data = self.cleaned_data
 
-        if cleaned_data['date']:
+        if cleaned_data.get('date'):
             sd = cleaned_data['date']
             ed = cleaned_data['end_date']
             multiday = cleaned_data['is_multi_day']
@@ -189,3 +189,8 @@ class RegularEventQueryForm(forms.Form):
 
     def set_event(self, event):
         self.initial['event'] = event
+
+
+class FindEventForm(forms.Form):
+    name = forms.CharField()
+    date = forms.DateField()

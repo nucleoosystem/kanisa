@@ -39,12 +39,56 @@ function quick_event_delete(event) {
     }
 }
 
+function update_diary_modal(event) {
+    var element = $(this);
+    var yyyymmdd = element.attr("data-date-yyyymmdd");
+    var display = element.attr("data-date-display");
+
+    // Update the modal title with the display date
+    $("#add_modal_date").html(display);
+
+    // Fix the link for heading straight to add an event
+    var btn = $("#add_details_myself");
+    var url = btn.attr("href");
+    btn.attr("href", url.split('?')[0] + "?date=" + yyyymmdd);
+
+    // Clear out the lookup field
+    $("#id_name").val("");
+    $("#id_date").val(yyyymmdd);
+    $("#possible_events").html("");
+}
+
+function lookup_events(evt) {
+    var el = $(this);
+    var current_val = el.val();
+
+    // Require at least three characters to start doing lookups
+    if (current_val.length < 3) {
+        $("#possible_events").html("");
+        return;
+    }
+
+    var event_date = $("#id_date").val()
+
+    $.post(find_events_in_diary_url,
+           {
+               'event_name': current_val,
+               'event_date': event_date
+           },
+           function(data) {
+               $("#possible_events").html(data);
+           }
+    );
+}
+
 function bind_diary_handlers() {
     $("a.regular_schedule").click(quick_event_schedule);
     $("a.scheduled_event_cancel").click(quick_event_delete);
+    $("a.diary_modal_toggle").click(update_diary_modal);
 }
 
 $(document).ready(function() {
+    $("#id_name").on('input', lookup_events);
     bind_diary_handlers();
 
     $("#schedule-weeks-events").mouseover(function() {

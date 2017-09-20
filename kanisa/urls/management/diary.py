@@ -34,6 +34,8 @@ urlpatterns = patterns(
         'kanisa_manage_diary_schedule_regular_event'),
     url(r'^schedule/all/$', views.diary_schedule_weeks_events, {},
         'kanisa_manage_diary_schedule_weeks_regular_event'),
+    url(r'^schedule/find/$', views.diary_scheduled_event_find, {},
+        'kanisa_manage_xhr_diary_find_events'),
     url(r'^cancel/(?P<pk>\d+)/$', views.diary_cancel_scheduled_event, {},
         'kanisa_manage_diary_cancel_scheduled_event'),
     url(r'^clone/$', views.diary_scheduled_event_clone, {},

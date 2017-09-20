@@ -1,0 +1,22 @@
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Event</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+  {% for event in events %}
+  <tr>
+    <td>
+      {{ event }}
+    </td>
+    <td>
+      {{ event.date|date:"jS F Y" }}
+    </td>
+    <td>
+      <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ event.pk }}&date={{ event_date }}" class="btn btn-default btn-xs">
+        Clone
+      </a>
+    </td>
+  </tr>
+{% endfor %}
+</table>

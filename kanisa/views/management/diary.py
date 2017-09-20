@@ -3,9 +3,13 @@ from time import strptime
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import Http404, HttpResponseRedirect
+from django.db.models import Q
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic.base import RedirectView
+from django.template.response import TemplateResponse
+from django.views.generic.base import RedirectView, View
+
+from django import forms
 
 from kanisa.forms.diary import (
     RegularEventForm,
@@ -15,7 +19,8 @@ from kanisa.forms.diary import (
     ScheduledEventCreationForm,
     ScheduledEventSeriesForm,
     EventContactForm,
-    EventCategoryForm
+    EventCategoryForm,
+    FindEventForm
 )
 from kanisa.models import (
     EventContact,
@@ -89,6 +94,9 @@ class DiaryEventIndexView(DiaryBaseView,
         context['calendar'] = schedule.calendar_entries
         context['events_to_schedule'] = schedule.events_to_schedule
 
+        form = FindEventForm()
+        form.fields['date'].widget = forms.HiddenInput()
+        context['find_event_form'] = form
         return context
 diary_management = DiaryEventIndexView.as_view()
 
@@ -349,7 +357,11 @@ class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
         original = get_object_or_404(ScheduledEvent, pk=pk)
         initial = super(DiaryScheduledEventCloneView, self).get_initial()
 
-        initial['title'] = original.title
+        if original.title:
+            initial['title'] = original.title
+        elif original.event:
+            initial['title'] = original.event.title
+
         initial['event'] = original.event
         initial['start_time'] = original.start_time
         initial['duration'] = original.duration
@@ -357,6 +369,17 @@ class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
         initial['contact'] = original.contact
         initial['intro'] = original.intro
         initial['series'] = original.series
+
+        try:
+            real_date = datetime.strptime(
+                self.request.GET['date'],
+                '%Y%m%d'
+            )
+            initial['date'] = real_date
+        except ValueError:
+            pass
+        except KeyError:
+            pass
 
         return initial
 
@@ -575,3 +598,30 @@ class ScheduledEventSeriesUpdateView(EventSeriesBaseView,
     model = ScheduledEventSeries
     success_url = reverse_lazy('kanisa_manage_diary_series')
 diary_event_series_update = ScheduledEventSeriesUpdateView.as_view()
+
+
+class ScheduledEventFindView(KanisaAuthorizationMixin,
+                             View):
+    permission = 'kanisa.manage_diary'
+
+    def post(self, request, *args, **kwargs):
+        event_name = request.POST['event_name']
+        event_date = request.POST['event_date']
+
+        by_title = Q(title__icontains=event_name)
+        by_event_title = Q(event__title__icontains=event_name)
+        events = ScheduledEvent.objects.filter(
+            by_title | by_event_title
+        )[:5]
+
+        ctx = {
+            'events': events,
+            'event_date': event_date,
+        }
+
+        return TemplateResponse(
+            request,
+            'kanisa/management/diary/xhr_events.html',
+            ctx
+        )
+diary_scheduled_event_find = ScheduledEventFindView.as_view()
