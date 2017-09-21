@@ -4,7 +4,12 @@ from time import strptime
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import (
+    Http404,
+    HttpResponseForbidden,
+    HttpResponseRedirect,
+    HttpResponse
+)
 from django.shortcuts import get_object_or_404
 from django.template.response import TemplateResponse
 from django.views.generic.base import RedirectView, View
@@ -605,6 +610,10 @@ class ScheduledEventFindView(KanisaAuthorizationMixin,
     permission = 'kanisa.manage_diary'
 
     def post(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseForbidden("This page is not directly "
+                                         "accessible.")
+
         event_name = request.POST['event_name']
         event_date = request.POST['event_date']
 
