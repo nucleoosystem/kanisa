@@ -70,14 +70,19 @@ function lookup_events(evt) {
 
     var event_date = $("#id_date").val()
 
-    $.post(find_events_in_diary_url,
-           {
-               'event_name': current_val,
-               'event_date': event_date
-           },
-           function(data) {
-               $("#possible_events").html(data);
-           }
+    $.post(
+        find_events_in_diary_url,
+        {
+            'event_name': current_val,
+            'event_date': event_date
+        },
+        function(data) {
+            $("#possible_events").html(data);
+        }
+    ).error(
+        function(data) {
+            $("#possible_events").html(data.responseText);
+        }
     );
 }
 
