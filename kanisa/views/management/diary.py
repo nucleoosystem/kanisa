@@ -616,6 +616,7 @@ class ScheduledEventFindView(KanisaAuthorizationMixin,
 
         ctx = {
             'events': events,
+            'event_name': event_name,
             'event_date': event_date,
         }
 
