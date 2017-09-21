@@ -99,7 +99,7 @@ class ScheduledEventFindView(XHRBasePostView):
         by_event_title = Q(event__title__icontains=event_name)
         events = ScheduledEvent.objects.filter(
             by_title | by_event_title
-        )[:5]
+        ).order_by('-date')[:5]
 
         ctx = {
             'events': events,
