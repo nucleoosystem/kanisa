@@ -1,10 +1,12 @@
 from datetime import datetime
+from django.db.models import Q
 from django.http import (HttpResponse,
                          HttpResponseBadRequest)
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.template.response import TemplateResponse
 
-from kanisa.models import RegularEvent
+from kanisa.models import RegularEvent, ScheduledEvent
 from kanisa.utils.diary import get_schedule, get_this_week
 from kanisa.views.xhr.base import XHRBasePostView, XHRBaseGetView, BadArgument
 
@@ -83,3 +85,31 @@ class DiaryGetWeekPublic(XHRBaseGetView):
                                   {'thisweek': get_this_week(thedate)},
                                   context_instance=RequestContext(request))
 get_week_public_view = DiaryGetWeekPublic.as_view()
+
+
+class ScheduledEventFindView(XHRBasePostView):
+    permission = 'kanisa.manage_diary'
+    required_arguments = ['event_name', 'event_date', ]
+
+    def render(self, request, *args, **kwargs):
+        event_name = self.arguments['event_name']
+        event_date = self.arguments['event_date']
+
+        by_title = Q(title__icontains=event_name)
+        by_event_title = Q(event__title__icontains=event_name)
+        events = ScheduledEvent.objects.filter(
+            by_title | by_event_title
+        )[:5]
+
+        ctx = {
+            'events': events,
+            'event_name': event_name,
+            'event_date': event_date,
+        }
+
+        return TemplateResponse(
+            request,
+            'kanisa/management/diary/xhr_events.html',
+            ctx
+        )
+diary_scheduled_event_find = ScheduledEventFindView.as_view()

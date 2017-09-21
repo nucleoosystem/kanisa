@@ -3,16 +3,9 @@ from time import strptime
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.db.models import Q
-from django.http import (
-    Http404,
-    HttpResponseForbidden,
-    HttpResponseRedirect,
-    HttpResponse
-)
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.template.response import TemplateResponse
-from django.views.generic.base import RedirectView, View
+from django.views.generic.base import RedirectView
 
 from django import forms
 
@@ -603,35 +596,3 @@ class ScheduledEventSeriesUpdateView(EventSeriesBaseView,
     model = ScheduledEventSeries
     success_url = reverse_lazy('kanisa_manage_diary_series')
 diary_event_series_update = ScheduledEventSeriesUpdateView.as_view()
-
-
-class ScheduledEventFindView(KanisaAuthorizationMixin,
-                             View):
-    permission = 'kanisa.manage_diary'
-
-    def post(self, request, *args, **kwargs):
-        if not request.is_ajax():
-            return HttpResponseForbidden("This page is not directly "
-                                         "accessible.")
-
-        event_name = request.POST['event_name']
-        event_date = request.POST['event_date']
-
-        by_title = Q(title__icontains=event_name)
-        by_event_title = Q(event__title__icontains=event_name)
-        events = ScheduledEvent.objects.filter(
-            by_title | by_event_title
-        )[:5]
-
-        ctx = {
-            'events': events,
-            'event_name': event_name,
-            'event_date': event_date,
-        }
-
-        return TemplateResponse(
-            request,
-            'kanisa/management/diary/xhr_events.html',
-            ctx
-        )
-diary_scheduled_event_find = ScheduledEventFindView.as_view()
