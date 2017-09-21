@@ -42,7 +42,7 @@ class SiteWideNotice(models.Model):
         app_label = 'kanisa'
         permissions = (
             ('manage_sitewidenotices',
-             'Can manage your banners'),
+             'Can manage your site wide notices'),
         )
         ordering = ('-publish_until', )
 
