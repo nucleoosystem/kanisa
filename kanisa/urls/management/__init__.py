@@ -13,6 +13,7 @@ urlpatterns = patterns(
     url(r'^documents/', include('kanisa.urls.management.documents')),
     url(r'^media/', include('kanisa.urls.management.media')),
     url(r'^navigation/', include('kanisa.urls.management.navigation')),
+    url(r'^notices/', include('kanisa.urls.management.notices')),
     url(r'^pages/', include('kanisa.urls.management.pages')),
     url(r'^sermons/', include('kanisa.urls.management.sermons')),
     url(r'^users/', include('kanisa.urls.management.users')),

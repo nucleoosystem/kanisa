@@ -1,0 +1,48 @@
+{% extends 'kanisa/management/base.html' %}
+
+{% block content %}
+<p>
+  <a href="{% url 'kanisa_manage_notice_create' %}" class="btn btn-lg btn-success">
+    <i class="glyphicon glyphicon-plus"></i>
+    Write a Notice
+  </a>
+</p>
+
+<hr />
+
+{% if object_list %}
+
+<table class="table table-striped">
+<tr>
+  <th></th>
+  <th>Title</th>
+  <th>Expires</th>
+</tr>
+{% for object in object_list %}
+<tr>
+  <td>
+    {% if object.published and not object.expired %}
+    <span class="text-success glyphicon glyphicon-ok-circle" title="This notice is active"></span>
+    {% else %}
+    <span class="text-danger glyphicon glyphicon-remove-circle" title="This notice is expired"></span>
+    {% endif %}
+  </td>
+  <td>
+    <a href="{% url 'kanisa_manage_notice_update' object.pk %}" title="Edit this notice">
+      {{ object.headline }}
+    </a>
+  </td>
+  <td>
+    {{ object.publish_until|date:"jS F Y" }}
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+{% else %}
+<div class="alert alert-warning">
+There are no posts to display.
+</div>
+{% endif %}
+
+{% endblock %}

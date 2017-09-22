@@ -94,6 +94,14 @@
   </a>
 </li>
 {% endif %}
+{% if perms.kanisa.manage_sitewidenotices %}
+<li{% if kanisa_nav_component = "notices" %} class="active"{% endif %}>
+  <a href="{% url 'kanisa_manage_notices' %}">
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
+    Notices
+  </a>
+</li>
+{% endif %}
 {% if user.is_superuser %}
 <li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_branding' %}">
