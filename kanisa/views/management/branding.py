@@ -16,7 +16,8 @@ from kanisa.utils.branding import (
     get_available_colours,
     get_brand_colours,
     get_branding_disk_file,
-    BRANDING_COMPONENTS
+    BRANDING_COMPONENTS,
+    BrandingInformation
 )
 from kanisa.views.generic import (
     KanisaAuthorizationMixin,
@@ -96,6 +97,8 @@ class BrandingManagementUpdateView(BrandingBaseView,
 
     def form_valid(self, form):
         ensure_branding_directory_exists()
+        brand = BrandingInformation(self.kwargs['resource'])
+        brand.clear_cached_hash()
 
         dest_name = get_branding_disk_file(self.get_destination_filename())
 

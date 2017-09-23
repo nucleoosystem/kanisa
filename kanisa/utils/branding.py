@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import shutil
 from django.conf import settings
 from django.core.cache import cache
 from django.template import TemplateDoesNotExist
@@ -62,10 +63,6 @@ def get_brand_colours():
         return {}
 
 
-def get_cache_key(component_name):
-    return 'kanisa_branding_component:%s' % component_name
-
-
 def flush_brand_colours(colours):
     with open(get_brand_colours_filename(), 'w') as destination:
         destination.write(json.dumps(colours))
@@ -77,8 +74,6 @@ def flush_brand_colours(colours):
 
     with open(destination_name, 'w') as destination:
         destination.write(rendered)
-
-    cache.delete(get_cache_key('colours'))
 
 
 def ensure_branding_directory_exists():
@@ -117,20 +112,11 @@ class BrandingInformation(object):
 
     @property
     def url(self):
-        url = cache.get(get_cache_key(self.component))
-
-        if url is not None:
-            return url
-
         url = self.__fetch()
 
         if url is None:
             return url
 
-        # Cache these URLs for 10 minutes - chances are they won't
-        # disappear, but on the off-chance they do, let's not keep
-        # serving non-existent files forever.
-        cache.set(get_cache_key(self.component), url, 600)
         return url
 
     def __file_exists(self):
@@ -140,28 +126,60 @@ class BrandingInformation(object):
 
         return os.path.exists(path)
 
-    def __url(self, filehash):
+    def __url(self):
         filename = BRANDING_COMPONENTS[self.component]['filename']
+        filehash = self.__filehash()
 
-        if filehash:
+        if self.component == 'colours':
             return 'kanisa/branding/%s?%s' % (filename, filehash)
-        else:
-            return 'kanisa/branding/%s' % filename
+
+        filebase, extension = os.path.splitext(filename)
+        hashed_filename = '%s/%s%s' % (
+            filebase, filehash, extension
+        )
+        hashed_disk_file = get_branding_disk_file(hashed_filename)
+
+        if not os.path.exists(hashed_disk_file):
+            thedir, _ = os.path.split(hashed_disk_file)
+
+            try:
+                os.makedirs(thedir)
+            except OSError:
+                pass
+
+            shutil.copyfile(
+                get_branding_disk_file(filename),
+                hashed_disk_file
+            )
+
+        return 'kanisa/branding/%s' % hashed_filename
+
+    def clear_cached_hash(self):
+        cache_key = self.__get_cache_key()
+        cache.delete(cache_key)
+
+    def __get_cache_key(self):
+        return 'kanisa_branding_component:%s' % self.component
 
     def __filehash(self):
+        cache_key = self.__get_cache_key()
+        cached_hash = cache.get(cache_key)
+
+        if cached_hash:
+            return cached_hash
+
         content = open(get_branding_disk_file(
             BRANDING_COMPONENTS[self.component]['filename']
         ), 'rb').read()
         md5 = hashlib.md5(content)
-        return md5.hexdigest()[:12]
+        filehash = md5.hexdigest()[:12]
+
+        cache.set(cache_key, filehash, 600)
+
+        return filehash
 
     def __fetch(self):
         if not self.__file_exists():
             return None
 
-        filehash = None
-
-        if self.component == 'colours':
-            filehash = self.__filehash()
-
-        return self.__url(filehash)
+        return self.__url()
