@@ -9,9 +9,12 @@ def fix_perm_name(apps, schema_editor):
         'auth',
         'Permission'
     )
-    perm = Permission.objects.get(codename='manage_sitewidenotices')
-    perm.name = 'Can manage your site wide notices'
-    perm.save()
+    try:
+        perm = Permission.objects.get(codename='manage_sitewidenotices')
+        perm.name = 'Can manage your site wide notices'
+        perm.save()
+    except Permission.DoesNotExist:
+        pass
 
 
 class Migration(migrations.Migration):
