@@ -28,7 +28,7 @@ class ScheduledEventIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def get_model(self):
         return ScheduledEvent
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().objects.filter(date__gte=date.today())
 
 
@@ -39,7 +39,7 @@ class SermonIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def should_update(self, instance, **kwargs):
         return not instance.in_the_future()
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().preached_objects.all()
 
 
@@ -47,7 +47,7 @@ class BlogPostIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def get_model(self):
         return BlogPost
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().published_objects.all()
 
     def get_updated_field(self):
@@ -58,7 +58,7 @@ class PageIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def get_model(self):
         return Page
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().objects.all()
 
 
@@ -66,7 +66,7 @@ class RegularEventIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def get_model(self):
         return RegularEvent
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().objects.all()
 
 
@@ -74,5 +74,5 @@ class SermonSeriesIndex(KanisaBaseSearchIndex, indexes.Indexable):
     def get_model(self):
         return SermonSeries
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         return self.get_model().objects.all()
