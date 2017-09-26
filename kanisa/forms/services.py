@@ -39,6 +39,7 @@ class SongForm(KanisaBaseModelForm):
 
     class Meta:
         model = Song
+        fields = ('title', 'composers', )
 
 
 class MergeSongForm(KanisaBaseForm):
@@ -106,6 +107,7 @@ class ServiceForm(KanisaBaseModelForm):
 class ComposerForm(KanisaBaseModelForm):
     class Meta:
         model = Composer
+        fields = ('forename', 'surname', )
 
 
 class BandForm(KanisaBaseModelForm):
@@ -116,4 +118,5 @@ class BandForm(KanisaBaseModelForm):
     )
 
     class Meta:
+        fields = ('band_leader', 'musicians', )
         model = Band

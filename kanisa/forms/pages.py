@@ -11,3 +11,10 @@ class PageForm(KanisaBaseModelForm):
         model = Page
         widgets = {'lead': KanisaIntroInputWidget(),
                    'contents': KanisaMainInputWidget(), }
+        fields = (
+            'title',
+            'lead',
+            'contents',
+            'draft',
+            'parent',
+        )

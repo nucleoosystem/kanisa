@@ -7,9 +7,18 @@ class DocumentForm(KanisaBaseModelForm):
     class Meta:
         model = Document
         widgets = {'details': KanisaMainInputWidget(), }
+        fields = (
+            'title',
+            'file',
+            'details',
+            'public',
+        )
 
 
 class DocumentFormSimple(KanisaBaseModelForm):
     class Meta:
         model = Document
-        exclude = ('details', 'public', )
+        fields = (
+            'title',
+            'file',
+        )

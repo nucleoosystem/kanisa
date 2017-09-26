@@ -21,12 +21,21 @@ class SermonSeriesForm(KanisaBaseModelForm):
         model = SermonSeries
         widgets = {'details': KanisaMainInputWidget(),
                    'image': KanisaThumbnailFileWidget(130, 130), }
+        fields = (
+            'title',
+            'image',
+            'intro',
+            'details',
+            'active',
+            'passage',
+        )
 
 
 class SermonSpeakerForm(KanisaBaseModelForm):
     class Meta:
         model = SermonSpeaker
         widgets = {'biography': KanisaMainInputWidget(), }
+        fields = ('forename', 'surname', 'image', 'biography', )
 
 
 class SermonForm(KanisaBaseModelForm):
@@ -41,6 +50,17 @@ class SermonForm(KanisaBaseModelForm):
         model = Sermon
         widgets = {'details': KanisaMainInputWidget(),
                    'transcript': KanisaMainInputWidget()}
+        fields = (
+            'title',
+            'date',
+            'series',
+            'speaker',
+            'passage',
+            'mp3',
+            'details',
+            'transcript',
+            'no_mp3',
+        )
 
     def apply_id3(self, cleaned_data):
         try:

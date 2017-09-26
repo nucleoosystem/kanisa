@@ -27,16 +27,23 @@ class EventContactForm(KanisaBaseModelForm):
     class Meta:
         model = EventContact
         widgets = {'image': KanisaThumbnailFileWidget(100, 100), }
+        fields = (
+            'name',
+            'email',
+            'image',
+        )
 
 
 class EventCategoryForm(KanisaBaseModelForm):
     class Meta:
         model = EventCategory
+        fields = ('title', )
 
 
 class ScheduledEventSeriesForm(KanisaBaseModelForm):
     class Meta:
         model = ScheduledEventSeries
+        fields = ('name', )
 
 
 class RegularEventForm(KanisaBaseModelForm):
@@ -153,6 +160,18 @@ class ScheduledEventCreationForm(ScheduledEventBaseForm):
     class Meta:
         model = ScheduledEvent
         widgets = {'details': KanisaMainInputWidget(), }
+        fields = (
+            'event',
+            'title',
+            'date',
+            'start_time',
+            'duration',
+            'end_date',
+            'contact',
+            'intro',
+            'details',
+            'series',
+        )
 
 
 class RegularEventQueryForm(forms.Form):

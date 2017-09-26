@@ -25,6 +25,14 @@ class BlogPostForm(KanisaBaseModelForm):
             'main_text': KanisaMainInputWidget(),
             'teaser_text': KanisaBlogTeaserInputWidget(),
         }
+        fields = (
+            'title',
+            'author',
+            'publish_date',
+            'teaser_text',
+            'main_text',
+            'enable_comments',
+        )
 
 
 class BlogCommentForm(KanisaBaseModelForm):

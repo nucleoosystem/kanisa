@@ -7,3 +7,7 @@ class InlineImageForm(KanisaBaseModelForm):
     class Meta:
         model = InlineImage
         widgets = {'image': KanisaThumbnailFileWidget(180, 180), }
+        fields = (
+            'title',
+            'image',
+        )
