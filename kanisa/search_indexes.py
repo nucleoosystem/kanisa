@@ -6,7 +6,6 @@
 
 from datetime import date
 from haystack import indexes
-from haystack import site
 from kanisa.models import (
     BlogPost,
     Page,
@@ -17,7 +16,7 @@ from kanisa.models import (
 )
 
 
-class KanisaBaseSearchIndex(indexes.RealTimeSearchIndex):
+class KanisaBaseSearchIndex(indexes.SearchIndex):
     text = indexes.CharField(document=True, use_template=True)
     rendered = indexes.CharField(use_template=True)
 
@@ -25,30 +24,55 @@ class KanisaBaseSearchIndex(indexes.RealTimeSearchIndex):
         return 'modified'
 
 
-class ScheduledEventIndex(KanisaBaseSearchIndex):
+class ScheduledEventIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return ScheduledEvent
+
     def index_queryset(self):
-        return ScheduledEvent.objects.filter(date__gte=date.today())
+        return self.get_model().objects.filter(date__gte=date.today())
 
 
-class SermonIndex(KanisaBaseSearchIndex):
+class SermonIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return Sermon
+
     def should_update(self, instance, **kwargs):
         return not instance.in_the_future()
 
     def index_queryset(self):
-        return Sermon.preached_objects.all()
+        return self.get_model().preached_objects.all()
 
 
-class BlogPostIndex(KanisaBaseSearchIndex):
+class BlogPostIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return BlogPost
+
     def index_queryset(self):
-        return BlogPost.published_objects.all()
+        return self.get_model().published_objects.all()
 
     def get_updated_field(self):
         return 'updated_date'
 
 
-site.register(BlogPost, BlogPostIndex)
-site.register(Page, KanisaBaseSearchIndex)
-site.register(RegularEvent, KanisaBaseSearchIndex)
-site.register(ScheduledEvent, ScheduledEventIndex)
-site.register(Sermon, SermonIndex)
-site.register(SermonSeries, KanisaBaseSearchIndex)
+class PageIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return Page
+
+    def index_queryset(self):
+        return self.get_model().objects.all()
+
+
+class RegularEventIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return RegularEvent
+
+    def index_queryset(self):
+        return self.get_model().objects.all()
+
+
+class SermonSeriesIndex(KanisaBaseSearchIndex, indexes.Indexable):
+    def get_model(self):
+        return SermonSeries
+
+    def index_queryset(self):
+        return self.get_model().objects.all()

@@ -33,7 +33,7 @@ setup(
         "Pillow==2.8.1",
         "django-autoslug==1.7.1",
         "django-crispy-forms==1.4.0",
-        "django-haystack==1.2.7",
+        "django-haystack==2.4.1",
         "django-mptt==0.7.4",
         "django-password-reset==0.7",
         "django-recaptcha==1.1.0",
@@ -41,7 +41,7 @@ setup(
         "markdown==2.6.2",
         "mutagen==1.29",
         "sorl-thumbnail==12.2",
-        "Whoosh==2.4.1",
+        "Whoosh==2.5.0",
     ],
     tests_require=(
         "pytest==2.7.1",
