@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from django import forms
 from django.core.urlresolvers import reverse_lazy
-from django.forms import util
+from django.forms import utils
 from django.forms.widgets import TextInput
 from .bible import to_passage, InvalidPassage
 
@@ -32,4 +32,4 @@ class BiblePassageFormField(forms.CharField):
         try:
             return unicode(to_passage(value))
         except InvalidPassage, e:
-            raise util.ValidationError(e)
+            raise utils.ValidationError(e)

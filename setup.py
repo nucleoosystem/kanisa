@@ -29,7 +29,7 @@ setup(
     packages=find_packages(exclude=["tests", "tests.*"]),
     include_package_data=True,
     install_requires=[
-        "Django==1.7.10",
+        "Django==1.8.18",
         "Pillow==2.8.1",
         "django-autoslug==1.7.1",
         "django-crispy-forms==1.4.0",

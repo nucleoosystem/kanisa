@@ -139,8 +139,10 @@ def kanisa_markdown(value, demote_heading_levels=None):
 
     value = value.replace("####", "<br style=\"clear: both\" />")
 
-    marked_down = markdown.markdown(value,
-                                    extensions=['nl2br', ])
+    marked_down = markdown.markdown(
+        value,
+        extensions=['markdown.extensions.nl2br', ]
+    )
 
     if demote_heading_levels:
         marked_down = demote_headings(marked_down, demote_heading_levels)

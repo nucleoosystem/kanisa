@@ -1,6 +1,6 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from django.forms import Textarea, TextInput
-from django.forms.util import flatatt
+from django.forms.utils import flatatt
 from django.forms.widgets import (
     ClearableFileInput,
     DateInput,

@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django import forms
 from django.core.urlresolvers import reverse
-from django.forms.util import ErrorList
+from django.forms.utils import ErrorList
 from kanisa.forms import (
     KanisaBaseModelForm,
     BootstrapTimeField,
