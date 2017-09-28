@@ -7,7 +7,7 @@
   </a>
 </li>
 {% if perms.kanisa.manage_pages %}
-<li{% if kanisa_nav_component = "pages" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "pages" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_pages' %}">
     <span class="glyphicon glyphicon-font"></span>
     Pages
@@ -15,7 +15,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_diary %}
-<li{% if kanisa_nav_component = "diary" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "diary" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_diary' %}">
     <span class="glyphicon glyphicon-calendar"></span>
     Diary
@@ -23,7 +23,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_sermons %}
-<li{% if kanisa_nav_component = "sermons" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "sermons" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_sermons' %}">
     <span class="glyphicon glyphicon-headphones"></span>
     Sermons
@@ -31,7 +31,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_banners %}
-<li{% if kanisa_nav_component = "banners" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "banners" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_banners' %}">
     <span class="glyphicon glyphicon-picture"></span>
     Banners
@@ -40,7 +40,7 @@
 <li>
   {% endif %}
   {% if perms.kanisa.manage_documents %}
-<li{% if kanisa_nav_component = "documents" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "documents" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_documents' %}">
     <span class="glyphicon glyphicon-file"></span>
     Documents
@@ -48,7 +48,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_users %}
-<li{% if kanisa_nav_component = "users" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "users" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_users' %}">
     <span class="glyphicon glyphicon-user"></span>
     Users
@@ -63,7 +63,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_navigation %}
-<li{% if kanisa_nav_component = "navigation" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "navigation" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_navigation' %}">
     <span class="glyphicon glyphicon-road"></span>
     Navigation
@@ -71,7 +71,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_media %}
-<li{% if kanisa_nav_component = "media" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "media" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_media' %}">
     <span class="glyphicon glyphicon-camera"></span>
     Media
@@ -79,7 +79,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_blocks %}
-<li{% if kanisa_nav_component = "blocks" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "blocks" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_blocks' %}">
     <span class="glyphicon glyphicon-th-large"></span>
     Content Blocks
@@ -87,7 +87,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_blog %}
-<li{% if kanisa_nav_component = "blog" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "blog" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_blog' %}">
     <span class="glyphicon glyphicon-leaf"></span>
     Blog Posts
@@ -95,7 +95,7 @@
 </li>
 {% endif %}
 {% if perms.kanisa.manage_sitewidenotices %}
-<li{% if kanisa_nav_component = "notices" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "notices" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_notices' %}">
     <span class="glyphicon glyphicon-exclamation-sign"></span>
     Notices
@@ -103,7 +103,7 @@
 </li>
 {% endif %}
 {% if user.is_superuser %}
-<li{% if kanisa_nav_component = "branding" %} class="active"{% endif %}>
+<li{% if kanisa_nav_component == "branding" %} class="active"{% endif %}>
   <a href="{% url 'kanisa_manage_branding' %}">
     <span class="glyphicon glyphicon-tag"></span>
     Branding
