@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.management.documents as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.document_management, {}, 'kanisa_manage_documents'),
     url(r'^create/$', views.document_create, {},
         'kanisa_manage_documents_create'),
@@ -11,4 +10,4 @@ urlpatterns = patterns(
         'kanisa_manage_documents_update'),
     url(r'^delete/(?P<pk>\d+)$', views.document_delete, {},
         'kanisa_manage_documents_delete'),
-)
+]

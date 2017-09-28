@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.members.services.services as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<service_pk>\d+)/$',
         views.service_detail, {},
         'kanisa_members_services_detail'),
@@ -29,4 +28,4 @@ urlpatterns = patterns(
     url((r'^(?P<service_pk>\d+)/moveup/(?P<song_pk>\d+)/$'),
         views.move_up, {},
         'kanisa_members_services_move_song_up'),
-)
+]

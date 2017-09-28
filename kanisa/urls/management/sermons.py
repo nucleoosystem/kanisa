@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.management.sermons as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.sermon_management, {}, 'kanisa_manage_sermons'),
     url(r'^series/(?P<pk>\d+)$', views.sermon_series_detail, {},
         'kanisa_manage_sermons_series_detail'),
@@ -27,4 +26,4 @@ urlpatterns = patterns(
         'kanisa_manage_sermons_speaker_create'),
     url(r'^speaker/edit/(?P<pk>\d+)$', views.sermon_speaker_update, {},
         'kanisa_manage_sermons_speaker_update'),
-)
+]

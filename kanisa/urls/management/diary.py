@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.management.diary as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.diary_management, {},
         'kanisa_manage_diary'),
     url(r'^series/$', views.diary_event_series, {},
@@ -50,4 +49,4 @@ urlpatterns = patterns(
         'kanisa_manage_diary_categories_create'),
     url(r'^categories/edit/(?P<pk>\d+)$', views.diary_event_category_update,
         {}, 'kanisa_manage_diary_categories_update'),
-)
+]

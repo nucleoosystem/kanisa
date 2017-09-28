@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from kanisa.views import KanisaIndexView
 from kanisa.views.public.seasonal import seasonal_view
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', KanisaIndexView.as_view(), {}, 'kanisa_public_index'),
     url(r'^banners/', include('kanisa.urls.public.banners')),
     url(r'^blog/', include('kanisa.urls.public.blog')),
@@ -18,4 +17,4 @@ urlpatterns = patterns(
     url(r'^search/', include('kanisa.urls.public.search')),
     url(r'^sermons/', include('kanisa.urls.public.sermons')),
     url(r'^xhr/', include('kanisa.urls.xhr')),
-)
+]

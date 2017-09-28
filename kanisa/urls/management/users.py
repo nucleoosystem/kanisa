@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.management.users as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.user_management, {}, 'kanisa_manage_users'),
     url(r'^activate/(?P<user_id>\d+)/$', views.user_activate, {},
         'kanisa_manage_users_activate'),
@@ -15,4 +14,4 @@ urlpatterns = patterns(
         'kanisa_manage_users_details'),
     url(r'^update/(?P<pk>\d+)/$', views.user_update, {},
         'kanisa_manage_users_update'),
-)
+]

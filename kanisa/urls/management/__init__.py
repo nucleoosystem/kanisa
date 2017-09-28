@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from kanisa.views.management import KanisaManagementIndexView
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', KanisaManagementIndexView.as_view(), {}, 'kanisa_manage_index'),
     url(r'^banners/', include('kanisa.urls.management.banners')),
     url(r'^blocks/', include('kanisa.urls.management.blocks')),
@@ -18,4 +17,4 @@ urlpatterns = patterns(
     url(r'^sermons/', include('kanisa.urls.management.sermons')),
     url(r'^users/', include('kanisa.urls.management.users')),
     url(r'^xhr/', include('kanisa.urls.management.xhr')),
-)
+]

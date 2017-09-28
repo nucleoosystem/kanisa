@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.management.navigation as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.navigation_management, {}, 'kanisa_manage_navigation'),
     url(r'^create/$', views.navigation_create, {},
         'kanisa_manage_navigation_create'),
@@ -15,4 +14,4 @@ urlpatterns = patterns(
         'kanisa_manage_navigation_move_up'),
     url(r'^delete/(?P<pk>\d+)$', views.navigation_delete, {},
         'kanisa_manage_navigation_delete'),
-)
+]

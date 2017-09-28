@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from kanisa.views.members.account.password import (
     KanisaRecoverPasswordView,
     KanisaResetPasswordView,
@@ -8,8 +8,7 @@ from kanisa.views.members.account.password import (
 )
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', kanisa_members_password_change, {},
         'kanisa_members_password_change'),
     url(r'^recover/$', KanisaRecoverPasswordView.as_view(), {},
@@ -22,4 +21,4 @@ urlpatterns = patterns(
         'kanisa_members_reset_password_sent'),
     url(r'^done/$', KanisaResetPasswordDoneView.as_view(), {},
         'kanisa_members_reset_password_done'),
-)
+]

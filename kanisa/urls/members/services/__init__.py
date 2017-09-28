@@ -1,9 +1,8 @@
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 import kanisa.views.members.services as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.index, {'show_all': False},
         'kanisa_members_services_index'),
     url(r'^all/$', views.index, {'show_all': True},
@@ -14,4 +13,4 @@ urlpatterns = patterns(
     url(r'^composers/', include('kanisa.urls.members.services.composers')),
     url(r'^service/', include('kanisa.urls.members.services.service')),
     url(r'^songs/', include('kanisa.urls.members.services.songs')),
-)
+]

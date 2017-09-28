@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 import kanisa.views.public.diary as views
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', views.diary_index, {}, 'kanisa_public_diary_index'),
     url(r'^printable/$', views.diary_printable_redirect, {},
         'kanisa_public_diary_printable_redirect'),
@@ -16,4 +15,4 @@ urlpatterns = patterns(
         'kanisa_public_diary_regularevent_detail'),
     url(r'^specials/(?P<pk>[0-9]+)/$', views.scheduled_event_detail, {},
         'kanisa_public_diary_scheduledevent_detail'),
-)
+]

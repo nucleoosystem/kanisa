@@ -1,4 +1,4 @@
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from kanisa.views.members.account import (
     KanisaAccountModificationView,
     KanisaLoginView,
@@ -7,8 +7,7 @@ from kanisa.views.members.account import (
 )
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^login/$', KanisaLoginView.as_view(), {},
         'kanisa_members_login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout',
@@ -24,4 +23,4 @@ urlpatterns = patterns(
         'kanisa_members_registration_thanks'),
 
     url(r'^auth/', include('kanisa.urls.members.account.password')),
-)
+]

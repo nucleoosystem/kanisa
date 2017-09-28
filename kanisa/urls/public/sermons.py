@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from kanisa.views.public.sermons import (
     SermonArchiveView,
     SermonDetailView,
@@ -10,8 +10,7 @@ from kanisa.views.public.sermons import (
 from kanisa.views.public.podcast import iTunesPodcastsFeed
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$', SermonIndexView.as_view(), {}, 'kanisa_public_sermon_index'),
     url(r'^archive/$', SermonArchiveView.as_view(), {},
         'kanisa_public_sermon_archive'),
@@ -28,4 +27,4 @@ urlpatterns = patterns(
         SermonDetailView.as_view(), {}, 'kanisa_public_sermon_detail'),
     url(r'^podcasts/podcast.xml$',
         iTunesPodcastsFeed(), {}, 'sermon_podcast_itunes'),
-)
+]
