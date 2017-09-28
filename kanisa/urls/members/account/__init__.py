@@ -5,12 +5,13 @@ from kanisa.views.members.account import (
     KanisaRegistrationView,
     KanisaRegistrationThanksView
 )
+import django.contrib.auth.views
 
 
 urlpatterns = [
     url(r'^login/$', KanisaLoginView.as_view(), {},
         'kanisa_members_login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout',
+    url(r'^logout/$', django.contrib.auth.views.logout,
         {'template_name': 'kanisa/auth/logout.html', },
         'kanisa_members_logout'),
 
