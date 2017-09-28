@@ -36,7 +36,7 @@ class KanisaLoginView(FormView):
         return reverse('kanisa_members_index')
 
     def form_valid(self, form):
-        redirect_to = self.request.REQUEST.get(REDIRECT_FIELD_NAME, '')
+        redirect_to = self.request.GET.get(REDIRECT_FIELD_NAME, '')
         netloc = urlparse.urlparse(redirect_to)[1]
 
         # Use default setting if redirect_to is empty
