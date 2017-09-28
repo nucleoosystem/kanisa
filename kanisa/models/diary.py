@@ -70,7 +70,7 @@ class RegularEvent(models.Model):
                              help_text='The name of the event.')
     categories = models.ManyToManyField(EventCategory,
                                         verbose_name='Event Categories',
-                                        blank=True, null=True)
+                                        blank=True)
     image = ImageField(upload_to='kanisa/diary/events/',
                        help_text='Must be at least 200px by 200px.')
     slug = AutoSlugField(populate_from='title', unique=True)

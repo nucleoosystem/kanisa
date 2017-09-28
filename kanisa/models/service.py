@@ -56,7 +56,7 @@ class FutureServicesManager(ServicesManager):
 
 
 class Service(models.Model):
-    event = models.ForeignKey(ScheduledEvent, unique=True)
+    event = models.OneToOneField(ScheduledEvent)
     band_leader = models.ForeignKey(settings.AUTH_USER_MODEL)
     songs = models.ManyToManyField(Song, through='SongInService')
     musicians = models.ManyToManyField(
