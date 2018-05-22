@@ -24,6 +24,7 @@ coverage.xml
 pep8.txt
 .test_whoosh/
 .coverage
+.pytest_cache/
 
 # Translations
 *.mo
