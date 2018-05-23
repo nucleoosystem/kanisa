@@ -11,7 +11,6 @@ class DocumentForm(KanisaBaseModelForm):
             'title',
             'file',
             'details',
-            'public',
         )
 
 

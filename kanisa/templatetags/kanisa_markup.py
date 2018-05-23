@@ -85,8 +85,7 @@ def get_images(markdown_text):
 class DocumentMatch(object):
     def __init__(self, match):
         self.full = match[0]
-        self.document = Document.objects.get(slug=match[1],
-                                             public=True)
+        self.document = Document.objects.get(slug=match[1])
 
     def tag(self):
         return render_to_string("kanisa/_download.html",

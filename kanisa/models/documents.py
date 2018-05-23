@@ -22,11 +22,6 @@ class Document(models.Model):
                                null=True,
                                help_text=('Give a brief idea of what\'s in '
                                           'this document.'))
-    public = models.BooleanField(default=True,
-                                 help_text=('If checked, this document can be '
-                                            'added as an attachment to '
-                                            'publicly accessible areas of '
-                                            'your site.'))
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     downloads = models.IntegerField(default=0,
