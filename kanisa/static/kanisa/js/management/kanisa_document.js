@@ -5,11 +5,6 @@ function lookup_documents(evt) {
     var el = $(this);
     var current_val = el.val();
 
-    // Require at least three characters to start doing lookups
-    if (current_val.length < 3) {
-        return;
-    }
-
     $.get(
         "",
         {
