@@ -1,35 +1,32 @@
+{% if document_list %}
+
+{% if title_filter %}
+<p>Found <strong>{{ document_list|length }}</strong> document{{ document_list|length|pluralize }} matching <em>{{ title_filter }}</em>.</p>
+{% endif %}
+
 <table class="table table-striped kanisa_diary">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Uploaded</th>
-      <th>Modified</th>
-      <th>Downloads</th>
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
     {% for document in document_list %}
     <tr>
       <td>
         <a href="{% url 'kanisa_manage_documents_update' document.pk %}">
           {{ document.title }}
-        </a>
+        </a><br />
+        <span class="text-muted">
+          Last modified <abbr title="{{ document.modified|date:"r"}}">
+            {{ document.modified|timesince }} ago</abbr>,
+          {% if document.downloads == 0 %}
+          never downloaded.
+          {% elif document.downloads == 1 %}
+          downloaded once.
+          {% elif document.downloads == 2 %}
+          downloaded twice.
+          {% else %}
+          downloaded {{ document.downloads }} times.
+          {% endif %}
+        </span>
       </td>
-      <td>
-        <abbr title="{{ document.created|date:"r"}}">
-          {{ document.created|timesince }} ago
-        </abbr>
-      </td>
-      <td>
-        <abbr title="{{ document.modified|date:"r"}}">
-          {{ document.modified|timesince }} ago
-        </abbr>
-      </td>
-      <td>
-        {{ document.downloads }}
-      </td>
-      <td>
+      <td style="vertical-align: middle">
         <a class="btn btn-danger btn-xs" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
       </td>
     </tr>
@@ -38,3 +35,12 @@
 </table>
 
 {% include "kanisa/_simple_pagination.html" %}
+{% else %}
+<div class="alert alert-warning">
+  {% if title_filter %}
+  Did not find any documents matching <em>{{ title_filter }}</em>.
+  {% else %}
+  There are no documents to display.
+  {% endif %}
+</div>
+{% endif %}

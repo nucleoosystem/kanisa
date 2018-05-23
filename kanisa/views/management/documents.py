@@ -19,12 +19,42 @@ class DocumentBaseView(KanisaAuthorizationMixin):
 class DocumentIndexView(DocumentBaseView,
                         KanisaListView):
     model = Document
-    queryset = Document.objects.all()
 
-    template_name = 'kanisa/management/documents/index.html'
     kanisa_title = 'Manage Documents'
     kanisa_is_root_view = True
-    paginate_by = 20
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(DocumentIndexView, self).get_context_data(
+            *args, **kwargs
+        )
+        title_query = self.request.GET.get('title')
+
+        if title_query:
+            ctx['title_filter'] = title_query
+
+        return ctx
+
+    def get_paginate_by(self, queryset):
+        title_query = self.request.GET.get('title')
+        if title_query:
+            return None
+
+        return 50
+
+    def get_queryset(self):
+        title_query = self.request.GET.get('title')
+        if title_query:
+            return Document.objects.filter(
+                title__contains=title_query
+            )
+
+        return Document.objects.all()
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return 'kanisa/management/documents/_document_table.html'
+        else:
+            return 'kanisa/management/documents/index.html'
 document_management = DocumentIndexView.as_view()
 
 
