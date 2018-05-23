@@ -45,7 +45,7 @@ class DocumentIndexView(DocumentBaseView,
         title_query = self.request.GET.get('title')
         if title_query:
             return Document.objects.filter(
-                title__contains=title_query
+                title__icontains=title_query
             )
 
         return Document.objects.all()
