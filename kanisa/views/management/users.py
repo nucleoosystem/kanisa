@@ -42,7 +42,7 @@ class UserManagementView(UserBaseView,
     paginate_by = 20
 
     def get_filter_query(self):
-        return self.request.GET.get('query', None)
+        return self.request.GET.get('query')
 
     def get_queryset(self):
         query = self.get_filter_query()
