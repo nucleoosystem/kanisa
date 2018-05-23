@@ -18,14 +18,18 @@ class Document(models.Model):
                              help_text='The name of the document.')
     slug = AutoSlugField(populate_from='title', unique=True)
     file = models.FileField(upload_to='kanisa/documents')
-    details = models.TextField(blank=True,
-                               null=True,
-                               help_text=('Give a brief idea of what\'s in '
-                                          'this document.'))
+    details = models.TextField(
+        blank=True,
+        null=True,
+        help_text=('Give a brief idea of what\'s in '
+                   'this document.')
+    )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    downloads = models.IntegerField(default=0,
-                                    editable=False)
+    downloads = models.IntegerField(
+        default=0,
+        editable=False
+    )
 
     def __unicode__(self):
         return self.title
