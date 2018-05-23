@@ -5,5 +5,6 @@ from kanisa.models import Document
 class DocumentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'details', )
     list_display = ('title', 'modified', )
+    date_hierarchy = 'created'
 
 admin.site.register(Document, DocumentAdmin)
