@@ -41,11 +41,7 @@ class Document(models.Model):
         prefix, extension = os.path.splitext(self.file.name)
 
         extension = extension.lower()
-
-        if extension in KNOWN_EXTENSIONS:
-            return KNOWN_EXTENSIONS[extension]
-
-        return extension
+        return KNOWN_EXTENSIONS.get(extension, extension)
 
     def download_url(self):
         return reverse('kanisa_members_documents_download', args=[self.pk, ])
