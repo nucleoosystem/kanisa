@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+import datetime
 from django.core.urlresolvers import reverse
 from django.db import models
 import os
@@ -45,6 +46,10 @@ class Document(models.Model):
 
     def download_url(self):
         return reverse('kanisa_members_documents_download', args=[self.pk, ])
+
+    def likely_revised(self):
+        modification_delta = self.modified - self.created
+        return modification_delta > datetime.timedelta(hours=1)
 
     class Meta:
         # Need this because I've split up models.py into multiple

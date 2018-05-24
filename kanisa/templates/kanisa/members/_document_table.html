@@ -1,13 +1,7 @@
 {% load kanisa_markup %}
 
-<table class="table table-striped kanisa_diary">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Uploaded</th>
-      <th>Modified</th>
-    </tr>
-  </thead>
+{% if document_list %}
+<table class="table table-striped">
   <tbody>
     {% for document in document_list %}
     <tr>
@@ -25,16 +19,17 @@
           {{ document.details|kanisa_markdown }}
         </div>
         {% endif %}
-      </td>
-      <td style="vertical-align: top; width:12em">
-        <abbr title="{{ document.created|date:"r"}}">
-          {{ document.created|timesince }} ago
-        </abbr>
-      </td>
-      <td style="vertical-align: top; width:12em">
+        <br />
+        Last modified
         <abbr title="{{ document.modified|date:"r"}}">
-          {{ document.modified|timesince }} ago
-        </abbr>
+          {{ document.modified|timesince }} ago</abbr>.
+        {% if document.likely_revised %}
+        <span class="text-muted">
+          Original version uploaded
+          <abbr title="{{ document.created|date:"r"}}">
+          {{ document.created|timesince }} ago</abbr>.
+        </span>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -42,3 +37,8 @@
 </table>
 
 {% include "kanisa/_simple_pagination.html" %}
+{% else %}
+<div class="alert alert-warning">
+  There are no documents to display.
+</div>
+{% endif %}
