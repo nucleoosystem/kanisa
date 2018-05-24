@@ -1,5 +1,3 @@
-/* global update_diary_url:false, schedule_event_url:false, alert_failure: false */
-
 function lookup_documents(evt) {
     var el = $(this);
     var current_val = el.val();

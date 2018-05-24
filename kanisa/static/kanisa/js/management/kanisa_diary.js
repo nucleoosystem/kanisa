@@ -1,4 +1,4 @@
-/* global update_diary_url:false, schedule_event_url:false, alert_failure: false */
+/* global update_diary_url:false, schedule_event_url:false, find_events_in_diary_url:false, alert_failure: false */
 
 function update_event_list() {
     $.get(update_diary_url,
@@ -68,7 +68,7 @@ function lookup_events(evt) {
         return;
     }
 
-    var event_date = $("#id_date").val()
+    var event_date = $("#id_date").val();
 
     $.post(
         find_events_in_diary_url,
