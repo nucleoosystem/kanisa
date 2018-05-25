@@ -8,6 +8,11 @@ from sorl.thumbnail import get_thumbnail
 import markdown
 import re
 
+try:
+    from raven.contrib.django.raven_compat.models import client
+except ImportError:
+    client = None
+
 
 register = template.Library()
 
@@ -91,11 +96,24 @@ class DocumentMatch(object):
         try:
             self.document = Document.objects.get(slug=match[1])
             if self.document.has_expired():
-                # TODO - send Sentry error?
+                if client is not None:
+                    client.captureMessage(
+                        'Tried to load expired document with slug %s' %
+                        (
+                            match[1]
+                        )
+                    )
                 self.document = None
                 self.missing_reason = 'expired'
         except Document.DoesNotExist:
-            # TODO - send Sentry error?
+            if client is not None:
+                client.captureMessage(
+                    'Tried to load non-existent document with slug %s' %
+                    (
+                        match[1]
+                    )
+                )
+
             self.document = None
             self.missing_reason = 'not_found'
 
