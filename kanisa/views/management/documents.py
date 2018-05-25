@@ -3,9 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse, reverse_lazy
 from kanisa.forms.documents import DocumentForm, DocumentFormSimple
 from kanisa.models import Document
-from kanisa.views.generic import (KanisaAuthorizationMixin,
-                                  KanisaCreateView, KanisaUpdateView,
-                                  KanisaListView, KanisaDeleteView)
+from kanisa.views.generic import (
+    KanisaAuthorizationMixin,
+    KanisaCreateView,
+    KanisaDeleteView,
+    KanisaListView,
+    KanisaUpdateView,
+)
 
 
 class DocumentBaseView(KanisaAuthorizationMixin):
