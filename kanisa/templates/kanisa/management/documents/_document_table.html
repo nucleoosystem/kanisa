@@ -41,6 +41,11 @@
           {% csrf_token %}
           <button class="btn btn-warning btn-xs">Force expiry</button>
         </form>
+        {% else %}
+        <form method="post" action="{% url 'kanisa_manage_documents_unexpire' document.pk %}" style="display: inline">
+          {% csrf_token %}
+          <button class="btn btn-success btn-xs">Restore</button>
+        </form>
         {% endif %}
 
       </td>

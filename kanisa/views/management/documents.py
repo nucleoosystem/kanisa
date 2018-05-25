@@ -102,7 +102,7 @@ class DocumentDeleteView(DocumentBaseView,
 document_delete = DocumentDeleteView.as_view()
 
 
-class DocumentExpireView(DocumentBaseView, View):
+class DocumentExpireBaseView(DocumentBaseView, View):
     def get_object(self):
         try:
             return Document.objects.get(pk=self.kwargs['pk'])
@@ -110,18 +110,33 @@ class DocumentExpireView(DocumentBaseView, View):
             raise Http404
 
     def get_success_url(self):
-        message = '%s marked expired.' % self.get_object()
-        messages.success(self.request, message)
+        messages.success(self.request, self.get_message())
         return reverse('kanisa_manage_documents')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.expired = True
+        self.mutate(self.object)
         self.object.save()
 
         if request.is_ajax():
-            return HttpResponse('"%s" marked expired' % self.get_object())
+            return HttpResponse(self.get_message())
 
         return HttpResponseRedirect(self.get_success_url())
 
+
+class DocumentExpireView(DocumentExpireBaseView):
+    def get_message(self):
+        return '%s marked expired.' % self.object
+
+    def mutate(self, object):
+        object.expired = True
 document_expire = DocumentExpireView.as_view()
+
+
+class DocumentUnexpireView(DocumentExpireBaseView):
+    def get_message(self):
+        return '%s restored.' % self.object
+
+    def mutate(self, object):
+        object.expired = False
+document_unexpire = DocumentUnexpireView.as_view()
