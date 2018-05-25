@@ -85,13 +85,26 @@ def get_images(markdown_text):
 class DocumentMatch(object):
     def __init__(self, match):
         self.full = match[0]
-        self.document = Document.objects.get(slug=match[1])
+        self.missing_reason = None
+        self.document = None
+
+        try:
+            self.document = Document.objects.get(slug=match[1])
+            if self.document.has_expired():
+                # TODO - send Sentry error?
+                self.document = None
+                self.missing_reason = 'expired'
+        except Document.DoesNotExist:
+            # TODO - send Sentry error?
+            self.document = None
+            self.missing_reason = 'not_found'
 
     def tag(self):
         return render_to_string(
             "kanisa/_download.html",
             {
                 'document': self.document,
+                'missing_reason': self.missing_reason,
             }
         )
 
@@ -109,11 +122,7 @@ class MapMatch(object):
 def get_documents(markdown_text):
     documents = []
     for match in document_expression.findall(markdown_text):
-        try:
-            documents.append(DocumentMatch(match))
-        except Document.DoesNotExist:
-            # Just ignore bad document pks
-            pass
+        documents.append(DocumentMatch(match))
 
     return documents
 

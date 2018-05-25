@@ -1,3 +1,17 @@
+{% if not document %}
+<p class="text-muted">
+  {% if missing_reason == 'expired' %}
+  Sorry, there used to be a file here, but it&rsquo;s no longer
+  available.
+  {% elif missing_reason == 'not_found' %}
+  Sorry, there&rsquo;s meant to be a file here, but it&rsquo;s gone
+  missing.
+  {% else %}
+  Sorry, something went wrong.
+  {% endif %}
+</p>
+{% else %}
 <p>
   <a href="{{ document.download_url }}" class="btn btn-default" title="Download {{ document.title }}"><i class="glyphicon glyphicon-download"></i> Download <em>{{ document.title }}</em></a>
 </p>
+{% endif %}
