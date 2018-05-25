@@ -46,11 +46,14 @@ class MembersDocumentView(MembersBaseView, KanisaListView):
 index = MembersDocumentView.as_view()
 
 
-class MembersDocumentDownloadView(MembersBaseView, RedirectView):
+class MembersDocumentDownloadView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, **kwargs):
         document = get_object_or_404(Document, pk=int(kwargs['document_pk']))
+
+        if document.has_expired():
+            return None
 
         document.downloads = F('downloads') + 1
         document.save()
