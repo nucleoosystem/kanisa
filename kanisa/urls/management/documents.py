@@ -10,4 +10,6 @@ urlpatterns = [
         'kanisa_manage_documents_update'),
     url(r'^delete/(?P<pk>\d+)$', views.document_delete, {},
         'kanisa_manage_documents_delete'),
+    url(r'^expire/(?P<pk>\d+)$', views.document_expire, {},
+        'kanisa_manage_documents_expire'),
 ]

@@ -36,6 +36,10 @@
       </td>
       <td style="vertical-align: middle">
         <a class="btn btn-danger btn-xs" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
+        {% if not document.has_expired %}
+        <a class="btn btn-warning btn-xs" href="{% url 'kanisa_manage_documents_expire' document.pk %}">Force expiry</a>
+        {% endif %}
+
       </td>
     </tr>
     {% endfor %}
