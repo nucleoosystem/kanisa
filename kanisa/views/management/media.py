@@ -18,12 +18,13 @@ class MediaBaseView(KanisaAuthorizationMixin):
 class MediaIndexView(MediaBaseView,
                      KanisaListView):
     model = InlineImage
-    queryset = InlineImage.objects.all()
+    queryset = InlineImage.objects.all().order_by('-modified')
 
     template_name = 'kanisa/management/media/index.html'
     kanisa_title = 'Manage Media'
     kanisa_is_root_view = True
     paginate_by = 24
+
 media_management = MediaIndexView.as_view()
 
 
