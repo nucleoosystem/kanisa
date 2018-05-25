@@ -11,6 +11,7 @@ class DocumentForm(KanisaBaseModelForm):
             'title',
             'file',
             'details',
+            'expiry_months',
         )
 
 
