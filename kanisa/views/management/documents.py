@@ -1,6 +1,11 @@
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import (
+    HttpResponse,
+    HttpResponseRedirect,
+    Http404
+)
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.views.generic import View
 from kanisa.forms.documents import DocumentForm, DocumentFormSimple
 from kanisa.models import Document
 from kanisa.views.generic import (
@@ -97,36 +102,25 @@ class DocumentDeleteView(DocumentBaseView,
 document_delete = DocumentDeleteView.as_view()
 
 
-class DocumentExpireView(DocumentBaseView,
-                         KanisaDeleteView):
-    model = Document
-
-    def get_deletion_confirmation_message(self):
-        return 'Are you sure you want to mark %s as expired?' % (
-            unicode(self.object)
-        )
-
-    def get_kanisa_default_title(self):
-        return 'Expire %s' % self.model._meta.verbose_name.title()
-
-    def get_deletion_button_title(self):
-        return 'Yes, expire "%s"' % unicode(self.object)
-
-    def get_cancel_url(self):
-        return reverse('kanisa_manage_documents')
+class DocumentExpireView(DocumentBaseView, View):
+    def get_object(self):
+        try:
+            return Document.objects.get(pk=self.kwargs['pk'])
+        except:
+            raise Http404
 
     def get_success_url(self):
         message = '%s marked expired.' % self.get_object()
         messages.success(self.request, message)
         return reverse('kanisa_manage_documents')
 
-    def delete(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.expired = True
         self.object.save()
 
         if request.is_ajax():
-            return HttpResponse('"%s" marked expired' % self.object)
+            return HttpResponse('"%s" marked expired' % self.get_object())
 
         return HttpResponseRedirect(self.get_success_url())
 
