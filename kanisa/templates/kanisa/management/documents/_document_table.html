@@ -7,7 +7,7 @@
 <table class="table table-striped kanisa_diary">
   <tbody>
     {% for document in document_list %}
-    <tr>
+    <tr{% if document.has_expired %} class="warning"{% endif %}>
       <td>
         <a href="{% url 'kanisa_manage_documents_update' document.pk %}">
           {{ document.title }}
@@ -23,6 +23,14 @@
           downloaded twice.
           {% else %}
           downloaded {{ document.downloads }} times.
+          {% endif %}
+          {% if document.has_expired %}
+          This document has expired, and can no longer be downloaded.
+          {% else %}
+          {% if document.auto_expiry_time %}
+          Expires in <abbr title="This document will be removed on {{ document.auto_expiry_time|date:"jS F Y" }}">
+            {{ document.auto_expiry_time|timeuntil }}</abbr>.
+          {% endif %}
           {% endif %}
         </span>
       </td>
