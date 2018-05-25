@@ -673,3 +673,7 @@ ul.pager-tiny {
 abbr {
     text-decoration:none;
 }
+
+form.expiry_toggle {
+    display: inline;
+}
