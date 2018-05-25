@@ -88,8 +88,12 @@ class DocumentMatch(object):
         self.document = Document.objects.get(slug=match[1])
 
     def tag(self):
-        return render_to_string("kanisa/_download.html",
-                                {'document': self.document})
+        return render_to_string(
+            "kanisa/_download.html",
+            {
+                'document': self.document,
+            }
+        )
 
 
 class MapMatch(object):
