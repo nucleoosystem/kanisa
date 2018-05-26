@@ -5,14 +5,12 @@ from django.utils.safestring import mark_safe
 from kanisa.models import InlineImage, Document
 from kanisa.utils.text import demote_headings
 from sorl.thumbnail import get_thumbnail
+import logging
 import markdown
 import re
 
-try:
-    from raven.contrib.django.raven_compat.models import client
-except ImportError:
-    client = None
 
+logger = logging.getLogger(__name__)
 
 register = template.Library()
 
@@ -96,23 +94,17 @@ class DocumentMatch(object):
         try:
             self.document = Document.objects.get(slug=match[1])
             if self.document.has_expired():
-                if client is not None:
-                    client.captureMessage(
-                        'Tried to load expired document with slug %s' %
-                        (
-                            match[1]
-                        )
-                    )
+                logger.error(
+                    'Tried to load expired document with slug %s' % match[1],
+                    exc_info=True
+                )
                 self.document = None
                 self.missing_reason = 'expired'
         except Document.DoesNotExist:
-            if client is not None:
-                client.captureMessage(
-                    'Tried to load non-existent document with slug %s' %
-                    (
-                        match[1]
-                    )
-                )
+            logger.error(
+                'Tried to load non-existent document with slug %s' % match[1],
+                exc_info=True
+            )
 
             self.document = None
             self.missing_reason = 'not_found'
