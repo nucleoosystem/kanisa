@@ -95,15 +95,13 @@ class DocumentMatch(object):
             self.document = Document.objects.get(slug=match[1])
             if self.document.has_expired():
                 logger.error(
-                    'Tried to load expired document with slug %s' % match[1],
-                    exc_info=True
+                    'Tried to load expired document with slug %s' % match[1]
                 )
                 self.document = None
                 self.missing_reason = 'expired'
         except Document.DoesNotExist:
             logger.error(
-                'Tried to load non-existent document with slug %s' % match[1],
-                exc_info=True
+                'Tried to load non-existent document with slug %s' % match[1]
             )
 
             self.document = None
