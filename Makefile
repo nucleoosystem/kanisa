@@ -11,7 +11,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 cleandist: clean
-	python setup.py bdist_wheel
+	python setup.py sdist bdist_wheel
 
 git-check:
 	git status
