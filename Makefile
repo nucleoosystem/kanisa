@@ -36,3 +36,7 @@ push: git-check lint test
 	git push -u origin master
 
 wheel: push cleandist
+
+publish: wheel
+	ssh giraffatitan mkdir -p /var/www/python.dominicrodger.com/kanisa
+	scp dist/* giraffatitan:/var/www/python.dominicrodger.com/kanisa/
