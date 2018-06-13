@@ -1,5 +1,5 @@
 from django.contrib.auth.views import password_change
-from django.contrib.sites.models import RequestSite
+from django.contrib.sites.requests import RequestSite
 from django.core import signing
 from django.core.urlresolvers import reverse_lazy, reverse
 from kanisa.forms.auth import (
