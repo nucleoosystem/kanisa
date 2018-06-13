@@ -1,7 +1,6 @@
 {% extends 'search/indexes/kanisa/base_rendered.txt' %}
 
 {% load kanisa_markup %}
-{% load url from future %}
 
 {% block title %}
 <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
