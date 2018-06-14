@@ -18,6 +18,9 @@ git-check:
 	git diff-files --quiet
 
 test:
+	py.test
+
+testall:
 	tox
 
 flake8:
@@ -32,7 +35,7 @@ lint: flake8 jslint
 coverage:
 	py.test --cov-report term-missing --cov kanisa
 
-push: git-check lint test
+push: git-check lint testall
 	git push -u origin master
 
 wheel: push cleandist
