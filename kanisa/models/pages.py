@@ -1,12 +1,12 @@
-from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.db import models, DEFAULT_DB_ALIAS
+from kanisa.fields import KanisaAutoSlugField
 from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Page(MPTTModel):
     title = models.CharField(max_length=60)
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     lead = models.TextField(
         null=True, blank=True,
         help_text=('This should be the introductory sentence or two to the '

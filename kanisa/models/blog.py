@@ -1,8 +1,8 @@
-from autoslug import AutoSlugField
 from datetime import date, timedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from kanisa.fields import KanisaAutoSlugField
 
 
 class PublishedPostManager(models.Manager):
@@ -16,7 +16,7 @@ class PublishedPostManager(models.Manager):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
     publish_date = models.DateField(
         help_text=('Blog posts are published on the site at 00:00 on the '

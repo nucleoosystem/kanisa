@@ -1,9 +1,9 @@
-from autoslug import AutoSlugField
 import datetime
 from dateutil import relativedelta
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.timezone import now
+from kanisa.fields import KanisaAutoSlugField
 import os
 
 
@@ -26,7 +26,7 @@ class Document(models.Model):
     )
     title = models.CharField(max_length=60,
                              help_text='The name of the document.')
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     file = models.FileField(upload_to='kanisa/documents')
     details = models.TextField(
         blank=True,

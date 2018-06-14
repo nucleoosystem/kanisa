@@ -1,8 +1,8 @@
-from autoslug import AutoSlugField
 from datetime import date, datetime, timedelta, time
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
+from kanisa.fields import KanisaAutoSlugField
 from kanisa.utils.branding import BrandingInformation
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
@@ -73,7 +73,7 @@ class RegularEvent(models.Model):
                                         blank=True)
     image = ImageField(upload_to='kanisa/diary/events/',
                        help_text='Must be at least 200px by 200px.')
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     pattern = RecurrenceField(verbose_name='Timetable')
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,

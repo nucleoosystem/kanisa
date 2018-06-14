@@ -1,5 +1,5 @@
-from autoslug import AutoSlugField
 from django.db import models
+from kanisa.fields import KanisaAutoSlugField
 from sorl.thumbnail import ImageField
 
 
@@ -7,7 +7,7 @@ class InlineImage(models.Model):
     title = models.CharField(max_length=60,
                              help_text=('This will be used to help you find '
                                         'it later.'))
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     image = ImageField(
         upload_to='kanisa/media/',
         help_text=(

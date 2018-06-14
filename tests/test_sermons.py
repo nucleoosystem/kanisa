@@ -165,3 +165,10 @@ class SermonTest(TestCase):
         self.assertEqual(render(series2),
                          ('<small>\n(A series on '
                           '<em>John 21</em>)\n</small>'))
+
+    def test_sermon_speaker_slug(self):
+        speaker = SermonSpeaker.objects.create(
+            forename='Bugs',
+            surname='Bunny',
+        )
+        assert speaker.slug == 'bugs-bunny'

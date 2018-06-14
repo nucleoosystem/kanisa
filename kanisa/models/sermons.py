@@ -1,12 +1,11 @@
 import os
-from autoslug import AutoSlugField
 from datetime import date
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
 from kanisa.utils.branding import BrandingInformation
 from sorl.thumbnail import ImageField
-
+from kanisa.fields import KanisaAutoSlugField
 from kanisa.models.bible.db_field import BiblePassageField
 
 
@@ -19,7 +18,7 @@ class SermonSeriesManager(models.Manager):
 class SermonSeries(models.Model):
     title = models.CharField(max_length=120,
                              help_text='The name of the series.')
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     image = ImageField(
         null=True, blank=True,
         upload_to='kanisa/sermons/series/',
@@ -106,10 +105,7 @@ def sermon_speaker_slug(speaker):
 class SermonSpeaker(models.Model):
     forename = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    slug = AutoSlugField(
-        populate_from=sermon_speaker_slug,
-        unique=True
-    )
+    slug = KanisaAutoSlugField(populate_from=sermon_speaker_slug)
     image = ImageField(
         null=True, blank=True,
         upload_to='kanisa/sermons/speakers/',
@@ -160,7 +156,7 @@ class PreachedSermonManager(SermonManager):
 class Sermon(models.Model):
     title = models.CharField(max_length=120,
                              help_text='The title of the sermon.')
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = KanisaAutoSlugField(populate_from='title')
     date = models.DateField(help_text='The date the sermon was preached.')
     series = models.ForeignKey(SermonSeries,
                                blank=True, null=True,
