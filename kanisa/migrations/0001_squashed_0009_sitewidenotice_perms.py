@@ -14,8 +14,6 @@ import django.core.validators
 
 class Migration(migrations.Migration):
 
-    replaces = [(b'kanisa', '0001_initial'), (b'kanisa', '0002_registereduser_is_spam'), (b'kanisa', '0003_increase_nav_length'), (b'kanisa', '0004_add_size_info_to_media_help'), (b'kanisa', '0005_delete_scheduledtweet'), (b'kanisa', '0006_sitewidenotice'), (b'kanisa', '0007_sitewidenotice_meta'), (b'kanisa', '0008_regularevent_mothballed'), (b'kanisa', '0009_sitewidenotice_perms')]
-
     dependencies = [
         ('auth', '0001_initial'),
     ]

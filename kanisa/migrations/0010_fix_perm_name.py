@@ -20,7 +20,7 @@ def fix_perm_name(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('kanisa', '0009_sitewidenotice_perms'),
+        ('kanisa', '0001_squashed_0009_sitewidenotice_perms'),
     ]
 
     operations = [
