@@ -15,8 +15,6 @@ import django.core.validators
 
 class Migration(migrations.Migration):
 
-    replaces = [(b'kanisa', '0001_squashed_0009_sitewidenotice_perms'), (b'kanisa', '0010_fix_perm_name'), (b'kanisa', '0011_django18'), (b'kanisa', '0012_django18_warnings'), (b'kanisa', '0013_remove_document_public'), (b'kanisa', '0014_document_expiry'), (b'kanisa', '0015_blogslug_to_kanisaslug')]
-
     dependencies = [
         ('auth', '0001_initial'),
     ]
