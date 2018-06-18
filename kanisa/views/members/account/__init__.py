@@ -4,7 +4,7 @@ from django.contrib.auth import (
     login,
     REDIRECT_FIELD_NAME
 )
-from django.contrib.sites.models import RequestSite
+from django.contrib.sites.requests import RequestSite
 from django.core.cache import cache
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import HttpResponseRedirect, Http404

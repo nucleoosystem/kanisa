@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.contrib.sites.models import RequestSite
+from django.contrib.sites.requests import RequestSite
 from django.core.cache import cache
 from django.db.models import Q
 from django.core.urlresolvers import reverse, reverse_lazy
