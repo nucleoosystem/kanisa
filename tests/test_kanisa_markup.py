@@ -1,9 +1,9 @@
-from django.test import SimpleTestCase
+from django.test import TestCase
 
 from kanisa.templatetags.kanisa_markup import kanisa_markdown
 
 
-class KanisaMarkupTest(SimpleTestCase):
+class KanisaMarkupTest(TestCase):
     def test_basic(self):
         self.assertHTMLEqual(kanisa_markdown("hello"),
                              '<p>hello</p>')
