@@ -9,4 +9,4 @@ markdown==2.6.2
 mutagen==1.29
 sorl-thumbnail==12.3
 Whoosh==2.5.0
-Django==1.8.19
+Django==1.9.13
