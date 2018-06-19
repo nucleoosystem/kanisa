@@ -2,8 +2,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.http import (HttpResponse,
                          HttpResponseBadRequest)
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.template.response import TemplateResponse
 
 from kanisa.models import RegularEvent, ScheduledEvent
@@ -59,9 +58,9 @@ class DiaryGetSchedule(XHRBaseGetView):
         schedule = get_schedule(thedate)
 
         tmpl = 'kanisa/management/diary/_diary_page.html'
-        return render_to_response(tmpl,
-                                  {'calendar': schedule.calendar_entries},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'calendar': schedule.calendar_entries})
 get_schedule_view = DiaryGetSchedule.as_view()
 
 
@@ -81,9 +80,9 @@ class DiaryGetWeekPublic(XHRBaseGetView):
         thedate = self.get_date(request, *args, **kwargs)
 
         tmpl = 'kanisa/public/diary/_this_week_table.html'
-        return render_to_response(tmpl,
-                                  {'thisweek': get_this_week(thedate)},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'thisweek': get_this_week(thedate)})
 get_week_public_view = DiaryGetWeekPublic.as_view()
 
 

@@ -1,6 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 
 from kanisa.models import NavigationElement
 from kanisa.views.xhr.base import (XHRBaseGetView,
@@ -14,9 +13,9 @@ class ListNavigationView(XHRBaseGetView):
     def render(self, request, *args, **kwargs):
         elements = NavigationElement.objects.all()
         tmpl = 'kanisa/management/navigation/_item_list.html'
-        return render_to_response(tmpl,
-                                  {'object_list': elements},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'object_list': elements})
 list_navigation = ListNavigationView.as_view()
 
 

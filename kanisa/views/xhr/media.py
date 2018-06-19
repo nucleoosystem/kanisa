@@ -1,7 +1,6 @@
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404, HttpResponseForbidden
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.shortcuts import render, get_object_or_404
 
 from kanisa.models import InlineImage, Document
 from kanisa.utils.auth import has_any_kanisa_permission
@@ -45,9 +44,9 @@ class InlineImagesListView(PaginatedMediaListView, XHRBaseGetView):
         paginator, page = self.slice_results(request, images)
         tmpl = 'kanisa/management/media/_inline_image_list.html'
 
-        return render_to_response(tmpl,
-                                  {'page_obj': page},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'page_obj': page})
 list_inline_images = InlineImagesListView.as_view()
 
 
@@ -57,9 +56,9 @@ class InlineImagesDetailView(MediaBaseView, XHRBaseGetView):
         image = get_object_or_404(InlineImage, pk=pk)
 
         tmpl = 'kanisa/management/media/_inline_image_detail.html'
-        return render_to_response(tmpl,
-                                  {'image': image},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'image': image})
 inline_image_detail = InlineImagesDetailView.as_view()
 
 
@@ -69,7 +68,7 @@ class AttachmentsListView(PaginatedMediaListView, XHRBaseGetView):
         paginator, page = self.slice_results(request, documents)
         tmpl = 'kanisa/management/media/_attachment_list.html'
 
-        return render_to_response(tmpl,
-                                  {'page_obj': page},
-                                  context_instance=RequestContext(request))
+        return render(request,
+                      tmpl,
+                      {'page_obj': page})
 list_attachments = AttachmentsListView.as_view()

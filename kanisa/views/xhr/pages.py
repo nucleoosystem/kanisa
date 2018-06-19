@@ -1,6 +1,5 @@
 import json
 from django.http import HttpResponse
-from django.template import RequestContext
 from django.template.loader import render_to_string
 
 from kanisa.models import Page
@@ -51,12 +50,12 @@ class ListPagesView(XHRBaseGetView):
         tmpl = 'kanisa/management/pages/_page_table.html'
         page_table = render_to_string(tmpl,
                                       {'page_list': pages},
-                                      context_instance=RequestContext(request))
+                                      request=request)
 
         tmpl = 'kanisa/management/pages/_parent_select_options.html'
         options = render_to_string(tmpl,
                                    {'page_list': pages},
-                                   context_instance=RequestContext(request))
+                                   request=request)
 
         response = {'page_table': page_table,
                     'options': options}

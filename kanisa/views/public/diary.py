@@ -3,8 +3,7 @@ from datetime import date, timedelta
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.views.generic import (
     DetailView,
     RedirectView,
@@ -50,11 +49,8 @@ class DiaryIndexView(DiaryBaseView, TemplateView):
         context = self.get_context_data(**kwargs)
 
         if request.is_ajax():
-            req = RequestContext(request)
             tmpl = 'kanisa/public/diary/_regular_event_list.html'
-            return render_to_response(tmpl,
-                                      context,
-                                      context_instance=req)
+            return render(request, tmpl, context)
 
         return self.render_to_response(context)
 

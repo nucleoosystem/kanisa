@@ -1,8 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db.models import Max
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils import formats
 from django.views.generic.base import View
 from kanisa.forms.services import (
@@ -119,11 +118,11 @@ class AddSongView(BaseServiceManagementView, KanisaFormView):
         add_song_to_service(form.cleaned_data['song'], self.service)
 
         if self.request.is_ajax():
-            return render_to_response(
+            return render(
+                self.request,
                 'kanisa/members/services/_song_table.html',
                 {'object': self.service,
-                 'songs': self.service.songinservice_set.all()},
-                context_instance=RequestContext(self.request)
+                 'songs': self.service.songinservice_set.all()}
             )
 
         return super(AddSongView, self).form_valid(form)
@@ -148,11 +147,11 @@ class RemoveSongView(BaseServiceManagementView, KanisaDeleteView):
     def delete(self, request, *args, **kwargs):
         if request.is_ajax():
             self.get_object().delete()
-            return render_to_response(
+            return render(
+                request,
                 'kanisa/members/services/_song_table.html',
                 {'object': self.service,
-                 'songs': self.service.songinservice_set.all()},
-                context_instance=RequestContext(request)
+                 'songs': self.service.songinservice_set.all()}
             )
 
         return super(RemoveSongView, self).delete(request, *args, **kwargs)
@@ -195,11 +194,11 @@ class BaseMoveSongView(BaseServiceManagementView, View):
         self.swap()
 
         if request.is_ajax():
-            return render_to_response(
+            return render(
+                request,
                 'kanisa/members/services/_song_table.html',
                 {'object': self.service,
-                 'songs': self.songs},
-                context_instance=RequestContext(request)
+                 'songs': self.songs}
             )
 
         return HttpResponseRedirect(reverse('kanisa_members_services_detail',

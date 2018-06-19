@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.http import Http404, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from kanisa.models.pages import (
     Page,
     get_page_from_path,
@@ -22,7 +21,8 @@ def public_page_view(request):
         if page.parent:
             parent_path = page.parent.get_path()
 
-        return render_to_response(
+        return render(
+            request,
             'kanisa/public/pages/page.html',
             {'page': page,
              'parent': page.parent,
@@ -30,8 +30,7 @@ def public_page_view(request):
              'page_path': page.get_path(),
              'siblings': page.get_published_siblings(),
              'children': page.get_published_children(),
-             'kanisa_title': unicode(page)},
-            context_instance=RequestContext(request))
+             'kanisa_title': unicode(page)})
     except Page.DoesNotExist:
         if not request.path.endswith('/') and settings.APPEND_SLASH:
             try:

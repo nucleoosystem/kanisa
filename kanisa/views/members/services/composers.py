@@ -1,6 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from kanisa.forms.services import ComposerForm
 from kanisa.models import Composer
 from kanisa.views.members.services import ServiceRestrictedBaseView
@@ -24,12 +23,11 @@ class ComposerCreateView(ServiceRestrictedBaseView,
     def form_valid(self, form):
         if self.is_popup():
             self.object = form.save()
-            req = self.request
             tmpl = 'kanisa/members/services/composer_popup_close.html'
-            return render_to_response(
+            return render(
+                self.request,
                 tmpl,
-                {'object': self.object},
-                context_instance=RequestContext(req)
+                {'object': self.object}
             )
 
         rval = super(KanisaCreateView, self).form_valid(form)

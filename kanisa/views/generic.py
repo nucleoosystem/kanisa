@@ -6,8 +6,7 @@ from django.http import (
     HttpResponseForbidden,
     HttpResponseRedirect
 )
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.http import urlquote
 from django.views.generic import (
     CreateView,
@@ -132,10 +131,9 @@ class KanisaCreateView(CreateView):
     def form_valid(self, form):
         if self.is_popup():
             self.object = form.save()
-            req = self.request
-            return render_to_response('kanisa/management/popup_close.html',
-                                      {},
-                                      context_instance=RequestContext(req))
+            return render(self.request,
+                          'kanisa/management/popup_close.html',
+                          {})
 
         rval = super(KanisaCreateView, self).form_valid(form)
 

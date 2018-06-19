@@ -1,7 +1,6 @@
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from haystack.query import SearchQuerySet
 
 from kanisa.views.generic import KanisaTemplateView
@@ -42,6 +41,4 @@ class KanisaSearchView(KanisaTemplateView):
 
             context['page_obj'] = page
 
-        return render_to_response(self.template_name,
-                                  context,
-                                  context_instance=RequestContext(request))
+        return render(request, self.template_name, context)
