@@ -42,7 +42,6 @@ class ImageMatch(object):
         self.image = InlineImage.objects.get(slug=slug)
 
     def tag(self):
-
         klasses = [
             'img-thumbnail',
             'inline-image-base',
