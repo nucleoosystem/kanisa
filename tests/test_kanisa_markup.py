@@ -1,5 +1,3 @@
-from django.test import TestCase
-
 import pytest
 import re
 
@@ -24,4 +22,5 @@ def test_newlines():
 
 @pytest.mark.django_db
 def test_inline_image_that_does_not_exist():
-    assert kanisa_markdown("hello ![img-99 headline]") == '<p>hello ![img-99 headline]</p>'
+    result = kanisa_markdown("hello ![img-99 headline]")
+    assert result == '<p>hello ![img-99 headline]</p>'
