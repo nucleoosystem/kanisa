@@ -162,10 +162,10 @@ class DiaryRegularEventMothballView(DiaryRegularEventsBaseView,
         else:
             return RegularEventMothballForm
 
-    def get_form(self, form_class):
+    def get_form(self):
         # Skipping the save-and-continue button added by
         # KanisaUpdateView.
-        return super(KanisaUpdateView, self).get_form(form_class)
+        return super(KanisaUpdateView, self).get_form()
 
     def get_message(self, form):
         if self.object.mothballed:

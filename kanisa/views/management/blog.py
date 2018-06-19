@@ -36,8 +36,8 @@ class BlogCreateView(BlogBaseView,
     kanisa_title = 'Write a Blog Post'
     success_url = reverse_lazy('kanisa_manage_blog')
 
-    def get_form(self, form_class):
-        form = super(BlogCreateView, self).get_form(form_class)
+    def get_form(self):
+        form = super(BlogCreateView, self).get_form()
         form.initial = {
             'author': self.request.user,
             'publish_date': date.today()

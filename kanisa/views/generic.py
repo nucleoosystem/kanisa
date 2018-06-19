@@ -160,8 +160,8 @@ class KanisaUpdateView(UpdateView):
         return u'%s "%s" saved.' % (model_name,
                                     unicode(form.instance))
 
-    def get_form(self, form_class):
-        form = super(KanisaUpdateView, self).get_form(form_class)
+    def get_form(self):
+        form = super(KanisaUpdateView, self).get_form()
         form.add_save_and_continue()
         return form
 
