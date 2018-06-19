@@ -40,14 +40,6 @@ class NoticeCreateView(NoticeBaseView,
     form_class = SiteWideNoticeForm
     kanisa_title = 'Write a Notice'
     success_url = reverse_lazy('kanisa_manage_notices')
-
-    def get_form(self, form_class):
-        form = super(NoticeCreateView, self).get_form(form_class)
-        form.initial = {
-            'author': self.request.user,
-            'publish_date': date.today()
-        }
-        return form
 notice_create = NoticeCreateView.as_view()
 
 
