@@ -1,4 +1,3 @@
-from datetime import date
 from django.core.urlresolvers import reverse_lazy
 
 from kanisa.forms.notices import (
