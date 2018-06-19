@@ -128,11 +128,11 @@ class BrandingManagementUpdateColoursView(BrandingBaseView,
     kanisa_form_warning = ("Colours must be entered as their 6 digit hex code "
                            "(including the preceding '#'), e.g. #FF00FF.")
 
-    def get_form(self, form_class):
-        form = super(BrandingManagementUpdateColoursView,
-                     self).get_form(form_class)
-        form.initial = get_brand_colours()
-        return form
+    def get_initial(self):
+        initial = super(BrandingManagementUpdateColoursView,
+                        self).get_initial()
+        initial.update(get_brand_colours())
+        return initial
 
     def form_valid(self, form):
         ensure_branding_directory_exists()
