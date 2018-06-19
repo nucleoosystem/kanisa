@@ -106,7 +106,7 @@ def test_slug_uniqueness():
 
 
 @pytest.mark.django_db
-def test_slug_uniqueness():
+def test_slug_uniqueness_with_long_slug():
     publish_date = date.today() - timedelta(days=1)
     teaser_text = 'Teaser contents'
     main_text = 'Main post contents'
