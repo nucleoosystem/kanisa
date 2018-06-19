@@ -5,8 +5,6 @@ from .form_field import BiblePassageFormField
 
 
 class BiblePassageField(models.CharField):
-    __metaclass__ = models.SubfieldBase
-
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 25
         super(BiblePassageField, self).__init__(*args, **kwargs)
@@ -33,6 +31,9 @@ class BiblePassageField(models.CharField):
             # Shouldn't get here - since we've saved the BiblePassage
             # in a model.
             return None
+
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
 
     def get_prep_value(self, value):
         if not value:
