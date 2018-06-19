@@ -64,7 +64,7 @@ inline_image_detail = InlineImagesDetailView.as_view()
 
 class AttachmentsListView(PaginatedMediaListView, XHRBaseGetView):
     def render(self, request, *args, **kwargs):
-        documents = Document.objects.filter(public=True)
+        documents = Document.objects.all()
         paginator, page = self.slice_results(request, documents)
         tmpl = 'kanisa/management/media/_attachment_list.html'
 
