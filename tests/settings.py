@@ -1,3 +1,5 @@
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -64,9 +66,11 @@ TEMPLATES = [
     },
 ]
 
-import os
 PROJECT_DIR = os.path.dirname(__file__)
-j = lambda filename: os.path.join(PROJECT_DIR, filename)
+
+
+def j(filename):
+    return os.path.join(PROJECT_DIR, filename)
 
 
 HAYSTACK_CONNECTIONS = {
