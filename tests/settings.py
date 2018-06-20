@@ -86,6 +86,7 @@ TIME_FORMAT = 'P'
 SHORT_DATE_FORMAT = 'm/d/Y'
 
 STATIC_URL = '/fakestatictrees/'
+MEDIA_ROOT = j('.test_media')
 
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
