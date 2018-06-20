@@ -167,3 +167,26 @@ def kanisa_markdown(value, demote_heading_levels=None):
         marked_down = demote_headings(marked_down, demote_heading_levels)
 
     return mark_safe(marked_down)
+
+
+@register.filter(is_safe=True)
+def kanisa_markdown_for_preview(value):
+    value = force_unicode(value)
+
+    for image_match in get_images(value):
+        value = value.replace(image_match.full, "")
+
+    for document_match in get_documents(value):
+        value = value.replace(document_match.full, "")
+
+    for map_match in get_maps(value):
+        value = value.replace(map_match.full, "")
+
+    value = value.replace("####", "<br />")
+
+    marked_down = markdown.markdown(
+        value,
+        extensions=['markdown.extensions.nl2br', ]
+    )
+
+    return mark_safe(marked_down)

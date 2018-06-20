@@ -68,28 +68,32 @@ def test_headings():
     test_input = "# Heading 1\n## Heading 2"
     test_output = "<h1>Heading 1</h1>\n<h2>Heading 2</h2>"
     template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
-    assert test_output == template.render(Context({'input': test_input }))
+    assert test_output == template.render(Context({'input': test_input}))
 
 
 def test_headings_demoted_one_level():
     test_input = "# Heading 1\n## Heading 2"
     test_output = "<h2>Heading 1</h2>\n<h3>Heading 2</h3>"
-    template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown:1 }}")
-    assert test_output == template.render(Context({'input': test_input }))
+    template = Template(
+        "{% load kanisa_markup %}{{ input|kanisa_markdown:1 }}"
+    )
+    assert test_output == template.render(Context({'input': test_input}))
 
 
 def test_headings_demoted_two_levels():
     test_input = "# Heading 1\n## Heading 2"
     test_output = "<h3>Heading 1</h3>\n<h4>Heading 2</h4>"
-    template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown:2 }}")
-    assert test_output == template.render(Context({'input': test_input }))
+    template = Template(
+        "{% load kanisa_markup %}{{ input|kanisa_markdown:2 }}"
+    )
+    assert test_output == template.render(Context({'input': test_input}))
 
 
 def test_newline_to_break():
     test_input = "Line 1\nLine 2"
     test_output = "<p>Line 1<br />\nLine 2</p>"
     template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
-    assert test_output == template.render(Context({'input': test_input }))
+    assert test_output == template.render(Context({'input': test_input}))
 
 
 @pytest.mark.django_db
@@ -97,5 +101,16 @@ def test_inline_image_with_template():
     inline_image = InlineImageFactory.create()
     test_input = "hello ![%s medium]" % inline_image.slug
     template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
-    test_output = template.render(Context({'input': test_input }))
+    test_output = template.render(Context({'input': test_input}))
     assert "<p>hello <img" in test_output
+
+
+@pytest.mark.django_db
+def test_inline_image_with_template_for_preview():
+    inline_image = InlineImageFactory.create()
+    test_input = "hello ![%s medium]" % inline_image.slug
+    template = Template(
+        "{% load kanisa_markup %}{{ input|kanisa_markdown_for_preview }}"
+    )
+    test_output = template.render(Context({'input': test_input}))
+    assert "<p>hello </p>" == test_output

@@ -3,7 +3,7 @@
 {% include "kanisa/public/blog/_author_byline.html" %}
 
 <div class="lead">
-  {{ object.teaser_text|kanisa_markdown|removetags:"img" }}
+  {{ object.teaser_text|kanisa_markdown_for_preview }}
 </div>
 
 <ul class="pager">
