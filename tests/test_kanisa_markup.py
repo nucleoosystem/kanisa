@@ -83,3 +83,10 @@ def test_headings_demoted_two_levels():
     test_output = "<h3>Heading 1</h3>\n<h4>Heading 2</h4>"
     template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown:2 }}")
     assert test_output == template.render(Context({'input': test_input }))
+
+
+def test_newline_to_break():
+    test_input = "Line 1\nLine 2"
+    test_output = "<p>Line 1<br />\nLine 2</p>"
+    template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
+    assert test_output == template.render(Context({'input': test_input }))
