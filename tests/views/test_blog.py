@@ -1,3 +1,5 @@
+import pytest
+
 from datetime import date
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser, Permission
@@ -5,17 +7,18 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.utils.html import escape
 from tests.test_blog import BlogPostFactory
+from tests.test_kanisa_markup import InlineImageFactory
 import kanisa.views.public.blog as views
 from kanisa.views.public.blog.feed import LatestEntriesFeed
-import pytest
 
 
 @pytest.fixture()
 def posts():
+    image1 = InlineImageFactory.create()
     post1 = BlogPostFactory.create()
     post2 = BlogPostFactory.create(
         publish_date=date(2012, 1, 1),
-        teaser_text='*Hello*',
+        teaser_text='*Hello* ![%s medium]' % image1.slug,
         main_text='I am the **cat**',
     )
     post3 = BlogPostFactory.create(
@@ -54,6 +57,10 @@ def test_blog_index(rf, posts):
     assert len(context['object_list']) == 2
     assert context['object_list'][0] == post1
     assert context['object_list'][1] == post2
+
+    response.render()
+    assert '<img' not in response.content
+    assert '<em>Hello</em>' in response.content
 
 
 def get_year_view(rf, year, user=None):
