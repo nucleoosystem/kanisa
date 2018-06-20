@@ -90,3 +90,12 @@ def test_newline_to_break():
     test_output = "<p>Line 1<br />\nLine 2</p>"
     template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
     assert test_output == template.render(Context({'input': test_input }))
+
+
+@pytest.mark.django_db
+def test_inline_image_with_template():
+    inline_image = InlineImageFactory.create()
+    test_input = "hello ![%s medium]" % inline_image.slug
+    template = Template("{% load kanisa_markup %}{{ input|kanisa_markdown }}")
+    test_output = template.render(Context({'input': test_input }))
+    assert "<p>hello <img" in test_output
