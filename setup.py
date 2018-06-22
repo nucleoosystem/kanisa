@@ -31,6 +31,7 @@ setup(
     install_requires=[
         "Django",
         "Pillow",
+        "django-bootstrap3",
         "django-crispy-forms",
         "django-haystack",
         "django-mptt",
