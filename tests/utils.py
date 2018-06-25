@@ -28,6 +28,8 @@ class KanisaViewTestCase(TestCase):
         self.fred.user_permissions.add(p)
         p = Permission.objects.get(codename='manage_services')
         self.fred.user_permissions.add(p)
+        p = Permission.objects.get(codename='manage_documents')
+        self.fred.user_permissions.add(p)
         self.fred.email = 'fred@example.com'
 
         self.fred.save()

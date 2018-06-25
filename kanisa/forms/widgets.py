@@ -1,14 +1,11 @@
 from crispy_forms.bootstrap import InlineCheckboxes
 from django.forms import Textarea, TextInput
-from django.forms.utils import flatatt
 from django.forms.widgets import (
     ClearableFileInput,
     DateInput,
     SelectMultiple,
     TimeInput,
 )
-from django.utils.safestring import mark_safe
-from django.template.loader import render_to_string
 from sorl.thumbnail.shortcuts import get_thumbnail
 
 
@@ -29,16 +26,7 @@ class KanisaIntroInputWidget(Textarea):
 
 
 class KanisaMainInputWidget(Textarea):
-    def render(self, name, value, attrs=None):
-        if value is None:
-            value = ''
-
-        final_attrs = self.build_attrs(attrs, name=name)
-
-        return render_to_string("kanisa/management/_main_input_widget.html",
-                                {'attrs': mark_safe(flatatt(final_attrs)),
-                                 'id': final_attrs['id'],
-                                 'value': value})
+    template_name = 'kanisa/management/_main_input_widget.html'
 
 
 class KanisaThumbnailFileWidget(ClearableFileInput):
