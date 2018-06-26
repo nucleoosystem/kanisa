@@ -1,7 +1,6 @@
 language: python
 python: 2.7
 env:
-  - TOX_ENV=py27-110
   - TOX_ENV=py27-111
   - TOX_ENV=flake8
 install:
