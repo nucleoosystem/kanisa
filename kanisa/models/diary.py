@@ -74,7 +74,7 @@ class RegularEvent(models.Model):
     image = ImageField(upload_to='kanisa/diary/events/',
                        help_text='Must be at least 200px by 200px.')
     slug = KanisaAutoSlugField(populate_from='title')
-    pattern = RecurrenceField(verbose_name='Timetable')
+    pattern = RecurrenceField(verbose_name='Timetable', blank=True)
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text='Duration in minutes.')
@@ -180,6 +180,9 @@ class RegularEvent(models.Model):
         return events[0]
 
     def pattern_description(self):
+        if not self.pattern:
+            return 'None'
+
         if self.pattern and len(self.pattern.rrules) == 1:
             text = self.pattern.rrules[0].to_text()
             return text[0].capitalize() + text[1:]
