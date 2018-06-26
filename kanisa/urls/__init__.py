@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.views.i18n import JavaScriptCatalog
 from kanisa.views import KanisaIndexView
 from kanisa.views.public.seasonal import seasonal_view
 
@@ -12,6 +13,7 @@ urlpatterns = [
     url(r'^diary/', include('kanisa.urls.public.diary')),
     url(r'^easter/$', seasonal_view, {'season': 'easter'},
         'kanisa_public_seasonal'),
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     url(r'^manage/', include('kanisa.urls.management')),
     url(r'^members/', include('kanisa.urls.members')),
     url(r'^search/', include('kanisa.urls.public.search')),
