@@ -1,3 +1,4 @@
+{% if song_list %}
 <table class="table table-striped">
   <thead>
     <tr>
@@ -22,3 +23,9 @@
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<p class="alert alert-warning">
+  <strong>Sorry!</strong>
+  No matching songs found.
+</p>
+{% endif %}
