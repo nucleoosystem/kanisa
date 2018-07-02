@@ -16,12 +16,10 @@ from kanisa.forms.diary import (
     ScheduledEventEditForm,
     ScheduledEventCreationForm,
     ScheduledEventSeriesForm,
-    EventContactForm,
     EventCategoryForm,
     FindEventForm
 )
 from kanisa.models import (
-    EventContact,
     RegularEvent,
     ScheduledEvent,
     ScheduledEventSeries,
@@ -471,45 +469,6 @@ class DiaryCancelScheduledEventView(DiaryScheduledEventBaseView,
 
         return self.get_relative_root_url(self.object.date.strftime('%Y%m%d'))
 diary_cancel_scheduled_event = DiaryCancelScheduledEventView.as_view()
-
-
-class EventContactBaseView(DiaryBaseView):
-    kanisa_lead = ('Event contacts help people get in touch with the person '
-                   'relevant to their questions about your events.')
-
-    def get_kanisa_intermediate_crumbs(self):
-        return [{'url': reverse('kanisa_manage_diary_contacts'),
-                 'title': 'Contacts'},
-                ]
-
-
-class EventContactIndexView(EventContactBaseView,
-                            KanisaListView):
-    model = EventContact
-    queryset = EventContact.objects.all()
-
-    template_name = 'kanisa/management/diary/contacts.html'
-    kanisa_title = 'Contacts'
-
-    def get_kanisa_intermediate_crumbs(self):
-        return []
-diary_event_contact_management = EventContactIndexView.as_view()
-
-
-class EventContactCreateView(EventContactBaseView,
-                             KanisaCreateView):
-    form_class = EventContactForm
-    kanisa_title = 'Add an Event Contact'
-    success_url = reverse_lazy('kanisa_manage_diary_contacts')
-diary_event_contact_create = EventContactCreateView.as_view()
-
-
-class EventContactUpdateView(EventContactBaseView,
-                             KanisaUpdateView):
-    form_class = EventContactForm
-    model = EventContact
-    success_url = reverse_lazy('kanisa_manage_diary_contacts')
-diary_event_contact_update = EventContactUpdateView.as_view()
 
 
 class EventCategoryBaseView(DiaryBaseView):

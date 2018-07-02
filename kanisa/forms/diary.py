@@ -16,22 +16,10 @@ from kanisa.forms.widgets import (
 )
 from kanisa.models import (
     EventCategory,
-    EventContact,
     RegularEvent,
     ScheduledEvent,
     ScheduledEventSeries
 )
-
-
-class EventContactForm(KanisaBaseModelForm):
-    class Meta:
-        model = EventContact
-        widgets = {'image': KanisaThumbnailFileWidget(100, 100), }
-        fields = (
-            'name',
-            'email',
-            'image',
-        )
 
 
 class EventCategoryForm(KanisaBaseModelForm):
