@@ -362,7 +362,6 @@ class DiaryScheduledEventCloneView(DiaryScheduledEventBaseView,
         initial['start_time'] = original.start_time
         initial['duration'] = original.duration
         initial['details'] = original.details
-        initial['contact'] = original.contact
         initial['intro'] = original.intro
         initial['series'] = original.series
 

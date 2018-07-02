@@ -1,7 +1,6 @@
 from datetime import date, time
 from django.core.urlresolvers import reverse
 from kanisa.models import (
-    EventContact,
     RegularEvent,
     ScheduledEvent,
     ScheduledEventSeries
@@ -181,10 +180,6 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(len(ScheduledEvent.objects.all()), 3)
 
     def test_diary_event_cloning(self):
-        someone = EventContact.objects.create(
-            name='Bugs Bunny',
-            email='bugs@example.com'
-        )
         series = ScheduledEventSeries.objects.create(
             name='My Series'
         )
@@ -193,7 +188,6 @@ class DiaryManagementViewTest(KanisaViewTestCase):
             date=date(2014, 03, 31),
             start_time=time(9, 0),
             duration=60,
-            contact=someone,
             intro='Test event',
             details='All my details',
             series=series
@@ -211,7 +205,6 @@ class DiaryManagementViewTest(KanisaViewTestCase):
         self.assertEqual(form_data.get('title', None), 'Foobar')
         self.assertEqual(form_data.get('start_time', None), time(9, 0))
         self.assertEqual(form_data.get('duration', None), 60)
-        self.assertEqual(form_data.get('contact', None), someone)
         self.assertEqual(form_data.get('details', None), 'All my details')
         self.assertEqual(form_data.get('intro', None), 'Test event')
         self.assertEqual(form_data.get('series', None), series)
