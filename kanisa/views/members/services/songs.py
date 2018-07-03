@@ -125,7 +125,7 @@ class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
             pk__in=list(event_type_pks)
         )
 
-        all_most_popular = most_popular_songs()[:40]
+        all_songs_past_year = most_popular_songs()
 
         missing = {}
 
@@ -135,7 +135,7 @@ class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
                 service_filter=event
             ).filter(usage__gt=1)
 
-            for song in all_most_popular:
+            for song in all_songs_past_year:
                 if song not in this_event:
                     missing[event].append(song)
 

@@ -13,6 +13,9 @@
         <a href="{% url 'kanisa_members_services_song_detail' song.pk %}" title="View song information">
           {{ song.title }}
         </a>
+        {% if song.usage %}
+        <span class="text-muted">(used {% if song.usage == 1 %}once{% elif song.usage == 2 %}twice{% else %}{{ song.usage }} times{% endif %})</span>
+        {% endif %}
       </td>
       <td>
         {% for composer in song.composer_list %}
