@@ -12,13 +12,11 @@ class RegularEventAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'pattern_description',
-        'contact',
         'autoschedule',
         'mothballed',
     )
     list_filter = (
         'autoschedule',
-        'contact',
         'mothballed',
     )
 
