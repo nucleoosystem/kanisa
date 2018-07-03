@@ -32,7 +32,7 @@
     </p>
     {% endif %}
     <div class="row">
-      {% if object.event or object.contact %}
+      {% if object.event %}
       <div class="col-md-4">
         {% if object.event.image %}
         {% thumbnail object.event.image "260x260" as im %}
@@ -48,9 +48,6 @@
       <div class="col-md-8">
       {% else %}
       <div class="col-md-12">
-        {% if object.contact %}
-        {{ object.contact }}
-        {% endif %}
       {% endif %}
         <p class="lead">
           {% if object.date == object.end_date %}
