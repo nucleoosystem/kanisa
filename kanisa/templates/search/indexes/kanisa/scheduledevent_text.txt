@@ -8,10 +8,6 @@
 {{ object.details }}
 {% endif %}
 
-{% if object.contact %}
-{{ object.contact.name }}
-{% endif %}
-
 {{ object.event }}
 {% endautoescape %}
 {% endblock %}
