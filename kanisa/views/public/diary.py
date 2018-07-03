@@ -95,7 +95,7 @@ class RegularEventDetailView(DiaryBaseView, DetailView):
 
         context['kanisa_title'] = unicode(self.object)
 
-        if self.object.contact and self.object.contact.email:
+        if conf.KANISA_CHURCH_EMAIL:
             context['contact_form'] = RegularEventQueryForm()
             context['contact_form'].set_event(self.object)
 
@@ -123,6 +123,10 @@ class ScheduledEventDetailView(DiaryBaseView, DetailView):
         context.update(self.get_diary_context_data())
 
         context['kanisa_title'] = unicode(self.object)
+
+        if conf.KANISA_CHURCH_EMAIL:
+            context['contact_form'] = RegularEventQueryForm()
+            context['contact_form'].set_event(self.object)
 
         return context
 scheduled_event_detail = ScheduledEventDetailView.as_view()
@@ -197,7 +201,7 @@ class DiaryContactView(DiaryBaseView, KanisaFormView):
         context.update({'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME})
         event = form.cleaned_data['event']
         send_mail_with_context(
-            event.contact.email,
+            conf.KANISA_CHURCH_EMAIL,
             context,
             'on_regularevent_contact'
         )
