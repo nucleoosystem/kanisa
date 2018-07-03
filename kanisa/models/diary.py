@@ -146,8 +146,7 @@ class RegularEvent(models.Model):
                        title=self.title,
                        intro=self.intro,
                        start_time=self.start_time,
-                       duration=self.duration,
-                       contact=self.contact)
+                       duration=self.duration)
 
     class AlreadyScheduled(Exception):
         pass
