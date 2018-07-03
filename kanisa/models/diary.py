@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
 from kanisa.fields import KanisaAutoSlugField
-from kanisa.utils.branding import BrandingInformation
 from recurrence.fields import RecurrenceField
 from sorl.thumbnail import ImageField
 
