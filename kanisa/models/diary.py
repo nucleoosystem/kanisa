@@ -19,32 +19,6 @@ DAYS_OF_WEEK = (
 )
 
 
-class EventContact(models.Model):
-    name = models.CharField(max_length=60,
-                            help_text='The full name of the contact')
-    email = models.EmailField(help_text=('Bear in mind that this will be '
-                                         'displayed on a public website.'))
-    image = ImageField(blank=True,
-                       null=True,
-                       upload_to='kanisa/diary/contacts/',
-                       help_text='Must be at least 200px by 200px')
-
-    class Meta:
-        # Need this because I've split up models.py into multiple
-        # files.
-        app_label = 'kanisa'
-
-    def __unicode__(self):
-        return self.name
-
-    def image_or_default(self):
-        if self.image:
-            return self.image
-
-        branding = BrandingInformation('apple')
-        return branding.url
-
-
 class EventCategoryManager(models.Manager):
     def get_queryset(self):
         qs = super(EventCategoryManager, self).get_queryset()
@@ -78,9 +52,6 @@ class RegularEvent(models.Model):
     start_time = models.TimeField(help_text='What time does the event start?')
     duration = models.IntegerField(default=60,
                                    help_text='Duration in minutes.')
-    contact = models.ForeignKey(EventContact,
-                                blank=True,
-                                null=True)
     intro = models.CharField(max_length=200,
                              help_text=('Brief description (no Markdown here) '
                                         'of what the event is and who it is '
@@ -249,9 +220,6 @@ class ScheduledEvent(models.Model):
     end_date = models.DateField(blank=True, null=True,
                                 help_text=('If an end date is specified, any '
                                            'duration given will be ignored.'))
-    contact = models.ForeignKey(EventContact,
-                                blank=True,
-                                null=True)
     intro = models.CharField(max_length=200,
                              help_text=('Brief description (no Markdown here) '
                                         'of what the event is and who it is '

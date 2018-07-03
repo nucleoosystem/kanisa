@@ -10,7 +10,6 @@ from .diary import (
     RegularEvent,
     ScheduledEvent,
     ScheduledEventSeries,
-    EventContact
 )
 from .documents import Document
 from .media import InlineImage
