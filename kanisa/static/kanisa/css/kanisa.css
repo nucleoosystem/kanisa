@@ -347,21 +347,6 @@ div.form-actions {
     text-decoration: none;
 }
 
-.kanisa_event_contacts .thumbnail .caption {
-    padding: 4px;
-}
-
-.kanisa_event_contacts .thumbnail .caption h5 {
-    margin-bottom: 3px;
-    margin-top: 3px;
-    min-height: 2.2em;
-    font-weight: bold;
-}
-
-.kanisa_event_contacts .thumbnail .caption a {
-    text-decoration: none;
-}
-
 .kanisa_sermon_speakers a.thumbnail {
     text-decoration: none;
 }
@@ -650,10 +635,6 @@ ul.pager-tiny {
 
 .comments blockquote small {
     font-size: 75%;
-}
-
-#regular_event_contact {
-    display: none;
 }
 
 .inline-image-base {
