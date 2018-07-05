@@ -13,7 +13,7 @@ class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
         context = super(KanisaManagementIndexView,
                         self).get_context_data(**kwargs)
 
-        users = get_user_model().objects.all()
+        users = get_user_model().objects.filter(last_login__isnull=False)
         context['user_list'] = users.order_by('-last_login')[:5]
 
         return context
