@@ -214,8 +214,8 @@ textarea.kanisamaininputwidget {
 
 #logo .navbar-form {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
     width: 300px;
 }
 

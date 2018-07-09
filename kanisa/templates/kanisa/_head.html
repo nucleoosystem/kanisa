@@ -1,24 +1,19 @@
 {% load static from staticfiles %}
+{% load bootstrap4 %}
+
 <meta charset="utf-8">
 <title>{% if kanisa_title %}{{ kanisa_title }} - {% endif %}{{ KANISA_CHURCH_NAME }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/bootstrap-3.1.1/css/bootstrap.min.css' %}" />
-<link rel="stylesheet" type="text/css" media="all" href="{% static 'kanisa/vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css' %}" />
+{% bootstrap_css %}
 
 {% include "kanisa/_css.html" %}
 {% include 'kanisa/_icons.html' %}
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
-<script src="{% static 'kanisa/vendor/jquery-1.10.2.min.js' %}"></script>
+{% bootstrap_javascript jquery="full" %}
 <script src="{% static 'kanisa/vendor/jquery.cookie-1.4.1.min.js' %}"></script>
-<script src="{% static 'kanisa/vendor/bootstrap-3.1.1/js/bootstrap.min.js' %}"></script>
 {% include "kanisa/public/_js.html" %}
 
 {% if form %}
