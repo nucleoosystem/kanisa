@@ -53,6 +53,14 @@ class CCLIReport(object):
 
             all_songs = all_songs.select_related('song')
             all_songs = set([s.song for s in all_songs])
+            totally_unsung_songs = Song.objects.all()
+            totally_unsung_songs = [
+                song for song in totally_unsung_songs
+                if song not in qs
+                and song not in all_songs
+            ]
+            all_songs.update(totally_unsung_songs)
+
             songs = [
                 (s, 0)
                 for s in all_songs
