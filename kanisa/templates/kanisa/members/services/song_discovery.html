@@ -14,6 +14,12 @@
 
 {% for event, missing_songs in missing.items %}
   <h2>{{ event }}</h2>
+
+  <p>
+    The following {{ missing_songs|length }} song{{ missing_songs|length|pluralize }}
+    are songs sung in other services, but not in the {{ event }}.
+  </p>
+
   {% with missing_songs as song_list %}
     {% include 'kanisa/members/services/_song_detail_table.html' %}
   {% endwith %}

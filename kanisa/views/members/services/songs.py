@@ -133,10 +133,11 @@ class SongDisoveryView(SongFinderBaseView, KanisaTemplateView):
             missing[event] = []
             this_event = most_popular_songs(
                 service_filter=event
-            ).filter(usage__gt=1)
+            ).filter(usage__gte=1)
+            this_event = [song.pk for song in this_event]
 
             for song in all_songs_past_year:
-                if song not in this_event:
+                if song.pk not in this_event:
                     missing[event].append(song)
 
         context['missing'] = missing
