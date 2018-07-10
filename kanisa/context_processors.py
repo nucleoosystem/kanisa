@@ -18,5 +18,6 @@ def kanisa_settings(context):
         'KANISA_CHURCH_NAME': conf.KANISA_CHURCH_NAME,
         'KANISA_GOOGLE_ANALYTICS_KEY': conf.KANISA_GOOGLE_ANALYTICS_KEY,
         'KANISA_NAVIGATION': elements,
-        'KANISA_VERSION': kanisa.__version__
+        'KANISA_VERSION': kanisa.__version__,
+        'KANISA_PRIVACY_URL': conf.KANISA_PRIVACY_URL,
     }

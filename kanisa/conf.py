@@ -53,3 +53,9 @@ KANISA_BLOG_DESCRIPTION = getattr(
     'KANISA_BLOG_DESCRIPTION',
     'The latest news and updates from %s.' % KANISA_CHURCH_NAME
 )
+
+KANISA_PRIVACY_URL = getattr(
+    settings,
+    'KANISA_PRIVACY_URL',
+    None
+)
