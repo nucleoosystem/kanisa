@@ -56,8 +56,7 @@ class CCLIReport(object):
             totally_unsung_songs = Song.objects.all()
             totally_unsung_songs = [
                 song for song in totally_unsung_songs
-                if song not in qs
-                and song not in all_songs
+                if song not in qs and song not in all_songs
             ]
             all_songs.update(totally_unsung_songs)
 
