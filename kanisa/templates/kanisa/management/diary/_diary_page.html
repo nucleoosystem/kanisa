@@ -32,7 +32,7 @@
       <td>
       {% for e in entry.regular_events %}
         <div class="{% if e.autoschedule %}autoschedule{% else %}noautoschedule{% endif %}{% if not forloop.last %} notlast{% endif %}">
-            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-xs btn-success regular_schedule" data-event-id="{{ e.pk }}" data-event-date="{{ entry.date|date:"Ymd" }}">Schedule</a><span class="inline-status"></span>
+            <a href="{% url 'kanisa_manage_diary_schedule_regular_event' e.pk entry.date|date:"Ymd" %}" class="btn btn-sm btn-success regular_schedule" data-event-id="{{ e.pk }}" data-event-date="{{ entry.date|date:"Ymd" }}">Schedule</a><span class="inline-status"></span>
         </div>
       {% endfor %}
       </td>
@@ -62,7 +62,7 @@
       {% for e in entry.scheduled_events %}
         <div class="{% if not forloop.last %} notlast{% endif %}">
           {% if e.date == entry.date %}
-          <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-default btn-xs">Clone</a>
+          <a href="{% url 'kanisa_manage_diary_clone_scheduled_event' %}?event={{ e.pk }}" class="btn btn-secondary btn-sm">Clone</a>
           {% else %}
           &nbsp;
           {% endif %}
@@ -73,7 +73,7 @@
       {% for e in entry.scheduled_events %}
         <div class="{% if not forloop.last %} notlast{% endif %}">
           {% if e.date == entry.date %}
-          <a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-xs btn-danger scheduled_event_cancel" data-event-title="{{ e.title }}">Cancel</a>
+          <a href="{% url 'kanisa_manage_diary_cancel_scheduled_event' e.pk %}" class="btn btn-sm btn-danger scheduled_event_cancel" data-event-title="{{ e.title }}">Cancel</a>
           {% else %}
           &nbsp;
           {% endif %}

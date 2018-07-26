@@ -1,18 +1,9 @@
-  <li class="nav-header">
-    <a href="/{{ parent_path }}">{{ parent }}</a>
-  </li>
+    <a class="dropdown-item" href="/{{ parent_path }}">{{ parent }}</a>
 
   {% for p in siblings %}
     {% if p.pk == page.pk %}
-      <li class="disabled visible-xs">
-        <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
-      </li>
-      <li class="active disabled hidden-xs">
-        <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
-      </li>
+      <a class="dropdown-item active disabled" href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
     {% else %}
-      <li>
-        <a href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
-      </li>
+      <a class="dropdown-item" href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
     {% endif %}
   {% endfor %}

@@ -5,13 +5,13 @@
 
 {% block precontent %}
 <ul class="breadcrumb">
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a>
   </li>
-  <li class="active">
+  <li class="active breadcrumb-item">
     {{ object.title }}
   </li>
 </ul>
@@ -53,7 +53,7 @@
       <i class="glyphicon glyphicon-plus"></i>
       Add a sermon to this series
     </a>
-    <a href="{% url 'kanisa_manage_sermons_series_update' object.pk %}" class="btn btn-default">
+    <a href="{% url 'kanisa_manage_sermons_series_update' object.pk %}" class="btn btn-secondary">
       <i class="glyphicon glyphicon-edit"></i>
       Edit this series
     </a>

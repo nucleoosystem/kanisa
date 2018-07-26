@@ -15,11 +15,11 @@
 
         <hr />
         <div class="web-only-links">
-          <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
+          <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-secondary">
             Back to the main diary
           </a>
           {% if nextmonth %}
-          <a href="{{ nexturl }}" class="btn btn-default">
+          <a href="{{ nexturl }}" class="btn btn-secondary">
             View the diary for {{ nextmonth|date:"F Y" }}
           </a>
           {% endif %}
@@ -52,11 +52,11 @@
 
         <hr />
         <div class="web-only-links">
-          <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-default">
+          <a href="{% url 'kanisa_public_diary_index' %}" class="btn btn-secondary">
             Back to the main diary
           </a>
           {% if nextmonth %}
-          <a href="{{ nexturl }}" class="btn btn-default">
+          <a href="{{ nexturl }}" class="btn btn-secondary">
             View the diary for {{ nextmonth|date:"F Y" }}
           </a>
           {% endif %}

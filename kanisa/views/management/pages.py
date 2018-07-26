@@ -67,6 +67,9 @@ class PageUpdateView(PageBaseView,
     form_class = PageForm
     model = Page
     success_url = reverse_lazy('kanisa_manage_pages')
+
+    def get_preview_url(self):
+        return '/' + self.get_object().get_path()
 page_update = PageUpdateView.as_view()
 
 

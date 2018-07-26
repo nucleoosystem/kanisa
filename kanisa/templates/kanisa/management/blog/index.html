@@ -14,28 +14,25 @@
 
 <table class="table table-striped">
 <tr>
-  <th></th>
-  <th></th>
   <th>Title</th>
-  <th>Published</th>
+  <th>Status</th>
+  <th>Publication Date</th>
   <th>Author</th>
 </tr>
 {% for object in object_list %}
 <tr>
   <td>
-    {% if object.published %}
-    <span class="text-success glyphicon glyphicon-ok-circle" title="This blog post is published"></span>
-    {% else %}
-    <span class="text-danger glyphicon glyphicon-remove-circle" title="This blog post is not yet published"></span>
-    {% endif %}
-  </td>
-  <td>
-    <a href="{{ object.get_absolute_url }}" title="View on site"><i class="glyphicon glyphicon-eye-open"></i></a>
-  </td>
-  <td>
     <a href="{% url 'kanisa_manage_blog_update' object.pk %}" title="Edit this blog post">
       {{ object.title }}
     </a>
+    <a class="btn btn-secondary btn-sm float-right" href="{{ object.get_absolute_url }}" title="View on site">View</a>
+  </td>
+  <td>
+    {% if object.published %}
+    Published
+    {% else %}
+    Scheduled
+    {% endif %}
   </td>
   <td>
     {{ object.publish_date|date:"jS F Y" }}

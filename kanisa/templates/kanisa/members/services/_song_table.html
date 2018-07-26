@@ -27,8 +27,8 @@
         <form method="post" action="{% url 'kanisa_members_services_move_song_up' object.pk song.pk %}">
           {% csrf_token %}
           <span class="status-block"></span>
-          <button type="submit" class="btn btn-default btn-xs change-song">
-            <i class="glyphicon glyphicon-arrow-up"></i>
+          <button type="submit" class="btn btn-secondary btn-sm change-song">
+            &#x25B2;
           </button>
         </form>
         {% endif %}
@@ -38,8 +38,8 @@
         <form method="post" action="{% url 'kanisa_members_services_move_song_down' object.pk song.pk %}">
           {% csrf_token %}
           <span class="status-block"></span>
-          <button type="submit" class="btn btn-default btn-xs change-song">
-            <i class="glyphicon glyphicon-arrow-down"></i>
+          <button type="submit" class="btn btn-secondary btn-sm change-song">
+            &#x25BC;
           </button>
         </form>
         {% endif %}
@@ -48,8 +48,8 @@
         <form method="post" action="{% url 'kanisa_members_services_remove_song' object.pk song.pk %}">
           {% csrf_token %}
           <span class="status-block"></span>
-          <button type="submit" class="btn btn-xs btn-danger change-song">
-            <i class="glyphicon glyphicon-trash"></i>
+          <button type="submit" class="btn btn-sm btn-danger change-song float-right">
+            Remove
           </button>
         </form>
       </td>

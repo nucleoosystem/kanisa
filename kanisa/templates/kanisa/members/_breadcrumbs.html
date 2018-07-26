@@ -1,10 +1,10 @@
 <ul class="breadcrumb">
   {% block breadcrumbs %}
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_members_index' %}">Members' Home</a>
   </li>
   {% if kanisa_root_crumb %}
-  <li>
+  <li class="breadcrumb-item">
     {% if not kanisa_is_root_view %}
     <a href="{{ kanisa_root_crumb.url }}">{{ kanisa_root_crumb.text }}</a>
     {% else %}
@@ -14,7 +14,7 @@
   {% endif %}
 
   {% for crumb in kanisa_intermediate_crumbs %}
-  <li>
+  <li class="breadcrumb-item">
     <a href="{{ crumb.url }}">
     {{ crumb.title }}
     </a>
@@ -22,7 +22,7 @@
   {% endfor %}
 
   {% if kanisa_title and not kanisa_is_root_view %}
-  <li>
+  <li class="breadcrumb-item">
      {{ kanisa_title }}
   </li>
 {% endif %}

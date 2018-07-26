@@ -11,7 +11,7 @@
 <tbody>
 {% for event in this_sunday %}
 <tr>
-  <td width="70px">{{ event.start_time }}</td>
+  <td width="90px">{{ event.start_time }}</td>
   <td>
     <strong>
       <a href="{{ event.url }}">{{ event }}</a>
@@ -24,7 +24,7 @@
 </tbody>
 </table>
 
-<a href="{% url 'kanisa_public_diary_index' %}" title="View this week&rsquo;s diary" class="btn btn-default">
+<a href="{% url 'kanisa_public_diary_index' %}" title="View this week&rsquo;s diary" class="btn btn-secondary">
   <span class="glyphicon glyphicon-calendar"></span>
   View this week&rsquo;s diary
 </a>

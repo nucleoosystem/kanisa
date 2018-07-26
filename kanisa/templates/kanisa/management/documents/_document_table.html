@@ -35,16 +35,16 @@
         </span>
       </td>
       <td style="vertical-align: middle; text-align: right">
-        <a class="btn btn-danger btn-xs" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'kanisa_manage_documents_delete' document.pk %}">Delete</a>
         {% if not document.has_expired %}
         <form method="post" action="{% url 'kanisa_manage_documents_expire' document.pk %}" class="expiry_toggle">
           {% csrf_token %}
-          <button class="btn btn-warning btn-xs">Force expiry</button>
+          <button class="btn btn-warning btn-sm">Force expiry</button>
         </form>
         {% else %}
         <form method="post" action="{% url 'kanisa_manage_documents_unexpire' document.pk %}" class="expiry_toggle">
           {% csrf_token %}
-          <button class="btn btn-success btn-xs">Restore</button>
+          <button class="btn btn-success btn-sm">Restore</button>
         </form>
         {% endif %}
 

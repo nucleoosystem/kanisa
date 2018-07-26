@@ -30,22 +30,22 @@
         <a href="{% url 'kanisa_manage_navigation_update' element.pk %}">{{ element.title }}</a>
       </td>
       <td><a href="{{ element.url }}">{{ element.url }}</a></td>
-      <td class="iconcell">
+      <td>
         {% if element.require_login %}
-        <i class="glyphicon glyphicon-lock" title="This navigation element is only displayed for logged-in users."></i>
+        <abbr title="This navigation element is only displayed for logged-in users.">Locked</abbr>
         {% endif %}
       </td>
-      <td class="iconcell">
+      <td>
         {% if element.get_previous_sibling %}
         <a href="{% url 'kanisa_manage_navigation_move_up' element.pk %}" title="Move {{ element }} up in the navigation" data-navigation-id="{{ element.pk }}" class="move_up">
-          <i class="glyphicon glyphicon-arrow-up"></i>
+          &#x25B2;
         </a>
         {% endif %}
       </td>
-      <td class="iconcell">
+      <td>
         {% if element.get_next_sibling %}
         <a href="{% url 'kanisa_manage_navigation_move_down' element.pk %}" title="Move {{ element }} down in the navigation" data-navigation-id="{{ element.pk }}" class="move_down">
-          <i class="glyphicon glyphicon-arrow-down"></i>
+          &#x25BC;
         </a>
         {% endif %}
       </td>

@@ -52,4 +52,7 @@ class BlogUpdateView(BlogBaseView,
     form_class = BlogPostForm
     success_url = reverse_lazy('kanisa_manage_blog')
 
+    def get_preview_url(self):
+        return self.get_object().get_absolute_url()
+
 blog_update = BlogUpdateView.as_view()

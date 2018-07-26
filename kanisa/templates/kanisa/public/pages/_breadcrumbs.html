@@ -1,13 +1,13 @@
-<ul class="breadcrumb">
-  <li>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
   {% for p in page.get_breadcrumb_trail %}
-  <li>
+  <li class="breadcrumb-item">
     <a href="{{ p.path }}">{{ p.title }}</a>
   </li>
   {% endfor %}
-  <li class="active">
+  <li class="breadcrumb-item active">
     {{ page }}
   </li>
-</ul>
+</ol>

@@ -16,7 +16,7 @@ function update_list_of_regular_events(event) {
     link.parent().parent().find(".active").removeClass("active");
 
     // Add active class on clicked link
-    link.parent().addClass("active");
+    link.addClass("active");
 }
 
 $(document).ready(function() {
