@@ -6,23 +6,31 @@
 
 <p>
   <a href="{% url 'kanisa_manage_media_inlineimage_create' %}" class="btn btn-lg btn-success">
-    <i class="glyphicon glyphicon-plus"></i>
     Upload a new inline image
   </a>
 </p>
 
 <hr />
 
-{% if object_list %}
-<div class="row">
+<div class="card-deck">
+  {% if object_list %}
   {% for image in object_list %}
-    <div class="col-xs-3 col-md-2">
-      <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}" class="thumbnail">
-        {% thumbnail image.image "122x92" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
-        {% endthumbnail %}
-      </a>
+  <div class="card" style="min-width: 244px; max-width: 244px; margin-bottom: 30px">
+    <a href="{% url 'kanisa_manage_media_inlineimage_update' image.pk %}" class="thumbnail">
+
+      {% thumbnail image.image "244x184" crop="center" as im %}
+      <img class="card-img-top" src="{{ im.url }}" width="{{ im.width }}px" height="{{ im.height }}px" />
+      {% endthumbnail %}
+    </a>
+
+    <div class="card-body">
+      <h5 class="card-title">{{ image.title }}</h5>
     </div>
+
+    <div class="card-footer">
+      <small class="text-muted">Uploaded: {{ image.modified|timesince }} ago</small>
+    </div>
+</div>
   {% endfor %}
 </div>
 

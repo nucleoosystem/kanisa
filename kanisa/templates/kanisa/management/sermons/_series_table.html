@@ -21,14 +21,12 @@
         </h4>
       </p>
       <p>
-        <a class="btn btn-default" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
-          <i class="glyphicon glyphicon-edit"></i>
+        <a class="btn btn-secondary" href="{% url 'kanisa_manage_sermons_series_detail' sermonseries.pk %}">
           Edit
         </a>
 
         {% if sermonseries.active %}
         <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
-          <i class="glyphicon glyphicon-ok"></i>
           Mark Complete
         </a>
         <span class="inline-status"></span>

@@ -11,7 +11,7 @@
 <form method="post" action="">
     {% csrf_token %}
     <input class="btn btn-danger" type="submit" value="{{ kanisa_delete_button }}" />
-    <a class="btn btn-default" href="{{ kanisa_cancel_url }}">No, go back</a>
+    <a class="btn btn-secondary" href="{{ kanisa_cancel_url }}">No, go back</a>
 </form>
 
 {% endblock %}

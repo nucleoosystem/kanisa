@@ -17,8 +17,7 @@
         <a href="{% url 'kanisa_manage_sermons_individual_update' sermon.pk %}">
           {{ sermon.title }}
         </a><br />
-        <a href="{% url 'kanisa_manage_sermons_individual_delete' sermon.pk %}" title="Delete this sermon" class="btn btn-xs btn-danger inline-delete-btn">
-          <span class="glyphicon glyphicon-trash"></span>
+        <a href="{% url 'kanisa_manage_sermons_individual_delete' sermon.pk %}" title="Delete this sermon" class="btn btn-sm btn-danger inline-delete-btn">
           Delete
         </a>
       </td>

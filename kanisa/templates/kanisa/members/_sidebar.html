@@ -1,39 +1,24 @@
 {% load kanisa_tags %}
 
-<ul class="nav nav-stacked sidebar">
-  <li>
-    <a href="{% url 'kanisa_members_index' %}">
-      <i class="glyphicon glyphicon-home"></i>
-      Home
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'kanisa_members_password_change' %}">
-      <i class="glyphicon glyphicon-lock"></i>
-      Change Password
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'kanisa_members_account_modify' %}">
-      <i class="glyphicon glyphicon-user"></i>
-      Update Account
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'kanisa_members_documents' %}">
-      <i class="glyphicon glyphicon-file"></i>
-      Documents
-    </a>
-  </li>
+<nav class="nav nav-pills flex-column">
+  <a href="{% url 'kanisa_members_index' %}" class="nav-link">
+    Home
+  </a>
+  <a href="{% url 'kanisa_members_password_change' %}" class="nav-link">
+    Change Password
+  </a>
+  <a href="{% url 'kanisa_members_account_modify' %}" class="nav-link">
+    Update Account
+  </a>
+  <a href="{% url 'kanisa_members_documents' %}" class="nav-link">
+    Documents
+  </a>
   {% if user.can_see_service_plans %}
-    <li>
-      <a href="{% url 'kanisa_members_services_index' %}">
-        <i class="glyphicon glyphicon-bullhorn"></i>
-        Service Planning
-      </a>
-    </li>
+  <a href="{% url 'kanisa_members_services_index' %}" class="nav-link">
+    Service Planning
+  </a>
   {% endif %}
-</ul>
+</nav>
 
 {% include "kanisa/_profile_sidebar.html" %}
 
@@ -43,7 +28,6 @@
   <ul class="nav nav-stacked sidebar">
     <li>
       <a href="{% url 'kanisa_manage_index' %}">
-        <i class="glyphicon glyphicon-cog"></i>
         Site Management
       </a>
     </li>

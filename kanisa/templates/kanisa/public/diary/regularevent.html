@@ -6,13 +6,13 @@
 
 {% block precontent %}
 <ul class="breadcrumb">
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_diary_index' %}">Diary</a>
   </li>
-  <li class="active">
+  <li class="breadcrumb-item active">
     {{ object.title }}
   </li>
 </ul>
@@ -53,8 +53,7 @@
     {% include "kanisa/public/diary/_regular_event_nav.html" %}
     {% if perms.kanisa.manage_diary %}
     <hr />
-    <a class="btn btn-default" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
-      <i class="glyphicon glyphicon-edit"></i>
+    <a class="btn btn-secondary" href="{% url 'kanisa_manage_diary_regular_update' object.pk %}">
       Edit this regular event
     </a>
     {% endif %}

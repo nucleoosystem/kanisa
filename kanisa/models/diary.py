@@ -34,6 +34,9 @@ class EventCategory(models.Model):
         ordering = ('title', )
         verbose_name_plural = 'Event categories'
 
+    def live_events(self):
+        return self.regularevent_set.filter(mothballed=False)
+
     def __unicode__(self):
         return self.title
 

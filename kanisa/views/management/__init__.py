@@ -8,6 +8,7 @@ from kanisa.views.generic import (
 class KanisaManagementIndexView(KanisaAnyAuthorizationMixin,
                                 KanisaTemplateView):
     template_name = 'kanisa/management/index.html'
+    kanisa_nav_component = 'home'
 
     def get_context_data(self, **kwargs):
         context = super(KanisaManagementIndexView,

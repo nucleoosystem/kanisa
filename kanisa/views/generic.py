@@ -42,6 +42,9 @@ def add_kanisa_context(cls, context):
     if hasattr(cls, 'kanisa_nav_component'):
         context['kanisa_nav_component'] = cls.kanisa_nav_component
 
+    if hasattr(cls, 'get_preview_url'):
+        context['kanisa_preview_url'] = cls.get_preview_url()
+
     if hasattr(cls, 'get_kanisa_intermediate_crumbs'):
         crumbs = cls.get_kanisa_intermediate_crumbs()
         context['kanisa_intermediate_crumbs'] = crumbs

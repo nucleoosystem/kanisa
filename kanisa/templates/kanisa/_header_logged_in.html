@@ -1,48 +1,32 @@
 {% load kanisa_tags %}
 
-<ul class="nav navbar-nav pull-right">
-  <li class="dropdown">
-    <a href="{% url 'kanisa_members_index' %}" title="Visit the Members&rsquo; Area" data-toggle="dropdown">
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{% url 'kanisa_members_index' %}" title="Visit the Members&rsquo; Area" data-toggle="dropdown">
       Welcome, {{ user }}
-      <b class="caret"></b>
     </a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="{% url 'kanisa_members_index' %}" title="Visit the Members&rsquo; Area">
-          <i class="glyphicon glyphicon-lock"></i>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'kanisa_members_index' %}" title="Visit the Members&rsquo; Area">
           Members&rsquo; Area
         </a>
-      </li>
-      <li>
-        <a href="{% url 'kanisa_members_documents' %}">
-          <i class="glyphicon glyphicon-file"></i>
+        <a class="dropdown-item" href="{% url 'kanisa_members_documents' %}">
           Documents
         </a>
-      </li>
       {% if user.can_see_service_plans %}
-      <li>
-        <a href="{% url 'kanisa_members_services_index' %}">
-          <i class="glyphicon glyphicon-bullhorn"></i>
+        <a class="dropdown-item" href="{% url 'kanisa_members_services_index' %}">
           Service Planning
         </a>
-      </li>
       {% endif %}
 
       {% kanisa_is_permissioned_user as is_permissioned %}
       {% if is_permissioned %}
-      <li>
-        <a href="{% url 'kanisa_manage_index' %}" title="Manage this site" class="kanisa_manage">
-          <i class="glyphicon glyphicon-cog"></i>
+        <a class="dropdown-item" href="{% url 'kanisa_manage_index' %}" title="Manage this site" class="kanisa_manage">
           Manage this site
         </a>
-      </li>
       {% endif %}
-      <li>
-        <a href="{% url 'kanisa_members_logout' %}">
-          <i class="glyphicon glyphicon-log-out"></i>
+        <a class="dropdown-item" href="{% url 'kanisa_members_logout' %}">
           Logout
         </a>
-      </li>
     </ul>
   </li>
 </ul>

@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
-  <li{% if current == "index" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_diary' %}">This Week</a>
+  <li class="nav-item">
+    <a class="nav-link{% if current == "index" %} active{% endif %}" href="{% url 'kanisa_manage_diary' %}">This Week</a>
   </li>
-  <li{% if current == "regular_events" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
+  <li class="nav-item">
+    <a class="nav-link{% if current == "regular_events" %} active{% endif %}" href="{% url 'kanisa_manage_diary_regularevents' %}">Regular Events</a>
   </li>
-  <li{% if current == "categories" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_diary_categories' %}">Categories</a>
+  <li class="nav-item">
+    <a class="nav-link{% if current == "categories" %} active{% endif %}" href="{% url 'kanisa_manage_diary_categories' %}">Categories</a>
   </li>
-  <li{% if current == "series" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_diary_series' %}">Event Series</a>
+  <li class="nav-item">
+    <a class="nav-link{% if current == "series" %} active{% endif %}" href="{% url 'kanisa_manage_diary_series' %}">Event Series</a>
   </li>
 </ul>

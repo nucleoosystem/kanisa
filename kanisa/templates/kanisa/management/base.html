@@ -12,11 +12,34 @@
   {% endblock %}
   </head>
   <body>
-    <div id="wrap">
-    <div class="container">
-      {% include "kanisa/_header.html" %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-4 col-md-3 mr-0" href="#">Kanisa &raquo;
+        <strong>{{ KANISA_CHURCH_NAME }}</strong>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          {% if kanisa_preview_url %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ kanisa_preview_url }}">Preview</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kanisa_public_index' %}">View Site</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'kanisa_members_logout' %}">Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 bg-light">
           {% include 'kanisa/management/_sidebar.html' %}
         </div>
         <div class="col-sm-10">
@@ -33,25 +56,6 @@
 
           {% block content %}
           {% endblock %}
-        </div>
-      </div>
-    </div>
-    </div>
-    <div id="footer">
-      <div class="container text-muted">
-        <div class="row">
-          <div class="col-md-6">
-            <p>
-              Built with Kanisa {{ KANISA_VERSION }}<br />
-              &copy {% now "Y" %} Dominic Rodger
-            </p>
-          </div>
-          <div class="col-md-6 github">
-            <p>
-              <a href="https://github.com/dominicrodger/kanisa" title="Contribute to the development of Kanisa">
-                <img src="{% static 'kanisa/img/github.png' %}" />
-              </a>
-          </div>
         </div>
       </div>
     </div>

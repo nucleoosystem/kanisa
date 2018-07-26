@@ -16,23 +16,20 @@
       <td>{{ event.pattern_description }}</td>
       <td>{{ event.start_time }}</td>
       <td>
-        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-default btn-xs">
+        <a href="{% url 'kanisa_manage_diary_regular_bulkedit' event.pk %}" title="Edit upcoming" class="btn btn-secondary btn-sm">
           Edit Upcoming
         </a>
       </td>
       <td class="iconcell">
         <a href="{% url 'kanisa_public_diary_regularevent_detail' event.slug %}" title="View on site">
-          <i class="glyphicon glyphicon-eye-open"></i>
         </a>
       </td>
       <td class="iconcell">
         {% if not event.mothballed %}
         <a href="{% url 'kanisa_manage_diary_regular_mothball' event.pk %}" title="Mothball event" class="text-danger">
-          <i class="glyphicon glyphicon-trash"></i>
         </a>
         {% else %}
         <a href="{% url 'kanisa_manage_diary_regular_mothball' event.pk %}" title="Restore event" class="text-success">
-          <i class="glyphicon glyphicon-plus"></i>
         </a>
         {% endif %}
       </td>

@@ -39,7 +39,7 @@
       </td>
       <td>
         {% if page.is_leaf_node %}
-        <a class="btn btn-danger btn-xs page_delete" href="{% url 'kanisa_manage_pages_delete' page.pk %}" data-page-title="{{ page.title }}">
+        <a class="btn btn-danger btn-sm page_delete float-right" href="{% url 'kanisa_manage_pages_delete' page.pk %}" data-page-title="{{ page.title }}">
           Delete
         </a>
         {% endif %}

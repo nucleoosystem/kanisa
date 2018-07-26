@@ -1,7 +1,8 @@
-<div class="visible-xs" id="xs-management-menu">
+{% load static from staticfiles %}
+
+<div class="d-block d-sm-none" id="xs-management-menu">
   <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <span class="glyphicon glyphicon-cog"></span>
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
       Management Menu <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
@@ -10,8 +11,82 @@
   </div>
 </div>
 
-<ul class="nav nav-pills nav-stacked sidebar hidden-xs">
-  {% include "kanisa/management/_sidebar_items.html" %}
-</ul>
+<div class="nav nav-pills sidebar d-none d-sm-block">
+  <a class="nav-link{% if kanisa_nav_component == "home" %} active{% endif %}" href="{% url 'kanisa_manage_index' %}">
+    Home
+  </a>
+{% if perms.kanisa.manage_pages %}
+  <a class="nav-link{% if kanisa_nav_component == "pages" %} active{% endif %}" href="{% url 'kanisa_manage_pages' %}">
+    Pages
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_diary %}
+  <a class="nav-link{% if kanisa_nav_component == "diary" %} active{% endif %}" href="{% url 'kanisa_manage_diary' %}">
+    Diary
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_sermons %}
+  <a class="nav-link{% if kanisa_nav_component == "sermons" %} active{% endif %}" href="{% url 'kanisa_manage_sermons' %}">
+    Sermons
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_banners %}
+  <a class="nav-link{% if kanisa_nav_component == "banners" %} active{% endif %}" href="{% url 'kanisa_manage_banners' %}">
+    Banners
+  </a>
+  {% endif %}
+{% if perms.kanisa.manage_documents %}
+  <a class="nav-link{% if kanisa_nav_component == "documents" %} active{% endif %}" href="{% url 'kanisa_manage_documents' %}">
+    Documents
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_users %}
+  <a class="nav-link{% if kanisa_nav_component == "users" %} active{% endif %}" href="{% url 'kanisa_manage_users' %}">
+    Users
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_navigation %}
+  <a class="nav-link{% if kanisa_nav_component == "navigation" %} active{% endif %}" href="{% url 'kanisa_manage_navigation' %}">
+    Navigation
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_media %}
+  <a class="nav-link{% if kanisa_nav_component == "media" %} active{% endif %}" href="{% url 'kanisa_manage_media' %}">
+    Media
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_blocks %}
+  <a class="nav-link{% if kanisa_nav_component == "blocks" %} active{% endif %}" href="{% url 'kanisa_manage_blocks' %}">
+    Content Blocks
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_blog %}
+  <a class="nav-link{% if kanisa_nav_component == "blog" %} active{% endif %}" href="{% url 'kanisa_manage_blog' %}">
+    Blog Posts
+  </a>
+{% endif %}
+{% if perms.kanisa.manage_sitewidenotices %}
+  <a class="nav-link{% if kanisa_nav_component == "notices" %} active{% endif %}" href="{% url 'kanisa_manage_notices' %}">
+    Notices
+  </a>
+{% endif %}
+{% if user.is_superuser %}
+  <a class="nav-link{% if kanisa_nav_component == "branding" %} active{% endif %}" href="{% url 'kanisa_manage_branding' %}">
+    Branding
+  </a>
+{% endif %}
+
+  <a class="nav-link" href="{% url 'kanisa_members_index' %}">
+    Your Account
+  </a>
+</div>
 
 {% include "kanisa/_profile_sidebar.html" %}
+
+<hr />
+<p class="text-muted">
+  Built with <a href="https://github.com/dominicrodger/kanisa" title="Contribute to the development of Kanisa">Kanisa</a> v{{ KANISA_VERSION }}<br />
+  &copy {% now "Y" %} Dominic Rodger<br />
+  </a>
+
+</p>

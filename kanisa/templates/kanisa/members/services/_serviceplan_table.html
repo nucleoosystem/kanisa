@@ -13,8 +13,8 @@
       </td>
       {% if perms.kanisa.manage_services %}
       <td>
-        <a href="{% url 'kanisa_members_services_delete' plan.pk %}" class="btn btn-danger btn-xs">
-          <i class="glyphicon glyphicon-trash"></i>
+        <a href="{% url 'kanisa_members_services_delete' plan.pk %}" class="btn btn-danger btn-sm float-right">
+          Delete
         </a>
       </td>
       {% endif %}

@@ -1,29 +1,24 @@
 {% if element.is_leaf_node %}
-<li>
-  <a href="{{ element.url }}" title="{{ element.description }}">{{ element.title }}</a>
+<li class="nav-item">
+  <a class="nav-link" href="{{ element.url }}" title="{{ element.description }}">{{ element.title }}</a>
 </li>
 {% else %}
-<li class="dropdown">
+<li class="nav-item dropdown">
   <a href="{{ element.url }}"
      title="{{ element.description }}"
-     class="dropdown-toggle"
+     class="nav-link dropdown-toggle"
      data-toggle="dropdown">
     {{ element.title }}
-    <b class="caret"></b>
   </a>
-  <ul class="dropdown-menu">
+  <div class="dropdown-menu">
     {% if element.url %}
-    <li>
-      <a href="{{ element.url }}" title="{{ element.description }}">{{ element.get_alternate_title }}</a>
-    </li>
+    <a href="{{ element.url }}" class="dropdown-item" title="{{ element.description }}">{{ element.get_alternate_title }}</a>
     {% endif %}
     {% for child in children %}
     {% if not child.require_login or user.is_authenticated %}
-    <li>
-      <a href="{{ child.url }}" title="{{ child.description }}">{{ child.title }}</a>
-    </li>
+    <a href="{{ child.url }}" class="dropdown-item" title="{{ child.description }}">{{ child.title }}</a>
     {% endif %}
     {% endfor %}
-  </ul>
+  </div>
 </li>
 {% endif %}

@@ -9,10 +9,10 @@ var update_this_week_url = "{% url 'kanisa_xhr_diary_thisweek' %}";
 
 {% block precontent %}
 <ul class="breadcrumb">
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
-  <li class="active">
+  <li class="breadcrumb-item active">
     Diary
   </li>
 </ul>
@@ -25,15 +25,13 @@ var update_this_week_url = "{% url 'kanisa_xhr_diary_thisweek' %}";
       {% include 'kanisa/public/diary/_this_week_table.html' %}
     </div>
 
-    <a href="{% url 'kanisa_public_diary_printable_redirect' %}" title="View a printable diary" class="btn btn-default">
-      <span class="glyphicon glyphicon-print"></span>
+    <a href="{% url 'kanisa_public_diary_printable_redirect' %}" title="View a printable diary" class="btn btn-secondary">
       View a printable diary
     </a>
 
     {% if perms.kanisa.manage_diary %}
     <hr />
     <a class="btn btn-primary" href="{% url 'kanisa_manage_diary' %}" title="Manage the diary">
-      <i class="glyphicon glyphicon-calendar"></i>
       Manage the diary
     </a>
     {% endif %}
@@ -47,15 +45,15 @@ var update_this_week_url = "{% url 'kanisa_xhr_diary_thisweek' %}";
       Show events for:
     </strong><br />
     <ul class="nav nav-pills eventcategoryfilter">
-      <li{% if not category %} class="active"{% endif %}>
-        <a href="?" class="event_category_filter" data-cat-id="0">
+      <li class="nav-item">
+        <a href="?" data-cat-id="0" class="event_category_filter nav-link {% if not category %} active{% endif %}">
           All
         </a>
       </li>
       {% for current_category in event_categories %}
-      <li{% if category.pk == current_category.pk %} class="active"{% endif %}>
-        <a href="?category={{ current_category.pk }}" class="event_category_filter" data-cat-id="{{ current_category.pk }}">
-          {{ current_category }} <span class="badge">{{ current_category.num_events }}</span>
+      <li class="nav-item">
+        <a href="?category={{ current_category.pk }}" data-cat-id="{{ current_category.pk }}" class="event_category_filter nav-link{% if category.pk == current_category.pk %} active{% endif %}">
+          {{ current_category }} <span class="badge badge-secondary">{{ current_category.num_events }}</span>
         </a>
       </li>
       {% endfor %}

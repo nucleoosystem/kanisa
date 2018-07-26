@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
-  <li{% if current == "active" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_banners' %}">Active Banners</a>
+  <li class="nav-item">
+    <a class="nav-link{% if current == "active" %} active{% endif %}" href="{% url 'kanisa_manage_banners' %}">Active Banners</a>
   </li>
-  <li{% if current == "inactive" %} class="active"{% endif %}>
-    <a href="{% url 'kanisa_manage_banners_inactive' %}">
+  <li class="nav-item">
+    <a class="nav-link{% if current == "inactive" %} active{% endif %}" href="{% url 'kanisa_manage_banners_inactive' %}">
       Inactive Banners
     </a>
   </li>

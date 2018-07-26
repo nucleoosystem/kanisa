@@ -5,18 +5,18 @@
 
 {% block precontent %}
 <ul class="breadcrumb">
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_sermon_index' %}">Sermons</a>
   </li>
   {% if object.series %}
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series.title }}</a>
   </li>
   {% endif %}
-  <li class="active">
+  <li class="active breadcrumb-item">
     {{ object.title }}
   </li>
 </ul>
@@ -73,7 +73,7 @@
     {% include "kanisa/public/sermons/_sermon_author_intro.html" %}
 
     {% if perms.kanisa.manage_sermons %}
-    <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn btn-default">
+    <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn btn-secondary">
       <i class="glyphicon glyphicon-edit"></i>
       Edit this sermon
     </a>

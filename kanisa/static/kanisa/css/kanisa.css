@@ -194,17 +194,8 @@ textarea.kanisamaininputwidget {
     text-decoration: underline;
 }
 
-.navbar-text a,
-.navbar-text a:hover {
-    color: inherit;
-}
-
-.navbar-text a.kanisa_manage {
-    text-decoration: none;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #eee;
+nav {
+    margin-bottom: 15px;
 }
 
 #logo {
@@ -214,8 +205,8 @@ textarea.kanisamaininputwidget {
 
 #logo .navbar-form {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
     width: 300px;
 }
 

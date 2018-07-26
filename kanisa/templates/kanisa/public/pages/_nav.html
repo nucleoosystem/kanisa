@@ -1,34 +1,38 @@
 {% if parent or children %}
-  <div class="visible-xs">
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        {% if parent %}
-          {{ parent }}
-        {% else %}
-          In this section
-        {% endif %}
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        {% if parent %}
-          {% include 'kanisa/public/pages/_nav_siblings.html' %}
-        {% endif %}
-        {% if children %}
-          {% if parent %}
-            <li class="divider"></li>
-          {% endif %}
-          {% include 'kanisa/public/pages/_nav_children.html' %}
-        {% endif %}
-      </ul>
+<div class="d-block d-sm-none">
+  <div class="dropdown">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="pagedropdown" aria-haspopup="true" aria-expanded="false">
+      {% if parent %}
+      {{ parent }}
+      {% else %}
+      In this section
+      {% endif %}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="pagedropdown">
+      {% if parent %}
+      {% include 'kanisa/public/pages/_nav_siblings.html' %}
+      {% endif %}
+      {% if children %}
+      {% include 'kanisa/public/pages/_nav_children.html' %}
+      {% endif %}
     </div>
   </div>
+</div>
 {% endif %}
 
-<div class="hidden-xs">
+<div class="d-none d-sm-block">
   {% if parent %}
-    <ul class="nav nav-pills nav-stacked">
-      {% include 'kanisa/public/pages/_nav_siblings.html' %}
-    </ul>
+    <div class="nav nav-pills flex-column">
+      <a class="nav-link" href="/{{ parent_path }}">{{ parent }}</a>
+
+  {% for p in siblings %}
+      {% if p.pk == page.pk %}
+        <a class="nav-link active disabled" href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
+      {% else %}
+        <a class="nav-link" href="/{{ parent_path }}{{ p.slug }}/">{{ p }}</a>
+    {% endif %}
+  {% endfor %}
+    </div>
 
     {% if children %}
       <hr />
@@ -36,11 +40,11 @@
   {% endif %}
 
   {% if children %}
-    <ul class="nav nav-pills nav-stacked">
-      <li class="nav-header disabled">
-        <a href="#">In this section</a>
-      </li>
-      {% include 'kanisa/public/pages/_nav_children.html' %}
-    </ul>
+    <div class="nav nav-pills flex-column">
+        <a class="nav-link disabled" href="#">In this section</a>
+        {% for p in children %}
+        <a class="nav-link" href="/{{ page_path }}{{ p.slug }}/">{{ p }}</a>
+        {% endfor %}
+    </div>
   {% endif %}
 </div>

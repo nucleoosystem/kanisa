@@ -33,13 +33,11 @@
           </p>
 
           <p>
-            <a class="btn btn-default" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
-              <i class="glyphicon glyphicon-edit"></i>
+            <a class="btn btn-secondary" href="{% url 'kanisa_manage_banners_update' banner.pk %}">
               Edit
             </a>
             {% if banner.active %}
             <a class="btn btn-danger" href="{% url 'kanisa_manage_banners_retire' banner.pk %}" title="Retiring a banner just stops it showing up to your site's users, it does not delete it permanently">
-              <i class="glyphicon glyphicon-trash"></i>
               Retire
             </a>
             {% endif %}
