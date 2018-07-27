@@ -42,15 +42,11 @@
   {% include "kanisa/public/blog/_comments.html" %}
 </div>
 
-{% if next or previous %}
-<ul class="pager">
 {% if previous %}
-  <li class="previous"><a href="{{ previous.get_absolute_url }}">&larr; Previously: <em>{{ previous.title }}</em></a></li>
+<a class="btn btn-sm btn-outline-secondary" href="{{ previous.get_absolute_url }}">&larr; Previously: <em>{{ previous.title }}</em></a>
 {% endif %}
 {% if next %}
-  <li class="next"><a href="{{ next.get_absolute_url }}">Next up: <em>{{ next.title }}</em> &rarr;</a></li>
-{% endif %}
-</ul>
+  <a class="btn btn-sm btn-outline-secondary float-right" href="{{ next.get_absolute_url }}">Next up: <em>{{ next.title }}</em> &rarr;</a>
 {% endif %}
 
 {% endblock %}
