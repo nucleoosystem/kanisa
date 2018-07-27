@@ -3,13 +3,13 @@
 {% block blogcontent %}
 
 <ol class="breadcrumb">
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_index' %}">Home</a>
   </li>
-  <li>
+  <li class="breadcrumb-item">
     <a href="{% url 'kanisa_public_blog_index' %}">Blog</a>
   </li>
-  <li class="active">
+  <li class="breadcrumb-item active">
     {{ year.year }}
   </li>
 </ol>

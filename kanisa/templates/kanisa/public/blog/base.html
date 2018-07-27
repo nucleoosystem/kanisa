@@ -13,37 +13,29 @@
 
     <hr />
 
-    <ul class="nav nav-pills nav-stacked">
-      <li>
-        <a href="{% url 'kanisa_public_blog_index' %}">
-          All Blog Posts
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'kanisa_public_blog_rss' %}">
-          RSS feed
-        </a>
-      </li>
+    <div class="nav nav-pills flex-column">
+      <a class="nav-link" href="{% url 'kanisa_public_blog_index' %}">
+        All Blog Posts
+      </a>
+      <a class="nav-link" href="{% url 'kanisa_public_blog_rss' %}">
+        RSS feed
+      </a>
+    </div>
+    <hr />
       {% if years %}
-      <li class="nav-header disabled">
-        <a href="#">
-          The Archives
-        </a>
-      </li>
+    <div class="nav nav-pills flex-column">
+      <strong style="margin-left: 1em">The Archives</strong>
       {% for year in years %}
-      <li>
-        <a href="{% url 'kanisa_public_blog_year' year %}">
-          {{ year }}
-        </a>
-      </li>
+      <a class="nav-link" href="{% url 'kanisa_public_blog_year' year %}">
+        {{ year }}
+      </a>
       {% endfor %}
       {% endif %}
-    </ul>
+    </div>
 
     {% if perms.kanisa.manage_blog %}
     <hr />
     <a class="btn btn-primary" href="{% url 'kanisa_manage_blog' %}">
-      <i class="glyphicon glyphicon-leaf"></i>
       Manage blog posts
     </a>
     {% endif %}
