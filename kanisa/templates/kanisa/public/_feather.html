@@ -1,0 +1,7 @@
+{% load static %}
+<svg class="feather">
+  {% if title %}
+  <title>{{ title }}</title>
+  {% endif %}
+  <use xlink:href="{% static 'kanisa/vendor/feather/feather-sprite.svg' %}#{{ icon }}"/>
+</svg>
