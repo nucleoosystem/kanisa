@@ -1,3 +1,4 @@
+{% load kanisa_feather %}
 {% if not document %}
 <p class="text-muted">
   {% if missing_reason == 'expired' %}
@@ -12,6 +13,6 @@
 </p>
 {% else %}
 <p>
-  <a href="{{ document.download_url }}" class="btn btn-secondary" title="Download {{ document.title }}"><i class="glyphicon glyphicon-download"></i> Download <em>{{ document.title }}</em></a>
+  <a href="{{ document.download_url }}" class="btn btn-secondary" title="Download {{ document.title }}">{% kanisa_feather "download" %} Download <em>{{ document.title }}</em></a>
 </p>
 {% endif %}

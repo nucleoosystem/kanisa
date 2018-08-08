@@ -1,8 +1,9 @@
+{% load kanisa_feather %}
 {% load kanisa_markup %}
 
 <div class="editable_block_wrapper">
 <a class="btn btn-xs editable_block_btn" href="{% url 'kanisa_manage_blocks_update' slug %}">
-  <i class="glyphicon glyphicon-edit"></i>
+  {% kanisa_feather "edit" %}
 </a>
 {{ block.contents|kanisa_markdown }}
 </div>

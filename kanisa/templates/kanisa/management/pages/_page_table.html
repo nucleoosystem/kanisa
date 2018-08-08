@@ -1,3 +1,5 @@
+{% load kanisa_feather %}
+
 {% if page_list %}
 <table class="table table-striped kanisa_diary">
   <thead>
@@ -22,14 +24,14 @@
       </td>
       <td class="iconcell">
         <a href="{% url 'kanisa_manage_pages_create' %}?parent={{ page.pk }}" title="Create a page with &ldquo;{{ page.title }}&rdquo; as its parent">
-          <i class="glyphicon glyphicon-plus-sign"></i>
+          {% kanisa_feather "plus-circle" %}
         </a>
       </td>
       <td class="iconcell">
         {% if not page.draft %}
-        <i class="glyphicon glyphicon-ok" title="This page is published"></i>
+        {% kanisa_feather "check-circle" "This page is published" %}
         {% else %}
-        <i class="glyphicon glyphicon-remove" title="This page is not published"></i>
+        {% kanisa_feather "x-circle" "This page is not published" %}
         {% endif %}
       </td>
       <td>
@@ -46,7 +48,7 @@
       </td>
       <td class="iconcell">
         {% if not page.draft %}
-        <a href="/{{ page.get_path }}" title="View on site"><i class="glyphicon glyphicon-eye-open"></i></a>
+        <a href="/{{ page.get_path }}" title="View on site">{% kanisa_feather "external-link" %}</a>
         {% endif %}
       </td>
     </tr>

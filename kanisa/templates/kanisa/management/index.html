@@ -19,21 +19,18 @@
 
     {% if perms.kanisa.manage_pages %}
     <a href="{% url 'kanisa_manage_pages_create' %}" class="btn btn-secondary">
-      <span class="glyphicon glyphicon-font"></span>
       Create a Page
     </a>
     {% endif %}
 
     {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_individual_create' %}" class="btn btn-secondary">
-      <span class="glyphicon glyphicon-headphones"></span>
       Create a Sermon
     </a>
     {% endif %}
 
     {% if perms.kanisa.manage_users %}
     <a href="{% url 'kanisa_manage_users' %}" class="btn btn-secondary">
-      <span class="glyphicon glyphicon-user"></span>
       Manage Users
     </a>
     {% endif %}

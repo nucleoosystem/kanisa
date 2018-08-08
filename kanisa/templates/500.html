@@ -1,3 +1,4 @@
+{% load kanisa_feather %}
 {% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
 
             <p style="text-align: center">
               <a href="{% url 'kanisa_public_index' %}" title="Return to the home page" class="btn btn-lg btn-primary">
-                <span class="glyphicon glyphicon-home"></span>
+                {% kanisa_feather "home" %}
                 Go Home
               </a>
             </p>

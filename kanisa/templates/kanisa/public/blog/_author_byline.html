@@ -1,9 +1,9 @@
+{% load kanisa_feather %}
 {% load thumbnail %}
 
 <p class="text-muted author-byline">
   {% if perms.kanisa.manage_blog %}
   <a class="btn btn-primary btn-xs" href="{% url 'kanisa_manage_blog_update' object.pk %}" style="float: right">
-    <i class="glyphicon glyphicon-edit"></i>
     Edit
   </a>
   {% endif %}
@@ -23,7 +23,7 @@
   It is scheduled to be published on <strong>{{ object.publish_date|date:"jS F Y" }}</strong>.
   {% endif %}
   <a href="{{ object.get_absolute_url }}" title="Permalink to {{ object.title }}" class="badge">
-    <span class="glyphicon glyphicon-link"></span>
+    {% kanisa_feather "link" "" "feather-small" %}
   </a>
 </p>
 <hr class="clearfix" />

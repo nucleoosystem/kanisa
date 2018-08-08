@@ -1,3 +1,4 @@
+{% load kanisa_feather %}
 {% if report.songs %}
 
 <p>Showing <strong>{{ report.songs|length }} song{{ report.songs|length|pluralize }}</strong>.</p>
@@ -10,7 +11,7 @@
       <th>
         Song
         <a href="{% url 'kanisa_members_services_ccli_by_title' %}?event={{ filters.event.pk }}&start_date={{ filters.start_date|date:"m/d/Y" }}&end_date={{ filters.end_date|date:"m/d/Y" }}">
-        <i class="glyphicon glyphicon-chevron-down"></i></a>
+        {% kanisa_feather "chevron-down" %}</a>
       </th>
       <th>
         Composers
@@ -19,7 +20,7 @@
       <th width="100px" style="text-align: right">
         Usage
         <a href="{% url 'kanisa_members_services_ccli_by_usage' %}?event={{ filters.event.pk }}&start_date={{ filters.start_date|date:"m/d/Y" }}&end_date={{ filters.end_date|date:"m/d/Y" }}">
-        <i class="glyphicon glyphicon-chevron-down"></i></a>
+        {% kanisa_feather "chevron-down" %}</a>
       </th>
       {% endif %}
     </tr>

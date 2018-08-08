@@ -17,7 +17,6 @@
 
 {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_speaker_update' object.speaker.pk %}" class="btn btn-secondary btn-xs">
-      <i class="glyphicon glyphicon-edit"></i>
       Edit this speaker's profile
     </a>
 {% endif %}

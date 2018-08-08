@@ -1,17 +1,19 @@
+{% load kanisa_feather %}
+
 <div id="main_input_widget_{{ id }}" class="main_input_widget_container">
   <p>
     <div class="btn-group main_input_widget_action">
     <a class="btn btn-sm main_input_widget_insert_image" data-url="{% url 'kanisa_manage_xhr_media_inline_images' %}" title="Insert Image">
-      <i class="glyphicon glyphicon-camera"></i>
+      {% kanisa_feather "camera" %}
     </a>
     <a class="btn btn-sm main_input_widget_add_attachment" data-url="{% url 'kanisa_manage_xhr_media_attachments' %}" title="Add Attachment">
-      <i class="glyphicon glyphicon-file"></i>
+      {% kanisa_feather "file-text" %}
     </a>
     <a class="btn btn-sm main_input_widget_insert_break" title="Insert Floating Break">
-      <i class="glyphicon glyphicon-text-height"></i>
+      {% kanisa_feather "type" %}
     </a>
     </div>
-    <a class="btn btn-sm btn-danger main_input_widget_cancel" style="display: none">
+    <a href="#" class="btn btn-sm btn-danger main_input_widget_cancel" style="display: none">
       Cancel
     </a>
     <span class="spinner_placeholder" style="display: none; margin-left: 5px">

@@ -11,31 +11,21 @@
 </p>
 
 {% for image in page_obj.object_list %}
-{% thumbnail image.image "80x80" as im %}
-<div class="thumbnail main_input_widget_image">
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="main_input_widget_image_choice" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
+{% thumbnail image.image "120x120" crop="center" as im %}
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" class="main_input_widget_image_choice img-thumbnail" data-select-url="{% url 'kanisa_manage_xhr_media_inline_images_detail' image.pk %}" />
 {% endthumbnail %}
-</div>
 {% endfor %}
 
 {% if page_obj.has_other_pages %}
-<ul class="pager main_input_widget_image_pager">
+<div>
   {% if page_obj.has_previous %}
-  <li class="previous">
-    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_image_paginate">&larr; Newer</a>
-  </li>
-  {% else %}
-  <li class="disabled previous"><a href="#">&larr; Newer</a></li>
+    <a class="btn-sm btn-light main_input_widget_image_paginate float-left" href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}">&larr; Newer</a>
   {% endif %}
 
   {% if page_obj.has_next %}
-  <li class="next">
-    <a href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_image_paginate">Older &rarr;</a>
-  </li>
-  {% else %}
-  <li class="disabled next"><a href="#">Older &rarr;</a></li>
+    <a class="btn-sm btn-light main_input_widget_image_paginate float-right" href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.next_page_number }}">Older &rarr;</a>
   {% endif %}
-</ul>
+</div>
 {% endif %}
 
 {% else %}

@@ -1,3 +1,5 @@
+{% load kanisa_feather %}
+
 <table class="table table-striped kanisa_diary">
   <thead>
     <tr>
@@ -81,7 +83,7 @@
       {% endfor %}
       </td>
       <td>
-        <a href="#" data-toggle="modal" data-date-yyyymmdd="{{ entry.date|date:"Ymd" }}" data-date-display="{{ entry.date|date:"jS F Y" }}" data-target="#add_event_modal" class="diary_modal_toggle"><i class="glyphicon glyphicon-plus-sign"></i></a>
+        <a href="#" data-toggle="modal" data-date-yyyymmdd="{{ entry.date|date:"Ymd" }}" data-date-display="{{ entry.date|date:"jS F Y" }}" data-target="#add_event_modal" class="diary_modal_toggle">{% kanisa_feather "plus-circle" %}</a>
       </td>
     </tr>
     {% endfor %}

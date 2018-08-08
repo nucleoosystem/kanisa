@@ -422,28 +422,15 @@ label .text-muted {
     margin-right: 5px;
 }
 
-.main_input_widget_image {
-    margin-bottom: 5px;
-    margin-right: 5px;
-    float: left;
-    height: 90px;
-    width: 90px;
-    display: -webkit-flexbox;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+.main_input_widget_image_pagination {
+    clear: left;
+    margin-bottom: 15px;
 }
 
 .main_input_widget_image_choice {
     cursor: pointer;
-}
-
-.main_input_widget_image_pager {
-    clear: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 #kanisa_homepage_intro {
@@ -464,10 +451,6 @@ label .text-muted {
 
 p.error-page-btn {
     text-align: center;
-}
-
-.main_input_widget_container ul.pager {
-    margin: 0 0 1em 0;
 }
 
 .facebook_like_widget {

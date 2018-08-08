@@ -8,6 +8,16 @@
     fill: none;
 }
 
+.feather-small {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
 .btn .feather {
     height: 18px;
     width: 18px;
@@ -25,4 +35,15 @@
 .btn-sm .feather {
     height: 16px;
     width: 16px;
+}
+
+li .feather {
+    height: 1em;
+    width: 1em;
+}
+
+th .feather {
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
 }

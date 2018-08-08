@@ -50,11 +50,9 @@
 
     {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-success">
-      <i class="glyphicon glyphicon-plus"></i>
       Add a sermon to this series
     </a>
     <a href="{% url 'kanisa_manage_sermons_series_update' object.pk %}" class="btn btn-secondary">
-      <i class="glyphicon glyphicon-edit"></i>
       Edit this series
     </a>
     {% endif %}

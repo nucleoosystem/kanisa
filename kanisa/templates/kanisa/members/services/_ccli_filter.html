@@ -1,3 +1,5 @@
+{% load kanisa_feather %}
+
 <form class="form" method="get" action=".">
   <fieldset>
     <legend>Filter Usage</legend>
@@ -36,7 +38,7 @@
     </div>
   </fieldset>
   <button type="submit" class="btn btn-primary">
-    <i class="glyphicon glyphicon-filter"></i>
+    {% kanisa_feather "filter" %}
     Filter
   </button>
 </form>

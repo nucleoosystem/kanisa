@@ -6,7 +6,6 @@
 {% include "kanisa/management/sermons/_nav.html" with current="sermons" %}
 <p>
   <a href="{% url 'kanisa_manage_sermons_individual_create' %}?series={{ object.pk }}" class="btn btn-lg btn-success">
-    <i class="glyphicon glyphicon-plus"></i>
     Add a sermon to this series
   </a>
 </p>
@@ -20,17 +19,14 @@
   {% endif %}
 
   <a class="btn btn-secondary" href="{% url 'kanisa_manage_sermons_series_update' sermonseries.pk %}">
-    <i class="glyphicon glyphicon-edit"></i>
     Edit this series
   </a>
   <a class="btn btn-secondary" href="{% url 'kanisa_public_sermon_series_detail' sermonseries.slug %}">
-    <i class="glyphicon glyphicon-eye-open"></i>
     View on site
   </a>
 
   {% if object.active %}
   <a class="series_complete btn" href="{% url 'kanisa_manage_sermons_series_complete' sermonseries.pk %}" data-series-id="{{ sermonseries.pk }}">
-    <i class="glyphicon glyphicon-ok"></i>
     Mark Complete
   </a>
   <span class="inline-status"></span>

@@ -1,3 +1,4 @@
+{% load kanisa_feather %}
 {% load thumbnail %}
 
 {% include "kanisa/management/media/_inline_image_thumbnail.html" with size="medium" %}
@@ -35,10 +36,12 @@
 
   <p class="text-muted"><strong>Code Preview:</strong> <span class="image-code"></span></p>
 
-  <a class="btn btn-sm btn-success main_input_widget_image_insert" style="margin: 1em 0">
-    Insert image &raquo;
+  <a href="#" class="btn btn-sm btn-success main_input_widget_image_insert" style="margin: 1em 0">
+    {% kanisa_feather "plus" %}
+    Insert image
   </a>
-  <a href="#" class="btn btn-sm main_input_widget_get_images" style="margin-left: 1em" data-url="{% url 'kanisa_manage_xhr_media_inline_images' %}">
+  <a href="#" class="btn btn-sm btn-secondary main_input_widget_get_images" style="margin-left: 1em" data-url="{% url 'kanisa_manage_xhr_media_inline_images' %}">
+    {% kanisa_feather "arrow-left-circle" %}
     Choose another image
   </a>
 

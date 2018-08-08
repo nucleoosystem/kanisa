@@ -62,6 +62,7 @@ class RegisteredUserAdmin(UserAdmin):
         'first_name',
         'last_name',
         'created',
+        'is_spam',
     )
 
     search_fields = (

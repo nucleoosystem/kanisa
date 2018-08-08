@@ -40,20 +40,17 @@
 
     {% if object.passage %}
     <p>
-      <i class="glyphicon glyphicon-book"></i>
       This sermon is on <em>{{ object.passage }}</em>.
     </p>
     {% endif %}
 
     {% if object.series %}
     <p>
-      <i class="glyphicon glyphicon-list"></i>
       This sermon is part of the series <a href="{% url 'kanisa_public_sermon_series_detail' object.series.slug %}">{{ object.series }}</a>.
     </p>
     {% endif %}
 
     <p>
-      <i class="glyphicon glyphicon-headphones"></i>
       {% if not object.mp3 %}
       This sermon doesn't have audio available.
       {% else %}
@@ -74,7 +71,6 @@
 
     {% if perms.kanisa.manage_sermons %}
     <a href="{% url 'kanisa_manage_sermons_individual_update' object.pk %}" class="btn btn-secondary">
-      <i class="glyphicon glyphicon-edit"></i>
       Edit this sermon
     </a>
     {% endif %}

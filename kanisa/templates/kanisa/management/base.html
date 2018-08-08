@@ -1,5 +1,6 @@
+{% load kanisa_feather %}
 {% load kanisa_tags %}
-{% load static from staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +29,7 @@
           </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'kanisa_public_index' %}">View Site</a>
+            <a class="nav-link" href="{% url 'kanisa_public_index' %}">{% kanisa_feather "home" %}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'kanisa_members_logout' %}">Sign out</a>

@@ -1,8 +1,9 @@
+{% load kanisa_feather %}
 <form class="navbar-form navbar-left" role="search" action="{% url 'kanisa_public_search' %}">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search" name="query">
     <div class="input-group-append">
-      <button class="btn btn-light" type="submit">Go</button>
+      <button class="btn btn-light" type="submit">{% kanisa_feather "search" %}</button>
     </div>
   </div>
 </form>

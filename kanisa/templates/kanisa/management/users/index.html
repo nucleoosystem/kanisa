@@ -1,9 +1,10 @@
 {% extends 'kanisa/management/base.html' %}
 
+{% load kanisa_feather %}
+
 {% block content %}
 <p>
   <a href="{% url 'kanisa_manage_users_create' %}" class="btn btn-lg btn-success">
-    <i class="glyphicon glyphicon-plus"></i>
     Add an account
   </a>
 </p>
@@ -16,7 +17,7 @@
       <div class="input-group">
         <input type="text" class="form-control" id="user_search" placeholder="Find user" name="query">
         <div class="input-group-append">
-          <button class="btn btn-secondary" type="submit">Search</button>
+          <button class="btn btn-secondary" type="submit">{% kanisa_feather "search" %}</button>
         </div>
       </div>
     </form>
