@@ -26,19 +26,9 @@ var find_events_in_diary_url = "{% url 'kanisa_manage_xhr_diary_find_events' %}"
 
 {% include "kanisa/management/diary/_diary_add_modal.html" %}
 
-<ul class="pager">
-  <li class="previous">
-    <a href="?date={{ previousdate }}">&larr; Previous Week</a>
-  </li>
-  <li class="next">
-    <a href="?date={{ nextdate }}">Next Week &rarr;</a>
-  </li>
-</ul>
-
-<p class="pull-right">
-  <a href="{% url 'kanisa_manage_diary_scheduled_create' %}" class="btn btn-success">
-    Schedule a new event
-  </a>
-</p>
+<div class="clearfix" style="margin-bottom: 1em">
+  <a class="btn btn-outline-primary btn-sm float-left" href="?date={{ previousdate }}">&larr; Previous Week</a>
+  <a class="btn btn-outline-primary btn-sm float-right" href="?date={{ nextdate }}">Next Week &rarr;</a>
+</div>
 
 {% endblock %}
