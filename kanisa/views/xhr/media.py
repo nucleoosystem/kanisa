@@ -63,6 +63,8 @@ inline_image_detail = InlineImagesDetailView.as_view()
 
 
 class AttachmentsListView(PaginatedMediaListView, XHRBaseGetView):
+    results_per_page = 10
+
     def render(self, request, *args, **kwargs):
         documents = Document.objects.all()
         paginator, page = self.slice_results(request, documents)
