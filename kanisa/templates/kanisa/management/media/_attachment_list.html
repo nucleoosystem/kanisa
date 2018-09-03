@@ -23,23 +23,15 @@
 </table>
 
 {% if page_obj.has_other_pages %}
-<ul class="pager">
+<div class="clearfix" style="margin-bottom: 1em">
   {% if page_obj.has_previous %}
-  <li class="previous">
-    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.previous_page_number }}" class="main_input_widget_attachment_paginate">&larr; Older</a>
-  </li>
-  {% else %}
-  <li class="disabled previous"><a href="#">&larr; Older</a></li>
+    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.previous_page_number }}" class="btn-sm btn-light main_input_widget_attachment_paginate float-left">&larr; Older</a>
   {% endif %}
 
   {% if page_obj.has_next %}
-  <li class="next">
-    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.next_page_number }}" class="main_input_widget_attachment_paginate">Newer &rarr;</a>
-  </li>
-  {% else %}
-  <li class="disabled next"><a href="#">Newer &rarr;</a></li>
+    <a href="{% url 'kanisa_manage_xhr_media_attachments' %}?page={{ page_obj.next_page_number }}" class="btn-sm btn-light main_input_widget_attachment_paginate float-right">Newer &rarr;</a>
   {% endif %}
-</ul>
+</div>
 {% endif %}
 
 
