@@ -17,7 +17,7 @@
 {% endfor %}
 
 {% if page_obj.has_other_pages %}
-<div>
+<div class="clearfix" style="margin-bottom: 1em">
   {% if page_obj.has_previous %}
     <a class="btn-sm btn-light main_input_widget_image_paginate float-left" href="{% url 'kanisa_manage_xhr_media_inline_images' %}?page={{ page_obj.previous_page_number }}">&larr; Newer</a>
   {% endif %}
