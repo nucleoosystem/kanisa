@@ -33,7 +33,7 @@ function quick_page_create(event) {
     var error_block = status_block.find(".inline-error");
     spinner.hide();
     ok_block.hide();
-    error_block.hide()
+    error_block.hide();
 
     spinner.show();
 
