@@ -1,5 +1,24 @@
-Version 0.9.6
-=============
+Version 1.0
+===========
+
+* Fix JS references to glyphicons
+* Change emails sent for account approval to have everyone in "to"
+  list, and include name of approver/spammer
+* Start storing records of all emails sent by the website, for
+  tracking purposes;
+* Get rid of banners/site wide notices (consolidate into a single
+  site wide notice thing which we'll use for previewing major
+  things - the sorts of things we create timed banners for right
+  now);
+* Redesign the sermon area layout;
+* Redesign the home page;
+* Start sending out monthly (thoughts on frequency of these welcome)
+  emails to event owners to confirm pages are adequately up to date;
+* Ground up mobile redesign;
+* Get a new look for the seasonal (Christmas/Easter) page.
+
+Version 1.1
+===========
 
 Service Management
 ------------------
@@ -26,7 +45,7 @@ Miscellaneous
 
 - Rename management JS to members JS.
 
-Version 1.0
+Version 1.2
 ===========
 
 Deployment
@@ -34,12 +53,6 @@ Deployment
 
 - Remove all inline styles
 - Split up kanisa.css somehow
-- Version check requirements in setup.py
-  - Pillow (upgrade to 2.3.0 - might need newer version of
-    sorl-thumbnail, which is back in active development - see
-    https://github.com/mariocesar/sorl-thumbnail/)
-  - Whoosh (upgrade to 2.5.5)
-  - django-haystack to 2.x
 - Add `unicode_literals`, `print_function`, `absolute_import` and
   `division` imports from `__future__` to all files (plus a way of
   checking they're everywhere)
@@ -62,21 +75,11 @@ Features
 - Add a handler for Google maps in `main_input_widget`
 - Add support for multiple Bible passages in the sermon/sermon series
   models
-- Allow customisable home page templates (#56)
-- Add Facebook integration
-  - Support for delayed posting
-  - Facility for adding Like/Share buttons on individual pages
-  - Showing recent posts on the home page
 - Add logs of actions taken in the management console
-- Add a permission for branding management
-- Add a good way of finding a particular document in the document
-  management interface (which doesn't involve paging through all the
-  pages)
 
 Bug fixes
 ---------
 
-- Ensure search form is visible even if no logo is set up
 - Fix bug in rendering of event table when scheduling multiple events
   (#13)
 - Fix weird layout of user editing page
@@ -110,8 +113,5 @@ Features
 - Allow pages to use multiple templates (#20)
   - Mostly for adding support for two-column pages
 - Add support for rota management (#28)
-- Add support for multiple podcasts (perhaps grouped by service?)
 - Support for multiple schedules in a single RegularEvent (for events
   which are logically connected but have different components) (#15)
-- Add weekly notice sheet feature - ability to add notices far in
-  advance
