@@ -705,9 +705,9 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev"><i class="glyphicon glyphicon-arrow-left"/></th>'+
+								'<th class="prev">&larr;</th>'+
 								'<th colspan="5" class="switch"></th>'+
-								'<th class="next"><i class="glyphicon glyphicon-arrow-right"/></th>'+
+								'<th class="next">&rarr;</th>'+
 							'</tr>'+
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'

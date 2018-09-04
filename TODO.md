@@ -1,7 +1,6 @@
 Version 1.0
 ===========
 
-* Fix JS references to glyphicons
 * Change emails sent for account approval to have everyone in "to"
   list, and include name of approver/spammer
 * Start storing records of all emails sent by the website, for
