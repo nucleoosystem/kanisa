@@ -318,6 +318,14 @@ ul.nav-pills li.nav-header {
     width: 200px;
 }
 
+#page_quick_create .inline-status {
+    margin-left: 1em;
+}
+
+#page_quick_create .inline-status div {
+    display: none;
+}
+
 input.bootstraptimewidget.timepicker {
     width: 7em;
 }

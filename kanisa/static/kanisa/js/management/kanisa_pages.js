@@ -28,18 +28,28 @@ function quick_page_create(event) {
     var parent_element = form.find("#id_parent");
     var title = title_element.val();
     var status_block = form.find("div.inline-status");
+    var spinner = status_block.find(".inline-spinner");
+    var ok_block = status_block.find(".inline-ok");
+    var error_block = status_block.find(".inline-error");
+    spinner.hide();
+    ok_block.hide();
+    error_block.hide()
 
-    status_block.html("<i class=\"spinner\"></i>");
+    spinner.show();
 
     $.post(page_create_url,
            { 'title': title,
              'parent': parent_element.val() },
            function(data) {
-               status_block.html("<i class=\"glyphicon glyphicon-ok\"></i> " + data);
+               spinner.hide();
+               ok_block.show();
+               ok_block.find("span.message").html(data);
                title_element.val("");
                update_page_list();
            }).error(function(data) {
-               status_block.html("<i class=\"glyphicon glyphicon-exclamation-sign\"></i> " + data.responseText);
+               spinner.hide();
+               error_block.show();
+               error_block.find("span.message").html(data.responseText);
            }).complete(function() {
                form.data('submitting', false);
            });

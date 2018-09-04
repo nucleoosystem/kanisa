@@ -1,3 +1,5 @@
+{% load kanisa_feather %}
+
 <h3>Quick Create
   <span class="help_text">(Want to use the <a href="{% url 'kanisa_manage_pages_create' %}">full page creation form</a>?)</span>
 </h3>
@@ -10,6 +12,16 @@
     {% include 'kanisa/management/pages/_parent_select_options.html' %}
   </select>
   <button type="submit" class="btn btn-success">Create Page</button>
-  <div class="inline-status"></div>
+  <div class="inline-status">
+    <div class="inline-spinner"><i class="spinner"></i></div>
+    <div class="inline-ok">
+      <span class="text-success">{% kanisa_feather "check-circle" "" "feather-small" %}</span>
+      <span class="message"></span>
+    </div>
+    <div class="inline-error">
+      <span class="text-danger">{% kanisa_feather "alert-circle" "" "feather-small" %}</span>
+      <span class="message"></span>
+    </div>
+  </div>
   </div>
 </form>
