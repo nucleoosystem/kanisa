@@ -413,6 +413,9 @@ class BiblePassageModelField(TestCase):
         self.assertEqual(unicode(objects[0].object.passage),
                          'Psalms')
 
+    def test_to_passage_from_none(self):
+        self.assertEqual(bible.to_passage(None), None)
+
     def test_none(self):
         m = SermonSeries(title='test_title', slug='test-title')
         m.save()

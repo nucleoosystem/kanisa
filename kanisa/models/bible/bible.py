@@ -120,6 +120,8 @@ def to_passage(inputstring):
     1 thessalonians 3:4 - 4:5
     and translates it to a BiblePassage object
     """
+    if inputstring is None:
+        return None
 
     if not isinstance(inputstring, str):
         if not isinstance(inputstring, unicode):
