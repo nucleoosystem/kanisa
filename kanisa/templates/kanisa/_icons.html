@@ -2,7 +2,7 @@
 {% load thumbnail %}
 
 {% kanisa_branding 'favicon' as favicon_information %}
-{% if favicon %}
+{% if favicon_information %}
 <link rel="shortcut icon" href="{{ MEDIA_URL }}{{ favicon_information.url }}">
 {% endif %}
 
